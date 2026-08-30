@@ -1,0 +1,689 @@
+{
+    "base_root" : {
+        "version" : 42,
+        "quests" : {
+            "0" : {
+                "id" : "plot_kill_siren_1",
+                "map_name" : "",
+                "torch_setting" : "",
+                "raid_rules_override" : "",
+                "is_plot_quest" : true,
+                "type" : "kill_boss",
+                "dungeon" : "cove",
+                "difficulty" : 1,
+                "length" : 2,
+                "counted_in_generation" : true,
+                "goal_ids" : ["kill_siren_A"],
+                "progression_goal_ids" : 0,
+                "use_default_progression_goals" : true,
+                "completion_reward" : {
+                    "resolve_xp" : 4,
+                    "resolve_xp_per_wave_kill" : 0,
+                    "items_definition" : {
+                        "items" : {
+                            "0" : {
+                                "id" : "",
+                                "type" : "gold",
+                                "amount" : 4500,
+                                "added_buffs" : 0,
+                                "hero_name" : "",
+                                "previous_trinket_id" : "",
+                                "did_transform" : false,
+                                "trinkets_gained_count" : 0
+                            },
+                            "1" : {
+                                "id" : "crest",
+                                "type" : "heirloom",
+                                "amount" : 12,
+                                "added_buffs" : 0,
+                                "hero_name" : "",
+                                "previous_trinket_id" : "",
+                                "did_transform" : false,
+                                "trinkets_gained_count" : 0
+                            },
+                            "2" : {
+                                "id" : "wounding_helmet",
+                                "type" : "trinket",
+                                "amount" : 1,
+                                "added_buffs" : 0,
+                                "hero_name" : "",
+                                "previous_trinket_id" : "",
+                                "did_transform" : false,
+                                "trinkets_gained_count" : 0
+                            }
+                        }
+                    },
+                    "additional_threshold_trinket_rewards" : { },
+                    "max_times_dungeon_xp_awarded" : 0
+                },
+                "threshold_rewards" : { },
+                "completion_threshold" : 0,
+                "is_from_town_event" : false
+            },
+            "1" : {
+                "id" : "plot_kill_prophet_1",
+                "map_name" : "",
+                "torch_setting" : "",
+                "raid_rules_override" : "",
+                "is_plot_quest" : true,
+                "type" : "kill_boss",
+                "dungeon" : "crypts",
+                "difficulty" : 1,
+                "length" : 2,
+                "counted_in_generation" : true,
+                "goal_ids" : ["kill_prophet_A"],
+                "progression_goal_ids" : 0,
+                "use_default_progression_goals" : true,
+                "completion_reward" : {
+                    "resolve_xp" : 4,
+                    "resolve_xp_per_wave_kill" : 0,
+                    "items_definition" : {
+                        "items" : {
+                            "0" : {
+                                "id" : "",
+                                "type" : "gold",
+                                "amount" : 4500,
+                                "added_buffs" : 0,
+                                "hero_name" : "",
+                                "previous_trinket_id" : "",
+                                "did_transform" : false,
+                                "trinkets_gained_count" : 0
+                            },
+                            "1" : {
+                                "id" : "bust",
+                                "type" : "heirloom",
+                                "amount" : 4,
+                                "added_buffs" : 0,
+                                "hero_name" : "",
+                                "previous_trinket_id" : "",
+                                "did_transform" : false,
+                                "trinkets_gained_count" : 0
+                            },
+                            "2" : {
+                                "id" : "crest",
+                                "type" : "heirloom",
+                                "amount" : 6,
+                                "added_buffs" : 0,
+                                "hero_name" : "",
+                                "previous_trinket_id" : "",
+                                "did_transform" : false,
+                                "trinkets_gained_count" : 0
+                            },
+                            "3" : {
+                                "id" : "berserk_mask",
+                                "type" : "trinket",
+                                "amount" : 1,
+                                "added_buffs" : 0,
+                                "hero_name" : "",
+                                "previous_trinket_id" : "",
+                                "did_transform" : false,
+                                "trinkets_gained_count" : 0
+                            }
+                        }
+                    },
+                    "additional_threshold_trinket_rewards" : { },
+                    "max_times_dungeon_xp_awarded" : 0
+                },
+                "threshold_rewards" : { },
+                "completion_threshold" : 0,
+                "is_from_town_event" : false
+            },
+            "2" : {
+                "id" : "plot_darkest_dungeon_1",
+                "map_name" : "DD_map1",
+                "torch_setting" : "",
+                "raid_rules_override" : "",
+                "is_plot_quest" : true,
+                "type" : "kill_boss",
+                "dungeon" : "darkestdungeon",
+                "difficulty" : 6,
+                "length" : 2,
+                "counted_in_generation" : true,
+                "goal_ids" : ["kill_shuffler_D"],
+                "progression_goal_ids" : 0,
+                "use_default_progression_goals" : true,
+                "completion_reward" : {
+                    "resolve_xp" : 16,
+                    "resolve_xp_per_wave_kill" : 0,
+                    "items_definition" : {
+                        "items" : {
+                            "0" : {
+                                "id" : "",
+                                "type" : "gold",
+                                "amount" : 15000,
+                                "added_buffs" : 0,
+                                "hero_name" : "",
+                                "previous_trinket_id" : "",
+                                "did_transform" : false,
+                                "trinkets_gained_count" : 0
+                            },
+                            "1" : {
+                                "id" : "crest",
+                                "type" : "heirloom",
+                                "amount" : 18,
+                                "added_buffs" : 0,
+                                "hero_name" : "",
+                                "previous_trinket_id" : "",
+                                "did_transform" : false,
+                                "trinkets_gained_count" : 0
+                            },
+                            "2" : {
+                                "id" : "dd_trinket",
+                                "type" : "trinket_unlock",
+                                "amount" : 3,
+                                "added_buffs" : 0,
+                                "hero_name" : "",
+                                "previous_trinket_id" : "",
+                                "did_transform" : false,
+                                "trinkets_gained_count" : 0
+                            },
+                            "3" : {
+                                "id" : "cc_crimson_tincture",
+                                "type" : "trinket",
+                                "amount" : 1,
+                                "added_buffs" : 0,
+                                "hero_name" : "",
+                                "previous_trinket_id" : "",
+                                "did_transform" : false,
+                                "trinkets_gained_count" : 0
+                            }
+                        }
+                    },
+                    "additional_threshold_trinket_rewards" : { },
+                    "max_times_dungeon_xp_awarded" : 0
+                },
+                "threshold_rewards" : { },
+                "completion_threshold" : 0,
+                "is_from_town_event" : false
+            },
+            "3" : {
+                "id" : "plot_kill_swine_prince_1",
+                "map_name" : "",
+                "torch_setting" : "",
+                "raid_rules_override" : "",
+                "is_plot_quest" : true,
+                "type" : "kill_boss",
+                "dungeon" : "warrens",
+                "difficulty" : 1,
+                "length" : 2,
+                "counted_in_generation" : true,
+                "goal_ids" : ["kill_swine_prince_A"],
+                "progression_goal_ids" : 0,
+                "use_default_progression_goals" : true,
+                "completion_reward" : {
+                    "resolve_xp" : 4,
+                    "resolve_xp_per_wave_kill" : 0,
+                    "items_definition" : {
+                        "items" : {
+                            "0" : {
+                                "id" : "",
+                                "type" : "gold",
+                                "amount" : 4500,
+                                "added_buffs" : 0,
+                                "hero_name" : "",
+                                "previous_trinket_id" : "",
+                                "did_transform" : false,
+                                "trinkets_gained_count" : 0
+                            },
+                            "1" : {
+                                "id" : "portrait",
+                                "type" : "heirloom",
+                                "amount" : 3,
+                                "added_buffs" : 0,
+                                "hero_name" : "",
+                                "previous_trinket_id" : "",
+                                "did_transform" : false,
+                                "trinkets_gained_count" : 0
+                            },
+                            "2" : {
+                                "id" : "crest",
+                                "type" : "heirloom",
+                                "amount" : 4,
+                                "added_buffs" : 0,
+                                "hero_name" : "",
+                                "previous_trinket_id" : "",
+                                "did_transform" : false,
+                                "trinkets_gained_count" : 0
+                            },
+                            "3" : {
+                                "id" : "wrathful_hat",
+                                "type" : "trinket",
+                                "amount" : 1,
+                                "added_buffs" : 0,
+                                "hero_name" : "",
+                                "previous_trinket_id" : "",
+                                "did_transform" : false,
+                                "trinkets_gained_count" : 0
+                            }
+                        }
+                    },
+                    "additional_threshold_trinket_rewards" : { },
+                    "max_times_dungeon_xp_awarded" : 0
+                },
+                "threshold_rewards" : { },
+                "completion_threshold" : 0,
+                "is_from_town_event" : false
+            },
+            "4" : {
+                "id" : "plot_color_of_madness_0",
+                "map_name" : "",
+                "torch_setting" : "wave_farm",
+                "raid_rules_override" : "wave",
+                "is_plot_quest" : true,
+                "type" : "wave",
+                "dungeon" : "farm",
+                "difficulty" : 1,
+                "length" : 1,
+                "counted_in_generation" : false,
+                "goal_ids" : ["survive_short"],
+                "progression_goal_ids" : 0,
+                "use_default_progression_goals" : true,
+                "completion_reward" : {
+                    "resolve_xp" : 2,
+                    "resolve_xp_per_wave_kill" : 0,
+                    "items_definition" : {
+                        "items" : {
+                            "0" : {
+                                "id" : "",
+                                "type" : "gold",
+                                "amount" : 3000,
+                                "added_buffs" : 0,
+                                "hero_name" : "",
+                                "previous_trinket_id" : "",
+                                "did_transform" : false,
+                                "trinkets_gained_count" : 0
+                            },
+                            "1" : {
+                                "id" : "",
+                                "type" : "shard",
+                                "amount" : 12,
+                                "added_buffs" : 0,
+                                "hero_name" : "",
+                                "previous_trinket_id" : "",
+                                "did_transform" : false,
+                                "trinkets_gained_count" : 0
+                            },
+                            "2" : {
+                                "id" : "sly_eyepatch",
+                                "type" : "trinket",
+                                "amount" : 1,
+                                "added_buffs" : 0,
+                                "hero_name" : "",
+                                "previous_trinket_id" : "",
+                                "did_transform" : false,
+                                "trinkets_gained_count" : 0
+                            }
+                        }
+                    },
+                    "additional_threshold_trinket_rewards" : { },
+                    "max_times_dungeon_xp_awarded" : 6
+                },
+                "threshold_rewards" : { },
+                "completion_threshold" : 0,
+                "is_from_town_event" : false
+            },
+            "5" : {
+                "id" : "plot_crimson_court_0",
+                "map_name" : "cc_map_intro",
+                "torch_setting" : "bloodlight",
+                "raid_rules_override" : "cc",
+                "is_plot_quest" : true,
+                "type" : "inventory_activate",
+                "dungeon" : "courtyard",
+                "difficulty" : 1,
+                "length" : 1,
+                "counted_in_generation" : true,
+                "goal_ids" : ["inventory_activate_hive"],
+                "progression_goal_ids" : 0,
+                "use_default_progression_goals" : true,
+                "completion_reward" : {
+                    "resolve_xp" : 4,
+                    "resolve_xp_per_wave_kill" : 0,
+                    "items_definition" : {
+                        "items" : {
+                            "0" : {
+                                "id" : "",
+                                "type" : "gold",
+                                "amount" : 5000,
+                                "added_buffs" : 0,
+                                "hero_name" : "",
+                                "previous_trinket_id" : "",
+                                "did_transform" : false,
+                                "trinkets_gained_count" : 0
+                            },
+                            "1" : {
+                                "id" : "crest",
+                                "type" : "heirloom",
+                                "amount" : 12,
+                                "added_buffs" : 0,
+                                "hero_name" : "",
+                                "previous_trinket_id" : "",
+                                "did_transform" : false,
+                                "trinkets_gained_count" : 0
+                            },
+                            "2" : {
+                                "id" : "crimson_court_invitation_A",
+                                "type" : "estate_currency",
+                                "amount" : 1,
+                                "added_buffs" : 0,
+                                "hero_name" : "",
+                                "previous_trinket_id" : "",
+                                "did_transform" : false,
+                                "trinkets_gained_count" : 0
+                            },
+                            "3" : {
+                                "id" : "cc_set_flag_chipped_tooth",
+                                "type" : "trinket",
+                                "amount" : 1,
+                                "added_buffs" : 0,
+                                "hero_name" : "",
+                                "previous_trinket_id" : "",
+                                "did_transform" : false,
+                                "trinkets_gained_count" : 0
+                            }
+                        }
+                    },
+                    "additional_threshold_trinket_rewards" : { },
+                    "max_times_dungeon_xp_awarded" : 0
+                },
+                "threshold_rewards" : { },
+                "completion_threshold" : 0,
+                "is_from_town_event" : false
+            },
+            "6" : {
+                "id" : "generated_0",
+                "map_name" : "",
+                "torch_setting" : "",
+                "raid_rules_override" : "",
+                "is_plot_quest" : false,
+                "type" : "explore",
+                "dungeon" : "crypts",
+                "difficulty" : 1,
+                "length" : 3,
+                "counted_in_generation" : true,
+                "goal_ids" : ["explore_all_rooms"],
+                "progression_goal_ids" : 0,
+                "use_default_progression_goals" : true,
+                "completion_reward" : {
+                    "resolve_xp" : 4,
+                    "resolve_xp_per_wave_kill" : 0,
+                    "items_definition" : {
+                        "items" : {
+                            "0" : {
+                                "id" : "",
+                                "type" : "gold",
+                                "amount" : 7500,
+                                "added_buffs" : 0,
+                                "hero_name" : "",
+                                "previous_trinket_id" : "",
+                                "did_transform" : false,
+                                "trinkets_gained_count" : 0
+                            },
+                            "1" : {
+                                "id" : "crest",
+                                "type" : "heirloom",
+                                "amount" : 9,
+                                "added_buffs" : 0,
+                                "hero_name" : "",
+                                "previous_trinket_id" : "",
+                                "did_transform" : false,
+                                "trinkets_gained_count" : 0
+                            },
+                            "2" : {
+                                "id" : "rampart_shield",
+                                "type" : "trinket",
+                                "amount" : 1,
+                                "added_buffs" : 0,
+                                "hero_name" : "",
+                                "previous_trinket_id" : "",
+                                "did_transform" : false,
+                                "trinkets_gained_count" : 0
+                            }
+                        }
+                    },
+                    "additional_threshold_trinket_rewards" : { },
+                    "max_times_dungeon_xp_awarded" : 0
+                },
+                "threshold_rewards" : { },
+                "completion_threshold" : 0,
+                "is_from_town_event" : false
+            },
+            "7" : {
+                "id" : "generated_1",
+                "map_name" : "",
+                "torch_setting" : "",
+                "raid_rules_override" : "",
+                "is_plot_quest" : false,
+                "type" : "inventory_activate",
+                "dungeon" : "warrens",
+                "difficulty" : 3,
+                "length" : 2,
+                "counted_in_generation" : true,
+                "goal_ids" : ["inventory_activate_animalistic_shrine"],
+                "progression_goal_ids" : 0,
+                "use_default_progression_goals" : true,
+                "completion_reward" : {
+                    "resolve_xp" : 6,
+                    "resolve_xp_per_wave_kill" : 0,
+                    "items_definition" : {
+                        "items" : {
+                            "0" : {
+                                "id" : "",
+                                "type" : "gold",
+                                "amount" : 6750,
+                                "added_buffs" : 0,
+                                "hero_name" : "",
+                                "previous_trinket_id" : "",
+                                "did_transform" : false,
+                                "trinkets_gained_count" : 0
+                            },
+                            "1" : {
+                                "id" : "deed",
+                                "type" : "heirloom",
+                                "amount" : 6,
+                                "added_buffs" : 0,
+                                "hero_name" : "",
+                                "previous_trinket_id" : "",
+                                "did_transform" : false,
+                                "trinkets_gained_count" : 0
+                            },
+                            "2" : {
+                                "id" : "solar_crown",
+                                "type" : "trinket",
+                                "amount" : 1,
+                                "added_buffs" : 0,
+                                "hero_name" : "",
+                                "previous_trinket_id" : "",
+                                "did_transform" : false,
+                                "trinkets_gained_count" : 0
+                            }
+                        }
+                    },
+                    "additional_threshold_trinket_rewards" : { },
+                    "max_times_dungeon_xp_awarded" : 0
+                },
+                "threshold_rewards" : { },
+                "completion_threshold" : 0,
+                "is_from_town_event" : false
+            },
+            "8" : {
+                "id" : "generated_2",
+                "map_name" : "",
+                "torch_setting" : "",
+                "raid_rules_override" : "",
+                "is_plot_quest" : false,
+                "type" : "inventory_activate",
+                "dungeon" : "weald",
+                "difficulty" : 1,
+                "length" : 2,
+                "counted_in_generation" : true,
+                "goal_ids" : ["inventory_activate_infected_corpse"],
+                "progression_goal_ids" : 0,
+                "use_default_progression_goals" : true,
+                "completion_reward" : {
+                    "resolve_xp" : 3,
+                    "resolve_xp_per_wave_kill" : 0,
+                    "items_definition" : {
+                        "items" : {
+                            "0" : {
+                                "id" : "",
+                                "type" : "gold",
+                                "amount" : 4500,
+                                "added_buffs" : 0,
+                                "hero_name" : "",
+                                "previous_trinket_id" : "",
+                                "did_transform" : false,
+                                "trinkets_gained_count" : 0
+                            },
+                            "1" : {
+                                "id" : "deed",
+                                "type" : "heirloom",
+                                "amount" : 5,
+                                "added_buffs" : 0,
+                                "hero_name" : "",
+                                "previous_trinket_id" : "",
+                                "did_transform" : false,
+                                "trinkets_gained_count" : 0
+                            },
+                            "2" : {
+                                "id" : "chirurgeons_charm",
+                                "type" : "trinket",
+                                "amount" : 1,
+                                "added_buffs" : 0,
+                                "hero_name" : "",
+                                "previous_trinket_id" : "",
+                                "did_transform" : false,
+                                "trinkets_gained_count" : 0
+                            }
+                        }
+                    },
+                    "additional_threshold_trinket_rewards" : { },
+                    "max_times_dungeon_xp_awarded" : 0
+                },
+                "threshold_rewards" : { },
+                "completion_threshold" : 0,
+                "is_from_town_event" : false
+            },
+            "9" : {
+                "id" : "generated_3",
+                "map_name" : "",
+                "torch_setting" : "",
+                "raid_rules_override" : "",
+                "is_plot_quest" : false,
+                "type" : "gather",
+                "dungeon" : "cove",
+                "difficulty" : 3,
+                "length" : 2,
+                "counted_in_generation" : true,
+                "goal_ids" : ["gather_shipments"],
+                "progression_goal_ids" : 0,
+                "use_default_progression_goals" : true,
+                "completion_reward" : {
+                    "resolve_xp" : 6,
+                    "resolve_xp_per_wave_kill" : 0,
+                    "items_definition" : {
+                        "items" : {
+                            "0" : {
+                                "id" : "",
+                                "type" : "gold",
+                                "amount" : 6750,
+                                "added_buffs" : 0,
+                                "hero_name" : "",
+                                "previous_trinket_id" : "",
+                                "did_transform" : false,
+                                "trinkets_gained_count" : 0
+                            },
+                            "1" : {
+                                "id" : "portrait",
+                                "type" : "heirloom",
+                                "amount" : 3,
+                                "added_buffs" : 0,
+                                "hero_name" : "",
+                                "previous_trinket_id" : "",
+                                "did_transform" : false,
+                                "trinkets_gained_count" : 0
+                            },
+                            "2" : {
+                                "id" : "protective_collar",
+                                "type" : "trinket",
+                                "amount" : 1,
+                                "added_buffs" : 0,
+                                "hero_name" : "",
+                                "previous_trinket_id" : "",
+                                "did_transform" : false,
+                                "trinkets_gained_count" : 0
+                            }
+                        }
+                    },
+                    "additional_threshold_trinket_rewards" : { },
+                    "max_times_dungeon_xp_awarded" : 0
+                },
+                "threshold_rewards" : { },
+                "completion_threshold" : 0,
+                "is_from_town_event" : false
+            },
+            "10" : {
+                "id" : "generated_4",
+                "map_name" : "",
+                "torch_setting" : "",
+                "raid_rules_override" : "",
+                "is_plot_quest" : false,
+                "type" : "explore",
+                "dungeon" : "weald",
+                "difficulty" : 1,
+                "length" : 1,
+                "counted_in_generation" : true,
+                "goal_ids" : ["explore_all_rooms"],
+                "progression_goal_ids" : 0,
+                "use_default_progression_goals" : true,
+                "completion_reward" : {
+                    "resolve_xp" : 2,
+                    "resolve_xp_per_wave_kill" : 0,
+                    "items_definition" : {
+                        "items" : {
+                            "0" : {
+                                "id" : "",
+                                "type" : "gold",
+                                "amount" : 3000,
+                                "added_buffs" : 0,
+                                "hero_name" : "",
+                                "previous_trinket_id" : "",
+                                "did_transform" : false,
+                                "trinkets_gained_count" : 0
+                            },
+                            "1" : {
+                                "id" : "deed",
+                                "type" : "heirloom",
+                                "amount" : 3,
+                                "added_buffs" : 0,
+                                "hero_name" : "",
+                                "previous_trinket_id" : "",
+                                "did_transform" : false,
+                                "trinkets_gained_count" : 0
+                            },
+                            "2" : {
+                                "id" : "slippery_boots",
+                                "type" : "trinket",
+                                "amount" : 1,
+                                "added_buffs" : 0,
+                                "hero_name" : "",
+                                "previous_trinket_id" : "",
+                                "did_transform" : false,
+                                "trinkets_gained_count" : 0
+                            }
+                        }
+                    },
+                    "additional_threshold_trinket_rewards" : { },
+                    "max_times_dungeon_xp_awarded" : 0
+                },
+                "threshold_rewards" : { },
+                "completion_threshold" : 0,
+                "is_from_town_event" : false
+            }
+        },
+        "trinket_retention_ids" : {
+            "items" : { }
+        },
+        "plot_quest_total" : 44
+    }
+}

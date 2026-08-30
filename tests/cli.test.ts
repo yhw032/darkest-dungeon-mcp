@@ -63,11 +63,16 @@ test("CLI reports the combined game state as JSON", () => {
 
   assert.equal(result.status, 0, result.stderr);
   const output = JSON.parse(result.stdout) as {
-    versions: { roster: number; estate: number; town: number };
+    versions: { roster: number; estate: number; town: number; quests: number };
     roster: { totalHeroes: number; highStressHeroes: unknown[] };
     estate: { trinkets: { totalAmount: number } };
   };
-  assert.deepEqual(output.versions, { roster: 513, estate: 34, town: 513 });
+  assert.deepEqual(output.versions, {
+    roster: 513,
+    estate: 34,
+    town: 513,
+    quests: 42,
+  });
   assert.equal(output.roster.totalHeroes, 24);
   assert.equal(output.roster.highStressHeroes.length, 2);
   assert.equal(output.estate.trinkets.totalAmount, 19);
@@ -93,4 +98,39 @@ test("CLI reports a town summary as JSON", () => {
     districts: 16,
     builtDistricts: [],
   });
+});
+
+test("CLI lists filtered quests as JSON", () => {
+  const result = runCli(
+    "quests",
+    "--dungeon",
+    "weald",
+    "--plot",
+    "false",
+  );
+
+  assert.equal(result.status, 0, result.stderr);
+  const output = JSON.parse(result.stdout) as {
+    total: number;
+    quests: Array<{ dungeon: string; isPlotQuest: boolean }>;
+  };
+  assert.equal(output.total, 2);
+  assert.ok(
+    output.quests.every(
+      (quest) => quest.dungeon === "weald" && !quest.isPlotQuest,
+    ),
+  );
+});
+
+test("CLI gets a quest by id", () => {
+  const result = runCli("quest", "generated_0");
+
+  assert.equal(result.status, 0, result.stderr);
+  const output = JSON.parse(result.stdout) as {
+    quest: { id: string; dungeon: string };
+  };
+  assert.deepEqual(
+    { id: output.quest.id, dungeon: output.quest.dungeon },
+    { id: "generated_0", dungeon: "crypts" },
+  );
 });

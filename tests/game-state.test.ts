@@ -17,9 +17,17 @@ const estatePath = fileURLToPath(
 const townPath = fileURLToPath(
   new URL("../samples/town-decoded.json", import.meta.url),
 );
+const questPath = fileURLToPath(
+  new URL("../samples/quest-decoded.json", import.meta.url),
+);
 
-test("loads roster and estate into one game state", async () => {
-  const gameState = await loadGameState({ rosterPath, estatePath, townPath });
+test("loads all save components into one game state", async () => {
+  const gameState = await loadGameState({
+    rosterPath,
+    estatePath,
+    townPath,
+    questPath,
+  });
 
   assert.equal(gameState.roster.heroes.length, 24);
   assert.equal(
@@ -28,13 +36,24 @@ test("loads roster and estate into one game state", async () => {
     30790,
   );
   assert.equal(gameState.town.buildings.length, 11);
+  assert.equal(gameState.quests.quests.length, 11);
 });
 
 test("builds a combined game-state summary", async () => {
-  const gameState = await loadGameState({ rosterPath, estatePath, townPath });
+  const gameState = await loadGameState({
+    rosterPath,
+    estatePath,
+    townPath,
+    questPath,
+  });
   const summary = getGameStateSummary(gameState, 150);
 
-  assert.deepEqual(summary.versions, { roster: 513, estate: 34, town: 513 });
+  assert.deepEqual(summary.versions, {
+    roster: 513,
+    estate: 34,
+    town: 513,
+    quests: 42,
+  });
   assert.equal(summary.roster.totalHeroes, 24);
   assert.deepEqual(
     summary.roster.highStressHeroes.map((hero) => hero.stress),
@@ -47,6 +66,7 @@ test("builds a combined game-state summary", async () => {
   );
   assert.equal(summary.estate.trinkets.totalAmount, 19);
   assert.equal(summary.town.availableRecruits, 9);
+  assert.equal(summary.quests.totalQuests, 11);
 });
 
 test("identifies the component and path when loading fails", async () => {
@@ -55,7 +75,12 @@ test("identifies the component and path when loading fails", async () => {
   );
 
   await assert.rejects(
-    loadGameState({ rosterPath, estatePath: missingEstatePath, townPath }),
+    loadGameState({
+      rosterPath,
+      estatePath: missingEstatePath,
+      townPath,
+      questPath,
+    }),
     (error) =>
       error instanceof GameStateLoadError &&
       error.component === "estate" &&

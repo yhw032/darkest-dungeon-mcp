@@ -3,16 +3,19 @@ import { fileURLToPath } from "node:url";
 
 import { loadGameState } from "../loaders/load-game-state.js";
 import { parseEstateJson } from "../parser/parse-estate.js";
+import { parseQuestStateJson } from "../parser/parse-quest.js";
 import { parseRosterJson } from "../parser/parse-roster.js";
 import { parseTownJson } from "../parser/parse-town.js";
 import { getEstateResources } from "../queries/get-estate-resources.js";
 import { getGameStateSummary } from "../queries/get-game-state-summary.js";
 import { getHero } from "../queries/get-hero.js";
+import { getQuest } from "../queries/get-quest.js";
 import { getTownSummary } from "../queries/get-town-summary.js";
 import {
   type HeroFilters,
   listHeroes,
 } from "../queries/list-heroes.js";
+import { type QuestFilters, listQuests } from "../queries/list-quests.js";
 import { summarizeRoster } from "../queries/summarize-roster.js";
 
 const usage = `Usage:
@@ -21,7 +24,9 @@ const usage = `Usage:
   npm run cli -- summary [-- --stress-threshold <number> --file <path>]
   npm run cli -- resources [-- --file <path>]
   npm run cli -- town [-- --file <path>]
-  npm run cli -- state [-- --roster-file <path> --estate-file <path> --town-file <path> --stress-threshold <number>]`;
+  npm run cli -- quests [-- --dungeon <name> --type <type> --difficulty <number> --plot <true|false> --file <path>]
+  npm run cli -- quest <id> [-- --file <path>]
+  npm run cli -- state [-- --roster-file <path> --estate-file <path> --town-file <path> --quest-file <path> --stress-threshold <number>]`;
 
 interface ParsedArguments {
   positional: string[];
@@ -92,9 +97,23 @@ const defaultEstateSamplePath = fileURLToPath(
 const defaultTownSamplePath = fileURLToPath(
   new URL("../../samples/town-decoded.json", import.meta.url),
 );
+const defaultQuestSamplePath = fileURLToPath(
+  new URL("../../samples/quest-decoded.json", import.meta.url),
+);
 
 async function loadJson(path: string): Promise<string> {
   return readFile(path, "utf8");
+}
+
+function booleanOption(
+  options: Map<string, string>,
+  name: string,
+): boolean | undefined {
+  const value = options.get(name);
+  if (value === undefined) return undefined;
+  if (value === "true") return true;
+  if (value === "false") return false;
+  throw new Error(`--${name} must be true or false`);
 }
 
 async function main(args: string[]): Promise<void> {
@@ -191,11 +210,56 @@ async function main(args: string[]): Promise<void> {
       break;
     }
 
+    case "quests": {
+      assertKnownOptions(options, [
+        "file",
+        "dungeon",
+        "type",
+        "difficulty",
+        "plot",
+      ]);
+      if (id !== undefined || extraPositionals.length > 0) {
+        throw new Error("quests does not accept positional arguments");
+      }
+
+      const state = parseQuestStateJson(
+        await loadJson(options.get("file") ?? defaultQuestSamplePath),
+      );
+      const filters: QuestFilters = {};
+      const dungeon = options.get("dungeon");
+      const type = options.get("type");
+      const difficulty = numberOption(options, "difficulty");
+      const isPlotQuest = booleanOption(options, "plot");
+      if (dungeon !== undefined) filters.dungeon = dungeon;
+      if (type !== undefined) filters.type = type;
+      if (difficulty !== undefined) filters.difficulty = difficulty;
+      if (isPlotQuest !== undefined) filters.isPlotQuest = isPlotQuest;
+      const quests = listQuests(state, filters);
+      output = { total: quests.length, quests };
+      break;
+    }
+
+    case "quest": {
+      assertKnownOptions(options, ["file"]);
+      if (id === undefined || extraPositionals.length > 0) {
+        throw new Error("quest requires exactly one <id>");
+      }
+
+      const state = parseQuestStateJson(
+        await loadJson(options.get("file") ?? defaultQuestSamplePath),
+      );
+      const quest = getQuest(state, id);
+      if (quest === undefined) throw new Error(`Quest not found: ${id}`);
+      output = { quest };
+      break;
+    }
+
     case "state": {
       assertKnownOptions(options, [
         "roster-file",
         "estate-file",
         "town-file",
+        "quest-file",
         "stress-threshold",
       ]);
       if (id !== undefined || extraPositionals.length > 0) {
@@ -206,6 +270,7 @@ async function main(args: string[]): Promise<void> {
         rosterPath: options.get("roster-file") ?? defaultSamplePath,
         estatePath: options.get("estate-file") ?? defaultEstateSamplePath,
         townPath: options.get("town-file") ?? defaultTownSamplePath,
+        questPath: options.get("quest-file") ?? defaultQuestSamplePath,
       });
       output = getGameStateSummary(
         gameState,
