@@ -1,0 +1,267 @@
+{
+    "base_root" : {
+        "version" : 34,
+        "tampering" : {
+            "tampering_manager" : {
+                "foundLocalTamperedFile" : true,
+                "foundGlobalTamperedFile" : true
+            }
+        },
+        "wallet" : {
+            "0" : {
+                "amount" : 30790,
+                "type" : "gold"
+            },
+            "1" : {
+                "amount" : 36,
+                "type" : "bust"
+            },
+            "2" : {
+                "amount" : 12,
+                "type" : "portrait"
+            },
+            "3" : {
+                "amount" : 6,
+                "type" : "deed"
+            },
+            "4" : {
+                "amount" : 20,
+                "type" : "crest"
+            },
+            "5" : {
+                "amount" : 0,
+                "type" : "shard"
+            },
+            "6" : {
+                "amount" : 0,
+                "type" : "memory"
+            },
+            "7" : {
+                "amount" : 1,
+                "type" : "blueprint"
+            }
+        },
+        "trinkets" : {
+            "items" : {
+                "0" : {
+                    "id" : "recovery_chalice",
+                    "type" : "trinket",
+                    "amount" : 1,
+                    "added_buffs" : 0,
+                    "hero_name" : "",
+                    "previous_trinket_id" : "",
+                    "did_transform" : false,
+                    "trinkets_gained_count" : 0
+                },
+                "1" : {
+                    "id" : "padlock_1",
+                    "type" : "trinket",
+                    "amount" : 1,
+                    "added_buffs" : 0,
+                    "hero_name" : "",
+                    "previous_trinket_id" : "",
+                    "did_transform" : false,
+                    "trinkets_gained_count" : 0
+                },
+                "2" : {
+                    "id" : "flag_5",
+                    "type" : "trinket",
+                    "amount" : 1,
+                    "added_buffs" : 0,
+                    "hero_name" : "",
+                    "previous_trinket_id" : "",
+                    "did_transform" : false,
+                    "trinkets_gained_count" : 0
+                },
+                "3" : {
+                    "id" : "dodge_stone",
+                    "type" : "trinket",
+                    "amount" : 1,
+                    "added_buffs" : 0,
+                    "hero_name" : "",
+                    "previous_trinket_id" : "",
+                    "did_transform" : false,
+                    "trinkets_gained_count" : 0
+                },
+                "4" : {
+                    "id" : "evasion_incense",
+                    "type" : "trinket",
+                    "amount" : 1,
+                    "added_buffs" : 0,
+                    "hero_name" : "",
+                    "previous_trinket_id" : "",
+                    "did_transform" : false,
+                    "trinkets_gained_count" : 0
+                },
+                "5" : {
+                    "id" : "blight_stone",
+                    "type" : "trinket",
+                    "amount" : 1,
+                    "added_buffs" : 0,
+                    "hero_name" : "",
+                    "previous_trinket_id" : "",
+                    "did_transform" : false,
+                    "trinkets_gained_count" : 0
+                },
+                "6" : {
+                    "id" : "cc_sculptors_tools",
+                    "type" : "trinket",
+                    "amount" : 1,
+                    "added_buffs" : 0,
+                    "hero_name" : "",
+                    "previous_trinket_id" : "",
+                    "did_transform" : false,
+                    "trinkets_gained_count" : 0
+                },
+                "7" : {
+                    "id" : "vengeful_greaves",
+                    "type" : "trinket",
+                    "amount" : 1,
+                    "added_buffs" : 0,
+                    "hero_name" : "",
+                    "previous_trinket_id" : "",
+                    "did_transform" : false,
+                    "trinkets_gained_count" : 0
+                },
+                "8" : {
+                    "id" : "life_crystal",
+                    "type" : "trinket",
+                    "amount" : 1,
+                    "added_buffs" : 0,
+                    "hero_name" : "",
+                    "previous_trinket_id" : "",
+                    "did_transform" : false,
+                    "trinkets_gained_count" : 0
+                },
+                "9" : {
+                    "id" : "raiders_talisman",
+                    "type" : "trinket",
+                    "amount" : 1,
+                    "added_buffs" : 0,
+                    "hero_name" : "",
+                    "previous_trinket_id" : "",
+                    "did_transform" : false,
+                    "trinkets_gained_count" : 0
+                },
+                "10" : {
+                    "id" : "haste_chalice",
+                    "type" : "trinket",
+                    "amount" : 1,
+                    "added_buffs" : 0,
+                    "hero_name" : "",
+                    "previous_trinket_id" : "",
+                    "did_transform" : false,
+                    "trinkets_gained_count" : 0
+                },
+                "11" : {
+                    "id" : "drifters_buckle",
+                    "type" : "trinket",
+                    "amount" : 1,
+                    "added_buffs" : 0,
+                    "hero_name" : "",
+                    "previous_trinket_id" : "",
+                    "did_transform" : false,
+                    "trinkets_gained_count" : 0
+                },
+                "12" : {
+                    "id" : "cc_dazzling_mirror",
+                    "type" : "trinket",
+                    "amount" : 1,
+                    "added_buffs" : 0,
+                    "hero_name" : "",
+                    "previous_trinket_id" : "",
+                    "did_transform" : false,
+                    "trinkets_gained_count" : 0
+                },
+                "13" : {
+                    "id" : "slippery_boots",
+                    "type" : "trinket",
+                    "amount" : 1,
+                    "added_buffs" : 0,
+                    "hero_name" : "",
+                    "previous_trinket_id" : "",
+                    "did_transform" : false,
+                    "trinkets_gained_count" : 0
+                },
+                "14" : {
+                    "id" : "sb_1",
+                    "type" : "trinket",
+                    "amount" : 1,
+                    "added_buffs" : 0,
+                    "hero_name" : "",
+                    "previous_trinket_id" : "",
+                    "did_transform" : false,
+                    "trinkets_gained_count" : 0
+                },
+                "15" : {
+                    "id" : "cudgel_weight",
+                    "type" : "trinket",
+                    "amount" : 1,
+                    "added_buffs" : 0,
+                    "hero_name" : "",
+                    "previous_trinket_id" : "",
+                    "did_transform" : false,
+                    "trinkets_gained_count" : 0
+                },
+                "16" : {
+                    "id" : "book_of_holiness",
+                    "type" : "trinket",
+                    "amount" : 1,
+                    "added_buffs" : 0,
+                    "hero_name" : "",
+                    "previous_trinket_id" : "",
+                    "did_transform" : false,
+                    "trinkets_gained_count" : 0
+                },
+                "17" : {
+                    "id" : "gamblers_charm",
+                    "type" : "trinket",
+                    "amount" : 1,
+                    "added_buffs" : 0,
+                    "hero_name" : "",
+                    "previous_trinket_id" : "",
+                    "did_transform" : false,
+                    "trinkets_gained_count" : 0
+                },
+                "18" : {
+                    "id" : "gamblers_charm",
+                    "type" : "trinket",
+                    "amount" : 1,
+                    "added_buffs" : 0,
+                    "hero_name" : "",
+                    "previous_trinket_id" : "",
+                    "did_transform" : false,
+                    "trinkets_gained_count" : 0
+                }
+            }
+        },
+        "darkest_dungeon_trinket_unlocks" : { },
+        "performed_blueprint_correction_check" : true,
+        "endless_wave_highscore" : 0,
+        "was_endless_wave_highscore_tampered" : false,
+        "estate_items" : {
+            "items" : {
+                "0" : {
+                    "id" : "the_blood",
+                    "type" : "estate",
+                    "amount" : 10,
+                    "added_buffs" : 0,
+                    "hero_name" : "",
+                    "previous_trinket_id" : "",
+                    "did_transform" : false,
+                    "trinkets_gained_count" : 0
+                },
+                "1" : {
+                    "id" : "snake_scale",
+                    "type" : "estate",
+                    "amount" : 1,
+                    "added_buffs" : 0,
+                    "hero_name" : "",
+                    "previous_trinket_id" : "",
+                    "did_transform" : false,
+                    "trinkets_gained_count" : 0
+                }
+            }
+        }
+    }
+}

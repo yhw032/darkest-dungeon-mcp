@@ -1,7 +1,9 @@
 import { readFile } from "node:fs/promises";
 import { fileURLToPath } from "node:url";
 
+import { parseEstateJson } from "../parser/parse-estate.js";
 import { parseRosterJson } from "../parser/parse-roster.js";
+import { getEstateResources } from "../queries/get-estate-resources.js";
 import { getHero } from "../queries/get-hero.js";
 import {
   type HeroFilters,
@@ -12,7 +14,8 @@ import { summarizeRoster } from "../queries/summarize-roster.js";
 const usage = `Usage:
   npm run cli -- heroes [-- --class <class> --status <number> --max-stress <number> --file <path>]
   npm run cli -- hero <id> [-- --file <path>]
-  npm run cli -- summary [-- --stress-threshold <number> --file <path>]`;
+  npm run cli -- summary [-- --stress-threshold <number> --file <path>]
+  npm run cli -- resources [-- --file <path>]`;
 
 interface ParsedArguments {
   positional: string[];
@@ -77,6 +80,13 @@ function assertKnownOptions(
 const defaultSamplePath = fileURLToPath(
   new URL("../../samples/roster-decoded.json", import.meta.url),
 );
+const defaultEstateSamplePath = fileURLToPath(
+  new URL("../../samples/estate-decoded.json", import.meta.url),
+);
+
+async function loadJson(path: string): Promise<string> {
+  return readFile(path, "utf8");
+}
 
 async function main(args: string[]): Promise<void> {
   const { positional, options } = parseArguments(args);
@@ -86,8 +96,6 @@ async function main(args: string[]): Promise<void> {
     throw new Error(usage);
   }
 
-  const inputPath = options.get("file") ?? defaultSamplePath;
-  const roster = parseRosterJson(await readFile(inputPath, "utf8"));
   let output: unknown;
 
   switch (command) {
@@ -97,6 +105,9 @@ async function main(args: string[]): Promise<void> {
         throw new Error("heroes does not accept positional arguments");
       }
 
+      const roster = parseRosterJson(
+        await loadJson(options.get("file") ?? defaultSamplePath),
+      );
       const filters: HeroFilters = {};
       const heroClass = options.get("class");
       const rosterStatus = numberOption(options, "status");
@@ -117,6 +128,9 @@ async function main(args: string[]): Promise<void> {
         throw new Error("hero requires exactly one <id>");
       }
 
+      const roster = parseRosterJson(
+        await loadJson(options.get("file") ?? defaultSamplePath),
+      );
       const hero = getHero(roster, id);
       if (hero === undefined) {
         throw new Error(`Hero not found: ${id}`);
@@ -132,10 +146,26 @@ async function main(args: string[]): Promise<void> {
         throw new Error("summary does not accept positional arguments");
       }
 
+      const roster = parseRosterJson(
+        await loadJson(options.get("file") ?? defaultSamplePath),
+      );
       output = summarizeRoster(
         roster,
         numberOption(options, "stress-threshold"),
       );
+      break;
+    }
+
+    case "resources": {
+      assertKnownOptions(options, ["file"]);
+      if (id !== undefined || extraPositionals.length > 0) {
+        throw new Error("resources does not accept positional arguments");
+      }
+
+      const estate = parseEstateJson(
+        await loadJson(options.get("file") ?? defaultEstateSamplePath),
+      );
+      output = getEstateResources(estate);
       break;
     }
 

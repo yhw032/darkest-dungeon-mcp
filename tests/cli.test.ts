@@ -42,3 +42,18 @@ test("CLI reports an unknown hero on stderr", () => {
   assert.match(result.stderr, /Hero not found: missing/);
   assert.equal(result.stdout, "");
 });
+
+test("CLI reports estate resources as JSON", () => {
+  const result = runCli("resources");
+
+  assert.equal(result.status, 0, result.stderr);
+  const output = JSON.parse(result.stdout) as {
+    resources: Array<{ type: string; amount: number }>;
+    trinkets: { stacks: number; totalAmount: number };
+  };
+  assert.equal(
+    output.resources.find((resource) => resource.type === "gold")?.amount,
+    30790,
+  );
+  assert.deepEqual(output.trinkets, { stacks: 19, totalAmount: 19 });
+});
