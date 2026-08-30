@@ -5,8 +5,9 @@
   "type": "module",
   "scripts": {
     "dev": "tsx src/index.ts",
+    "cli": "tsx src/cli/index.ts",
     "typecheck": "tsc --noEmit",
-    "test": "tsx --test tests/roster.test.ts"
+    "test": "tsx --test tests/*.test.ts"
   },
   "keywords": [],
   "author": "",
