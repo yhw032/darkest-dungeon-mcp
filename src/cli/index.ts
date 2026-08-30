@@ -1,9 +1,11 @@
 import { readFile } from "node:fs/promises";
 import { fileURLToPath } from "node:url";
 
+import { loadGameState } from "../loaders/load-game-state.js";
 import { parseEstateJson } from "../parser/parse-estate.js";
 import { parseRosterJson } from "../parser/parse-roster.js";
 import { getEstateResources } from "../queries/get-estate-resources.js";
+import { getGameStateSummary } from "../queries/get-game-state-summary.js";
 import { getHero } from "../queries/get-hero.js";
 import {
   type HeroFilters,
@@ -15,7 +17,8 @@ const usage = `Usage:
   npm run cli -- heroes [-- --class <class> --status <number> --max-stress <number> --file <path>]
   npm run cli -- hero <id> [-- --file <path>]
   npm run cli -- summary [-- --stress-threshold <number> --file <path>]
-  npm run cli -- resources [-- --file <path>]`;
+  npm run cli -- resources [-- --file <path>]
+  npm run cli -- state [-- --roster-file <path> --estate-file <path> --stress-threshold <number>]`;
 
 interface ParsedArguments {
   positional: string[];
@@ -166,6 +169,27 @@ async function main(args: string[]): Promise<void> {
         await loadJson(options.get("file") ?? defaultEstateSamplePath),
       );
       output = getEstateResources(estate);
+      break;
+    }
+
+    case "state": {
+      assertKnownOptions(options, [
+        "roster-file",
+        "estate-file",
+        "stress-threshold",
+      ]);
+      if (id !== undefined || extraPositionals.length > 0) {
+        throw new Error("state does not accept positional arguments");
+      }
+
+      const gameState = await loadGameState({
+        rosterPath: options.get("roster-file") ?? defaultSamplePath,
+        estatePath: options.get("estate-file") ?? defaultEstateSamplePath,
+      });
+      output = getGameStateSummary(
+        gameState,
+        numberOption(options, "stress-threshold"),
+      );
       break;
     }
 

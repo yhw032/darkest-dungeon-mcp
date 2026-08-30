@@ -57,3 +57,18 @@ test("CLI reports estate resources as JSON", () => {
   );
   assert.deepEqual(output.trinkets, { stacks: 19, totalAmount: 19 });
 });
+
+test("CLI reports the combined game state as JSON", () => {
+  const result = runCli("state", "--stress-threshold", "150");
+
+  assert.equal(result.status, 0, result.stderr);
+  const output = JSON.parse(result.stdout) as {
+    versions: { roster: number; estate: number };
+    roster: { totalHeroes: number; highStressHeroes: unknown[] };
+    estate: { trinkets: { totalAmount: number } };
+  };
+  assert.deepEqual(output.versions, { roster: 513, estate: 34 });
+  assert.equal(output.roster.totalHeroes, 24);
+  assert.equal(output.roster.highStressHeroes.length, 2);
+  assert.equal(output.estate.trinkets.totalAmount, 19);
+});
