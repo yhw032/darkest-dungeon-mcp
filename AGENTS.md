@@ -20,11 +20,16 @@
 - Commit messages must use this exact structure:
 
   ```text
-  feat(subject): contents
+  type(subject): contents
   ```
 
+- Choose `type` to match the work, such as `feat`, `fix`, `docs`, `style`,
+  `refac`, `test`, or `chore`.
 - Replace `subject` with the affected area and `contents` with a concise imperative summary.
-- Example: `feat(roster): add validated roster parser`
+- Examples:
+  - `feat(roster): add validated roster parser`
+  - `fix(parser): handle missing skill data`
+  - `docs(git): clarify commit message convention`
 - Keep each commit limited to one work unit.
 - Do not amend, squash, reset, rebase, force-push, or otherwise rewrite history unless the user explicitly requests it.
 
