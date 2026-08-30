@@ -43,6 +43,30 @@ test("CLI reports an unknown hero on stderr", () => {
   assert.equal(result.stdout, "");
 });
 
+test("CLI reports expanded hero details and town context", () => {
+  const result = runCli("hero", "18");
+
+  assert.equal(result.status, 0, result.stderr);
+  const output = JSON.parse(result.stdout) as {
+    hero: {
+      weaponRank: number;
+      armourRank: number;
+      equippedTrinkets: Array<{ id: string }>;
+    };
+    town: { buildingName: string | null; activityAssignments: unknown[] };
+  };
+  assert.equal(output.hero.weaponRank, 2);
+  assert.equal(output.hero.armourRank, 2);
+  assert.deepEqual(
+    output.hero.equippedTrinkets.map((trinket) => trinket.id),
+    ["heavens_hairpin", "collector_1"],
+  );
+  assert.deepEqual(output.town, {
+    buildingName: null,
+    activityAssignments: [],
+  });
+});
+
 test("CLI reports estate resources as JSON", () => {
   const result = runCli("resources");
 

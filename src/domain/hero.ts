@@ -2,6 +2,18 @@ export interface Quirk {
   id: string;
   isLocked: boolean;
   isNew: boolean;
+  evolutionDurationRemaining: number;
+}
+
+export interface EquippedTrinket {
+  id: string;
+  type: string;
+  amount: number;
+}
+
+export interface SkillSelection {
+  id: string;
+  value: number;
 }
 
 export interface Hero {
@@ -11,10 +23,22 @@ export interface Hero {
   resolveXp: number;
   stress: number;
   rosterStatus: number;
+  buildingName: string | null;
   currentHp: number | null;
+  weaponRank: number;
+  armourRank: number;
+  afflictionId: string | null;
+  afflictionSeverity: number;
+  virtueId: string | null;
+  visitedDeathsDoor: boolean;
+  hasHadHeartAttack: boolean;
+  deathHeartAttackCompleted: boolean;
   quirks: Quirk[];
+  equippedTrinkets: EquippedTrinket[];
   combatSkills: string[];
   campingSkills: string[];
+  combatSkillSelections: SkillSelection[];
+  campingSkillSelections: SkillSelection[];
 }
 
 export interface Roster {

@@ -2,7 +2,9 @@ import assert from "node:assert/strict";
 import test from "node:test";
 
 import type { Hero, Roster } from "../src/domain/hero.js";
+import type { Town } from "../src/domain/town.js";
 import { getHero } from "../src/queries/get-hero.js";
+import { getHeroTownContext } from "../src/queries/get-hero-town-context.js";
 import { listHeroes } from "../src/queries/list-heroes.js";
 import { summarizeRoster } from "../src/queries/summarize-roster.js";
 
@@ -14,10 +16,22 @@ function makeHero(overrides: Partial<Hero>): Hero {
     resolveXp: 6,
     stress: 10,
     rosterStatus: 0,
+    buildingName: null,
     currentHp: 20,
+    weaponRank: 0,
+    armourRank: 0,
+    afflictionId: null,
+    afflictionSeverity: 0,
+    virtueId: null,
+    visitedDeathsDoor: false,
+    hasHadHeartAttack: false,
+    deathHeartAttackCompleted: false,
     quirks: [],
+    equippedTrinkets: [],
     combatSkills: [],
     campingSkills: [],
+    combatSkillSelections: [],
+    campingSkillSelections: [],
     ...overrides,
   };
 }
@@ -62,6 +76,47 @@ test("filters heroes by class, status, and maximum stress", () => {
 test("gets a hero by its string id", () => {
   assert.equal(getHero(roster, "2")?.name, "준이아");
   assert.equal(getHero(roster, "999"), undefined);
+});
+
+test("links a hero to matching town activity slots", () => {
+  const town: Town = {
+    version: 1,
+    districts: [],
+    buildings: [
+      {
+        id: "abbey",
+        stores: [],
+        activities: [
+          {
+            id: "meditation",
+            slots: [
+              {
+                id: "0",
+                heroId: 2,
+                visitsRemaining: 1,
+                residentOccupied: 0,
+                isSideEffectResult: false,
+              },
+            ],
+          },
+        ],
+      },
+    ],
+  };
+
+  assert.deepEqual(getHeroTownContext(roster, town, "2"), {
+    buildingName: null,
+    activityAssignments: [
+      {
+        buildingId: "abbey",
+        activityId: "meditation",
+        slotId: "0",
+        visitsRemaining: 1,
+        residentOccupied: 0,
+        isSideEffectResult: false,
+      },
+    ],
+  });
 });
 
 test("summarizes counts and sorts high-stress heroes", () => {

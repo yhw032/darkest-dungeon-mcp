@@ -9,6 +9,7 @@ import { parseTownJson } from "../parser/parse-town.js";
 import { getEstateResources } from "../queries/get-estate-resources.js";
 import { getGameStateSummary } from "../queries/get-game-state-summary.js";
 import { getHero } from "../queries/get-hero.js";
+import { getHeroTownContext } from "../queries/get-hero-town-context.js";
 import { getQuest } from "../queries/get-quest.js";
 import { getTownSummary } from "../queries/get-town-summary.js";
 import {
@@ -20,7 +21,7 @@ import { summarizeRoster } from "../queries/summarize-roster.js";
 
 const usage = `Usage:
   npm run cli -- heroes [-- --class <class> --status <number> --max-stress <number> --file <path>]
-  npm run cli -- hero <id> [-- --file <path>]
+  npm run cli -- hero <id> [-- --file <path> --town-file <path>]
   npm run cli -- summary [-- --stress-threshold <number> --file <path>]
   npm run cli -- resources [-- --file <path>]
   npm run cli -- town [-- --file <path>]
@@ -151,7 +152,7 @@ async function main(args: string[]): Promise<void> {
     }
 
     case "hero": {
-      assertKnownOptions(options, ["file"]);
+      assertKnownOptions(options, ["file", "town-file"]);
       if (id === undefined || extraPositionals.length > 0) {
         throw new Error("hero requires exactly one <id>");
       }
@@ -164,7 +165,10 @@ async function main(args: string[]): Promise<void> {
         throw new Error(`Hero not found: ${id}`);
       }
 
-      output = { hero };
+      const town = parseTownJson(
+        await loadJson(options.get("town-file") ?? defaultTownSamplePath),
+      );
+      output = { hero, town: getHeroTownContext(roster, town, id) };
       break;
     }
 
