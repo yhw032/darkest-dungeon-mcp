@@ -18,6 +18,13 @@ import {
 } from "../queries/list-heroes.js";
 import { type QuestFilters, listQuests } from "../queries/list-quests.js";
 import { summarizeRoster } from "../queries/summarize-roster.js";
+import {
+  getTrinket,
+  listTrinkets,
+  type TrinketFilters,
+  type TrinketLocation,
+  type TrinketSources,
+} from "../queries/trinkets.js";
 
 const usage = `Usage:
   npm run cli -- heroes [-- --class <class> --status <number> --max-stress <number> --file <path>]
@@ -27,6 +34,8 @@ const usage = `Usage:
   npm run cli -- town [-- --file <path>]
   npm run cli -- quests [-- --dungeon <name> --type <type> --difficulty <number> --plot <true|false> --file <path>]
   npm run cli -- quest <id> [-- --file <path>]
+  npm run cli -- trinkets [-- --id <id> --location <storage|equipped|store> --roster-file <path> --estate-file <path> --town-file <path>]
+  npm run cli -- trinket <id> [-- --roster-file <path> --estate-file <path> --town-file <path>]
   npm run cli -- state [-- --roster-file <path> --estate-file <path> --town-file <path> --quest-file <path> --stress-threshold <number>]`;
 
 interface ParsedArguments {
@@ -104,6 +113,34 @@ const defaultQuestSamplePath = fileURLToPath(
 
 async function loadJson(path: string): Promise<string> {
   return readFile(path, "utf8");
+}
+
+async function loadTrinketSources(
+  options: Map<string, string>,
+): Promise<TrinketSources> {
+  const [roster, estate, town] = await Promise.all([
+    loadJson(options.get("roster-file") ?? defaultSamplePath).then(
+      parseRosterJson,
+    ),
+    loadJson(options.get("estate-file") ?? defaultEstateSamplePath).then(
+      parseEstateJson,
+    ),
+    loadJson(options.get("town-file") ?? defaultTownSamplePath).then(
+      parseTownJson,
+    ),
+  ]);
+  return { roster, estate, town };
+}
+
+function trinketLocationOption(
+  options: Map<string, string>,
+): TrinketLocation | undefined {
+  const location = options.get("location");
+  if (location === undefined) return undefined;
+  if (location === "storage" || location === "equipped" || location === "store") {
+    return location;
+  }
+  throw new Error("--location must be storage, equipped, or store");
 }
 
 function booleanOption(
@@ -255,6 +292,40 @@ async function main(args: string[]): Promise<void> {
       const quest = getQuest(state, id);
       if (quest === undefined) throw new Error(`Quest not found: ${id}`);
       output = { quest };
+      break;
+    }
+
+    case "trinkets": {
+      assertKnownOptions(options, [
+        "id",
+        "location",
+        "roster-file",
+        "estate-file",
+        "town-file",
+      ]);
+      if (id !== undefined || extraPositionals.length > 0) {
+        throw new Error("trinkets does not accept positional arguments");
+      }
+
+      const filters: TrinketFilters = {};
+      const filterId = options.get("id");
+      const location = trinketLocationOption(options);
+      if (filterId !== undefined) filters.id = filterId;
+      if (location !== undefined) filters.location = location;
+      const trinkets = listTrinkets(await loadTrinketSources(options), filters);
+      output = { total: trinkets.length, trinkets };
+      break;
+    }
+
+    case "trinket": {
+      assertKnownOptions(options, ["roster-file", "estate-file", "town-file"]);
+      if (id === undefined || extraPositionals.length > 0) {
+        throw new Error("trinket requires exactly one <id>");
+      }
+
+      const trinket = getTrinket(await loadTrinketSources(options), id);
+      if (trinket === undefined) throw new Error(`Trinket not found: ${id}`);
+      output = { trinket };
       break;
     }
 

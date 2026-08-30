@@ -158,3 +158,34 @@ test("CLI gets a quest by id", () => {
     { id: "generated_0", dungeon: "crypts" },
   );
 });
+
+test("CLI lists trinkets by location", () => {
+  const result = runCli("trinkets", "--location", "equipped");
+
+  assert.equal(result.status, 0, result.stderr);
+  const output = JSON.parse(result.stdout) as {
+    total: number;
+    trinkets: Array<{ equippedBy: unknown[] }>;
+  };
+  assert.equal(output.total, 9);
+  assert.ok(output.trinkets.every((trinket) => trinket.equippedBy.length > 0));
+});
+
+test("CLI gets one trinket across all locations", () => {
+  const result = runCli("trinket", "flag_5");
+
+  assert.equal(result.status, 0, result.stderr);
+  const output = JSON.parse(result.stdout) as {
+    trinket: {
+      storageAmount: number;
+      equippedBy: Array<{ heroId: string }>;
+      storeAmount: number;
+    };
+  };
+  assert.equal(output.trinket.storageAmount, 1);
+  assert.deepEqual(
+    output.trinket.equippedBy.map((assignment) => assignment.heroId),
+    ["150"],
+  );
+  assert.equal(output.trinket.storeAmount, 0);
+});
