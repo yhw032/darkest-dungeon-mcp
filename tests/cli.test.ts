@@ -63,12 +63,34 @@ test("CLI reports the combined game state as JSON", () => {
 
   assert.equal(result.status, 0, result.stderr);
   const output = JSON.parse(result.stdout) as {
-    versions: { roster: number; estate: number };
+    versions: { roster: number; estate: number; town: number };
     roster: { totalHeroes: number; highStressHeroes: unknown[] };
     estate: { trinkets: { totalAmount: number } };
   };
-  assert.deepEqual(output.versions, { roster: 513, estate: 34 });
+  assert.deepEqual(output.versions, { roster: 513, estate: 34, town: 513 });
   assert.equal(output.roster.totalHeroes, 24);
   assert.equal(output.roster.highStressHeroes.length, 2);
   assert.equal(output.estate.trinkets.totalAmount, 19);
+});
+
+test("CLI reports a town summary as JSON", () => {
+  const result = runCli("town");
+
+  assert.equal(result.status, 0, result.stderr);
+  const output = JSON.parse(result.stdout) as {
+    buildings: number;
+    activitySlots: number;
+    availableRecruits: number;
+    districts: number;
+  };
+  assert.deepEqual(output, {
+    version: 513,
+    buildings: 11,
+    activitySlots: 24,
+    occupiedActivitySlots: 0,
+    storeItemAmount: 25,
+    availableRecruits: 9,
+    districts: 16,
+    builtDistricts: [],
+  });
 });

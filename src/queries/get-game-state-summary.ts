@@ -7,14 +7,17 @@ import {
   type RosterSummary,
   summarizeRoster,
 } from "./summarize-roster.js";
+import { type TownSummary, getTownSummary } from "./get-town-summary.js";
 
 export interface GameStateSummary {
   versions: {
     roster: number;
     estate: number;
+    town: number;
   };
   roster: RosterSummary;
   estate: Omit<EstateResourcesSummary, "version">;
+  town: Omit<TownSummary, "version">;
 }
 
 export function getGameStateSummary(
@@ -23,13 +26,17 @@ export function getGameStateSummary(
 ): GameStateSummary {
   const estateSummary = getEstateResources(gameState.estate);
   const { version: _version, ...estate } = estateSummary;
+  const townSummary = getTownSummary(gameState.town);
+  const { version: _townVersion, ...town } = townSummary;
 
   return {
     versions: {
       roster: gameState.roster.version,
       estate: gameState.estate.version,
+      town: gameState.town.version,
     },
     roster: summarizeRoster(gameState.roster, stressThreshold),
     estate,
+    town,
   };
 }

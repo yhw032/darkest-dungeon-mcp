@@ -14,9 +14,12 @@ const rosterPath = fileURLToPath(
 const estatePath = fileURLToPath(
   new URL("../samples/estate-decoded.json", import.meta.url),
 );
+const townPath = fileURLToPath(
+  new URL("../samples/town-decoded.json", import.meta.url),
+);
 
 test("loads roster and estate into one game state", async () => {
-  const gameState = await loadGameState({ rosterPath, estatePath });
+  const gameState = await loadGameState({ rosterPath, estatePath, townPath });
 
   assert.equal(gameState.roster.heroes.length, 24);
   assert.equal(
@@ -24,13 +27,14 @@ test("loads roster and estate into one game state", async () => {
       ?.amount,
     30790,
   );
+  assert.equal(gameState.town.buildings.length, 11);
 });
 
 test("builds a combined game-state summary", async () => {
-  const gameState = await loadGameState({ rosterPath, estatePath });
+  const gameState = await loadGameState({ rosterPath, estatePath, townPath });
   const summary = getGameStateSummary(gameState, 150);
 
-  assert.deepEqual(summary.versions, { roster: 513, estate: 34 });
+  assert.deepEqual(summary.versions, { roster: 513, estate: 34, town: 513 });
   assert.equal(summary.roster.totalHeroes, 24);
   assert.deepEqual(
     summary.roster.highStressHeroes.map((hero) => hero.stress),
@@ -42,6 +46,7 @@ test("builds a combined game-state summary", async () => {
     30790,
   );
   assert.equal(summary.estate.trinkets.totalAmount, 19);
+  assert.equal(summary.town.availableRecruits, 9);
 });
 
 test("identifies the component and path when loading fails", async () => {
@@ -50,7 +55,7 @@ test("identifies the component and path when loading fails", async () => {
   );
 
   await assert.rejects(
-    loadGameState({ rosterPath, estatePath: missingEstatePath }),
+    loadGameState({ rosterPath, estatePath: missingEstatePath, townPath }),
     (error) =>
       error instanceof GameStateLoadError &&
       error.component === "estate" &&

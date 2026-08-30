@@ -34,6 +34,14 @@ export function expectString(value: unknown, path: string): string {
   return value;
 }
 
+export function expectBoolean(value: unknown, path: string): boolean {
+  if (typeof value !== "boolean") {
+    throw new SaveValidationError("expected a boolean", path);
+  }
+
+  return value;
+}
+
 export function optionalBoolean(
   value: unknown,
   path: string,

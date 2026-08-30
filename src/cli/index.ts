@@ -4,9 +4,11 @@ import { fileURLToPath } from "node:url";
 import { loadGameState } from "../loaders/load-game-state.js";
 import { parseEstateJson } from "../parser/parse-estate.js";
 import { parseRosterJson } from "../parser/parse-roster.js";
+import { parseTownJson } from "../parser/parse-town.js";
 import { getEstateResources } from "../queries/get-estate-resources.js";
 import { getGameStateSummary } from "../queries/get-game-state-summary.js";
 import { getHero } from "../queries/get-hero.js";
+import { getTownSummary } from "../queries/get-town-summary.js";
 import {
   type HeroFilters,
   listHeroes,
@@ -18,7 +20,8 @@ const usage = `Usage:
   npm run cli -- hero <id> [-- --file <path>]
   npm run cli -- summary [-- --stress-threshold <number> --file <path>]
   npm run cli -- resources [-- --file <path>]
-  npm run cli -- state [-- --roster-file <path> --estate-file <path> --stress-threshold <number>]`;
+  npm run cli -- town [-- --file <path>]
+  npm run cli -- state [-- --roster-file <path> --estate-file <path> --town-file <path> --stress-threshold <number>]`;
 
 interface ParsedArguments {
   positional: string[];
@@ -85,6 +88,9 @@ const defaultSamplePath = fileURLToPath(
 );
 const defaultEstateSamplePath = fileURLToPath(
   new URL("../../samples/estate-decoded.json", import.meta.url),
+);
+const defaultTownSamplePath = fileURLToPath(
+  new URL("../../samples/town-decoded.json", import.meta.url),
 );
 
 async function loadJson(path: string): Promise<string> {
@@ -172,10 +178,24 @@ async function main(args: string[]): Promise<void> {
       break;
     }
 
+    case "town": {
+      assertKnownOptions(options, ["file"]);
+      if (id !== undefined || extraPositionals.length > 0) {
+        throw new Error("town does not accept positional arguments");
+      }
+
+      const town = parseTownJson(
+        await loadJson(options.get("file") ?? defaultTownSamplePath),
+      );
+      output = getTownSummary(town);
+      break;
+    }
+
     case "state": {
       assertKnownOptions(options, [
         "roster-file",
         "estate-file",
+        "town-file",
         "stress-threshold",
       ]);
       if (id !== undefined || extraPositionals.length > 0) {
@@ -185,6 +205,7 @@ async function main(args: string[]): Promise<void> {
       const gameState = await loadGameState({
         rosterPath: options.get("roster-file") ?? defaultSamplePath,
         estatePath: options.get("estate-file") ?? defaultEstateSamplePath,
+        townPath: options.get("town-file") ?? defaultTownSamplePath,
       });
       output = getGameStateSummary(
         gameState,

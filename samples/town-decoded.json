@@ -1,0 +1,1839 @@
+{
+    "base_root" : {
+        "version" : 513,
+        "buildings" : {
+            "nomad_wagon" : {
+                "activities" : { },
+                "store" : {
+                    "trinket_supply" : {
+                        "inventory" : {
+                            "items" : {
+                                "0" : {
+                                    "id" : "cudgel_weight",
+                                    "type" : "trinket",
+                                    "amount" : 1,
+                                    "added_buffs" : 0,
+                                    "hero_name" : "",
+                                    "previous_trinket_id" : "",
+                                    "did_transform" : false,
+                                    "trinkets_gained_count" : 0
+                                },
+                                "1" : {
+                                    "id" : "knights_crest",
+                                    "type" : "trinket",
+                                    "amount" : 1,
+                                    "added_buffs" : 0,
+                                    "hero_name" : "",
+                                    "previous_trinket_id" : "",
+                                    "did_transform" : false,
+                                    "trinkets_gained_count" : 0
+                                }
+                            }
+                        }
+                    },
+                    "shard_trinket_supply" : {
+                        "inventory" : {
+                            "items" : {
+                                "0" : {
+                                    "id" : "com_occ_elder_sign",
+                                    "type" : "trinket",
+                                    "amount" : 1,
+                                    "added_buffs" : 0,
+                                    "hero_name" : "",
+                                    "previous_trinket_id" : "",
+                                    "did_transform" : false,
+                                    "trinkets_gained_count" : 0
+                                },
+                                "1" : {
+                                    "id" : "com_lens_of_comet",
+                                    "type" : "trinket",
+                                    "amount" : 1,
+                                    "added_buffs" : 0,
+                                    "hero_name" : "",
+                                    "previous_trinket_id" : "",
+                                    "did_transform" : false,
+                                    "trinkets_gained_count" : 0
+                                },
+                                "2" : {
+                                    "id" : "com_abom_broken_key",
+                                    "type" : "trinket",
+                                    "amount" : 1,
+                                    "added_buffs" : 0,
+                                    "hero_name" : "",
+                                    "previous_trinket_id" : "",
+                                    "did_transform" : false,
+                                    "trinkets_gained_count" : 0
+                                },
+                                "3" : {
+                                    "id" : "com_pd_ashen_distillation",
+                                    "type" : "trinket",
+                                    "amount" : 1,
+                                    "added_buffs" : 0,
+                                    "hero_name" : "",
+                                    "previous_trinket_id" : "",
+                                    "did_transform" : false,
+                                    "trinkets_gained_count" : 0
+                                },
+                                "4" : {
+                                    "id" : "com_ant_smoking_skull",
+                                    "type" : "trinket",
+                                    "amount" : 1,
+                                    "added_buffs" : 0,
+                                    "hero_name" : "",
+                                    "previous_trinket_id" : "",
+                                    "did_transform" : false,
+                                    "trinkets_gained_count" : 0
+                                },
+                                "5" : {
+                                    "id" : "com_jes_dirge_for_devoured",
+                                    "type" : "trinket",
+                                    "amount" : 1,
+                                    "added_buffs" : 0,
+                                    "hero_name" : "",
+                                    "previous_trinket_id" : "",
+                                    "did_transform" : false,
+                                    "trinkets_gained_count" : 0
+                                },
+                                "6" : {
+                                    "id" : "com_flag_acidic_husk_ichor",
+                                    "type" : "trinket",
+                                    "amount" : 1,
+                                    "added_buffs" : 0,
+                                    "hero_name" : "",
+                                    "previous_trinket_id" : "",
+                                    "did_transform" : false,
+                                    "trinkets_gained_count" : 0
+                                },
+                                "7" : {
+                                    "id" : "com_comet_seed_pendant",
+                                    "type" : "trinket",
+                                    "amount" : 1,
+                                    "added_buffs" : 0,
+                                    "hero_name" : "",
+                                    "previous_trinket_id" : "",
+                                    "did_transform" : false,
+                                    "trinkets_gained_count" : 0
+                                },
+                                "8" : {
+                                    "id" : "com_sb_spectral_speartip",
+                                    "type" : "trinket",
+                                    "amount" : 1,
+                                    "added_buffs" : 0,
+                                    "hero_name" : "",
+                                    "previous_trinket_id" : "",
+                                    "did_transform" : false,
+                                    "trinkets_gained_count" : 0
+                                },
+                                "9" : {
+                                    "id" : "com_ves_heretical_passages",
+                                    "type" : "trinket",
+                                    "amount" : 1,
+                                    "added_buffs" : 0,
+                                    "hero_name" : "",
+                                    "previous_trinket_id" : "",
+                                    "did_transform" : false,
+                                    "trinkets_gained_count" : 0
+                                },
+                                "10" : {
+                                    "id" : "com_hnd_huskfang_whistle",
+                                    "type" : "trinket",
+                                    "amount" : 1,
+                                    "added_buffs" : 0,
+                                    "hero_name" : "",
+                                    "previous_trinket_id" : "",
+                                    "did_transform" : false,
+                                    "trinkets_gained_count" : 0
+                                },
+                                "11" : {
+                                    "id" : "com_bh_mask_of_timeless",
+                                    "type" : "trinket",
+                                    "amount" : 1,
+                                    "added_buffs" : 0,
+                                    "hero_name" : "",
+                                    "previous_trinket_id" : "",
+                                    "did_transform" : false,
+                                    "trinkets_gained_count" : 0
+                                },
+                                "12" : {
+                                    "id" : "com_maa_mirror_shield",
+                                    "type" : "trinket",
+                                    "amount" : 1,
+                                    "added_buffs" : 0,
+                                    "hero_name" : "",
+                                    "previous_trinket_id" : "",
+                                    "did_transform" : false,
+                                    "trinkets_gained_count" : 0
+                                },
+                                "13" : {
+                                    "id" : "com_grv_huskclaw_toxin",
+                                    "type" : "trinket",
+                                    "amount" : 1,
+                                    "added_buffs" : 0,
+                                    "hero_name" : "",
+                                    "previous_trinket_id" : "",
+                                    "did_transform" : false,
+                                    "trinkets_gained_count" : 0
+                                },
+                                "14" : {
+                                    "id" : "com_lep_crystalized_amulet",
+                                    "type" : "trinket",
+                                    "amount" : 1,
+                                    "added_buffs" : 0,
+                                    "hero_name" : "",
+                                    "previous_trinket_id" : "",
+                                    "did_transform" : false,
+                                    "trinkets_gained_count" : 0
+                                },
+                                "15" : {
+                                    "id" : "com_hwy_crystalline_gunpowder",
+                                    "type" : "trinket",
+                                    "amount" : 1,
+                                    "added_buffs" : 0,
+                                    "hero_name" : "",
+                                    "previous_trinket_id" : "",
+                                    "did_transform" : false,
+                                    "trinkets_gained_count" : 0
+                                },
+                                "16" : {
+                                    "id" : "com_comet_cluster_pendant",
+                                    "type" : "trinket",
+                                    "amount" : 1,
+                                    "added_buffs" : 0,
+                                    "hero_name" : "",
+                                    "previous_trinket_id" : "",
+                                    "did_transform" : false,
+                                    "trinkets_gained_count" : 0
+                                },
+                                "17" : {
+                                    "id" : "com_hel_thirsting_blade",
+                                    "type" : "trinket",
+                                    "amount" : 1,
+                                    "added_buffs" : 0,
+                                    "hero_name" : "",
+                                    "previous_trinket_id" : "",
+                                    "did_transform" : false,
+                                    "trinkets_gained_count" : 0
+                                },
+                                "18" : {
+                                    "id" : "com_msk_icosahedric_balls",
+                                    "type" : "trinket",
+                                    "amount" : 1,
+                                    "added_buffs" : 0,
+                                    "hero_name" : "",
+                                    "previous_trinket_id" : "",
+                                    "did_transform" : false,
+                                    "trinkets_gained_count" : 0
+                                },
+                                "19" : {
+                                    "id" : "com_arb_keening_bolts",
+                                    "type" : "trinket",
+                                    "amount" : 1,
+                                    "added_buffs" : 0,
+                                    "hero_name" : "",
+                                    "previous_trinket_id" : "",
+                                    "did_transform" : false,
+                                    "trinkets_gained_count" : 0
+                                },
+                                "20" : {
+                                    "id" : "com_millers_pipe",
+                                    "type" : "trinket",
+                                    "amount" : 1,
+                                    "added_buffs" : 0,
+                                    "hero_name" : "",
+                                    "previous_trinket_id" : "",
+                                    "did_transform" : false,
+                                    "trinkets_gained_count" : 0
+                                },
+                                "21" : {
+                                    "id" : "com_coat_many_colours",
+                                    "type" : "trinket",
+                                    "amount" : 1,
+                                    "added_buffs" : 0,
+                                    "hero_name" : "",
+                                    "previous_trinket_id" : "",
+                                    "did_transform" : false,
+                                    "trinkets_gained_count" : 0
+                                },
+                                "22" : {
+                                    "id" : "com_cru_non_euclidean_hilt",
+                                    "type" : "trinket",
+                                    "amount" : 1,
+                                    "added_buffs" : 0,
+                                    "hero_name" : "",
+                                    "previous_trinket_id" : "",
+                                    "did_transform" : false,
+                                    "trinkets_gained_count" : 0
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "sanitarium" : {
+                "activities" : {
+                    "treatment" : {
+                        "0" : {
+                            "hero" : 0,
+                            "visitsRemaining" : 0,
+                            "resident_occupied" : -1,
+                            "is_side_effect_result" : false
+                        },
+                        "1" : {
+                            "hero" : 0,
+                            "visitsRemaining" : 0,
+                            "resident_occupied" : -1,
+                            "is_side_effect_result" : false
+                        },
+                        "2" : {
+                            "hero" : 0,
+                            "visitsRemaining" : 0,
+                            "resident_occupied" : -1,
+                            "is_side_effect_result" : false
+                        },
+                        "quirk_treatment" : {
+                            "0" : {
+                                "positive_quirk" : {
+                                    "quirk_treatment" : "",
+                                    "quirk_treatment_action" : 0
+                                },
+                                "negative_quirk" : {
+                                    "quirk_treatment" : "",
+                                    "quirk_treatment_action" : 0
+                                },
+                                "disease_quirk" : {
+                                    "quirk_treatment" : "",
+                                    "quirk_treatment_action" : 0
+                                }
+                            },
+                            "1" : {
+                                "positive_quirk" : {
+                                    "quirk_treatment" : "",
+                                    "quirk_treatment_action" : 0
+                                },
+                                "negative_quirk" : {
+                                    "quirk_treatment" : "",
+                                    "quirk_treatment_action" : 0
+                                },
+                                "disease_quirk" : {
+                                    "quirk_treatment" : "",
+                                    "quirk_treatment_action" : 0
+                                }
+                            },
+                            "2" : {
+                                "positive_quirk" : {
+                                    "quirk_treatment" : "",
+                                    "quirk_treatment_action" : 0
+                                },
+                                "negative_quirk" : {
+                                    "quirk_treatment" : "",
+                                    "quirk_treatment_action" : 0
+                                },
+                                "disease_quirk" : {
+                                    "quirk_treatment" : "",
+                                    "quirk_treatment_action" : 0
+                                }
+                            }
+                        }
+                    },
+                    "disease_treatment" : {
+                        "0" : {
+                            "hero" : 0,
+                            "visitsRemaining" : 0,
+                            "resident_occupied" : -1,
+                            "is_side_effect_result" : false
+                        },
+                        "1" : {
+                            "hero" : 0,
+                            "visitsRemaining" : 0,
+                            "resident_occupied" : -1,
+                            "is_side_effect_result" : false
+                        },
+                        "2" : {
+                            "hero" : 0,
+                            "visitsRemaining" : 0,
+                            "resident_occupied" : -1,
+                            "is_side_effect_result" : false
+                        },
+                        "quirk_treatment" : {
+                            "0" : {
+                                "positive_quirk" : {
+                                    "quirk_treatment" : "",
+                                    "quirk_treatment_action" : 0
+                                },
+                                "negative_quirk" : {
+                                    "quirk_treatment" : "",
+                                    "quirk_treatment_action" : 0
+                                },
+                                "disease_quirk" : {
+                                    "quirk_treatment" : "",
+                                    "quirk_treatment_action" : 0
+                                }
+                            },
+                            "1" : {
+                                "positive_quirk" : {
+                                    "quirk_treatment" : "",
+                                    "quirk_treatment_action" : 0
+                                },
+                                "negative_quirk" : {
+                                    "quirk_treatment" : "",
+                                    "quirk_treatment_action" : 0
+                                },
+                                "disease_quirk" : {
+                                    "quirk_treatment" : "",
+                                    "quirk_treatment_action" : 0
+                                }
+                            },
+                            "2" : {
+                                "positive_quirk" : {
+                                    "quirk_treatment" : "",
+                                    "quirk_treatment_action" : 0
+                                },
+                                "negative_quirk" : {
+                                    "quirk_treatment" : "",
+                                    "quirk_treatment_action" : 0
+                                },
+                                "disease_quirk" : {
+                                    "quirk_treatment" : "",
+                                    "quirk_treatment_action" : 0
+                                }
+                            }
+                        }
+                    }
+                },
+                "store" : { }
+            },
+            "abbey" : {
+                "activities" : {
+                    "meditation" : {
+                        "0" : {
+                            "hero" : 0,
+                            "visitsRemaining" : 0,
+                            "resident_occupied" : 0,
+                            "is_side_effect_result" : false
+                        },
+                        "1" : {
+                            "hero" : 0,
+                            "visitsRemaining" : 0,
+                            "resident_occupied" : -1,
+                            "is_side_effect_result" : false
+                        },
+                        "2" : {
+                            "hero" : 0,
+                            "visitsRemaining" : 0,
+                            "resident_occupied" : -1,
+                            "is_side_effect_result" : false
+                        }
+                    },
+                    "prayer" : {
+                        "0" : {
+                            "hero" : 0,
+                            "visitsRemaining" : 0,
+                            "resident_occupied" : -1,
+                            "is_side_effect_result" : false
+                        },
+                        "1" : {
+                            "hero" : 0,
+                            "visitsRemaining" : 0,
+                            "resident_occupied" : -1,
+                            "is_side_effect_result" : false
+                        },
+                        "2" : {
+                            "hero" : 0,
+                            "visitsRemaining" : 0,
+                            "resident_occupied" : -1,
+                            "is_side_effect_result" : false
+                        }
+                    },
+                    "flagellation" : {
+                        "0" : {
+                            "hero" : 0,
+                            "visitsRemaining" : 0,
+                            "resident_occupied" : -1,
+                            "is_side_effect_result" : false
+                        },
+                        "1" : {
+                            "hero" : 0,
+                            "visitsRemaining" : 0,
+                            "resident_occupied" : -1,
+                            "is_side_effect_result" : false
+                        },
+                        "2" : {
+                            "hero" : 0,
+                            "visitsRemaining" : 0,
+                            "resident_occupied" : -1,
+                            "is_side_effect_result" : false
+                        }
+                    }
+                },
+                "store" : { }
+            },
+            "guild" : { },
+            "camping_trainer" : { },
+            "statue" : { },
+            "tavern" : {
+                "activities" : {
+                    "bar" : {
+                        "0" : {
+                            "hero" : 0,
+                            "visitsRemaining" : 0,
+                            "resident_occupied" : -1,
+                            "is_side_effect_result" : false
+                        },
+                        "1" : {
+                            "hero" : 0,
+                            "visitsRemaining" : 0,
+                            "resident_occupied" : -1,
+                            "is_side_effect_result" : false
+                        },
+                        "2" : {
+                            "hero" : 0,
+                            "visitsRemaining" : 0,
+                            "resident_occupied" : -1,
+                            "is_side_effect_result" : false
+                        }
+                    },
+                    "gambling" : {
+                        "0" : {
+                            "hero" : 0,
+                            "visitsRemaining" : 0,
+                            "resident_occupied" : -1,
+                            "is_side_effect_result" : false
+                        },
+                        "1" : {
+                            "hero" : 0,
+                            "visitsRemaining" : 0,
+                            "resident_occupied" : -1,
+                            "is_side_effect_result" : false
+                        },
+                        "2" : {
+                            "hero" : 0,
+                            "visitsRemaining" : 0,
+                            "resident_occupied" : -1,
+                            "is_side_effect_result" : false
+                        }
+                    },
+                    "brothel" : {
+                        "0" : {
+                            "hero" : 0,
+                            "visitsRemaining" : 0,
+                            "resident_occupied" : -1,
+                            "is_side_effect_result" : false
+                        },
+                        "1" : {
+                            "hero" : 0,
+                            "visitsRemaining" : 0,
+                            "resident_occupied" : -1,
+                            "is_side_effect_result" : false
+                        },
+                        "2" : {
+                            "hero" : 0,
+                            "visitsRemaining" : 0,
+                            "resident_occupied" : -1,
+                            "is_side_effect_result" : false
+                        }
+                    }
+                },
+                "store" : { }
+            },
+            "graveyard" : { },
+            "stage_coach" : {
+                "activities" : { },
+                "store" : {
+                    "hero_recruit" : {
+                        "generated" : {
+                            "327" : {
+                                "rescued" : false,
+                                "actor" : {
+                                    "name" : "베노이",
+                                    "current_hp" : 32.0,
+                                    "stunned" : 0,
+                                    "combat_ready" : false,
+                                    "damage_source_data" : 0,
+                                    "damage_source_type" : 0,
+                                    "damage_type" : 0,
+                                    "colour_variation" : 1,
+                                    "enemy_rank_targets" : 0,
+                                    "friendly_rank_targets" : 0,
+                                    "performing_turn" : 0,
+                                    "controlling_actor_guid" : 0,
+                                    "controlling_duration" : 0,
+                                    "current_mode_id" : 0,
+                                    "rounds_in_ranks" : 0,
+                                    "check_round_ranks" : 0,
+                                    "health_damage_blocks" : 0,
+                                    "buff_group_next_guid" : 4,
+                                    "buff_group" : { },
+                                    "actor_dot" : { }
+                                },
+                                "heroClass" : "musketeer",
+                                "resolveXp" : 2,
+                                "m_Stress" : 0.0,
+                                "is_death_heart_attack_completed" : false,
+                                "visited_deaths_door" : false,
+                                "deaths_door_enter_effect_round_cooldown" : 0,
+                                "has_had_heart_attack" : false,
+                                "backer_hero" : false,
+                                "steps_taken" : 0,
+                                "enemies_killed" : 0,
+                                "weapon_rank" : 1,
+                                "armour_rank" : 1,
+                                "dd_test_survived" : 0,
+                                "affliction_type_id" : "",
+                                "affliction_severity" : 0,
+                                "virtue_type_id" : "",
+                                "provisions_consumed" : 0,
+                                "quirks" : {
+                                    "lurker" : {
+                                        "is_new" : true,
+                                        "is_locked" : false,
+                                        "trinketId" : 0,
+                                        "mission_count" : 2,
+                                        "replaces_quirk" : 0,
+                                        "replaces_quirk_viewed" : false,
+                                        "evolution_duration_remaining" : 0
+                                    },
+                                    "accurate" : {
+                                        "is_new" : true,
+                                        "is_locked" : false,
+                                        "trinketId" : 0,
+                                        "mission_count" : 2,
+                                        "replaces_quirk" : 0,
+                                        "replaces_quirk_viewed" : false,
+                                        "evolution_duration_remaining" : 0
+                                    },
+                                    "claustrophobia" : {
+                                        "is_new" : true,
+                                        "is_locked" : false,
+                                        "trinketId" : 0,
+                                        "mission_count" : 2,
+                                        "replaces_quirk" : 0,
+                                        "replaces_quirk_viewed" : false,
+                                        "evolution_duration_remaining" : 0
+                                    }
+                                },
+                                "skills" : {
+                                    "selected_combat_skills" : {
+                                        "aimed_shot" : 0,
+                                        "smokescreen" : 0,
+                                        "buckshot" : 0,
+                                        "patch_up" : 0
+                                    },
+                                    "selected_camping_skills" : {
+                                        "first_aid" : 0,
+                                        "marching_plan" : 0,
+                                        "clean_musket" : 0,
+                                        "triage" : 0
+                                    }
+                                },
+                                "trinkets" : {
+                                    "items" : { }
+                                },
+                                "has_item_Tracking" : true,
+                                "item_tracking" : {
+                                    "supply" : { }
+                                },
+                                "number_of_successful_darkest_dungeon_quests" : 0,
+                                "is_from_town_event" : false
+                            },
+                            "329" : {
+                                "rescued" : false,
+                                "actor" : {
+                                    "name" : "콜리아",
+                                    "current_hp" : 25.0,
+                                    "stunned" : 0,
+                                    "combat_ready" : false,
+                                    "damage_source_data" : 0,
+                                    "damage_source_type" : 0,
+                                    "damage_type" : 0,
+                                    "colour_variation" : 2,
+                                    "enemy_rank_targets" : 0,
+                                    "friendly_rank_targets" : 0,
+                                    "performing_turn" : 0,
+                                    "controlling_actor_guid" : 0,
+                                    "controlling_duration" : 0,
+                                    "current_mode_id" : 0,
+                                    "rounds_in_ranks" : 0,
+                                    "check_round_ranks" : 0,
+                                    "health_damage_blocks" : 0,
+                                    "buff_group_next_guid" : 2,
+                                    "buff_group" : { },
+                                    "actor_dot" : { }
+                                },
+                                "heroClass" : "bounty_hunter",
+                                "resolveXp" : 0,
+                                "m_Stress" : 0.0,
+                                "is_death_heart_attack_completed" : false,
+                                "visited_deaths_door" : false,
+                                "deaths_door_enter_effect_round_cooldown" : 0,
+                                "has_had_heart_attack" : false,
+                                "backer_hero" : false,
+                                "steps_taken" : 0,
+                                "enemies_killed" : 0,
+                                "weapon_rank" : 0,
+                                "armour_rank" : 0,
+                                "dd_test_survived" : 0,
+                                "affliction_type_id" : "",
+                                "affliction_severity" : 0,
+                                "virtue_type_id" : "",
+                                "provisions_consumed" : 0,
+                                "quirks" : {
+                                    "photomania" : {
+                                        "is_new" : true,
+                                        "is_locked" : false,
+                                        "trinketId" : 0,
+                                        "mission_count" : 2,
+                                        "replaces_quirk" : 0,
+                                        "replaces_quirk_viewed" : false,
+                                        "evolution_duration_remaining" : 0
+                                    },
+                                    "egomania" : {
+                                        "is_new" : true,
+                                        "is_locked" : false,
+                                        "trinketId" : 0,
+                                        "mission_count" : 2,
+                                        "replaces_quirk" : 0,
+                                        "replaces_quirk_viewed" : false,
+                                        "evolution_duration_remaining" : 0
+                                    },
+                                    "ruminator" : {
+                                        "is_new" : true,
+                                        "is_locked" : false,
+                                        "trinketId" : 0,
+                                        "mission_count" : 2,
+                                        "replaces_quirk" : 0,
+                                        "replaces_quirk_viewed" : false,
+                                        "evolution_duration_remaining" : 0
+                                    }
+                                },
+                                "skills" : {
+                                    "selected_combat_skills" : {
+                                        "collect_bounty" : 0,
+                                        "uppercut" : 0,
+                                        "finish_him" : 0,
+                                        "hook_and_slice" : 0
+                                    },
+                                    "selected_camping_skills" : {
+                                        "encourage" : 0,
+                                        "planned_takedown" : 0,
+                                        "scout_ahead" : 0
+                                    }
+                                },
+                                "trinkets" : {
+                                    "items" : { }
+                                },
+                                "has_item_Tracking" : true,
+                                "item_tracking" : {
+                                    "supply" : { }
+                                },
+                                "number_of_successful_darkest_dungeon_quests" : 0,
+                                "is_from_town_event" : false
+                            },
+                            "330" : {
+                                "rescued" : false,
+                                "actor" : {
+                                    "name" : "부스노이",
+                                    "current_hp" : 27.0,
+                                    "stunned" : 0,
+                                    "combat_ready" : false,
+                                    "damage_source_data" : 0,
+                                    "damage_source_type" : 0,
+                                    "damage_type" : 0,
+                                    "colour_variation" : 2,
+                                    "enemy_rank_targets" : 0,
+                                    "friendly_rank_targets" : 0,
+                                    "performing_turn" : 0,
+                                    "controlling_actor_guid" : 0,
+                                    "controlling_duration" : 0,
+                                    "current_mode_id" : 0,
+                                    "rounds_in_ranks" : 0,
+                                    "check_round_ranks" : 0,
+                                    "health_damage_blocks" : 0,
+                                    "buff_group_next_guid" : 4,
+                                    "buff_group" : { },
+                                    "actor_dot" : { }
+                                },
+                                "heroClass" : "arbalest",
+                                "resolveXp" : 0,
+                                "m_Stress" : 0.0,
+                                "is_death_heart_attack_completed" : false,
+                                "visited_deaths_door" : false,
+                                "deaths_door_enter_effect_round_cooldown" : 0,
+                                "has_had_heart_attack" : false,
+                                "backer_hero" : false,
+                                "steps_taken" : 0,
+                                "enemies_killed" : 0,
+                                "weapon_rank" : 0,
+                                "armour_rank" : 0,
+                                "dd_test_survived" : 0,
+                                "affliction_type_id" : "",
+                                "affliction_severity" : 0,
+                                "virtue_type_id" : "",
+                                "provisions_consumed" : 0,
+                                "quirks" : {
+                                    "lurker" : {
+                                        "is_new" : true,
+                                        "is_locked" : false,
+                                        "trinketId" : 0,
+                                        "mission_count" : 2,
+                                        "replaces_quirk" : 0,
+                                        "replaces_quirk_viewed" : false,
+                                        "evolution_duration_remaining" : 0
+                                    },
+                                    "daredevil" : {
+                                        "is_new" : true,
+                                        "is_locked" : false,
+                                        "trinketId" : 0,
+                                        "mission_count" : 2,
+                                        "replaces_quirk" : 0,
+                                        "replaces_quirk_viewed" : false,
+                                        "evolution_duration_remaining" : 0
+                                    },
+                                    "stress_eater" : {
+                                        "is_new" : true,
+                                        "is_locked" : false,
+                                        "trinketId" : 0,
+                                        "mission_count" : 2,
+                                        "replaces_quirk" : 0,
+                                        "replaces_quirk_viewed" : false,
+                                        "evolution_duration_remaining" : 0
+                                    },
+                                    "alcoholism" : {
+                                        "is_new" : true,
+                                        "is_locked" : false,
+                                        "trinketId" : 0,
+                                        "mission_count" : 2,
+                                        "replaces_quirk" : 0,
+                                        "replaces_quirk_viewed" : false,
+                                        "evolution_duration_remaining" : 0
+                                    }
+                                },
+                                "skills" : {
+                                    "selected_combat_skills" : {
+                                        "sniper_shot" : 0,
+                                        "suppressing_fire" : 0,
+                                        "bola" : 0,
+                                        "battlefield_bandage" : 0
+                                    },
+                                    "selected_camping_skills" : {
+                                        "encourage" : 0,
+                                        "restring_crossbow" : 0,
+                                        "triage" : 0
+                                    }
+                                },
+                                "trinkets" : {
+                                    "items" : { }
+                                },
+                                "has_item_Tracking" : true,
+                                "item_tracking" : {
+                                    "supply" : { }
+                                },
+                                "number_of_successful_darkest_dungeon_quests" : 0,
+                                "is_from_town_event" : false
+                            }
+                        },
+                        "deck_history_version_0" : {
+                            "425622714" : {
+                                "count" : 6
+                            },
+                            "434243921" : {
+                                "count" : 6
+                            },
+                            "799185657" : {
+                                "count" : 5
+                            },
+                            "867528600" : {
+                                "count" : 5
+                            },
+                            "1164693370" : {
+                                "count" : 5
+                            },
+                            "1181166609" : {
+                                "count" : 4
+                            },
+                            "1333561066" : {
+                                "count" : 5
+                            },
+                            "1609830614" : {
+                                "count" : 3
+                            },
+                            "1994785473" : {
+                                "count" : 4
+                            },
+                            "2094671029" : {
+                                "count" : 4
+                            },
+                            "2193440045" : {
+                                "count" : 4
+                            },
+                            "2781707809" : {
+                                "count" : 3
+                            },
+                            "2916818447" : {
+                                "count" : 7
+                            },
+                            "3147710195" : {
+                                "count" : 4
+                            },
+                            "3588906526" : {
+                                "count" : 8
+                            },
+                            "3708729584" : {
+                                "count" : 6
+                            },
+                            "4094609168" : {
+                                "count" : 6
+                            },
+                            "4097579818" : {
+                                "count" : 6
+                            }
+                        }
+                    },
+                    "shard_hero_recruit" : {
+                        "generated" : {
+                            "331" : {
+                                "rescued" : false,
+                                "actor" : {
+                                    "name" : "코르바이저",
+                                    "current_hp" : 55.0,
+                                    "stunned" : 0,
+                                    "combat_ready" : false,
+                                    "damage_source_data" : 0,
+                                    "damage_source_type" : 0,
+                                    "damage_type" : 0,
+                                    "colour_variation" : 2,
+                                    "enemy_rank_targets" : 0,
+                                    "friendly_rank_targets" : 0,
+                                    "performing_turn" : 0,
+                                    "controlling_actor_guid" : 0,
+                                    "controlling_duration" : 0,
+                                    "current_mode_id" : 0,
+                                    "rounds_in_ranks" : 0,
+                                    "check_round_ranks" : 0,
+                                    "health_damage_blocks" : 0,
+                                    "buff_group_next_guid" : 7,
+                                    "buff_group" : { },
+                                    "actor_dot" : { }
+                                },
+                                "heroClass" : "man_at_arms",
+                                "resolveXp" : 40,
+                                "m_Stress" : 0.0,
+                                "is_death_heart_attack_completed" : false,
+                                "visited_deaths_door" : false,
+                                "deaths_door_enter_effect_round_cooldown" : 0,
+                                "has_had_heart_attack" : false,
+                                "backer_hero" : false,
+                                "steps_taken" : 0,
+                                "enemies_killed" : 0,
+                                "weapon_rank" : 4,
+                                "armour_rank" : 4,
+                                "dd_test_survived" : 0,
+                                "affliction_type_id" : "",
+                                "affliction_severity" : 0,
+                                "virtue_type_id" : "",
+                                "provisions_consumed" : 0,
+                                "quirks" : {
+                                    "luminous" : {
+                                        "is_new" : true,
+                                        "is_locked" : false,
+                                        "trinketId" : 0,
+                                        "mission_count" : 2,
+                                        "replaces_quirk" : 0,
+                                        "replaces_quirk_viewed" : false,
+                                        "evolution_duration_remaining" : 0
+                                    },
+                                    "cove_explorer" : {
+                                        "is_new" : true,
+                                        "is_locked" : false,
+                                        "trinketId" : 0,
+                                        "mission_count" : 2,
+                                        "replaces_quirk" : 0,
+                                        "replaces_quirk_viewed" : false,
+                                        "evolution_duration_remaining" : 0
+                                    },
+                                    "kleptomaniac" : {
+                                        "is_new" : true,
+                                        "is_locked" : false,
+                                        "trinketId" : 0,
+                                        "mission_count" : 2,
+                                        "replaces_quirk" : 0,
+                                        "replaces_quirk_viewed" : false,
+                                        "evolution_duration_remaining" : 0
+                                    },
+                                    "demonomania" : {
+                                        "is_new" : true,
+                                        "is_locked" : false,
+                                        "trinketId" : 0,
+                                        "mission_count" : 2,
+                                        "replaces_quirk" : 0,
+                                        "replaces_quirk_viewed" : false,
+                                        "evolution_duration_remaining" : 0
+                                    },
+                                    "shard_hungry" : {
+                                        "is_new" : true,
+                                        "is_locked" : false,
+                                        "trinketId" : 0,
+                                        "mission_count" : 2,
+                                        "replaces_quirk" : 0,
+                                        "replaces_quirk_viewed" : false,
+                                        "evolution_duration_remaining" : 0
+                                    },
+                                    "precision_striker" : {
+                                        "is_new" : true,
+                                        "is_locked" : false,
+                                        "trinketId" : 0,
+                                        "mission_count" : 2,
+                                        "replaces_quirk" : 0,
+                                        "replaces_quirk_viewed" : false,
+                                        "evolution_duration_remaining" : 0
+                                    },
+                                    "off_guard" : {
+                                        "is_new" : true,
+                                        "is_locked" : false,
+                                        "trinketId" : 0,
+                                        "mission_count" : 2,
+                                        "replaces_quirk" : 0,
+                                        "replaces_quirk_viewed" : false,
+                                        "evolution_duration_remaining" : 0
+                                    }
+                                },
+                                "skills" : {
+                                    "selected_combat_skills" : {
+                                        "crush" : 0,
+                                        "rampart" : 0,
+                                        "command" : 0,
+                                        "bolster" : 0
+                                    },
+                                    "selected_camping_skills" : {
+                                        "encourage" : 0,
+                                        "first_aid" : 0,
+                                        "pep_talk" : 0,
+                                        "maintain_equipment" : 0
+                                    }
+                                },
+                                "trinkets" : {
+                                    "items" : { }
+                                },
+                                "has_item_Tracking" : true,
+                                "item_tracking" : {
+                                    "supply" : { }
+                                },
+                                "number_of_successful_darkest_dungeon_quests" : 0,
+                                "is_from_town_event" : false
+                            },
+                            "332" : {
+                                "rescued" : false,
+                                "actor" : {
+                                    "name" : "라비에르",
+                                    "current_hp" : 37.0,
+                                    "stunned" : 0,
+                                    "combat_ready" : false,
+                                    "damage_source_data" : 0,
+                                    "damage_source_type" : 0,
+                                    "damage_type" : 0,
+                                    "colour_variation" : 1,
+                                    "enemy_rank_targets" : 0,
+                                    "friendly_rank_targets" : 0,
+                                    "performing_turn" : 0,
+                                    "controlling_actor_guid" : 0,
+                                    "controlling_duration" : 0,
+                                    "current_mode_id" : 0,
+                                    "rounds_in_ranks" : 0,
+                                    "check_round_ranks" : 0,
+                                    "health_damage_blocks" : 0,
+                                    "buff_group_next_guid" : 8,
+                                    "buff_group" : { },
+                                    "actor_dot" : { }
+                                },
+                                "heroClass" : "houndmaster",
+                                "resolveXp" : 40,
+                                "m_Stress" : 0.0,
+                                "is_death_heart_attack_completed" : false,
+                                "visited_deaths_door" : false,
+                                "deaths_door_enter_effect_round_cooldown" : 0,
+                                "has_had_heart_attack" : false,
+                                "backer_hero" : false,
+                                "steps_taken" : 0,
+                                "enemies_killed" : 0,
+                                "weapon_rank" : 4,
+                                "armour_rank" : 4,
+                                "dd_test_survived" : 0,
+                                "affliction_type_id" : "",
+                                "affliction_severity" : 0,
+                                "virtue_type_id" : "",
+                                "provisions_consumed" : 0,
+                                "quirks" : {
+                                    "second_wind" : {
+                                        "is_new" : true,
+                                        "is_locked" : false,
+                                        "trinketId" : 0,
+                                        "mission_count" : 2,
+                                        "replaces_quirk" : 0,
+                                        "replaces_quirk_viewed" : false,
+                                        "evolution_duration_remaining" : 0
+                                    },
+                                    "automatonophobia" : {
+                                        "is_new" : true,
+                                        "is_locked" : false,
+                                        "trinketId" : 0,
+                                        "mission_count" : 2,
+                                        "replaces_quirk" : 0,
+                                        "replaces_quirk_viewed" : false,
+                                        "evolution_duration_remaining" : 0
+                                    },
+                                    "dacnomania" : {
+                                        "is_new" : true,
+                                        "is_locked" : false,
+                                        "trinketId" : 0,
+                                        "mission_count" : 2,
+                                        "replaces_quirk" : 0,
+                                        "replaces_quirk_viewed" : false,
+                                        "evolution_duration_remaining" : 0
+                                    },
+                                    "shard_hungry" : {
+                                        "is_new" : true,
+                                        "is_locked" : false,
+                                        "trinketId" : 0,
+                                        "mission_count" : 2,
+                                        "replaces_quirk" : 0,
+                                        "replaces_quirk_viewed" : false,
+                                        "evolution_duration_remaining" : 0
+                                    },
+                                    "last_gasp" : {
+                                        "is_new" : true,
+                                        "is_locked" : false,
+                                        "trinketId" : 0,
+                                        "mission_count" : 2,
+                                        "replaces_quirk" : 0,
+                                        "replaces_quirk_viewed" : false,
+                                        "evolution_duration_remaining" : 0
+                                    },
+                                    "weapons_haggler" : {
+                                        "is_new" : true,
+                                        "is_locked" : false,
+                                        "trinketId" : 0,
+                                        "mission_count" : 2,
+                                        "replaces_quirk" : 0,
+                                        "replaces_quirk_viewed" : false,
+                                        "evolution_duration_remaining" : 0
+                                    },
+                                    "fear_of_unholy" : {
+                                        "is_new" : true,
+                                        "is_locked" : false,
+                                        "trinketId" : 0,
+                                        "mission_count" : 2,
+                                        "replaces_quirk" : 0,
+                                        "replaces_quirk_viewed" : false,
+                                        "evolution_duration_remaining" : 0
+                                    }
+                                },
+                                "skills" : {
+                                    "selected_combat_skills" : {
+                                        "hounds_rush" : 0,
+                                        "hounds_harry" : 0,
+                                        "lick_wounds" : 0,
+                                        "blackjack" : 0
+                                    },
+                                    "selected_camping_skills" : {
+                                        "encourage" : 0,
+                                        "first_aid" : 0,
+                                        "pep_talk" : 0,
+                                        "hounds_watch" : 0
+                                    }
+                                },
+                                "trinkets" : {
+                                    "items" : { }
+                                },
+                                "has_item_Tracking" : true,
+                                "item_tracking" : {
+                                    "supply" : { }
+                                },
+                                "number_of_successful_darkest_dungeon_quests" : 0,
+                                "is_from_town_event" : false
+                            },
+                            "333" : {
+                                "rescued" : false,
+                                "actor" : {
+                                    "name" : "부라사",
+                                    "current_hp" : 36.0,
+                                    "stunned" : 0,
+                                    "combat_ready" : false,
+                                    "damage_source_data" : 0,
+                                    "damage_source_type" : 0,
+                                    "damage_type" : 0,
+                                    "colour_variation" : 3,
+                                    "enemy_rank_targets" : 0,
+                                    "friendly_rank_targets" : 0,
+                                    "performing_turn" : 0,
+                                    "controlling_actor_guid" : 0,
+                                    "controlling_duration" : 0,
+                                    "current_mode_id" : 0,
+                                    "rounds_in_ranks" : 0,
+                                    "check_round_ranks" : 0,
+                                    "health_damage_blocks" : 0,
+                                    "buff_group_next_guid" : 5,
+                                    "buff_group" : { },
+                                    "actor_dot" : { }
+                                },
+                                "heroClass" : "shieldbreaker",
+                                "resolveXp" : 40,
+                                "m_Stress" : 0.0,
+                                "is_death_heart_attack_completed" : false,
+                                "visited_deaths_door" : false,
+                                "deaths_door_enter_effect_round_cooldown" : 0,
+                                "has_had_heart_attack" : false,
+                                "backer_hero" : false,
+                                "steps_taken" : 0,
+                                "enemies_killed" : 0,
+                                "weapon_rank" : 4,
+                                "armour_rank" : 4,
+                                "dd_test_survived" : 0,
+                                "affliction_type_id" : "",
+                                "affliction_severity" : 0,
+                                "virtue_type_id" : "",
+                                "provisions_consumed" : 0,
+                                "quirks" : {
+                                    "cove_scrounger" : {
+                                        "is_new" : true,
+                                        "is_locked" : false,
+                                        "trinketId" : 0,
+                                        "mission_count" : 2,
+                                        "replaces_quirk" : 0,
+                                        "replaces_quirk_viewed" : false,
+                                        "evolution_duration_remaining" : 0
+                                    },
+                                    "alcoholism" : {
+                                        "is_new" : true,
+                                        "is_locked" : false,
+                                        "trinketId" : 0,
+                                        "mission_count" : 2,
+                                        "replaces_quirk" : 0,
+                                        "replaces_quirk_viewed" : false,
+                                        "evolution_duration_remaining" : 0
+                                    },
+                                    "shard_hungry" : {
+                                        "is_new" : true,
+                                        "is_locked" : false,
+                                        "trinketId" : 0,
+                                        "mission_count" : 2,
+                                        "replaces_quirk" : 0,
+                                        "replaces_quirk_viewed" : false,
+                                        "evolution_duration_remaining" : 0
+                                    },
+                                    "weald_adventurer" : {
+                                        "is_new" : true,
+                                        "is_locked" : false,
+                                        "trinketId" : 0,
+                                        "mission_count" : 2,
+                                        "replaces_quirk" : 0,
+                                        "replaces_quirk_viewed" : false,
+                                        "evolution_duration_remaining" : 0
+                                    },
+                                    "weapons_haggler" : {
+                                        "is_new" : true,
+                                        "is_locked" : false,
+                                        "trinketId" : 0,
+                                        "mission_count" : 2,
+                                        "replaces_quirk" : 0,
+                                        "replaces_quirk_viewed" : false,
+                                        "evolution_duration_remaining" : 0
+                                    },
+                                    "perfectionist" : {
+                                        "is_new" : true,
+                                        "is_locked" : false,
+                                        "trinketId" : 0,
+                                        "mission_count" : 2,
+                                        "replaces_quirk" : 0,
+                                        "replaces_quirk_viewed" : false,
+                                        "evolution_duration_remaining" : 0
+                                    },
+                                    "bloodthirsty" : {
+                                        "is_new" : true,
+                                        "is_locked" : false,
+                                        "trinketId" : 0,
+                                        "mission_count" : 2,
+                                        "replaces_quirk" : 0,
+                                        "replaces_quirk_viewed" : false,
+                                        "evolution_duration_remaining" : 0
+                                    }
+                                },
+                                "skills" : {
+                                    "selected_combat_skills" : {
+                                        "pierce" : 0,
+                                        "adders_kiss" : 0,
+                                        "spearing" : 0,
+                                        "single_out" : 0
+                                    },
+                                    "selected_camping_skills" : {
+                                        "encourage" : 0,
+                                        "first_aid" : 0,
+                                        "pep_talk" : 0,
+                                        "way_of_serpent" : 0
+                                    }
+                                },
+                                "trinkets" : {
+                                    "items" : { }
+                                },
+                                "has_item_Tracking" : true,
+                                "item_tracking" : {
+                                    "supply" : { }
+                                },
+                                "number_of_successful_darkest_dungeon_quests" : 0,
+                                "is_from_town_event" : false
+                            },
+                            "334" : {
+                                "rescued" : false,
+                                "actor" : {
+                                    "name" : "볼벡",
+                                    "current_hp" : 46.0,
+                                    "stunned" : 0,
+                                    "combat_ready" : false,
+                                    "damage_source_data" : 0,
+                                    "damage_source_type" : 0,
+                                    "damage_type" : 0,
+                                    "colour_variation" : 0,
+                                    "enemy_rank_targets" : 0,
+                                    "friendly_rank_targets" : 0,
+                                    "performing_turn" : 0,
+                                    "controlling_actor_guid" : 0,
+                                    "controlling_duration" : 0,
+                                    "current_mode_id" : 0,
+                                    "rounds_in_ranks" : 0,
+                                    "check_round_ranks" : 0,
+                                    "health_damage_blocks" : 0,
+                                    "buff_group_next_guid" : 7,
+                                    "buff_group" : { },
+                                    "actor_dot" : { }
+                                },
+                                "heroClass" : "hellion",
+                                "resolveXp" : 40,
+                                "m_Stress" : 0.0,
+                                "is_death_heart_attack_completed" : false,
+                                "visited_deaths_door" : false,
+                                "deaths_door_enter_effect_round_cooldown" : 0,
+                                "has_had_heart_attack" : false,
+                                "backer_hero" : false,
+                                "steps_taken" : 0,
+                                "enemies_killed" : 0,
+                                "weapon_rank" : 4,
+                                "armour_rank" : 4,
+                                "dd_test_survived" : 0,
+                                "affliction_type_id" : "",
+                                "affliction_severity" : 0,
+                                "virtue_type_id" : "",
+                                "provisions_consumed" : 0,
+                                "quirks" : {
+                                    "accurate" : {
+                                        "is_new" : true,
+                                        "is_locked" : false,
+                                        "trinketId" : 0,
+                                        "mission_count" : 2,
+                                        "replaces_quirk" : 0,
+                                        "replaces_quirk_viewed" : false,
+                                        "evolution_duration_remaining" : 0
+                                    },
+                                    "gift_of_the_healer" : {
+                                        "is_new" : true,
+                                        "is_locked" : false,
+                                        "trinketId" : 0,
+                                        "mission_count" : 2,
+                                        "replaces_quirk" : 0,
+                                        "replaces_quirk_viewed" : false,
+                                        "evolution_duration_remaining" : 0
+                                    },
+                                    "dacnomania" : {
+                                        "is_new" : true,
+                                        "is_locked" : false,
+                                        "trinketId" : 0,
+                                        "mission_count" : 2,
+                                        "replaces_quirk" : 0,
+                                        "replaces_quirk_viewed" : false,
+                                        "evolution_duration_remaining" : 0
+                                    },
+                                    "scientific" : {
+                                        "is_new" : true,
+                                        "is_locked" : false,
+                                        "trinketId" : 0,
+                                        "mission_count" : 2,
+                                        "replaces_quirk" : 0,
+                                        "replaces_quirk_viewed" : false,
+                                        "evolution_duration_remaining" : 0
+                                    },
+                                    "shard_hungry" : {
+                                        "is_new" : true,
+                                        "is_locked" : false,
+                                        "trinketId" : 0,
+                                        "mission_count" : 2,
+                                        "replaces_quirk" : 0,
+                                        "replaces_quirk_viewed" : false,
+                                        "evolution_duration_remaining" : 0
+                                    },
+                                    "thick_blooded" : {
+                                        "is_new" : true,
+                                        "is_locked" : false,
+                                        "trinketId" : 0,
+                                        "mission_count" : 2,
+                                        "replaces_quirk" : 0,
+                                        "replaces_quirk_viewed" : false,
+                                        "evolution_duration_remaining" : 0
+                                    },
+                                    "stress_eater" : {
+                                        "is_new" : true,
+                                        "is_locked" : false,
+                                        "trinketId" : 0,
+                                        "mission_count" : 2,
+                                        "replaces_quirk" : 0,
+                                        "replaces_quirk_viewed" : false,
+                                        "evolution_duration_remaining" : 0
+                                    }
+                                },
+                                "skills" : {
+                                    "selected_combat_skills" : {
+                                        "wicked_hack" : 0,
+                                        "barbaric_yawp" : 0,
+                                        "breakthru" : 0,
+                                        "adrenaline_rush" : 0
+                                    },
+                                    "selected_camping_skills" : {
+                                        "encourage" : 0,
+                                        "first_aid" : 0,
+                                        "pep_talk" : 0,
+                                        "battle_trance" : 0
+                                    }
+                                },
+                                "trinkets" : {
+                                    "items" : { }
+                                },
+                                "has_item_Tracking" : true,
+                                "item_tracking" : {
+                                    "supply" : { }
+                                },
+                                "number_of_successful_darkest_dungeon_quests" : 0,
+                                "is_from_town_event" : false
+                            },
+                            "335" : {
+                                "rescued" : false,
+                                "actor" : {
+                                    "name" : "고다르",
+                                    "current_hp" : 45.0,
+                                    "stunned" : 0,
+                                    "combat_ready" : false,
+                                    "damage_source_data" : 0,
+                                    "damage_source_type" : 0,
+                                    "damage_type" : 0,
+                                    "colour_variation" : 3,
+                                    "enemy_rank_targets" : 0,
+                                    "friendly_rank_targets" : 0,
+                                    "performing_turn" : 0,
+                                    "controlling_actor_guid" : 0,
+                                    "controlling_duration" : 0,
+                                    "current_mode_id" : 0,
+                                    "rounds_in_ranks" : 0,
+                                    "check_round_ranks" : 0,
+                                    "health_damage_blocks" : 0,
+                                    "buff_group_next_guid" : 6,
+                                    "buff_group" : { },
+                                    "actor_dot" : { }
+                                },
+                                "heroClass" : "bounty_hunter",
+                                "resolveXp" : 40,
+                                "m_Stress" : 0.0,
+                                "is_death_heart_attack_completed" : false,
+                                "visited_deaths_door" : false,
+                                "deaths_door_enter_effect_round_cooldown" : 0,
+                                "has_had_heart_attack" : false,
+                                "backer_hero" : false,
+                                "steps_taken" : 0,
+                                "enemies_killed" : 0,
+                                "weapon_rank" : 4,
+                                "armour_rank" : 4,
+                                "dd_test_survived" : 0,
+                                "affliction_type_id" : "",
+                                "affliction_severity" : 0,
+                                "virtue_type_id" : "",
+                                "provisions_consumed" : 0,
+                                "quirks" : {
+                                    "warren_scrounger" : {
+                                        "is_new" : true,
+                                        "is_locked" : false,
+                                        "trinketId" : 0,
+                                        "mission_count" : 2,
+                                        "replaces_quirk" : 0,
+                                        "replaces_quirk_viewed" : false,
+                                        "evolution_duration_remaining" : 0
+                                    },
+                                    "shocker" : {
+                                        "is_new" : true,
+                                        "is_locked" : false,
+                                        "trinketId" : 0,
+                                        "mission_count" : 2,
+                                        "replaces_quirk" : 0,
+                                        "replaces_quirk_viewed" : false,
+                                        "evolution_duration_remaining" : 0
+                                    },
+                                    "shard_hungry" : {
+                                        "is_new" : true,
+                                        "is_locked" : false,
+                                        "trinketId" : 0,
+                                        "mission_count" : 2,
+                                        "replaces_quirk" : 0,
+                                        "replaces_quirk_viewed" : false,
+                                        "evolution_duration_remaining" : 0
+                                    },
+                                    "thick_blooded" : {
+                                        "is_new" : true,
+                                        "is_locked" : false,
+                                        "trinketId" : 0,
+                                        "mission_count" : 2,
+                                        "replaces_quirk" : 0,
+                                        "replaces_quirk_viewed" : false,
+                                        "evolution_duration_remaining" : 0
+                                    },
+                                    "luminous" : {
+                                        "is_new" : true,
+                                        "is_locked" : false,
+                                        "trinketId" : 0,
+                                        "mission_count" : 2,
+                                        "replaces_quirk" : 0,
+                                        "replaces_quirk_viewed" : false,
+                                        "evolution_duration_remaining" : 0
+                                    },
+                                    "flagellant" : {
+                                        "is_new" : true,
+                                        "is_locked" : false,
+                                        "trinketId" : 0,
+                                        "mission_count" : 2,
+                                        "replaces_quirk" : 0,
+                                        "replaces_quirk_viewed" : false,
+                                        "evolution_duration_remaining" : 0
+                                    },
+                                    "ablutomania" : {
+                                        "is_new" : true,
+                                        "is_locked" : false,
+                                        "trinketId" : 0,
+                                        "mission_count" : 2,
+                                        "replaces_quirk" : 0,
+                                        "replaces_quirk_viewed" : false,
+                                        "evolution_duration_remaining" : 0
+                                    }
+                                },
+                                "skills" : {
+                                    "selected_combat_skills" : {
+                                        "collect_bounty" : 0,
+                                        "target_tag" : 0,
+                                        "flashbang" : 0,
+                                        "finish_him" : 0
+                                    },
+                                    "selected_camping_skills" : {
+                                        "encourage" : 0,
+                                        "first_aid" : 0,
+                                        "pep_talk" : 0,
+                                        "how_its_done" : 0
+                                    }
+                                },
+                                "trinkets" : {
+                                    "items" : { }
+                                },
+                                "has_item_Tracking" : true,
+                                "item_tracking" : {
+                                    "supply" : { }
+                                },
+                                "number_of_successful_darkest_dungeon_quests" : 0,
+                                "is_from_town_event" : false
+                            },
+                            "336" : {
+                                "rescued" : false,
+                                "actor" : {
+                                    "name" : "타디프",
+                                    "current_hp" : 31.5,
+                                    "stunned" : 0,
+                                    "combat_ready" : false,
+                                    "damage_source_data" : 0,
+                                    "damage_source_type" : 0,
+                                    "damage_type" : 0,
+                                    "colour_variation" : 2,
+                                    "enemy_rank_targets" : 0,
+                                    "friendly_rank_targets" : 0,
+                                    "performing_turn" : 0,
+                                    "controlling_actor_guid" : 0,
+                                    "controlling_duration" : 0,
+                                    "current_mode_id" : 0,
+                                    "rounds_in_ranks" : 0,
+                                    "check_round_ranks" : 0,
+                                    "health_damage_blocks" : 0,
+                                    "buff_group_next_guid" : 6,
+                                    "buff_group" : { },
+                                    "actor_dot" : { }
+                                },
+                                "heroClass" : "occultist",
+                                "resolveXp" : 40,
+                                "m_Stress" : 0.0,
+                                "is_death_heart_attack_completed" : false,
+                                "visited_deaths_door" : false,
+                                "deaths_door_enter_effect_round_cooldown" : 0,
+                                "has_had_heart_attack" : false,
+                                "backer_hero" : false,
+                                "steps_taken" : 0,
+                                "enemies_killed" : 0,
+                                "weapon_rank" : 4,
+                                "armour_rank" : 4,
+                                "dd_test_survived" : 0,
+                                "affliction_type_id" : "",
+                                "affliction_severity" : 0,
+                                "virtue_type_id" : "",
+                                "provisions_consumed" : 0,
+                                "quirks" : {
+                                    "armor_haggler" : {
+                                        "is_new" : true,
+                                        "is_locked" : false,
+                                        "trinketId" : 0,
+                                        "mission_count" : 2,
+                                        "replaces_quirk" : 0,
+                                        "replaces_quirk_viewed" : false,
+                                        "evolution_duration_remaining" : 0
+                                    },
+                                    "natural_eye" : {
+                                        "is_new" : true,
+                                        "is_locked" : false,
+                                        "trinketId" : 0,
+                                        "mission_count" : 2,
+                                        "replaces_quirk" : 0,
+                                        "replaces_quirk_viewed" : false,
+                                        "evolution_duration_remaining" : 0
+                                    },
+                                    "nocturnal" : {
+                                        "is_new" : true,
+                                        "is_locked" : false,
+                                        "trinketId" : 0,
+                                        "mission_count" : 2,
+                                        "replaces_quirk" : 0,
+                                        "replaces_quirk_viewed" : false,
+                                        "evolution_duration_remaining" : 0
+                                    },
+                                    "fragile" : {
+                                        "is_new" : true,
+                                        "is_locked" : false,
+                                        "trinketId" : 0,
+                                        "mission_count" : 2,
+                                        "replaces_quirk" : 0,
+                                        "replaces_quirk_viewed" : false,
+                                        "evolution_duration_remaining" : 0
+                                    },
+                                    "shard_hungry" : {
+                                        "is_new" : true,
+                                        "is_locked" : false,
+                                        "trinketId" : 0,
+                                        "mission_count" : 2,
+                                        "replaces_quirk" : 0,
+                                        "replaces_quirk_viewed" : false,
+                                        "evolution_duration_remaining" : 0
+                                    },
+                                    "warren_scrounger" : {
+                                        "is_new" : true,
+                                        "is_locked" : false,
+                                        "trinketId" : 0,
+                                        "mission_count" : 2,
+                                        "replaces_quirk" : 0,
+                                        "replaces_quirk_viewed" : false,
+                                        "evolution_duration_remaining" : 0
+                                    },
+                                    "compulsive" : {
+                                        "is_new" : true,
+                                        "is_locked" : false,
+                                        "trinketId" : 0,
+                                        "mission_count" : 2,
+                                        "replaces_quirk" : 0,
+                                        "replaces_quirk_viewed" : false,
+                                        "evolution_duration_remaining" : 0
+                                    }
+                                },
+                                "skills" : {
+                                    "selected_combat_skills" : {
+                                        "bloodlet" : 0,
+                                        "abyssal_artillery" : 0,
+                                        "weakening_curse" : 0,
+                                        "wyrd_reconstruction" : 0
+                                    },
+                                    "selected_camping_skills" : {
+                                        "encourage" : 0,
+                                        "first_aid" : 0,
+                                        "pep_talk" : 0,
+                                        "abandon_hope" : 0
+                                    }
+                                },
+                                "trinkets" : {
+                                    "items" : { }
+                                },
+                                "has_item_Tracking" : true,
+                                "item_tracking" : {
+                                    "supply" : { }
+                                },
+                                "number_of_successful_darkest_dungeon_quests" : 0,
+                                "is_from_town_event" : false
+                            }
+                        },
+                        "deck_history_version_0" : {
+                            "425622714" : {
+                                "count" : 2
+                            },
+                            "434243921" : {
+                                "count" : 4
+                            },
+                            "799185657" : {
+                                "count" : 2
+                            },
+                            "867528600" : {
+                                "count" : 1
+                            },
+                            "1164693370" : {
+                                "count" : 1
+                            },
+                            "1333561066" : {
+                                "count" : 2
+                            },
+                            "1994785473" : {
+                                "count" : 1
+                            },
+                            "2094671029" : {
+                                "count" : 1
+                            },
+                            "2193440045" : {
+                                "count" : 1
+                            },
+                            "2781707809" : {
+                                "count" : 2
+                            },
+                            "2916818447" : {
+                                "count" : 3
+                            },
+                            "3147710195" : {
+                                "count" : 3
+                            },
+                            "3588906526" : {
+                                "count" : 3
+                            },
+                            "3708729584" : {
+                                "count" : 1
+                            },
+                            "4094609168" : {
+                                "count" : 2
+                            },
+                            "4097579818" : {
+                                "count" : 3
+                            }
+                        }
+                    }
+                }
+            },
+            "circus" : { },
+            "blacksmith" : { }
+        },
+        "districts" : {
+            "buildings" : {
+                "the_mill" : {
+                    "built" : false,
+                    "buffs" : {
+                        "" : { }
+                    }
+                },
+                "geologic_studyhall" : {
+                    "built" : false,
+                    "buffs" : {
+                        "stacking" : { }
+                    }
+                },
+                "tainted_well" : {
+                    "built" : false,
+                    "buffs" : {
+                        "holy_water" : { },
+                        "laudanum" : { }
+                    }
+                },
+                "miasmal_orchard" : {
+                    "built" : false,
+                    "buffs" : {
+                        "medicinal_herbs" : { },
+                        "antivenom" : { }
+                    }
+                },
+                "spire_of_hope" : {
+                    "built" : false,
+                    "buffs" : {
+                        "prestige" : { }
+                    }
+                },
+                "bank" : {
+                    "built" : false,
+                    "buffs" : {
+                        "estate" : { }
+                    }
+                },
+                "illuminators_guild" : {
+                    "built" : false,
+                    "buffs" : {
+                        "darkness" : { }
+                    }
+                },
+                "granary" : {
+                    "built" : false,
+                    "buffs" : {
+                        "hero_buff0" : { },
+                        "provision" : {
+                            "count" : 0
+                        }
+                    }
+                },
+                "buskers_corner" : {
+                    "built" : false,
+                    "buffs" : {
+                        "town_visit_stress_relief" : { }
+                    }
+                },
+                "house_of_the_yellow_hand" : {
+                    "built" : false,
+                    "buffs" : {
+                        "hero_buff0" : { }
+                    }
+                },
+                "altar_of_light" : {
+                    "built" : false,
+                    "buffs" : {
+                        "hero_buff0" : { }
+                    }
+                },
+                "training_ring" : {
+                    "built" : false,
+                    "buffs" : {
+                        "hero_buff0" : { }
+                    }
+                },
+                "library" : {
+                    "built" : false,
+                    "buffs" : {
+                        "hero_buff0" : { },
+                        "curio_buff0" : { }
+                    }
+                },
+                "theater" : {
+                    "built" : false,
+                    "buffs" : {
+                        "hero_buff0" : { }
+                    }
+                },
+                "outsiders_bonfire" : {
+                    "built" : false,
+                    "buffs" : {
+                        "camp_buff0" : { }
+                    }
+                },
+                "blood_bank" : {
+                    "built" : false,
+                    "buffs" : {
+                        "blood_provision" : {
+                            "count" : 0
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
