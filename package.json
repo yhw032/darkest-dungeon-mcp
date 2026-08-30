@@ -2,9 +2,11 @@
   "name": "darkest-dungeon-mcp",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "tsx src/index.ts",
+    "typecheck": "tsc --noEmit",
+    "test": "tsx --test tests/roster.test.ts"
   },
   "keywords": [],
   "author": "",

@@ -1,12 +1,13 @@
-import fs from "node:fs";
+import { readFile } from "node:fs/promises";
+import { fileURLToPath } from "node:url";
 
-const raw = fs.readFileSync(
-  "./samples/roster-decoded.json",
-  "utf-8",
+import { parseRosterJson } from "./parser/parse-roster.js";
+
+const defaultSamplePath = fileURLToPath(
+  new URL("../samples/roster-decoded.json", import.meta.url),
 );
+const inputPath = process.argv[2] ?? defaultSamplePath;
+const raw = await readFile(inputPath, "utf8");
+const roster = parseRosterJson(raw);
 
-const save = JSON.parse(raw);
-
-console.dir(save, {
-  depth: 3,
-});
+console.dir(roster, { depth: null });
