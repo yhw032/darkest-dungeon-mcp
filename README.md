@@ -53,7 +53,7 @@ The local `.env` file and decoder JAR are ignored by Git. Environment variables 
 npm run mcp
 ```
 
-Without `DD_SAVE_DIR`, the server uses the checked-in decoded samples. With `DD_SAVE_DIR`, each request copies the supported save components to a temporary directory and decodes those copies. The original profile remains untouched. `DD_GAME_DIR` is only needed to map saved upgrade purchases to building names, stages, and costs for `list_building_upgrades`; other tools do not require it.
+Without `DD_SAVE_DIR`, the server uses the checked-in decoded samples. With `DD_SAVE_DIR`, each request copies the supported save components to a temporary directory and decodes those copies. The original profile remains untouched. `DD_GAME_DIR` is only needed by `list_building_upgrades` and `list_risky_quirks`; other tools do not require it.
 
 The repository includes a project-scoped Codex configuration at `.codex/config.toml`. After installing dependencies, restart Codex or the IDE extension and check `/mcp` for the `darkest_dungeon` server. The configuration contains no personal filesystem paths; machine-specific values belong in `.env`.
 
@@ -63,6 +63,7 @@ The repository includes a project-scoped Codex configuration at `.codex/config.t
 | --- | --- |
 | `get_game_state` | Return a combined campaign summary. |
 | `list_building_upgrades` | List building upgrade progress and the next heirloom costs. |
+| `list_risky_quirks` | Rank heroes with treatment-worthy quirks and explain the risks. |
 | `list_heroes` | Filter heroes by class, roster status, and stress. |
 | `get_hero` | Return one hero with related town activity. |
 | `list_quests` | Filter available quests. |
@@ -73,6 +74,8 @@ The repository includes a project-scoped Codex configuration at `.codex/config.t
 | `get_curio_advice` | Return item-aware interaction advice and warnings. |
 
 Curio coverage includes shared curios, Ruins, Warrens, Weald, Cove, Courtyard, Farmstead, Darkest Dungeon, Old Road, and relevant Hamlet quests. Retired curios that are no longer used by the game are intentionally excluded.
+
+Quirk treatment analysis combines the current roster, installed game definitions, and a conservative editorial policy. It currently covers explicitly curated high-risk rules, primarily forced curio interactions and loot loss, rather than assigning an invented severity to every negative quirk. Results are guidance, not an absolute or exhaustive treatment order.
 
 ## CLI examples
 
