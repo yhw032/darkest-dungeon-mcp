@@ -94,7 +94,7 @@ test("rejects duplicate curio ids", () => {
 test("loads the checked-in verified curio knowledge", async () => {
   const knowledge = await loadCurioKnowledge();
 
-  assert.equal(knowledge.curios.length, 32);
+  assert.equal(knowledge.curios.length, 40);
   assert.equal(
     knowledge.curios.filter((curio) => curio.regions.includes("ruins")).length,
     13,
@@ -107,6 +107,10 @@ test("loads the checked-in verified curio knowledge", async () => {
   assert.equal(
     knowledge.curios.filter((curio) => curio.regions.includes("weald")).length,
     12,
+  );
+  assert.equal(
+    knowledge.curios.filter((curio) => curio.regions.includes("cove")).length,
+    10,
   );
   assert.equal(
     knowledge.curios.find((curio) => curio.id === "eldritch_altar")
@@ -143,6 +147,16 @@ test("loads the checked-in verified curio knowledge", async () => {
       .find((curio) => curio.id === "left_luggage")
       ?.interactions.map(({ item }) => item),
     ["skeleton_key", "antivenom", null],
+  );
+  assert.deepEqual(
+    knowledge.curios.find((curio) => curio.id === "fish_carcass")?.aliases,
+    ["Giant Fish Carcass"],
+  );
+  assert.deepEqual(
+    knowledge.curios
+      .find((curio) => curio.id === "giant_oyster")
+      ?.interactions.map(({ item }) => item),
+    ["shovel", "dog_treats", null],
   );
   assert.ok(knowledge.curios.every((curio) => curio.sources.length > 0));
 });

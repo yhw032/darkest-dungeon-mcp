@@ -1165,6 +1165,288 @@
       ]
     },
     {
+      "id": "barnacle_crusted_chest",
+      "names": { "en": "Barnacle Crusted Chest" },
+      "aliases": ["Barnacle-Crusted Chest"],
+      "regions": ["cove"],
+      "dlcs": [],
+      "interactions": [
+        {
+          "item": "shovel",
+          "recommendation": "recommended",
+          "certainty": "guaranteed",
+          "outcomes": [
+            { "type": "loot", "polarity": "positive", "description": "Provides three rolls from the unrestricted loot table." }
+          ]
+        },
+        {
+          "item": null,
+          "recommendation": "situational",
+          "certainty": "possible",
+          "outcomes": [
+            { "type": "loot", "polarity": "positive", "description": "Provides two rolls from the unrestricted loot table.", "chancePercent": 50 },
+            { "type": "status", "polarity": "negative", "description": "Inflicts bleed.", "chancePercent": 25 },
+            { "type": "nothing", "polarity": "neutral", "description": "Nothing happens.", "chancePercent": 25 }
+          ]
+        }
+      ],
+      "notes": [],
+      "sources": [
+        {
+          "title": "Official Darkest Dungeon Wiki: Curio data module",
+          "url": "https://darkestdungeon.wiki.gg/wiki/Module:Curios/Data",
+          "verifiedAt": "2026-08-31"
+        }
+      ]
+    },
+    {
+      "id": "bas_relief",
+      "names": { "en": "Bas-Relief" },
+      "aliases": ["Bas Relief"],
+      "regions": ["cove"],
+      "dlcs": [],
+      "interactions": [
+        {
+          "item": "shovel",
+          "recommendation": "avoid",
+          "certainty": "guaranteed",
+          "outcomes": [
+            { "type": "stress", "polarity": "negative", "description": "Increases stress by 100." }
+          ]
+        },
+        {
+          "item": null,
+          "recommendation": "situational",
+          "certainty": "possible",
+          "outcomes": [
+            { "type": "quirk", "polarity": "positive", "description": "Grants a random positive quirk.", "chancePercent": 66.7 },
+            { "type": "quirk", "polarity": "negative", "description": "Grants a random negative quirk.", "chancePercent": 22.2 },
+            { "type": "disease", "polarity": "negative", "description": "Inflicts a random disease.", "chancePercent": 11.1 }
+          ]
+        }
+      ],
+      "notes": ["Using a Shovel is guaranteed to maximize the interacting hero's stress."],
+      "sources": [
+        {
+          "title": "Official Darkest Dungeon Wiki: Curio data module",
+          "url": "https://darkestdungeon.wiki.gg/wiki/Module:Curios/Data",
+          "verifiedAt": "2026-08-31"
+        }
+      ]
+    },
+    {
+      "id": "brackish_tide_pool",
+      "names": { "en": "Brackish Tide Pool" },
+      "aliases": ["Brackish Tidepool"],
+      "regions": ["cove"],
+      "dlcs": [],
+      "interactions": [
+        {
+          "item": "antivenom",
+          "recommendation": "recommended",
+          "certainty": "possible",
+          "outcomes": [
+            { "type": "health", "polarity": "positive", "description": "Restores 5 HP.", "chancePercent": 50 },
+            { "type": "stress", "polarity": "positive", "description": "Reduces stress by 6.", "chancePercent": 50 }
+          ]
+        },
+        {
+          "item": null,
+          "recommendation": "situational",
+          "certainty": "possible",
+          "outcomes": [
+            { "type": "buff", "polarity": "positive", "description": "Grants +33% blight, bleed, disease, and debuff resistance until camp.", "chancePercent": 75 },
+            { "type": "disease", "polarity": "negative", "description": "Inflicts a random disease.", "chancePercent": 25 }
+          ]
+        }
+      ],
+      "notes": ["Antivenom guarantees a beneficial result, but the specific benefit is random."],
+      "sources": [
+        {
+          "title": "Official Darkest Dungeon Wiki: Curio data module",
+          "url": "https://darkestdungeon.wiki.gg/wiki/Module:Curios/Data",
+          "verifiedAt": "2026-08-31"
+        }
+      ]
+    },
+    {
+      "id": "eerie_coral",
+      "names": { "en": "Eerie Coral" },
+      "aliases": [],
+      "regions": ["cove"],
+      "dlcs": [],
+      "interactions": [
+        {
+          "item": "medicinal_herbs",
+          "recommendation": "recommended",
+          "certainty": "guaranteed",
+          "outcomes": [
+            { "type": "quirk", "polarity": "positive", "description": "Removes one random negative quirk." }
+          ]
+        },
+        {
+          "item": null,
+          "recommendation": "situational",
+          "certainty": "possible",
+          "outcomes": [
+            { "type": "stress", "polarity": "positive", "description": "Reduces stress by 10.", "chancePercent": 50 },
+            { "type": "stress", "polarity": "negative", "description": "Increases stress by 25.", "chancePercent": 25 },
+            { "type": "nothing", "polarity": "neutral", "description": "Nothing happens.", "chancePercent": 25 }
+          ]
+        }
+      ],
+      "notes": ["Select a hero who has a removable negative quirk when using Medicinal Herbs."],
+      "sources": [
+        {
+          "title": "Official Darkest Dungeon Wiki: Curio data module",
+          "url": "https://darkestdungeon.wiki.gg/wiki/Module:Curios/Data",
+          "verifiedAt": "2026-08-31"
+        }
+      ]
+    },
+    {
+      "id": "fish_carcass",
+      "names": { "en": "Fish Carcass" },
+      "aliases": ["Giant Fish Carcass"],
+      "regions": ["cove"],
+      "dlcs": [],
+      "interactions": [
+        {
+          "item": "medicinal_herbs",
+          "recommendation": "recommended",
+          "certainty": "guaranteed",
+          "outcomes": [
+            { "type": "loot", "polarity": "positive", "description": "Provides two gem or trinket rolls, one gem or gold roll, and two supplies rolls." }
+          ]
+        },
+        {
+          "item": null,
+          "recommendation": "avoid",
+          "certainty": "possible",
+          "outcomes": [
+            { "type": "loot", "polarity": "positive", "description": "Provides one gem or trinket roll, one gold or gem roll, and one supplies roll.", "chancePercent": 16.7 },
+            { "type": "disease", "polarity": "negative", "description": "Inflicts The Red Plague.", "chancePercent": 16.7 },
+            { "type": "status", "polarity": "negative", "description": "Inflicts blight.", "chancePercent": 11.1 },
+            { "type": "status", "polarity": "negative", "description": "Inflicts bleed.", "chancePercent": 5.6 },
+            { "type": "nothing", "polarity": "neutral", "description": "Nothing happens.", "chancePercent": 50 }
+          ]
+        }
+      ],
+      "notes": [],
+      "sources": [
+        {
+          "title": "Official Darkest Dungeon Wiki: Curio data module",
+          "url": "https://darkestdungeon.wiki.gg/wiki/Module:Curios/Data",
+          "verifiedAt": "2026-08-31"
+        }
+      ]
+    },
+    {
+      "id": "fish_idol",
+      "names": { "en": "Fish Idol" },
+      "aliases": [],
+      "regions": ["cove"],
+      "dlcs": [],
+      "interactions": [
+        {
+          "item": "holy_water",
+          "recommendation": "recommended",
+          "certainty": "guaranteed",
+          "outcomes": [
+            { "type": "buff", "polarity": "positive", "description": "Grants +18% damage until camp." }
+          ]
+        },
+        {
+          "item": null,
+          "recommendation": "avoid",
+          "certainty": "possible",
+          "outcomes": [
+            { "type": "buff", "polarity": "negative", "description": "Inflicts -25% damage and -10 accuracy until camp.", "chancePercent": 50 },
+            { "type": "buff", "polarity": "negative", "description": "Inflicts -12 dodge until camp.", "chancePercent": 50 }
+          ]
+        }
+      ],
+      "notes": [],
+      "sources": [
+        {
+          "title": "Official Darkest Dungeon Wiki: Curio data module",
+          "url": "https://darkestdungeon.wiki.gg/wiki/Module:Curios/Data",
+          "verifiedAt": "2026-08-31"
+        }
+      ]
+    },
+    {
+      "id": "giant_oyster",
+      "names": { "en": "Giant Oyster" },
+      "aliases": [],
+      "regions": ["cove"],
+      "dlcs": [],
+      "interactions": [
+        {
+          "item": "shovel",
+          "recommendation": "recommended",
+          "certainty": "guaranteed",
+          "outcomes": [
+            { "type": "loot", "polarity": "positive", "description": "Provides three gold or trinket rolls." }
+          ],
+          "note": "Choose this interaction when guaranteed loot is the priority."
+        },
+        {
+          "item": "dog_treats",
+          "recommendation": "recommended",
+          "certainty": "guaranteed",
+          "outcomes": [
+            { "type": "buff", "polarity": "positive", "description": "Grants +25 dodge until camp." }
+          ],
+          "note": "Choose this interaction when a large dodge buff is more valuable than loot."
+        },
+        {
+          "item": null,
+          "recommendation": "avoid",
+          "certainty": "possible",
+          "outcomes": [
+            { "type": "loot", "polarity": "positive", "description": "Provides two gold or trinket rolls.", "chancePercent": 40 },
+            { "type": "status", "polarity": "negative", "description": "Inflicts bleed.", "chancePercent": 40 },
+            { "type": "nothing", "polarity": "neutral", "description": "Nothing happens.", "chancePercent": 20 }
+          ]
+        }
+      ],
+      "notes": [],
+      "sources": [
+        {
+          "title": "Official Darkest Dungeon Wiki: Curio data module",
+          "url": "https://darkestdungeon.wiki.gg/wiki/Module:Curios/Data",
+          "verifiedAt": "2026-08-31"
+        }
+      ]
+    },
+    {
+      "id": "ships_figurehead",
+      "names": { "en": "Ship's Figurehead" },
+      "aliases": ["Ships Figurehead"],
+      "regions": ["cove"],
+      "dlcs": [],
+      "interactions": [
+        {
+          "item": null,
+          "recommendation": "recommended",
+          "certainty": "possible",
+          "outcomes": [
+            { "type": "stress", "polarity": "positive", "description": "Reduces stress by 25 to 30.", "chancePercent": 66.7 },
+            { "type": "buff", "polarity": "positive", "description": "Grants +20% damage and +4 speed until camp.", "chancePercent": 33.3 }
+          ]
+        }
+      ],
+      "notes": ["Every possible outcome is beneficial."],
+      "sources": [
+        {
+          "title": "Official Darkest Dungeon Wiki: Curio data module",
+          "url": "https://darkestdungeon.wiki.gg/wiki/Module:Curios/Data",
+          "verifiedAt": "2026-08-31"
+        }
+      ]
+    },
+    {
       "id": "shamblers_altar",
       "names": { "en": "Shambler's Altar" },
       "aliases": ["Shambler Altar"],

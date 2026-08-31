@@ -13,6 +13,7 @@ test("searches curios by id, alias, partial name, and region", async () => {
   assert.equal(searchCurios(knowledge, { query: "Shambler Altar" })[0]?.id, "shamblers_altar");
   assert.equal(searchCurios(knowledge, { query: "Knife Rack" })[0]?.id, "rack_of_blades");
   assert.equal(searchCurios(knowledge, { query: "Cosmic Spiderweb" })[0]?.id, "eerie_spiderweb");
+  assert.equal(searchCurios(knowledge, { query: "Giant Fish Carcass" })[0]?.id, "fish_carcass");
   assert.deepEqual(
     searchCurios(knowledge, { query: "fountain", region: "ruins" }).map(
       (curio) => curio.id,
@@ -145,6 +146,21 @@ test("selects an available alternative when multiple provisions are recommended"
   assert.deepEqual(
     result.usableInteractions.map((interaction) => interaction.item),
     ["antivenom", null],
+  );
+});
+
+test("recommends a non-loot curio interaction when its item is available", async () => {
+  const result = getCurioAdvice(await loadCurioKnowledge(), {
+    name: "Giant Oyster",
+    availableItems: ["Dog Treats"],
+  });
+
+  assert.equal(result.status, "found");
+  if (result.status !== "found") return;
+  assert.equal(result.recommendedInteraction?.item, "dog_treats");
+  assert.equal(
+    result.recommendedInteraction.outcomes[0]?.description,
+    "Grants +25 dodge until camp.",
   );
 });
 
