@@ -1,4 +1,4 @@
-[mcp_servers.darkest_dungeon]
+[mcp_servers.darkest_dungeon_dev]
 command = "node"
 args = ["--import", "tsx", "src/mcp/stdio.ts"]
 cwd = "."
