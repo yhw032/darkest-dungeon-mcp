@@ -42,6 +42,23 @@ const sourceSchema = z
   })
   .strict();
 
+const questIdSchema = z.string().regex(/^[a-z0-9]+(?:_[a-z0-9]+)*$/);
+
+const availabilitySchema = z.discriminatedUnion("type", [
+  z.object({ type: z.literal("standard") }).strict(),
+  z
+    .object({
+      type: z.literal("quest"),
+      questIds: z
+        .array(questIdSchema)
+        .min(1)
+        .refine((questIds) => new Set(questIds).size === questIds.length, {
+          message: "questIds must be unique",
+        }),
+    })
+    .strict(),
+]);
+
 const curioSchema = z
   .object({
     id: z.string().regex(/^[a-z0-9]+(?:_[a-z0-9]+)*$/),
@@ -62,10 +79,13 @@ const curioSchema = z
           "courtyard",
           "farmstead",
           "darkest_dungeon",
+          "old_road",
+          "hamlet",
         ]),
       )
       .min(1),
     dlcs: z.array(nonEmptyString),
+    availability: availabilitySchema.default({ type: "standard" }),
     interactions: z.array(interactionSchema).min(1),
     notes: z.array(nonEmptyString),
     sources: z.array(sourceSchema).min(1),

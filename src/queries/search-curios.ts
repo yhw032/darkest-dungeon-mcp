@@ -6,7 +6,7 @@ import type {
 
 export type CurioSummary = Pick<
   CurioKnowledge,
-  "id" | "names" | "aliases" | "regions" | "dlcs"
+  "id" | "names" | "aliases" | "regions" | "dlcs" | "availability"
 >;
 
 export interface CurioSearchFilters {
@@ -43,8 +43,8 @@ function matchScore(curio: CurioKnowledge, query: string): number | undefined {
 }
 
 export function toCurioSummary(curio: CurioKnowledge): CurioSummary {
-  const { id, names, aliases, regions, dlcs } = curio;
-  return { id, names, aliases, regions, dlcs };
+  const { id, names, aliases, regions, dlcs, availability } = curio;
+  return { id, names, aliases, regions, dlcs, availability };
 }
 
 export function searchCurios(

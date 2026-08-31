@@ -5,7 +5,13 @@ export type CurioRegion =
   | "cove"
   | "courtyard"
   | "farmstead"
-  | "darkest_dungeon";
+  | "darkest_dungeon"
+  | "old_road"
+  | "hamlet";
+
+export type CurioAvailability =
+  | { type: "standard" }
+  | { type: "quest"; questIds: string[] };
 
 export type CurioRecommendation = "recommended" | "situational" | "avoid";
 export type OutcomeCertainty = "guaranteed" | "possible";
@@ -52,6 +58,7 @@ export interface CurioKnowledge {
   aliases: string[];
   regions: CurioRegion[];
   dlcs: string[];
+  availability: CurioAvailability;
   interactions: CurioInteraction[];
   notes: string[];
   sources: KnowledgeSource[];

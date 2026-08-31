@@ -50,10 +50,63 @@ test("validates and preserves localized curio knowledge", () => {
   const result = parseCurioKnowledge(validKnowledge());
 
   assert.equal(result.schemaVersion, 1);
+  assert.deepEqual(result.curios[0]?.availability, { type: "standard" });
   assert.equal(result.curios[0]?.names.ko, "시험용 골동품");
   assert.equal(
     result.curios[0]?.interactions[0]?.outcomes[0]?.chancePercent,
     100,
+  );
+});
+
+test("validates quest-only curio availability", () => {
+  const knowledge = validKnowledge() as {
+    curios: Array<{
+      regions: string[];
+      availability?: unknown;
+    }>;
+  };
+  knowledge.curios[0]!.regions = ["old_road"];
+  knowledge.curios[0]!.availability = {
+    type: "quest",
+    questIds: ["old_road_intro", "old_road_stygian"],
+  };
+
+  const result = parseCurioKnowledge(knowledge);
+
+  assert.deepEqual(result.curios[0]?.availability, {
+    type: "quest",
+    questIds: ["old_road_intro", "old_road_stygian"],
+  });
+});
+
+test("rejects quest-only availability without a quest id", () => {
+  const knowledge = validKnowledge() as {
+    curios: Array<{ availability?: unknown }>;
+  };
+  knowledge.curios[0]!.availability = { type: "quest", questIds: [] };
+
+  assert.throws(
+    () => parseCurioKnowledge(knowledge),
+    (error) =>
+      error instanceof KnowledgeValidationError &&
+      error.path === "$.curios[0].availability.questIds",
+  );
+});
+
+test("rejects duplicate quest ids", () => {
+  const knowledge = validKnowledge() as {
+    curios: Array<{ availability?: unknown }>;
+  };
+  knowledge.curios[0]!.availability = {
+    type: "quest",
+    questIds: ["old_road_intro", "old_road_intro"],
+  };
+
+  assert.throws(
+    () => parseCurioKnowledge(knowledge),
+    (error) =>
+      error instanceof KnowledgeValidationError &&
+      error.path === "$.curios[0].availability.questIds",
   );
 });
 

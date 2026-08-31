@@ -26,6 +26,10 @@ test("searches curios by id, alias, partial name, and region", async () => {
     ),
     ["ancient_artifact"],
   );
+  assert.deepEqual(
+    searchCurios(knowledge, { query: "eldritch_altar" })[0]?.availability,
+    { type: "standard" },
+  );
 });
 
 test("matches normalized Korean names", () => {
@@ -38,6 +42,7 @@ test("matches normalized Korean names", () => {
         aliases: [],
         regions: ["ruins"],
         dlcs: [],
+        availability: { type: "standard" },
         interactions: [
           {
             item: null,

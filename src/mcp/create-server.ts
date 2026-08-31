@@ -28,6 +28,8 @@ const curioRegionSchema = z.enum([
   "courtyard",
   "farmstead",
   "darkest_dungeon",
+  "old_road",
+  "hamlet",
 ]);
 
 export interface DarkestDungeonServerOptions {
