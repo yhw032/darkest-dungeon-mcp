@@ -220,6 +220,34 @@ test("recommends a shovel to obtain firewood from a wine crate", async () => {
   assert.match(result.recommendedInteraction.note ?? "", /Firewood/);
 });
 
+test("recommends a skeleton key for a Farmstead stockpile", async () => {
+  const result = getCurioAdvice(await loadCurioKnowledge(), {
+    name: "Stockpile",
+    availableItems: ["Skeleton Key"],
+  });
+
+  assert.equal(result.status, "found");
+  if (result.status !== "found") return;
+  assert.equal(result.recommendedInteraction?.item, "skeleton_key");
+  assert.deepEqual(
+    result.usableInteractions.map((interaction) => interaction.item),
+    ["skeleton_key", null],
+  );
+  assert.match(
+    result.recommendedInteraction.outcomes[0]?.description ?? "",
+    /trinket/,
+  );
+});
+
+test("finds all verified Farmstead curios by region", async () => {
+  const results = searchCurios(await loadCurioKnowledge(), {
+    region: "farmstead",
+  });
+
+  assert.equal(results.length, 8);
+  assert.ok(results.every((curio) => curio.dlcs.includes("color_of_madness")));
+});
+
 test("recommends a skeleton key for the secret-room ancient artifact", async () => {
   const result = getCurioAdvice(await loadCurioKnowledge(), {
     name: "Secret Room Chest",

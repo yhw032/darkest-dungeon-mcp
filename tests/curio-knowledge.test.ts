@@ -94,7 +94,7 @@ test("rejects duplicate curio ids", () => {
 test("loads the checked-in verified curio knowledge", async () => {
   const knowledge = await loadCurioKnowledge();
 
-  assert.equal(knowledge.curios.length, 62);
+  assert.equal(knowledge.curios.length, 70);
   assert.equal(
     knowledge.curios.filter((curio) => curio.regions.includes("ruins")).length,
     23,
@@ -116,6 +116,11 @@ test("loads the checked-in verified curio knowledge", async () => {
     knowledge.curios.filter((curio) => curio.regions.includes("courtyard"))
       .length,
     15,
+  );
+  assert.equal(
+    knowledge.curios.filter((curio) => curio.regions.includes("farmstead"))
+      .length,
+    8,
   );
   assert.equal(
     knowledge.curios.find((curio) => curio.id === "eldritch_altar")
@@ -203,6 +208,22 @@ test("loads the checked-in verified curio knowledge", async () => {
       .map((curio) => curio.id)
       .sort(),
     ["throbbing_cocoons_courtyard", "throbbing_cocoons_infestation"],
+  );
+  assert.ok(
+    knowledge.curios
+      .filter((curio) => curio.regions.includes("farmstead"))
+      .every((curio) => curio.dlcs.includes("color_of_madness")),
+  );
+  assert.deepEqual(
+    knowledge.curios
+      .find((curio) => curio.id === "stockpile")
+      ?.interactions.map(({ item }) => item),
+    ["skeleton_key", null],
+  );
+  assert.equal(
+    knowledge.curios.find((curio) => curio.id === "fresh_harvest")
+      ?.interactions[0]?.outcomes[0]?.description,
+    "Heals the selected hero for 90% of maximum health.",
   );
   assert.ok(knowledge.curios.every((curio) => curio.sources.length > 0));
 });

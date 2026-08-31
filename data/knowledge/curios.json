@@ -2205,6 +2205,184 @@
       ]
     },
     {
+      "id": "corrupted_harvest",
+      "names": { "en": "Corrupted Harvest" },
+      "aliases": [],
+      "regions": ["farmstead"],
+      "dlcs": ["color_of_madness"],
+      "interactions": [
+        {
+          "item": null,
+          "recommendation": "recommended",
+          "certainty": "guaranteed",
+          "outcomes": [
+            { "type": "stress", "polarity": "positive", "description": "Reduces stress by 60 for the entire party." }
+          ]
+        }
+      ],
+      "notes": ["Appears in a Farmstead curio room between combat waves."],
+      "sources": [
+        { "title": "Farmstead - Official Darkest Dungeon Wiki", "url": "https://darkestdungeon.wiki.gg/wiki/Farmstead#Curios", "verifiedAt": "2026-08-31" }
+      ]
+    },
+    {
+      "id": "fresh_harvest",
+      "names": { "en": "Fresh Harvest" },
+      "aliases": [],
+      "regions": ["farmstead"],
+      "dlcs": ["color_of_madness"],
+      "interactions": [
+        {
+          "item": null,
+          "recommendation": "recommended",
+          "certainty": "guaranteed",
+          "outcomes": [
+            { "type": "health", "polarity": "positive", "description": "Heals the selected hero for 90% of maximum health." }
+          ]
+        }
+      ],
+      "notes": ["Select the hero who most needs healing before interacting."],
+      "sources": [
+        { "title": "Farmstead - Official Darkest Dungeon Wiki", "url": "https://darkestdungeon.wiki.gg/wiki/Farmstead#Curios", "verifiedAt": "2026-08-31" }
+      ]
+    },
+    {
+      "id": "gleaming_shards",
+      "names": { "en": "Gleaming Shards" },
+      "aliases": [],
+      "regions": ["farmstead"],
+      "dlcs": ["color_of_madness"],
+      "interactions": [
+        {
+          "item": null,
+          "recommendation": "recommended",
+          "certainty": "guaranteed",
+          "outcomes": [
+            { "type": "loot", "polarity": "positive", "description": "Provides 5 to 15 Comet Shards." }
+          ]
+        }
+      ],
+      "notes": [],
+      "sources": [
+        { "title": "Farmstead - Official Darkest Dungeon Wiki", "url": "https://darkestdungeon.wiki.gg/wiki/Farmstead#Curios", "verifiedAt": "2026-08-31" }
+      ]
+    },
+    {
+      "id": "millers_hearth",
+      "names": { "en": "Miller's Hearth" },
+      "aliases": ["Millers Hearth"],
+      "regions": ["farmstead"],
+      "dlcs": ["color_of_madness"],
+      "interactions": [
+        {
+          "item": null,
+          "recommendation": "recommended",
+          "certainty": "guaranteed",
+          "outcomes": [
+            { "type": "other", "polarity": "positive", "description": "Allows the party to camp without consuming Firewood." }
+          ]
+        }
+      ],
+      "notes": ["Farmstead expeditions do not supply Firewood; this curio provides the opportunity to camp."],
+      "sources": [
+        { "title": "Farmstead - Official Darkest Dungeon Wiki", "url": "https://darkestdungeon.wiki.gg/wiki/Farmstead#Curios", "verifiedAt": "2026-08-31" }
+      ]
+    },
+    {
+      "id": "plentiful_bounty",
+      "names": { "en": "Plentiful Bounty" },
+      "aliases": [],
+      "regions": ["farmstead"],
+      "dlcs": ["color_of_madness"],
+      "interactions": [
+        {
+          "item": null,
+          "recommendation": "recommended",
+          "certainty": "guaranteed",
+          "outcomes": [
+            { "type": "health", "polarity": "positive", "description": "Heals the entire party for 65% of each hero's maximum health." }
+          ]
+        }
+      ],
+      "notes": [],
+      "sources": [
+        { "title": "Farmstead - Official Darkest Dungeon Wiki", "url": "https://darkestdungeon.wiki.gg/wiki/Farmstead#Curios", "verifiedAt": "2026-08-31" }
+      ]
+    },
+    {
+      "id": "rotted_fare",
+      "names": { "en": "Rotted Fare" },
+      "aliases": [],
+      "regions": ["farmstead"],
+      "dlcs": ["color_of_madness"],
+      "interactions": [
+        {
+          "item": null,
+          "recommendation": "recommended",
+          "certainty": "guaranteed",
+          "outcomes": [
+            { "type": "stress", "polarity": "positive", "description": "Reduces the selected hero's stress by 100." }
+          ]
+        }
+      ],
+      "notes": ["Select the hero with the highest useful stress reduction before interacting."],
+      "sources": [
+        { "title": "Farmstead - Official Darkest Dungeon Wiki", "url": "https://darkestdungeon.wiki.gg/wiki/Farmstead#Curios", "verifiedAt": "2026-08-31" }
+      ]
+    },
+    {
+      "id": "stockpile",
+      "names": { "en": "Stockpile" },
+      "aliases": [],
+      "regions": ["farmstead"],
+      "dlcs": ["color_of_madness"],
+      "interactions": [
+        {
+          "item": "skeleton_key",
+          "recommendation": "recommended",
+          "certainty": "guaranteed",
+          "outcomes": [
+            { "type": "loot", "polarity": "positive", "description": "Provides 6 to 12 food, assorted supplies, and one trinket." }
+          ],
+          "note": "The key opens a hidden compartment and improves the reward."
+        },
+        {
+          "item": null,
+          "recommendation": "situational",
+          "certainty": "possible",
+          "outcomes": [
+            { "type": "loot", "polarity": "positive", "description": "Provides Laudanum, Medicinal Herbs, or Food.", "chancePercent": 66.7 },
+            { "type": "nothing", "polarity": "neutral", "description": "The stockpile is empty.", "chancePercent": 33.3 }
+          ]
+        }
+      ],
+      "notes": ["Skeleton Keys are useful provisions for long Farmstead expeditions because they improve this curio's loot."],
+      "sources": [
+        { "title": "Farmstead - Official Darkest Dungeon Wiki", "url": "https://darkestdungeon.wiki.gg/wiki/Farmstead#Curios", "verifiedAt": "2026-08-31" }
+      ]
+    },
+    {
+      "id": "mildred",
+      "names": { "en": "Mildred" },
+      "aliases": [],
+      "regions": ["farmstead"],
+      "dlcs": ["color_of_madness"],
+      "interactions": [
+        {
+          "item": null,
+          "recommendation": "recommended",
+          "certainty": "guaranteed",
+          "outcomes": [
+            { "type": "loot", "polarity": "positive", "description": "Provides Mildred's Locket on the first encounter; subsequent encounters provide a random trinket or Comet Shards." }
+          ]
+        }
+      ],
+      "notes": ["Mildred's Locket has a unique beneficial interaction with the Miller boss."],
+      "sources": [
+        { "title": "Farmstead - Official Darkest Dungeon Wiki", "url": "https://darkestdungeon.wiki.gg/wiki/Farmstead#Curios", "verifiedAt": "2026-08-31" }
+      ]
+    },
+    {
       "id": "shamblers_altar",
       "names": { "en": "Shambler's Altar" },
       "aliases": ["Shambler Altar"],
