@@ -1,12 +1,16 @@
 import { McpServer } from "@modelcontextprotocol/server";
 import { z } from "zod";
 
+import type { CurioKnowledgeBase } from "../domain/curio-knowledge.js";
+import { loadCurioKnowledge } from "../knowledge/load-curio-knowledge.js";
+import { getCurioAdvice } from "../queries/get-curio-advice.js";
 import { getGameStateSummary } from "../queries/get-game-state-summary.js";
 import { getHeroTownContext } from "../queries/get-hero-town-context.js";
 import { getHero } from "../queries/get-hero.js";
 import { getQuest } from "../queries/get-quest.js";
 import { listHeroes } from "../queries/list-heroes.js";
 import { listQuests } from "../queries/list-quests.js";
+import { searchCurios } from "../queries/search-curios.js";
 import { getTrinket, listTrinkets } from "../queries/trinkets.js";
 import type { GameStateDataSource } from "./data-source.js";
 
@@ -15,6 +19,20 @@ const readOnlyAnnotations = {
   destructiveHint: false,
   idempotentHint: true,
 } as const;
+
+const curioRegionSchema = z.enum([
+  "ruins",
+  "warrens",
+  "weald",
+  "cove",
+  "courtyard",
+  "farmstead",
+  "darkest_dungeon",
+]);
+
+export interface DarkestDungeonServerOptions {
+  loadCurioKnowledge?: () => Promise<CurioKnowledgeBase>;
+}
 
 function toolResult(key: string, value: unknown) {
   const structuredContent = { [key]: value };
@@ -33,7 +51,14 @@ function notFoundResult(subject: string, id: string) {
 
 export function createDarkestDungeonServer(
   dataSource: GameStateDataSource,
+  options: DarkestDungeonServerOptions = {},
 ): McpServer {
+  const knowledgeLoader = options.loadCurioKnowledge ?? loadCurioKnowledge;
+  let knowledgePromise: Promise<CurioKnowledgeBase> | undefined;
+  const getKnowledge = () => {
+    knowledgePromise ??= knowledgeLoader();
+    return knowledgePromise;
+  };
   const server = new McpServer(
     { name: "darkest-dungeon-mcp", version: "1.0.0" },
     { capabilities: { tools: {} } },
@@ -207,6 +232,73 @@ export function createDarkestDungeonServer(
       return trinket === undefined
         ? notFoundResult("Trinket", trinketId)
         : toolResult("trinket", trinket);
+    },
+  );
+
+  server.registerTool(
+    "search_curios",
+    {
+      title: "Search curio knowledge",
+      description:
+        "Search verified Darkest Dungeon 1 curio knowledge by id, localized name, alias, or region.",
+      inputSchema: z.object({
+        query: z.string().min(1).optional(),
+        region: curioRegionSchema.optional(),
+        limit: z.number().int().min(1).max(50).default(20),
+      }),
+      outputSchema: z.object({ curios: z.array(z.unknown()) }),
+      annotations: readOnlyAnnotations,
+    },
+    async ({ query, region, limit }) => {
+      const filters = {
+        ...(query === undefined ? {} : { query }),
+        ...(region === undefined ? {} : { region }),
+        limit,
+      };
+      return toolResult(
+        "curios",
+        searchCurios(await getKnowledge(), filters),
+      );
+    },
+  );
+
+  server.registerTool(
+    "get_curio_advice",
+    {
+      title: "Get curio interaction advice",
+      description:
+        "Return verified curio interactions, prioritizing recommendations enabled by the supplied inventory items.",
+      inputSchema: z
+        .object({
+          curioId: z.string().min(1).optional(),
+          name: z.string().min(1).optional(),
+          availableItems: z.array(z.string().min(1)).max(64).optional(),
+        })
+        .refine(
+          ({ curioId, name }) =>
+            Number(curioId !== undefined) + Number(name !== undefined) === 1,
+          { message: "Provide exactly one of curioId or name." },
+        ),
+      outputSchema: z.object({ advice: z.unknown() }),
+      annotations: readOnlyAnnotations,
+    },
+    async ({ curioId, name, availableItems }) => {
+      const request = {
+        ...(curioId === undefined ? {} : { curioId }),
+        ...(name === undefined ? {} : { name }),
+        ...(availableItems === undefined ? {} : { availableItems }),
+      };
+      const advice = getCurioAdvice(await getKnowledge(), request);
+      if (advice.status === "not_found") {
+        return notFoundResult("Curio", advice.query);
+      }
+      if (advice.status === "invalid_request") {
+        return {
+          isError: true,
+          content: [{ type: "text", text: advice.message }],
+        };
+      }
+      return toolResult("advice", advice);
     },
   );
 

@@ -44,6 +44,7 @@ Java가 PATH 또는 `JAVA_HOME`으로 검색되지 않는 환경에서는
 - `get_hero`: 영웅 상세 정보와 마을 활동 정보 조회
 - `list_quests`, `get_quest`: 조건별 퀘스트 목록과 상세 정보 조회
 - `list_trinkets`, `get_trinket`: 보관함, 장착 영웅, 상점에 걸친 장신구 조회
+- `search_curios`, `get_curio_advice`: 골동품 검색과 소지품 기반 상호작용 조언
 
 ## 검증
 

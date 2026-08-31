@@ -52,6 +52,7 @@ test("MCP server advertises and executes read-only game tools", async (t) => {
   assert.deepEqual(
     tools.map((tool) => tool.name).sort(),
     [
+      "get_curio_advice",
       "get_game_state",
       "get_hero",
       "get_quest",
@@ -59,6 +60,7 @@ test("MCP server advertises and executes read-only game tools", async (t) => {
       "list_heroes",
       "list_quests",
       "list_trinkets",
+      "search_curios",
     ],
   );
   assert.ok(tools.every((tool) => tool.annotations?.readOnlyHint === true));
@@ -184,4 +186,40 @@ test("MCP server advertises and executes read-only game tools", async (t) => {
     ).isError,
     true,
   );
+
+  const curioSearchResult = await client.callTool({
+    name: "search_curios",
+    arguments: { query: "Shambler Altar", region: "ruins" },
+  });
+  const curioSearchContent = curioSearchResult.structuredContent as
+    | Record<string, unknown>
+    | undefined;
+  const curios = curioSearchContent?.curios;
+  assert.ok(Array.isArray(curios));
+  assert.equal(
+    (curios[0] as { id?: unknown } | undefined)?.id,
+    "shamblers_altar",
+  );
+
+  const curioAdviceResult = await client.callTool({
+    name: "get_curio_advice",
+    arguments: {
+      name: "Eldritch Altar",
+      availableItems: ["Holy Water"],
+    },
+  });
+  const curioAdviceContent = curioAdviceResult.structuredContent as
+    | Record<string, unknown>
+    | undefined;
+  const advice = curioAdviceContent?.advice as
+    | { status?: unknown; recommendedInteraction?: { item?: unknown } }
+    | undefined;
+  assert.equal(advice?.status, "found");
+  assert.equal(advice?.recommendedInteraction?.item, "holy_water");
+
+  const missingCurioResult = await client.callTool({
+    name: "get_curio_advice",
+    arguments: { name: "missing curio" },
+  });
+  assert.equal(missingCurioResult.isError, true);
 });
