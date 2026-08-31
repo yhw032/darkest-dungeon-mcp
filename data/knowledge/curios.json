@@ -2383,6 +2383,179 @@
       ]
     },
     {
+      "id": "brigands_tent",
+      "names": { "en": "Brigand's Tent" },
+      "aliases": ["Brigands Tent"],
+      "regions": ["old_road"],
+      "dlcs": [],
+      "availability": { "type": "quest", "questIds": ["old_road"] },
+      "interactions": [
+        {
+          "item": null,
+          "recommendation": "recommended",
+          "certainty": "guaranteed",
+          "outcomes": [
+            { "type": "loot", "polarity": "positive", "description": "Provides two unrestricted loot rolls." }
+          ]
+        }
+      ],
+      "notes": ["Appears on the Old Road when not playing on Stygian difficulty."],
+      "sources": [
+        { "title": "Curios - Official Darkest Dungeon Wiki", "url": "https://darkestdungeon.wiki.gg/wiki/Curios#Special_Curios", "verifiedAt": "2026-08-31" }
+      ]
+    },
+    {
+      "id": "transcendent_terror",
+      "names": { "en": "Transcendent Terror" },
+      "aliases": [],
+      "regions": ["old_road"],
+      "dlcs": [],
+      "availability": { "type": "quest", "questIds": ["old_road_stygian"] },
+      "interactions": [
+        {
+          "item": null,
+          "recommendation": "avoid",
+          "certainty": "guaranteed",
+          "outcomes": [
+            { "type": "stress", "polarity": "negative", "description": "Inflicts 100 stress." }
+          ]
+        }
+      ],
+      "notes": ["Replaces Brigand's Tent on the Old Road in Stygian mode."],
+      "sources": [
+        { "title": "Curios - Official Darkest Dungeon Wiki", "url": "https://darkestdungeon.wiki.gg/wiki/Curios#Special_Curios", "verifiedAt": "2026-08-31" }
+      ]
+    },
+    {
+      "id": "bandits_trapped_chest",
+      "names": { "en": "Bandit's Trapped Chest" },
+      "aliases": ["Bandits Trapped Chest", "Trapped Strongbox"],
+      "regions": ["old_road"],
+      "dlcs": [],
+      "availability": { "type": "quest", "questIds": ["old_road"] },
+      "interactions": [
+        {
+          "item": "skeleton_key",
+          "recommendation": "recommended",
+          "certainty": "guaranteed",
+          "outcomes": [
+            { "type": "loot", "polarity": "positive", "description": "Provides two random trinkets." }
+          ],
+          "note": "A Skeleton Key safely bypasses the trap."
+        },
+        {
+          "item": null,
+          "recommendation": "avoid",
+          "certainty": "guaranteed",
+          "outcomes": [
+            { "type": "status", "polarity": "negative", "description": "Inflicts blight." }
+          ],
+          "note": "Opening the chest without a key provides no loot and always triggers the trap."
+        }
+      ],
+      "notes": ["A Skeleton Key can rarely be obtained from Old Road combat loot; otherwise ignore this chest."],
+      "sources": [
+        { "title": "Curios - Official Darkest Dungeon Wiki", "url": "https://darkestdungeon.wiki.gg/wiki/Curios#Special_Curios", "verifiedAt": "2026-08-31" },
+        { "title": "Old Road - Official Darkest Dungeon Wiki", "url": "https://darkestdungeon.wiki.gg/wiki/Old_Road", "verifiedAt": "2026-08-31" }
+      ]
+    },
+    {
+      "id": "forgotten_strongbox",
+      "names": { "en": "Forgotten Strongbox" },
+      "aliases": [],
+      "regions": ["courtyard"],
+      "dlcs": ["crimson_court"],
+      "availability": { "type": "quest", "questIds": ["courtyard_boss_quests"] },
+      "interactions": [
+        {
+          "item": null,
+          "recommendation": "recommended",
+          "certainty": "guaranteed",
+          "outcomes": [
+            { "type": "other", "polarity": "positive", "description": "Provides the colored key required for the current Courtyard quest." }
+          ]
+        }
+      ],
+      "notes": ["There are four quest-specific variants, each containing a different colored key; no provision is required."],
+      "sources": [
+        { "title": "Curios - Official Darkest Dungeon Wiki", "url": "https://darkestdungeon.wiki.gg/wiki/Curios#Special_Curios", "verifiedAt": "2026-08-31" }
+      ]
+    },
+    {
+      "id": "ancestors_knapsack",
+      "names": { "en": "Ancestor's Knapsack" },
+      "aliases": ["Ancestors Knapsack"],
+      "regions": ["darkest_dungeon", "hamlet"],
+      "dlcs": [],
+      "availability": { "type": "quest", "questIds": ["darkest_dungeon_expeditions", "wolves_at_the_door"] },
+      "interactions": [
+        {
+          "item": null,
+          "recommendation": "recommended",
+          "certainty": "guaranteed",
+          "outcomes": [
+            { "type": "loot", "polarity": "positive", "description": "Provides five gold or gem rolls and one Ancestral trinket." }
+          ]
+        }
+      ],
+      "notes": ["Appears only in the Darkest Dungeon or during Wolves at the Door."],
+      "sources": [
+        { "title": "Curios - Official Darkest Dungeon Wiki", "url": "https://darkestdungeon.wiki.gg/wiki/Curios#Special_Curios", "verifiedAt": "2026-08-31" }
+      ]
+    },
+    {
+      "id": "iron_crown",
+      "names": { "en": "Iron Crown" },
+      "aliases": [],
+      "regions": ["darkest_dungeon"],
+      "dlcs": [],
+      "availability": { "type": "quest", "questIds": ["darkest_dungeon_2"] },
+      "interactions": [
+        {
+          "item": "hand_of_glory",
+          "recommendation": "recommended",
+          "certainty": "guaranteed",
+          "outcomes": [
+            { "type": "other", "polarity": "positive", "description": "Advances the quest objective by one of three required activations." }
+          ]
+        },
+        {
+          "item": null,
+          "recommendation": "avoid",
+          "certainty": "guaranteed",
+          "outcomes": [
+            { "type": "nothing", "polarity": "neutral", "description": "Cannot be activated without a Hand of Glory." }
+          ]
+        }
+      ],
+      "notes": ["Appears only in the second Darkest Dungeon expedition."],
+      "sources": [
+        { "title": "Curios - Official Darkest Dungeon Wiki", "url": "https://darkestdungeon.wiki.gg/wiki/Curios#Special_Curios", "verifiedAt": "2026-08-31" }
+      ]
+    },
+    {
+      "id": "locus_beacon",
+      "names": { "en": "Locus Beacon" },
+      "aliases": [],
+      "regions": ["darkest_dungeon"],
+      "dlcs": [],
+      "availability": { "type": "quest", "questIds": ["darkest_dungeon_3"] },
+      "interactions": [
+        {
+          "item": null,
+          "recommendation": "recommended",
+          "certainty": "guaranteed",
+          "outcomes": [
+            { "type": "other", "polarity": "positive", "description": "Completes the quest objective." }
+          ]
+        }
+      ],
+      "notes": ["Appears only in the third Darkest Dungeon expedition."],
+      "sources": [
+        { "title": "Curios - Official Darkest Dungeon Wiki", "url": "https://darkestdungeon.wiki.gg/wiki/Curios#Special_Curios", "verifiedAt": "2026-08-31" }
+      ]
+    },
+    {
       "id": "shamblers_altar",
       "names": { "en": "Shambler's Altar" },
       "aliases": ["Shambler Altar"],

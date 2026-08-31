@@ -147,7 +147,7 @@ test("rejects duplicate curio ids", () => {
 test("loads the checked-in verified curio knowledge", async () => {
   const knowledge = await loadCurioKnowledge();
 
-  assert.equal(knowledge.curios.length, 70);
+  assert.equal(knowledge.curios.length, 77);
   assert.equal(
     knowledge.curios.filter((curio) => curio.regions.includes("ruins")).length,
     23,
@@ -168,12 +168,28 @@ test("loads the checked-in verified curio knowledge", async () => {
   assert.equal(
     knowledge.curios.filter((curio) => curio.regions.includes("courtyard"))
       .length,
-    15,
+    16,
   );
   assert.equal(
     knowledge.curios.filter((curio) => curio.regions.includes("farmstead"))
       .length,
     8,
+  );
+  assert.equal(
+    knowledge.curios.filter((curio) =>
+      curio.regions.includes("darkest_dungeon"),
+    ).length,
+    3,
+  );
+  assert.equal(
+    knowledge.curios.filter((curio) => curio.regions.includes("old_road"))
+      .length,
+    3,
+  );
+  assert.equal(
+    knowledge.curios.filter((curio) => curio.regions.includes("hamlet"))
+      .length,
+    1,
   );
   assert.equal(
     knowledge.curios.find((curio) => curio.id === "eldritch_altar")
@@ -277,6 +293,20 @@ test("loads the checked-in verified curio knowledge", async () => {
     knowledge.curios.find((curio) => curio.id === "fresh_harvest")
       ?.interactions[0]?.outcomes[0]?.description,
     "Heals the selected hero for 90% of maximum health.",
+  );
+  assert.equal(
+    knowledge.curios.filter(
+      (curio) => curio.availability.type === "quest",
+    ).length,
+    7,
+  );
+  assert.deepEqual(
+    knowledge.curios.find((curio) => curio.id === "ancestors_knapsack")
+      ?.availability,
+    {
+      type: "quest",
+      questIds: ["darkest_dungeon_expeditions", "wolves_at_the_door"],
+    },
   );
   assert.ok(knowledge.curios.every((curio) => curio.sources.length > 0));
 });

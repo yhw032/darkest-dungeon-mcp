@@ -253,6 +253,46 @@ test("finds all verified Farmstead curios by region", async () => {
   assert.ok(results.every((curio) => curio.dlcs.includes("color_of_madness")));
 });
 
+test("recommends a key for the Old Road trapped chest", async () => {
+  const result = getCurioAdvice(await loadCurioKnowledge(), {
+    name: "Trapped Strongbox",
+    availableItems: ["Skeleton Key"],
+  });
+
+  assert.equal(result.status, "found");
+  if (result.status !== "found") return;
+  assert.equal(result.curio.id, "bandits_trapped_chest");
+  assert.equal(result.recommendedInteraction?.item, "skeleton_key");
+  assert.deepEqual(result.curio.availability, {
+    type: "quest",
+    questIds: ["old_road"],
+  });
+});
+
+test("requires a Hand of Glory to activate an Iron Crown", async () => {
+  const result = getCurioAdvice(await loadCurioKnowledge(), {
+    name: "Iron Crown",
+    availableItems: ["Hand of Glory"],
+  });
+
+  assert.equal(result.status, "found");
+  if (result.status !== "found") return;
+  assert.equal(result.recommendedInteraction?.item, "hand_of_glory");
+  assert.match(
+    result.recommendedInteraction.outcomes[0]?.description ?? "",
+    /one of three/,
+  );
+});
+
+test("exposes quest availability in special-curio search results", async () => {
+  const results = searchCurios(await loadCurioKnowledge(), {
+    region: "darkest_dungeon",
+  });
+
+  assert.equal(results.length, 3);
+  assert.ok(results.every((curio) => curio.availability.type === "quest"));
+});
+
 test("recommends a skeleton key for the secret-room ancient artifact", async () => {
   const result = getCurioAdvice(await loadCurioKnowledge(), {
     name: "Secret Room Chest",
