@@ -53,7 +53,7 @@ The local `.env` file and decoder JAR are ignored by Git. Environment variables 
 npm run mcp
 ```
 
-Without `DD_SAVE_DIR`, the server uses the checked-in decoded samples. With `DD_SAVE_DIR`, each request copies the supported save components to a temporary directory and decodes those copies. The original profile remains untouched.
+Without `DD_SAVE_DIR`, the server uses the checked-in decoded samples. With `DD_SAVE_DIR`, each request copies the supported save components to a temporary directory and decodes those copies. The original profile remains untouched. `DD_GAME_DIR` is only needed to map saved upgrade purchases to building names, stages, and costs for `list_building_upgrades`; other tools do not require it.
 
 The repository includes a project-scoped Codex configuration at `.codex/config.toml`. After installing dependencies, restart Codex or the IDE extension and check `/mcp` for the `darkest_dungeon` server. The configuration contains no personal filesystem paths; machine-specific values belong in `.env`.
 
