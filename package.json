@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "tsx src/index.ts",
     "cli": "tsx src/cli/index.ts",
+    "mcp": "tsx src/mcp/stdio.ts",
     "typecheck": "tsc --noEmit",
     "test": "tsx --test tests/*.test.ts"
   },
@@ -13,8 +14,13 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@modelcontextprotocol/client": "^2.0.0",
     "@types/node": "^26.4.0",
     "tsx": "^4.23.13",
     "typescript": "^7.0.2"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/server": "^2.0.0",
+    "zod": "^4.5.4"
   }
 }
