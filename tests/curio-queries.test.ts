@@ -178,6 +178,48 @@ test("does not guess between visually identical heirloom chest variants", async 
   );
 });
 
+test("does not guess between the two throbbing cocoon variants", async () => {
+  const result = getCurioAdvice(await loadCurioKnowledge(), {
+    name: "Throbbing Cocoons",
+    availableItems: ["Torch"],
+  });
+
+  assert.equal(result.status, "ambiguous");
+  if (result.status !== "ambiguous") return;
+  assert.deepEqual(
+    result.candidates.map((candidate) => candidate.id),
+    ["throbbing_cocoons_courtyard", "throbbing_cocoons_infestation"],
+  );
+});
+
+test("avoids using a key when it replaces a guaranteed set trinket", async () => {
+  const result = getCurioAdvice(await loadCurioKnowledge(), {
+    name: "Trinket Chest",
+    availableItems: ["Skeleton Key"],
+  });
+
+  assert.equal(result.status, "found");
+  if (result.status !== "found") return;
+  assert.equal(result.recommendedInteraction?.item, null);
+  assert.deepEqual(
+    result.usableInteractions.map((interaction) => interaction.item),
+    ["skeleton_key", null],
+  );
+  assert.match(result.warnings[0] ?? "", /key replaces/);
+});
+
+test("recommends a shovel to obtain firewood from a wine crate", async () => {
+  const result = getCurioAdvice(await loadCurioKnowledge(), {
+    name: "Wine Crate",
+    availableItems: ["Shovel"],
+  });
+
+  assert.equal(result.status, "found");
+  if (result.status !== "found") return;
+  assert.equal(result.recommendedInteraction?.item, "shovel");
+  assert.match(result.recommendedInteraction.note ?? "", /Firewood/);
+});
+
 test("recommends a skeleton key for the secret-room ancient artifact", async () => {
   const result = getCurioAdvice(await loadCurioKnowledge(), {
     name: "Secret Room Chest",

@@ -94,7 +94,7 @@ test("rejects duplicate curio ids", () => {
 test("loads the checked-in verified curio knowledge", async () => {
   const knowledge = await loadCurioKnowledge();
 
-  assert.equal(knowledge.curios.length, 50);
+  assert.equal(knowledge.curios.length, 62);
   assert.equal(
     knowledge.curios.filter((curio) => curio.regions.includes("ruins")).length,
     23,
@@ -115,7 +115,7 @@ test("loads the checked-in verified curio knowledge", async () => {
   assert.equal(
     knowledge.curios.filter((curio) => curio.regions.includes("courtyard"))
       .length,
-    3,
+    15,
   );
   assert.equal(
     knowledge.curios.find((curio) => curio.id === "eldritch_altar")
@@ -179,6 +179,30 @@ test("loads the checked-in verified curio knowledge", async () => {
       (curio) => curio.id === "throbbing_cocoons_infestation",
     )?.dlcs,
     ["crimson_court"],
+  );
+  assert.ok(
+    knowledge.curios
+      .filter(
+        (curio) =>
+          curio.regions.includes("courtyard") &&
+          !["discarded_pack", "sack", "unlocked_strongbox"].includes(
+            curio.id,
+          ),
+      )
+      .every((curio) => curio.dlcs.includes("crimson_court")),
+  );
+  assert.deepEqual(
+    knowledge.curios
+      .find((curio) => curio.id === "trinket_chest")
+      ?.interactions.map(({ recommendation }) => recommendation),
+    ["avoid", "recommended"],
+  );
+  assert.deepEqual(
+    knowledge.curios
+      .filter((curio) => curio.aliases.includes("Throbbing Cocoons"))
+      .map((curio) => curio.id)
+      .sort(),
+    ["throbbing_cocoons_courtyard", "throbbing_cocoons_infestation"],
   );
   assert.ok(knowledge.curios.every((curio) => curio.sources.length > 0));
 });

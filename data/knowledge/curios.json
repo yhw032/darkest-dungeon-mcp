@@ -1777,6 +1777,434 @@
       ]
     },
     {
+      "id": "pile_of_strange_bones",
+      "names": { "en": "Pile of Strange Bones" },
+      "aliases": ["Strange Bones"],
+      "regions": ["courtyard"],
+      "dlcs": ["crimson_court"],
+      "interactions": [
+        {
+          "item": "bandage",
+          "recommendation": "recommended",
+          "certainty": "possible",
+          "outcomes": [
+            { "type": "loot", "polarity": "positive", "description": "Provides one roll from the unrestricted loot table.", "chancePercent": 50 },
+            { "type": "loot", "polarity": "positive", "description": "Provides one vial of The Blood.", "chancePercent": 50 }
+          ]
+        },
+        {
+          "item": "blood",
+          "recommendation": "avoid",
+          "certainty": "guaranteed",
+          "outcomes": [
+            { "type": "combat", "polarity": "negative", "description": "Summons a Supplicant, a Sycophant, and an Esquire." }
+          ]
+        },
+        {
+          "item": null,
+          "recommendation": "avoid",
+          "certainty": "possible",
+          "outcomes": [
+            { "type": "status", "polarity": "negative", "description": "Inflicts bleed.", "chancePercent": 50 },
+            { "type": "loot", "polarity": "positive", "description": "Provides two unrestricted loot rolls with a chance for The Blood.", "chancePercent": 20 },
+            { "type": "disease", "polarity": "negative", "description": "Inflicts the Crimson Curse.", "chancePercent": 10 },
+            { "type": "nothing", "polarity": "neutral", "description": "Nothing happens.", "chancePercent": 20 }
+          ]
+        }
+      ],
+      "notes": ["Never spend The Blood on this curio unless deliberately seeking the summoned fight."],
+      "sources": [
+        { "title": "Official Darkest Dungeon Wiki: Curio data module", "url": "https://darkestdungeon.wiki.gg/wiki/Module:Curios/Data", "verifiedAt": "2026-08-31" }
+      ]
+    },
+    {
+      "id": "bloodflowers",
+      "names": { "en": "Bloodflowers" },
+      "aliases": ["Blood Flowers"],
+      "regions": ["courtyard"],
+      "dlcs": ["crimson_court"],
+      "interactions": [
+        {
+          "item": "shovel",
+          "recommendation": "recommended",
+          "certainty": "guaranteed",
+          "outcomes": [
+            { "type": "loot", "polarity": "positive", "description": "Provides two heirloom rolls and one unrestricted loot roll." }
+          ]
+        },
+        {
+          "item": "holy_water",
+          "recommendation": "avoid",
+          "certainty": "guaranteed",
+          "outcomes": [
+            { "type": "stress", "polarity": "negative", "description": "Increases stress by 15." }
+          ]
+        },
+        {
+          "item": "blood",
+          "recommendation": "avoid",
+          "certainty": "guaranteed",
+          "outcomes": [
+            { "type": "nothing", "polarity": "neutral", "description": "Nothing happens." }
+          ]
+        },
+        {
+          "item": null,
+          "recommendation": "avoid",
+          "certainty": "possible",
+          "outcomes": [
+            { "type": "stress", "polarity": "negative", "description": "Increases stress by 15.", "chancePercent": 38.5 },
+            { "type": "other", "polarity": "positive", "description": "Scouts ahead.", "chancePercent": 23.1 },
+            { "type": "loot", "polarity": "positive", "description": "Provides two unrestricted loot rolls with a chance for The Blood.", "chancePercent": 15.3 },
+            { "type": "disease", "polarity": "negative", "description": "Inflicts Tetanus.", "chancePercent": 5.1 },
+            { "type": "disease", "polarity": "negative", "description": "Inflicts a random disease.", "chancePercent": 2.5 },
+            { "type": "nothing", "polarity": "neutral", "description": "Nothing happens.", "chancePercent": 15.3 }
+          ]
+        }
+      ],
+      "notes": [],
+      "sources": [
+        { "title": "Official Darkest Dungeon Wiki: Curio data module", "url": "https://darkestdungeon.wiki.gg/wiki/Module:Curios/Data", "verifiedAt": "2026-08-31" }
+      ]
+    },
+    {
+      "id": "damned_fountain",
+      "names": { "en": "Damned Fountain" },
+      "aliases": [],
+      "regions": ["courtyard"],
+      "dlcs": ["crimson_court"],
+      "interactions": [
+        {
+          "item": "holy_water",
+          "recommendation": "recommended",
+          "certainty": "guaranteed",
+          "outcomes": [
+            { "type": "stress", "polarity": "positive", "description": "Reduces stress by 30." }
+          ]
+        },
+        {
+          "item": "torch",
+          "recommendation": "avoid",
+          "certainty": "guaranteed",
+          "outcomes": [
+            { "type": "stress", "polarity": "negative", "description": "Increases stress by 5." }
+          ]
+        },
+        {
+          "item": null,
+          "recommendation": "avoid",
+          "certainty": "possible",
+          "outcomes": [
+            { "type": "status", "polarity": "negative", "description": "Inflicts bleed.", "chancePercent": 60 },
+            { "type": "disease", "polarity": "negative", "description": "Inflicts the Crimson Curse.", "chancePercent": 20 },
+            { "type": "loot", "polarity": "positive", "description": "Provides two unrestricted loot rolls with a chance to bleed.", "chancePercent": 20 }
+          ]
+        }
+      ],
+      "notes": [],
+      "sources": [
+        { "title": "Official Darkest Dungeon Wiki: Curio data module", "url": "https://darkestdungeon.wiki.gg/wiki/Module:Curios/Data", "verifiedAt": "2026-08-31" }
+      ]
+    },
+    {
+      "id": "disturbing_diversion",
+      "names": { "en": "Disturbing Diversion" },
+      "aliases": [],
+      "regions": ["courtyard"],
+      "dlcs": ["crimson_court"],
+      "interactions": [
+        {
+          "item": "shovel",
+          "recommendation": "recommended",
+          "certainty": "guaranteed",
+          "outcomes": [
+            { "type": "loot", "polarity": "positive", "description": "Provides three heirloom rolls." }
+          ]
+        },
+        {
+          "item": null,
+          "recommendation": "avoid",
+          "certainty": "possible",
+          "outcomes": [
+            { "type": "stress", "polarity": "negative", "description": "Increases stress by 25.", "chancePercent": 40 },
+            { "type": "quirk", "polarity": "positive", "description": "Grants a random positive quirk.", "chancePercent": 15 },
+            { "type": "quirk", "polarity": "negative", "description": "Grants a random negative quirk.", "chancePercent": 15 },
+            { "type": "loot", "polarity": "positive", "description": "Provides two unrestricted loot rolls with a chance for two vials of The Blood.", "chancePercent": 10 },
+            { "type": "nothing", "polarity": "neutral", "description": "Nothing happens.", "chancePercent": 20 }
+          ]
+        }
+      ],
+      "notes": [],
+      "sources": [
+        { "title": "Official Darkest Dungeon Wiki: Curio data module", "url": "https://darkestdungeon.wiki.gg/wiki/Module:Curios/Data", "verifiedAt": "2026-08-31" }
+      ]
+    },
+    {
+      "id": "forgotten_delicacies",
+      "names": { "en": "Forgotten Delicacies" },
+      "aliases": ["Forgotten Delicacy"],
+      "regions": ["courtyard"],
+      "dlcs": ["crimson_court"],
+      "interactions": [
+        {
+          "item": "medicinal_herbs",
+          "recommendation": "recommended",
+          "certainty": "guaranteed",
+          "outcomes": [
+            { "type": "loot", "polarity": "positive", "description": "Provides two food rolls and one gold or supplies roll." }
+          ]
+        },
+        {
+          "item": null,
+          "recommendation": "avoid",
+          "certainty": "possible",
+          "outcomes": [
+            { "type": "loot", "polarity": "positive", "description": "Provides four gold or supplies rolls, one supplies roll, and a chance for The Blood.", "chancePercent": 20 },
+            { "type": "quirk", "polarity": "negative", "description": "Inflicts the Stress Eater quirk.", "chancePercent": 20 },
+            { "type": "status", "polarity": "negative", "description": "Inflicts blight.", "chancePercent": 20 },
+            { "type": "disease", "polarity": "negative", "description": "Inflicts the Crimson Curse.", "chancePercent": 13.3 },
+            { "type": "disease", "polarity": "negative", "description": "Inflicts a random disease.", "chancePercent": 6.7 },
+            { "type": "nothing", "polarity": "neutral", "description": "Nothing happens.", "chancePercent": 20 }
+          ]
+        }
+      ],
+      "notes": [],
+      "sources": [
+        { "title": "Official Darkest Dungeon Wiki: Curio data module", "url": "https://darkestdungeon.wiki.gg/wiki/Module:Curios/Data", "verifiedAt": "2026-08-31" }
+      ]
+    },
+    {
+      "id": "hooded_shrew",
+      "names": { "en": "Hooded Shrew" },
+      "aliases": [],
+      "regions": ["courtyard"],
+      "dlcs": ["crimson_court"],
+      "interactions": [
+        {
+          "item": "blood",
+          "recommendation": "recommended",
+          "certainty": "guaranteed",
+          "outcomes": [
+            { "type": "loot", "polarity": "positive", "description": "Provides two non-set trinkets." }
+          ]
+        },
+        {
+          "item": null,
+          "recommendation": "avoid",
+          "certainty": "possible",
+          "outcomes": [
+            { "type": "stress", "polarity": "negative", "description": "Increases stress by 15.", "chancePercent": 42.8 },
+            { "type": "loot", "polarity": "positive", "description": "Provides one unrestricted loot roll.", "chancePercent": 28.5 },
+            { "type": "disease", "polarity": "negative", "description": "Inflicts a random disease.", "chancePercent": 7.6 },
+            { "type": "nothing", "polarity": "neutral", "description": "Nothing happens.", "chancePercent": 14.2 }
+          ]
+        }
+      ],
+      "notes": ["Preserves the probabilities published by the official data module; displayed rounded values do not sum to 100%."],
+      "sources": [
+        { "title": "Official Darkest Dungeon Wiki: Curio data module", "url": "https://darkestdungeon.wiki.gg/wiki/Module:Curios/Data", "verifiedAt": "2026-08-31" }
+      ]
+    },
+    {
+      "id": "throbbing_cocoons_courtyard",
+      "names": { "en": "Throbbing Cocoons (Courtyard)" },
+      "aliases": ["Throbbing Cocoons", "Courtyard Cocoons"],
+      "regions": ["courtyard"],
+      "dlcs": ["crimson_court"],
+      "interactions": [
+        {
+          "item": "torch",
+          "recommendation": "recommended",
+          "certainty": "guaranteed",
+          "outcomes": [
+            { "type": "stress", "polarity": "positive", "description": "Reduces stress by 30." }
+          ]
+        },
+        {
+          "item": null,
+          "recommendation": "avoid",
+          "certainty": "possible",
+          "outcomes": [
+            { "type": "combat", "polarity": "negative", "description": "Summons a Supplicant, a Sycophant, and an Esquire.", "chancePercent": 75 },
+            { "type": "loot", "polarity": "positive", "description": "Provides three unrestricted loot rolls with a chance for The Blood.", "chancePercent": 12.5 },
+            { "type": "nothing", "polarity": "neutral", "description": "Nothing happens.", "chancePercent": 12.5 }
+          ]
+        }
+      ],
+      "notes": ["This variant looks identical to the high-infestation variant found in regular dungeons."],
+      "sources": [
+        { "title": "Official Darkest Dungeon Wiki: Curio data module", "url": "https://darkestdungeon.wiki.gg/wiki/Module:Curios/Data", "verifiedAt": "2026-08-31" },
+        { "title": "Official Darkest Dungeon Wiki: Curios", "url": "https://darkestdungeon.wiki.gg/wiki/Curios#Throbbing_Cocoons_Variants", "verifiedAt": "2026-08-31" }
+      ]
+    },
+    {
+      "id": "thronging_hive",
+      "names": { "en": "Thronging Hive" },
+      "aliases": [],
+      "regions": ["courtyard"],
+      "dlcs": ["crimson_court"],
+      "interactions": [
+        {
+          "item": "torch",
+          "recommendation": "recommended",
+          "certainty": "guaranteed",
+          "outcomes": [
+            { "type": "loot", "polarity": "positive", "description": "Provides three unrestricted loot rolls with a chance for The Blood." }
+          ]
+        },
+        {
+          "item": null,
+          "recommendation": "avoid",
+          "certainty": "possible",
+          "outcomes": [
+            { "type": "loot", "polarity": "positive", "description": "Provides two unrestricted loot rolls with a chance for The Blood.", "chancePercent": 75 },
+            { "type": "status", "polarity": "negative", "description": "Inflicts bleed.", "chancePercent": 25 }
+          ]
+        }
+      ],
+      "notes": [],
+      "sources": [
+        { "title": "Official Darkest Dungeon Wiki: Curio data module", "url": "https://darkestdungeon.wiki.gg/wiki/Module:Curios/Data", "verifiedAt": "2026-08-31" }
+      ]
+    },
+    {
+      "id": "wine_crate",
+      "names": { "en": "Wine Crate" },
+      "aliases": [],
+      "regions": ["courtyard"],
+      "dlcs": ["crimson_court"],
+      "interactions": [
+        {
+          "item": "shovel",
+          "recommendation": "recommended",
+          "certainty": "guaranteed",
+          "outcomes": [
+            { "type": "loot", "polarity": "positive", "description": "Provides one firewood for camping." }
+          ],
+          "note": "This is the only way to obtain Firewood while exploring the Courtyard."
+        },
+        {
+          "item": "antivenom",
+          "recommendation": "recommended",
+          "certainty": "guaranteed",
+          "outcomes": [
+            { "type": "stress", "polarity": "positive", "description": "Reduces stress by 30." }
+          ]
+        },
+        {
+          "item": null,
+          "recommendation": "avoid",
+          "certainty": "possible",
+          "outcomes": [
+            { "type": "loot", "polarity": "positive", "description": "Provides loot with a chance for The Blood.", "chancePercent": 41.7 },
+            { "type": "disease", "polarity": "negative", "description": "Inflicts the Crimson Curse.", "chancePercent": 16.7 },
+            { "type": "quirk", "polarity": "negative", "description": "Inflicts the Tippler quirk.", "chancePercent": 16.7 },
+            { "type": "other", "polarity": "positive", "description": "Scouts ahead.", "chancePercent": 8.3 },
+            { "type": "status", "polarity": "negative", "description": "Inflicts bleed.", "chancePercent": 8.3 },
+            { "type": "nothing", "polarity": "neutral", "description": "Nothing happens.", "chancePercent": 8.3 }
+          ]
+        }
+      ],
+      "notes": [],
+      "sources": [
+        { "title": "Official Darkest Dungeon Wiki: Curio data module", "url": "https://darkestdungeon.wiki.gg/wiki/Module:Curios/Data", "verifiedAt": "2026-08-31" }
+      ]
+    },
+    {
+      "id": "wizened_shrew",
+      "names": { "en": "Wizened Shrew" },
+      "aliases": [],
+      "regions": ["courtyard"],
+      "dlcs": ["crimson_court"],
+      "interactions": [
+        {
+          "item": "blood",
+          "recommendation": "recommended",
+          "certainty": "guaranteed",
+          "outcomes": [
+            { "type": "loot", "polarity": "positive", "description": "Provides three non-set trinkets." }
+          ]
+        },
+        {
+          "item": null,
+          "recommendation": "situational",
+          "certainty": "possible",
+          "outcomes": [
+            { "type": "other", "polarity": "positive", "description": "Scouts ahead.", "chancePercent": 33.3 },
+            { "type": "disease", "polarity": "negative", "description": "Inflicts a random disease.", "chancePercent": 16.7 },
+            { "type": "nothing", "polarity": "neutral", "description": "A harmless ritual occurs.", "chancePercent": 33.3 },
+            { "type": "nothing", "polarity": "neutral", "description": "Nothing happens.", "chancePercent": 16.7 }
+          ]
+        }
+      ],
+      "notes": [],
+      "sources": [
+        { "title": "Official Darkest Dungeon Wiki: Curio data module", "url": "https://darkestdungeon.wiki.gg/wiki/Module:Curios/Data", "verifiedAt": "2026-08-31" }
+      ]
+    },
+    {
+      "id": "lost_treasure_box",
+      "names": { "en": "Lost Treasure Box" },
+      "aliases": ["Lost Treasury Chest"],
+      "regions": ["courtyard"],
+      "dlcs": ["crimson_court"],
+      "interactions": [
+        {
+          "item": "skeleton_key",
+          "recommendation": "avoid",
+          "certainty": "guaranteed",
+          "outcomes": [
+            { "type": "loot", "polarity": "positive", "description": "Provides two heirloom rolls and one unrestricted loot roll." }
+          ],
+          "note": "The key replaces the chest's guaranteed trinket rewards with ordinary loot."
+        },
+        {
+          "item": null,
+          "recommendation": "recommended",
+          "certainty": "guaranteed",
+          "outcomes": [
+            { "type": "loot", "polarity": "positive", "description": "Provides one unrestricted loot roll, two non-set trinkets, and one gem roll." }
+          ]
+        }
+      ],
+      "notes": ["Open by hand to preserve the guaranteed non-set trinket rewards."],
+      "sources": [
+        { "title": "Official Darkest Dungeon Wiki: Curio data module", "url": "https://darkestdungeon.wiki.gg/wiki/Module:Curios/Data", "verifiedAt": "2026-08-31" },
+        { "title": "Official Darkest Dungeon Wiki: Courtyard", "url": "https://darkestdungeon.wiki.gg/wiki/Courtyard#Curios", "verifiedAt": "2026-08-31" }
+      ]
+    },
+    {
+      "id": "trinket_chest",
+      "names": { "en": "Trinket Chest" },
+      "aliases": ["Courtyard Locked Strongbox"],
+      "regions": ["courtyard"],
+      "dlcs": ["crimson_court"],
+      "interactions": [
+        {
+          "item": "skeleton_key",
+          "recommendation": "avoid",
+          "certainty": "guaranteed",
+          "outcomes": [
+            { "type": "loot", "polarity": "positive", "description": "Provides two heirloom rolls and one unrestricted loot roll." }
+          ],
+          "note": "The key replaces the guaranteed set trinket with ordinary loot."
+        },
+        {
+          "item": null,
+          "recommendation": "recommended",
+          "certainty": "guaranteed",
+          "outcomes": [
+            { "type": "loot", "polarity": "positive", "description": "Provides one Crimson Court set trinket." }
+          ]
+        }
+      ],
+      "notes": ["Appears only during the main Courtyard campaign expeditions; open by hand."],
+      "sources": [
+        { "title": "Official Darkest Dungeon Wiki: Curio data module", "url": "https://darkestdungeon.wiki.gg/wiki/Module:Curios/Data", "verifiedAt": "2026-08-31" },
+        { "title": "Official Darkest Dungeon Wiki: Courtyard", "url": "https://darkestdungeon.wiki.gg/wiki/Courtyard#Curios", "verifiedAt": "2026-08-31" }
+      ]
+    },
+    {
       "id": "shamblers_altar",
       "names": { "en": "Shambler's Altar" },
       "aliases": ["Shambler Altar"],
