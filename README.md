@@ -9,82 +9,114 @@ This is an unofficial fan project. It is not affiliated with, endorsed by, or sp
 ## Requirements
 
 - Node.js 20.12 or later
-- Java, available through `PATH`, `JAVA_HOME`, or `DD_JAVA_EXECUTABLE`
-- [`DDSaveEditor.jar`](https://github.com/robojumper/DarkestDungeonSaveEditor) for live saves
-- A PC installation of Darkest Dungeon 1 when reading live campaign data
+- For live saves: Java through `PATH`, `JAVA_HOME`, or `--java`, plus
+  [`DDSaveEditor.jar`](https://github.com/robojumper/DarkestDungeonSaveEditor)
+- A PC installation of Darkest Dungeon 1 for building-upgrade and risky-quirk
+  analysis
 
 ## Installation
 
 ```powershell
 npm install
-Copy-Item .env.example .env
-```
-
-Set the profile directory in `.env`:
-
-```dotenv
-DD_SAVE_DIR=C:\path\to\Steam\userdata\STEAM_USER_ID\262060\remote\profile_0
-```
-
-Set the game installation directory to enable building upgrade progress and
-cost lookup:
-
-```dotenv
-DD_GAME_DIR=C:\path\to\Steam\steamapps\common\DarkestDungeon
-```
-
-Place the decoder at `tools/DDSaveEditor.jar`, or configure another location:
-
-```dotenv
-DD_SAVE_EDITOR_JAR=C:\path\to\DDSaveEditor.jar
-```
-
-If Java cannot be discovered automatically, set its executable explicitly:
-
-```dotenv
-DD_JAVA_EXECUTABLE=C:\Program Files\Java\bin\java.exe
-```
-
-The local `.env` file and decoder JAR are ignored by Git. Environment variables already present in the process take precedence over `.env` values.
-
-## Running the MCP server
-
-Build and run the distributable JavaScript entrypoint:
-
-```powershell
 npm run build
-npm start
 ```
 
-`npm run mcp` remains available for development and runs the TypeScript source
-directly. `npm pack` creates an installable package exposing the
-`darkest-dungeon-mcp` executable.
+Download `DDSaveEditor.jar`, then add the built stdio entrypoint to your MCP
+client. This commonly supported `mcpServers` shape works with Claude Desktop,
+Claude Code project configuration, Google Antigravity, and many other clients:
 
-The executable accepts configuration directly, so MCP clients do not need to
-depend on a particular working directory or a local `.env` file:
+```json
+{
+  "mcpServers": {
+    "darkest-dungeon": {
+      "command": "node",
+      "args": [
+        "C:/absolute/path/to/darkest-dungeon-mcp/dist/mcp/stdio.js",
+        "--save-dir",
+        "C:/path/to/Steam/userdata/STEAM_USER_ID/262060/remote/profile_0",
+        "--game-dir",
+        "C:/path/to/Steam/steamapps/common/DarkestDungeon",
+        "--decoder-jar",
+        "C:/absolute/path/to/DDSaveEditor.jar"
+      ]
+    }
+  }
+}
+```
+
+Codex uses TOML instead of the JSON wrapper. Add this to
+`~/.codex/config.toml` for a user-level installation:
+
+```toml
+[mcp_servers.darkest_dungeon]
+command = "node"
+args = [
+  "C:/absolute/path/to/darkest-dungeon-mcp/dist/mcp/stdio.js",
+  "--save-dir", "C:/path/to/profile_0",
+  "--game-dir", "C:/path/to/DarkestDungeon",
+  "--decoder-jar", "C:/absolute/path/to/DDSaveEditor.jar",
+]
+startup_timeout_sec = 20
+tool_timeout_sec = 120
+```
+
+Restart the client after saving its configuration, then inspect its MCP server
+list or ask it to call `get_game_state`. See
+[MCP client configuration](docs/CLIENT_CONFIGURATION.md) for exact locations,
+commands, and troubleshooting instructions for Codex, Claude Code, Claude
+Desktop, Google Antigravity, OpenClaw, and generic stdio clients.
+
+`--save-dir` selects the live profile. Without it, the server uses the
+checked-in decoded samples. `--game-dir` is only required by
+`list_building_upgrades` and `list_risky_quirks`. The original profile remains
+untouched: supported save files are copied to a temporary directory before
+decoding.
+
+## Server options
+
+The stdio entrypoint accepts configuration directly and does not require a
+particular working directory:
 
 ```powershell
-darkest-dungeon-mcp --save-dir "C:\path\to\profile_0" --game-dir "C:\path\to\DarkestDungeon" --decoder-jar "C:\path\to\DDSaveEditor.jar"
+node C:\absolute\path\to\dist\mcp\stdio.js --save-dir "C:\path\to\profile_0" --game-dir "C:\path\to\DarkestDungeon" --decoder-jar "C:\path\to\DDSaveEditor.jar"
 ```
 
 Available options are `--env-file`, `--save-dir`, `--game-dir`,
 `--decoder-jar`, and `--java`. Command-line options take precedence over
-process environment variables, which take precedence over the optional `.env`
-next to the installed package. An explicitly supplied `--env-file` must exist.
+process environment variables, which take precedence over an optional `.env`
+next to the installed package. Java is discovered through `PATH` or
+`JAVA_HOME` when `--java` is omitted.
 
-See [MCP client configuration](docs/CLIENT_CONFIGURATION.md) for complete,
-cwd-independent examples for Codex, Claude Code, Claude Desktop, Google
-Antigravity, OpenClaw, and generic stdio clients.
+## Development
 
-Without `DD_SAVE_DIR`, the server uses the checked-in decoded samples. With `DD_SAVE_DIR`, each request copies the supported save components to a temporary directory and decodes those copies. The original profile remains untouched. `DD_GAME_DIR` is only needed by `list_building_upgrades` and `list_risky_quirks`; other tools do not require it.
+`npm run mcp` runs the TypeScript source directly. The project-scoped
+`.codex/config.toml` registers it as `darkest_dungeon_dev`, keeping it distinct
+from an installed user-level `darkest_dungeon` server. After installing
+dependencies, restart Codex and inspect `/mcp` to use it.
 
-The repository includes a project-scoped Codex configuration at
-`.codex/config.toml`. After installing dependencies, restart Codex or the IDE
-extension and check `/mcp` for the `darkest_dungeon_dev` server. This
-contributor convenience runs the TypeScript source directly and contains no
-personal filesystem paths. The `darkest_dungeon` name is reserved for an
-installed, user-level server; use the command-line options documented above
-for that configuration.
+For repeated local development, `.env` remains an optional convenience rather
+than an installation requirement:
+
+```powershell
+Copy-Item .env.example .env
+```
+
+It supports `DD_SAVE_DIR`, `DD_GAME_DIR`, `DD_SAVE_EDITOR_JAR`, and
+`DD_JAVA_EXECUTABLE`. The local file and decoder JAR are ignored by Git. Do not
+commit personal paths or save data.
+
+Useful development checks:
+
+```powershell
+npm run typecheck
+npm test
+npm run test:package
+git diff --check
+```
+
+`npm pack` creates an installable package exposing the `darkest-dungeon-mcp`
+executable. The project uses strict TypeScript, ESM, and Node's built-in test
+runner through `tsx`. Tests never access the user's live save directory.
 
 ## MCP tools
 
@@ -121,16 +153,6 @@ npm run cli -- live-state -- --save-dir "C:\path\to\profile_0"
 ```
 
 Run the CLI without a command to print the complete command and option list.
-
-## Development
-
-```powershell
-npm run typecheck
-npm test
-git diff --check
-```
-
-The project uses strict TypeScript, ESM, and Node's built-in test runner through `tsx`. Tests never access the user's live save directory.
 
 ## Knowledge data and attribution
 
