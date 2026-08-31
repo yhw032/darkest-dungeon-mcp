@@ -18,6 +18,14 @@ export function expectRecord(value: unknown, path: string): JsonRecord {
   return value as JsonRecord;
 }
 
+export function expectArray(value: unknown, path: string): unknown[] {
+  if (!Array.isArray(value)) {
+    throw new SaveValidationError("expected an array", path);
+  }
+
+  return value;
+}
+
 export function expectNumber(value: unknown, path: string): number {
   if (typeof value !== "number" || !Number.isFinite(value)) {
     throw new SaveValidationError("expected a finite number", path);
