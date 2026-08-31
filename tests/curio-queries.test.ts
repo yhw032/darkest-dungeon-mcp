@@ -24,7 +24,7 @@ test("searches curios by id, alias, partial name, and region", async () => {
     searchCurios(knowledge, { region: "warrens", limit: 1 }).map(
       (curio) => curio.id,
     ),
-    ["bone_altar"],
+    ["ancient_artifact"],
   );
 });
 
@@ -162,6 +162,32 @@ test("recommends a non-loot curio interaction when its item is available", async
     result.recommendedInteraction.outcomes[0]?.description,
     "Grants +25 dodge until camp.",
   );
+});
+
+test("does not guess between visually identical heirloom chest variants", async () => {
+  const result = getCurioAdvice(await loadCurioKnowledge(), {
+    name: "Heirloom Chest",
+    availableItems: ["Skeleton Key"],
+  });
+
+  assert.equal(result.status, "ambiguous");
+  if (result.status !== "ambiguous") return;
+  assert.deepEqual(
+    result.candidates.map((candidate) => candidate.id),
+    ["heirloom_chest_1", "heirloom_chest_2"],
+  );
+});
+
+test("recommends a skeleton key for the secret-room ancient artifact", async () => {
+  const result = getCurioAdvice(await loadCurioKnowledge(), {
+    name: "Secret Room Chest",
+    availableItems: ["Skeleton Key"],
+  });
+
+  assert.equal(result.status, "found");
+  if (result.status !== "found") return;
+  assert.equal(result.curio.id, "ancient_artifact");
+  assert.equal(result.recommendedInteraction?.item, "skeleton_key");
 });
 
 test("does not choose among ambiguous curio names", async () => {

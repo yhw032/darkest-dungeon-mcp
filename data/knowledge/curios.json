@@ -2,6 +2,336 @@
   "schemaVersion": 1,
   "curios": [
     {
+      "id": "crate",
+      "names": { "en": "Crate" },
+      "aliases": [],
+      "regions": ["ruins", "warrens", "weald", "cove"],
+      "dlcs": [],
+      "interactions": [
+        {
+          "item": null,
+          "recommendation": "situational",
+          "certainty": "possible",
+          "outcomes": [
+            { "type": "loot", "polarity": "positive", "description": "Provides heirlooms.", "chancePercent": 75 },
+            { "type": "nothing", "polarity": "neutral", "description": "Nothing happens.", "chancePercent": 25 }
+          ]
+        }
+      ],
+      "notes": ["No provision item changes this curio's outcomes."],
+      "sources": [
+        {
+          "title": "Official Darkest Dungeon Wiki: Curio data module",
+          "url": "https://darkestdungeon.wiki.gg/wiki/Module:Curios/Data",
+          "verifiedAt": "2026-08-31"
+        }
+      ]
+    },
+    {
+      "id": "discarded_pack",
+      "names": { "en": "Discarded Pack" },
+      "aliases": [],
+      "regions": ["ruins", "warrens", "weald", "cove", "courtyard"],
+      "dlcs": [],
+      "interactions": [
+        {
+          "item": null,
+          "recommendation": "recommended",
+          "certainty": "possible",
+          "outcomes": [
+            { "type": "loot", "polarity": "positive", "description": "Provides one supplies roll, two gold or gem rolls, and a journal entry.", "chancePercent": 60 },
+            { "type": "other", "polarity": "positive", "description": "Scouts ahead.", "chancePercent": 20 },
+            { "type": "nothing", "polarity": "neutral", "description": "Nothing happens.", "chancePercent": 20 }
+          ]
+        }
+      ],
+      "notes": ["Every possible outcome is non-harmful."],
+      "sources": [
+        {
+          "title": "Official Darkest Dungeon Wiki: Curio data module",
+          "url": "https://darkestdungeon.wiki.gg/wiki/Module:Curios/Data",
+          "verifiedAt": "2026-08-31"
+        }
+      ]
+    },
+    {
+      "id": "sack",
+      "names": { "en": "Sack" },
+      "aliases": [],
+      "regions": ["ruins", "warrens", "weald", "cove", "courtyard"],
+      "dlcs": [],
+      "interactions": [
+        {
+          "item": null,
+          "recommendation": "recommended",
+          "certainty": "possible",
+          "outcomes": [
+            { "type": "loot", "polarity": "positive", "description": "Provides gold.", "chancePercent": 75 },
+            { "type": "nothing", "polarity": "neutral", "description": "Nothing happens.", "chancePercent": 25 }
+          ]
+        }
+      ],
+      "notes": ["Every possible outcome is non-harmful."],
+      "sources": [
+        {
+          "title": "Official Darkest Dungeon Wiki: Curio data module",
+          "url": "https://darkestdungeon.wiki.gg/wiki/Module:Curios/Data",
+          "verifiedAt": "2026-08-31"
+        }
+      ]
+    },
+    {
+      "id": "sconce",
+      "names": { "en": "Sconce" },
+      "aliases": [],
+      "regions": ["ruins", "warrens", "weald", "cove"],
+      "dlcs": [],
+      "interactions": [
+        {
+          "item": null,
+          "recommendation": "recommended",
+          "certainty": "guaranteed",
+          "outcomes": [
+            { "type": "loot", "polarity": "positive", "description": "Provides one torch." }
+          ]
+        }
+      ],
+      "notes": ["Every interaction is beneficial."],
+      "sources": [
+        {
+          "title": "Official Darkest Dungeon Wiki: Curio data module",
+          "url": "https://darkestdungeon.wiki.gg/wiki/Module:Curios/Data",
+          "verifiedAt": "2026-08-31"
+        }
+      ]
+    },
+    {
+      "id": "stack_of_books",
+      "names": { "en": "Stack of Books" },
+      "aliases": ["Book Stack"],
+      "regions": ["ruins", "warrens"],
+      "dlcs": [],
+      "interactions": [
+        {
+          "item": "torch",
+          "recommendation": "avoid",
+          "certainty": "guaranteed",
+          "outcomes": [
+            { "type": "stress", "polarity": "negative", "description": "Increases stress by 100." }
+          ]
+        },
+        {
+          "item": null,
+          "recommendation": "avoid",
+          "certainty": "possible",
+          "outcomes": [
+            { "type": "quirk", "polarity": "positive", "description": "Grants a random positive quirk.", "chancePercent": 22.2 },
+            { "type": "loot", "polarity": "positive", "description": "Provides a journal entry.", "chancePercent": 16.7 },
+            { "type": "stress", "polarity": "negative", "description": "Increases stress by 25.", "chancePercent": 22.2 },
+            { "type": "quirk", "polarity": "negative", "description": "Grants a random negative quirk.", "chancePercent": 11.1 },
+            { "type": "other", "polarity": "negative", "description": "Reduces the light meter by 25.", "chancePercent": 11.1 },
+            { "type": "nothing", "polarity": "neutral", "description": "Nothing happens.", "chancePercent": 16.7 }
+          ]
+        }
+      ],
+      "notes": ["Burning the books with a Torch is guaranteed to maximize the interacting hero's stress."],
+      "sources": [
+        {
+          "title": "Official Darkest Dungeon Wiki: Curio data module",
+          "url": "https://darkestdungeon.wiki.gg/wiki/Module:Curios/Data",
+          "verifiedAt": "2026-08-31"
+        }
+      ]
+    },
+    {
+      "id": "heirloom_chest_1",
+      "names": { "en": "Heirloom Chest (1)" },
+      "aliases": ["Heirloom Chest", "Original Heirloom Chest"],
+      "regions": ["ruins", "warrens", "weald", "cove"],
+      "dlcs": [],
+      "interactions": [
+        {
+          "item": "skeleton_key",
+          "recommendation": "recommended",
+          "certainty": "guaranteed",
+          "outcomes": [
+            { "type": "loot", "polarity": "positive", "description": "Provides four heirloom rolls." }
+          ]
+        },
+        {
+          "item": "antivenom",
+          "recommendation": "recommended",
+          "certainty": "guaranteed",
+          "outcomes": [
+            { "type": "loot", "polarity": "positive", "description": "Provides three heirloom rolls." }
+          ],
+          "note": "Safe, but yields one fewer heirloom roll than a Skeleton Key."
+        },
+        {
+          "item": null,
+          "recommendation": "avoid",
+          "certainty": "possible",
+          "outcomes": [
+            { "type": "loot", "polarity": "positive", "description": "Provides two heirloom rolls.", "chancePercent": 75 },
+            { "type": "status", "polarity": "negative", "description": "Inflicts bleed.", "chancePercent": 25 },
+            { "type": "status", "polarity": "negative", "description": "Inflicts blight.", "chancePercent": 25 }
+          ]
+        }
+      ],
+      "notes": ["This variant looks identical to Heirloom Chest (2)."],
+      "sources": [
+        {
+          "title": "Official Darkest Dungeon Wiki: Curio data module",
+          "url": "https://darkestdungeon.wiki.gg/wiki/Module:Curios/Data",
+          "verifiedAt": "2026-08-31"
+        },
+        {
+          "title": "Official Darkest Dungeon Wiki: Curios",
+          "url": "https://darkestdungeon.wiki.gg/wiki/Curios#Heirloom_Chest_Variants",
+          "verifiedAt": "2026-08-31"
+        }
+      ]
+    },
+    {
+      "id": "heirloom_chest_2",
+      "names": { "en": "Heirloom Chest (2)" },
+      "aliases": ["Heirloom Chest", "Locked Strongbox"],
+      "regions": ["ruins", "warrens", "weald", "cove"],
+      "dlcs": [],
+      "interactions": [
+        {
+          "item": "skeleton_key",
+          "recommendation": "recommended",
+          "certainty": "guaranteed",
+          "outcomes": [
+            { "type": "loot", "polarity": "positive", "description": "Provides three rolls from the unrestricted loot table." }
+          ]
+        },
+        {
+          "item": "shovel",
+          "recommendation": "situational",
+          "certainty": "possible",
+          "outcomes": [
+            { "type": "loot", "polarity": "positive", "description": "Provides two rolls from the unrestricted loot table.", "chancePercent": 66.7 },
+            { "type": "nothing", "polarity": "neutral", "description": "Nothing happens.", "chancePercent": 33.3 }
+          ]
+        },
+        {
+          "item": null,
+          "recommendation": "avoid",
+          "certainty": "possible",
+          "outcomes": [
+            { "type": "loot", "polarity": "positive", "description": "Provides two rolls from the unrestricted loot table.", "chancePercent": 50 },
+            { "type": "status", "polarity": "negative", "description": "Inflicts bleed.", "chancePercent": 25 },
+            { "type": "status", "polarity": "negative", "description": "Inflicts blight.", "chancePercent": 25 }
+          ]
+        }
+      ],
+      "notes": ["This variant is a reskinned Locked Strongbox and looks identical to Heirloom Chest (1)."],
+      "sources": [
+        {
+          "title": "Official Darkest Dungeon Wiki: Curio data module",
+          "url": "https://darkestdungeon.wiki.gg/wiki/Module:Curios/Data",
+          "verifiedAt": "2026-08-31"
+        },
+        {
+          "title": "Official Darkest Dungeon Wiki: Curios",
+          "url": "https://darkestdungeon.wiki.gg/wiki/Curios#Heirloom_Chest_Variants",
+          "verifiedAt": "2026-08-31"
+        }
+      ]
+    },
+    {
+      "id": "unlocked_strongbox",
+      "names": { "en": "Unlocked Strongbox" },
+      "aliases": ["Strongbox"],
+      "regions": ["ruins", "warrens", "weald", "cove", "courtyard"],
+      "dlcs": [],
+      "interactions": [
+        {
+          "item": null,
+          "recommendation": "situational",
+          "certainty": "possible",
+          "outcomes": [
+            { "type": "loot", "polarity": "positive", "description": "Provides two rolls from the unrestricted loot table.", "chancePercent": 75 },
+            { "type": "status", "polarity": "negative", "description": "Inflicts blight.", "chancePercent": 25 }
+          ]
+        }
+      ],
+      "notes": ["No provision item changes this curio's outcomes."],
+      "sources": [
+        {
+          "title": "Official Darkest Dungeon Wiki: Curio data module",
+          "url": "https://darkestdungeon.wiki.gg/wiki/Module:Curios/Data",
+          "verifiedAt": "2026-08-31"
+        }
+      ]
+    },
+    {
+      "id": "ancient_artifact",
+      "names": { "en": "Ancient Artifact" },
+      "aliases": ["Secret Room Chest"],
+      "regions": ["ruins", "warrens", "weald", "cove"],
+      "dlcs": [],
+      "interactions": [
+        {
+          "item": "skeleton_key",
+          "recommendation": "recommended",
+          "certainty": "guaranteed",
+          "outcomes": [
+            { "type": "loot", "polarity": "positive", "description": "Provides a Collector trinket or three Puzzling Trapezohedrons." }
+          ]
+        },
+        {
+          "item": null,
+          "recommendation": "situational",
+          "certainty": "guaranteed",
+          "outcomes": [
+            { "type": "loot", "polarity": "positive", "description": "Provides three gold or gem rolls." }
+          ]
+        }
+      ],
+      "notes": ["Found in secret rooms; a Skeleton Key gives the special reward table."],
+      "sources": [
+        {
+          "title": "Official Darkest Dungeon Wiki: Curio data module",
+          "url": "https://darkestdungeon.wiki.gg/wiki/Module:Curios/Data",
+          "verifiedAt": "2026-08-31"
+        }
+      ]
+    },
+    {
+      "id": "throbbing_cocoons_infestation",
+      "names": { "en": "Throbbing Cocoons (Infestation)" },
+      "aliases": ["Throbbing Cocoons", "Infestation Cocoons"],
+      "regions": ["ruins", "warrens", "weald", "cove"],
+      "dlcs": ["crimson_court"],
+      "interactions": [
+        {
+          "item": null,
+          "recommendation": "situational",
+          "certainty": "guaranteed",
+          "outcomes": [
+            { "type": "combat", "polarity": "mixed", "description": "Summons a Gatekeeper encounter with Bloodsucker enemies." }
+          ],
+          "note": "Activate only when deliberately seeking a Gatekeeper encounter for a Courtyard invitation."
+        }
+      ],
+      "notes": ["Appears only at high Crimson Court infestation in regular dungeons."],
+      "sources": [
+        {
+          "title": "Official Darkest Dungeon Wiki: Curio data module",
+          "url": "https://darkestdungeon.wiki.gg/wiki/Module:Curios/Data",
+          "verifiedAt": "2026-08-31"
+        },
+        {
+          "title": "Official Darkest Dungeon Wiki: Curios",
+          "url": "https://darkestdungeon.wiki.gg/wiki/Curios#Throbbing_Cocoons_Variants",
+          "verifiedAt": "2026-08-31"
+        }
+      ]
+    },
+    {
       "id": "eldritch_altar",
       "names": { "en": "Eldritch Altar" },
       "aliases": [],
