@@ -19,6 +19,31 @@
               "description": "Removes one random negative quirk."
             }
           ]
+        },
+        {
+          "item": null,
+          "recommendation": "avoid",
+          "certainty": "possible",
+          "outcomes": [
+            {
+              "type": "stress",
+              "polarity": "negative",
+              "description": "Increases stress by 25.",
+              "chancePercent": 40
+            },
+            {
+              "type": "quirk",
+              "polarity": "positive",
+              "description": "Removes one random negative quirk.",
+              "chancePercent": 10
+            },
+            {
+              "type": "nothing",
+              "polarity": "neutral",
+              "description": "Nothing happens.",
+              "chancePercent": 50
+            }
+          ]
         }
       ],
       "notes": ["Select a hero who has a removable negative quirk."],
@@ -26,6 +51,304 @@
         {
           "title": "Official Darkest Dungeon Wiki: Quirks",
           "url": "https://darkestdungeon.wiki.gg/wiki/Quirks",
+          "verifiedAt": "2026-08-31"
+        }
+      ]
+    },
+    {
+      "id": "alchemy_table",
+      "names": { "en": "Alchemy Table" },
+      "aliases": [],
+      "regions": ["ruins"],
+      "dlcs": [],
+      "interactions": [
+        {
+          "item": "medicinal_herbs",
+          "recommendation": "recommended",
+          "certainty": "guaranteed",
+          "outcomes": [
+            {
+              "type": "loot",
+              "polarity": "positive",
+              "description": "Provides two rolls from the gold and gems loot table."
+            }
+          ]
+        },
+        {
+          "item": "torch",
+          "recommendation": "situational",
+          "certainty": "guaranteed",
+          "outcomes": [
+            {
+              "type": "buff",
+              "polarity": "positive",
+              "description": "Sets the light meter to 100."
+            }
+          ],
+          "note": "Useful when the party needs full torchlight more than loot."
+        },
+        {
+          "item": null,
+          "recommendation": "avoid",
+          "certainty": "possible",
+          "outcomes": [
+            {
+              "type": "status",
+              "polarity": "negative",
+              "description": "Inflicts blight.",
+              "chancePercent": 50
+            },
+            {
+              "type": "loot",
+              "polarity": "positive",
+              "description": "Provides one roll from the gold and gems loot table.",
+              "chancePercent": 25
+            },
+            {
+              "type": "nothing",
+              "polarity": "neutral",
+              "description": "Nothing happens.",
+              "chancePercent": 25
+            }
+          ]
+        }
+      ],
+      "notes": [],
+      "sources": [
+        {
+          "title": "Official Darkest Dungeon Wiki: Curio data module",
+          "url": "https://darkestdungeon.wiki.gg/wiki/Module:Curios/Data",
+          "verifiedAt": "2026-08-31"
+        }
+      ]
+    },
+    {
+      "id": "altar_of_light",
+      "names": { "en": "Altar of Light" },
+      "aliases": [],
+      "regions": ["ruins"],
+      "dlcs": [],
+      "interactions": [
+        {
+          "item": "holy_water",
+          "recommendation": "recommended",
+          "certainty": "guaranteed",
+          "outcomes": [
+            {
+              "type": "buff",
+              "polarity": "positive",
+              "description": "Grants +30% damage until camp."
+            }
+          ]
+        },
+        {
+          "item": null,
+          "recommendation": "situational",
+          "certainty": "guaranteed",
+          "outcomes": [
+            {
+              "type": "buff",
+              "polarity": "positive",
+              "description": "Grants +20% damage until camp."
+            }
+          ]
+        }
+      ],
+      "notes": ["Use a hero who benefits from a damage buff for the rest of the expedition."],
+      "sources": [
+        {
+          "title": "Official Darkest Dungeon Wiki: Curio data module",
+          "url": "https://darkestdungeon.wiki.gg/wiki/Module:Curios/Data",
+          "verifiedAt": "2026-08-31"
+        }
+      ]
+    },
+    {
+      "id": "bookshelf",
+      "names": { "en": "Bookshelf" },
+      "aliases": [],
+      "regions": ["ruins"],
+      "dlcs": [],
+      "interactions": [
+        {
+          "item": null,
+          "recommendation": "situational",
+          "certainty": "possible",
+          "outcomes": [
+            { "type": "other", "polarity": "positive", "description": "Scouts ahead.", "chancePercent": 20 },
+            { "type": "stress", "polarity": "negative", "description": "Increases stress by 15.", "chancePercent": 20 },
+            { "type": "quirk", "polarity": "positive", "description": "Grants a random positive quirk.", "chancePercent": 13.3 },
+            { "type": "quirk", "polarity": "negative", "description": "Grants a random negative quirk.", "chancePercent": 6.7 },
+            { "type": "loot", "polarity": "positive", "description": "Provides a journal entry.", "chancePercent": 20 },
+            { "type": "nothing", "polarity": "neutral", "description": "Nothing happens.", "chancePercent": 20 }
+          ]
+        }
+      ],
+      "notes": ["No provision item changes this curio's outcomes."],
+      "sources": [
+        {
+          "title": "Official Darkest Dungeon Wiki: Curio data module",
+          "url": "https://darkestdungeon.wiki.gg/wiki/Module:Curios/Data",
+          "verifiedAt": "2026-08-31"
+        }
+      ]
+    },
+    {
+      "id": "confession_booth",
+      "names": { "en": "Confession Booth" },
+      "aliases": [],
+      "regions": ["ruins"],
+      "dlcs": [],
+      "interactions": [
+        {
+          "item": "holy_water",
+          "recommendation": "recommended",
+          "certainty": "guaranteed",
+          "outcomes": [
+            { "type": "stress", "polarity": "positive", "description": "Reduces stress by 30." }
+          ]
+        },
+        {
+          "item": null,
+          "recommendation": "situational",
+          "certainty": "possible",
+          "outcomes": [
+            { "type": "stress", "polarity": "negative", "description": "Increases stress by 15.", "chancePercent": 50 },
+            { "type": "loot", "polarity": "positive", "description": "Provides six rolls from the gold and trinket loot table and a journal entry.", "chancePercent": 25 },
+            { "type": "quirk", "polarity": "positive", "description": "Removes one random negative quirk.", "chancePercent": 25 }
+          ]
+        }
+      ],
+      "notes": [],
+      "sources": [
+        {
+          "title": "Official Darkest Dungeon Wiki: Curio data module",
+          "url": "https://darkestdungeon.wiki.gg/wiki/Module:Curios/Data",
+          "verifiedAt": "2026-08-31"
+        }
+      ]
+    },
+    {
+      "id": "decorative_urn",
+      "names": { "en": "Decorative Urn" },
+      "aliases": [],
+      "regions": ["ruins"],
+      "dlcs": [],
+      "interactions": [
+        {
+          "item": "holy_water",
+          "recommendation": "recommended",
+          "certainty": "guaranteed",
+          "outcomes": [
+            { "type": "loot", "polarity": "positive", "description": "Provides two gem or trinket rolls and two gem rolls." }
+          ]
+        },
+        {
+          "item": "shovel",
+          "recommendation": "avoid",
+          "certainty": "guaranteed",
+          "outcomes": [
+            { "type": "quirk", "polarity": "negative", "description": "Inflicts the Guilty Conscience quirk." }
+          ]
+        },
+        {
+          "item": null,
+          "recommendation": "avoid",
+          "certainty": "possible",
+          "outcomes": [
+            { "type": "loot", "polarity": "positive", "description": "Provides one gem or trinket roll and two gem rolls.", "chancePercent": 44.4 },
+            { "type": "status", "polarity": "negative", "description": "Inflicts blight.", "chancePercent": 22.2 },
+            { "type": "disease", "polarity": "negative", "description": "Inflicts Creeping Cough.", "chancePercent": 7.4 },
+            { "type": "disease", "polarity": "negative", "description": "Inflicts a random disease.", "chancePercent": 3.7 },
+            { "type": "nothing", "polarity": "neutral", "description": "Nothing happens.", "chancePercent": 22.2 }
+          ]
+        }
+      ],
+      "notes": [],
+      "sources": [
+        {
+          "title": "Official Darkest Dungeon Wiki: Curio data module",
+          "url": "https://darkestdungeon.wiki.gg/wiki/Module:Curios/Data",
+          "verifiedAt": "2026-08-31"
+        }
+      ]
+    },
+    {
+      "id": "iron_maiden",
+      "names": { "en": "Iron Maiden" },
+      "aliases": [],
+      "regions": ["ruins"],
+      "dlcs": [],
+      "interactions": [
+        {
+          "item": "medicinal_herbs",
+          "recommendation": "recommended",
+          "certainty": "guaranteed",
+          "outcomes": [
+            { "type": "loot", "polarity": "positive", "description": "Provides two rolls from the unrestricted loot table." }
+          ]
+        },
+        {
+          "item": null,
+          "recommendation": "avoid",
+          "certainty": "possible",
+          "outcomes": [
+            { "type": "loot", "polarity": "positive", "description": "Provides two rolls from the unrestricted loot table.", "chancePercent": 40 },
+            { "type": "quirk", "polarity": "negative", "description": "Inflicts the Claustrophobia quirk.", "chancePercent": 20 },
+            { "type": "disease", "polarity": "negative", "description": "Inflicts Tetanus.", "chancePercent": 13.3 },
+            { "type": "disease", "polarity": "negative", "description": "Inflicts a random disease.", "chancePercent": 6.7 },
+            { "type": "nothing", "polarity": "neutral", "description": "Nothing happens.", "chancePercent": 20 }
+          ]
+        }
+      ],
+      "notes": [],
+      "sources": [
+        {
+          "title": "Official Darkest Dungeon Wiki: Curio data module",
+          "url": "https://darkestdungeon.wiki.gg/wiki/Module:Curios/Data",
+          "verifiedAt": "2026-08-31"
+        }
+      ]
+    },
+    {
+      "id": "locked_display_cabinet",
+      "names": { "en": "Locked Display Cabinet" },
+      "aliases": ["Display Cabinet"],
+      "regions": ["ruins"],
+      "dlcs": [],
+      "interactions": [
+        {
+          "item": "skeleton_key",
+          "recommendation": "recommended",
+          "certainty": "guaranteed",
+          "outcomes": [
+            { "type": "loot", "polarity": "positive", "description": "Provides three gold or heirloom rolls and two gold or gem rolls." }
+          ]
+        },
+        {
+          "item": "shovel",
+          "recommendation": "situational",
+          "certainty": "guaranteed",
+          "outcomes": [
+            { "type": "loot", "polarity": "positive", "description": "Provides two gold or heirloom rolls and two gold or gem rolls." }
+          ],
+          "note": "Safe but yields one fewer gold or heirloom roll than a Skeleton Key."
+        },
+        {
+          "item": null,
+          "recommendation": "avoid",
+          "certainty": "possible",
+          "outcomes": [
+            { "type": "status", "polarity": "negative", "description": "Inflicts bleed.", "chancePercent": 50 },
+            { "type": "status", "polarity": "negative", "description": "Inflicts blight.", "chancePercent": 50 }
+          ]
+        }
+      ],
+      "notes": [],
+      "sources": [
+        {
+          "title": "Official Darkest Dungeon Wiki: Curio data module",
+          "url": "https://darkestdungeon.wiki.gg/wiki/Module:Curios/Data",
           "verifiedAt": "2026-08-31"
         }
       ]
@@ -58,6 +381,25 @@
               "description": "Cures current status effects."
             }
           ]
+        },
+        {
+          "item": null,
+          "recommendation": "situational",
+          "certainty": "possible",
+          "outcomes": [
+            {
+              "type": "stress",
+              "polarity": "positive",
+              "description": "Reduces stress by 10, restores 5 HP, and cures current status effects.",
+              "chancePercent": 50
+            },
+            {
+              "type": "loot",
+              "polarity": "positive",
+              "description": "Provides two rolls from the gold and gems loot table.",
+              "chancePercent": 50
+            }
+          ]
         }
       ],
       "notes": [],
@@ -65,6 +407,103 @@
         {
           "title": "Official Darkest Dungeon Wiki: Curios",
           "url": "https://darkestdungeon.wiki.gg/wiki/Curios",
+          "verifiedAt": "2026-08-31"
+        }
+      ]
+    },
+    {
+      "id": "locked_sarcophagus",
+      "names": { "en": "Locked Sarcophagus" },
+      "aliases": [],
+      "regions": ["ruins"],
+      "dlcs": [],
+      "interactions": [
+        {
+          "item": "skeleton_key",
+          "recommendation": "recommended",
+          "certainty": "guaranteed",
+          "outcomes": [
+            { "type": "loot", "polarity": "positive", "description": "Provides two gold or heirloom rolls and one gold or trinket roll." }
+          ]
+        },
+        {
+          "item": "shovel",
+          "recommendation": "situational",
+          "certainty": "guaranteed",
+          "outcomes": [
+            { "type": "loot", "polarity": "positive", "description": "Provides one gold or heirloom roll and one gold or trinket roll." }
+          ],
+          "note": "Safe but yields one fewer gold or heirloom roll than a Skeleton Key."
+        },
+        {
+          "item": null,
+          "recommendation": "avoid",
+          "certainty": "possible",
+          "outcomes": [
+            { "type": "status", "polarity": "negative", "description": "Inflicts bleed.", "chancePercent": 50 },
+            { "type": "status", "polarity": "negative", "description": "Inflicts blight.", "chancePercent": 50 }
+          ]
+        }
+      ],
+      "notes": [],
+      "sources": [
+        {
+          "title": "Official Darkest Dungeon Wiki: Curio data module",
+          "url": "https://darkestdungeon.wiki.gg/wiki/Module:Curios/Data",
+          "verifiedAt": "2026-08-31"
+        }
+      ]
+    },
+    {
+      "id": "sarcophagus",
+      "names": { "en": "Sarcophagus" },
+      "aliases": [],
+      "regions": ["ruins"],
+      "dlcs": [],
+      "interactions": [
+        {
+          "item": null,
+          "recommendation": "situational",
+          "certainty": "possible",
+          "outcomes": [
+            { "type": "loot", "polarity": "positive", "description": "Provides two gold or heirloom rolls.", "chancePercent": 60 },
+            { "type": "quirk", "polarity": "negative", "description": "Inflicts the Thanatophobia quirk.", "chancePercent": 20 },
+            { "type": "nothing", "polarity": "neutral", "description": "Nothing happens.", "chancePercent": 20 }
+          ]
+        }
+      ],
+      "notes": ["No provision item changes this curio's outcomes."],
+      "sources": [
+        {
+          "title": "Official Darkest Dungeon Wiki: Curio data module",
+          "url": "https://darkestdungeon.wiki.gg/wiki/Module:Curios/Data",
+          "verifiedAt": "2026-08-31"
+        }
+      ]
+    },
+    {
+      "id": "suit_of_armor",
+      "names": { "en": "Suit of Armor" },
+      "aliases": ["Armor"],
+      "regions": ["ruins"],
+      "dlcs": [],
+      "interactions": [
+        {
+          "item": null,
+          "recommendation": "recommended",
+          "certainty": "possible",
+          "outcomes": [
+            { "type": "buff", "polarity": "positive", "description": "Grants +15% protection and +10 dodge until camp.", "chancePercent": 75 },
+            { "type": "quirk", "polarity": "positive", "description": "Grants the Ruins Adventurer quirk.", "chancePercent": 12.5 },
+            { "type": "quirk", "polarity": "positive", "description": "Grants the Ruins Tactician quirk.", "chancePercent": 12.5 }
+          ]
+        }
+      ],
+      "notes": ["Every possible outcome is beneficial."],
+      "sources": [
+        {
+          "title": "Official Darkest Dungeon Wiki: Curio data module",
+          "url": "https://darkestdungeon.wiki.gg/wiki/Module:Curios/Data",
           "verifiedAt": "2026-08-31"
         }
       ]

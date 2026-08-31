@@ -73,8 +73,11 @@ test("recommends an interaction enabled by supplied items", async () => {
   assert.equal(result.status, "found");
   if (result.status !== "found") return;
   assert.equal(result.recommendedInteraction?.item, "holy_water");
-  assert.equal(result.usableInteractions.length, 1);
-  assert.deepEqual(result.warnings, []);
+  assert.deepEqual(
+    result.usableInteractions.map((interaction) => interaction.item),
+    ["holy_water", null],
+  );
+  assert.match(result.warnings[0] ?? "", /no-item/);
 });
 
 test("warns when supplied items cannot enable a recommended interaction", async () => {
@@ -86,8 +89,12 @@ test("warns when supplied items cannot enable a recommended interaction", async 
   assert.equal(result.status, "found");
   if (result.status !== "found") return;
   assert.equal(result.recommendedInteraction, null);
-  assert.equal(result.usableInteractions.length, 0);
+  assert.deepEqual(
+    result.usableInteractions.map((interaction) => interaction.item),
+    [null],
+  );
   assert.match(result.warnings[0] ?? "", /supplied items/);
+  assert.match(result.warnings[1] ?? "", /no-item/);
 });
 
 test("returns situational and no-item warnings without inventing a recommendation", async () => {
