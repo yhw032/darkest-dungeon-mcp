@@ -13,7 +13,7 @@ export interface EquippedTrinket {
 
 export interface SkillSelection {
   id: string;
-  value: number;
+  rawSelectionValue: number;
 }
 
 export interface Hero {

@@ -21,7 +21,8 @@ node ABSOLUTE_PATH_TO_PROJECT/dist/mcp/stdio.js
   --decoder-jar ABSOLUTE_PATH_TO_DDSaveEditor.jar
 ```
 
-`--game-dir` is only required for building-upgrade and risky-quirk analysis.
+`--game-dir` is required for building upgrades, verified hero combat skill
+levels, and risky-quirk analysis.
 `--java` is optional when Java is already available through `PATH` or
 `JAVA_HOME`. You can use `--env-file ABSOLUTE_PATH` instead of the individual
 configuration arguments when desired.

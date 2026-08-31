@@ -94,10 +94,12 @@ test("normalizes a decoded hero", () => {
     combatSkills: ["smite", "stunning_blow"],
     campingSkills: ["zealous_speech"],
     combatSkillSelections: [
-      { id: "smite", value: 0 },
-      { id: "stunning_blow", value: 1 },
+      { id: "smite", rawSelectionValue: 0 },
+      { id: "stunning_blow", rawSelectionValue: 1 },
     ],
-    campingSkillSelections: [{ id: "zealous_speech", value: 0 }],
+    campingSkillSelections: [
+      { id: "zealous_speech", rawSelectionValue: 0 },
+    ],
   });
 });
 

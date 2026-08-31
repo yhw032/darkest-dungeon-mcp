@@ -70,7 +70,7 @@ function parseSkillSelections(
   const selections = expectRecord(value, path);
   return Object.entries(selections).map(([id, rawValue]) => ({
     id,
-    value: expectNumber(rawValue, `${path}.${id}`),
+    rawSelectionValue: expectNumber(rawValue, `${path}.${id}`),
   }));
 }
 

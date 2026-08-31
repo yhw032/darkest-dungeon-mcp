@@ -11,8 +11,8 @@ This is an unofficial fan project. It is not affiliated with, endorsed by, or sp
 - Node.js 20.12 or later
 - For live saves: Java through `PATH`, `JAVA_HOME`, or `--java`, plus
   [`DDSaveEditor.jar`](https://github.com/robojumper/DarkestDungeonSaveEditor)
-- A PC installation of Darkest Dungeon 1 for building-upgrade and risky-quirk
-  analysis
+- A PC installation of Darkest Dungeon 1 for building upgrades, combat skill
+  levels, and risky-quirk analysis
 
 ## Installation
 
@@ -67,10 +67,10 @@ commands, and troubleshooting instructions for Codex, Claude Code, Claude
 Desktop, Google Antigravity, OpenClaw, and generic stdio clients.
 
 `--save-dir` selects the live profile. Without it, the server uses the
-checked-in decoded samples. `--game-dir` is only required by
-`list_building_upgrades` and `list_risky_quirks`. The original profile remains
-untouched: supported save files are copied to a temporary directory before
-decoding.
+checked-in decoded samples. `--game-dir` enables building upgrades, verified
+combat skill levels in `get_hero`, and risky-quirk analysis. The original
+profile remains untouched: supported save files are copied to a temporary
+directory before decoding.
 
 ## Server options
 
@@ -126,7 +126,7 @@ runner through `tsx`. Tests never access the user's live save directory.
 | `list_building_upgrades` | List building upgrade progress and the next heirloom costs. |
 | `list_risky_quirks` | Rank heroes with treatment-worthy quirks and explain the risks. |
 | `list_heroes` | Filter heroes by class, roster status, and stress. |
-| `get_hero` | Return one hero with related town activity. |
+| `get_hero` | Return one hero with combat skill levels and related town activity. |
 | `list_quests` | Filter available quests. |
 | `get_quest` | Return one quest by ID. |
 | `list_trinkets` | List trinkets in storage, on heroes, or in stores. |
@@ -137,6 +137,12 @@ runner through `tsx`. Tests never access the user's live save directory.
 Curio coverage includes shared curios, Ruins, Warrens, Weald, Cove, Courtyard, Farmstead, Darkest Dungeon, Old Road, and relevant Hamlet quests. Retired curios that are no longer used by the game are intentionally excluded.
 
 Quirk treatment analysis combines the current roster, installed game definitions, and a conservative editorial policy. It currently covers explicitly curated high-risk rules, primarily forced curio interactions and loot loss, rather than assigning an invented severity to every negative quirk. Results are guidance, not an absolute or exhaustive treatment order.
+
+Combat skill levels combine per-hero purchases from `persist.upgrades.json`
+with installed hero upgrade definitions. The raw values under
+`selected_combat_skills` only identify selection data and are never reported as
+levels. Without `--game-dir`, `get_hero` returns selected skills with
+`level: null` rather than guessing.
 
 ## CLI examples
 

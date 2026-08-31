@@ -3,6 +3,7 @@ import { z } from "zod";
 
 import type { BuildingUpgradeTree } from "../domain/building-upgrades.js";
 import type { CurioKnowledgeBase } from "../domain/curio-knowledge.js";
+import type { HeroCombatSkillTree } from "../domain/hero-skills.js";
 import type { QuirkDefinition } from "../domain/quirk-definitions.js";
 import type { QuirkTreatmentKnowledgeBase } from "../domain/quirk-treatment-knowledge.js";
 import { loadCurioKnowledge } from "../knowledge/load-curio-knowledge.js";
@@ -22,6 +23,10 @@ import {
   getBuildingUpgradeProgress,
   loadBuildingUpgradeTrees,
 } from "../upgrades/building-upgrades.js";
+import {
+  getHeroCombatSkillDetails,
+  loadHeroCombatSkillTrees,
+} from "../upgrades/hero-skills.js";
 import type { GameStateDataSource } from "./data-source.js";
 
 const readOnlyAnnotations = {
@@ -46,6 +51,7 @@ export interface DarkestDungeonServerOptions {
   loadCurioKnowledge?: () => Promise<CurioKnowledgeBase>;
   gameDirectory?: string;
   loadBuildingUpgradeTrees?: () => Promise<BuildingUpgradeTree[]>;
+  loadHeroCombatSkillTrees?: () => Promise<HeroCombatSkillTree[]>;
   loadQuirkDefinitions?: () => Promise<QuirkDefinition[]>;
   loadQuirkTreatmentKnowledge?: () => Promise<QuirkTreatmentKnowledgeBase>;
 }
@@ -53,6 +59,7 @@ export interface DarkestDungeonServerOptions {
 export const serverInstructions = [
   "This read-only server provides normalized Darkest Dungeon 1 save state and verified gameplay knowledge.",
   "Use save-state tools for facts about the current campaign instead of guessing.",
+  "In hero details, use combatSkillDetails.level for combat skill levels; rawSelectionValue is not a level.",
   "Use list_building_upgrades for verified building upgrade progress and next costs.",
   "Use list_risky_quirks for treatment-priority questions, and present its policy as editorial guidance rather than an absolute game value.",
   "For curio questions, call search_curios when the identity is uncertain, then call get_curio_advice.",
@@ -101,6 +108,23 @@ export function createDarkestDungeonServer(
   const getUpgradeTrees = () => {
     upgradeTreesPromise ??= Promise.resolve().then(upgradeTreeLoader);
     return upgradeTreesPromise;
+  };
+  const heroCombatSkillTreeLoader =
+    options.loadHeroCombatSkillTrees ??
+    (() => {
+      const gameDirectory = options.gameDirectory?.trim();
+      return gameDirectory === undefined || gameDirectory === ""
+        ? Promise.resolve(undefined)
+        : loadHeroCombatSkillTrees(gameDirectory);
+    });
+  let heroCombatSkillTreesPromise:
+    | Promise<HeroCombatSkillTree[] | undefined>
+    | undefined;
+  const getHeroCombatSkillTrees = () => {
+    heroCombatSkillTreesPromise ??= Promise.resolve().then(
+      heroCombatSkillTreeLoader,
+    );
+    return heroCombatSkillTreesPromise;
   };
   const quirkDefinitionLoader =
     options.loadQuirkDefinitions ??
@@ -258,7 +282,7 @@ export function createDarkestDungeonServer(
     {
       title: "Get hero details",
       description:
-        "Return one normalized hero and their current town activity context.",
+        "Return one normalized hero with verified combat skill levels when game definitions are available, plus their current town activity context. Raw selection values are not skill levels.",
       inputSchema: z.object({ heroId: z.string().min(1) }),
       outputSchema: z.object({
         hero: z.unknown(),
@@ -267,7 +291,10 @@ export function createDarkestDungeonServer(
       annotations: readOnlyAnnotations,
     },
     async ({ heroId }) => {
-      const state = await dataSource.load();
+      const [state, skillTrees] = await Promise.all([
+        dataSource.load(),
+        getHeroCombatSkillTrees(),
+      ]);
       const hero = getHero(state.roster, heroId);
       if (hero === undefined) {
         return notFoundResult("Hero", heroId);
@@ -278,19 +305,27 @@ export function createDarkestDungeonServer(
         state.town,
         heroId,
       );
+      const heroDetails = {
+        ...hero,
+        combatSkillDetails: getHeroCombatSkillDetails(
+          hero,
+          state.upgrades,
+          skillTrees,
+        ),
+      };
 
       return {
         content: [
           {
             type: "text",
             text: JSON.stringify({
-              hero,
+              hero: heroDetails,
               townContext,
             }),
           },
         ],
         structuredContent: {
-          hero,
+          hero: heroDetails,
           townContext,
         },
       };

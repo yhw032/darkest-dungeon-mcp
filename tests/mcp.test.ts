@@ -211,7 +211,17 @@ test("MCP server advertises and executes read-only game tools", async (t) => {
   const heroContent = heroResult.structuredContent as
     | Record<string, unknown>
     | undefined;
-  assert.deepEqual(heroContent?.hero, expectedHero);
+  assert.deepEqual(heroContent?.hero, {
+    ...expectedHero,
+    combatSkillDetails: expectedHero.combatSkillSelections.map(
+      ({ id, rawSelectionValue }) => ({
+        id,
+        level: null,
+        isSelected: true,
+        rawSelectionValue,
+      }),
+    ),
+  });
 
   const missingResult = await client.callTool({
     name: "get_hero",
