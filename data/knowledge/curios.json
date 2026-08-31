@@ -509,6 +509,274 @@
       ]
     },
     {
+      "id": "dinner_cart",
+      "names": { "en": "Dinner Cart" },
+      "aliases": [],
+      "regions": ["warrens"],
+      "dlcs": [],
+      "interactions": [
+        {
+          "item": "medicinal_herbs",
+          "recommendation": "recommended",
+          "certainty": "guaranteed",
+          "outcomes": [
+            { "type": "loot", "polarity": "positive", "description": "Provides three food rolls and one gold or trinket roll." }
+          ]
+        },
+        {
+          "item": null,
+          "recommendation": "avoid",
+          "certainty": "possible",
+          "outcomes": [
+            { "type": "loot", "polarity": "positive", "description": "Provides one food roll and one gold or trinket roll.", "chancePercent": 37.5 },
+            { "type": "status", "polarity": "negative", "description": "Inflicts blight.", "chancePercent": 25 },
+            { "type": "disease", "polarity": "negative", "description": "Inflicts The Black Plague.", "chancePercent": 12.5 },
+            { "type": "nothing", "polarity": "neutral", "description": "Nothing happens.", "chancePercent": 25 }
+          ]
+        }
+      ],
+      "notes": [],
+      "sources": [
+        {
+          "title": "Official Darkest Dungeon Wiki: Curio data module",
+          "url": "https://darkestdungeon.wiki.gg/wiki/Module:Curios/Data",
+          "verifiedAt": "2026-08-31"
+        }
+      ]
+    },
+    {
+      "id": "moonshine_barrel",
+      "names": { "en": "Moonshine Barrel" },
+      "aliases": [],
+      "regions": ["warrens"],
+      "dlcs": [],
+      "interactions": [
+        {
+          "item": "medicinal_herbs",
+          "recommendation": "recommended",
+          "certainty": "guaranteed",
+          "outcomes": [
+            { "type": "buff", "polarity": "positive", "description": "Grants +30% damage until camp." }
+          ]
+        },
+        {
+          "item": null,
+          "recommendation": "avoid",
+          "certainty": "possible",
+          "outcomes": [
+            { "type": "loot", "polarity": "positive", "description": "Provides one food roll and one gold or supplies roll.", "chancePercent": 33.3 },
+            { "type": "status", "polarity": "negative", "description": "Inflicts blight.", "chancePercent": 33.3 },
+            { "type": "quirk", "polarity": "negative", "description": "Inflicts the Tippler quirk.", "chancePercent": 11.1 },
+            { "type": "nothing", "polarity": "neutral", "description": "Nothing happens.", "chancePercent": 22.2 }
+          ]
+        }
+      ],
+      "notes": ["Use a hero who benefits from a damage buff for the rest of the expedition."],
+      "sources": [
+        {
+          "title": "Official Darkest Dungeon Wiki: Curio data module",
+          "url": "https://darkestdungeon.wiki.gg/wiki/Module:Curios/Data",
+          "verifiedAt": "2026-08-31"
+        }
+      ]
+    },
+    {
+      "id": "occult_scrawlings",
+      "names": { "en": "Occult Scrawlings" },
+      "aliases": [],
+      "regions": ["warrens"],
+      "dlcs": [],
+      "interactions": [
+        {
+          "item": "holy_water",
+          "recommendation": "avoid",
+          "certainty": "guaranteed",
+          "outcomes": [
+            { "type": "buff", "polarity": "negative", "description": "Inflicts -20 dodge until camp." }
+          ]
+        },
+        {
+          "item": null,
+          "recommendation": "avoid",
+          "certainty": "possible",
+          "outcomes": [
+            { "type": "quirk", "polarity": "positive", "description": "Grants a random positive quirk.", "chancePercent": 33.3 },
+            { "type": "quirk", "polarity": "negative", "description": "Grants a random negative quirk.", "chancePercent": 16.7 },
+            { "type": "stress", "polarity": "negative", "description": "Increases stress by 25.", "chancePercent": 25 },
+            { "type": "nothing", "polarity": "neutral", "description": "Nothing happens.", "chancePercent": 25 }
+          ]
+        }
+      ],
+      "notes": ["Holy Water is actively harmful on this curio."],
+      "sources": [
+        {
+          "title": "Official Darkest Dungeon Wiki: Curio data module",
+          "url": "https://darkestdungeon.wiki.gg/wiki/Module:Curios/Data",
+          "verifiedAt": "2026-08-31"
+        }
+      ]
+    },
+    {
+      "id": "pile_of_bones",
+      "names": { "en": "Pile of Bones" },
+      "aliases": [],
+      "regions": ["warrens"],
+      "dlcs": [],
+      "interactions": [
+        {
+          "item": "holy_water",
+          "recommendation": "recommended",
+          "certainty": "guaranteed",
+          "outcomes": [
+            { "type": "loot", "polarity": "positive", "description": "Provides two rolls from the unrestricted loot table." }
+          ]
+        },
+        {
+          "item": null,
+          "recommendation": "avoid",
+          "certainty": "possible",
+          "outcomes": [
+            { "type": "loot", "polarity": "positive", "description": "Provides two rolls from the unrestricted loot table.", "chancePercent": 25 },
+            { "type": "quirk", "polarity": "negative", "description": "Inflicts the Bloodthirsty quirk.", "chancePercent": 25 },
+            { "type": "disease", "polarity": "negative", "description": "Inflicts a random disease.", "chancePercent": 25 },
+            { "type": "nothing", "polarity": "neutral", "description": "Nothing happens.", "chancePercent": 25 }
+          ]
+        }
+      ],
+      "notes": [],
+      "sources": [
+        {
+          "title": "Official Darkest Dungeon Wiki: Curio data module",
+          "url": "https://darkestdungeon.wiki.gg/wiki/Module:Curios/Data",
+          "verifiedAt": "2026-08-31"
+        }
+      ]
+    },
+    {
+      "id": "rack_of_blades",
+      "names": { "en": "Rack of Blades" },
+      "aliases": ["Knife Rack"],
+      "regions": ["warrens"],
+      "dlcs": [],
+      "interactions": [
+        {
+          "item": "bandage",
+          "recommendation": "recommended",
+          "certainty": "guaranteed",
+          "outcomes": [
+            { "type": "loot", "polarity": "positive", "description": "Provides two gold or gem rolls and one food roll." }
+          ]
+        },
+        {
+          "item": null,
+          "recommendation": "avoid",
+          "certainty": "possible",
+          "outcomes": [
+            { "type": "loot", "polarity": "positive", "description": "Provides one gold or gem roll and one food roll.", "chancePercent": 40 },
+            { "type": "status", "polarity": "negative", "description": "Inflicts bleed.", "chancePercent": 40 },
+            { "type": "nothing", "polarity": "neutral", "description": "Nothing happens.", "chancePercent": 20 }
+          ]
+        }
+      ],
+      "notes": [],
+      "sources": [
+        {
+          "title": "Official Darkest Dungeon Wiki: Curio data module",
+          "url": "https://darkestdungeon.wiki.gg/wiki/Module:Curios/Data",
+          "verifiedAt": "2026-08-31"
+        }
+      ]
+    },
+    {
+      "id": "bone_altar",
+      "names": { "en": "Bone Altar" },
+      "aliases": ["Skull Altar"],
+      "regions": ["warrens"],
+      "dlcs": [],
+      "interactions": [
+        {
+          "item": null,
+          "recommendation": "recommended",
+          "certainty": "guaranteed",
+          "outcomes": [
+            { "type": "buff", "polarity": "positive", "description": "Grants +15% damage, +10 accuracy, and +5% critical chance until camp, and cures current status effects." }
+          ]
+        }
+      ],
+      "notes": ["Every interaction is beneficial."],
+      "sources": [
+        {
+          "title": "Official Darkest Dungeon Wiki: Curio data module",
+          "url": "https://darkestdungeon.wiki.gg/wiki/Module:Curios/Data",
+          "verifiedAt": "2026-08-31"
+        }
+      ]
+    },
+    {
+      "id": "makeshift_dining_table",
+      "names": { "en": "Makeshift Dining Table" },
+      "aliases": ["Makeshift Table"],
+      "regions": ["warrens"],
+      "dlcs": [],
+      "interactions": [
+        {
+          "item": "medicinal_herbs",
+          "recommendation": "recommended",
+          "certainty": "guaranteed",
+          "outcomes": [
+            { "type": "loot", "polarity": "positive", "description": "Provides two food rolls and one gold or supplies roll." }
+          ]
+        },
+        {
+          "item": null,
+          "recommendation": "avoid",
+          "certainty": "possible",
+          "outcomes": [
+            { "type": "loot", "polarity": "positive", "description": "Provides one food roll and one gold or supplies roll.", "chancePercent": 25 },
+            { "type": "status", "polarity": "negative", "description": "Inflicts blight.", "chancePercent": 25 },
+            { "type": "disease", "polarity": "negative", "description": "Inflicts Tapeworm.", "chancePercent": 25 },
+            { "type": "nothing", "polarity": "neutral", "description": "Nothing happens.", "chancePercent": 25 }
+          ]
+        }
+      ],
+      "notes": [],
+      "sources": [
+        {
+          "title": "Official Darkest Dungeon Wiki: Curio data module",
+          "url": "https://darkestdungeon.wiki.gg/wiki/Module:Curios/Data",
+          "verifiedAt": "2026-08-31"
+        }
+      ]
+    },
+    {
+      "id": "sacrificial_stone",
+      "names": { "en": "Sacrificial Stone" },
+      "aliases": [],
+      "regions": ["warrens"],
+      "dlcs": [],
+      "interactions": [
+        {
+          "item": null,
+          "recommendation": "avoid",
+          "certainty": "possible",
+          "outcomes": [
+            { "type": "stress", "polarity": "negative", "description": "Increases stress by 50.", "chancePercent": 50 },
+            { "type": "quirk", "polarity": "positive", "description": "Removes one random negative quirk.", "chancePercent": 25 },
+            { "type": "quirk", "polarity": "positive", "description": "Grants the Warrens Explorer quirk.", "chancePercent": 12.5 },
+            { "type": "quirk", "polarity": "positive", "description": "Grants the Warrens Scrounger quirk.", "chancePercent": 12.5 }
+          ]
+        }
+      ],
+      "notes": ["No provision item changes this curio's outcomes."],
+      "sources": [
+        {
+          "title": "Official Darkest Dungeon Wiki: Curio data module",
+          "url": "https://darkestdungeon.wiki.gg/wiki/Module:Curios/Data",
+          "verifiedAt": "2026-08-31"
+        }
+      ]
+    },
+    {
       "id": "pile_of_scrolls",
       "names": { "en": "Pile of Scrolls" },
       "aliases": [],
@@ -525,6 +793,19 @@
               "polarity": "positive",
               "description": "Removes one random negative quirk."
             }
+          ]
+        },
+        {
+          "item": null,
+          "recommendation": "situational",
+          "certainty": "possible",
+          "outcomes": [
+            { "type": "other", "polarity": "positive", "description": "Scouts ahead.", "chancePercent": 28.6 },
+            { "type": "stress", "polarity": "negative", "description": "Increases stress by 15.", "chancePercent": 14.3 },
+            { "type": "loot", "polarity": "positive", "description": "Provides a journal entry.", "chancePercent": 14.3 },
+            { "type": "quirk", "polarity": "positive", "description": "Grants a random positive quirk.", "chancePercent": 9.5 },
+            { "type": "quirk", "polarity": "negative", "description": "Grants a random negative quirk.", "chancePercent": 4.8 },
+            { "type": "nothing", "polarity": "neutral", "description": "Nothing happens.", "chancePercent": 28.6 }
           ]
         }
       ],

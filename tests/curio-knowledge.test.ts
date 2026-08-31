@@ -94,10 +94,15 @@ test("rejects duplicate curio ids", () => {
 test("loads the checked-in verified curio knowledge", async () => {
   const knowledge = await loadCurioKnowledge();
 
-  assert.equal(knowledge.curios.length, 14);
+  assert.equal(knowledge.curios.length, 22);
   assert.equal(
     knowledge.curios.filter((curio) => curio.regions.includes("ruins")).length,
     13,
+  );
+  assert.equal(
+    knowledge.curios.filter((curio) => curio.regions.includes("warrens"))
+      .length,
+    11,
   );
   assert.equal(
     knowledge.curios.find((curio) => curio.id === "eldritch_altar")
@@ -115,6 +120,15 @@ test("loads the checked-in verified curio knowledge", async () => {
       .find((curio) => curio.id === "suit_of_armor")
       ?.interactions[0]?.outcomes.length,
     3,
+  );
+  assert.deepEqual(
+    knowledge.curios.find((curio) => curio.id === "rack_of_blades")?.aliases,
+    ["Knife Rack"],
+  );
+  assert.equal(
+    knowledge.curios.find((curio) => curio.id === "occult_scrawlings")
+      ?.interactions[0]?.recommendation,
+    "avoid",
   );
   assert.ok(knowledge.curios.every((curio) => curio.sources.length > 0));
 });
