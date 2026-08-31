@@ -1,0 +1,140 @@
+import assert from "node:assert/strict";
+import test from "node:test";
+
+import type { CurioKnowledgeBase } from "../src/domain/curio-knowledge.js";
+import { loadCurioKnowledge } from "../src/knowledge/load-curio-knowledge.js";
+import { getCurioAdvice } from "../src/queries/get-curio-advice.js";
+import { searchCurios } from "../src/queries/search-curios.js";
+
+test("searches curios by id, alias, partial name, and region", async () => {
+  const knowledge = await loadCurioKnowledge();
+
+  assert.equal(searchCurios(knowledge, { query: "eldritch_altar" })[0]?.id, "eldritch_altar");
+  assert.equal(searchCurios(knowledge, { query: "Shambler Altar" })[0]?.id, "shamblers_altar");
+  assert.deepEqual(
+    searchCurios(knowledge, { query: "fountain", region: "ruins" }).map(
+      (curio) => curio.id,
+    ),
+    ["holy_fountain"],
+  );
+  assert.deepEqual(
+    searchCurios(knowledge, { region: "warrens", limit: 1 }).map(
+      (curio) => curio.id,
+    ),
+    ["eldritch_altar"],
+  );
+});
+
+test("matches normalized Korean names", () => {
+  const knowledge: CurioKnowledgeBase = {
+    schemaVersion: 1,
+    curios: [
+      {
+        id: "test_curio",
+        names: { en: "Test Curio", ko: "시험용 골동품" },
+        aliases: [],
+        regions: ["ruins"],
+        dlcs: [],
+        interactions: [
+          {
+            item: null,
+            recommendation: "avoid",
+            certainty: "guaranteed",
+            outcomes: [
+              {
+                type: "nothing",
+                polarity: "neutral",
+                description: "Nothing happens.",
+              },
+            ],
+          },
+        ],
+        notes: [],
+        sources: [
+          {
+            title: "Test",
+            url: "https://example.com",
+            verifiedAt: "2026-08-31",
+          },
+        ],
+      },
+    ],
+  };
+
+  assert.equal(searchCurios(knowledge, { query: "  시험용  " })[0]?.id, "test_curio");
+});
+
+test("recommends an interaction enabled by supplied items", async () => {
+  const result = getCurioAdvice(await loadCurioKnowledge(), {
+    name: "Eldritch Altar",
+    availableItems: ["Holy Water"],
+  });
+
+  assert.equal(result.status, "found");
+  if (result.status !== "found") return;
+  assert.equal(result.recommendedInteraction?.item, "holy_water");
+  assert.equal(result.usableInteractions.length, 1);
+  assert.deepEqual(result.warnings, []);
+});
+
+test("warns when supplied items cannot enable a recommended interaction", async () => {
+  const result = getCurioAdvice(await loadCurioKnowledge(), {
+    curioId: "eldritch_altar",
+    availableItems: ["shovel"],
+  });
+
+  assert.equal(result.status, "found");
+  if (result.status !== "found") return;
+  assert.equal(result.recommendedInteraction, null);
+  assert.equal(result.usableInteractions.length, 0);
+  assert.match(result.warnings[0] ?? "", /supplied items/);
+});
+
+test("returns situational and no-item warnings without inventing a recommendation", async () => {
+  const result = getCurioAdvice(await loadCurioKnowledge(), {
+    name: "Shambler Altar",
+    availableItems: ["torch"],
+  });
+
+  assert.equal(result.status, "found");
+  if (result.status !== "found") return;
+  assert.equal(result.recommendedInteraction, null);
+  assert.deepEqual(
+    result.usableInteractions.map((interaction) => interaction.item),
+    ["torch", null],
+  );
+  assert.match(result.warnings[0] ?? "", /no-item/);
+});
+
+test("does not choose among ambiguous curio names", async () => {
+  const knowledge = await loadCurioKnowledge();
+  const ambiguous: CurioKnowledgeBase = {
+    ...knowledge,
+    curios: knowledge.curios.map((curio, index) => ({
+      ...curio,
+      aliases: index < 2 ? [...curio.aliases, "shared"] : curio.aliases,
+    })),
+  };
+
+  const result = getCurioAdvice(ambiguous, { name: "shared" });
+  assert.equal(result.status, "ambiguous");
+  if (result.status !== "ambiguous") return;
+  assert.equal(result.candidates.length, 2);
+});
+
+test("requires exactly one curio locator", async () => {
+  const knowledge = await loadCurioKnowledge();
+
+  assert.equal(getCurioAdvice(knowledge, {}).status, "invalid_request");
+  assert.equal(
+    getCurioAdvice(knowledge, {
+      curioId: "holy_fountain",
+      name: "Holy Fountain",
+    }).status,
+    "invalid_request",
+  );
+  assert.equal(
+    getCurioAdvice(knowledge, { name: "missing" }).status,
+    "not_found",
+  );
+});
