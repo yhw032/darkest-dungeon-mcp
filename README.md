@@ -60,6 +60,18 @@ npm start
 directly. `npm pack` creates an installable package exposing the
 `darkest-dungeon-mcp` executable.
 
+The executable accepts configuration directly, so MCP clients do not need to
+depend on a particular working directory or a local `.env` file:
+
+```powershell
+darkest-dungeon-mcp --save-dir "C:\path\to\profile_0" --game-dir "C:\path\to\DarkestDungeon" --decoder-jar "C:\path\to\DDSaveEditor.jar"
+```
+
+Available options are `--env-file`, `--save-dir`, `--game-dir`,
+`--decoder-jar`, and `--java`. Command-line options take precedence over
+process environment variables, which take precedence over the optional `.env`
+next to the installed package. An explicitly supplied `--env-file` must exist.
+
 Without `DD_SAVE_DIR`, the server uses the checked-in decoded samples. With `DD_SAVE_DIR`, each request copies the supported save components to a temporary directory and decodes those copies. The original profile remains untouched. `DD_GAME_DIR` is only needed by `list_building_upgrades` and `list_risky_quirks`; other tools do not require it.
 
 The repository includes a project-scoped Codex configuration at `.codex/config.toml`. After installing dependencies, restart Codex or the IDE extension and check `/mcp` for the `darkest_dungeon` server. The configuration contains no personal filesystem paths; machine-specific values belong in `.env`.

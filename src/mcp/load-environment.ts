@@ -1,4 +1,10 @@
-import { resolve } from "node:path";
+import { readFileSync } from "node:fs";
+import { fileURLToPath } from "node:url";
+import { parseEnv } from "node:util";
+
+export const defaultEnvironmentFile = fileURLToPath(
+  new URL("../../.env", import.meta.url),
+);
 
 function isMissingFile(error: unknown): boolean {
   return (
@@ -8,14 +14,14 @@ function isMissingFile(error: unknown): boolean {
   );
 }
 
-export function loadProjectEnvironment(
-  path = resolve(process.cwd(), ".env"),
-): boolean {
+export function readEnvironmentFile(
+  path = defaultEnvironmentFile,
+  required = false,
+): NodeJS.ProcessEnv | undefined {
   try {
-    process.loadEnvFile(path);
-    return true;
+    return parseEnv(readFileSync(path, "utf8"));
   } catch (error) {
-    if (isMissingFile(error)) return false;
+    if (!required && isMissingFile(error)) return undefined;
     throw error;
   }
 }

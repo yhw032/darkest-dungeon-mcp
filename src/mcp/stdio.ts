@@ -4,17 +4,17 @@ import { serveStdio } from "@modelcontextprotocol/server/stdio";
 
 import { createDarkestDungeonServer } from "./create-server.js";
 import { createConfiguredDataSource } from "./data-source.js";
-import { loadProjectEnvironment } from "./load-environment.js";
+import { resolveRuntimeConfiguration } from "./runtime-options.js";
 
-loadProjectEnvironment();
-const dataSource = createConfiguredDataSource();
+const { environment } = resolveRuntimeConfiguration();
+const dataSource = createConfiguredDataSource(environment);
 
 serveStdio(
   () =>
     createDarkestDungeonServer(dataSource, {
-      ...(process.env.DD_GAME_DIR === undefined
+      ...(environment.DD_GAME_DIR === undefined
         ? {}
-        : { gameDirectory: process.env.DD_GAME_DIR }),
+        : { gameDirectory: environment.DD_GAME_DIR }),
     }),
   {
     onerror(error) {

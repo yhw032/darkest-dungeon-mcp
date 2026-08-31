@@ -8,7 +8,10 @@ import { fileURLToPath } from "node:url";
 import { promisify } from "node:util";
 
 import { Client } from "@modelcontextprotocol/client";
-import { StdioClientTransport } from "@modelcontextprotocol/client/stdio";
+import {
+  getDefaultEnvironment,
+  StdioClientTransport,
+} from "@modelcontextprotocol/client/stdio";
 
 const execFileAsync = promisify(execFile);
 const projectRoot = fileURLToPath(new URL("..", import.meta.url));
@@ -20,6 +23,11 @@ test("built stdio entrypoint completes an MCP handshake outside the project", as
     command: process.execPath,
     args: [serverPath],
     cwd: workingDirectory,
+    env: {
+      ...getDefaultEnvironment(),
+      DD_SAVE_DIR: "",
+      DD_GAME_DIR: "",
+    },
     stderr: "pipe",
   });
   const client = new Client({ name: "package-test-client", version: "1.0.0" });
