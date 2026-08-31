@@ -1,0 +1,149 @@
+{
+  "schemaVersion": 1,
+  "curios": [
+    {
+      "id": "eldritch_altar",
+      "names": { "en": "Eldritch Altar" },
+      "aliases": [],
+      "regions": ["ruins", "warrens", "weald", "cove"],
+      "dlcs": [],
+      "interactions": [
+        {
+          "item": "holy_water",
+          "recommendation": "recommended",
+          "certainty": "guaranteed",
+          "outcomes": [
+            {
+              "type": "quirk",
+              "polarity": "positive",
+              "description": "Removes one random negative quirk."
+            }
+          ]
+        }
+      ],
+      "notes": ["Select a hero who has a removable negative quirk."],
+      "sources": [
+        {
+          "title": "Official Darkest Dungeon Wiki: Quirks",
+          "url": "https://darkestdungeon.wiki.gg/wiki/Quirks",
+          "verifiedAt": "2026-08-31"
+        }
+      ]
+    },
+    {
+      "id": "holy_fountain",
+      "names": { "en": "Holy Fountain" },
+      "aliases": [],
+      "regions": ["ruins"],
+      "dlcs": [],
+      "interactions": [
+        {
+          "item": "holy_water",
+          "recommendation": "recommended",
+          "certainty": "guaranteed",
+          "outcomes": [
+            {
+              "type": "stress",
+              "polarity": "positive",
+              "description": "Reduces stress by 20."
+            },
+            {
+              "type": "health",
+              "polarity": "positive",
+              "description": "Restores 12 HP."
+            },
+            {
+              "type": "status",
+              "polarity": "positive",
+              "description": "Cures current status effects."
+            }
+          ]
+        }
+      ],
+      "notes": [],
+      "sources": [
+        {
+          "title": "Official Darkest Dungeon Wiki: Curios",
+          "url": "https://darkestdungeon.wiki.gg/wiki/Curios",
+          "verifiedAt": "2026-08-31"
+        }
+      ]
+    },
+    {
+      "id": "pile_of_scrolls",
+      "names": { "en": "Pile of Scrolls" },
+      "aliases": [],
+      "regions": ["warrens"],
+      "dlcs": [],
+      "interactions": [
+        {
+          "item": "torch",
+          "recommendation": "recommended",
+          "certainty": "guaranteed",
+          "outcomes": [
+            {
+              "type": "quirk",
+              "polarity": "positive",
+              "description": "Removes one random negative quirk."
+            }
+          ]
+        }
+      ],
+      "notes": ["Select a hero who has a removable negative quirk."],
+      "sources": [
+        {
+          "title": "Official Darkest Dungeon Wiki: Quirks",
+          "url": "https://darkestdungeon.wiki.gg/wiki/Quirks",
+          "verifiedAt": "2026-08-31"
+        }
+      ]
+    },
+    {
+      "id": "shamblers_altar",
+      "names": { "en": "Shambler's Altar" },
+      "aliases": ["Shambler Altar"],
+      "regions": ["ruins", "warrens", "weald", "cove"],
+      "dlcs": [],
+      "interactions": [
+        {
+          "item": "torch",
+          "recommendation": "situational",
+          "certainty": "guaranteed",
+          "outcomes": [
+            {
+              "type": "combat",
+              "polarity": "negative",
+              "description": "Summons the Shambler and sets torchlight to zero."
+            }
+          ],
+          "note": "Only activate when deliberately prepared to fight the Shambler."
+        },
+        {
+          "item": null,
+          "recommendation": "avoid",
+          "certainty": "guaranteed",
+          "outcomes": [
+            {
+              "type": "nothing",
+              "polarity": "neutral",
+              "description": "Touching the altar without an item has no effect."
+            }
+          ]
+        }
+      ],
+      "notes": ["The summoned fight begins at zero torchlight."],
+      "sources": [
+        {
+          "title": "Official Darkest Dungeon Wiki: Shambler",
+          "url": "https://darkestdungeon.wiki.gg/wiki/Shambler",
+          "verifiedAt": "2026-08-31"
+        },
+        {
+          "title": "Official Darkest Dungeon Wiki: Curios",
+          "url": "https://darkestdungeon.wiki.gg/wiki/Curios",
+          "verifiedAt": "2026-08-31"
+        }
+      ]
+    }
+  ]
+}
