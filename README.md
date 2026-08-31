@@ -72,9 +72,15 @@ Available options are `--env-file`, `--save-dir`, `--game-dir`,
 process environment variables, which take precedence over the optional `.env`
 next to the installed package. An explicitly supplied `--env-file` must exist.
 
+See [MCP client configuration](docs/CLIENT_CONFIGURATION.md) for complete,
+cwd-independent examples for Codex, Claude Code, Claude Desktop, Google
+Antigravity, OpenClaw, and generic stdio clients.
+
 Without `DD_SAVE_DIR`, the server uses the checked-in decoded samples. With `DD_SAVE_DIR`, each request copies the supported save components to a temporary directory and decodes those copies. The original profile remains untouched. `DD_GAME_DIR` is only needed by `list_building_upgrades` and `list_risky_quirks`; other tools do not require it.
 
 The repository includes a project-scoped Codex configuration at `.codex/config.toml`. After installing dependencies, restart Codex or the IDE extension and check `/mcp` for the `darkest_dungeon` server. The configuration contains no personal filesystem paths; machine-specific values belong in `.env`.
+For installed or cross-client use, prefer the command-line options documented
+above instead of relying on that development configuration.
 
 ## MCP tools
 

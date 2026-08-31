@@ -67,6 +67,7 @@ test("npm package contains the runtime, knowledge, samples, and notices", async 
       "dist/mcp/stdio.js",
       "data/knowledge/curios.json",
       "data/knowledge/quirk-treatment.json",
+      "docs/CLIENT_CONFIGURATION.md",
       "samples/roster-decoded.json",
       ".env.example",
       "tools/README.md",

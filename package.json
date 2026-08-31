@@ -9,6 +9,7 @@
   "files": [
     "dist",
     "data",
+    "docs",
     "samples",
     "tools/README.md",
     ".env.example"
