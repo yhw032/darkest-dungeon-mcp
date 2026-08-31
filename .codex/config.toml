@@ -1,8 +1,8 @@
 [mcp_servers.darkest_dungeon]
-command = "npm"
-args = ["run", "mcp"]
+command = "node"
+args = ["--import", "tsx", "src/mcp/stdio.ts"]
 cwd = "."
 startup_timeout_sec = 20
 tool_timeout_sec = 120
-required = true
+required = false
 default_tools_approval_mode = "auto"
