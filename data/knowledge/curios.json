@@ -819,6 +819,352 @@
       ]
     },
     {
+      "id": "beast_carcass",
+      "names": { "en": "Beast Carcass" },
+      "aliases": [],
+      "regions": ["weald"],
+      "dlcs": [],
+      "interactions": [
+        {
+          "item": "medicinal_herbs",
+          "recommendation": "recommended",
+          "certainty": "guaranteed",
+          "outcomes": [
+            { "type": "loot", "polarity": "positive", "description": "Provides two food rolls." }
+          ]
+        },
+        {
+          "item": null,
+          "recommendation": "avoid",
+          "certainty": "possible",
+          "outcomes": [
+            { "type": "loot", "polarity": "positive", "description": "Provides one food roll.", "chancePercent": 42.9 },
+            { "type": "disease", "polarity": "negative", "description": "Inflicts a random disease.", "chancePercent": 19 },
+            { "type": "disease", "polarity": "negative", "description": "Inflicts Rabies.", "chancePercent": 9.5 },
+            { "type": "quirk", "polarity": "negative", "description": "Inflicts the Zoophobia quirk.", "chancePercent": 14.3 },
+            { "type": "nothing", "polarity": "neutral", "description": "Nothing happens.", "chancePercent": 14.3 }
+          ]
+        }
+      ],
+      "notes": [],
+      "sources": [
+        {
+          "title": "Official Darkest Dungeon Wiki: Curio data module",
+          "url": "https://darkestdungeon.wiki.gg/wiki/Module:Curios/Data",
+          "verifiedAt": "2026-08-31"
+        }
+      ]
+    },
+    {
+      "id": "eerie_spiderweb",
+      "names": { "en": "Eerie Spiderweb" },
+      "aliases": ["Cosmic Spiderweb"],
+      "regions": ["weald"],
+      "dlcs": [],
+      "interactions": [
+        {
+          "item": "bandage",
+          "recommendation": "recommended",
+          "certainty": "guaranteed",
+          "outcomes": [
+            { "type": "loot", "polarity": "positive", "description": "Provides two gold or gem rolls and one gem or trinket roll." }
+          ]
+        },
+        {
+          "item": null,
+          "recommendation": "situational",
+          "certainty": "possible",
+          "outcomes": [
+            { "type": "loot", "polarity": "positive", "description": "Provides one gold or gem roll and one gem or trinket roll.", "chancePercent": 40 },
+            { "type": "quirk", "polarity": "negative", "description": "Inflicts the Slow Reflexes quirk.", "chancePercent": 10 },
+            { "type": "quirk", "polarity": "negative", "description": "Inflicts the Slowdraw quirk.", "chancePercent": 10 },
+            { "type": "nothing", "polarity": "neutral", "description": "Nothing happens.", "chancePercent": 40 }
+          ]
+        }
+      ],
+      "notes": [],
+      "sources": [
+        {
+          "title": "Official Darkest Dungeon Wiki: Curio data module",
+          "url": "https://darkestdungeon.wiki.gg/wiki/Module:Curios/Data",
+          "verifiedAt": "2026-08-31"
+        }
+      ]
+    },
+    {
+      "id": "left_luggage",
+      "names": { "en": "Left Luggage" },
+      "aliases": ["Lost Luggage"],
+      "regions": ["weald"],
+      "dlcs": [],
+      "interactions": [
+        {
+          "item": "skeleton_key",
+          "recommendation": "recommended",
+          "certainty": "guaranteed",
+          "outcomes": [
+            { "type": "loot", "polarity": "positive", "description": "Provides three rolls from the unrestricted loot table." }
+          ]
+        },
+        {
+          "item": "antivenom",
+          "recommendation": "recommended",
+          "certainty": "guaranteed",
+          "outcomes": [
+            { "type": "loot", "polarity": "positive", "description": "Provides three rolls from the unrestricted loot table." }
+          ]
+        },
+        {
+          "item": null,
+          "recommendation": "avoid",
+          "certainty": "possible",
+          "outcomes": [
+            { "type": "loot", "polarity": "positive", "description": "Provides four rolls from the unrestricted loot table and a journal entry.", "chancePercent": 50 },
+            { "type": "status", "polarity": "negative", "description": "Inflicts blight.", "chancePercent": 50 }
+          ]
+        }
+      ],
+      "notes": ["Skeleton Key and Antivenom produce the same guaranteed loot quantity."],
+      "sources": [
+        {
+          "title": "Official Darkest Dungeon Wiki: Curio data module",
+          "url": "https://darkestdungeon.wiki.gg/wiki/Module:Curios/Data",
+          "verifiedAt": "2026-08-31"
+        }
+      ]
+    },
+    {
+      "id": "mummified_remains",
+      "names": { "en": "Mummified Remains" },
+      "aliases": [],
+      "regions": ["weald"],
+      "dlcs": [],
+      "interactions": [
+        {
+          "item": "bandage",
+          "recommendation": "recommended",
+          "certainty": "guaranteed",
+          "outcomes": [
+            { "type": "loot", "polarity": "positive", "description": "Provides two gold or trinket rolls." }
+          ]
+        },
+        {
+          "item": null,
+          "recommendation": "avoid",
+          "certainty": "possible",
+          "outcomes": [
+            { "type": "loot", "polarity": "positive", "description": "Provides one gold or trinket roll.", "chancePercent": 40 },
+            { "type": "status", "polarity": "negative", "description": "Inflicts blight.", "chancePercent": 40 },
+            { "type": "nothing", "polarity": "neutral", "description": "Nothing happens.", "chancePercent": 20 }
+          ]
+        }
+      ],
+      "notes": [],
+      "sources": [
+        {
+          "title": "Official Darkest Dungeon Wiki: Curio data module",
+          "url": "https://darkestdungeon.wiki.gg/wiki/Module:Curios/Data",
+          "verifiedAt": "2026-08-31"
+        }
+      ]
+    },
+    {
+      "id": "old_tree",
+      "names": { "en": "Old Tree" },
+      "aliases": [],
+      "regions": ["weald"],
+      "dlcs": [],
+      "interactions": [
+        {
+          "item": "antivenom",
+          "recommendation": "recommended",
+          "certainty": "guaranteed",
+          "outcomes": [
+            { "type": "loot", "polarity": "positive", "description": "Provides three rolls from the unrestricted loot table." }
+          ]
+        },
+        {
+          "item": null,
+          "recommendation": "avoid",
+          "certainty": "possible",
+          "outcomes": [
+            { "type": "loot", "polarity": "positive", "description": "Provides two rolls from the unrestricted loot table.", "chancePercent": 50 },
+            { "type": "status", "polarity": "negative", "description": "Inflicts blight.", "chancePercent": 25 },
+            { "type": "nothing", "polarity": "neutral", "description": "Nothing happens.", "chancePercent": 25 }
+          ]
+        }
+      ],
+      "notes": [],
+      "sources": [
+        {
+          "title": "Official Darkest Dungeon Wiki: Curio data module",
+          "url": "https://darkestdungeon.wiki.gg/wiki/Module:Curios/Data",
+          "verifiedAt": "2026-08-31"
+        }
+      ]
+    },
+    {
+      "id": "shallow_grave",
+      "names": { "en": "Shallow Grave" },
+      "aliases": [],
+      "regions": ["weald"],
+      "dlcs": [],
+      "interactions": [
+        {
+          "item": "shovel",
+          "recommendation": "recommended",
+          "certainty": "guaranteed",
+          "outcomes": [
+            { "type": "loot", "polarity": "positive", "description": "Provides three gem or heirloom rolls." }
+          ]
+        },
+        {
+          "item": null,
+          "recommendation": "avoid",
+          "certainty": "possible",
+          "outcomes": [
+            { "type": "status", "polarity": "negative", "description": "Inflicts blight.", "chancePercent": 50 },
+            { "type": "disease", "polarity": "negative", "description": "Inflicts a random disease.", "chancePercent": 50 }
+          ]
+        }
+      ],
+      "notes": [],
+      "sources": [
+        {
+          "title": "Official Darkest Dungeon Wiki: Curio data module",
+          "url": "https://darkestdungeon.wiki.gg/wiki/Module:Curios/Data",
+          "verifiedAt": "2026-08-31"
+        }
+      ]
+    },
+    {
+      "id": "troubling_effigy",
+      "names": { "en": "Troubling Effigy" },
+      "aliases": [],
+      "regions": ["weald"],
+      "dlcs": [],
+      "interactions": [
+        {
+          "item": "holy_water",
+          "recommendation": "recommended",
+          "certainty": "guaranteed",
+          "outcomes": [
+            { "type": "quirk", "polarity": "positive", "description": "Grants a random positive quirk." }
+          ]
+        },
+        {
+          "item": null,
+          "recommendation": "avoid",
+          "certainty": "possible",
+          "outcomes": [
+            { "type": "quirk", "polarity": "positive", "description": "Grants a random positive quirk.", "chancePercent": 18.8 },
+            { "type": "quirk", "polarity": "negative", "description": "Grants a random negative quirk.", "chancePercent": 18.8 },
+            { "type": "status", "polarity": "negative", "description": "Inflicts bleed.", "chancePercent": 18.8 },
+            { "type": "status", "polarity": "negative", "description": "Inflicts blight.", "chancePercent": 9.4 },
+            { "type": "stress", "polarity": "negative", "description": "Increases stress by 15.", "chancePercent": 9.4 },
+            { "type": "nothing", "polarity": "neutral", "description": "Nothing happens.", "chancePercent": 25 }
+          ]
+        }
+      ],
+      "notes": [],
+      "sources": [
+        {
+          "title": "Official Darkest Dungeon Wiki: Curio data module",
+          "url": "https://darkestdungeon.wiki.gg/wiki/Module:Curios/Data",
+          "verifiedAt": "2026-08-31"
+        }
+      ]
+    },
+    {
+      "id": "ancient_coffin",
+      "names": { "en": "Ancient Coffin" },
+      "aliases": [],
+      "regions": ["weald"],
+      "dlcs": [],
+      "interactions": [
+        {
+          "item": null,
+          "recommendation": "situational",
+          "certainty": "possible",
+          "outcomes": [
+            { "type": "loot", "polarity": "positive", "description": "Provides two gold or heirloom rolls.", "chancePercent": 50 },
+            { "type": "quirk", "polarity": "positive", "description": "Grants the Weald Adventurer quirk.", "chancePercent": 8.3 },
+            { "type": "quirk", "polarity": "positive", "description": "Grants the Weald Explorer quirk.", "chancePercent": 8.3 },
+            { "type": "nothing", "polarity": "neutral", "description": "Nothing happens.", "chancePercent": 33.3 }
+          ]
+        }
+      ],
+      "notes": ["No provision item changes this curio's outcomes."],
+      "sources": [
+        {
+          "title": "Official Darkest Dungeon Wiki: Curio data module",
+          "url": "https://darkestdungeon.wiki.gg/wiki/Module:Curios/Data",
+          "verifiedAt": "2026-08-31"
+        }
+      ]
+    },
+    {
+      "id": "pristine_fountain",
+      "names": { "en": "Pristine Fountain" },
+      "aliases": [],
+      "regions": ["weald"],
+      "dlcs": [],
+      "interactions": [
+        {
+          "item": "holy_water",
+          "recommendation": "recommended",
+          "certainty": "guaranteed",
+          "outcomes": [
+            { "type": "stress", "polarity": "positive", "description": "Reduces stress by 30." }
+          ]
+        },
+        {
+          "item": null,
+          "recommendation": "situational",
+          "certainty": "guaranteed",
+          "outcomes": [
+            { "type": "stress", "polarity": "positive", "description": "Reduces stress by 20." }
+          ]
+        }
+      ],
+      "notes": [],
+      "sources": [
+        {
+          "title": "Official Darkest Dungeon Wiki: Curio data module",
+          "url": "https://darkestdungeon.wiki.gg/wiki/Module:Curios/Data",
+          "verifiedAt": "2026-08-31"
+        }
+      ]
+    },
+    {
+      "id": "travelers_tent",
+      "names": { "en": "Traveler's Tent" },
+      "aliases": ["Travellers Tent", "Traveler Tent"],
+      "regions": ["weald"],
+      "dlcs": [],
+      "interactions": [
+        {
+          "item": null,
+          "recommendation": "situational",
+          "certainty": "possible",
+          "outcomes": [
+            { "type": "loot", "polarity": "positive", "description": "Provides four gold or supplies rolls, four gold or heirloom rolls, and a journal entry.", "chancePercent": 37.5 },
+            { "type": "other", "polarity": "positive", "description": "Scouts ahead.", "chancePercent": 37.5 },
+            { "type": "stress", "polarity": "negative", "description": "Increases stress by 25.", "chancePercent": 12.5 },
+            { "type": "nothing", "polarity": "neutral", "description": "Nothing happens.", "chancePercent": 12.5 }
+          ]
+        }
+      ],
+      "notes": ["No provision item changes this curio's outcomes."],
+      "sources": [
+        {
+          "title": "Official Darkest Dungeon Wiki: Curio data module",
+          "url": "https://darkestdungeon.wiki.gg/wiki/Module:Curios/Data",
+          "verifiedAt": "2026-08-31"
+        }
+      ]
+    },
+    {
       "id": "shamblers_altar",
       "names": { "en": "Shambler's Altar" },
       "aliases": ["Shambler Altar"],

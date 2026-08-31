@@ -12,6 +12,7 @@ test("searches curios by id, alias, partial name, and region", async () => {
   assert.equal(searchCurios(knowledge, { query: "eldritch_altar" })[0]?.id, "eldritch_altar");
   assert.equal(searchCurios(knowledge, { query: "Shambler Altar" })[0]?.id, "shamblers_altar");
   assert.equal(searchCurios(knowledge, { query: "Knife Rack" })[0]?.id, "rack_of_blades");
+  assert.equal(searchCurios(knowledge, { query: "Cosmic Spiderweb" })[0]?.id, "eerie_spiderweb");
   assert.deepEqual(
     searchCurios(knowledge, { query: "fountain", region: "ruins" }).map(
       (curio) => curio.id,
@@ -129,6 +130,22 @@ test("warns when a supplied provision is harmful for a curio", async () => {
   );
   assert.match(result.warnings[0] ?? "", /holy_water/);
   assert.match(result.warnings[1] ?? "", /no-item/);
+});
+
+test("selects an available alternative when multiple provisions are recommended", async () => {
+  const result = getCurioAdvice(await loadCurioKnowledge(), {
+    name: "Lost Luggage",
+    availableItems: ["Antivenom"],
+  });
+
+  assert.equal(result.status, "found");
+  if (result.status !== "found") return;
+  assert.equal(result.curio.id, "left_luggage");
+  assert.equal(result.recommendedInteraction?.item, "antivenom");
+  assert.deepEqual(
+    result.usableInteractions.map((interaction) => interaction.item),
+    ["antivenom", null],
+  );
 });
 
 test("does not choose among ambiguous curio names", async () => {
