@@ -34,9 +34,13 @@ test("MCP server advertises and executes read-only game tools", async (t) => {
   const expectedHero = state.roster.heroes[0];
   const expectedQuest = state.quests.quests[0];
   const expectedStoredTrinket = state.estate.trinkets[0];
+  const riskyHero = state.roster.heroes.find((hero) => hero.quirks.length > 0);
+  const riskyQuirk = riskyHero?.quirks[0];
   assert.ok(expectedHero);
   assert.ok(expectedQuest);
   assert.ok(expectedStoredTrinket);
+  assert.ok(riskyHero);
+  assert.ok(riskyQuirk);
 
   const server = createDarkestDungeonServer(dataSource, {
     loadBuildingUpgradeTrees: async () => [
@@ -52,6 +56,43 @@ test("MCP server advertises and executes read-only game tools", async (t) => {
         ],
       },
     ],
+    loadQuirkDefinitions: async () => [
+      {
+        id: riskyQuirk.id,
+        isPositive: false,
+        isDisease: false,
+        classification: "mental",
+        incompatibleQuirks: [],
+        curioTag: "All",
+        curioTagChance: 0.2,
+        keepsLoot: false,
+        canModifyInActivity: true,
+        canBeReplacedByNewQuirk: true,
+        effects: [],
+        unresolvedBuffIds: [],
+        localization: {
+          english: { name: "Risky test quirk", description: "Test risk" },
+          korean: { name: "위험 테스트 기벽", description: "테스트 위험" },
+        },
+      },
+    ],
+    loadQuirkTreatmentKnowledge: async () => ({
+      schemaVersion: 1,
+      policy: {
+        title: "Test treatment policy",
+        disclaimer: "Editorial guidance for MCP integration tests.",
+      },
+      rules: [
+        {
+          quirkId: riskyQuirk.id,
+          priority: "high",
+          factors: ["forced_curio_interaction"],
+          reasons: ["May force a curio interaction."],
+          notes: [],
+          sources: [{ title: "Fixture", reference: "test" }],
+        },
+      ],
+    }),
   });
   const client = new Client({ name: "mcp-test-client", version: "1.0.0" });
   const [clientTransport, serverTransport] = InMemoryTransport.createLinkedPair();
@@ -69,6 +110,8 @@ test("MCP server advertises and executes read-only game tools", async (t) => {
   assert.match(instructions ?? "", /get_curio_advice/);
   assert.match(instructions ?? "", /never invent curio effects/);
   assert.match(instructions ?? "", /do not infer it from estate storage/);
+  assert.match(instructions ?? "", /list_risky_quirks/);
+  assert.match(instructions ?? "", /editorial guidance/);
 
   const { tools } = await client.listTools();
   assert.deepEqual(
@@ -82,6 +125,7 @@ test("MCP server advertises and executes read-only game tools", async (t) => {
       "list_building_upgrades",
       "list_heroes",
       "list_quests",
+      "list_risky_quirks",
       "list_trinkets",
       "search_curios",
     ],
@@ -121,6 +165,25 @@ test("MCP server advertises and executes read-only game tools", async (t) => {
     },
     isComplete: false,
   });
+
+  const riskyResult = await client.callTool({
+    name: "list_risky_quirks",
+    arguments: { heroId: riskyHero.id },
+  });
+  const riskyContent = riskyResult.structuredContent as
+    | Record<string, unknown>
+    | undefined;
+  assert.deepEqual(riskyContent?.policy, {
+    title: "Test treatment policy",
+    disclaimer: "Editorial guidance for MCP integration tests.",
+  });
+  const riskyHeroes = riskyContent?.heroes;
+  assert.ok(Array.isArray(riskyHeroes));
+  assert.equal(riskyHeroes.length, 1);
+  assert.equal(
+    (riskyHeroes[0] as { heroId?: unknown } | undefined)?.heroId,
+    riskyHero.id,
+  );
 
   const listResult = await client.callTool({
     name: "list_heroes",

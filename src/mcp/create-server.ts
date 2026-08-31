@@ -3,7 +3,11 @@ import { z } from "zod";
 
 import type { BuildingUpgradeTree } from "../domain/building-upgrades.js";
 import type { CurioKnowledgeBase } from "../domain/curio-knowledge.js";
+import type { QuirkDefinition } from "../domain/quirk-definitions.js";
+import type { QuirkTreatmentKnowledgeBase } from "../domain/quirk-treatment-knowledge.js";
 import { loadCurioKnowledge } from "../knowledge/load-curio-knowledge.js";
+import { loadQuirkTreatmentKnowledge } from "../knowledge/load-quirk-treatment-knowledge.js";
+import { analyzeRiskyQuirks } from "../queries/analyze-risky-quirks.js";
 import { getCurioAdvice } from "../queries/get-curio-advice.js";
 import { getGameStateSummary } from "../queries/get-game-state-summary.js";
 import { getHeroTownContext } from "../queries/get-hero-town-context.js";
@@ -13,6 +17,7 @@ import { listHeroes } from "../queries/list-heroes.js";
 import { listQuests } from "../queries/list-quests.js";
 import { searchCurios } from "../queries/search-curios.js";
 import { getTrinket, listTrinkets } from "../queries/trinkets.js";
+import { loadQuirkDefinitions } from "../quirks/load-quirk-definitions.js";
 import {
   getBuildingUpgradeProgress,
   loadBuildingUpgradeTrees,
@@ -41,12 +46,15 @@ export interface DarkestDungeonServerOptions {
   loadCurioKnowledge?: () => Promise<CurioKnowledgeBase>;
   gameDirectory?: string;
   loadBuildingUpgradeTrees?: () => Promise<BuildingUpgradeTree[]>;
+  loadQuirkDefinitions?: () => Promise<QuirkDefinition[]>;
+  loadQuirkTreatmentKnowledge?: () => Promise<QuirkTreatmentKnowledgeBase>;
 }
 
 export const serverInstructions = [
   "This read-only server provides normalized Darkest Dungeon 1 save state and verified gameplay knowledge.",
   "Use save-state tools for facts about the current campaign instead of guessing.",
   "Use list_building_upgrades for verified building upgrade progress and next costs.",
+  "Use list_risky_quirks for treatment-priority questions, and present its policy as editorial guidance rather than an absolute game value.",
   "For curio questions, call search_curios when the identity is uncertain, then call get_curio_advice.",
   "Treat only returned knowledge as verified; never invent curio effects, probabilities, item interactions, or localized names.",
   "The availableItems argument means expedition items explicitly supplied by the user; do not infer it from estate storage.",
@@ -93,6 +101,31 @@ export function createDarkestDungeonServer(
   const getUpgradeTrees = () => {
     upgradeTreesPromise ??= Promise.resolve().then(upgradeTreeLoader);
     return upgradeTreesPromise;
+  };
+  const quirkDefinitionLoader =
+    options.loadQuirkDefinitions ??
+    (() => {
+      const gameDirectory = options.gameDirectory?.trim();
+      if (gameDirectory === undefined || gameDirectory === "") {
+        throw new Error(
+          "Quirk definitions require DD_GAME_DIR to point to the Darkest Dungeon installation.",
+        );
+      }
+      return loadQuirkDefinitions(gameDirectory);
+    });
+  let quirkDefinitionsPromise: Promise<QuirkDefinition[]> | undefined;
+  const getQuirkDefinitions = () => {
+    quirkDefinitionsPromise ??= Promise.resolve().then(quirkDefinitionLoader);
+    return quirkDefinitionsPromise;
+  };
+  const treatmentKnowledgeLoader =
+    options.loadQuirkTreatmentKnowledge ?? loadQuirkTreatmentKnowledge;
+  let treatmentKnowledgePromise:
+    | Promise<QuirkTreatmentKnowledgeBase>
+    | undefined;
+  const getTreatmentKnowledge = () => {
+    treatmentKnowledgePromise ??= treatmentKnowledgeLoader();
+    return treatmentKnowledgePromise;
   };
   const server = new McpServer(
     { name: "darkest-dungeon-mcp", version: "1.0.0" },
@@ -143,6 +176,56 @@ export function createDarkestDungeonServer(
           buildingId === undefined || upgrade.buildingId === buildingId,
       );
       return toolResult("upgrades", upgrades);
+    },
+  );
+
+  server.registerTool(
+    "list_risky_quirks",
+    {
+      title: "List risky quirks",
+      description:
+        "Rank heroes with treatment-worthy quirks using verified game definitions and an explicit editorial priority policy.",
+      inputSchema: z.object({
+        minimumPriority: z
+          .enum(["critical", "high", "medium", "low"])
+          .default("high"),
+        lockedOnly: z.boolean().default(false),
+        heroId: z.string().min(1).optional(),
+        limit: z.number().int().min(1).max(50).default(10),
+      }),
+      outputSchema: z.object({
+        policy: z.unknown(),
+        heroes: z.array(z.unknown()),
+      }),
+      annotations: readOnlyAnnotations,
+    },
+    async ({ minimumPriority, lockedOnly, heroId, limit }) => {
+      const [state, definitions, knowledge] = await Promise.all([
+        dataSource.load(),
+        getQuirkDefinitions(),
+        getTreatmentKnowledge(),
+      ]);
+      const filters = {
+        minimumPriority,
+        lockedOnly,
+        ...(heroId === undefined ? {} : { heroId }),
+        limit,
+      };
+      const structuredContent = {
+        policy: knowledge.policy,
+        heroes: analyzeRiskyQuirks(
+          state.roster,
+          definitions,
+          knowledge,
+          filters,
+        ),
+      };
+      return {
+        content: [
+          { type: "text", text: JSON.stringify(structuredContent) },
+        ],
+        structuredContent,
+      };
     },
   );
 
