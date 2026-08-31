@@ -1,7 +1,13 @@
 import { readFile } from "node:fs/promises";
 import { fileURLToPath } from "node:url";
 
+import { DdsSaveEditorDecoder } from "../decoder/dds-save-editor.js";
+import {
+  resolveDecoderJarPath,
+  resolveJavaExecutable,
+} from "../decoder/resolve-decoder.js";
 import { loadGameState } from "../loaders/load-game-state.js";
+import { loadLiveGameState } from "../loaders/load-live-game-state.js";
 import { parseEstateJson } from "../parser/parse-estate.js";
 import { parseQuestStateJson } from "../parser/parse-quest.js";
 import { parseRosterJson } from "../parser/parse-roster.js";
@@ -36,6 +42,7 @@ const usage = `Usage:
   npm run cli -- quest <id> [-- --file <path>]
   npm run cli -- trinkets [-- --id <id> --location <storage|equipped|store> --roster-file <path> --estate-file <path> --town-file <path>]
   npm run cli -- trinket <id> [-- --roster-file <path> --estate-file <path> --town-file <path>]
+  npm run cli -- live-state -- --save-dir <profile-path> [--decoder-jar <path> --java <executable> --stress-threshold <number>]
   npm run cli -- state [-- --roster-file <path> --estate-file <path> --town-file <path> --quest-file <path> --stress-threshold <number>]`;
 
 interface ParsedArguments {
@@ -326,6 +333,37 @@ async function main(args: string[]): Promise<void> {
       const trinket = getTrinket(await loadTrinketSources(options), id);
       if (trinket === undefined) throw new Error(`Trinket not found: ${id}`);
       output = { trinket };
+      break;
+    }
+
+    case "live-state": {
+      assertKnownOptions(options, [
+        "save-dir",
+        "decoder-jar",
+        "java",
+        "stress-threshold",
+      ]);
+      if (id !== undefined || extraPositionals.length > 0) {
+        throw new Error("live-state does not accept positional arguments");
+      }
+
+      const saveDirectory = options.get("save-dir");
+      if (saveDirectory === undefined) {
+        throw new Error("live-state requires --save-dir <profile-path>");
+      }
+      const explicitJarPath = options.get("decoder-jar");
+      const jarPath = await resolveDecoderJarPath(
+        explicitJarPath === undefined
+          ? {}
+          : { explicitPath: explicitJarPath },
+      );
+      const javaExecutable = await resolveJavaExecutable(options.get("java"));
+      const decoder = new DdsSaveEditorDecoder({ jarPath, javaExecutable });
+      const gameState = await loadLiveGameState({ saveDirectory, decoder });
+      output = getGameStateSummary(
+        gameState,
+        numberOption(options, "stress-threshold"),
+      );
       break;
     }
 

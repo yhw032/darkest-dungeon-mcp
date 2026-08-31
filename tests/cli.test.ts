@@ -189,3 +189,11 @@ test("CLI gets one trinket across all locations", () => {
   );
   assert.equal(output.trinket.storeAmount, 0);
 });
+
+test("CLI requires a save directory for live state", () => {
+  const result = runCli("live-state");
+
+  assert.equal(result.status, 1);
+  assert.match(result.stderr, /live-state requires --save-dir/);
+  assert.equal(result.stdout, "");
+});
