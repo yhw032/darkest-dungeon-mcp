@@ -43,7 +43,7 @@ const usage = `Usage:
   npm run cli -- trinkets [-- --id <id> --location <storage|equipped|store> --roster-file <path> --estate-file <path> --town-file <path>]
   npm run cli -- trinket <id> [-- --roster-file <path> --estate-file <path> --town-file <path>]
   npm run cli -- live-state -- --save-dir <profile-path> [--decoder-jar <path> --java <executable> --stress-threshold <number>]
-  npm run cli -- state [-- --roster-file <path> --estate-file <path> --town-file <path> --quest-file <path> --stress-threshold <number>]`;
+  npm run cli -- state [-- --roster-file <path> --estate-file <path> --town-file <path> --quest-file <path> --upgrades-file <path> --stress-threshold <number>]`;
 
 interface ParsedArguments {
   positional: string[];
@@ -116,6 +116,9 @@ const defaultTownSamplePath = fileURLToPath(
 );
 const defaultQuestSamplePath = fileURLToPath(
   new URL("../../samples/quest-decoded.json", import.meta.url),
+);
+const defaultUpgradesSamplePath = fileURLToPath(
+  new URL("../../samples/upgrades-decoded.json", import.meta.url),
 );
 
 async function loadJson(path: string): Promise<string> {
@@ -373,6 +376,7 @@ async function main(args: string[]): Promise<void> {
         "estate-file",
         "town-file",
         "quest-file",
+        "upgrades-file",
         "stress-threshold",
       ]);
       if (id !== undefined || extraPositionals.length > 0) {
@@ -384,6 +388,8 @@ async function main(args: string[]): Promise<void> {
         estatePath: options.get("estate-file") ?? defaultEstateSamplePath,
         townPath: options.get("town-file") ?? defaultTownSamplePath,
         questPath: options.get("quest-file") ?? defaultQuestSamplePath,
+        upgradesPath:
+          options.get("upgrades-file") ?? defaultUpgradesSamplePath,
       });
       output = getGameStateSummary(
         gameState,

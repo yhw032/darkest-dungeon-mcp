@@ -19,11 +19,16 @@ export interface GameStateSummary {
     estate: number;
     town: number;
     quests: number;
+    upgrades: number;
   };
   roster: RosterSummary;
   estate: Omit<EstateResourcesSummary, "version">;
   town: Omit<TownSummary, "version">;
   quests: Omit<QuestStateSummary, "version">;
+  upgrades: {
+    totalPurchases: number;
+    purchased: number;
+  };
 }
 
 export function getGameStateSummary(
@@ -43,10 +48,17 @@ export function getGameStateSummary(
       estate: gameState.estate.version,
       town: gameState.town.version,
       quests: gameState.quests.version,
+      upgrades: gameState.upgrades.version,
     },
     roster: summarizeRoster(gameState.roster, stressThreshold),
     estate,
     town,
     quests,
+    upgrades: {
+      totalPurchases: gameState.upgrades.purchases.length,
+      purchased: gameState.upgrades.purchases.filter(
+        (purchase) => purchase.isPurchased,
+      ).length,
+    },
   };
 }

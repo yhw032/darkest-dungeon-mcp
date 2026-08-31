@@ -25,6 +25,7 @@ test("sample data source loads the checked-in game state", async () => {
   assert.ok(state.estate.resources.length > 0);
   assert.ok(state.town.buildings.length > 0);
   assert.ok(state.quests.quests.length > 0);
+  assert.ok(state.upgrades.purchases.length > 0);
 });
 
 test("MCP server advertises and executes read-only game tools", async (t) => {
@@ -37,7 +38,21 @@ test("MCP server advertises and executes read-only game tools", async (t) => {
   assert.ok(expectedQuest);
   assert.ok(expectedStoredTrinket);
 
-  const server = createDarkestDungeonServer(dataSource);
+  const server = createDarkestDungeonServer(dataSource, {
+    loadBuildingUpgradeTrees: async () => [
+      {
+        id: "guild.skill_levels",
+        hash: -166715556,
+        buildingId: "guild",
+        requirements: [
+          { code: "a", currencyCost: [{ type: "portrait", amount: 6 }] },
+          { code: "b", currencyCost: [{ type: "portrait", amount: 15 }] },
+          { code: "c", currencyCost: [{ type: "portrait", amount: 24 }] },
+          { code: "d", currencyCost: [{ type: "portrait", amount: 33 }] },
+        ],
+      },
+    ],
+  });
   const client = new Client({ name: "mcp-test-client", version: "1.0.0" });
   const [clientTransport, serverTransport] = InMemoryTransport.createLinkedPair();
 
@@ -64,6 +79,7 @@ test("MCP server advertises and executes read-only game tools", async (t) => {
       "get_hero",
       "get_quest",
       "get_trinket",
+      "list_building_upgrades",
       "list_heroes",
       "list_quests",
       "list_trinkets",
@@ -81,6 +97,30 @@ test("MCP server advertises and executes read-only game tools", async (t) => {
     | Record<string, unknown>
     | undefined;
   assert.ok(summaryContent?.gameState);
+
+  const upgradeResult = await client.callTool({
+    name: "list_building_upgrades",
+    arguments: { buildingId: "guild" },
+  });
+  const upgradeContent = upgradeResult.structuredContent as
+    | Record<string, unknown>
+    | undefined;
+  const upgrades = upgradeContent?.upgrades;
+  assert.ok(Array.isArray(upgrades));
+  assert.equal(upgrades.length, 1);
+  assert.deepEqual(upgrades[0], {
+    treeId: "guild.skill_levels",
+    buildingId: "guild",
+    purchasedCodes: ["a", "b", "c"],
+    purchasedCount: 3,
+    totalCount: 4,
+    highestPurchasedCode: "c",
+    nextRequirement: {
+      code: "d",
+      currencyCost: [{ type: "portrait", amount: 33 }],
+    },
+    isComplete: false,
+  });
 
   const listResult = await client.callTool({
     name: "list_heroes",

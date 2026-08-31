@@ -7,8 +7,16 @@ import { loadProjectEnvironment } from "./load-environment.js";
 loadProjectEnvironment();
 const dataSource = createConfiguredDataSource();
 
-serveStdio(() => createDarkestDungeonServer(dataSource), {
-  onerror(error) {
-    console.error(error);
+serveStdio(
+  () =>
+    createDarkestDungeonServer(dataSource, {
+      ...(process.env.DD_GAME_DIR === undefined
+        ? {}
+        : { gameDirectory: process.env.DD_GAME_DIR }),
+    }),
+  {
+    onerror(error) {
+      console.error(error);
+    },
   },
-});
+);

@@ -1,6 +1,7 @@
 import { McpServer } from "@modelcontextprotocol/server";
 import { z } from "zod";
 
+import type { BuildingUpgradeTree } from "../domain/building-upgrades.js";
 import type { CurioKnowledgeBase } from "../domain/curio-knowledge.js";
 import { loadCurioKnowledge } from "../knowledge/load-curio-knowledge.js";
 import { getCurioAdvice } from "../queries/get-curio-advice.js";
@@ -12,6 +13,10 @@ import { listHeroes } from "../queries/list-heroes.js";
 import { listQuests } from "../queries/list-quests.js";
 import { searchCurios } from "../queries/search-curios.js";
 import { getTrinket, listTrinkets } from "../queries/trinkets.js";
+import {
+  getBuildingUpgradeProgress,
+  loadBuildingUpgradeTrees,
+} from "../upgrades/building-upgrades.js";
 import type { GameStateDataSource } from "./data-source.js";
 
 const readOnlyAnnotations = {
@@ -34,11 +39,14 @@ const curioRegionSchema = z.enum([
 
 export interface DarkestDungeonServerOptions {
   loadCurioKnowledge?: () => Promise<CurioKnowledgeBase>;
+  gameDirectory?: string;
+  loadBuildingUpgradeTrees?: () => Promise<BuildingUpgradeTree[]>;
 }
 
 export const serverInstructions = [
   "This read-only server provides normalized Darkest Dungeon 1 save state and verified gameplay knowledge.",
   "Use save-state tools for facts about the current campaign instead of guessing.",
+  "Use list_building_upgrades for verified building upgrade progress and next costs.",
   "For curio questions, call search_curios when the identity is uncertain, then call get_curio_advice.",
   "Treat only returned knowledge as verified; never invent curio effects, probabilities, item interactions, or localized names.",
   "The availableItems argument means expedition items explicitly supplied by the user; do not infer it from estate storage.",
@@ -70,6 +78,22 @@ export function createDarkestDungeonServer(
     knowledgePromise ??= knowledgeLoader();
     return knowledgePromise;
   };
+  const upgradeTreeLoader =
+    options.loadBuildingUpgradeTrees ??
+    (() => {
+      const gameDirectory = options.gameDirectory?.trim();
+      if (gameDirectory === undefined || gameDirectory === "") {
+        throw new Error(
+          "Building upgrade definitions require DD_GAME_DIR to point to the Darkest Dungeon installation.",
+        );
+      }
+      return loadBuildingUpgradeTrees(gameDirectory);
+    });
+  let upgradeTreesPromise: Promise<BuildingUpgradeTree[]> | undefined;
+  const getUpgradeTrees = () => {
+    upgradeTreesPromise ??= Promise.resolve().then(upgradeTreeLoader);
+    return upgradeTreesPromise;
+  };
   const server = new McpServer(
     { name: "darkest-dungeon-mcp", version: "1.0.0" },
     {
@@ -95,6 +119,31 @@ export function createDarkestDungeonServer(
         "gameState",
         getGameStateSummary(await dataSource.load(), stressThreshold),
       ),
+  );
+
+  server.registerTool(
+    "list_building_upgrades",
+    {
+      title: "List building upgrade progress",
+      description:
+        "List purchased building upgrades and the next verified heirloom cost, optionally filtered by building id.",
+      inputSchema: z.object({
+        buildingId: z.string().min(1).optional(),
+      }),
+      outputSchema: z.object({ upgrades: z.array(z.unknown()) }),
+      annotations: readOnlyAnnotations,
+    },
+    async ({ buildingId }) => {
+      const [state, trees] = await Promise.all([
+        dataSource.load(),
+        getUpgradeTrees(),
+      ]);
+      const upgrades = getBuildingUpgradeProgress(state.upgrades, trees).filter(
+        (upgrade) =>
+          buildingId === undefined || upgrade.buildingId === buildingId,
+      );
+      return toolResult("upgrades", upgrades);
+    },
   );
 
   server.registerTool(

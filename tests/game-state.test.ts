@@ -20,6 +20,9 @@ const townPath = fileURLToPath(
 const questPath = fileURLToPath(
   new URL("../samples/quest-decoded.json", import.meta.url),
 );
+const upgradesPath = fileURLToPath(
+  new URL("../samples/upgrades-decoded.json", import.meta.url),
+);
 
 test("loads all save components into one game state", async () => {
   const gameState = await loadGameState({
@@ -27,6 +30,7 @@ test("loads all save components into one game state", async () => {
     estatePath,
     townPath,
     questPath,
+    upgradesPath,
   });
 
   assert.equal(gameState.roster.heroes.length, 24);
@@ -37,6 +41,7 @@ test("loads all save components into one game state", async () => {
   );
   assert.equal(gameState.town.buildings.length, 11);
   assert.equal(gameState.quests.quests.length, 11);
+  assert.equal(gameState.upgrades.purchases.length, 713);
 });
 
 test("builds a combined game-state summary", async () => {
@@ -45,6 +50,7 @@ test("builds a combined game-state summary", async () => {
     estatePath,
     townPath,
     questPath,
+    upgradesPath,
   });
   const summary = getGameStateSummary(gameState, 150);
 
@@ -53,6 +59,7 @@ test("builds a combined game-state summary", async () => {
     estate: 34,
     town: 513,
     quests: 42,
+    upgrades: 1,
   });
   assert.equal(summary.roster.totalHeroes, 24);
   assert.deepEqual(
@@ -67,6 +74,10 @@ test("builds a combined game-state summary", async () => {
   assert.equal(summary.estate.trinkets.totalAmount, 19);
   assert.equal(summary.town.availableRecruits, 9);
   assert.equal(summary.quests.totalQuests, 11);
+  assert.deepEqual(summary.upgrades, {
+    totalPurchases: 713,
+    purchased: 713,
+  });
 });
 
 test("identifies the component and path when loading fails", async () => {
@@ -80,6 +91,7 @@ test("identifies the component and path when loading fails", async () => {
       estatePath: missingEstatePath,
       townPath,
       questPath,
+      upgradesPath,
     }),
     (error) =>
       error instanceof GameStateLoadError &&

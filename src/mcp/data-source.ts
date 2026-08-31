@@ -25,6 +25,9 @@ const samplePaths = {
   questPath: fileURLToPath(
     new URL("../../samples/quest-decoded.json", import.meta.url),
   ),
+  upgradesPath: fileURLToPath(
+    new URL("../../samples/upgrades-decoded.json", import.meta.url),
+  ),
 };
 
 export class SampleGameStateDataSource implements GameStateDataSource {

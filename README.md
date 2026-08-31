@@ -26,6 +26,13 @@ Set the profile directory in `.env`:
 DD_SAVE_DIR=C:\path\to\Steam\userdata\STEAM_USER_ID\262060\remote\profile_0
 ```
 
+Set the game installation directory to enable building upgrade progress and
+cost lookup:
+
+```dotenv
+DD_GAME_DIR=C:\path\to\Steam\steamapps\common\DarkestDungeon
+```
+
 Place the decoder at `tools/DDSaveEditor.jar`, or configure another location:
 
 ```dotenv
@@ -55,6 +62,7 @@ The repository includes a project-scoped Codex configuration at `.codex/config.t
 | Tool | Purpose |
 | --- | --- |
 | `get_game_state` | Return a combined campaign summary. |
+| `list_building_upgrades` | List building upgrade progress and the next heirloom costs. |
 | `list_heroes` | Filter heroes by class, roster status, and stress. |
 | `get_hero` | Return one hero with related town activity. |
 | `list_quests` | Filter available quests. |

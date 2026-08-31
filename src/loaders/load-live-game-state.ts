@@ -11,6 +11,7 @@ const saveFiles = {
   estate: "persist.estate.json",
   town: "persist.town.json",
   quests: "persist.quest.json",
+  upgrades: "persist.upgrades.json",
 } as const;
 
 type SaveComponent = keyof typeof saveFiles;
@@ -107,6 +108,7 @@ export async function loadLiveGameState(
         estatePath: decoded.estate,
         townPath: decoded.town,
         questPath: decoded.quests,
+        upgradesPath: decoded.upgrades,
       });
     } catch (error) {
       throw new LiveGameStateError("load", undefined, error);

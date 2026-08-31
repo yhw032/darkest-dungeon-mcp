@@ -26,6 +26,9 @@ const fixtures: Record<string, string> = {
   "persist.quest.json": fileURLToPath(
     new URL("../samples/quest-decoded.json", import.meta.url),
   ),
+  "persist.upgrades.json": fileURLToPath(
+    new URL("../samples/upgrades-decoded.json", import.meta.url),
+  ),
 };
 
 class FixtureDecoder implements SaveDecoder {
@@ -111,6 +114,7 @@ test("snapshots allowed files, loads GameState, and cleans temporary data", asyn
 
     assert.equal(gameState.roster.heroes.length, 24);
     assert.equal(gameState.quests.quests.length, 11);
+    assert.equal(gameState.upgrades.purchases.length, 713);
     assert.deepEqual(
       decoder.calls.map((call) => basename(call.inputPath)),
       Object.keys(fixtures),

@@ -87,7 +87,13 @@ test("CLI reports the combined game state as JSON", () => {
 
   assert.equal(result.status, 0, result.stderr);
   const output = JSON.parse(result.stdout) as {
-    versions: { roster: number; estate: number; town: number; quests: number };
+    versions: {
+      roster: number;
+      estate: number;
+      town: number;
+      quests: number;
+      upgrades: number;
+    };
     roster: { totalHeroes: number; highStressHeroes: unknown[] };
     estate: { trinkets: { totalAmount: number } };
   };
@@ -96,6 +102,7 @@ test("CLI reports the combined game state as JSON", () => {
     estate: 34,
     town: 513,
     quests: 42,
+    upgrades: 1,
   });
   assert.equal(output.roster.totalHeroes, 24);
   assert.equal(output.roster.highStressHeroes.length, 2);
