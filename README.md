@@ -32,6 +32,8 @@ Java가 PATH 또는 `JAVA_HOME`으로 검색되지 않는 환경에서는
 - `get_game_state`: 로스터, 영지 자원, 마을, 퀘스트 요약
 - `list_heroes`: 클래스, 로스터 상태, 최대 스트레스 기준 영웅 조회
 - `get_hero`: 영웅 상세 정보와 마을 활동 정보 조회
+- `list_quests`, `get_quest`: 조건별 퀘스트 목록과 상세 정보 조회
+- `list_trinkets`, `get_trinket`: 보관함, 장착 영웅, 상점에 걸친 장신구 조회
 
 ## 검증
 
