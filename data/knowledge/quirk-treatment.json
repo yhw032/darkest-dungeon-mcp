@@ -1,0 +1,67 @@
+{
+  "schemaVersion": 1,
+  "policy": {
+    "title": "Conservative negative-quirk treatment priorities",
+    "disclaimer": "Priorities are editorial guidance, not values supplied by the game. They favor preventing forced interactions and permanent loot loss; party composition and campaign resources can change the best choice."
+  },
+  "rules": [
+    {
+      "quirkId": "kleptomaniac",
+      "priority": "critical",
+      "factors": ["forced_curio_interaction", "loot_loss"],
+      "reasons": [
+        "May force interactions with Treasure curios.",
+        "Loot taken during the forced interaction is not retained by the party."
+      ],
+      "notes": ["Treat early before the quirk becomes locked when campaign resources allow."],
+      "sources": [
+        {
+          "title": "Darkest Dungeon base quirk definition",
+          "reference": "shared/quirk/quirk_library.json#kleptomaniac"
+        }
+      ]
+    },
+    {
+      "quirkId": "egomania",
+      "priority": "high",
+      "factors": ["forced_curio_interaction", "loot_loss"],
+      "reasons": [
+        "May force interactions with Reflective curios.",
+        "Loot taken during the forced interaction is not retained by the party."
+      ],
+      "notes": [],
+      "sources": [
+        {
+          "title": "Darkest Dungeon base quirk definition",
+          "reference": "shared/quirk/quirk_library.json#egomania"
+        }
+      ]
+    },
+    {
+      "quirkId": "compulsive",
+      "priority": "high",
+      "factors": ["forced_curio_interaction"],
+      "reasons": ["May force interactions with any category of curio."],
+      "notes": ["The actual consequence depends on the curio encountered."],
+      "sources": [
+        {
+          "title": "Darkest Dungeon base quirk definition",
+          "reference": "shared/quirk/quirk_library.json#compulsive"
+        }
+      ]
+    },
+    {
+      "quirkId": "curious",
+      "priority": "high",
+      "factors": ["forced_curio_interaction"],
+      "reasons": ["May force interactions with any category of curio."],
+      "notes": ["The actual consequence depends on the curio encountered."],
+      "sources": [
+        {
+          "title": "Darkest Dungeon base quirk definition",
+          "reference": "shared/quirk/quirk_library.json#curious"
+        }
+      ]
+    }
+  ]
+}
