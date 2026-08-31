@@ -49,9 +49,16 @@ The local `.env` file and decoder JAR are ignored by Git. Environment variables 
 
 ## Running the MCP server
 
+Build and run the distributable JavaScript entrypoint:
+
 ```powershell
-npm run mcp
+npm run build
+npm start
 ```
+
+`npm run mcp` remains available for development and runs the TypeScript source
+directly. `npm pack` creates an installable package exposing the
+`darkest-dungeon-mcp` executable.
 
 Without `DD_SAVE_DIR`, the server uses the checked-in decoded samples. With `DD_SAVE_DIR`, each request copies the supported save components to a temporary directory and decodes those copies. The original profile remains untouched. `DD_GAME_DIR` is only needed by `list_building_upgrades` and `list_risky_quirks`; other tools do not require it.
 

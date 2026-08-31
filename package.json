@@ -1,16 +1,37 @@
 {
   "name": "darkest-dungeon-mcp",
   "version": "1.0.0",
-  "description": "",
+  "description": "Read-only MCP server for Darkest Dungeon 1 save data and gameplay knowledge",
   "type": "module",
+  "bin": {
+    "darkest-dungeon-mcp": "dist/mcp/stdio.js"
+  },
+  "files": [
+    "dist",
+    "data",
+    "samples",
+    "tools/README.md",
+    ".env.example"
+  ],
+  "engines": {
+    "node": ">=20.12"
+  },
   "scripts": {
+    "build": "tsc -p tsconfig.build.json",
     "dev": "tsx src/index.ts",
     "cli": "tsx src/cli/index.ts",
     "mcp": "tsx src/mcp/stdio.ts",
+    "start": "node dist/mcp/stdio.js",
+    "prepack": "npm run build",
     "typecheck": "tsc --noEmit",
-    "test": "tsx --test tests/*.test.ts"
+    "test": "npm run build && tsx --test tests/*.test.ts",
+    "test:package": "npm run build && tsx --test tests/package.test.ts"
   },
-  "keywords": [],
+  "keywords": [
+    "darkest-dungeon",
+    "mcp",
+    "model-context-protocol"
+  ],
   "author": "",
   "license": "SEE LICENSE IN LICENSE.md",
   "devDependencies": {
