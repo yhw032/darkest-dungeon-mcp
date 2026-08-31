@@ -34,6 +34,15 @@ export interface DarkestDungeonServerOptions {
   loadCurioKnowledge?: () => Promise<CurioKnowledgeBase>;
 }
 
+export const serverInstructions = [
+  "This read-only server provides normalized Darkest Dungeon 1 save state and verified gameplay knowledge.",
+  "Use save-state tools for facts about the current campaign instead of guessing.",
+  "For curio questions, call search_curios when the identity is uncertain, then call get_curio_advice.",
+  "Treat only returned knowledge as verified; never invent curio effects, probabilities, item interactions, or localized names.",
+  "The availableItems argument means expedition items explicitly supplied by the user; do not infer it from estate storage.",
+  "Keep Darkest Dungeon 1 information separate from Darkest Dungeon 2.",
+].join(" ");
+
 function toolResult(key: string, value: unknown) {
   const structuredContent = { [key]: value };
   return {
@@ -61,7 +70,10 @@ export function createDarkestDungeonServer(
   };
   const server = new McpServer(
     { name: "darkest-dungeon-mcp", version: "1.0.0" },
-    { capabilities: { tools: {} } },
+    {
+      capabilities: { tools: {} },
+      instructions: serverInstructions,
+    },
   );
 
   server.registerTool(

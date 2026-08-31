@@ -48,6 +48,13 @@ test("MCP server advertises and executes read-only game tools", async (t) => {
     await server.close();
   });
 
+  const instructions = client.getInstructions();
+  assert.match(instructions ?? "", /Darkest Dungeon 1/);
+  assert.match(instructions ?? "", /search_curios/);
+  assert.match(instructions ?? "", /get_curio_advice/);
+  assert.match(instructions ?? "", /never invent curio effects/);
+  assert.match(instructions ?? "", /do not infer it from estate storage/);
+
   const { tools } = await client.listTools();
   assert.deepEqual(
     tools.map((tool) => tool.name).sort(),
