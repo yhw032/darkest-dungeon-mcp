@@ -1,6 +1,7 @@
 import type { Hero, Roster } from "../domain/hero.js";
 import type { HeroProgressionRules } from "../domain/hero-progression.js";
 import type { Town } from "../domain/town.js";
+import type { QuestEligibility } from "../domain/quest-restrictions.js";
 import {
   getHeroAvailability,
   getResolveLevel,
@@ -28,6 +29,7 @@ export interface HeroSummary extends RawHeroSummary {
       | "roster_status_unavailable"
     >;
   };
+  questEligibility: QuestEligibility | null;
 }
 
 export interface HeroFilters {
@@ -65,6 +67,7 @@ export function toHeroSummary(
     currentHp,
     resolveLevel: getResolveLevel(resolveXp, progressionRules),
     availability: getHeroAvailability(hero, townContext),
+    questEligibility: null,
   };
 }
 

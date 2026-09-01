@@ -24,6 +24,7 @@ import type {
 import type { HeroProgressionRules } from "../domain/hero-progression.js";
 import type { QuirkDefinition } from "../domain/quirk-definitions.js";
 import type { QuirkTreatmentKnowledgeBase } from "../domain/quirk-treatment-knowledge.js";
+import type { QuestRestrictionRules } from "../domain/quest-restrictions.js";
 import { loadCurioKnowledge } from "../knowledge/load-curio-knowledge.js";
 import { loadQuirkTreatmentKnowledge } from "../knowledge/load-quirk-treatment-knowledge.js";
 import { analyzeRiskyQuirks } from "../queries/analyze-risky-quirks.js";
@@ -40,6 +41,10 @@ import { loadHeroCombatSkillPositions } from "../skills/combat-skill-positions.j
 import { analyzeHeroCombatPositions } from "../skills/analyze-combat-positions.js";
 import { getQuest } from "../queries/get-quest.js";
 import { listHeroes } from "../queries/list-heroes.js";
+import {
+  getQuestEligibility,
+  loadQuestRestrictionRules,
+} from "../quests/quest-eligibility.js";
 import { listQuests } from "../queries/list-quests.js";
 import { searchCurios } from "../queries/search-curios.js";
 import { getTrinket, listTrinkets } from "../queries/trinkets.js";
@@ -67,6 +72,7 @@ export interface DarkestDungeonServerOptions {
   loadHeroCombatSkillTrees?: () => Promise<HeroCombatSkillTree[]>;
   loadHeroCombatSkillPositions?: () => Promise<HeroCombatSkillPositionDefinition[]>;
   loadHeroProgressionRules?: () => Promise<HeroProgressionRules>;
+  loadQuestRestrictionRules?: () => Promise<QuestRestrictionRules>;
   loadQuirkDefinitions?: () => Promise<QuirkDefinition[]>;
   loadQuirkTreatmentKnowledge?: () => Promise<QuirkTreatmentKnowledgeBase>;
 }
@@ -75,6 +81,7 @@ export const serverInstructions = [
   "This read-only server provides normalized Darkest Dungeon 1 save state and verified gameplay knowledge.",
   "Use save-state tools for facts about the current campaign instead of guessing.",
   "Use resolveLevel instead of resolveXp when stating a hero level, and use availability.isAvailableForPartySelection when choosing new party members.",
+  "For a specific quest, pass questId to list_heroes or get_hero and use questEligibility instead of inferring level restrictions.",
   "In hero details, use combatSkillDetails.level for combat skill levels; rawSelectionValue is not a level.",
   "Use combatSkillDetails.usableFromPartyPositions, target, and movement for formation claims instead of relying on class stereotypes.",
   "Formation position 1 is frontmost and position 4 is rearmost for both parties.",
@@ -178,6 +185,23 @@ export function createDarkestDungeonServer(
       heroProgressionRulesLoader,
     );
     return heroProgressionRulesPromise;
+  };
+  const questRestrictionRulesLoader =
+    options.loadQuestRestrictionRules ??
+    (() => {
+      const gameDirectory = options.gameDirectory?.trim();
+      return gameDirectory === undefined || gameDirectory === ""
+        ? Promise.resolve(undefined)
+        : loadQuestRestrictionRules(gameDirectory);
+    });
+  let questRestrictionRulesPromise:
+    | Promise<QuestRestrictionRules | undefined>
+    | undefined;
+  const getQuestRestrictionRules = () => {
+    questRestrictionRulesPromise ??= Promise.resolve().then(
+      questRestrictionRulesLoader,
+    );
+    return questRestrictionRulesPromise;
   };
   const quirkDefinitionLoader =
     options.loadQuirkDefinitions ??
@@ -322,25 +346,62 @@ export function createDarkestDungeonServer(
         rosterStatus: z.number().int().optional(),
         maxStress: z.number().finite().nonnegative().optional(),
         availableOnly: z.boolean().default(false),
-      }),
+        questId: z.string().min(1).optional(),
+        eligibleOnly: z.boolean().default(false),
+      }).refine(
+        ({ questId, eligibleOnly }) => !eligibleOnly || questId !== undefined,
+        { message: "eligibleOnly requires questId." },
+      ),
       outputSchema: z.object({ heroes: z.array(heroSummarySchema) }),
       annotations: readOnlyAnnotations,
     },
-    async ({ heroClass, rosterStatus, maxStress, availableOnly }) => {
-      const [state, progressionRules] = await Promise.all([
+    async ({
+      heroClass,
+      rosterStatus,
+      maxStress,
+      availableOnly,
+      questId,
+      eligibleOnly,
+    }) => {
+      const [state, progressionRules, restrictionRules] = await Promise.all([
         dataSource.load(),
         getHeroProgressionRules(),
+        questId === undefined
+          ? Promise.resolve(undefined)
+          : getQuestRestrictionRules(),
       ]);
+      const quest = questId === undefined
+        ? undefined
+        : getQuest(state.quests, questId);
+      if (questId !== undefined && quest === undefined) {
+        return notFoundResult("Quest", questId);
+      }
       const filters = {
         ...(heroClass === undefined ? {} : { heroClass }),
         ...(rosterStatus === undefined ? {} : { rosterStatus }),
         ...(maxStress === undefined ? {} : { maxStress }),
         availableOnly,
       };
-      return toolResult(
-        "heroes",
-        listHeroes(state.roster, filters, state.town, progressionRules),
+      const heroes = listHeroes(
+        state.roster,
+        filters,
+        state.town,
+        progressionRules,
+      ).map((hero) => ({
+        ...hero,
+        questEligibility:
+          quest === undefined
+            ? null
+            : getQuestEligibility(
+                quest,
+                hero.resolveLevel,
+                restrictionRules,
+              ),
+      })).filter(
+        (hero) =>
+          !eligibleOnly || hero.questEligibility?.isEligible === true,
       );
+      return toolResult("heroes", heroes);
     },
   );
 
@@ -350,23 +411,41 @@ export function createDarkestDungeonServer(
       title: "Get hero details",
       description:
         "Return one normalized hero with verified resolve and combat skill levels when game definitions are available, party-selection availability, and current town activity context. Raw selection values are not skill levels.",
-      inputSchema: z.object({ heroId: z.string().min(1) }),
+      inputSchema: z.object({
+        heroId: z.string().min(1),
+        questId: z.string().min(1).optional(),
+      }),
       outputSchema: z.object({
         hero: heroDetailSchema,
         townContext: heroTownContextSchema,
       }),
       annotations: readOnlyAnnotations,
     },
-    async ({ heroId }) => {
-      const [state, skillTrees, skillPositions, progressionRules] = await Promise.all([
+    async ({ heroId, questId }) => {
+      const [
+        state,
+        skillTrees,
+        skillPositions,
+        progressionRules,
+        restrictionRules,
+      ] = await Promise.all([
         dataSource.load(),
         getHeroCombatSkillTrees(),
         getHeroCombatSkillPositions(),
         getHeroProgressionRules(),
+        questId === undefined
+          ? Promise.resolve(undefined)
+          : getQuestRestrictionRules(),
       ]);
       const hero = getHero(state.roster, heroId);
       if (hero === undefined) {
         return notFoundResult("Hero", heroId);
+      }
+      const quest = questId === undefined
+        ? undefined
+        : getQuest(state.quests, questId);
+      if (questId !== undefined && quest === undefined) {
+        return notFoundResult("Quest", questId);
       }
 
       const townContext = getHeroTownContext(
@@ -380,10 +459,15 @@ export function createDarkestDungeonServer(
         skillTrees,
         skillPositions,
       );
+      const resolveLevel = getResolveLevel(hero.resolveXp, progressionRules);
       const heroDetails = {
         ...hero,
-        resolveLevel: getResolveLevel(hero.resolveXp, progressionRules),
+        resolveLevel,
         availability: getHeroAvailability(hero, townContext!),
+        questEligibility:
+          quest === undefined
+            ? null
+            : getQuestEligibility(quest, resolveLevel, restrictionRules),
         combatSkillDetails,
         combatPositionAnalysis: analyzeHeroCombatPositions(combatSkillDetails),
       };

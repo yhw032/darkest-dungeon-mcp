@@ -59,6 +59,9 @@ test("MCP server advertises and executes read-only game tools", async (t) => {
     loadHeroProgressionRules: async () => ({
       resolveLevelThresholds: [0, 2, 8, 14, 24, 36, 48],
     }),
+    loadQuestRestrictionRules: async () => ({
+      maximumResolveLevelByDifficulty: [2, 2, 3, 4, 5, 99, 99],
+    }),
     loadHeroCombatSkillPositions: async () =>
       expectedHero.combatSkillSelections.map(({ id }) => ({
         heroClass: expectedHero.heroClass,
@@ -243,6 +246,28 @@ test("MCP server advertises and executes read-only game tools", async (t) => {
     ),
   );
 
+  const eligibleResult = await client.callTool({
+    name: "list_heroes",
+    arguments: { questId: expectedQuest.id, eligibleOnly: true },
+  });
+  const eligibleHeroes = (
+    eligibleResult.structuredContent as { heroes?: unknown[] } | undefined
+  )?.heroes;
+  assert.ok(Array.isArray(eligibleHeroes));
+  assert.ok(eligibleHeroes.length > 0);
+  assert.ok(
+    eligibleHeroes.every(
+      (candidate) =>
+        typeof candidate === "object" &&
+        candidate !== null &&
+        "questEligibility" in candidate &&
+        candidate.questEligibility !== null &&
+        typeof candidate.questEligibility === "object" &&
+        "isEligible" in candidate.questEligibility &&
+        candidate.questEligibility.isEligible === true,
+    ),
+  );
+
   const heroResult = await client.callTool({
     name: "get_hero",
     arguments: { heroId: expectedHero.id },
@@ -265,6 +290,7 @@ test("MCP server advertises and executes read-only game tools", async (t) => {
               ? ["assigned_to_town_activity"]
               : [],
     },
+    questEligibility: null,
     combatSkillDetails: expectedHero.combatSkillSelections.map(
       ({ id, rawSelectionValue }) => ({
         id,

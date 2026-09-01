@@ -3,6 +3,21 @@ import { z } from "zod";
 const finiteNumber = z.number().finite();
 const count = z.number().int().nonnegative();
 const nullableString = z.string().nullable();
+const questEligibilitySchema = z.object({
+  questId: z.string(),
+  questDifficulty: z.number().int().nonnegative(),
+  status: z.enum(["eligible", "ineligible", "unknown"]),
+  isEligible: z.boolean().nullable(),
+  maximumResolveLevel: z.number().int().nonnegative().nullable(),
+  reason: z
+    .enum([
+      "resolve_level_too_high",
+      "resolve_level_unavailable",
+      "restriction_rules_unavailable",
+      "quest_difficulty_undefined",
+    ])
+    .nullable(),
+});
 
 export const heroSummarySchema = z.object({
   id: z.string().describe("Stable hero identifier used by get_hero."),
@@ -35,6 +50,9 @@ export const heroSummarySchema = z.object({
       ]),
     ),
   }),
+  questEligibility: questEligibilitySchema
+    .nullable()
+    .describe("Eligibility for the requested quest; null when no questId was supplied."),
 });
 
 const questRewardItemSchema = z.object({

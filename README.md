@@ -125,8 +125,8 @@ runner through `tsx`. Tests never access the user's live save directory.
 | `get_game_state` | Return a combined campaign summary. |
 | `list_building_upgrades` | List building upgrade progress and the next heirloom costs. |
 | `list_risky_quirks` | Rank heroes with treatment-worthy quirks and explain the risks. |
-| `list_heroes` | Filter heroes by class, roster status, stress, and party-selection availability. |
-| `get_hero` | Return one hero with resolve level, availability, combat skill levels, and related town activity. |
+| `list_heroes` | Filter heroes by class, roster status, stress, party availability, and optional quest eligibility. |
+| `get_hero` | Return one hero with resolve level, availability, optional quest eligibility, combat skills, and town activity. |
 | `list_quests` | Filter available quests. |
 | `get_quest` | Return one quest by ID. |
 | `list_trinkets` | List trinkets in storage, on heroes, or in stores. |
@@ -156,7 +156,9 @@ apply an editorial viability threshold.
 Hero resolve levels are derived from the thresholds in the configured game
 installation. Hero results also report whether each hero can be newly selected
 for a party and list concrete blockers such as an existing raid or town
-assignment.
+assignment. Pass a `questId` to `list_heroes` or `get_hero` to apply the
+installed game's resolve-level restriction for that quest; `eligibleOnly` can
+then restrict `list_heroes` to eligible heroes.
 
 ## CLI examples
 
