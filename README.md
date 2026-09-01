@@ -125,8 +125,8 @@ runner through `tsx`. Tests never access the user's live save directory.
 | `get_game_state` | Return a combined campaign summary. |
 | `list_building_upgrades` | List building upgrade progress and the next heirloom costs. |
 | `list_risky_quirks` | Rank heroes with treatment-worthy quirks and explain the risks. |
-| `list_heroes` | Filter heroes by class, roster status, and stress. |
-| `get_hero` | Return one hero with combat skill levels and related town activity. |
+| `list_heroes` | Filter heroes by class, roster status, stress, and party-selection availability. |
+| `get_hero` | Return one hero with resolve level, availability, combat skill levels, and related town activity. |
 | `list_quests` | Filter available quests. |
 | `get_quest` | Return one quest by ID. |
 | `list_trinkets` | List trinkets in storage, on heroes, or in stores. |
@@ -143,6 +143,11 @@ with installed hero upgrade definitions. The raw values under
 `selected_combat_skills` only identify selection data and are never reported as
 levels. Without `--game-dir`, `get_hero` returns selected skills with
 `level: null` rather than guessing.
+
+Hero resolve levels are derived from the thresholds in the configured game
+installation. Hero results also report whether each hero can be newly selected
+for a party and list concrete blockers such as an existing raid or town
+assignment.
 
 ## CLI examples
 

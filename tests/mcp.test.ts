@@ -56,6 +56,9 @@ test("MCP server advertises and executes read-only game tools", async (t) => {
         ],
       },
     ],
+    loadHeroProgressionRules: async () => ({
+      resolveLevelThresholds: [0, 2, 8, 14, 24, 36, 48],
+    }),
     loadQuirkDefinitions: async () => [
       {
         id: riskyQuirk.id,
@@ -241,6 +244,19 @@ test("MCP server advertises and executes read-only game tools", async (t) => {
     | undefined;
   assert.deepEqual(heroContent?.hero, {
     ...expectedHero,
+    resolveLevel: expectedHero.resolveXp >= 2 ? 1 : 0,
+    availability: {
+      isAvailableForPartySelection:
+        expectedHero.rosterStatus === 0 && expectedHero.buildingName === null,
+      reasons:
+        expectedHero.rosterStatus === 1
+          ? ["already_selected_for_raid"]
+          : expectedHero.rosterStatus !== 0
+            ? ["roster_status_unavailable"]
+            : expectedHero.buildingName !== null
+              ? ["assigned_to_town_activity"]
+              : [],
+    },
     combatSkillDetails: expectedHero.combatSkillSelections.map(
       ({ id, rawSelectionValue }) => ({
         id,

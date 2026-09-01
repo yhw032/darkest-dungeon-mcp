@@ -1,4 +1,6 @@
 import type { Roster } from "../domain/hero.js";
+import type { HeroProgressionRules } from "../domain/hero-progression.js";
+import type { Town } from "../domain/town.js";
 import { type HeroSummary, toHeroSummary } from "./list-heroes.js";
 
 export interface RosterSummary {
@@ -16,6 +18,8 @@ function increment(counts: Record<string, number>, key: string): void {
 export function summarizeRoster(
   roster: Roster,
   stressThreshold = 100,
+  town?: Town,
+  progressionRules?: HeroProgressionRules,
 ): RosterSummary {
   const byClass: Record<string, number> = {};
   const byStatus: Record<string, number> = {};
@@ -28,7 +32,7 @@ export function summarizeRoster(
   const highStressHeroes = roster.heroes
     .filter((hero) => hero.stress >= stressThreshold)
     .sort((left, right) => right.stress - left.stress)
-    .map(toHeroSummary);
+    .map((hero) => toHeroSummary(hero, town, progressionRules));
 
   return {
     totalHeroes: roster.heroes.length,

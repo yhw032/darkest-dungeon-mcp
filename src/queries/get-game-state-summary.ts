@@ -1,4 +1,5 @@
 import type { GameState } from "../domain/game-state.js";
+import type { HeroProgressionRules } from "../domain/hero-progression.js";
 import {
   type EstateResourcesSummary,
   getEstateResources,
@@ -34,6 +35,7 @@ export interface GameStateSummary {
 export function getGameStateSummary(
   gameState: GameState,
   stressThreshold?: number,
+  progressionRules?: HeroProgressionRules,
 ): GameStateSummary {
   const estateSummary = getEstateResources(gameState.estate);
   const { version: _version, ...estate } = estateSummary;
@@ -50,7 +52,12 @@ export function getGameStateSummary(
       quests: gameState.quests.version,
       upgrades: gameState.upgrades.version,
     },
-    roster: summarizeRoster(gameState.roster, stressThreshold),
+    roster: summarizeRoster(
+      gameState.roster,
+      stressThreshold,
+      gameState.town,
+      progressionRules,
+    ),
     estate,
     town,
     quests,

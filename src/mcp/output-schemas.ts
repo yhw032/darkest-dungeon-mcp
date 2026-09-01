@@ -19,6 +19,22 @@ export const heroSummarySchema = z.object({
   currentHp: finiteNumber
     .nullable()
     .describe("Raw current_hp save value; null when absent. Do not assume its display unit."),
+  resolveLevel: z
+    .number()
+    .int()
+    .nonnegative()
+    .nullable()
+    .describe("Verified resolve level derived from game thresholds; null without game definitions."),
+  availability: z.object({
+    isAvailableForPartySelection: z.boolean(),
+    reasons: z.array(
+      z.enum([
+        "already_selected_for_raid",
+        "assigned_to_town_activity",
+        "roster_status_unavailable",
+      ]),
+    ),
+  }),
 });
 
 const questRewardItemSchema = z.object({

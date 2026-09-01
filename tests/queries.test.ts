@@ -71,6 +71,10 @@ test("filters heroes by class, status, and maximum stress", () => {
     listHeroes(roster, { rosterStatus: 1 }).map((hero) => hero.id),
     ["2"],
   );
+  assert.deepEqual(
+    listHeroes(roster, { availableOnly: true }).map((hero) => hero.id),
+    ["1", "3"],
+  );
 });
 
 test("gets a hero by its string id", () => {
