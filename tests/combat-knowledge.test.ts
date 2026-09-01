@@ -152,6 +152,7 @@ test("loads the checked-in combat knowledge base", async () => {
     "ruins",
     "warrens",
     "weald",
+    "cove",
   ]);
   assert.deepEqual(
     knowledge.enemies.map(({ id }) => id),
@@ -177,6 +178,14 @@ test("loads the checked-in combat knowledge base", async () => {
       "crone",
       "unclean_giant",
       "hateful_virago",
+      "pelagic_grouper",
+      "pelagic_shaman",
+      "pelagic_guardian",
+      "sea_maggot",
+      "deep_stinger",
+      "drowned_thrall",
+      "uca_major",
+      "squiffy_ghast",
     ],
   );
   assert.equal(
@@ -189,6 +198,10 @@ test("loads the checked-in combat knowledge base", async () => {
   );
   assert.equal(
     knowledge.enemies.find(({ id }) => id === "hateful_virago")?.priority,
+    "critical",
+  );
+  assert.equal(
+    knowledge.enemies.find(({ id }) => id === "drowned_thrall")?.priority,
     "critical",
   );
   assert.ok(
@@ -220,6 +233,18 @@ test("loads the checked-in combat knowledge base", async () => {
   assert.equal(wealdEnemies.length, 8);
   assert.ok(
     wealdEnemies.every(
+      ({ dangerousActions, effectiveResponses, sources }) =>
+        dangerousActions.length > 0 &&
+        effectiveResponses.length > 0 &&
+        sources.length > 0,
+    ),
+  );
+  const coveEnemies = knowledge.enemies.filter(({ regions }) =>
+    regions.includes("cove"),
+  );
+  assert.equal(coveEnemies.length, 8);
+  assert.ok(
+    coveEnemies.every(
       ({ dangerousActions, effectiveResponses, sources }) =>
         dangerousActions.length > 0 &&
         effectiveResponses.length > 0 &&

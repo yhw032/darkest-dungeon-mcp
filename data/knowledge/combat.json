@@ -167,6 +167,64 @@
         { "title": "Official Darkest Dungeon Wiki: Weald", "url": "https://darkestdungeon.wiki.gg/wiki/Weald", "verifiedAt": "2026-09-01" },
         { "title": "Official Darkest Dungeon Wiki: Enemy types", "url": "https://darkestdungeon.wiki.gg/wiki/Enemy_Types", "verifiedAt": "2026-09-01" }
       ]
+    },
+    {
+      "id": "cove",
+      "names": { "en": "Cove", "ko": "해안 만" },
+      "dlcs": [],
+      "overview": "The Cove combines high direct damage, backline stress and support, guard, stuns, and heavily protected enemies. Most Pelagic enemies resist bleed but are vulnerable to blight.",
+      "commonThreats": [
+        {
+          "id": "thrall_explosion",
+          "type": "health_damage",
+          "description": "A Drowned Thrall explodes on its second action, dealing severe health and stress damage to the entire party.",
+          "counters": ["Kill the Thrall immediately", "Stun it to delay the sequence", "Break any guard protecting it"]
+        },
+        {
+          "id": "health_and_stress_pressure",
+          "type": "other",
+          "description": "Pelagic Groupers deliver high direct damage while Shamans apply stress, buffs, and healing, forcing priorities to follow the party's current risk.",
+          "counters": ["Prioritize Groupers when health is low", "Prioritize Shamans when stress is high", "Control whichever threat cannot be killed first"]
+        },
+        {
+          "id": "guard_and_protection",
+          "type": "guard",
+          "description": "Pelagic Guardians protect dangerous allies, while Sea Maggots and Uca enemies make direct attacks inefficient through high protection.",
+          "counters": ["Blight", "Armor piercing", "Protection reduction", "Stun or break guard"]
+        },
+        {
+          "id": "stun_bleed_and_movement",
+          "type": "stun",
+          "description": "Deep Stingers and Uca enemies combine stun, bleed vulnerability, severe bleeding, and party-position disruption.",
+          "counters": ["Stun resistance", "Bandages or bleed cure", "Position-tolerant party", "Fast control"]
+        }
+      ],
+      "resistanceTendencies": [
+        { "effect": "bleed", "tendency": "high", "note": "Pelagic scales and several drowned enemies make bleed an unreliable primary plan." },
+        { "effect": "blight", "tendency": "low", "note": "Blight is broadly effective and bypasses the protection common among Cove enemies." },
+        { "effect": "stun", "tendency": "mixed", "note": "Basic Pelagics can be vulnerable, while Stingers, Thralls, large enemies, and Champion threats resist stun more strongly." },
+        { "effect": "move", "tendency": "mixed", "note": "Pulling a Shaman forward is valuable, but large enemies and higher-tier variants are harder to displace." }
+      ],
+      "recommendedCapabilities": [
+        "Apply blight reliably",
+        "Pierce or reduce protection",
+        "Break guard or stun the guarding enemy",
+        "Reach and control the enemy backline",
+        "Cure severe bleed",
+        "Resist stun and recover party positions",
+        "Exploit bonuses against Eldritch enemies"
+      ],
+      "cautions": [
+        "Do not allow a Drowned Thrall to take its second action.",
+        "Do not build the party's primary damage-over-time plan around bleed.",
+        "A Guardian protecting a Thrall can turn an otherwise simple priority target into an emergency.",
+        "Veteran and Champion expeditions require an answer to Uca Major's severe bleed and knockback.",
+        "Champion expeditions require fast control of Squiffy Ghast's party-wide stress and horror."
+      ],
+      "sources": [
+        { "title": "Official Darkest Dungeon Wiki: Cove", "url": "https://darkestdungeon.wiki.gg/wiki/Cove", "verifiedAt": "2026-09-01" },
+        { "title": "Official Darkest Dungeon Wiki: Status effects", "url": "https://darkestdungeon.wiki.gg/wiki/Status_Effects_(Darkest_Dungeon)", "verifiedAt": "2026-09-01" }
+      ]
     }
   ],
   "enemies": [
@@ -543,6 +601,150 @@
       "effectiveResponses": ["Treat her as an immediate Champion-tier priority while accounting for other lethal attackers.", "Use high-accuracy attacks and corpse clearing rather than repeated stun attempts."],
       "cautions": ["Do not create a corpse without a plan to clear it before her automatic action.", "Focusing her can still be dangerous if an Unclean Giant or marked-target attacker remains uncontrolled."],
       "sources": [{ "title": "Official Darkest Dungeon Wiki: Hateful Virago", "url": "https://darkestdungeon.wiki.gg/wiki/Hateful_Virago", "verifiedAt": "2026-09-01" }]
+    },
+    {
+      "id": "pelagic_grouper",
+      "enemyType": "common",
+      "names": { "en": "Pelagic Grouper" },
+      "aliases": ["Pelagic Widemouth", "Pelagic Piranha"],
+      "regions": ["cove"],
+      "dlcs": [],
+      "priority": "high",
+      "priorityReasons": ["It deals high direct damage for a common enemy and can pressure either half of the party.", "Groups of several Groupers can rapidly overwhelm healing capacity."],
+      "traits": ["Eldritch", "Fast direct attacker", "High bleed resistance", "Low early control resistance"],
+      "dangerousActions": [
+        { "name": "Seaward Slash", "threats": ["health_damage"], "description": "A strong attack used from the front two enemy positions against frontline heroes.", "counters": ["Stun", "Damage reduction", "Guard", "Focused damage"] },
+        { "name": "Spearfishing", "threats": ["health_damage", "movement"], "description": "Attacks backline heroes from the rear and pulls the target forward at higher difficulty.", "counters": ["Stun", "Position tolerance", "Move the Grouper to a less useful position"] }
+      ],
+      "effectiveResponses": ["Prioritize Groupers when party health is the immediate constraint.", "Use blight, stun, or debuffs against their generally low non-bleed resistances."],
+      "cautions": ["Moving a Grouper changes its targets but does not remove its high damage output."],
+      "sources": [{ "title": "Official Darkest Dungeon Wiki: Pelagic Grouper", "url": "https://darkestdungeon.wiki.gg/wiki/Pelagic_Grouper", "verifiedAt": "2026-09-01" }]
+    },
+    {
+      "id": "pelagic_shaman",
+      "enemyType": "common",
+      "names": { "en": "Pelagic Shaman" },
+      "aliases": ["Pelagic Oracle", "Pelagic Tidemaster"],
+      "regions": ["cove"],
+      "dlcs": [],
+      "priority": "high",
+      "priorityReasons": ["Stress Wave can stress two heroes at once.", "Call of the Deep and Sea Breeze increase allied damage output and undo progress through buffs and healing."],
+      "traits": ["Eldritch", "Fast backline support", "Stress dealer", "Healing and offensive buffs", "Stealth at Veteran and Champion difficulty"],
+      "dangerousActions": [
+        { "name": "Stress Wave", "threats": ["stress"], "description": "Inflicts substantial stress on one hero with a chance to hit a second target.", "counters": ["Kill or stun the Shaman", "Pull it to enemy position 1", "Stress recovery"] },
+        { "name": "Call of the Deep", "threats": ["other"], "description": "Buffs another enemy's accuracy, critical chance, and damage.", "counters": ["Disable the Shaman", "Kill the buffed attacker", "Damage reduction"] },
+        { "name": "Sea Breeze", "threats": ["healing"], "description": "Heals the lowest-health ally other than the Shaman.", "counters": ["Finish wounded enemies", "Stun or kill the Shaman", "Apply damage-over-time"] }
+      ],
+      "effectiveResponses": ["Prioritize it when stress is the party's main expedition risk.", "Pull it into enemy position 1 to force the weak Ceremonial Cut."],
+      "cautions": ["Veteran and Champion variants begin stealthed, requiring destealth, area attacks, or temporary control of their allies."],
+      "sources": [{ "title": "Official Darkest Dungeon Wiki: Pelagic Shaman", "url": "https://darkestdungeon.wiki.gg/wiki/Pelagic_Shaman", "verifiedAt": "2026-09-01" }]
+    },
+    {
+      "id": "pelagic_guardian",
+      "enemyType": "common",
+      "names": { "en": "Pelagic Guardian" },
+      "aliases": ["Pelagic Bulwark", "Pelagic Champion"],
+      "regions": ["cove"],
+      "dlcs": [],
+      "priority": "medium",
+      "priorityReasons": ["Barnacle Barrier redirects attacks from a more dangerous ally while increasing the Guardian's protection.", "Its own damage is modest, so its urgency depends on which enemy it guards."],
+      "traits": ["Eldritch", "High protection", "Slow", "Guard support", "Low blight resistance"],
+      "dangerousActions": [
+        { "name": "Barnacle Barrier", "threats": ["guard"], "description": "Guards an ally and further increases the Guardian's protection.", "counters": ["Stun the Guardian", "Break guard", "Armor piercing", "Area attacks", "Blight"] },
+        { "name": "Octocestus", "threats": ["health_damage", "bleed"], "description": "A modest frontline attack that inflicts bleed.", "counters": ["Bleed cure", "Dodge", "Control the Guardian"] }
+      ],
+      "effectiveResponses": ["Break or disable its guard before attacking a protected priority target.", "Use blight or armor piercing instead of grinding through stacked protection."],
+      "cautions": ["Its priority becomes critical when it guards a Drowned Thrall approaching The Revenge."],
+      "sources": [{ "title": "Official Darkest Dungeon Wiki: Pelagic Guardian", "url": "https://darkestdungeon.wiki.gg/wiki/Pelagic_Guardian", "verifiedAt": "2026-09-01" }]
+    },
+    {
+      "id": "sea_maggot",
+      "enemyType": "common",
+      "names": { "en": "Sea Maggot" },
+      "aliases": ["Plated Maggot", "Armored Maggot"],
+      "regions": ["cove"],
+      "dlcs": [],
+      "priority": "low",
+      "priorityReasons": ["Its extremely low speed and poor accuracy usually make it less urgent than Cove damage and stress dealers.", "Very high protection makes ordinary direct attacks inefficient despite its tiny health pool."],
+      "traits": ["Eldritch", "Extremely slow", "Very high protection", "Low health", "Disease and debuff source"],
+      "dangerousActions": [
+        { "name": "Brine", "threats": ["health_damage", "disease", "debuff"], "description": "A low-accuracy attack that may spread disease and sharply reduces dodge and speed.", "counters": ["Dodge", "Disease resistance", "Cure or outlast the debuff", "Stun"] }
+      ],
+      "effectiveResponses": ["Leave it until urgent enemies are controlled unless its debuff would expose a vulnerable hero.", "Use blight, armor piercing, or protection reduction to bypass its armor."],
+      "cautions": ["Low priority does not mean harmless when a disease or dodge debuff would compound other threats."],
+      "sources": [{ "title": "Official Darkest Dungeon Wiki: Sea Maggot", "url": "https://darkestdungeon.wiki.gg/wiki/Sea_Maggot", "verifiedAt": "2026-09-01" }]
+    },
+    {
+      "id": "deep_stinger",
+      "enemyType": "common",
+      "names": { "en": "Deep Stinger" },
+      "aliases": ["Energized Stinger", "Paralyzing Stinger"],
+      "regions": ["cove"],
+      "dlcs": [],
+      "priority": "high",
+      "priorityReasons": ["Shocker combines stun with reduced bleed resistance and may spread disease.", "Its broad targeting and speed let it set up Salty Gouge or allied bleed attacks against any hero."],
+      "traits": ["Eldritch", "Fast", "Backline enemy", "Stun and bleed setup", "Disease source", "High stun resistance"],
+      "dangerousActions": [
+        { "name": "Shocker", "threats": ["stun", "disease", "debuff", "health_damage"], "description": "Stuns any hero, may spread disease, and reduces bleed resistance.", "counters": ["Kill or move the Stinger", "Stun resistance", "Disease resistance"] },
+        { "name": "Salty Gouge", "threats": ["health_damage", "bleed", "disease", "debuff"], "description": "Inflicts bleed, may spread disease, and reduces dodge on any hero.", "counters": ["Bleed cure", "Disease resistance", "Fast focused damage"] }
+      ],
+      "effectiveResponses": ["Remove it early before Shocker enables repeated bleed pressure.", "Use blight, direct damage, debuffs, or movement rather than relying on stun."],
+      "cautions": ["It can use both skills from any enemy position, so movement disrupts formation but does not fully disable it."],
+      "sources": [{ "title": "Official Darkest Dungeon Wiki: Deep Stinger", "url": "https://darkestdungeon.wiki.gg/wiki/Deep_Stinger", "verifiedAt": "2026-09-01" }]
+    },
+    {
+      "id": "drowned_thrall",
+      "enemyType": "common",
+      "names": { "en": "Drowned Thrall" },
+      "aliases": ["Pustulant Thrall", "Bloated Thrall"],
+      "regions": ["cove"],
+      "dlcs": [],
+      "priority": "critical",
+      "priorityReasons": ["The Revenge deals massive health and stress damage to the entire party on the Thrall's second action.", "Its explosion can cause a party wipe and is dangerous from every enemy position."],
+      "traits": ["Unholy", "Eldritch", "Delayed self-destruct", "Party-wide burst", "Moderate to high stun resistance"],
+      "dangerousActions": [
+        { "name": "Gargling Grab", "threats": ["health_damage", "stress"], "description": "The Thrall's first action damages and stresses a frontline hero, signaling that The Revenge follows on its next action.", "counters": ["Kill the Thrall before its next turn", "Stun it to buy time"] },
+        { "name": "The Revenge", "threats": ["health_damage", "stress"], "description": "The Thrall self-destructs, dealing severe damage and stress to the entire party.", "counters": ["Kill it immediately", "Stun it", "Break a Guardian's protection of it"] }
+      ],
+      "effectiveResponses": ["Treat it as the default first target regardless of party health or stress.", "If it is guarded, break or stun the Guardian and keep the Thrall controlled until it can be killed."],
+      "cautions": ["Moving it does not prevent The Revenge.", "Higher-tier stun resistance makes repeated delay less reliable than killing it."],
+      "sources": [{ "title": "Official Darkest Dungeon Wiki: Drowned Thrall", "url": "https://darkestdungeon.wiki.gg/wiki/Drowned_Thrall", "verifiedAt": "2026-09-01" }]
+    },
+    {
+      "id": "uca_major",
+      "enemyType": "elite",
+      "names": { "en": "Uca Major" },
+      "aliases": ["Uca Crusher", "Uca Savage"],
+      "regions": ["cove"],
+      "dlcs": [],
+      "priority": "high",
+      "priorityReasons": ["Arterial Pinch inflicts extreme bleed while reducing healing received.", "Tidal Slam can stun and knock a frontline hero three positions backward."],
+      "traits": ["Eldritch", "Large enemy", "Veteran and Champion expeditions", "High protection", "High health", "Severe bleed and movement disruption"],
+      "dangerousActions": [
+        { "name": "Arterial Pinch", "threats": ["bleed", "debuff", "health_damage"], "description": "Applies catastrophic bleed and reduces healing received, with the effect able to stack.", "counters": ["Bandage or bleed cure immediately", "Blight or armor piercing", "Stun", "Protection reduction"] },
+        { "name": "Tidal Slam", "threats": ["health_damage", "stun", "movement"], "description": "Damages and stuns a frontline hero while knocking the target to the back.", "counters": ["Stun resistance", "Position-tolerant party", "Movement skills"] }
+      ],
+      "effectiveResponses": ["Use blight to bypass its protection and apply protection reduction when available.", "Control it while curing Arterial Pinch rather than allowing the bleed to tick or stack."],
+      "cautions": ["Its high stun resistance makes control useful but unreliable.", "A position-dependent frontline can lose several turns after Tidal Slam."],
+      "sources": [{ "title": "Official Darkest Dungeon Wiki: Uca Major", "url": "https://darkestdungeon.wiki.gg/wiki/Uca_Major", "verifiedAt": "2026-09-01" }]
+    },
+    {
+      "id": "squiffy_ghast",
+      "enemyType": "elite",
+      "names": { "en": "Squiffy Ghast" },
+      "aliases": [],
+      "regions": ["cove"],
+      "dlcs": [],
+      "priority": "critical",
+      "priorityReasons": ["Offkilter Jig inflicts heavy stress and horror on the entire party.", "Maddening Shanty adds a stress-received debuff that lasts until camp, increasing expedition-wide risk."],
+      "traits": ["Unholy", "Champion expeditions", "Fast", "High dodge", "Very high bleed and stun resistance", "Party-wide stress and horror"],
+      "dangerousActions": [
+        { "name": "Maddening Shanty", "threats": ["stress", "debuff", "movement"], "description": "Stresses one hero, increases stress received until camp, and moves the Ghast to the front; it always targets a Jester if present.", "counters": ["Kill or control the Ghast", "Stress recovery", "High accuracy", "Move it away from the front before its follow-up"] },
+        { "name": "Offkilter Jig", "threats": ["stress", "movement"], "description": "From the front, inflicts stress and horror on the entire party before moving the Ghast back.", "counters": ["Prevent its next action", "Move it out of the front", "Horror cure", "Stress recovery"] }
+      ],
+      "effectiveResponses": ["Treat it as an immediate Champion-tier priority and use high-accuracy attacks.", "Exploit its moderate move resistance to interrupt the front-to-back attack cycle when possible."],
+      "cautions": ["Repeated stun attempts are unreliable because of its high resistance.", "If only two enemies remain it may keep using Maddening Shanty instead of completing the usual cycle."],
+      "sources": [{ "title": "Official Darkest Dungeon Wiki: Squiffy Ghast", "url": "https://darkestdungeon.wiki.gg/wiki/Squiffy_Ghast", "verifiedAt": "2026-09-01" }]
     }
   ]
 }
