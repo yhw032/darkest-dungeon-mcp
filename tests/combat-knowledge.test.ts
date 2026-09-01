@@ -19,7 +19,6 @@ function validKnowledge(): unknown {
     regions: [
       {
         id: "ruins",
-        names: { en: "Ruins", ko: "폐허" },
         dlcs: [],
         overview: "An introductory region dominated by Unholy enemies.",
         commonThreats: [

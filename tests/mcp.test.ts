@@ -511,6 +511,7 @@ test("MCP server advertises and executes read-only game tools", async (t) => {
       threat: "stress",
       priority: "critical",
       scope: "enemies",
+      language: "ko",
     },
   });
   const combatQueryContent = combatQueryResult.structuredContent as
@@ -521,6 +522,20 @@ test("MCP server advertises and executes read-only game tools", async (t) => {
     combatQueryContent?.enemies?.map(({ id }) => id),
     ["drowned_thrall", "madman", "squiffy_ghast"],
   );
+
+  const localizedCombatRegionResult = await client.callTool({
+    name: "query_combat",
+    arguments: { query: "해안 만", scope: "regions", language: "ko" },
+  });
+  const localizedCombatRegionContent =
+    localizedCombatRegionResult.structuredContent as
+      | { regions?: Array<{ id?: unknown; name?: unknown }> }
+      | undefined;
+  assert.deepEqual(localizedCombatRegionContent?.regions?.[0], {
+    ...(localizedCombatRegionContent?.regions?.[0] ?? {}),
+    id: "cove",
+    name: "해안 만",
+  });
 
   const curioAdviceResult = await client.callTool({
     name: "get_curio_advice",

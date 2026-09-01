@@ -54,7 +54,6 @@ export interface RegionResistanceKnowledge {
 
 export interface RegionCombatKnowledge {
   id: CombatRegionId;
-  names: { en: string; ko?: string };
   dlcs: string[];
   overview: string;
   commonThreats: RegionThreatKnowledge[];

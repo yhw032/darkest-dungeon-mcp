@@ -117,7 +117,7 @@ export const serverInstructions = [
   "Use list_building_upgrades for verified building upgrade progress and next costs.",
   "Use list_risky_quirks for treatment-priority questions, and present its policy as editorial guidance rather than an absolute game value.",
   "Use query_classes for verified class roles, strengths, limitations, position guidance, mechanics, and party synergies instead of relying on class stereotypes.",
-  "Use query_combat for verified region and enemy priorities, dangerous actions, threat types, and counters instead of inventing combat advice.",
+  "Use query_combat for verified region and enemy priorities, dangerous actions, threat types, and counters instead of inventing combat advice; pass the user's language and display the localized region name.",
   "Class position guidance is editorial strategy knowledge; use combatSkillDetails for the current hero's exact selected-skill positions.",
   "For curio questions, call search_curios when the identity is uncertain, then call get_curio_advice.",
   "Treat only returned knowledge as verified; never invent curio effects, probabilities, item interactions, or localized names.",
@@ -838,6 +838,7 @@ export function createDarkestDungeonServer(
         threat: combatThreatSchema.optional(),
         priority: enemyPrioritySchema.optional(),
         scope: z.enum(["all", "regions", "enemies"]).default("all"),
+        language: z.enum(["en", "ko"]).default("en"),
         limit: z.number().int().min(1).max(50).default(20),
       }),
       outputSchema: z.object({
@@ -846,16 +847,21 @@ export function createDarkestDungeonServer(
       }),
       annotations: readOnlyAnnotations,
     },
-    async ({ query, region, threat, priority, scope, limit }) => {
+    async ({ query, region, threat, priority, scope, language, limit }) => {
       const filters = {
         ...(query === undefined ? {} : { query }),
         ...(region === undefined ? {} : { region }),
         ...(threat === undefined ? {} : { threat }),
         ...(priority === undefined ? {} : { priority }),
         scope,
+        language,
         limit,
       };
-      const result = queryCombatKnowledge(await getCombatKnowledge(), filters);
+      const [knowledge, localization] = await Promise.all([
+        getCombatKnowledge(),
+        getQuestLocalization(),
+      ]);
+      const result = queryCombatKnowledge(knowledge, filters, localization);
       return {
         content: [{ type: "text" as const, text: JSON.stringify(result) }],
         structuredContent: result,

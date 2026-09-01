@@ -6,6 +6,11 @@ import type {
   EnemyPriority,
   RegionCombatKnowledge,
 } from "../domain/combat-knowledge.js";
+import type {
+  QuestLanguage,
+  QuestLocalization,
+} from "../quests/localize-quest.js";
+import { localizeDungeon } from "../quests/localize-quest.js";
 import { normalizeKnowledgeTerm } from "./search-curios.js";
 
 export type CombatQueryScope = "all" | "regions" | "enemies";
@@ -17,12 +22,27 @@ export interface CombatQueryFilters {
   priority?: EnemyPriority;
   scope?: CombatQueryScope;
   limit?: number;
+  language?: QuestLanguage;
 }
 
+export type LocalizedRegionCombatKnowledge = RegionCombatKnowledge & {
+  name: string | null;
+};
+
 export interface CombatQueryResult {
-  regions: RegionCombatKnowledge[];
+  regions: LocalizedRegionCombatKnowledge[];
   enemies: EnemyCombatKnowledge[];
 }
+
+const dungeonIdByCombatRegion: Record<CombatRegionId, string> = {
+  ruins: "crypts",
+  warrens: "warrens",
+  weald: "weald",
+  cove: "cove",
+  courtyard: "courtyard",
+  farmstead: "farm",
+  darkest_dungeon: "darkestdungeon",
+};
 
 function matchScore(values: string[], query: string): number | undefined {
   const normalized = values.map(normalizeKnowledgeTerm);
@@ -48,6 +68,7 @@ function localizedNames(
 export function queryCombatKnowledge(
   knowledgeBase: CombatKnowledgeBase,
   filters: CombatQueryFilters = {},
+  localization?: QuestLocalization,
 ): CombatQueryResult {
   const query = normalizeKnowledgeTerm(filters.query ?? "");
   const scope = filters.scope ?? "all";
@@ -72,19 +93,33 @@ export function queryCombatKnowledge(
             ) {
               return [];
             }
+            const dungeonId = dungeonIdByCombatRegion[region.id];
+            const localizedRegionNames = [...(localization?.values() ?? [])]
+              .map((strings) => strings.get(`dungeon_name_${dungeonId}`))
+              .filter((name): name is string => name !== undefined);
             const score =
               query === ""
                 ? 0
-                : matchScore(localizedNames(region.id, region.names), query);
+                : matchScore(
+                    [region.id, dungeonId, ...localizedRegionNames],
+                    query,
+                  );
             return score === undefined ? [] : [{ knowledge: region, score }];
           })
           .sort(
             (left, right) =>
               left.score - right.score ||
-              left.knowledge.names.en.localeCompare(right.knowledge.names.en),
+              left.knowledge.id.localeCompare(right.knowledge.id),
           )
           .slice(0, limit)
-          .map(({ knowledge }) => knowledge);
+          .map(({ knowledge }) => ({
+            ...knowledge,
+            name: localizeDungeon(
+              dungeonIdByCombatRegion[knowledge.id],
+              filters.language ?? "en",
+              localization,
+            ).name,
+          }));
 
   const enemies =
     scope === "regions"

@@ -142,8 +142,10 @@ Class knowledge covers all 18 playable Darkest Dungeon 1 classes and all 126 com
 
 Combat knowledge currently covers Ruins, Warrens, Weald, Cove, their
 region-specific enemies, and base-game enemies shared across those regions.
-`query_combat` accepts `query`, `region`, `threat`, `priority`, and `scope`
-filters. The guidance describes qualitative priorities, dangerous actions,
+`query_combat` accepts `query`, `region`, `threat`, `priority`, `scope`, and
+`language` filters. Region display names and localized-name search come from
+the installed game's localization files when `DD_GAME_DIR` is configured.
+The guidance describes qualitative priorities, dangerous actions,
 and counters; it does not provide live turn state, exact enemy stats, bosses,
 or DLC-region coverage.
 

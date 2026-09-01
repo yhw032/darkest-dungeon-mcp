@@ -33,6 +33,25 @@ test("returns one region without unrelated enemies when scoped", async () => {
 
   assert.deepEqual(result.regions.map(({ id }) => id), ["cove"]);
   assert.deepEqual(result.enemies, []);
+  assert.equal(result.regions[0]?.name, null);
+});
+
+test("searches and displays region names from game localization", async () => {
+  const knowledge = await loadCombatKnowledge();
+  const localization = new Map([
+    ["english", new Map([["dungeon_name_crypts", "Ruins"]])],
+    ["koreana", new Map([["dungeon_name_crypts", "폐허"]])],
+  ]);
+
+  const result = queryCombatKnowledge(
+    knowledge,
+    { query: "폐허", scope: "regions", language: "ko" },
+    localization,
+  );
+
+  assert.deepEqual(result.regions.map(({ id, name }) => ({ id, name })), [
+    { id: "ruins", name: "폐허" },
+  ]);
 });
 
 test("combines region, threat, and priority enemy filters", async () => {

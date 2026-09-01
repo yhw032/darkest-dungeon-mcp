@@ -51,7 +51,6 @@ const namesSchema = z
 const regionSchema = z
   .object({
     id: regionIdSchema,
-    names: namesSchema,
     dlcs: uniqueStrings("dlcs must be unique"),
     overview: nonEmptyString,
     commonThreats: z

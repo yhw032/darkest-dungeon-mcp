@@ -413,7 +413,7 @@ const combatSourceSchema = z.object({
 });
 export const regionCombatKnowledgeSchema = z.object({
   id: combatRegionSchema,
-  names: z.object({ en: z.string(), ko: z.string().optional() }),
+  name: nullableString,
   dlcs: z.array(z.string()),
   overview: z.string(),
   commonThreats: z.array(z.object({

@@ -3,7 +3,6 @@
   "regions": [
     {
       "id": "ruins",
-      "names": { "en": "Ruins", "ko": "폐허" },
       "dlcs": [],
       "overview": "The Ruins is dominated by Unholy skeletons. Backline stress and ranged attackers are usually more urgent than the durable but low-pressure frontline defenders.",
       "commonThreats": [
@@ -57,7 +56,6 @@
     },
     {
       "id": "warrens",
-      "names": { "en": "Warrens", "ko": "사육장" },
       "dlcs": [],
       "overview": "The Warrens is dominated by Human and Beast Swinefolk. Fast backline enemies spread stress, disease, marks, and party disruption while tougher frontliners exploit the resulting openings.",
       "commonThreats": [
@@ -113,7 +111,6 @@
     },
     {
       "id": "weald",
-      "names": { "en": "Weald", "ko": "삼림지대" },
       "dlcs": [],
       "overview": "The Weald combines fast swarming enemies, durable fungal frontliners, dangerous mark synergies, and large high-damage threats. Backline support enemies often make otherwise manageable frontliners lethal.",
       "commonThreats": [
@@ -170,7 +167,6 @@
     },
     {
       "id": "cove",
-      "names": { "en": "Cove", "ko": "해안 만" },
       "dlcs": [],
       "overview": "The Cove combines high direct damage, backline stress and support, guard, stuns, and heavily protected enemies. Most Pelagic enemies resist bleed but are vulnerable to blight.",
       "commonThreats": [
