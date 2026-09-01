@@ -127,6 +127,8 @@ test("MCP server advertises and executes read-only game tools", async (t) => {
   assert.match(instructions ?? "", /list_risky_quirks/);
   assert.match(instructions ?? "", /editorial guidance/);
   assert.match(instructions ?? "", /compare_heroes/);
+  assert.match(instructions ?? "", /query_classes/);
+  assert.match(instructions ?? "", /editorial strategy knowledge/);
 
   const { tools } = await client.listTools();
   assert.deepEqual(
@@ -142,6 +144,7 @@ test("MCP server advertises and executes read-only game tools", async (t) => {
       "list_quests",
       "list_risky_quirks",
       "list_trinkets",
+      "query_classes",
       "search_curios",
     ],
   );
@@ -446,6 +449,26 @@ test("MCP server advertises and executes read-only game tools", async (t) => {
   assert.equal(
     (curios[0] as { id?: unknown } | undefined)?.id,
     "shamblers_altar",
+  );
+
+  const classQueryResult = await client.callTool({
+    name: "query_classes",
+    arguments: { query: "역병 의사", role: "blight" },
+  });
+  const classQueryContent = classQueryResult.structuredContent as
+    | Record<string, unknown>
+    | undefined;
+  const classes = classQueryContent?.classes;
+  assert.ok(Array.isArray(classes));
+  assert.equal(
+    (classes[0] as { id?: unknown } | undefined)?.id,
+    "plague_doctor",
+  );
+  assert.ok(
+    Array.isArray(
+      (classes[0] as { positionGuidance?: unknown } | undefined)
+        ?.positionGuidance,
+    ),
   );
 
   const curioAdviceResult = await client.callTool({

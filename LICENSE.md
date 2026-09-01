@@ -12,15 +12,16 @@ Permission to use, copy, modify, and/or distribute this software for any purpose
 
 THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 
-## Wiki-derived curio knowledge: CC BY-NC-SA 4.0
+## Wiki-derived knowledge: CC BY-NC-SA 4.0
 
-The contents of `data/knowledge/curios.json`, including the normalized descriptions, interaction results, source metadata, and recommendation annotations derived from those facts, are licensed under the [Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License](https://creativecommons.org/licenses/by-nc-sa/4.0/).
+The contents of `data/knowledge/curios.json` and `data/knowledge/classes.json`, including normalized descriptions, interaction results, class guidance, source metadata, and recommendation annotations derived from those facts, are licensed under the [Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License](https://creativecommons.org/licenses/by-nc-sa/4.0/).
 
 Source material:
 
 - [Official Darkest Dungeon Wiki](https://darkestdungeon.wiki.gg/), by its contributors
 - [Curio data module](https://darkestdungeon.wiki.gg/wiki/Module:Curios/Data)
 - [Curios reference](https://darkestdungeon.wiki.gg/wiki/Curios)
+- [Darkest Dungeon heroes reference](https://darkestdungeon.wiki.gg/wiki/Heroes_(Darkest_Dungeon))
 - Regional and gameplay pages identified by the `sources` property of each record
 
 The source material is also offered under CC BY-NC-SA 4.0. This project made changes by selecting, summarizing, translating where applicable, normalizing, restructuring, and adding recommendation metadata. Verification dates and direct source links are retained in each record. No endorsement by the wiki or its contributors is implied.

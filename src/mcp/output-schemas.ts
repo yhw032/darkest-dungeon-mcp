@@ -3,6 +3,47 @@ import { z } from "zod";
 const finiteNumber = z.number().finite();
 const count = z.number().int().nonnegative();
 const nullableString = z.string().nullable();
+
+const classKnowledgeSourceSchema = z.object({
+  title: z.string(),
+  url: z.string(),
+  verifiedAt: z.string(),
+});
+export const classKnowledgeSchema = z.object({
+  id: z.string(),
+  names: z.object({ en: z.string(), ko: z.string().optional() }),
+  aliases: z.array(z.string()),
+  dlcs: z.array(z.string()),
+  summary: z.string(),
+  roles: z.array(z.string()),
+  strengths: z.array(z.string()),
+  limitations: z.array(z.string()),
+  positionGuidance: z.array(
+    z.object({
+      positions: z.array(z.number().int().min(1).max(4)),
+      recommendation: z.enum([
+        "preferred",
+        "viable",
+        "situational",
+        "avoid",
+      ]),
+      reason: z.string(),
+    }),
+  ),
+  mechanics: z.array(z.object({ id: z.string(), description: z.string() })),
+  skillGuidance: z.array(
+    z.object({
+      skillId: z.string(),
+      useCases: z.array(z.string()),
+      synergies: z.array(z.string()),
+      cautions: z.array(z.string()),
+    }),
+  ),
+  partySynergies: z.array(
+    z.object({ heroClassId: z.string(), reasons: z.array(z.string()) }),
+  ),
+  sources: z.array(classKnowledgeSourceSchema),
+});
 export const questEligibilitySchema = z.object({
   questId: z.string(),
   questDifficulty: z.number().int().nonnegative(),

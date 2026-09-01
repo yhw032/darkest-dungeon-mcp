@@ -131,6 +131,7 @@ runner through `tsx`. Tests never access the user's live save directory.
 | `list_quests` | Filter available quests. |
 | `get_quest` | Return one quest by ID. |
 | `list_trinkets` | Query all trinkets or one exact ID across storage, heroes, and stores. |
+| `query_classes` | Query verified class roles, strengths, limitations, positions, mechanics, and synergies. |
 | `search_curios` | Search verified curios by ID, name, alias, or region. |
 | `get_curio_advice` | Return item-aware interaction advice and warnings. |
 
@@ -178,7 +179,7 @@ Run the CLI without a command to print the complete command and option list.
 
 ## Knowledge data and attribution
 
-The curio knowledge in [`data/knowledge/curios.json`](data/knowledge/curios.json) is adapted from the [Official Darkest Dungeon Wiki curio data module](https://darkestdungeon.wiki.gg/wiki/Module:Curios/Data), the [curio reference](https://darkestdungeon.wiki.gg/wiki/Curios), and linked regional pages. Individual records retain their source URLs and verification dates.
+The curio knowledge in [`data/knowledge/curios.json`](data/knowledge/curios.json) and class guidance in [`data/knowledge/classes.json`](data/knowledge/classes.json) are adapted from the [Official Darkest Dungeon Wiki](https://darkestdungeon.wiki.gg/wiki/Darkest_Dungeon_Wiki). Individual records retain their source URLs and verification dates.
 
 The wiki material was summarized, normalized into a machine-readable schema, reorganized by interaction, and supplemented with clearly marked recommendation metadata. No wiki images are included. The adapted knowledge data is distributed under [Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International](https://creativecommons.org/licenses/by-nc-sa/4.0/), matching the source license. Reuse of that data must preserve attribution, remain noncommercial, indicate changes, and use the same license for adaptations.
 

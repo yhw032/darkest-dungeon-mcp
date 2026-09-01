@@ -2,6 +2,7 @@ import { McpServer } from "@modelcontextprotocol/server";
 import { z } from "zod";
 import {
   buildingUpgradeProgressSchema,
+  classKnowledgeSchema,
   curioAdviceSchema,
   curioRegionSchema,
   curioSummarySchema,
@@ -17,6 +18,7 @@ import {
 } from "./output-schemas.js";
 
 import type { BuildingUpgradeTree } from "../domain/building-upgrades.js";
+import type { ClassKnowledgeBase } from "../domain/class-knowledge.js";
 import type { CurioKnowledgeBase } from "../domain/curio-knowledge.js";
 import type {
   HeroCombatSkillPositionDefinition,
@@ -27,6 +29,7 @@ import type { QuirkDefinition } from "../domain/quirk-definitions.js";
 import type { QuirkTreatmentKnowledgeBase } from "../domain/quirk-treatment-knowledge.js";
 import type { QuestRestrictionRules } from "../domain/quest-restrictions.js";
 import { loadCurioKnowledge } from "../knowledge/load-curio-knowledge.js";
+import { loadClassKnowledge } from "../knowledge/load-class-knowledge.js";
 import { loadQuirkTreatmentKnowledge } from "../knowledge/load-quirk-treatment-knowledge.js";
 import { analyzeRiskyQuirks } from "../queries/analyze-risky-quirks.js";
 import { getCurioAdvice } from "../queries/get-curio-advice.js";
@@ -48,6 +51,7 @@ import {
   loadQuestRestrictionRules,
 } from "../quests/quest-eligibility.js";
 import { listQuests } from "../queries/list-quests.js";
+import { queryClasses } from "../queries/query-classes.js";
 import { searchCurios } from "../queries/search-curios.js";
 import { listTrinkets } from "../queries/trinkets.js";
 import { loadQuirkDefinitions } from "../quirks/load-quirk-definitions.js";
@@ -68,6 +72,7 @@ const readOnlyAnnotations = {
 } as const;
 
 export interface DarkestDungeonServerOptions {
+  loadClassKnowledge?: () => Promise<ClassKnowledgeBase>;
   loadCurioKnowledge?: () => Promise<CurioKnowledgeBase>;
   gameDirectory?: string;
   loadBuildingUpgradeTrees?: () => Promise<BuildingUpgradeTree[]>;
@@ -91,6 +96,8 @@ export const serverInstructions = [
   "Use combatPositionAnalysis for objective selected-skill position coverage; bestCoveragePartyPositions is not by itself a tactical recommendation.",
   "Use list_building_upgrades for verified building upgrade progress and next costs.",
   "Use list_risky_quirks for treatment-priority questions, and present its policy as editorial guidance rather than an absolute game value.",
+  "Use query_classes for verified class roles, strengths, limitations, position guidance, mechanics, and party synergies instead of relying on class stereotypes.",
+  "Class position guidance is editorial strategy knowledge; use combatSkillDetails for the current hero's exact selected-skill positions.",
   "For curio questions, call search_curios when the identity is uncertain, then call get_curio_advice.",
   "Treat only returned knowledge as verified; never invent curio effects, probabilities, item interactions, or localized names.",
   "The availableItems argument means expedition items explicitly supplied by the user; do not infer it from estate storage.",
@@ -116,6 +123,13 @@ export function createDarkestDungeonServer(
   dataSource: GameStateDataSource,
   options: DarkestDungeonServerOptions = {},
 ): McpServer {
+  const classKnowledgeLoader =
+    options.loadClassKnowledge ?? loadClassKnowledge;
+  let classKnowledgePromise: Promise<ClassKnowledgeBase> | undefined;
+  const getClassKnowledge = () => {
+    classKnowledgePromise ??= classKnowledgeLoader();
+    return classKnowledgePromise;
+  };
   const knowledgeLoader = options.loadCurioKnowledge ?? loadCurioKnowledge;
   let knowledgePromise: Promise<CurioKnowledgeBase> | undefined;
   const getKnowledge = () => {
@@ -695,6 +709,39 @@ export function createDarkestDungeonServer(
         ...(location === undefined ? {} : { location }),
       };
       return toolResult("trinkets", listTrinkets(state, filters));
+    },
+  );
+
+  server.registerTool(
+    "query_classes",
+    {
+      title: "Query class knowledge",
+      description:
+        "Query verified Darkest Dungeon 1 class guidance by exact id, localized name, alias, role, or DLC. Omit filters to list all covered classes.",
+      inputSchema: z.object({
+        id: z.string().min(1).optional(),
+        query: z.string().min(1).optional(),
+        role: z.string().min(1).optional(),
+        isDlc: z.boolean().optional(),
+        dlc: z.string().min(1).optional(),
+        limit: z.number().int().min(1).max(20).default(20),
+      }),
+      outputSchema: z.object({ classes: z.array(classKnowledgeSchema) }),
+      annotations: readOnlyAnnotations,
+    },
+    async ({ id, query, role, isDlc, dlc, limit }) => {
+      const filters = {
+        ...(id === undefined ? {} : { id }),
+        ...(query === undefined ? {} : { query }),
+        ...(role === undefined ? {} : { role }),
+        ...(isDlc === undefined ? {} : { isDlc }),
+        ...(dlc === undefined ? {} : { dlc }),
+        limit,
+      };
+      return toolResult(
+        "classes",
+        queryClasses(await getClassKnowledge(), filters),
+      );
     },
   );
 
