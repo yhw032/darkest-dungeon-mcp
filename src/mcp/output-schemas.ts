@@ -378,6 +378,63 @@ export const curioRegionSchema = z.enum([
   "ruins", "warrens", "weald", "cove", "courtyard", "farmstead",
   "darkest_dungeon", "old_road", "hamlet",
 ]);
+export const combatRegionSchema = z.enum([
+  "ruins", "warrens", "weald", "cove", "courtyard", "farmstead",
+  "darkest_dungeon",
+]);
+export const combatThreatSchema = z.enum([
+  "health_damage", "stress", "bleed", "blight", "disease", "stun",
+  "mark", "debuff", "movement", "guard", "summon", "stealth",
+  "healing", "other",
+]);
+export const enemyPrioritySchema = z.enum([
+  "low", "medium", "high", "critical",
+]);
+const combatSourceSchema = z.object({
+  title: z.string(),
+  url: z.string(),
+  verifiedAt: z.string(),
+});
+export const regionCombatKnowledgeSchema = z.object({
+  id: combatRegionSchema,
+  names: z.object({ en: z.string(), ko: z.string().optional() }),
+  dlcs: z.array(z.string()),
+  overview: z.string(),
+  commonThreats: z.array(z.object({
+    id: z.string(),
+    type: combatThreatSchema,
+    description: z.string(),
+    counters: z.array(z.string()),
+  })),
+  resistanceTendencies: z.array(z.object({
+    effect: z.enum(["bleed", "blight", "stun", "debuff", "move"]),
+    tendency: z.enum(["low", "mixed", "high"]),
+    note: z.string(),
+  })),
+  recommendedCapabilities: z.array(z.string()),
+  cautions: z.array(z.string()),
+  sources: z.array(combatSourceSchema),
+});
+export const enemyCombatKnowledgeSchema = z.object({
+  id: z.string(),
+  enemyType: z.enum(["common", "elite", "miniboss"]),
+  names: z.object({ en: z.string(), ko: z.string().optional() }),
+  aliases: z.array(z.string()),
+  regions: z.array(combatRegionSchema),
+  dlcs: z.array(z.string()),
+  priority: enemyPrioritySchema,
+  priorityReasons: z.array(z.string()),
+  traits: z.array(z.string()),
+  dangerousActions: z.array(z.object({
+    name: z.string(),
+    threats: z.array(combatThreatSchema),
+    description: z.string(),
+    counters: z.array(z.string()),
+  })),
+  effectiveResponses: z.array(z.string()),
+  cautions: z.array(z.string()),
+  sources: z.array(combatSourceSchema),
+});
 const availabilitySchema = z.discriminatedUnion("type", [
   z.object({ type: z.literal("standard") }),
   z.object({ type: z.literal("quest"), questIds: z.array(z.string()) }),

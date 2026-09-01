@@ -128,6 +128,7 @@ test("MCP server advertises and executes read-only game tools", async (t) => {
   assert.match(instructions ?? "", /editorial guidance/);
   assert.match(instructions ?? "", /compare_heroes/);
   assert.match(instructions ?? "", /query_classes/);
+  assert.match(instructions ?? "", /query_combat/);
   assert.match(instructions ?? "", /editorial strategy knowledge/);
 
   const { tools } = await client.listTools();
@@ -145,6 +146,7 @@ test("MCP server advertises and executes read-only game tools", async (t) => {
       "list_risky_quirks",
       "list_trinkets",
       "query_classes",
+      "query_combat",
       "search_curios",
     ],
   );
@@ -474,6 +476,24 @@ test("MCP server advertises and executes read-only game tools", async (t) => {
     (classes[0] as { skillGuidance?: unknown[] } | undefined)?.skillGuidance
       ?.length,
     7,
+  );
+
+  const combatQueryResult = await client.callTool({
+    name: "query_combat",
+    arguments: {
+      region: "cove",
+      threat: "stress",
+      priority: "critical",
+      scope: "enemies",
+    },
+  });
+  const combatQueryContent = combatQueryResult.structuredContent as
+    | { regions?: unknown[]; enemies?: Array<{ id?: unknown }> }
+    | undefined;
+  assert.deepEqual(combatQueryContent?.regions, []);
+  assert.deepEqual(
+    combatQueryContent?.enemies?.map(({ id }) => id),
+    ["drowned_thrall", "madman", "squiffy_ghast"],
   );
 
   const curioAdviceResult = await client.callTool({

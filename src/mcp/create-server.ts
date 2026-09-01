@@ -3,6 +3,8 @@ import { z } from "zod";
 import {
   buildingUpgradeProgressSchema,
   classKnowledgeSchema,
+  combatRegionSchema,
+  combatThreatSchema,
   curioAdviceSchema,
   curioRegionSchema,
   curioSummarySchema,
@@ -11,14 +13,18 @@ import {
   heroDetailSchema,
   heroSummarySchema,
   heroTownContextSchema,
+  enemyCombatKnowledgeSchema,
+  enemyPrioritySchema,
   questSchema,
   questSummarySchema,
   riskyHeroSchema,
+  regionCombatKnowledgeSchema,
   trinketRecordSchema,
 } from "./output-schemas.js";
 
 import type { BuildingUpgradeTree } from "../domain/building-upgrades.js";
 import type { ClassKnowledgeBase } from "../domain/class-knowledge.js";
+import type { CombatKnowledgeBase } from "../domain/combat-knowledge.js";
 import type { CurioKnowledgeBase } from "../domain/curio-knowledge.js";
 import type {
   HeroCombatSkillPositionDefinition,
@@ -30,6 +36,7 @@ import type { QuirkTreatmentKnowledgeBase } from "../domain/quirk-treatment-know
 import type { QuestRestrictionRules } from "../domain/quest-restrictions.js";
 import { loadCurioKnowledge } from "../knowledge/load-curio-knowledge.js";
 import { loadClassKnowledge } from "../knowledge/load-class-knowledge.js";
+import { loadCombatKnowledge } from "../knowledge/load-combat-knowledge.js";
 import { loadQuirkTreatmentKnowledge } from "../knowledge/load-quirk-treatment-knowledge.js";
 import { analyzeRiskyQuirks } from "../queries/analyze-risky-quirks.js";
 import { getCurioAdvice } from "../queries/get-curio-advice.js";
@@ -52,6 +59,7 @@ import {
 } from "../quests/quest-eligibility.js";
 import { listQuests } from "../queries/list-quests.js";
 import { queryClasses } from "../queries/query-classes.js";
+import { queryCombatKnowledge } from "../queries/query-combat.js";
 import { searchCurios } from "../queries/search-curios.js";
 import { listTrinkets } from "../queries/trinkets.js";
 import { loadQuirkDefinitions } from "../quirks/load-quirk-definitions.js";
@@ -73,6 +81,7 @@ const readOnlyAnnotations = {
 
 export interface DarkestDungeonServerOptions {
   loadClassKnowledge?: () => Promise<ClassKnowledgeBase>;
+  loadCombatKnowledge?: () => Promise<CombatKnowledgeBase>;
   loadCurioKnowledge?: () => Promise<CurioKnowledgeBase>;
   gameDirectory?: string;
   loadBuildingUpgradeTrees?: () => Promise<BuildingUpgradeTree[]>;
@@ -97,6 +106,7 @@ export const serverInstructions = [
   "Use list_building_upgrades for verified building upgrade progress and next costs.",
   "Use list_risky_quirks for treatment-priority questions, and present its policy as editorial guidance rather than an absolute game value.",
   "Use query_classes for verified class roles, strengths, limitations, position guidance, mechanics, and party synergies instead of relying on class stereotypes.",
+  "Use query_combat for verified region and enemy priorities, dangerous actions, threat types, and counters instead of inventing combat advice.",
   "Class position guidance is editorial strategy knowledge; use combatSkillDetails for the current hero's exact selected-skill positions.",
   "For curio questions, call search_curios when the identity is uncertain, then call get_curio_advice.",
   "Treat only returned knowledge as verified; never invent curio effects, probabilities, item interactions, or localized names.",
@@ -129,6 +139,13 @@ export function createDarkestDungeonServer(
   const getClassKnowledge = () => {
     classKnowledgePromise ??= classKnowledgeLoader();
     return classKnowledgePromise;
+  };
+  const combatKnowledgeLoader =
+    options.loadCombatKnowledge ?? loadCombatKnowledge;
+  let combatKnowledgePromise: Promise<CombatKnowledgeBase> | undefined;
+  const getCombatKnowledge = () => {
+    combatKnowledgePromise ??= combatKnowledgeLoader();
+    return combatKnowledgePromise;
   };
   const knowledgeLoader = options.loadCurioKnowledge ?? loadCurioKnowledge;
   let knowledgePromise: Promise<CurioKnowledgeBase> | undefined;
@@ -742,6 +759,43 @@ export function createDarkestDungeonServer(
         "classes",
         queryClasses(await getClassKnowledge(), filters),
       );
+    },
+  );
+
+  server.registerTool(
+    "query_combat",
+    {
+      title: "Query combat knowledge",
+      description:
+        "Query verified Darkest Dungeon 1 region and enemy combat guidance by localized name, region, threat type, or enemy priority. Use scope to return only regions or enemies and keep responses focused.",
+      inputSchema: z.object({
+        query: z.string().min(1).optional(),
+        region: combatRegionSchema.optional(),
+        threat: combatThreatSchema.optional(),
+        priority: enemyPrioritySchema.optional(),
+        scope: z.enum(["all", "regions", "enemies"]).default("all"),
+        limit: z.number().int().min(1).max(50).default(20),
+      }),
+      outputSchema: z.object({
+        regions: z.array(regionCombatKnowledgeSchema),
+        enemies: z.array(enemyCombatKnowledgeSchema),
+      }),
+      annotations: readOnlyAnnotations,
+    },
+    async ({ query, region, threat, priority, scope, limit }) => {
+      const filters = {
+        ...(query === undefined ? {} : { query }),
+        ...(region === undefined ? {} : { region }),
+        ...(threat === undefined ? {} : { threat }),
+        ...(priority === undefined ? {} : { priority }),
+        scope,
+        limit,
+      };
+      const result = queryCombatKnowledge(await getCombatKnowledge(), filters);
+      return {
+        content: [{ type: "text" as const, text: JSON.stringify(result) }],
+        structuredContent: result,
+      };
     },
   );
 
