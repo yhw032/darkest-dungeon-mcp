@@ -124,5 +124,26 @@ test("loads the checked-in class knowledge base", async () => {
   const knowledge = await loadClassKnowledge();
 
   assert.equal(knowledge.schemaVersion, 1);
-  assert.deepEqual(knowledge.classes, []);
+  assert.equal(knowledge.classes.length, 18);
+  assert.deepEqual(
+    knowledge.classes.map(({ id }) => id).sort(),
+    [
+      "abomination", "antiquarian", "arbalest", "bounty_hunter",
+      "crusader", "flagellant", "grave_robber", "hellion", "highwayman",
+      "houndmaster", "jester", "leper", "man_at_arms", "musketeer",
+      "occultist", "plague_doctor", "shieldbreaker", "vestal"
+    ],
+  );
+  assert.ok(
+    knowledge.classes.every(
+      ({ roles, strengths, positionGuidance, sources }) =>
+        roles.length > 0 && strengths.length > 0 &&
+        positionGuidance.length > 0 && sources.length > 0,
+    ),
+  );
+  assert.deepEqual(
+    knowledge.classes.filter(({ dlcs }) => dlcs.length > 0)
+      .map(({ id }) => id).sort(),
+    ["flagellant", "musketeer", "shieldbreaker"],
+  );
 });

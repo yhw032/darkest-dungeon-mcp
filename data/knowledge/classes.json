@@ -1,4 +1,311 @@
 {
   "schemaVersion": 1,
-  "classes": []
+  "classes": [
+    {
+      "id": "abomination",
+      "names": { "en": "Abomination", "ko": "괴인" },
+      "aliases": [], "dlcs": [],
+      "summary": "A controller and self-sustaining damage dealer who changes roles by transforming between human and beast forms.",
+      "roles": ["stun", "blight", "damage", "self_sustain"],
+      "strengths": ["Human form combines control, blight, and recovery.", "Beast form provides fast burst damage with useful reach."],
+      "limitations": ["Transforming causes party stress.", "His complete kit depends heavily on party position 2."],
+      "positionGuidance": [
+        { "positions": [2], "recommendation": "preferred", "reason": "This is the only position that preserves the complete human and beast kits." },
+        { "positions": [3], "recommendation": "viable", "reason": "Human-form control remains useful, but beast-form options are restricted." }
+      ],
+      "mechanics": [{ "id": "transformation", "description": "Transform is a free action that exchanges human control skills for beast attacks and causes stress." }],
+      "skillGuidance": [],
+      "partySynergies": [{ "heroClassId": "jester", "reasons": ["Stress healing offsets the cost of transformation."] }],
+      "sources": [{ "title": "Official Darkest Dungeon Wiki: Abomination strategy", "url": "https://darkestdungeon.wiki.gg/wiki/Abomination_(Darkest_Dungeon)/Strategy", "verifiedAt": "2026-09-01" }]
+    },
+    {
+      "id": "antiquarian",
+      "names": { "en": "Antiquarian", "ko": "유물수집상" },
+      "aliases": [], "dlcs": [],
+      "summary": "An economic and defensive support hero who increases expedition loot at the cost of direct combat power.",
+      "roles": ["economy", "dodge_support", "guard_support", "blight"],
+      "strengths": ["Enables unique antiques and larger gold stacks.", "Can stack party dodge and redirect attacks toward an ally."],
+      "limitations": ["Has low direct damage.", "Cannot replace a dedicated healer or damage dealer."],
+      "positionGuidance": [
+        { "positions": [3, 4], "recommendation": "preferred", "reason": "Back positions keep her safer while preserving defensive support." },
+        { "positions": [1, 2], "recommendation": "viable", "reason": "Her broad access tolerates shuffles, but front placement exposes a fragile hero." }
+      ],
+      "mechanics": [{ "id": "antique_loot", "description": "Her presence enables antique loot and increases the maximum size of gold stacks." }],
+      "skillGuidance": [],
+      "partySynergies": [{ "heroClassId": "highwayman", "reasons": ["Protect Me can direct attacks into an active riposte."] }],
+      "sources": [{ "title": "Official Darkest Dungeon Wiki: Antiquarian strategy", "url": "https://darkestdungeon.wiki.gg/wiki/Antiquarian_(Darkest_Dungeon)/Strategy", "verifiedAt": "2026-09-01" }]
+    },
+    {
+      "id": "arbalest",
+      "names": { "en": "Arbalest", "ko": "석궁사수" },
+      "aliases": [], "dlcs": [],
+      "summary": "A durable backline marksman who converts marks into accurate ranged damage and supplies secondary healing and debuffs.",
+      "roles": ["ranged_damage", "mark", "healing_support", "debuff"],
+      "strengths": ["Combines high accuracy with strong marked-target scaling.", "Has high health for a backliner and useful support options."],
+      "limitations": ["Most of her kit is unavailable in the front.", "Low speed favors marks established by a faster ally."],
+      "positionGuidance": [
+        { "positions": [3, 4], "recommendation": "preferred", "reason": "Her primary attacks and support skills are designed for the back ranks." },
+        { "positions": [2], "recommendation": "situational", "reason": "A faster forward-moving ally can open a back position before she acts." }
+      ],
+      "mechanics": [{ "id": "mark_payoff", "description": "Her primary shot gains substantial value against marked enemies." }],
+      "skillGuidance": [],
+      "partySynergies": [{ "heroClassId": "houndmaster", "reasons": ["Target Whistle supplies both a mark and protection reduction."] }],
+      "sources": [{ "title": "Official Darkest Dungeon Wiki: Arbalest", "url": "https://darkestdungeon.wiki.gg/wiki/Arbalest_(Darkest_Dungeon)", "verifiedAt": "2026-09-01" }]
+    },
+    {
+      "id": "bounty_hunter",
+      "names": { "en": "Bounty Hunter", "ko": "현상금 사냥꾼" },
+      "aliases": [], "dlcs": [],
+      "summary": "A flexible disruption and execution specialist who exploits marked or stunned enemies.",
+      "roles": ["damage", "mark", "stun", "movement_control"],
+      "strengths": ["Can reach and disrupt dangerous backliners.", "Deals exceptional conditional damage against marked or stunned targets."],
+      "limitations": ["Has no recovery skills.", "Different plans compete for skills, trinkets, and setup actions."],
+      "positionGuidance": [
+        { "positions": [2, 3], "recommendation": "preferred", "reason": "Middle positions preserve broad access to damage and disruption." },
+        { "positions": [1], "recommendation": "viable", "reason": "Front placement supports some attacks but narrows his reach." }
+      ],
+      "mechanics": [{ "id": "conditional_damage", "description": "Different attacks gain large bonuses against marked or stunned enemies." }],
+      "skillGuidance": [],
+      "partySynergies": [{ "heroClassId": "houndmaster", "reasons": ["The Houndmaster can establish marks before the Bounty Hunter attacks."] }],
+      "sources": [{ "title": "Official Darkest Dungeon Wiki: Bounty Hunter strategy", "url": "https://darkestdungeon.wiki.gg/wiki/Bounty_Hunter_(Darkest_Dungeon)/Strategy", "verifiedAt": "2026-09-01" }]
+    },
+    {
+      "id": "crusader",
+      "names": { "en": "Crusader", "ko": "성전사" },
+      "aliases": [], "dlcs": [],
+      "summary": "A durable generalist combining frontline damage with stuns, recovery, and a forward movement attack.",
+      "roles": ["damage", "stun", "healing_support", "stress_healing", "durability"],
+      "strengths": ["High health and broad recovery utility make him dependable.", "Can work in stationary frontlines or coordinated movement parties."],
+      "limitations": ["Very low speed often lets enemies act first.", "Direct attacks have limited reach without movement setup."],
+      "positionGuidance": [
+        { "positions": [1, 2], "recommendation": "preferred", "reason": "Front positions support his standard attacks and durable frontline role." },
+        { "positions": [3, 4], "recommendation": "situational", "reason": "Starting back is useful when intentionally cycling his forward attack." }
+      ],
+      "mechanics": [{ "id": "recovery_utility", "description": "He can restore both health and stress, though neither option replaces a specialist under pressure." }],
+      "skillGuidance": [],
+      "partySynergies": [{ "heroClassId": "highwayman", "reasons": ["Their movement patterns can cycle positions without disabling either hero."] }],
+      "sources": [{ "title": "Official Darkest Dungeon Wiki: Crusader strategy", "url": "https://darkestdungeon.wiki.gg/wiki/Crusader_(Darkest_Dungeon)/Strategy", "verifiedAt": "2026-09-01" }]
+    },
+    {
+      "id": "grave_robber",
+      "names": { "en": "Grave Robber", "ko": "도굴꾼" },
+      "aliases": [], "dlcs": [],
+      "summary": "A fast, evasive damage dealer using movement, blight interaction, and armor piercing to reach priority targets.",
+      "roles": ["damage", "movement", "blight", "armor_piercing"],
+      "strengths": ["High speed and reach help remove enemies before they act.", "Movement and armor piercing answer protected formations."],
+      "limitations": ["Low health makes failed dodge rolls dangerous.", "Movement builds require position-tolerant teammates."],
+      "positionGuidance": [
+        { "positions": [3, 4], "recommendation": "preferred", "reason": "Back positions enable her powerful forward opener and ranged options." },
+        { "positions": [2], "recommendation": "viable", "reason": "Several attacks remain available, but her movement opener needs resetting." }
+      ],
+      "mechanics": [{ "id": "blight_payoff", "description": "Some attacks gain additional damage against blighted targets." }],
+      "skillGuidance": [],
+      "partySynergies": [{ "heroClassId": "plague_doctor", "reasons": ["Reliable blight enables her conditional damage."] }],
+      "sources": [{ "title": "Official Darkest Dungeon Wiki: Grave Robber strategy", "url": "https://darkestdungeon.wiki.gg/wiki/Grave_Robber_(Darkest_Dungeon)/Strategy", "verifiedAt": "2026-09-01" }]
+    },
+    {
+      "id": "hellion",
+      "names": { "en": "Hellion", "ko": "야만인" },
+      "aliases": [], "dlcs": [],
+      "summary": "A frontline damage dealer with rare back-rank reach, bleed attacks, limited control, and self-recovery.",
+      "roles": ["damage", "bleed", "stun", "self_sustain"],
+      "strengths": ["Can strike every enemy position from the front.", "High damage and a two-target frontline stun provide strong pressure."],
+      "limitations": ["Her defining backline attack requires party position 1.", "Several powerful skills impose temporary penalties."],
+      "positionGuidance": [
+        { "positions": [1], "recommendation": "preferred", "reason": "The front enables her complete reach, including enemy position 4." },
+        { "positions": [2], "recommendation": "viable", "reason": "Most general attacks remain usable after the enemy backline is handled." }
+      ],
+      "mechanics": [{ "id": "self_debuff_attacks", "description": "Several high-impact attacks trade immediate power for temporary personal penalties." }],
+      "skillGuidance": [],
+      "partySynergies": [{ "heroClassId": "vestal", "reasons": ["Consistent healing supports an aggressive frontline build."] }],
+      "sources": [{ "title": "Official Darkest Dungeon Wiki: Hellion strategy", "url": "https://darkestdungeon.wiki.gg/wiki/Hellion_(Darkest_Dungeon)/Strategy", "verifiedAt": "2026-09-01" }]
+    },
+    {
+      "id": "highwayman",
+      "names": { "en": "Highwayman", "ko": "노상강도" },
+      "aliases": [], "dlcs": [],
+      "summary": "A mobile damage dealer with broad reach whose riposte converts enemy attacks into additional offense.",
+      "roles": ["damage", "riposte", "movement", "bleed"],
+      "strengths": ["Can attack nearly every enemy position from several party positions.", "Riposte can generate multiple extra attacks."],
+      "limitations": ["Provides almost no recovery or control.", "Riposte value depends on enemy targeting and ends when stunned."],
+      "positionGuidance": [
+        { "positions": [2, 3], "recommendation": "preferred", "reason": "Middle positions preserve ranged reach and his forward riposte attack." },
+        { "positions": [1, 4], "recommendation": "viable", "reason": "He can recover through movement, but some attacks are temporarily unavailable." }
+      ],
+      "mechanics": [{ "id": "riposte", "description": "An active riposte counterattacks enemies that target him." }],
+      "skillGuidance": [],
+      "partySynergies": [{ "heroClassId": "antiquarian", "reasons": ["Protect Me directs attacks toward riposte while improving defenses."] }],
+      "sources": [{ "title": "Official Darkest Dungeon Wiki: Highwayman strategy", "url": "https://darkestdungeon.wiki.gg/wiki/Highwayman_(Darkest_Dungeon)/Strategy", "verifiedAt": "2026-09-01" }]
+    },
+    {
+      "id": "houndmaster",
+      "names": { "en": "Houndmaster", "ko": "조련사" },
+      "aliases": ["Hound Master"], "dlcs": [],
+      "summary": "A flexible support attacker offering mark synergy, protection reduction, stress healing, guard, stun, and self-healing.",
+      "roles": ["damage", "mark", "stress_healing", "guard", "stun"],
+      "strengths": ["Can reach every enemy position and adapt to many party needs.", "Combines efficient mark setup with defensive utility."],
+      "limitations": ["Base damage is modest without bonuses.", "Stress healing and guard builds need upgrades or repeated actions."],
+      "positionGuidance": [
+        { "positions": [2, 3, 4], "recommendation": "preferred", "reason": "These positions support flexible offense, recovery, mark, and guard combinations." },
+        { "positions": [1], "recommendation": "viable", "reason": "Front placement supports his stun but restricts backline utility." }
+      ],
+      "mechanics": [{ "id": "dodge_guard", "description": "Guard Dog protects an ally while temporarily increasing the Houndmaster's dodge." }],
+      "skillGuidance": [],
+      "partySynergies": [{ "heroClassId": "arbalest", "reasons": ["His mark and protection reduction amplify her marked-target shot."] }],
+      "sources": [{ "title": "Official Darkest Dungeon Wiki: Houndmaster strategy", "url": "https://darkestdungeon.wiki.gg/wiki/Houndmaster_(Darkest_Dungeon)/Strategy", "verifiedAt": "2026-09-01" }]
+    },
+    {
+      "id": "jester",
+      "names": { "en": "Jester", "ko": "광대" },
+      "aliases": [], "dlcs": [],
+      "summary": "A fast stress healer and combat buffer who can add bleed damage or build toward a risky movement-based burst attack.",
+      "roles": ["stress_healing", "buff", "bleed", "movement", "damage"],
+      "strengths": ["Provides reliable stress recovery and a strong party buff.", "High speed lets him establish support before many enemies act."],
+      "limitations": ["Low health punishes exposed frontline turns.", "Finale play requires movement planning and sacrifices support actions."],
+      "positionGuidance": [
+        { "positions": [3, 4], "recommendation": "preferred", "reason": "Back positions safely enable stress healing and party buffs." },
+        { "positions": [2], "recommendation": "situational", "reason": "Position 2 supports bleed and movement sequences but exposes him." }
+      ],
+      "mechanics": [{ "id": "finale_setup", "description": "Movement skills build Finale damage; Finale then moves him back and imposes lasting penalties." }],
+      "skillGuidance": [],
+      "partySynergies": [{ "heroClassId": "abomination", "reasons": ["Stress healing controls the cost of transformation."] }],
+      "sources": [{ "title": "Official Darkest Dungeon Wiki: Jester strategy", "url": "https://darkestdungeon.wiki.gg/wiki/Jester_(Darkest_Dungeon)/Strategy", "verifiedAt": "2026-09-01" }]
+    },
+    {
+      "id": "leper",
+      "names": { "en": "Leper", "ko": "나병환자" },
+      "aliases": [], "dlcs": [],
+      "summary": "A self-sufficient frontline specialist with exceptional raw damage and durability but limited reach and accuracy.",
+      "roles": ["damage", "durability", "self_sustain", "debuff"],
+      "strengths": ["Very high health and melee damage dominate accessible targets.", "Strong self-recovery reduces dependence on party support."],
+      "limitations": ["Low base accuracy needs support or equipment.", "Poor backline reach and movement tolerance make shuffles dangerous."],
+      "positionGuidance": [
+        { "positions": [1, 2], "recommendation": "preferred", "reason": "His attacks and self-sustain are built around the front two positions." },
+        { "positions": [3, 4], "recommendation": "avoid", "reason": "A displaced Leper loses most offensive options." }
+      ],
+      "mechanics": [{ "id": "frontline_reach", "description": "Exceptional raw damage is balanced by attacks that primarily reach the enemy frontline." }],
+      "skillGuidance": [],
+      "partySynergies": [{ "heroClassId": "jester", "reasons": ["Accuracy buffs address the Leper's main reliability problem."] }],
+      "sources": [{ "title": "Official Darkest Dungeon Wiki: Leper strategy", "url": "https://darkestdungeon.wiki.gg/wiki/Leper_(Darkest_Dungeon)/Strategy", "verifiedAt": "2026-09-01" }]
+    },
+    {
+      "id": "man_at_arms",
+      "names": { "en": "Man-at-Arms", "ko": "중보병" },
+      "aliases": ["Man at Arms"], "dlcs": [],
+      "summary": "A defensive specialist who protects allies, buffs the party, controls the frontline, and punishes attacks with riposte.",
+      "roles": ["guard", "buff", "riposte", "stun", "debuff"],
+      "strengths": ["Guard and protection buffs protect vulnerable allies.", "Party buffs and riposte remain valuable in long fights."],
+      "limitations": ["Personal damage is modest without riposte triggers.", "Defensive actions do not immediately remove dangerous enemies."],
+      "positionGuidance": [
+        { "positions": [1, 2, 3], "recommendation": "preferred", "reason": "He remains broadly functional across front and middle positions." },
+        { "positions": [4], "recommendation": "situational", "reason": "Some support remains, but control and riposte options narrow." }
+      ],
+      "mechanics": [{ "id": "guard", "description": "Guard redirects attacks from a selected ally to the Man-at-Arms." }, { "id": "riposte", "description": "Retribution marks him and establishes a counterattack." }],
+      "skillGuidance": [],
+      "partySynergies": [{ "heroClassId": "antiquarian", "reasons": ["His guard compensates for her low durability."] }],
+      "sources": [{ "title": "Official Darkest Dungeon Wiki: Man-at-Arms strategy", "url": "https://darkestdungeon.wiki.gg/wiki/Man-at-Arms_(Darkest_Dungeon)/Strategy", "verifiedAt": "2026-09-01" }]
+    },
+    {
+      "id": "musketeer",
+      "names": { "en": "Musketeer", "ko": "총사" },
+      "aliases": [], "dlcs": ["musketeer"],
+      "summary": "A free-DLC counterpart to the Arbalest with nearly identical marked-target damage, support, and positional needs.",
+      "roles": ["ranged_damage", "mark", "healing_support", "debuff"],
+      "strengths": ["Combines high accuracy with strong marked-target scaling.", "Provides secondary healing and enemy suppression."],
+      "limitations": ["Most abilities require the back two positions.", "Her mechanics largely duplicate the Arbalest."],
+      "positionGuidance": [
+        { "positions": [3, 4], "recommendation": "preferred", "reason": "Her primary shots and support actions are designed for the backline." },
+        { "positions": [2], "recommendation": "situational", "reason": "A faster dancer may move forward and open a back position." }
+      ],
+      "mechanics": [{ "id": "arbalest_counterpart", "description": "She is mechanically almost identical to the Arbalest but has distinct names, visuals, and trinkets." }],
+      "skillGuidance": [],
+      "partySynergies": [{ "heroClassId": "houndmaster", "reasons": ["Target Whistle supplies mark setup and protection reduction."] }],
+      "sources": [{ "title": "Official Darkest Dungeon Wiki: Musketeer", "url": "https://darkestdungeon.wiki.gg/wiki/Musketeer_(Darkest_Dungeon)", "verifiedAt": "2026-09-01" }]
+    },
+    {
+      "id": "occultist",
+      "names": { "en": "Occultist", "ko": "신비학자" },
+      "aliases": [], "dlcs": [],
+      "summary": "A flexible support hero with variable healing, strong marks and debuffs, enemy movement, and a frontline stun.",
+      "roles": ["healing", "mark", "debuff", "stun", "movement_control"],
+      "strengths": ["Combines healing with mark setup, protection reduction, pulls, and stuns.", "Supports both backline and frontline control builds."],
+      "limitations": ["His heal is random and may add bleed.", "The frontline stun costs torchlight and exposes a fragile hero."],
+      "positionGuidance": [
+        { "positions": [3, 4], "recommendation": "preferred", "reason": "Back placement safely supports healing, marking, pulling, and debuffs." },
+        { "positions": [1, 2], "recommendation": "viable", "reason": "Front placement enables his strong stun but changes his support package." }
+      ],
+      "mechanics": [{ "id": "variable_heal", "description": "Wyrd Reconstruction can heal from zero to a high value and may inflict bleed." }],
+      "skillGuidance": [],
+      "partySynergies": [{ "heroClassId": "arbalest", "reasons": ["His mark enables her damage while her bandage improves later healing."] }],
+      "sources": [{ "title": "Official Darkest Dungeon Wiki: Occultist strategy", "url": "https://darkestdungeon.wiki.gg/wiki/Occultist_(Darkest_Dungeon)/Strategy", "verifiedAt": "2026-09-01" }]
+    },
+    {
+      "id": "plague_doctor",
+      "names": { "en": "Plague Doctor", "ko": "역병 의사" },
+      "aliases": [], "dlcs": [],
+      "summary": "A fast backline controller specializing in stuns, blight, corpse disruption, and bleed or blight removal.",
+      "roles": ["stun", "blight", "cleansing", "buff"],
+      "strengths": ["Can stun both enemy backliners and blight through protection.", "Battlefield Medicine removes dangerous damage-over-time effects."],
+      "limitations": ["Low direct damage struggles against blight resistance.", "Being pulled forward disables much of her kit."],
+      "positionGuidance": [
+        { "positions": [3, 4], "recommendation": "preferred", "reason": "The backline preserves multi-target control, blight, and cleansing." },
+        { "positions": [2], "recommendation": "situational", "reason": "Some options remain, but her defining tools are restricted." }
+      ],
+      "mechanics": [{ "id": "damage_over_time_cleanse", "description": "Battlefield Medicine removes bleed and blight from an ally and the Plague Doctor." }],
+      "skillGuidance": [],
+      "partySynergies": [{ "heroClassId": "grave_robber", "reasons": ["Blight enables the Grave Robber's conditional damage."] }],
+      "sources": [{ "title": "Official Darkest Dungeon Wiki: Plague Doctor strategy", "url": "https://darkestdungeon.wiki.gg/wiki/Plague_Doctor_(Darkest_Dungeon)/Strategy", "verifiedAt": "2026-09-01" }]
+    },
+    {
+      "id": "vestal",
+      "names": { "en": "Vestal", "ko": "성녀" },
+      "aliases": [], "dlcs": [],
+      "summary": "A dependable healer whose backline kit combines single-target and party recovery with stun and light support.",
+      "roles": ["healing", "stun", "light", "damage_support"],
+      "strengths": ["Provides consistent single-target and party-wide healing.", "Can contribute stuns and light when healing is unnecessary."],
+      "limitations": ["A conventional healing loadout requires the back two positions.", "Frequent healing becomes passive if the party lacks damage and control."],
+      "positionGuidance": [
+        { "positions": [3, 4], "recommendation": "preferred", "reason": "Back placement enables both primary heals and ranged support." },
+        { "positions": [2], "recommendation": "situational", "reason": "A melee build is possible but gives up conventional healing access." }
+      ],
+      "mechanics": [{ "id": "party_heal", "description": "Divine Comfort can remove multiple heroes from Death's Door with one action." }],
+      "skillGuidance": [],
+      "partySynergies": [{ "heroClassId": "hellion", "reasons": ["Stable healing lets the Hellion focus on frontline pressure."] }],
+      "sources": [{ "title": "Official Darkest Dungeon Wiki: Vestal strategy", "url": "https://darkestdungeon.wiki.gg/wiki/Vestal_(Darkest_Dungeon)/Strategy", "verifiedAt": "2026-09-01" }]
+    },
+    {
+      "id": "flagellant",
+      "names": { "en": "Flagellant", "ko": "고행자" },
+      "aliases": [], "dlcs": ["crimson_court"],
+      "summary": "A frontline bleed and recovery specialist whose strongest emergency abilities require low health.",
+      "roles": ["bleed", "healing", "stress_healing", "damage_over_time_cleanse"],
+      "strengths": ["Applies powerful bleed while supporting health and stress recovery.", "Low-health abilities provide major emergency value."],
+      "limitations": ["Bleed offense loses value against resistant enemies.", "Low-health bonuses do not make Death's Door safe."],
+      "positionGuidance": [
+        { "positions": [1, 2], "recommendation": "preferred", "reason": "His bleed attacks require the front while support remains broadly accessible." },
+        { "positions": [3, 4], "recommendation": "avoid", "reason": "Back placement removes his main offensive contribution." }
+      ],
+      "mechanics": [{ "id": "low_health_threshold", "description": "Several powerful limited-use skills become available only below a health threshold." }, { "id": "rapturous", "description": "At maximum stress he always becomes Rapturous instead of rolling a normal affliction or virtue." }],
+      "skillGuidance": [],
+      "partySynergies": [{ "heroClassId": "plague_doctor", "reasons": ["Together they cover both major damage-over-time types and cleanse them from allies."] }],
+      "sources": [{ "title": "Official Darkest Dungeon Wiki: Flagellant", "url": "https://darkestdungeon.wiki.gg/wiki/Flagellant_(Darkest_Dungeon)", "verifiedAt": "2026-09-01" }]
+    },
+    {
+      "id": "shieldbreaker",
+      "names": { "en": "Shieldbreaker", "ko": "방패 파괴자" },
+      "aliases": [], "dlcs": ["shieldbreaker"],
+      "summary": "A fast, mobile damage dealer specializing in armor piercing, guard bypass, blight, and formation disruption.",
+      "roles": ["damage", "armor_piercing", "blight", "movement", "guard_bypass"],
+      "strengths": ["Armor piercing and guard bypass answer protected targets.", "Broad reach and movement work through changing formations."],
+      "limitations": ["Low maximum health makes focused damage dangerous.", "Movement can disable position-dependent allies."],
+      "positionGuidance": [
+        { "positions": [1, 2], "recommendation": "preferred", "reason": "Front positions support armor-piercing attacks and mobile damage." },
+        { "positions": [3], "recommendation": "viable", "reason": "She can move forward while attacking if displaced allies remain functional." }
+      ],
+      "mechanics": [{ "id": "aegis", "description": "Aegis blocks the next direct damaging attack but not stress or damage over time." }, { "id": "nightmares", "description": "Camping can trigger a sequence of Shieldbreaker nightmare encounters." }],
+      "skillGuidance": [],
+      "partySynergies": [{ "heroClassId": "highwayman", "reasons": ["Both heroes tolerate movement and alternate forward or backward attacks."] }],
+      "sources": [{ "title": "Official Darkest Dungeon Wiki: Shieldbreaker", "url": "https://darkestdungeon.wiki.gg/wiki/Shieldbreaker_(Darkest_Dungeon)", "verifiedAt": "2026-09-01" }]
+    }
+  ]
 }
