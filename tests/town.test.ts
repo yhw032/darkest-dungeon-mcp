@@ -91,6 +91,6 @@ test("parses and summarizes the checked-in town sample", async () => {
   assert.equal(town.buildings.length, 11);
   assert.equal(summary.activitySlots, 24);
   assert.equal(summary.occupiedActivitySlots, 0);
-  assert.equal(summary.availableRecruits, 9);
+  assert.equal(summary.stagecoachRecruitCount, 9);
   assert.equal(summary.districts, 16);
 });

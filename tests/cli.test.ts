@@ -133,7 +133,7 @@ test("CLI reports a town summary as JSON", () => {
   const output = JSON.parse(result.stdout) as {
     buildings: number;
     activitySlots: number;
-    availableRecruits: number;
+    stagecoachRecruitCount: number;
     districts: number;
   };
   assert.deepEqual(output, {
@@ -142,7 +142,7 @@ test("CLI reports a town summary as JSON", () => {
     activitySlots: 24,
     occupiedActivitySlots: 0,
     storeItemAmount: 25,
-    availableRecruits: 9,
+    stagecoachRecruitCount: 9,
     districts: 16,
     builtDistricts: [],
   });

@@ -75,7 +75,7 @@ test("builds a combined game-state summary", async () => {
     30790,
   );
   assert.equal(summary.estate.trinkets.totalAmount, 19);
-  assert.equal(summary.town.availableRecruits, 9);
+  assert.equal(summary.town.stagecoachRecruitCount, 9);
   assert.equal(summary.quests.totalQuests, 11);
   assert.deepEqual(summary.upgrades, {
     totalPurchases: 713,

@@ -164,7 +164,9 @@ export const gameStateSummarySchema = z.object({
     activitySlots: count,
     occupiedActivitySlots: count,
     storeItemAmount: finiteNumber,
-    availableRecruits: count,
+    stagecoachRecruitCount: count.describe(
+      "Number of generated Stage Coach recruit candidates; does not account for barracks capacity.",
+    ),
     districts: count,
     builtDistricts: z.array(z.string()),
   }),

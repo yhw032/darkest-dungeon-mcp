@@ -6,7 +6,7 @@ export interface TownSummary {
   activitySlots: number;
   occupiedActivitySlots: number;
   storeItemAmount: number;
-  availableRecruits: number;
+  stagecoachRecruitCount: number;
   districts: number;
   builtDistricts: string[];
 }
@@ -24,7 +24,7 @@ export function getTownSummary(town: Town): TownSummary {
     storeItemAmount: stores
       .flatMap((store) => store.items)
       .reduce((total, item) => total + item.amount, 0),
-    availableRecruits: stores.reduce(
+    stagecoachRecruitCount: stores.reduce(
       (total, store) => total + store.recruits.length,
       0,
     ),
