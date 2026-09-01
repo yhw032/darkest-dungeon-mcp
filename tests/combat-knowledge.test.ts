@@ -148,6 +148,30 @@ test("loads the checked-in combat knowledge base", async () => {
   const knowledge = await loadCombatKnowledge();
 
   assert.equal(knowledge.schemaVersion, 1);
-  assert.deepEqual(knowledge.regions, []);
-  assert.deepEqual(knowledge.enemies, []);
+  assert.deepEqual(knowledge.regions.map(({ id }) => id), ["ruins"]);
+  assert.deepEqual(
+    knowledge.enemies.map(({ id }) => id),
+    [
+      "bone_soldier",
+      "bone_courtier",
+      "bone_arbalist",
+      "bone_defender",
+      "bone_spearman",
+      "bone_captain",
+      "bone_bearer",
+    ],
+  );
+  assert.equal(
+    knowledge.enemies.find(({ id }) => id === "bone_bearer")?.priority,
+    "critical",
+  );
+  assert.ok(
+    knowledge.enemies.every(
+      ({ regions, dangerousActions, effectiveResponses, sources }) =>
+        regions.includes("ruins") &&
+        dangerousActions.length > 0 &&
+        effectiveResponses.length > 0 &&
+        sources.length > 0,
+    ),
+  );
 });

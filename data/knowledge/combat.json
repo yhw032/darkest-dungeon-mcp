@@ -1,5 +1,183 @@
 {
   "schemaVersion": 1,
-  "regions": [],
-  "enemies": []
+  "regions": [
+    {
+      "id": "ruins",
+      "names": { "en": "Ruins", "ko": "폐허" },
+      "dlcs": [],
+      "overview": "The Ruins is dominated by Unholy skeletons. Backline stress and ranged attackers are usually more urgent than the durable but low-pressure frontline defenders.",
+      "commonThreats": [
+        {
+          "id": "backline_stress",
+          "type": "stress",
+          "description": "Bone Courtiers and shared stress dealers can create lasting expedition risk from the back ranks.",
+          "counters": ["Fast backline damage", "Backline stun", "Pull vulnerable ranged enemies forward"]
+        },
+        {
+          "id": "backline_ranged_damage",
+          "type": "health_damage",
+          "description": "Bone Arbalists attack from safety and become more dangerous when attacking marked heroes.",
+          "counters": ["Backline reach", "Stun", "Pull the Arbalist into a weak forward attack pattern"]
+        },
+        {
+          "id": "protected_frontline",
+          "type": "health_damage",
+          "description": "Bone Defenders and later Bone Captains can absorb direct damage while more urgent enemies act behind them.",
+          "counters": ["Blight through protection", "Armor piercing", "Attack or disable the backline first"]
+        },
+        {
+          "id": "late_tier_disruption",
+          "type": "stun",
+          "description": "Veteran and Champion enemies add party-wide attacks, stuns, movement, buffs, and corpse revival.",
+          "counters": ["Reliable control", "Corpse clearing against Bone Bearer", "Broad position tolerance"]
+        }
+      ],
+      "resistanceTendencies": [
+        { "effect": "bleed", "tendency": "high", "note": "Ruins-specific skeletons are effectively unsuitable bleed targets." },
+        { "effect": "blight", "tendency": "low", "note": "Skeletons are generally vulnerable to blight, though resistance rises with expedition difficulty." },
+        { "effect": "stun", "tendency": "mixed", "note": "Backline skeletons begin vulnerable to stun, while large and higher-tier enemies resist it more strongly." },
+        { "effect": "move", "tendency": "mixed", "note": "Courtier and Arbalist can be disrupted by movement, while Defender, Captain, and Bearer are less practical move targets." }
+      ],
+      "recommendedCapabilities": [
+        "Reach enemy positions 3 and 4 quickly",
+        "Apply blight or pierce protection",
+        "Stun vulnerable backline enemies",
+        "Exploit bonuses against Unholy enemies",
+        "Clear corpses before Bone Bearer revival"
+      ],
+      "cautions": [
+        "Do not build the party's primary damage plan around bleed.",
+        "Do not spend early turns grinding through a Bone Defender while a Courtier or Arbalist remains active.",
+        "Champion expeditions require an immediate plan for Bone Bearer and its corpse revival."
+      ],
+      "sources": [
+        { "title": "Official Darkest Dungeon Wiki: Ruins", "url": "https://darkestdungeon.wiki.gg/wiki/Ruins", "verifiedAt": "2026-09-01" },
+        { "title": "Official Darkest Dungeon Wiki: Enemy types", "url": "https://darkestdungeon.wiki.gg/wiki/Enemy_Types", "verifiedAt": "2026-09-01" }
+      ]
+    }
+  ],
+  "enemies": [
+    {
+      "id": "bone_soldier",
+      "enemyType": "common",
+      "names": { "en": "Bone Soldier" },
+      "aliases": ["Bone Veteran", "Bone Sergeant"],
+      "regions": ["ruins"],
+      "dlcs": [],
+      "priority": "medium",
+      "priorityReasons": ["Deals straightforward health damage with broader reach than many basic frontliners.", "Usually presents less lasting risk than active backline stress or ranged enemies."],
+      "traits": ["Unholy", "High bleed resistance", "Modest protection"],
+      "dangerousActions": [
+        { "name": "Graveyard Slash", "threats": ["health_damage"], "description": "A direct melee attack that can reach beyond the frontmost hero.", "counters": ["Stun", "Direct damage", "Move it to the backmost position"] }
+      ],
+      "effectiveResponses": ["Remove it after more urgent backline threats unless immediate health damage is the greater concern.", "Use blight or Unholy bonuses when convenient."],
+      "cautions": ["At higher difficulties it may begin stealthed, delaying direct targeting without destealth."],
+      "sources": [{ "title": "Official Darkest Dungeon Wiki: Bone Soldier", "url": "https://darkestdungeon.wiki.gg/wiki/Bone_Soldier", "verifiedAt": "2026-09-01" }]
+    },
+    {
+      "id": "bone_courtier",
+      "enemyType": "common",
+      "names": { "en": "Bone Courtier" },
+      "aliases": ["Bone Noble", "Bone Royalty"],
+      "regions": ["ruins"],
+      "dlcs": [],
+      "priority": "high",
+      "priorityReasons": ["Tempting Goblet inflicts stress that persists beyond the current fight.", "High speed often lets it act before slower heroes."],
+      "traits": ["Unholy", "Backline stress dealer", "High bleed resistance", "Low early move and stun resistance"],
+      "dangerousActions": [
+        { "name": "Tempting Goblet", "threats": ["stress", "debuff"], "description": "Attacks any hero from the back ranks, inflicting substantial stress and later a critical-chance debuff.", "counters": ["Kill it quickly", "Stun it", "Pull or shuffle it to enemy position 1"] }
+      ],
+      "effectiveResponses": ["Prioritize it when expedition stress is a concern.", "Pulling it to the front forces a much weaker attack pattern."],
+      "cautions": ["Enemy position 2 may still allow Tempting Goblet, so a partial pull is not a complete shutdown."],
+      "sources": [{ "title": "Official Darkest Dungeon Wiki: Bone Courtier", "url": "https://darkestdungeon.wiki.gg/wiki/Bone_Courtier", "verifiedAt": "2026-09-01" }]
+    },
+    {
+      "id": "bone_arbalist",
+      "enemyType": "common",
+      "names": { "en": "Bone Arbalist" },
+      "aliases": ["Bone Marksman", "Bone Sharpshooter"],
+      "regions": ["ruins"],
+      "dlcs": [],
+      "priority": "high",
+      "priorityReasons": ["Quarrel delivers strong backline health damage with meaningful critical potential.", "It preferentially threatens marked heroes."],
+      "traits": ["Unholy", "Backline ranged attacker", "High bleed resistance", "Low early stun resistance"],
+      "dangerousActions": [
+        { "name": "Quarrel", "threats": ["health_damage", "mark"], "description": "A strong ranged attack against the party backline that is more dangerous to marked heroes.", "counters": ["Backline damage", "Stun", "Pull it into the front two positions", "Clear marks from vulnerable heroes"] }
+      ],
+      "effectiveResponses": ["Disable or kill it before it repeatedly pressures fragile backliners.", "A successful pull replaces Quarrel with its weaker Bayonet Jab until it retreats."],
+      "cautions": ["Bayonet Jab moves it backward, so movement disruption may need to be repeated."],
+      "sources": [{ "title": "Official Darkest Dungeon Wiki: Bone Arbalist", "url": "https://darkestdungeon.wiki.gg/wiki/Bone_Arbalist", "verifiedAt": "2026-09-01" }]
+    },
+    {
+      "id": "bone_defender",
+      "enemyType": "common",
+      "names": { "en": "Bone Defender" },
+      "aliases": ["Bone Bulwark", "Bone Shieldwall"],
+      "regions": ["ruins"],
+      "dlcs": [],
+      "priority": "low",
+      "priorityReasons": ["Its protection makes direct attacks inefficient.", "Its damage pressure is usually lower than the enemies it accompanies."],
+      "traits": ["Unholy", "High protection", "High bleed resistance", "Slow"],
+      "dangerousActions": [
+        { "name": "Dead Weight", "threats": ["stun", "movement", "health_damage"], "description": "Hits a front hero and can stun and knock the target backward.", "counters": ["Stun resistance", "Position-tolerant party", "Disable it during recovery turns"] }
+      ],
+      "effectiveResponses": ["Leave it until urgent backline enemies are controlled.", "Use blight or armor piercing instead of inefficient direct damage."],
+      "cautions": ["Dead Weight can still disrupt a position-dependent frontline even when the Defender is left for last."],
+      "sources": [{ "title": "Official Darkest Dungeon Wiki: Bone Defender", "url": "https://darkestdungeon.wiki.gg/wiki/Bone_Defender", "verifiedAt": "2026-09-01" }]
+    },
+    {
+      "id": "bone_spearman",
+      "enemyType": "elite",
+      "names": { "en": "Bone Spearman" },
+      "aliases": ["Bone Lancer"],
+      "regions": ["ruins"],
+      "dlcs": [],
+      "priority": "high",
+      "priorityReasons": ["Its attacks have broad reach and high critical potential.", "Impale damages the entire party while it remains in the front."],
+      "traits": ["Unholy", "Veteran and Champion expeditions", "High bleed resistance", "Broad attack reach"],
+      "dangerousActions": [
+        { "name": "Spear Thrust", "threats": ["health_damage", "movement"], "description": "A strong attack that can reach any hero and knock the target backward.", "counters": ["Stun", "Damage reduction", "Guard an endangered hero"] },
+        { "name": "Impale", "threats": ["health_damage"], "description": "A party-wide attack available while the Spearman occupies the enemy front.", "counters": ["Kill or stun it", "Push it out of the front two positions", "Party-wide recovery"] }
+      ],
+      "effectiveResponses": ["Prioritize it before low-pressure defenders.", "Stun it or push it backward to prevent Impale."],
+      "cautions": ["Spear Thrust remains usable from any enemy position, so pushing it back only removes Impale."],
+      "sources": [{ "title": "Official Darkest Dungeon Wiki: Bone Spearman", "url": "https://darkestdungeon.wiki.gg/wiki/Bone_Spearman", "verifiedAt": "2026-09-01" }]
+    },
+    {
+      "id": "bone_captain",
+      "enemyType": "elite",
+      "names": { "en": "Bone Captain" },
+      "aliases": ["Bone Commander", "Bone General"],
+      "regions": ["ruins"],
+      "dlcs": [],
+      "priority": "high",
+      "priorityReasons": ["Ground Pound can stun the entire party.", "Crushing Blow combines high frontline damage with reduced stun resistance."],
+      "traits": ["Unholy", "Large enemy", "Veteran and Champion expeditions", "High protection", "High move resistance"],
+      "dangerousActions": [
+        { "name": "Crushing Blow", "threats": ["health_damage", "debuff"], "description": "Heavy frontline damage that reduces the target's stun resistance.", "counters": ["Guard", "Damage reduction", "Focused healing"] },
+        { "name": "Ground Pound", "threats": ["stun", "health_damage"], "description": "A party-wide attack that can stun multiple heroes.", "counters": ["Stun resistance", "Damage debuff", "Kill or control the Captain"] }
+      ],
+      "effectiveResponses": ["Use blight, armor piercing, or protection reduction.", "Damage reduction is useful when its high resistances make direct control unreliable."],
+      "cautions": ["Do not assume a stun or move attempt will reliably disable this large enemy."],
+      "sources": [{ "title": "Official Darkest Dungeon Wiki: Bone Captain", "url": "https://darkestdungeon.wiki.gg/wiki/Bone_Captain", "verifiedAt": "2026-09-01" }]
+    },
+    {
+      "id": "bone_bearer",
+      "enemyType": "elite",
+      "names": { "en": "Bone Bearer" },
+      "aliases": [],
+      "regions": ["ruins"],
+      "dlcs": [],
+      "priority": "critical",
+      "priorityReasons": ["Passively increases allied damage and can add further offensive buffs.", "Unholy Rally revives corpses at full health as an automatic action."],
+      "traits": ["Unholy", "Champion expeditions", "Passive enemy damage support", "Corpse revival", "Extremely high stun resistance"],
+      "dangerousActions": [
+        { "name": "Wicked Surge", "threats": ["other"], "description": "Improves another enemy's accuracy and damage.", "counters": ["Kill the Bearer", "Eliminate buffed attackers", "Damage reduction"] },
+        { "name": "Unholy Rally", "threats": ["summon"], "description": "Automatically revives an available enemy corpse at full health.", "counters": ["Clear corpses", "Use attacks that leave no corpse", "Kill the Bearer before more enemies die"] }
+      ],
+      "effectiveResponses": ["Treat it as an immediate Champion-tier priority.", "Use corpse clearing while working through enemies that screen it."],
+      "cautions": ["Repeated stun attempts are not a dependable plan because its stun resistance is exceptionally high.", "Ignoring corpses allows defeated enemies to return at full health."],
+      "sources": [{ "title": "Official Darkest Dungeon Wiki: Bone Bearer", "url": "https://darkestdungeon.wiki.gg/wiki/Bone_Bearer", "verifiedAt": "2026-09-01" }]
+    }
+  ]
 }
