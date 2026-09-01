@@ -45,6 +45,10 @@ test("MCP server advertises and executes read-only game tools", async (t) => {
   assert.ok(riskyQuirk);
 
   const server = createDarkestDungeonServer(dataSource, {
+    loadQuestLocalization: async () =>
+      new Map([
+        ["koreana", new Map([["dungeon_name_cove", "해안 만"]])],
+      ]),
     loadBuildingUpgradeTrees: async () => [
       {
         id: "guild.skill_levels",

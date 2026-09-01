@@ -58,8 +58,10 @@ import {
   loadQuestRestrictionRules,
 } from "../quests/quest-eligibility.js";
 import {
+  loadQuestLocalization,
   localizeQuest,
   localizeQuestSummary,
+  type QuestLocalization,
 } from "../quests/localize-quest.js";
 import { listQuests } from "../queries/list-quests.js";
 import { queryClasses } from "../queries/query-classes.js";
@@ -94,6 +96,7 @@ export interface DarkestDungeonServerOptions {
   loadHeroCombatSkillPositions?: () => Promise<HeroCombatSkillPositionDefinition[]>;
   loadHeroProgressionRules?: () => Promise<HeroProgressionRules>;
   loadQuestRestrictionRules?: () => Promise<QuestRestrictionRules>;
+  loadQuestLocalization?: () => Promise<QuestLocalization>;
   loadQuirkDefinitions?: () => Promise<QuirkDefinition[]>;
   loadQuirkTreatmentKnowledge?: () => Promise<QuirkTreatmentKnowledgeBase>;
 }
@@ -244,6 +247,23 @@ export function createDarkestDungeonServer(
       questRestrictionRulesLoader,
     );
     return questRestrictionRulesPromise;
+  };
+  const questLocalizationLoader =
+    options.loadQuestLocalization ??
+    (() => {
+      const gameDirectory = options.gameDirectory?.trim();
+      return gameDirectory === undefined || gameDirectory === ""
+        ? Promise.resolve(undefined)
+        : loadQuestLocalization(gameDirectory);
+    });
+  let questLocalizationPromise:
+    | Promise<QuestLocalization | undefined>
+    | undefined;
+  const getQuestLocalization = () => {
+    questLocalizationPromise ??= Promise.resolve().then(
+      questLocalizationLoader,
+    );
+    return questLocalizationPromise;
   };
   const quirkDefinitionLoader =
     options.loadQuirkDefinitions ??
@@ -703,7 +723,10 @@ export function createDarkestDungeonServer(
       annotations: readOnlyAnnotations,
     },
     async ({ dungeon, type, difficulty, isPlotQuest, language }) => {
-      const state = await dataSource.load();
+      const [state, localization] = await Promise.all([
+        dataSource.load(),
+        getQuestLocalization(),
+      ]);
       const filters = {
         ...(dungeon === undefined ? {} : { dungeon }),
         ...(type === undefined ? {} : { type }),
@@ -713,7 +736,7 @@ export function createDarkestDungeonServer(
       return toolResult(
         "quests",
         listQuests(state.quests, filters).map((quest) =>
-          localizeQuestSummary(quest, language),
+          localizeQuestSummary(quest, language, localization),
         ),
       );
     },
@@ -736,10 +759,14 @@ export function createDarkestDungeonServer(
       annotations: readOnlyAnnotations,
     },
     async ({ questId, language }) => {
-      const quest = getQuest((await dataSource.load()).quests, questId);
+      const [state, localization] = await Promise.all([
+        dataSource.load(),
+        getQuestLocalization(),
+      ]);
+      const quest = getQuest(state.quests, questId);
       return quest === undefined
         ? notFoundResult("Quest", questId)
-        : toolResult("quest", localizeQuest(quest, language));
+        : toolResult("quest", localizeQuest(quest, language, localization));
     },
   );
 

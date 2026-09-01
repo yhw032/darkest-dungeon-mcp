@@ -1,5 +1,7 @@
 import assert from "node:assert/strict";
-import { readFile } from "node:fs/promises";
+import { mkdir, mkdtemp, readFile, rm, writeFile } from "node:fs/promises";
+import { tmpdir } from "node:os";
+import { join } from "node:path";
 import test from "node:test";
 import { fileURLToPath } from "node:url";
 
@@ -12,9 +14,34 @@ import { getQuest } from "../src/queries/get-quest.js";
 import { getQuestStateSummary } from "../src/queries/get-quest-state-summary.js";
 import { listQuests } from "../src/queries/list-quests.js";
 import {
+  loadQuestLocalization,
   localizeDungeon,
   localizeQuest,
+  type QuestLocalization,
 } from "../src/quests/localize-quest.js";
+
+function questLocalization(): QuestLocalization {
+  return new Map([
+    [
+      "english",
+      new Map([
+        ["dungeon_name_weald", "Weald"],
+      ]),
+    ],
+    [
+      "koreana",
+      new Map([
+        ["dungeon_name_cove", "해안 만"],
+        ["dungeon_name_crypts", "폐허"],
+        ["dungeon_name_darkestdungeon", "가장 어두운 던전"],
+        ["dungeon_name_warrens", "사육장"],
+        ["dungeon_name_farm", "농장"],
+        ["dungeon_name_courtyard", "안뜰"],
+        ["dungeon_name_weald", "삼림지대"],
+      ]),
+    ],
+  ]);
+}
 
 function questDocument(): unknown {
   return {
@@ -86,15 +113,16 @@ test("filters and retrieves quests", () => {
 test("selects one verified dungeon name for the requested language", () => {
   const quest = getQuest(parseQuestState(questDocument()), "generated_0");
   assert.ok(quest);
-  assert.deepEqual(localizeQuest(quest, "ko").dungeon, {
+  const localization = questLocalization();
+  assert.deepEqual(localizeQuest(quest, "ko", localization).dungeon, {
     id: "weald",
     name: "삼림지대",
   });
-  assert.deepEqual(localizeDungeon("weald", "en"), {
+  assert.deepEqual(localizeDungeon("weald", "en", localization), {
     id: "weald",
     name: "Weald",
   });
-  assert.deepEqual(localizeDungeon("modded_region", "ko"), {
+  assert.deepEqual(localizeDungeon("modded_region", "ko", localization), {
     id: "modded_region",
     name: null,
   });
@@ -108,7 +136,7 @@ test("covers every dungeon id in the checked-in quest sample", async () => {
   const localized = new Map(
     state.quests.map((quest) => [
       quest.dungeon,
-      localizeDungeon(quest.dungeon, "ko").name,
+      localizeDungeon(quest.dungeon, "ko", questLocalization()).name,
     ]),
   );
 
@@ -121,6 +149,47 @@ test("covers every dungeon id in the checked-in quest sample", async () => {
     courtyard: "안뜰",
     weald: "삼림지대",
   });
+});
+
+test("loads base and official DLC dungeon names from game localization", async (t) => {
+  const root = await mkdtemp(join(tmpdir(), "dd-quest-localization-"));
+  t.after(() => rm(root, { recursive: true, force: true }));
+  const basePath = join(root, "localization", "miscellaneous.string_table.xml");
+  const courtPath = join(
+    root,
+    "dlc",
+    "580100_crimson_court",
+    "localization",
+    "CC.string_table.xml",
+  );
+  const farmPath = join(
+    root,
+    "dlc",
+    "735730_color_of_madness",
+    "localization",
+    "CoM.string_table.xml",
+  );
+  await Promise.all([
+    mkdir(join(root, "localization"), { recursive: true }),
+    mkdir(join(root, "dlc", "580100_crimson_court", "localization"), {
+      recursive: true,
+    }),
+    mkdir(join(root, "dlc", "735730_color_of_madness", "localization"), {
+      recursive: true,
+    }),
+  ]);
+  const table = (language: string, id: string, name: string) =>
+    `<root><language id="${language}"><entry id="${id}"><![CDATA[${name}]]></entry></language></root>`;
+  await Promise.all([
+    writeFile(basePath, table("koreana", "dungeon_name_crypts", "폐허")),
+    writeFile(courtPath, table("koreana", "dungeon_name_courtyard", "안뜰")),
+    writeFile(farmPath, table("koreana", "dungeon_name_farm", "농장")),
+  ]);
+
+  const localization = await loadQuestLocalization(root);
+  assert.equal(localizeDungeon("crypts", "ko", localization).name, "폐허");
+  assert.equal(localizeDungeon("courtyard", "ko", localization).name, "안뜰");
+  assert.equal(localizeDungeon("farm", "ko", localization).name, "농장");
 });
 
 test("parses and summarizes the checked-in quest sample", async () => {
