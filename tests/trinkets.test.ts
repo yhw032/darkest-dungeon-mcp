@@ -83,3 +83,18 @@ test("filters the catalog by id and location", async () => {
     [],
   );
 });
+
+test("excludes trinkets attached only to deceased hero records", async () => {
+  const sources = await loadSources();
+  const sourceHero = sources.roster.heroes[0];
+  assert.ok(sourceHero);
+  sources.roster.heroes.push({
+    ...sourceHero,
+    id: "deceased",
+    name: "Deceased",
+    rosterStatus: 3,
+    equippedTrinkets: [{ id: "historical_trinket", type: "trinket", amount: 1 }],
+  });
+
+  assert.equal(getTrinket(sources, "historical_trinket"), undefined);
+});

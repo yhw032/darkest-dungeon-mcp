@@ -12,6 +12,7 @@ function hero(
 ): ComparableHero {
   return {
     id,
+    rosterState: "active",
     stress: 10,
     resolveLevel: 2,
     availability: { isAvailableForPartySelection: true },
@@ -54,4 +55,29 @@ test("does not imply quest eligibility without quest context", () => {
   ]);
   assert.equal(highlights.questEligibleHeroIds, null);
   assert.deepEqual(highlights.highestResolveLevelHeroIds, []);
+});
+
+test("keeps non-active heroes out of comparison highlights", () => {
+  const highlights = getHeroComparisonHighlights([
+    hero("active", { stress: 20, resolveLevel: 2 }),
+    hero("dead", {
+      rosterState: "deceased",
+      stress: 0,
+      resolveLevel: 6,
+      equipment: { weaponRank: 4, armourRank: 4 },
+    }),
+    hero("unknown", {
+      rosterState: "unknown",
+      stress: 0,
+      resolveLevel: 6,
+      equipment: { weaponRank: 4, armourRank: 4 },
+    }),
+  ]);
+
+  assert.deepEqual(highlights.lowestStressHeroIds, ["active"]);
+  assert.deepEqual(highlights.highestResolveLevelHeroIds, ["active"]);
+  assert.deepEqual(highlights.highestWeaponRankHeroIds, ["active"]);
+  assert.deepEqual(highlights.highestArmourRankHeroIds, ["active"]);
+  assert.deepEqual(highlights.availableHeroIds, ["active"]);
+  assert.deepEqual(highlights.questEligibleHeroIds, ["active"]);
 });

@@ -325,6 +325,9 @@ export const heroComparisonSchema = z.object({
       id: z.string(),
       name: z.string(),
       heroClass: z.string(),
+      rosterState: z
+        .enum(["active", "deceased", "unknown"])
+        .describe("Lifecycle state; only active heroes are included in comparison highlights."),
       resolveXp: finiteNumber.describe("Raw resolve experience, not resolve level."),
       resolveLevel: z.number().int().nonnegative().nullable(),
       stress: finiteNumber,

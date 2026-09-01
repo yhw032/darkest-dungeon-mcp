@@ -550,6 +550,7 @@ export function createDarkestDungeonServer(
           id: hero.id,
           name: hero.name,
           heroClass: hero.heroClass,
+          rosterState: getHeroRosterState(hero.rosterStatus),
           resolveXp: hero.resolveXp,
           resolveLevel,
           stress: hero.stress,

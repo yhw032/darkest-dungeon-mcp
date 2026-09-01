@@ -1,6 +1,7 @@
 import type { Estate } from "../domain/estate.js";
 import type { Roster } from "../domain/hero.js";
 import type { Town } from "../domain/town.js";
+import { isDeceasedHero } from "../roster/hero-roster-state.js";
 
 export type TrinketLocation = "storage" | "equipped" | "store";
 
@@ -61,6 +62,7 @@ export function buildTrinketCatalog(sources: TrinketSources): TrinketRecord[] {
   }
 
   for (const hero of sources.roster.heroes) {
+    if (isDeceasedHero(hero.rosterStatus)) continue;
     for (const trinket of hero.equippedTrinkets) {
       getOrCreate(catalog, trinket.id).equippedBy.push({
         heroId: hero.id,

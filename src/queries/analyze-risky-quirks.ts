@@ -9,6 +9,7 @@ import type {
   QuirkTreatmentKnowledgeBase,
   QuirkTreatmentPriority,
 } from "../domain/quirk-treatment-knowledge.js";
+import { isDeceasedHero } from "../roster/hero-roster-state.js";
 
 export interface RiskyQuirkAnalysis {
   id: string;
@@ -110,6 +111,7 @@ export function analyzeRiskyQuirks(
   );
 
   const heroes = roster.heroes.flatMap((hero): RiskyHeroAnalysis[] => {
+    if (isDeceasedHero(hero.rosterStatus)) return [];
     if (filters.heroId !== undefined && hero.id !== filters.heroId) return [];
 
     const riskyQuirks = hero.quirks

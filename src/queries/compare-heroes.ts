@@ -1,5 +1,8 @@
+import type { HeroRosterState } from "../roster/hero-roster-state.js";
+
 export interface ComparableHero {
   id: string;
+  rosterState: HeroRosterState;
   stress: number;
   resolveLevel: number | null;
   availability: { isAvailableForPartySelection: boolean };
@@ -26,37 +29,40 @@ function idsAtExtreme(
 }
 
 export function getHeroComparisonHighlights(heroes: ComparableHero[]) {
-  const hasQuestContext = heroes.some(
+  const activeHeroes = heroes.filter(
+    ({ rosterState }) => rosterState === "active",
+  );
+  const hasQuestContext = activeHeroes.some(
     ({ questEligibility }) => questEligibility !== null,
   );
   return {
-    availableHeroIds: heroes
+    availableHeroIds: activeHeroes
       .filter(({ availability }) => availability.isAvailableForPartySelection)
       .map(({ id }) => id),
     questEligibleHeroIds: hasQuestContext
-      ? heroes
+      ? activeHeroes
           .filter(
             ({ questEligibility }) => questEligibility?.isEligible === true,
           )
           .map(({ id }) => id)
       : null,
     lowestStressHeroIds: idsAtExtreme(
-      heroes,
+      activeHeroes,
       ({ stress }) => stress,
       "minimum",
     ),
     highestResolveLevelHeroIds: idsAtExtreme(
-      heroes,
+      activeHeroes,
       ({ resolveLevel }) => resolveLevel,
       "maximum",
     ),
     highestWeaponRankHeroIds: idsAtExtreme(
-      heroes,
+      activeHeroes,
       ({ equipment }) => equipment.weaponRank,
       "maximum",
     ),
     highestArmourRankHeroIds: idsAtExtreme(
-      heroes,
+      activeHeroes,
       ({ equipment }) => equipment.armourRank,
       "maximum",
     ),

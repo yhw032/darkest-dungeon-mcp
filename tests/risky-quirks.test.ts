@@ -76,6 +76,10 @@ const roster: Roster = {
     ]),
     hero("2", "Beta", [{ id: "curious", isLocked: true }]),
     hero("3", "Gamma", [{ id: "harmless", isLocked: true }]),
+    {
+      ...hero("4", "Deceased", [{ id: "kleptomaniac", isLocked: true }]),
+      rosterStatus: 3,
+    },
   ],
 };
 
@@ -166,6 +170,13 @@ test("preserves a matched rule when its game definition is unavailable", () => {
 test("does not report heroes without a matching treatment rule", () => {
   assert.deepEqual(
     analyzeRiskyQuirks(roster, definitions, knowledge, { heroId: "3" }),
+    [],
+  );
+});
+
+test("does not recommend treatment for deceased heroes", () => {
+  assert.deepEqual(
+    analyzeRiskyQuirks(roster, definitions, knowledge, { heroId: "4" }),
     [],
   );
 });

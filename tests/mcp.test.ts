@@ -34,7 +34,9 @@ test("MCP server advertises and executes read-only game tools", async (t) => {
   const expectedHero = state.roster.heroes[0];
   const expectedQuest = state.quests.quests[0];
   const expectedStoredTrinket = state.estate.trinkets[0];
-  const riskyHero = state.roster.heroes.find((hero) => hero.quirks.length > 0);
+  const riskyHero = state.roster.heroes.find(
+    (hero) => hero.rosterStatus !== 3 && hero.quirks.length > 0,
+  );
   const riskyQuirk = riskyHero?.quirks[0];
   assert.ok(expectedHero);
   assert.ok(expectedQuest);
@@ -355,6 +357,14 @@ test("MCP server advertises and executes read-only game tools", async (t) => {
     comparison?.heroes?.map((candidate) =>
       (candidate as { id?: unknown }).id),
     [expectedHero.id, secondHero.id],
+  );
+  assert.deepEqual(
+    comparison?.heroes?.map((candidate) =>
+      (candidate as { rosterState?: unknown }).rosterState),
+    ["deceased", "active"],
+  );
+  assert.ok(
+    !JSON.stringify(comparison?.highlights).includes(expectedHero.id),
   );
 
   const missingResult = await client.callTool({
