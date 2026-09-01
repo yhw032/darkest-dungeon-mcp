@@ -11,7 +11,7 @@ export interface HeroCombatSkillDetail {
   level: number | null;
   isSelected: boolean;
   rawSelectionValue: number | null;
-  usableFromRanks: number[] | null;
+  usableFromPartyPositions: number[] | null;
   target: HeroCombatSkillTarget | null;
   movement: HeroCombatSkillMovement | null;
 }
@@ -22,7 +22,7 @@ export type HeroCombatSkillTargetMode = "single" | "group" | "random";
 export interface HeroCombatSkillTarget {
   side: HeroCombatSkillTargetSide;
   mode: HeroCombatSkillTargetMode;
-  ranks: number[];
+  positions: number[];
 }
 
 export interface HeroCombatSkillMovement {
@@ -33,13 +33,13 @@ export interface HeroCombatSkillMovement {
 export interface HeroCombatSkillPositionDefinition {
   heroClass: string;
   skillId: string;
-  usableFromRanks: number[];
+  usableFromPartyPositions: number[];
   target: HeroCombatSkillTarget;
   movement: HeroCombatSkillMovement;
 }
 
-export interface HeroRankCoverage {
-  rank: number;
+export interface HeroPositionCoverage {
+  partyPosition: number;
   usableSkillIds: string[];
   unusableSkillIds: string[];
   unknownSkillIds: string[];
@@ -49,7 +49,8 @@ export interface HeroCombatPositionAnalysis {
   status: "complete" | "partial" | "unavailable";
   selectedSkillCount: number;
   definedSkillCount: number;
-  rankCoverage: HeroRankCoverage[];
-  fullyUsablePartyRanks: number[];
-  bestCoveragePartyRanks: number[];
+  positionNumbering: { front: 1; back: 4 };
+  positionCoverage: HeroPositionCoverage[];
+  fullyUsablePartyPositions: number[];
+  bestCoveragePartyPositions: number[];
 }

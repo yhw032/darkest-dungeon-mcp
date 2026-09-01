@@ -6,20 +6,20 @@ import { analyzeHeroCombatPositions } from "../src/skills/analyze-combat-positio
 
 function skill(
   id: string,
-  usableFromRanks: number[] | null,
+  usableFromPartyPositions: number[] | null,
 ): HeroCombatSkillDetail {
   return {
     id,
     level: 1,
     isSelected: true,
     rawSelectionValue: 0,
-    usableFromRanks,
+    usableFromPartyPositions,
     target: null,
     movement: null,
   };
 }
 
-test("calculates complete rank coverage without an editorial threshold", () => {
+test("calculates complete position coverage without an editorial threshold", () => {
   const result = analyzeHeroCombatPositions([
     skill("pick", [1, 2, 3]),
     skill("lunge", [3, 4]),
@@ -28,10 +28,10 @@ test("calculates complete rank coverage without an editorial threshold", () => {
   ]);
 
   assert.equal(result.status, "complete");
-  assert.deepEqual(result.fullyUsablePartyRanks, [3]);
-  assert.deepEqual(result.bestCoveragePartyRanks, [3]);
-  assert.deepEqual(result.rankCoverage[1], {
-    rank: 2,
+  assert.deepEqual(result.fullyUsablePartyPositions, [3]);
+  assert.deepEqual(result.bestCoveragePartyPositions, [3]);
+  assert.deepEqual(result.positionCoverage[1], {
+    partyPosition: 2,
     usableSkillIds: ["pick", "thrown_dagger", "poison_dart"],
     unusableSkillIds: ["lunge"],
     unknownSkillIds: [],
@@ -45,9 +45,9 @@ test("keeps unknown skill positions explicit in partial analysis", () => {
   ]);
 
   assert.equal(result.status, "partial");
-  assert.deepEqual(result.fullyUsablePartyRanks, []);
-  assert.deepEqual(result.bestCoveragePartyRanks, [2, 3]);
-  assert.deepEqual(result.rankCoverage[1]?.unknownSkillIds, ["unknown"]);
+  assert.deepEqual(result.fullyUsablePartyPositions, []);
+  assert.deepEqual(result.bestCoveragePartyPositions, [2, 3]);
+  assert.deepEqual(result.positionCoverage[1]?.unknownSkillIds, ["unknown"]);
 });
 
 test("returns unavailable analysis without selected position definitions", () => {
@@ -56,13 +56,14 @@ test("returns unavailable analysis without selected position definitions", () =>
     status: "unavailable",
     selectedSkillCount: 0,
     definedSkillCount: 0,
-    rankCoverage: [1, 2, 3, 4].map((rank) => ({
-      rank,
+    positionNumbering: { front: 1, back: 4 },
+    positionCoverage: [1, 2, 3, 4].map((partyPosition) => ({
+      partyPosition,
       usableSkillIds: [],
       unusableSkillIds: [],
       unknownSkillIds: [],
     })),
-    fullyUsablePartyRanks: [],
-    bestCoveragePartyRanks: [],
+    fullyUsablePartyPositions: [],
+    bestCoveragePartyPositions: [],
   });
 });

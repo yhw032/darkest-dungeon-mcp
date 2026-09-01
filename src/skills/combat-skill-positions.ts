@@ -12,7 +12,7 @@ function capture(text: string, pattern: RegExp, field: string): string {
   return value;
 }
 
-function ranks(value: string, field: string): number[] {
+function positions(value: string, field: string): number[] {
   const parsed = [...value].map(Number).sort((left, right) => left - right);
   if (parsed.length === 0 || parsed.some((rank) => rank < 1 || rank > 4)) {
     throw new Error(`Combat skill has invalid ${field}: ${value}`);
@@ -25,8 +25,10 @@ function parseTarget(line: string): HeroCombatSkillTarget {
     /(?:^|\s)\.target\s*([@~?]*)([1-4]*)(?=\s+\.|\s*$)/.exec(line);
   if (match === null) throw new Error("Combat skill is missing target");
   const modifiers = match[1] ?? "";
-  const rankText = match[2] ?? "";
-  if (rankText === "") return { side: "self", mode: "single", ranks: [] };
+  const positionText = match[2] ?? "";
+  if (positionText === "") {
+    return { side: "self", mode: "single", positions: [] };
+  }
   return {
     side: modifiers.includes("@") ? "ally" : "enemy",
     mode: modifiers.includes("?")
@@ -34,7 +36,7 @@ function parseTarget(line: string): HeroCombatSkillTarget {
       : modifiers.includes("~")
         ? "group"
         : "single",
-    ranks: ranks(rankText, "target ranks"),
+    positions: positions(positionText, "target positions"),
   };
 }
 
@@ -64,7 +66,7 @@ export function parseHeroCombatSkillPositions(
     bySkill.set(skillId, {
       heroClass,
       skillId,
-      usableFromRanks: ranks(launch, "launch ranks"),
+      usableFromPartyPositions: positions(launch, "launch positions"),
       target: parseTarget(line),
       movement: parseMovement(line),
     });

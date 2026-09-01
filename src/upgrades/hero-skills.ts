@@ -129,10 +129,15 @@ export function getHeroCombatSkillDetails(
   const positionFields = (id: string) => {
     const position = positionBySkill.get(id);
     return position === undefined
-      ? { usableFromRanks: null, target: null, movement: null }
+      ? { usableFromPartyPositions: null, target: null, movement: null }
       : {
-          usableFromRanks: [...position.usableFromRanks],
-          target: { ...position.target, ranks: [...position.target.ranks] },
+          usableFromPartyPositions: [
+            ...position.usableFromPartyPositions,
+          ],
+          target: {
+            ...position.target,
+            positions: [...position.target.positions],
+          },
           movement: { ...position.movement },
         };
   };

@@ -63,8 +63,8 @@ test("MCP server advertises and executes read-only game tools", async (t) => {
       expectedHero.combatSkillSelections.map(({ id }) => ({
         heroClass: expectedHero.heroClass,
         skillId: id,
-        usableFromRanks: [2, 3, 4],
-        target: { side: "enemy", mode: "single", ranks: [2, 3, 4] },
+        usableFromPartyPositions: [2, 3, 4],
+        target: { side: "enemy", mode: "single", positions: [2, 3, 4] },
         movement: { backward: 0, forward: 0 },
       })),
     loadQuirkDefinitions: async () => [
@@ -271,8 +271,8 @@ test("MCP server advertises and executes read-only game tools", async (t) => {
         level: null,
         isSelected: true,
         rawSelectionValue,
-        usableFromRanks: [2, 3, 4],
-        target: { side: "enemy", mode: "single", ranks: [2, 3, 4] },
+        usableFromPartyPositions: [2, 3, 4],
+        target: { side: "enemy", mode: "single", positions: [2, 3, 4] },
         movement: { backward: 0, forward: 0 },
       }),
     ),
@@ -280,20 +280,21 @@ test("MCP server advertises and executes read-only game tools", async (t) => {
       status: "complete",
       selectedSkillCount: expectedHero.combatSkillSelections.length,
       definedSkillCount: expectedHero.combatSkillSelections.length,
-      rankCoverage: [1, 2, 3, 4].map((rank) => ({
-        rank,
+      positionNumbering: { front: 1, back: 4 },
+      positionCoverage: [1, 2, 3, 4].map((partyPosition) => ({
+        partyPosition,
         usableSkillIds:
-          rank >= 2
+          partyPosition >= 2
             ? expectedHero.combatSkillSelections.map(({ id }) => id)
             : [],
         unusableSkillIds:
-          rank >= 2
+          partyPosition >= 2
             ? []
             : expectedHero.combatSkillSelections.map(({ id }) => id),
         unknownSkillIds: [],
       })),
-      fullyUsablePartyRanks: [2, 3, 4],
-      bestCoveragePartyRanks: [2, 3, 4],
+      fullyUsablePartyPositions: [2, 3, 4],
+      bestCoveragePartyPositions: [2, 3, 4],
     },
   });
 

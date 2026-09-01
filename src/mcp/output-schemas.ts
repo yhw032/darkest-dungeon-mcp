@@ -188,21 +188,23 @@ const combatSkillDetailSchema = z.object({
   level: z.number().int().positive().nullable().describe("Verified one-based skill level, or null when game definitions are unavailable."),
   isSelected: z.boolean(),
   rawSelectionValue: finiteNumber.nullable().describe("Raw selection flag/value; never use as a skill level."),
-  usableFromRanks: z
+  usableFromPartyPositions: z
     .array(z.number().int().min(1).max(4))
     .nullable()
-    .describe("Hero ranks where this skill can be used; null without game definitions."),
+    .describe("Party positions where this skill can be used; 1 is frontmost and 4 is rearmost. Null without game definitions."),
   target: z
     .object({
       side: z.enum(["enemy", "ally", "self"]),
       mode: z.enum(["single", "group", "random"]),
-      ranks: z.array(z.number().int().min(1).max(4)),
+      positions: z
+        .array(z.number().int().min(1).max(4))
+        .describe("Target positions; 1 is frontmost and 4 is rearmost."),
     })
     .nullable(),
   movement: z
     .object({ backward: count, forward: count })
     .nullable()
-    .describe("Ranks moved after use; zeroes mean no movement, null means definitions unavailable."),
+    .describe("Positions moved after use; zeroes mean no movement, null means definitions unavailable."),
 });
 const combatPositionAnalysisSchema = z.object({
   status: z
@@ -210,20 +212,24 @@ const combatPositionAnalysisSchema = z.object({
     .describe("Whether position definitions cover all, some, or none of the selected skills."),
   selectedSkillCount: count,
   definedSkillCount: count,
-  rankCoverage: z.array(
+  positionNumbering: z.object({
+    front: z.literal(1),
+    back: z.literal(4),
+  }),
+  positionCoverage: z.array(
     z.object({
-      rank: z.number().int().min(1).max(4),
+      partyPosition: z.number().int().min(1).max(4),
       usableSkillIds: z.array(z.string()),
       unusableSkillIds: z.array(z.string()),
       unknownSkillIds: z.array(z.string()),
     }),
   ),
-  fullyUsablePartyRanks: z
+  fullyUsablePartyPositions: z
     .array(z.number().int().min(1).max(4))
-    .describe("Ranks where every selected skill is usable; empty unless analysis is complete."),
-  bestCoveragePartyRanks: z
+    .describe("Party positions where every selected skill is usable; empty unless analysis is complete."),
+  bestCoveragePartyPositions: z
     .array(z.number().int().min(1).max(4))
-    .describe("Ranks enabling the largest number of selected skills; not an editorial recommendation."),
+    .describe("Party positions enabling the largest number of selected skills; not an editorial recommendation."),
 });
 
 export const heroDetailSchema = heroSummarySchema.extend({
