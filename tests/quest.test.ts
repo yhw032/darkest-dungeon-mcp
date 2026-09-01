@@ -11,6 +11,10 @@ import { SaveValidationError } from "../src/parser/roster-schema.js";
 import { getQuest } from "../src/queries/get-quest.js";
 import { getQuestStateSummary } from "../src/queries/get-quest-state-summary.js";
 import { listQuests } from "../src/queries/list-quests.js";
+import {
+  localizeDungeon,
+  localizeQuest,
+} from "../src/quests/localize-quest.js";
 
 function questDocument(): unknown {
   return {
@@ -77,6 +81,46 @@ test("filters and retrieves quests", () => {
   assert.equal(listQuests(state, { isPlotQuest: true }).length, 0);
   assert.equal(getQuest(state, "generated_0")?.type, "explore");
   assert.equal(getQuest(state, "missing"), undefined);
+});
+
+test("selects one verified dungeon name for the requested language", () => {
+  const quest = getQuest(parseQuestState(questDocument()), "generated_0");
+  assert.ok(quest);
+  assert.deepEqual(localizeQuest(quest, "ko").dungeon, {
+    id: "weald",
+    name: "삼림지대",
+  });
+  assert.deepEqual(localizeDungeon("weald", "en"), {
+    id: "weald",
+    name: "Weald",
+  });
+  assert.deepEqual(localizeDungeon("modded_region", "ko"), {
+    id: "modded_region",
+    name: null,
+  });
+});
+
+test("covers every dungeon id in the checked-in quest sample", async () => {
+  const samplePath = fileURLToPath(
+    new URL("../samples/quest-decoded.json", import.meta.url),
+  );
+  const state = parseQuestStateJson(await readFile(samplePath, "utf8"));
+  const localized = new Map(
+    state.quests.map((quest) => [
+      quest.dungeon,
+      localizeDungeon(quest.dungeon, "ko").name,
+    ]),
+  );
+
+  assert.deepEqual(Object.fromEntries(localized), {
+    cove: "해안 만",
+    crypts: "폐허",
+    darkestdungeon: "가장 어두운 던전",
+    warrens: "사육장",
+    farm: "농장",
+    courtyard: "안뜰",
+    weald: "삼림지대",
+  });
 });
 
 test("parses and summarizes the checked-in quest sample", async () => {

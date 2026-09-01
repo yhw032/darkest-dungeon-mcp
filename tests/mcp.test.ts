@@ -375,7 +375,7 @@ test("MCP server advertises and executes read-only game tools", async (t) => {
 
   const questListResult = await client.callTool({
     name: "list_quests",
-    arguments: { dungeon: expectedQuest.dungeon },
+    arguments: { dungeon: expectedQuest.dungeon, language: "ko" },
   });
   const questListContent = questListResult.structuredContent as
     | Record<string, unknown>
@@ -388,18 +388,26 @@ test("MCP server advertises and executes read-only game tools", async (t) => {
         typeof quest === "object" &&
         quest !== null &&
         "dungeon" in quest &&
-        quest.dungeon === expectedQuest.dungeon,
+        typeof quest.dungeon === "object" &&
+        quest.dungeon !== null &&
+        "id" in quest.dungeon &&
+        quest.dungeon.id === expectedQuest.dungeon &&
+        "name" in quest.dungeon &&
+        typeof quest.dungeon.name === "string",
     ),
   );
 
   const questResult = await client.callTool({
     name: "get_quest",
-    arguments: { questId: expectedQuest.id },
+    arguments: { questId: expectedQuest.id, language: "ko" },
   });
   const questContent = questResult.structuredContent as
     | Record<string, unknown>
     | undefined;
-  assert.deepEqual(questContent?.quest, expectedQuest);
+  assert.deepEqual(questContent?.quest, {
+    ...expectedQuest,
+    dungeon: { id: expectedQuest.dungeon, name: "해안 만" },
+  });
   assert.equal(
     (
       await client.callTool({

@@ -116,7 +116,12 @@ export const questSummarySchema = z.object({
   id: z.string(),
   isPlotQuest: z.boolean(),
   type: z.string(),
-  dungeon: z.string(),
+  dungeon: z.object({
+    id: z.string().describe("Stable dungeon id from the save."),
+    name: z.string().nullable().describe(
+      "Dungeon display name in the requested language; null when no verified mapping exists.",
+    ),
+  }),
   difficulty: z.number().int().nonnegative(),
   length: z.number().int().nonnegative(),
   reward: questRewardSchema,

@@ -57,6 +57,10 @@ import {
   getQuestEligibility,
   loadQuestRestrictionRules,
 } from "../quests/quest-eligibility.js";
+import {
+  localizeQuest,
+  localizeQuestSummary,
+} from "../quests/localize-quest.js";
 import { listQuests } from "../queries/list-quests.js";
 import { queryClasses } from "../queries/query-classes.js";
 import { queryCombatKnowledge } from "../queries/query-combat.js";
@@ -101,6 +105,7 @@ export const serverInstructions = [
   "list_heroes excludes deceased heroes by default; set includeDeceased only when historical records are requested.",
   "Use resolveLevel instead of resolveXp when stating a hero level, and use availability.isAvailableForPartySelection when choosing new party members.",
   "For a specific quest, pass questId to list_heroes or get_hero and use questEligibility instead of inferring level restrictions.",
+  "Pass the user's language to quest tools and use dungeon.name for display; dungeon.id is the stable save identifier.",
   "Use compare_heroes for objective comparisons instead of selecting a winner from raw experience points or class stereotypes.",
   "In hero details, use combatSkillDetails.level for combat skill levels; rawSelectionValue is not a level.",
   "Use combatSkillDetails.usableFromPartyPositions, target, and movement for formation claims instead of relying on class stereotypes.",
@@ -678,17 +683,26 @@ export function createDarkestDungeonServer(
     "list_quests",
     {
       title: "List quests",
-      description: "List normalized quest summaries with optional filters.",
+      description:
+        "List normalized quest summaries with optional filters and one localized dungeon display name.",
       inputSchema: z.object({
-        dungeon: z.string().min(1).optional(),
+        dungeon: z
+          .string()
+          .min(1)
+          .optional()
+          .describe("Raw dungeon id used for filtering, such as crypts or weald."),
         type: z.string().min(1).optional(),
         difficulty: z.number().int().nonnegative().optional(),
         isPlotQuest: z.boolean().optional(),
+        language: z
+          .enum(["en", "ko"])
+          .default("en")
+          .describe("Display language for dungeon.name."),
       }),
       outputSchema: z.object({ quests: z.array(questSummarySchema) }),
       annotations: readOnlyAnnotations,
     },
-    async ({ dungeon, type, difficulty, isPlotQuest }) => {
+    async ({ dungeon, type, difficulty, isPlotQuest, language }) => {
       const state = await dataSource.load();
       const filters = {
         ...(dungeon === undefined ? {} : { dungeon }),
@@ -696,7 +710,12 @@ export function createDarkestDungeonServer(
         ...(difficulty === undefined ? {} : { difficulty }),
         ...(isPlotQuest === undefined ? {} : { isPlotQuest }),
       };
-      return toolResult("quests", listQuests(state.quests, filters));
+      return toolResult(
+        "quests",
+        listQuests(state.quests, filters).map((quest) =>
+          localizeQuestSummary(quest, language),
+        ),
+      );
     },
   );
 
@@ -704,16 +723,23 @@ export function createDarkestDungeonServer(
     "get_quest",
     {
       title: "Get quest details",
-      description: "Return one normalized quest by its quest id.",
-      inputSchema: z.object({ questId: z.string().min(1) }),
+      description:
+        "Return one normalized quest with a localized dungeon display name.",
+      inputSchema: z.object({
+        questId: z.string().min(1),
+        language: z
+          .enum(["en", "ko"])
+          .default("en")
+          .describe("Display language for dungeon.name."),
+      }),
       outputSchema: z.object({ quest: questSchema }),
       annotations: readOnlyAnnotations,
     },
-    async ({ questId }) => {
+    async ({ questId, language }) => {
       const quest = getQuest((await dataSource.load()).quests, questId);
       return quest === undefined
         ? notFoundResult("Quest", questId)
-        : toolResult("quest", quest);
+        : toolResult("quest", localizeQuest(quest, language));
     },
   );
 
