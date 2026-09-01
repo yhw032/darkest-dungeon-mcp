@@ -137,7 +137,6 @@ test("MCP server advertises and executes read-only game tools", async (t) => {
       "get_game_state",
       "get_hero",
       "get_quest",
-      "get_trinket",
       "list_building_upgrades",
       "list_heroes",
       "list_quests",
@@ -413,24 +412,26 @@ test("MCP server advertises and executes read-only game tools", async (t) => {
   );
 
   const trinketResult = await client.callTool({
-    name: "get_trinket",
-    arguments: { trinketId: expectedStoredTrinket.id },
+    name: "list_trinkets",
+    arguments: { id: expectedStoredTrinket.id },
   });
   const trinketContent = trinketResult.structuredContent as
     | Record<string, unknown>
     | undefined;
   assert.equal(
-    (trinketContent?.trinket as { id?: unknown } | undefined)?.id,
+    (
+      trinketContent?.trinkets as Array<{ id?: unknown }> | undefined
+    )?.[0]?.id,
     expectedStoredTrinket.id,
   );
-  assert.equal(
-    (
-      await client.callTool({
-        name: "get_trinket",
-        arguments: { trinketId: "missing-trinket" },
-      })
-    ).isError,
-    true,
+  const missingTrinketResult = await client.callTool({
+    name: "list_trinkets",
+    arguments: { id: "missing-trinket" },
+  });
+  assert.deepEqual(
+    (missingTrinketResult.structuredContent as { trinkets?: unknown })
+      .trinkets,
+    [],
   );
 
   const curioSearchResult = await client.callTool({

@@ -49,7 +49,7 @@ import {
 } from "../quests/quest-eligibility.js";
 import { listQuests } from "../queries/list-quests.js";
 import { searchCurios } from "../queries/search-curios.js";
-import { getTrinket, listTrinkets } from "../queries/trinkets.js";
+import { listTrinkets } from "../queries/trinkets.js";
 import { loadQuirkDefinitions } from "../quirks/load-quirk-definitions.js";
 import {
   getBuildingUpgradeProgress,
@@ -678,9 +678,9 @@ export function createDarkestDungeonServer(
   server.registerTool(
     "list_trinkets",
     {
-      title: "List trinkets",
+      title: "Query trinkets",
       description:
-        "List trinkets across estate storage, equipped heroes, and town stores.",
+        "Query trinkets across estate storage, equipped heroes, and town stores. Supply id for one exact trinket or omit it to list matching trinkets.",
       inputSchema: z.object({
         id: z.string().min(1).optional(),
         location: z.enum(["storage", "equipped", "store"]).optional(),
@@ -695,24 +695,6 @@ export function createDarkestDungeonServer(
         ...(location === undefined ? {} : { location }),
       };
       return toolResult("trinkets", listTrinkets(state, filters));
-    },
-  );
-
-  server.registerTool(
-    "get_trinket",
-    {
-      title: "Get trinket details",
-      description:
-        "Return one trinket with its storage, equipped, and store locations.",
-      inputSchema: z.object({ trinketId: z.string().min(1) }),
-      outputSchema: z.object({ trinket: trinketRecordSchema }),
-      annotations: readOnlyAnnotations,
-    },
-    async ({ trinketId }) => {
-      const trinket = getTrinket(await dataSource.load(), trinketId);
-      return trinket === undefined
-        ? notFoundResult("Trinket", trinketId)
-        : toolResult("trinket", trinket);
     },
   );
 

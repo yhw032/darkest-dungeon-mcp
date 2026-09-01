@@ -130,8 +130,7 @@ runner through `tsx`. Tests never access the user's live save directory.
 | `compare_heroes` | Compare 2–8 heroes using objective readiness, equipment, skill-position, and curated quirk-risk evidence. |
 | `list_quests` | Filter available quests. |
 | `get_quest` | Return one quest by ID. |
-| `list_trinkets` | List trinkets in storage, on heroes, or in stores. |
-| `get_trinket` | Return one trinket across all known locations. |
+| `list_trinkets` | Query all trinkets or one exact ID across storage, heroes, and stores. |
 | `search_curios` | Search verified curios by ID, name, alias, or region. |
 | `get_curio_advice` | Return item-aware interaction advice and warnings. |
 
