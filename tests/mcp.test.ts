@@ -470,6 +470,11 @@ test("MCP server advertises and executes read-only game tools", async (t) => {
         ?.positionGuidance,
     ),
   );
+  assert.equal(
+    (classes[0] as { skillGuidance?: unknown[] } | undefined)?.skillGuidance
+      ?.length,
+    7,
+  );
 
   const curioAdviceResult = await client.callTool({
     name: "get_curio_advice",

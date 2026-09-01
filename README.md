@@ -137,6 +137,8 @@ runner through `tsx`. Tests never access the user's live save directory.
 
 Curio coverage includes shared curios, Ruins, Warrens, Weald, Cove, Courtyard, Farmstead, Darkest Dungeon, Old Road, and relevant Hamlet quests. Retired curios that are no longer used by the game are intentionally excluded.
 
+Class knowledge covers all 18 playable Darkest Dungeon 1 classes and all 126 combat skills. Skill guidance uses internal IDs verified against the installed game definitions and describes use cases, synergies, and cautions without duplicating exact position or target data.
+
 Quirk treatment analysis combines the current roster, installed game definitions, and a conservative editorial policy. It currently covers explicitly curated high-risk rules, primarily forced curio interactions and loot loss, rather than assigning an invented severity to every negative quirk. Results are guidance, not an absolute or exhaustive treatment order.
 
 Combat skill levels combine per-hero purchases from `persist.upgrades.json`

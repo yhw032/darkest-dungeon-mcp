@@ -7,6 +7,44 @@ import {
   parseClassKnowledgeJson,
 } from "../src/knowledge/class-knowledge-schema.js";
 import { loadClassKnowledge } from "../src/knowledge/load-class-knowledge.js";
+import {
+  findClassSkillGuidanceMismatches,
+  validateClassSkillGuidance,
+} from "../src/knowledge/validate-class-skill-guidance.js";
+import type { HeroCombatSkillPositionDefinition } from "../src/domain/hero-skills.js";
+
+const expectedSkillIds: Record<string, string[]> = {
+  abomination: ["transform", "manacles", "vomit", "absolution", "rake", "rage", "slam"],
+  antiquarian: ["kris_stab", "festering_vapours", "cower", "flashpowder", "fortifying_vapours", "invigorating_vapours", "protect_me"],
+  arbalest: ["sniper_shot", "suppressing_fire", "sniper_mark", "bola", "blindfire", "battlefield_bandage", "flare"],
+  bounty_hunter: ["collect_bounty", "target_tag", "come_hither", "uppercut", "flashbang", "finish_him", "hook_and_slice"],
+  crusader: ["smite", "zealous_accusation", "stunning_blow", "bulwark_of_faith", "battle_heal", "holy_lance", "inspiring_cry"],
+  flagellant: ["punish", "rain_of_sorrows", "exsanguinate", "reclaim", "redeem", "endure", "suffer"],
+  grave_robber: ["pick", "lunge", "flashing_daggers", "shadow_fade", "thrown_dagger", "poison_dart", "toxin_trickery"],
+  hellion: ["wicked_hack", "iron_swan", "barbaric_yawp", "if_it_bleeds", "breakthru", "adrenaline_rush", "bleed_out"],
+  highwayman: ["wicked_slice", "pistol_shot", "point_blank_shot", "grape_shot_blast", "take_aim", "duelist_advance", "opened_vein"],
+  houndmaster: ["hounds_rush", "hounds_harry", "whistle", "howl", "guard_dog", "lick_wounds", "blackjack"],
+  jester: ["dirk_stab", "harvest", "heroic_end", "solo", "slice_off", "battle_ballad", "inspiring_tune"],
+  leper: ["chop", "hew", "focus", "revenge", "withstand", "solemnity", "intimidate"],
+  man_at_arms: ["crush", "rampart", "bellow", "defender", "retribution", "command", "bolster"],
+  musketeer: ["aimed_shot", "smokescreen", "call_the_shot", "buckshot", "sidearm", "patch_up", "skeet_shot"],
+  occultist: ["bloodlet", "abyssal_artillery", "weakening_curse", "wyrd_reconstruction", "disruptive_curse", "hands_from_abyss", "daemons_pull"],
+  plague_doctor: ["noxious_blast", "plague_grenade", "blinding_gas", "incision", "battlefield_medicine", "emboldening_vapours", "disorienting_blast"],
+  shieldbreaker: ["pierce", "break_guard", "adders_kiss", "spearing", "expose", "single_out", "serpents_sway"],
+  vestal: ["mace_bash", "judgement", "dazzling_light", "divine_grace", "gods_comfort", "gods_illumination", "gods_hand"],
+};
+
+function positionDefinitions(): HeroCombatSkillPositionDefinition[] {
+  return Object.entries(expectedSkillIds).flatMap(([heroClass, skillIds]) =>
+    skillIds.map((skillId) => ({
+      heroClass,
+      skillId,
+      usableFromPartyPositions: [1],
+      target: { side: "enemy" as const, mode: "single" as const, positions: [1] },
+      movement: { backward: 0, forward: 0 },
+    })),
+  );
+}
 
 function validKnowledge(): unknown {
   return {
@@ -145,5 +183,30 @@ test("loads the checked-in class knowledge base", async () => {
     knowledge.classes.filter(({ dlcs }) => dlcs.length > 0)
       .map(({ id }) => id).sort(),
     ["flagellant", "musketeer", "shieldbreaker"],
+  );
+  assert.equal(
+    knowledge.classes.reduce(
+      (total, classKnowledge) => total + classKnowledge.skillGuidance.length,
+      0,
+    ),
+    126,
+  );
+  validateClassSkillGuidance(knowledge, positionDefinitions());
+});
+
+test("reports missing and unknown skill guidance against game definitions", async () => {
+  const knowledge = structuredClone(await loadClassKnowledge());
+  knowledge.classes.find(({ id }) => id === "plague_doctor")!
+    .skillGuidance[0]!.skillId = "invented_skill";
+
+  assert.deepEqual(
+    findClassSkillGuidanceMismatches(knowledge, positionDefinitions()),
+    [
+      {
+        heroClass: "plague_doctor",
+        missingGuidanceSkillIds: ["noxious_blast"],
+        unknownGuidanceSkillIds: ["invented_skill"],
+      },
+    ],
   );
 });
