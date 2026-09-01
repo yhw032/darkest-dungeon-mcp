@@ -1,8 +1,8 @@
 # Darkest Dungeon MCP
 
-A read-only Model Context Protocol (MCP) server for inspecting **Darkest Dungeon 1** save data and retrieving verified curio interaction advice.
+A read-only Model Context Protocol (MCP) server for inspecting **Darkest Dungeon 1** save data and retrieving verified gameplay knowledge.
 
-The server decodes copied save files into a temporary directory, validates the decoded JSON, and exposes normalized campaign data without modifying the original saves. It also includes a curated knowledge base covering 77 active curios across the base-game regions, the Courtyard, the Farmstead, and quest-specific locations.
+The server decodes copied save files into a temporary directory, validates the decoded JSON, and exposes normalized campaign data without modifying the original saves. It also includes curated knowledge for curios, classes, combat skills, base-region threats, and enemies.
 
 This is an unofficial fan project. It is not affiliated with, endorsed by, or sponsored by Red Hook Studios or the Official Darkest Dungeon Wiki.
 
@@ -132,12 +132,20 @@ runner through `tsx`. Tests never access the user's live save directory.
 | `get_quest` | Return one quest by ID. |
 | `list_trinkets` | Query all trinkets or one exact ID across storage, heroes, and stores. |
 | `query_classes` | Query verified class roles, strengths, limitations, positions, mechanics, and synergies. |
+| `query_combat` | Query verified region and enemy guidance by name, region, threat type, or priority. |
 | `search_curios` | Search verified curios by ID, name, alias, or region. |
 | `get_curio_advice` | Return item-aware interaction advice and warnings. |
 
 Curio coverage includes shared curios, Ruins, Warrens, Weald, Cove, Courtyard, Farmstead, Darkest Dungeon, Old Road, and relevant Hamlet quests. Retired curios that are no longer used by the game are intentionally excluded.
 
 Class knowledge covers all 18 playable Darkest Dungeon 1 classes and all 126 combat skills. Skill guidance uses internal IDs verified against the installed game definitions and describes use cases, synergies, and cautions without duplicating exact position or target data.
+
+Combat knowledge currently covers Ruins, Warrens, Weald, Cove, their
+region-specific enemies, and base-game enemies shared across those regions.
+`query_combat` accepts `query`, `region`, `threat`, `priority`, and `scope`
+filters. The guidance describes qualitative priorities, dangerous actions,
+and counters; it does not provide live turn state, exact enemy stats, bosses,
+or DLC-region coverage.
 
 Quirk treatment analysis combines the current roster, installed game definitions, and a conservative editorial policy. It currently covers explicitly curated high-risk rules, primarily forced curio interactions and loot loss, rather than assigning an invented severity to every negative quirk. Results are guidance, not an absolute or exhaustive treatment order.
 
@@ -181,7 +189,7 @@ Run the CLI without a command to print the complete command and option list.
 
 ## Knowledge data and attribution
 
-The curio knowledge in [`data/knowledge/curios.json`](data/knowledge/curios.json) and class guidance in [`data/knowledge/classes.json`](data/knowledge/classes.json) are adapted from the [Official Darkest Dungeon Wiki](https://darkestdungeon.wiki.gg/wiki/Darkest_Dungeon_Wiki). Individual records retain their source URLs and verification dates.
+The curio knowledge in [`data/knowledge/curios.json`](data/knowledge/curios.json), class guidance in [`data/knowledge/classes.json`](data/knowledge/classes.json), and combat guidance in [`data/knowledge/combat.json`](data/knowledge/combat.json) are adapted from the [Official Darkest Dungeon Wiki](https://darkestdungeon.wiki.gg/wiki/Darkest_Dungeon_Wiki). Individual records retain their source URLs and verification dates.
 
 The wiki material was summarized, normalized into a machine-readable schema, reorganized by interaction, and supplemented with clearly marked recommendation metadata. No wiki images are included. The adapted knowledge data is distributed under [Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International](https://creativecommons.org/licenses/by-nc-sa/4.0/), matching the source license. Reuse of that data must preserve attribution, remain noncommercial, indicate changes, and use the same license for adaptations.
 
