@@ -54,6 +54,62 @@
         { "title": "Official Darkest Dungeon Wiki: Ruins", "url": "https://darkestdungeon.wiki.gg/wiki/Ruins", "verifiedAt": "2026-09-01" },
         { "title": "Official Darkest Dungeon Wiki: Enemy types", "url": "https://darkestdungeon.wiki.gg/wiki/Enemy_Types", "verifiedAt": "2026-09-01" }
       ]
+    },
+    {
+      "id": "warrens",
+      "names": { "en": "Warrens", "ko": "사육장" },
+      "dlcs": [],
+      "overview": "The Warrens is dominated by Human and Beast Swinefolk. Fast backline enemies spread stress, disease, marks, and party disruption while tougher frontliners exploit the resulting openings.",
+      "commonThreats": [
+        {
+          "id": "disease_and_stress",
+          "type": "disease",
+          "description": "Swine Wretches attack quickly from the back ranks, inflicting stress and potentially a random disease on any hero.",
+          "counters": ["Fast backline damage", "Backline stun", "Disease resistance and cures"]
+        },
+        {
+          "id": "mark_support",
+          "type": "mark",
+          "description": "Swine Drummers mark heroes and reduce dodge, enabling dangerous follow-up attacks from other Warrens enemies.",
+          "counters": ["Kill or stun the Drummer", "Clear marks", "Guard the marked hero"]
+        },
+        {
+          "id": "party_disruption",
+          "type": "movement",
+          "description": "Choppers, Swinetaurs, and Skivers can stun, knock heroes back, or pressure multiple party positions at once.",
+          "counters": ["Position-tolerant party", "Stun resistance", "Control high-impact enemies before they act"]
+        },
+        {
+          "id": "champion_backline_burst",
+          "type": "health_damage",
+          "description": "Champion Warrens expeditions add the Swine Skiver, whose backline attacks combine heavy damage with stun, movement, blight, and debuffs.",
+          "counters": ["Pull or shuffle the Skiver forward", "Fast focused damage", "Backline control"]
+        }
+      ],
+      "resistanceTendencies": [
+        { "effect": "bleed", "tendency": "low", "note": "Warrens enemies are generally more practical bleed targets than blight targets, though individual and higher-tier resistances still vary." },
+        { "effect": "blight", "tendency": "high", "note": "Swinefolk commonly resist blight, with resistance increasing at higher expedition difficulties." },
+        { "effect": "stun", "tendency": "mixed", "note": "Small backline enemies are often controllable, while large enemies and Champion variants resist stun more strongly." },
+        { "effect": "move", "tendency": "mixed", "note": "Movement is especially valuable against Swinetaur and Swine Skiver, but reliability falls against larger or higher-tier targets." }
+      ],
+      "recommendedCapabilities": [
+        "Reach enemy positions 3 and 4 quickly",
+        "Apply bleed reliably",
+        "Prevent or cure disease",
+        "Clear marks or protect marked heroes",
+        "Remain functional after party movement",
+        "Pull dangerous backline enemies forward"
+      ],
+      "cautions": [
+        "Do not build the party's primary damage-over-time plan around blight without checking individual resistance.",
+        "Do not let a Swine Wretch or Drummer act repeatedly while attacking a low-pressure frontline enemy.",
+        "Veteran and Champion expeditions require a plan for large enemies and disruptive party-wide attacks.",
+        "Champion expeditions require immediate control or displacement of the Swine Skiver."
+      ],
+      "sources": [
+        { "title": "Official Darkest Dungeon Wiki: Warrens", "url": "https://darkestdungeon.wiki.gg/wiki/Warrens", "verifiedAt": "2026-09-01" },
+        { "title": "Official Darkest Dungeon Wiki: Enemy types", "url": "https://darkestdungeon.wiki.gg/wiki/Enemy_Types", "verifiedAt": "2026-09-01" }
+      ]
     }
   ],
   "enemies": [
@@ -178,6 +234,112 @@
       "effectiveResponses": ["Treat it as an immediate Champion-tier priority.", "Use corpse clearing while working through enemies that screen it."],
       "cautions": ["Repeated stun attempts are not a dependable plan because its stun resistance is exceptionally high.", "Ignoring corpses allows defeated enemies to return at full health."],
       "sources": [{ "title": "Official Darkest Dungeon Wiki: Bone Bearer", "url": "https://darkestdungeon.wiki.gg/wiki/Bone_Bearer", "verifiedAt": "2026-09-01" }]
+    },
+    {
+      "id": "swine_chopper",
+      "enemyType": "common",
+      "names": { "en": "Swine Chopper" },
+      "aliases": ["Swine Wrecker", "Swine Butcher"],
+      "regions": ["warrens"],
+      "dlcs": [],
+      "priority": "medium",
+      "priorityReasons": ["Its durable frontline presence delivers bleed and disruptive stun or knockback.", "Fragile Warrens support enemies usually create greater lasting risk and should often be removed first."],
+      "traits": ["Human", "Beast", "Durable frontline", "Low bleed resistance", "High move resistance"],
+      "dangerousActions": [
+        { "name": "Butcher Cut", "threats": ["health_damage", "bleed", "debuff"], "description": "A frontline attack that causes bleed and at higher difficulty reduces healing received.", "counters": ["Bleed resistance", "Bleed cure", "Guard or damage reduction"] },
+        { "name": "Ball and Chain", "threats": ["health_damage", "stun", "movement"], "description": "Targets the party backline and can stun and knock the victim backward.", "counters": ["Stun resistance", "Position tolerance", "Disable the Chopper"] }
+      ],
+      "effectiveResponses": ["Control it while eliminating Wretches, Drummers, or Skivers behind it.", "Exploit its relatively low bleed resistance instead of relying on movement."],
+      "cautions": ["Leaving it for later is not harmless when bleed or party displacement threatens an already weakened hero."],
+      "sources": [{ "title": "Official Darkest Dungeon Wiki: Swine Chopper", "url": "https://darkestdungeon.wiki.gg/wiki/Swine_Chopper", "verifiedAt": "2026-09-01" }]
+    },
+    {
+      "id": "swine_slasher",
+      "enemyType": "common",
+      "names": { "en": "Swine Slasher" },
+      "aliases": ["Swine Gorer", "Swine Meathooker"],
+      "regions": ["warrens"],
+      "dlcs": [],
+      "priority": "high",
+      "priorityReasons": ["Hook Where It Hurts reaches the first three heroes from any enemy position and has high critical potential.", "Later variants reduce bleed and disease resistance, amplifying other Warrens threats."],
+      "traits": ["Human", "Beast", "High protection", "Broad attack reach", "Stealth at Veteran and Champion difficulty"],
+      "dangerousActions": [
+        { "name": "Hook Where It Hurts", "threats": ["health_damage", "debuff", "movement"], "description": "A high-critical attack that later reduces bleed and disease resistance; the Slasher moves itself backward after attacking.", "counters": ["Armor piercing or protection reduction", "Damage-over-time", "Destealth", "Fast focused damage"] }
+      ],
+      "effectiveResponses": ["Remove it early when its resistance debuff would expose the party to disease or bleed follow-ups.", "Use attacks that bypass protection and can reach it after it retreats."],
+      "cautions": ["Pulling it forward does not disable its attack because Hook Where It Hurts is usable from every enemy position."],
+      "sources": [{ "title": "Official Darkest Dungeon Wiki: Swine Slasher", "url": "https://darkestdungeon.wiki.gg/wiki/Swine_Slasher", "verifiedAt": "2026-09-01" }]
+    },
+    {
+      "id": "swine_wretch",
+      "enemyType": "common",
+      "names": { "en": "Swine Wretch" },
+      "aliases": ["Swine Spawn", "Swine Heaver"],
+      "regions": ["warrens"],
+      "dlcs": [],
+      "priority": "high",
+      "priorityReasons": ["Vomit inflicts persistent expedition costs through stress and random disease.", "High speed and access to every hero let it create risk before slower parties can respond."],
+      "traits": ["Beast", "Fast backline stress dealer", "Disease source", "Low health", "Low early move resistance"],
+      "dangerousActions": [
+        { "name": "Vomit", "threats": ["stress", "disease", "debuff"], "description": "Targets any hero for stress and a chance of random disease, adding a dodge debuff at higher difficulty.", "counters": ["Kill it quickly", "Stun it", "Pull it forward", "Disease resistance and cures"] }
+      ],
+      "effectiveResponses": ["Prioritize it when expedition stress or disease would be costly.", "Use its low health and early control resistances to prevent repeated Vomit attacks."],
+      "cautions": ["Its speed means a slow party may still suffer one Vomit before removing it."],
+      "sources": [{ "title": "Official Darkest Dungeon Wiki: Swine Wretch", "url": "https://darkestdungeon.wiki.gg/wiki/Swine_Wretch", "verifiedAt": "2026-09-01" }]
+    },
+    {
+      "id": "swine_drummer",
+      "enemyType": "common",
+      "names": { "en": "Swine Drummer" },
+      "aliases": ["Swine Marcher", "Swine Warchief"],
+      "regions": ["warrens"],
+      "dlcs": [],
+      "priority": "high",
+      "priorityReasons": ["Drum of Doom inflicts stress across the party.", "Its mark and dodge debuff enable stronger follow-up attacks from other Warrens enemies."],
+      "traits": ["Human", "Beast", "Backline support", "Party-wide stress", "Mark support"],
+      "dangerousActions": [
+        { "name": "Drum of Doom", "threats": ["stress"], "description": "Inflicts stress on the entire party from the enemy backline.", "counters": ["Kill it quickly", "Stun", "Pull it forward"] },
+        { "name": "Drum of Debilitation", "threats": ["mark", "debuff"], "description": "Marks one hero and reduces dodge, setting up allied attacks.", "counters": ["Clear the mark", "Guard the target", "Disable follow-up attackers"] }
+      ],
+      "effectiveResponses": ["Treat it as an early target because both actions increase expedition-level risk.", "Pulling or shuffling it away from the back ranks restricts its support pattern."],
+      "cautions": ["Judge its priority together with enemies that exploit marked targets; the combination is more dangerous than either enemy alone."],
+      "sources": [{ "title": "Official Darkest Dungeon Wiki: Swine Drummer", "url": "https://darkestdungeon.wiki.gg/wiki/Swine_Drummer", "verifiedAt": "2026-09-01" }]
+    },
+    {
+      "id": "swinetaur",
+      "enemyType": "elite",
+      "names": { "en": "Swinetaur" },
+      "aliases": ["Swine Centaur"],
+      "regions": ["warrens"],
+      "dlcs": [],
+      "priority": "high",
+      "priorityReasons": ["From the back ranks it can use a party-wide attack or a powerful charge with stun and knockback.", "Its large health pool and protection make an unfocused damage race inefficient."],
+      "traits": ["Human", "Beast", "Large enemy", "Veteran and Champion expeditions", "High protection", "High resistances"],
+      "dangerousActions": [
+        { "name": "Pig Spear", "threats": ["health_damage"], "description": "A party-wide ranged attack used from the rear enemy positions.", "counters": ["Force it to enemy position 1", "Damage reduction", "Party-wide recovery"] },
+        { "name": "Boar Rush", "threats": ["health_damage", "stun", "movement"], "description": "A powerful charge from the rear that can stun and knock a hero backward while moving the Swinetaur forward.", "counters": ["Force it to enemy position 1", "Stun resistance", "Guard an endangered hero"] }
+      ],
+      "effectiveResponses": ["Eliminate its allies and their corpses so its size traps it in enemy position 1.", "In the front it is restricted to the weaker Crunching Backhand before using Trot Retreat to reposition."],
+      "cautions": ["Direct movement and stun attempts can be unreliable because of its high resistances.", "Leaving corpses or another enemy in front gives it room to regain its dangerous rear-position pattern."],
+      "sources": [{ "title": "Official Darkest Dungeon Wiki: Swinetaur", "url": "https://darkestdungeon.wiki.gg/wiki/Swinetaur", "verifiedAt": "2026-09-01" }]
+    },
+    {
+      "id": "swine_skiver",
+      "enemyType": "elite",
+      "names": { "en": "Swine Skiver" },
+      "aliases": [],
+      "regions": ["warrens"],
+      "dlcs": [],
+      "priority": "critical",
+      "priorityReasons": ["Spit to Roast combines heavy damage, stun, and knockback and preferentially threatens marked heroes.", "Cripple Them attacks three heroes while applying blight and combat debuffs."],
+      "traits": ["Human", "Beast", "Champion expeditions", "Backline attacker", "Mark synergy", "High speed"],
+      "dangerousActions": [
+        { "name": "Spit to Roast", "threats": ["health_damage", "stun", "movement", "mark"], "description": "A severe single-target attack from the rear that stuns and knocks the victim backward, with increased danger to marked heroes.", "counters": ["Pull the Skiver to enemy position 1", "Clear marks", "Guard the marked hero", "Stun or kill it"] },
+        { "name": "Cripple Them", "threats": ["health_damage", "blight", "debuff"], "description": "Attacks party positions 2 through 4 together, applying blight and reducing dodge and speed.", "counters": ["Pull the Skiver to enemy position 1", "Blight resistance and cure", "Party-wide recovery"] }
+      ],
+      "effectiveResponses": ["Treat it as an immediate Champion-tier priority.", "Pull or shuffle it into enemy position 1, where it must use the weaker Goring Flight to move backward."],
+      "cautions": ["Goring Flight restores its access to dangerous backline attacks, so displacement may need to be repeated.", "A marked hero makes Spit to Roast especially urgent."],
+      "sources": [{ "title": "Official Darkest Dungeon Wiki: Swine Skiver", "url": "https://darkestdungeon.wiki.gg/wiki/Swine_Skiver", "verifiedAt": "2026-09-01" }]
     }
   ]
 }

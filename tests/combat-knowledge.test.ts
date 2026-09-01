@@ -148,7 +148,10 @@ test("loads the checked-in combat knowledge base", async () => {
   const knowledge = await loadCombatKnowledge();
 
   assert.equal(knowledge.schemaVersion, 1);
-  assert.deepEqual(knowledge.regions.map(({ id }) => id), ["ruins"]);
+  assert.deepEqual(knowledge.regions.map(({ id }) => id), [
+    "ruins",
+    "warrens",
+  ]);
   assert.deepEqual(
     knowledge.enemies.map(({ id }) => id),
     [
@@ -159,16 +162,40 @@ test("loads the checked-in combat knowledge base", async () => {
       "bone_spearman",
       "bone_captain",
       "bone_bearer",
+      "swine_chopper",
+      "swine_slasher",
+      "swine_wretch",
+      "swine_drummer",
+      "swinetaur",
+      "swine_skiver",
     ],
   );
   assert.equal(
     knowledge.enemies.find(({ id }) => id === "bone_bearer")?.priority,
     "critical",
   );
+  assert.equal(
+    knowledge.enemies.find(({ id }) => id === "swine_skiver")?.priority,
+    "critical",
+  );
   assert.ok(
-    knowledge.enemies.every(
+    knowledge.enemies
+      .filter(({ regions }) => regions.includes("ruins"))
+      .every(
       ({ regions, dangerousActions, effectiveResponses, sources }) =>
         regions.includes("ruins") &&
+        dangerousActions.length > 0 &&
+        effectiveResponses.length > 0 &&
+        sources.length > 0,
+    ),
+  );
+  const warrensEnemies = knowledge.enemies.filter(({ regions }) =>
+    regions.includes("warrens"),
+  );
+  assert.equal(warrensEnemies.length, 6);
+  assert.ok(
+    warrensEnemies.every(
+      ({ dangerousActions, effectiveResponses, sources }) =>
         dangerousActions.length > 0 &&
         effectiveResponses.length > 0 &&
         sources.length > 0,
