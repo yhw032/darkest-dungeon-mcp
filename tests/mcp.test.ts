@@ -132,6 +132,34 @@ test("MCP server advertises and executes read-only game tools", async (t) => {
   );
   assert.ok(tools.every((tool) => tool.annotations?.readOnlyHint === true));
 
+  const listHeroesTool = tools.find((tool) => tool.name === "list_heroes");
+  const listHeroesOutput = listHeroesTool?.outputSchema as
+    | {
+        properties?: {
+          heroes?: {
+            items?: { properties?: Record<string, { description?: string }> };
+          };
+        };
+      }
+    | undefined;
+  const heroProperties = listHeroesOutput?.properties?.heroes?.items?.properties;
+  assert.ok(heroProperties?.id);
+  assert.ok(heroProperties?.name);
+  assert.match(heroProperties?.resolveXp?.description ?? "", /not the hero's resolve level/i);
+  assert.match(heroProperties?.rosterStatus?.description ?? "", /do not infer availability/i);
+
+  const getHeroTool = tools.find((tool) => tool.name === "get_hero");
+  const getHeroOutput = getHeroTool?.outputSchema as
+    | {
+        properties?: {
+          hero?: { properties?: Record<string, unknown> };
+          townContext?: { properties?: Record<string, unknown> };
+        };
+      }
+    | undefined;
+  assert.ok(getHeroOutput?.properties?.hero?.properties?.combatSkillDetails);
+  assert.ok(getHeroOutput?.properties?.townContext?.properties?.activityAssignments);
+
   const summaryResult = await client.callTool({
     name: "get_game_state",
     arguments: { stressThreshold: 50 },

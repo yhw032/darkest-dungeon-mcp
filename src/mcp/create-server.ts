@@ -1,5 +1,19 @@
 import { McpServer } from "@modelcontextprotocol/server";
 import { z } from "zod";
+import {
+  buildingUpgradeProgressSchema,
+  curioAdviceSchema,
+  curioRegionSchema,
+  curioSummarySchema,
+  gameStateSummarySchema,
+  heroDetailSchema,
+  heroSummarySchema,
+  heroTownContextSchema,
+  questSchema,
+  questSummarySchema,
+  riskyHeroSchema,
+  trinketRecordSchema,
+} from "./output-schemas.js";
 
 import type { BuildingUpgradeTree } from "../domain/building-upgrades.js";
 import type { CurioKnowledgeBase } from "../domain/curio-knowledge.js";
@@ -34,18 +48,6 @@ const readOnlyAnnotations = {
   destructiveHint: false,
   idempotentHint: true,
 } as const;
-
-const curioRegionSchema = z.enum([
-  "ruins",
-  "warrens",
-  "weald",
-  "cove",
-  "courtyard",
-  "farmstead",
-  "darkest_dungeon",
-  "old_road",
-  "hamlet",
-]);
 
 export interface DarkestDungeonServerOptions {
   loadCurioKnowledge?: () => Promise<CurioKnowledgeBase>;
@@ -168,7 +170,7 @@ export function createDarkestDungeonServer(
       inputSchema: z.object({
         stressThreshold: z.number().finite().nonnegative().optional(),
       }),
-      outputSchema: z.object({ gameState: z.unknown() }),
+      outputSchema: z.object({ gameState: gameStateSummarySchema }),
       annotations: readOnlyAnnotations,
     },
     async ({ stressThreshold }) =>
@@ -187,7 +189,7 @@ export function createDarkestDungeonServer(
       inputSchema: z.object({
         buildingId: z.string().min(1).optional(),
       }),
-      outputSchema: z.object({ upgrades: z.array(z.unknown()) }),
+      outputSchema: z.object({ upgrades: z.array(buildingUpgradeProgressSchema) }),
       annotations: readOnlyAnnotations,
     },
     async ({ buildingId }) => {
@@ -218,8 +220,8 @@ export function createDarkestDungeonServer(
         limit: z.number().int().min(1).max(50).default(10),
       }),
       outputSchema: z.object({
-        policy: z.unknown(),
-        heroes: z.array(z.unknown()),
+        policy: z.object({ title: z.string(), disclaimer: z.string() }),
+        heroes: z.array(riskyHeroSchema),
       }),
       annotations: readOnlyAnnotations,
     },
@@ -263,7 +265,7 @@ export function createDarkestDungeonServer(
         rosterStatus: z.number().int().optional(),
         maxStress: z.number().finite().nonnegative().optional(),
       }),
-      outputSchema: z.object({ heroes: z.array(z.unknown()) }),
+      outputSchema: z.object({ heroes: z.array(heroSummarySchema) }),
       annotations: readOnlyAnnotations,
     },
     async ({ heroClass, rosterStatus, maxStress }) => {
@@ -285,8 +287,8 @@ export function createDarkestDungeonServer(
         "Return one normalized hero with verified combat skill levels when game definitions are available, plus their current town activity context. Raw selection values are not skill levels.",
       inputSchema: z.object({ heroId: z.string().min(1) }),
       outputSchema: z.object({
-        hero: z.unknown(),
-        townContext: z.unknown(),
+        hero: heroDetailSchema,
+        townContext: heroTownContextSchema,
       }),
       annotations: readOnlyAnnotations,
     },
@@ -343,7 +345,7 @@ export function createDarkestDungeonServer(
         difficulty: z.number().int().nonnegative().optional(),
         isPlotQuest: z.boolean().optional(),
       }),
-      outputSchema: z.object({ quests: z.array(z.unknown()) }),
+      outputSchema: z.object({ quests: z.array(questSummarySchema) }),
       annotations: readOnlyAnnotations,
     },
     async ({ dungeon, type, difficulty, isPlotQuest }) => {
@@ -364,7 +366,7 @@ export function createDarkestDungeonServer(
       title: "Get quest details",
       description: "Return one normalized quest by its quest id.",
       inputSchema: z.object({ questId: z.string().min(1) }),
-      outputSchema: z.object({ quest: z.unknown() }),
+      outputSchema: z.object({ quest: questSchema }),
       annotations: readOnlyAnnotations,
     },
     async ({ questId }) => {
@@ -385,7 +387,7 @@ export function createDarkestDungeonServer(
         id: z.string().min(1).optional(),
         location: z.enum(["storage", "equipped", "store"]).optional(),
       }),
-      outputSchema: z.object({ trinkets: z.array(z.unknown()) }),
+      outputSchema: z.object({ trinkets: z.array(trinketRecordSchema) }),
       annotations: readOnlyAnnotations,
     },
     async ({ id, location }) => {
@@ -405,7 +407,7 @@ export function createDarkestDungeonServer(
       description:
         "Return one trinket with its storage, equipped, and store locations.",
       inputSchema: z.object({ trinketId: z.string().min(1) }),
-      outputSchema: z.object({ trinket: z.unknown() }),
+      outputSchema: z.object({ trinket: trinketRecordSchema }),
       annotations: readOnlyAnnotations,
     },
     async ({ trinketId }) => {
@@ -427,7 +429,7 @@ export function createDarkestDungeonServer(
         region: curioRegionSchema.optional(),
         limit: z.number().int().min(1).max(50).default(20),
       }),
-      outputSchema: z.object({ curios: z.array(z.unknown()) }),
+      outputSchema: z.object({ curios: z.array(curioSummarySchema) }),
       annotations: readOnlyAnnotations,
     },
     async ({ query, region, limit }) => {
@@ -460,7 +462,7 @@ export function createDarkestDungeonServer(
             Number(curioId !== undefined) + Number(name !== undefined) === 1,
           { message: "Provide exactly one of curioId or name." },
         ),
-      outputSchema: z.object({ advice: z.unknown() }),
+      outputSchema: z.object({ advice: curioAdviceSchema }),
       annotations: readOnlyAnnotations,
     },
     async ({ curioId, name, availableItems }) => {
