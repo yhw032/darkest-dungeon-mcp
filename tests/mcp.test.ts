@@ -276,6 +276,25 @@ test("MCP server advertises and executes read-only game tools", async (t) => {
         movement: { backward: 0, forward: 0 },
       }),
     ),
+    combatPositionAnalysis: {
+      status: "complete",
+      selectedSkillCount: expectedHero.combatSkillSelections.length,
+      definedSkillCount: expectedHero.combatSkillSelections.length,
+      rankCoverage: [1, 2, 3, 4].map((rank) => ({
+        rank,
+        usableSkillIds:
+          rank >= 2
+            ? expectedHero.combatSkillSelections.map(({ id }) => id)
+            : [],
+        unusableSkillIds:
+          rank >= 2
+            ? []
+            : expectedHero.combatSkillSelections.map(({ id }) => id),
+        unknownSkillIds: [],
+      })),
+      fullyUsablePartyRanks: [2, 3, 4],
+      bestCoveragePartyRanks: [2, 3, 4],
+    },
   });
 
   const missingResult = await client.callTool({

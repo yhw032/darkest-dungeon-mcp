@@ -37,6 +37,7 @@ import {
 } from "../progression/hero-progression.js";
 import { getHero } from "../queries/get-hero.js";
 import { loadHeroCombatSkillPositions } from "../skills/combat-skill-positions.js";
+import { analyzeHeroCombatPositions } from "../skills/analyze-combat-positions.js";
 import { getQuest } from "../queries/get-quest.js";
 import { listHeroes } from "../queries/list-heroes.js";
 import { listQuests } from "../queries/list-quests.js";
@@ -76,6 +77,7 @@ export const serverInstructions = [
   "Use resolveLevel instead of resolveXp when stating a hero level, and use availability.isAvailableForPartySelection when choosing new party members.",
   "In hero details, use combatSkillDetails.level for combat skill levels; rawSelectionValue is not a level.",
   "Use combatSkillDetails.usableFromRanks, target, and movement for position claims instead of relying on class stereotypes.",
+  "Use combatPositionAnalysis for objective selected-skill rank coverage; bestCoveragePartyRanks is not by itself a tactical recommendation.",
   "Use list_building_upgrades for verified building upgrade progress and next costs.",
   "Use list_risky_quirks for treatment-priority questions, and present its policy as editorial guidance rather than an absolute game value.",
   "For curio questions, call search_curios when the identity is uncertain, then call get_curio_advice.",
@@ -371,16 +373,18 @@ export function createDarkestDungeonServer(
         state.town,
         heroId,
       );
+      const combatSkillDetails = getHeroCombatSkillDetails(
+        hero,
+        state.upgrades,
+        skillTrees,
+        skillPositions,
+      );
       const heroDetails = {
         ...hero,
         resolveLevel: getResolveLevel(hero.resolveXp, progressionRules),
         availability: getHeroAvailability(hero, townContext!),
-        combatSkillDetails: getHeroCombatSkillDetails(
-          hero,
-          state.upgrades,
-          skillTrees,
-          skillPositions,
-        ),
+        combatSkillDetails,
+        combatPositionAnalysis: analyzeHeroCombatPositions(combatSkillDetails),
       };
 
       return {

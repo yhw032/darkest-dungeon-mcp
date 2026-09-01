@@ -204,6 +204,27 @@ const combatSkillDetailSchema = z.object({
     .nullable()
     .describe("Ranks moved after use; zeroes mean no movement, null means definitions unavailable."),
 });
+const combatPositionAnalysisSchema = z.object({
+  status: z
+    .enum(["complete", "partial", "unavailable"])
+    .describe("Whether position definitions cover all, some, or none of the selected skills."),
+  selectedSkillCount: count,
+  definedSkillCount: count,
+  rankCoverage: z.array(
+    z.object({
+      rank: z.number().int().min(1).max(4),
+      usableSkillIds: z.array(z.string()),
+      unusableSkillIds: z.array(z.string()),
+      unknownSkillIds: z.array(z.string()),
+    }),
+  ),
+  fullyUsablePartyRanks: z
+    .array(z.number().int().min(1).max(4))
+    .describe("Ranks where every selected skill is usable; empty unless analysis is complete."),
+  bestCoveragePartyRanks: z
+    .array(z.number().int().min(1).max(4))
+    .describe("Ranks enabling the largest number of selected skills; not an editorial recommendation."),
+});
 
 export const heroDetailSchema = heroSummarySchema.extend({
   buildingName: nullableString,
@@ -222,6 +243,7 @@ export const heroDetailSchema = heroSummarySchema.extend({
   combatSkillSelections: z.array(skillSelectionSchema),
   campingSkillSelections: z.array(skillSelectionSchema),
   combatSkillDetails: z.array(combatSkillDetailSchema),
+  combatPositionAnalysis: combatPositionAnalysisSchema,
 });
 
 export const heroTownContextSchema = z.object({

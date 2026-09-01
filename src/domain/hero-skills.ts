@@ -37,3 +37,19 @@ export interface HeroCombatSkillPositionDefinition {
   target: HeroCombatSkillTarget;
   movement: HeroCombatSkillMovement;
 }
+
+export interface HeroRankCoverage {
+  rank: number;
+  usableSkillIds: string[];
+  unusableSkillIds: string[];
+  unknownSkillIds: string[];
+}
+
+export interface HeroCombatPositionAnalysis {
+  status: "complete" | "partial" | "unavailable";
+  selectedSkillCount: number;
+  definedSkillCount: number;
+  rankCoverage: HeroRankCoverage[];
+  fullyUsablePartyRanks: number[];
+  bestCoveragePartyRanks: number[];
+}

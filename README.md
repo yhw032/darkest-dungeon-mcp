@@ -147,6 +147,9 @@ levels. Without `--game-dir`, `get_hero` returns selected skills with
 With a configured game installation, combat skill details also include the
 hero ranks where each skill can be used, its target side and ranks, whether it
 targets one, a group, or a random unit, and any forward or backward movement.
+`get_hero` also summarizes the selected loadout as objective per-rank coverage,
+including ranks where every selected skill works and ranks with the highest
+skill count. These fields do not apply an editorial viability threshold.
 
 Hero resolve levels are derived from the thresholds in the configured game
 installation. Hero results also report whether each hero can be newly selected
