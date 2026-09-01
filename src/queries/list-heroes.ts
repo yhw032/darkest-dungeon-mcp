@@ -6,6 +6,11 @@ import {
   getHeroAvailability,
   getResolveLevel,
 } from "../progression/hero-progression.js";
+import {
+  getHeroRosterState,
+  isDeceasedHero,
+  type HeroRosterState,
+} from "../roster/hero-roster-state.js";
 import { getHeroTownContext } from "./get-hero-town-context.js";
 
 type RawHeroSummary = Pick<
@@ -20,6 +25,7 @@ type RawHeroSummary = Pick<
 >;
 
 export interface HeroSummary extends RawHeroSummary {
+  rosterState: HeroRosterState;
   resolveLevel: number | null;
   availability: {
     isAvailableForPartySelection: boolean;
@@ -37,6 +43,7 @@ export interface HeroFilters {
   rosterStatus?: number;
   maxStress?: number;
   availableOnly?: boolean;
+  includeDeceased?: boolean;
 }
 
 export function toHeroSummary(
@@ -64,6 +71,7 @@ export function toHeroSummary(
     resolveXp,
     stress,
     rosterStatus,
+    rosterState: getHeroRosterState(rosterStatus),
     currentHp,
     resolveLevel: getResolveLevel(resolveXp, progressionRules),
     availability: getHeroAvailability(hero, townContext),
@@ -80,6 +88,8 @@ export function listHeroes(
   return roster.heroes
     .filter(
       (hero) =>
+        (filters.includeDeceased === true ||
+          !isDeceasedHero(hero.rosterStatus)) &&
         (filters.heroClass === undefined ||
           hero.heroClass === filters.heroClass) &&
         (filters.rosterStatus === undefined ||

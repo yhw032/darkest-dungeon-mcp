@@ -49,6 +49,7 @@ const roster: Roster = {
       rosterStatus: 1,
     }),
     makeHero({ id: "3", name: "디스마스", stress: 150 }),
+    makeHero({ id: "4", name: "Deceased", stress: 200, rosterStatus: 3 }),
   ],
 };
 
@@ -74,6 +75,18 @@ test("filters heroes by class, status, and maximum stress", () => {
   assert.deepEqual(
     listHeroes(roster, { availableOnly: true }).map((hero) => hero.id),
     ["1", "3"],
+  );
+});
+
+test("excludes deceased heroes by default and includes them on request", () => {
+  assert.deepEqual(listHeroes(roster).map((hero) => hero.id), ["1", "2", "3"]);
+  assert.deepEqual(
+    listHeroes(roster, { includeDeceased: true }).map((hero) => hero.id),
+    ["1", "2", "3", "4"],
+  );
+  assert.equal(
+    listHeroes(roster, { includeDeceased: true })[3]?.rosterState,
+    "deceased",
   );
 });
 
@@ -126,9 +139,12 @@ test("links a hero to matching town activity slots", () => {
 test("summarizes counts and sorts high-stress heroes", () => {
   const summary = summarizeRoster(roster, 100);
 
-  assert.equal(summary.totalHeroes, 3);
+  assert.equal(summary.activeHeroes, 3);
+  assert.equal(summary.deceasedHeroes, 1);
+  assert.equal(summary.unknownStateHeroes, 0);
+  assert.equal(summary.totalHeroRecords, 4);
   assert.deepEqual(summary.byClass, { crusader: 2, vestal: 1 });
-  assert.deepEqual(summary.byStatus, { "0": 2, "1": 1 });
+  assert.deepEqual(summary.byStatus, { "0": 2, "1": 1, "3": 1 });
   assert.deepEqual(
     summary.highStressHeroes.map((hero) => hero.id),
     ["3", "2"],

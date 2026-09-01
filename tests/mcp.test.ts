@@ -167,6 +167,7 @@ test("MCP server advertises and executes read-only game tools", async (t) => {
   assert.ok(heroProperties?.name);
   assert.match(heroProperties?.resolveXp?.description ?? "", /not the hero's resolve level/i);
   assert.match(heroProperties?.rosterStatus?.description ?? "", /do not infer availability/i);
+  assert.match(heroProperties?.rosterState?.description ?? "", /deceased heroes are excluded/i);
 
   const getHeroTool = tools.find((tool) => tool.name === "get_hero");
   const getHeroOutput = getHeroTool?.outputSchema as
@@ -248,7 +249,9 @@ test("MCP server advertises and executes read-only game tools", async (t) => {
         typeof hero === "object" &&
         hero !== null &&
         "heroClass" in hero &&
-        hero.heroClass === expectedHero.heroClass,
+        hero.heroClass === expectedHero.heroClass &&
+        "rosterState" in hero &&
+        hero.rosterState !== "deceased",
     ),
   );
 
@@ -283,6 +286,7 @@ test("MCP server advertises and executes read-only game tools", async (t) => {
     | undefined;
   assert.deepEqual(heroContent?.hero, {
     ...expectedHero,
+    rosterState: "deceased",
     resolveLevel: expectedHero.resolveXp >= 2 ? 1 : 0,
     availability: {
       isAvailableForPartySelection:

@@ -63,6 +63,7 @@ import { queryCombatKnowledge } from "../queries/query-combat.js";
 import { searchCurios } from "../queries/search-curios.js";
 import { listTrinkets } from "../queries/trinkets.js";
 import { loadQuirkDefinitions } from "../quirks/load-quirk-definitions.js";
+import { getHeroRosterState } from "../roster/hero-roster-state.js";
 import {
   getBuildingUpgradeProgress,
   loadBuildingUpgradeTrees,
@@ -96,6 +97,8 @@ export interface DarkestDungeonServerOptions {
 export const serverInstructions = [
   "This read-only server provides normalized Darkest Dungeon 1 save state and verified gameplay knowledge.",
   "Use save-state tools for facts about the current campaign instead of guessing.",
+  "Use roster.activeHeroes for the current barracks count; roster.totalHeroRecords includes deceased history.",
+  "list_heroes excludes deceased heroes by default; set includeDeceased only when historical records are requested.",
   "Use resolveLevel instead of resolveXp when stating a hero level, and use availability.isAvailableForPartySelection when choosing new party members.",
   "For a specific quest, pass questId to list_heroes or get_hero and use questEligibility instead of inferring level restrictions.",
   "Use compare_heroes for objective comparisons instead of selecting a winner from raw experience points or class stereotypes.",
@@ -380,6 +383,10 @@ export function createDarkestDungeonServer(
         rosterStatus: z.number().int().optional(),
         maxStress: z.number().finite().nonnegative().optional(),
         availableOnly: z.boolean().default(false),
+        includeDeceased: z
+          .boolean()
+          .default(false)
+          .describe("Include deceased historical hero records. Defaults to false."),
         questId: z.string().min(1).optional(),
         eligibleOnly: z.boolean().default(false),
       }).refine(
@@ -394,6 +401,7 @@ export function createDarkestDungeonServer(
       rosterStatus,
       maxStress,
       availableOnly,
+      includeDeceased,
       questId,
       eligibleOnly,
     }) => {
@@ -415,6 +423,7 @@ export function createDarkestDungeonServer(
         ...(rosterStatus === undefined ? {} : { rosterStatus }),
         ...(maxStress === undefined ? {} : { maxStress }),
         availableOnly,
+        includeDeceased,
       };
       const heroes = listHeroes(
         state.roster,
@@ -635,6 +644,7 @@ export function createDarkestDungeonServer(
       const resolveLevel = getResolveLevel(hero.resolveXp, progressionRules);
       const heroDetails = {
         ...hero,
+        rosterState: getHeroRosterState(hero.rosterStatus),
         resolveLevel,
         availability: getHeroAvailability(hero, townContext!),
         questEligibility:

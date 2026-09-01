@@ -61,10 +61,13 @@ test("builds a combined game-state summary", async () => {
     quests: 42,
     upgrades: 1,
   });
-  assert.equal(summary.roster.totalHeroes, 24);
+  assert.equal(summary.roster.activeHeroes, 18);
+  assert.equal(summary.roster.deceasedHeroes, 6);
+  assert.equal(summary.roster.unknownStateHeroes, 0);
+  assert.equal(summary.roster.totalHeroRecords, 24);
   assert.deepEqual(
     summary.roster.highStressHeroes.map((hero) => hero.stress),
-    [200, 179],
+    [],
   );
   assert.equal(
     summary.estate.resources.find((resource) => resource.type === "gold")

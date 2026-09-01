@@ -35,6 +35,16 @@ test("CLI lists filtered heroes as JSON", () => {
   );
 });
 
+test("CLI excludes deceased heroes unless explicitly requested", () => {
+  const defaultResult = runCli("heroes");
+  const historyResult = runCli("heroes", "--include-deceased", "true");
+
+  assert.equal(defaultResult.status, 0, defaultResult.stderr);
+  assert.equal(historyResult.status, 0, historyResult.stderr);
+  assert.equal((JSON.parse(defaultResult.stdout) as { total: number }).total, 18);
+  assert.equal((JSON.parse(historyResult.stdout) as { total: number }).total, 24);
+});
+
 test("CLI reports an unknown hero on stderr", () => {
   const result = runCli("hero", "missing");
 
@@ -94,7 +104,12 @@ test("CLI reports the combined game state as JSON", () => {
       quests: number;
       upgrades: number;
     };
-    roster: { totalHeroes: number; highStressHeroes: unknown[] };
+    roster: {
+      activeHeroes: number;
+      deceasedHeroes: number;
+      totalHeroRecords: number;
+      highStressHeroes: unknown[];
+    };
     estate: { trinkets: { totalAmount: number } };
   };
   assert.deepEqual(output.versions, {
@@ -104,8 +119,10 @@ test("CLI reports the combined game state as JSON", () => {
     quests: 42,
     upgrades: 1,
   });
-  assert.equal(output.roster.totalHeroes, 24);
-  assert.equal(output.roster.highStressHeroes.length, 2);
+  assert.equal(output.roster.activeHeroes, 18);
+  assert.equal(output.roster.deceasedHeroes, 6);
+  assert.equal(output.roster.totalHeroRecords, 24);
+  assert.equal(output.roster.highStressHeroes.length, 0);
   assert.equal(output.estate.trinkets.totalAmount, 19);
 });
 

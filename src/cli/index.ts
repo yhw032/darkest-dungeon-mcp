@@ -33,7 +33,7 @@ import {
 } from "../queries/trinkets.js";
 
 const usage = `Usage:
-  npm run cli -- heroes [-- --class <class> --status <number> --max-stress <number> --file <path>]
+  npm run cli -- heroes [-- --class <class> --status <number> --max-stress <number> --include-deceased <true|false> --file <path>]
   npm run cli -- hero <id> [-- --file <path> --town-file <path>]
   npm run cli -- summary [-- --stress-threshold <number> --file <path>]
   npm run cli -- resources [-- --file <path>]
@@ -176,7 +176,7 @@ async function main(args: string[]): Promise<void> {
 
   switch (command) {
     case "heroes": {
-      assertKnownOptions(options, ["file", "class", "status", "max-stress"]);
+      assertKnownOptions(options, ["file", "class", "status", "max-stress", "include-deceased"]);
       if (id !== undefined || extraPositionals.length > 0) {
         throw new Error("heroes does not accept positional arguments");
       }
@@ -188,10 +188,12 @@ async function main(args: string[]): Promise<void> {
       const heroClass = options.get("class");
       const rosterStatus = numberOption(options, "status");
       const maxStress = numberOption(options, "max-stress");
+      const includeDeceased = booleanOption(options, "include-deceased");
 
       if (heroClass !== undefined) filters.heroClass = heroClass;
       if (rosterStatus !== undefined) filters.rosterStatus = rosterStatus;
       if (maxStress !== undefined) filters.maxStress = maxStress;
+      if (includeDeceased !== undefined) filters.includeDeceased = includeDeceased;
 
       const heroes = listHeroes(roster, filters);
       output = { total: heroes.length, heroes };

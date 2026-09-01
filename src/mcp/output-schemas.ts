@@ -72,6 +72,9 @@ export const heroSummarySchema = z.object({
     .number()
     .int()
     .describe("Raw save roster status code; do not infer availability from this field alone."),
+  rosterState: z
+    .enum(["active", "deceased", "unknown"])
+    .describe("Verified lifecycle classification. Deceased heroes are excluded from list_heroes by default."),
   currentHp: finiteNumber
     .nullable()
     .describe("Raw current_hp save value; null when absent. Do not assume its display unit."),
@@ -142,9 +145,12 @@ export const gameStateSummarySchema = z.object({
     upgrades: z.number().int(),
   }),
   roster: z.object({
-    totalHeroes: count,
-    byClass: z.record(z.string(), count),
-    byStatus: z.record(z.string(), count),
+    activeHeroes: count.describe("Current barracks heroes; excludes deceased records."),
+    deceasedHeroes: count.describe("Historical hero records verified as deceased."),
+    unknownStateHeroes: count.describe("Records whose raw roster status is not yet classified."),
+    totalHeroRecords: count.describe("All save records, including deceased and unknown-state records."),
+    byClass: z.record(z.string(), count).describe("Class counts for active heroes only."),
+    byStatus: z.record(z.string(), count).describe("Counts of all records by raw roster status."),
     stressThreshold: finiteNumber,
     highStressHeroes: z.array(heroSummarySchema),
   }),
