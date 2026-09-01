@@ -110,6 +110,63 @@
         { "title": "Official Darkest Dungeon Wiki: Warrens", "url": "https://darkestdungeon.wiki.gg/wiki/Warrens", "verifiedAt": "2026-09-01" },
         { "title": "Official Darkest Dungeon Wiki: Enemy types", "url": "https://darkestdungeon.wiki.gg/wiki/Enemy_Types", "verifiedAt": "2026-09-01" }
       ]
+    },
+    {
+      "id": "weald",
+      "names": { "en": "Weald", "ko": "삼림지대" },
+      "dlcs": [],
+      "overview": "The Weald combines fast swarming enemies, durable fungal frontliners, dangerous mark synergies, and large high-damage threats. Backline support enemies often make otherwise manageable frontliners lethal.",
+      "commonThreats": [
+        {
+          "id": "fungal_mark_combo",
+          "type": "mark",
+          "description": "Fungal Artillery and Crones mark and debuff heroes so Fungal Scratchers can use their stronger marked-target attack.",
+          "counters": ["Kill or control the marker first", "Clear marks", "Move a marked frontline hero out of reach"]
+        },
+        {
+          "id": "bleed_blight_disease",
+          "type": "other",
+          "description": "Gnashers inflict bleed and disease while fungal enemies and Giants apply blight, creating simultaneous damage-over-time pressure.",
+          "counters": ["Bring both bleed and blight cures", "Disease resistance", "Prevent fast enemies from acting repeatedly"]
+        },
+        {
+          "id": "multiplying_ectoplasm",
+          "type": "summon",
+          "description": "Ectoplasms can multiply or merge when other Ectoplasms and their corpses remain available, prolonging the battle.",
+          "counters": ["Focus Ectoplasms one at a time", "Clear corpses", "Use attacks that leave no corpse"]
+        },
+        {
+          "id": "large_enemy_burst",
+          "type": "health_damage",
+          "description": "Unclean Giants combine extreme frontline burst with party shuffle and blight, while resisting many direct control effects.",
+          "counters": ["Damage debuffs", "Guard or protection", "Position-tolerant party", "Reliable recovery"]
+        }
+      ],
+      "resistanceTendencies": [
+        { "effect": "bleed", "tendency": "low", "note": "Bleed is the region's most consistent damage-over-time option and bypasses fungal protection." },
+        { "effect": "blight", "tendency": "high", "note": "Fungal and other Weald enemies commonly resist blight, especially at higher difficulty." },
+        { "effect": "debuff", "tendency": "mixed", "note": "Small enemies vary, but the Unclean Giant is notably more practical to weaken than to move." },
+        { "effect": "move", "tendency": "mixed", "note": "Moving fungal frontliners can disable their main attacks, while large enemies strongly resist movement." }
+      ],
+      "recommendedCapabilities": [
+        "Reach and control enemy positions 3 and 4",
+        "Apply bleed reliably",
+        "Cure both bleed and blight",
+        "Clear marks or protect marked heroes",
+        "Clear corpses before enemy summon effects",
+        "Reduce enemy damage",
+        "Remain functional after a party shuffle"
+      ],
+      "cautions": [
+        "Do not rely on blight as the party's primary damage-over-time plan without checking individual resistance.",
+        "Do not attack a protected Fungal Scratcher first while its marker remains active.",
+        "Ectoplasm fights can expand if targets and corpses are left unmanaged.",
+        "Champion expeditions require immediate answers to Hateful Virago's healing denial."
+      ],
+      "sources": [
+        { "title": "Official Darkest Dungeon Wiki: Weald", "url": "https://darkestdungeon.wiki.gg/wiki/Weald", "verifiedAt": "2026-09-01" },
+        { "title": "Official Darkest Dungeon Wiki: Enemy types", "url": "https://darkestdungeon.wiki.gg/wiki/Enemy_Types", "verifiedAt": "2026-09-01" }
+      ]
     }
   ],
   "enemies": [
@@ -340,6 +397,152 @@
       "effectiveResponses": ["Treat it as an immediate Champion-tier priority.", "Pull or shuffle it into enemy position 1, where it must use the weaker Goring Flight to move backward."],
       "cautions": ["Goring Flight restores its access to dangerous backline attacks, so displacement may need to be repeated.", "A marked hero makes Spit to Roast especially urgent."],
       "sources": [{ "title": "Official Darkest Dungeon Wiki: Swine Skiver", "url": "https://darkestdungeon.wiki.gg/wiki/Swine_Skiver", "verifiedAt": "2026-09-01" }]
+    },
+    {
+      "id": "ectoplasm",
+      "enemyType": "common",
+      "names": { "en": "Ectoplasm" },
+      "aliases": [],
+      "regions": ["weald"],
+      "dlcs": [],
+      "priority": "high",
+      "priorityReasons": ["Cytokinesis can create another Ectoplasm and extend the fight.", "Multiple Ectoplasms or their corpses enable them to merge into a more durable Large Ectoplasm."],
+      "traits": ["Eldritch", "Low direct threat alone", "Enemy multiplication", "Corpse synergy"],
+      "dangerousActions": [
+        { "name": "Cytokinesis", "threats": ["summon"], "description": "Creates another Ectoplasm when space is available, expanding the enemy action economy.", "counters": ["Focus Ectoplasms", "Prevent open enemy positions", "Clear corpses"] },
+        { "name": "Ectoplasmic Profusion", "threats": ["summon", "healing"], "description": "Combines available Ectoplasms or Ectoplasm corpses into a Large Ectoplasm.", "counters": ["Kill one target at a time", "Clear Ectoplasm corpses", "Use attacks that leave no corpse"] }
+      ],
+      "effectiveResponses": ["Prevent the encounter from growing before spending turns on lower-priority enemies.", "Remove corpses immediately when another Ectoplasm can exploit them."],
+      "cautions": ["Splitting damage between several Ectoplasms gives their multiplication mechanics more time to act."],
+      "sources": [{ "title": "Official Darkest Dungeon Wiki: Ectoplasm", "url": "https://darkestdungeon.wiki.gg/wiki/Ectoplasm", "verifiedAt": "2026-09-01" }]
+    },
+    {
+      "id": "large_ectoplasm",
+      "enemyType": "elite",
+      "names": { "en": "Large Ectoplasm" },
+      "aliases": [],
+      "regions": ["weald"],
+      "dlcs": [],
+      "priority": "high",
+      "priorityReasons": ["It can create additional Ectoplasms and restart the multiplication cycle.", "Its large health pool and protection make inefficient direct damage costly."],
+      "traits": ["Eldritch", "Large enemy", "Protection", "Enemy multiplication", "High control resistance"],
+      "dangerousActions": [
+        { "name": "Cytokinesis", "threats": ["summon"], "description": "Creates a small Ectoplasm in an available enemy position.", "counters": ["Keep enemy positions occupied", "Kill spawned Ectoplasms", "Focus the Large Ectoplasm"] },
+        { "name": "Slimesmack", "threats": ["health_damage", "stun"], "description": "A direct attack that can stun its target.", "counters": ["Stun resistance", "Guard", "Damage reduction"] }
+      ],
+      "effectiveResponses": ["Use bleed, armor piercing, or protection reduction rather than inefficient raw damage.", "Do not allow newly spawned Ectoplasms to multiply unchecked."],
+      "cautions": ["Its strong resistances make repeated stun or movement attempts unreliable."],
+      "sources": [{ "title": "Official Darkest Dungeon Wiki: Large Ectoplasm", "url": "https://darkestdungeon.wiki.gg/wiki/Large_Ectoplasm", "verifiedAt": "2026-09-01" }]
+    },
+    {
+      "id": "rabid_gnasher",
+      "enemyType": "common",
+      "names": { "en": "Rabid Gnasher" },
+      "aliases": ["Crazed Gnasher", "Harrying Gnasher"],
+      "regions": ["weald"],
+      "dlcs": [],
+      "priority": "high",
+      "priorityReasons": ["High speed lets packs apply bleed before many heroes can respond.", "Rabid Rush can spread disease and its high critical chance adds party stress."],
+      "traits": ["Beast", "Fast", "High dodge", "Pack enemy", "Bleed and disease source"],
+      "dangerousActions": [
+        { "name": "Rabid Rush", "threats": ["health_damage", "bleed", "disease", "stress", "movement"], "description": "A fast pounce that inflicts bleed, may spread Rabies, and moves the Gnasher forward; critical hits also stress the party.", "counters": ["High accuracy", "Fast focused damage", "Stun", "Bleed and disease protection"] }
+      ],
+      "effectiveResponses": ["Kill the next Gnasher likely to act instead of spreading damage across the pack.", "Use accuracy support to overcome their dodge."],
+      "cautions": ["A missed attack can leave several fast Gnashers free to stack bleed in the same round."],
+      "sources": [{ "title": "Official Darkest Dungeon Wiki: Rabid Gnasher", "url": "https://darkestdungeon.wiki.gg/wiki/Rabid_Gnasher", "verifiedAt": "2026-09-01" }]
+    },
+    {
+      "id": "fungal_scratcher",
+      "enemyType": "common",
+      "names": { "en": "Fungal Scratcher" },
+      "aliases": ["Fungal Grabber", "Fungal Crawler"],
+      "regions": ["weald"],
+      "dlcs": [],
+      "priority": "medium",
+      "priorityReasons": ["High protection makes it slow to remove with direct damage.", "Its ordinary attacks are inaccurate, but Rend the Marked becomes dangerous when allied support marks a frontline hero."],
+      "traits": ["Human", "Eldritch", "High protection", "Slow", "Marked-target synergy", "Low bleed resistance"],
+      "dangerousActions": [
+        { "name": "Rend the Marked", "threats": ["health_damage", "mark"], "description": "Deals substantially increased damage to a marked hero in the first two party positions.", "counters": ["Kill or control enemy markers", "Clear the mark", "Move the marked hero out of the front", "Guard the marked hero"] },
+        { "name": "Groping Swipe", "threats": ["health_damage", "blight"], "description": "An inaccurate frontline attack that adds blight at Veteran and Champion difficulty.", "counters": ["Blight cure", "Dodge", "Move the Scratcher backward"] }
+      ],
+      "effectiveResponses": ["Remove the Fungal Artillery or Crone enabling it before grinding through its protection.", "Use bleed or armor piercing, or move it to the back where it is restricted to Harmless Swipe."],
+      "cautions": ["Its priority rises sharply while a vulnerable frontline hero is marked."],
+      "sources": [{ "title": "Official Darkest Dungeon Wiki: Fungal Scratcher", "url": "https://darkestdungeon.wiki.gg/wiki/Fungal_Scratcher", "verifiedAt": "2026-09-01" }]
+    },
+    {
+      "id": "fungal_artillery",
+      "enemyType": "common",
+      "names": { "en": "Fungal Artillery" },
+      "aliases": ["Fungal Battery", "Fungal Bombard"],
+      "regions": ["weald"],
+      "dlcs": [],
+      "priority": "high",
+      "priorityReasons": ["Mark Prey enables Fungal Scratchers to deal increased damage to frontline heroes.", "Rain of Blight pressures both backline heroes and may spread disease."],
+      "traits": ["Human", "Eldritch", "Backline support", "Mark synergy", "Blight and disease source"],
+      "dangerousActions": [
+        { "name": "Mark Prey", "threats": ["mark", "debuff"], "description": "Marks a frontline hero and reduces dodge, enabling allied marked-target attacks.", "counters": ["Kill or stun the Artillery", "Clear the mark", "Guard or reposition the target"] },
+        { "name": "Rain of Blight", "threats": ["blight", "disease", "health_damage"], "description": "Attacks both backline heroes with blight and a chance of random disease.", "counters": ["Blight and disease resistance", "Cure damage-over-time", "Backline control"] }
+      ],
+      "effectiveResponses": ["Eliminate it before the protected Scratchers it supports.", "Pull it into the front to force Escape Cloud, reducing its immediate support pressure."],
+      "cautions": ["Escape Cloud blights the front two heroes while moving the Artillery back, so a pull is disruption rather than a permanent shutdown."],
+      "sources": [{ "title": "Official Darkest Dungeon Wiki: Fungal Artillery", "url": "https://darkestdungeon.wiki.gg/wiki/Fungal_Artillery", "verifiedAt": "2026-09-01" }]
+    },
+    {
+      "id": "crone",
+      "enemyType": "elite",
+      "names": { "en": "Crone" },
+      "aliases": ["Tenacious Crone", "Blighted Crone"],
+      "regions": ["weald"],
+      "dlcs": [],
+      "priority": "high",
+      "priorityReasons": ["Her mark and accuracy or dodge debuffs set up lethal allied attacks against multiple heroes.", "She also inflicts multi-target stress or frontline blight and disease from any position."],
+      "traits": ["Human", "Veteran and Champion expeditions", "Fast", "High dodge", "Stealthed", "Mark and stress support"],
+      "dangerousActions": [
+        { "name": "Curse of Vulnerability", "threats": ["mark", "debuff", "health_damage"], "description": "Damages and marks up to two heroes while reducing accuracy and dodge.", "counters": ["Destealth", "High accuracy", "Kill or stun the Crone", "Clear marks"] },
+        { "name": "Embrace the Dark", "threats": ["stress", "other"], "description": "Inflicts stress on up to two heroes and reduces torchlight.", "counters": ["Fast focused damage", "Stress recovery", "Maintain torchlight"] },
+        { "name": "Fetid Censer", "threats": ["stress", "blight", "disease"], "description": "From the front, attacks both frontline heroes with stress, blight, and a disease chance.", "counters": ["Blight and disease protection", "Do not rely on pulling her forward as a shutdown"] }
+      ],
+      "effectiveResponses": ["Prioritize her early and bring destealth or attacks that bypass stealth.", "Use accuracy support or dodge reduction to overcome her evasion."],
+      "cautions": ["Unlike many backline supports, moving her forward does not make her harmless."],
+      "sources": [{ "title": "Official Darkest Dungeon Wiki: Crone", "url": "https://darkestdungeon.wiki.gg/wiki/Crone", "verifiedAt": "2026-09-01" }]
+    },
+    {
+      "id": "unclean_giant",
+      "enemyType": "elite",
+      "names": { "en": "Unclean Giant" },
+      "aliases": ["Blighted Giant", "Corrupted Giant"],
+      "regions": ["weald"],
+      "dlcs": [],
+      "priority": "high",
+      "priorityReasons": ["Treebranch Smackdown can deliver extreme burst damage to a frontline hero.", "Confusion Spores shuffles the entire party while reducing accuracy."],
+      "traits": ["Human", "Beast", "Large enemy", "Veteran and Champion expeditions", "Very high health", "High control resistance"],
+      "dangerousActions": [
+        { "name": "Treebranch Smackdown", "threats": ["health_damage", "movement"], "description": "One of the strongest non-boss single-target attacks, striking the frontline and knocking the victim backward.", "counters": ["Damage debuff", "Guard", "Protection", "Keep frontline heroes healthy"] },
+        { "name": "Confusion Spores", "threats": ["movement", "debuff", "health_damage"], "description": "Attacks and shuffles the entire party while reducing accuracy.", "counters": ["Position-tolerant party", "Movement skills", "Accuracy support"] },
+        { "name": "Poison Spores", "threats": ["blight", "health_damage"], "description": "Applies blight to any hero and becomes more likely against a critically wounded target.", "counters": ["Blight cure", "Heal heroes away from Death's Door", "Guard"] }
+      ],
+      "effectiveResponses": ["Reduce its damage while removing more fragile support enemies, then focus it safely.", "Use bleed and direct damage; do not expect movement control to work reliably."],
+      "cautions": ["Its enormous health pool makes a one-round kill unlikely.", "A shuffled position-dependent party may lose both damage and healing access."],
+      "sources": [{ "title": "Official Darkest Dungeon Wiki: Unclean Giant", "url": "https://darkestdungeon.wiki.gg/wiki/Unclean_Giant", "verifiedAt": "2026-09-01" }]
+    },
+    {
+      "id": "hateful_virago",
+      "enemyType": "elite",
+      "names": { "en": "Hateful Virago" },
+      "aliases": [],
+      "regions": ["weald"],
+      "dlcs": [],
+      "priority": "critical",
+      "priorityReasons": ["From Death Comes Life turns corpses into Necrotic Fungus, preventing all hero healing while the growth remains.", "Ruinous Hex marks and severely weakens multiple heroes for allied attacks."],
+      "traits": ["Human", "Champion expeditions", "Fast", "Extremely high dodge", "Near immunity to stun", "Corpse transformation", "Healing denial"],
+      "dangerousActions": [
+        { "name": "From Death Comes Life", "threats": ["summon", "healing"], "description": "An automatic end-of-round action that converts an available corpse into a Necrotic Fungus, blocking hero healing while it lives.", "counters": ["Clear corpses", "Use attacks that leave no corpse", "Kill the Virago", "Destroy the Necrotic Fungus immediately"] },
+        { "name": "Ruinous Hex", "threats": ["health_damage", "mark", "debuff"], "description": "Damages and marks up to two heroes while heavily reducing accuracy and dodge.", "counters": ["Clear marks", "Accuracy support", "Protect exposed heroes", "Kill the Virago"] },
+        { "name": "Putrefying Breath", "threats": ["health_damage", "blight", "movement"], "description": "Hits the first three heroes with damage, blight, and knockback.", "counters": ["Blight cure", "Position tolerance", "Guard or recovery"] }
+      ],
+      "effectiveResponses": ["Treat her as an immediate Champion-tier priority while accounting for other lethal attackers.", "Use high-accuracy attacks and corpse clearing rather than repeated stun attempts."],
+      "cautions": ["Do not create a corpse without a plan to clear it before her automatic action.", "Focusing her can still be dangerous if an Unclean Giant or marked-target attacker remains uncontrolled."],
+      "sources": [{ "title": "Official Darkest Dungeon Wiki: Hateful Virago", "url": "https://darkestdungeon.wiki.gg/wiki/Hateful_Virago", "verifiedAt": "2026-09-01" }]
     }
   ]
 }

@@ -151,6 +151,7 @@ test("loads the checked-in combat knowledge base", async () => {
   assert.deepEqual(knowledge.regions.map(({ id }) => id), [
     "ruins",
     "warrens",
+    "weald",
   ]);
   assert.deepEqual(
     knowledge.enemies.map(({ id }) => id),
@@ -168,6 +169,14 @@ test("loads the checked-in combat knowledge base", async () => {
       "swine_drummer",
       "swinetaur",
       "swine_skiver",
+      "ectoplasm",
+      "large_ectoplasm",
+      "rabid_gnasher",
+      "fungal_scratcher",
+      "fungal_artillery",
+      "crone",
+      "unclean_giant",
+      "hateful_virago",
     ],
   );
   assert.equal(
@@ -176,6 +185,10 @@ test("loads the checked-in combat knowledge base", async () => {
   );
   assert.equal(
     knowledge.enemies.find(({ id }) => id === "swine_skiver")?.priority,
+    "critical",
+  );
+  assert.equal(
+    knowledge.enemies.find(({ id }) => id === "hateful_virago")?.priority,
     "critical",
   );
   assert.ok(
@@ -195,6 +208,18 @@ test("loads the checked-in combat knowledge base", async () => {
   assert.equal(warrensEnemies.length, 6);
   assert.ok(
     warrensEnemies.every(
+      ({ dangerousActions, effectiveResponses, sources }) =>
+        dangerousActions.length > 0 &&
+        effectiveResponses.length > 0 &&
+        sources.length > 0,
+    ),
+  );
+  const wealdEnemies = knowledge.enemies.filter(({ regions }) =>
+    regions.includes("weald"),
+  );
+  assert.equal(wealdEnemies.length, 8);
+  assert.ok(
+    wealdEnemies.every(
       ({ dangerousActions, effectiveResponses, sources }) =>
         dangerousActions.length > 0 &&
         effectiveResponses.length > 0 &&
