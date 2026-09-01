@@ -186,6 +186,20 @@ test("loads the checked-in combat knowledge base", async () => {
       "drowned_thrall",
       "uca_major",
       "squiffy_ghast",
+      "cultist_brawler",
+      "cultist_acolyte",
+      "brigand_cutthroat",
+      "brigand_fusilier",
+      "brigand_bloodletter",
+      "brigand_raider",
+      "brigand_hunter",
+      "madman",
+      "maggot",
+      "webber",
+      "spitter",
+      "bone_rabble",
+      "ghoul",
+      "gargoyle",
     ],
   );
   assert.equal(
@@ -216,7 +230,7 @@ test("loads the checked-in combat knowledge base", async () => {
     ),
   );
   const warrensEnemies = knowledge.enemies.filter(({ regions }) =>
-    regions.includes("warrens"),
+    regions.length === 1 && regions.includes("warrens"),
   );
   assert.equal(warrensEnemies.length, 6);
   assert.ok(
@@ -228,7 +242,7 @@ test("loads the checked-in combat knowledge base", async () => {
     ),
   );
   const wealdEnemies = knowledge.enemies.filter(({ regions }) =>
-    regions.includes("weald"),
+    regions.length === 1 && regions.includes("weald"),
   );
   assert.equal(wealdEnemies.length, 8);
   assert.ok(
@@ -240,7 +254,7 @@ test("loads the checked-in combat knowledge base", async () => {
     ),
   );
   const coveEnemies = knowledge.enemies.filter(({ regions }) =>
-    regions.includes("cove"),
+    regions.length === 1 && regions.includes("cove"),
   );
   assert.equal(coveEnemies.length, 8);
   assert.ok(
@@ -250,5 +264,38 @@ test("loads the checked-in combat knowledge base", async () => {
         effectiveResponses.length > 0 &&
         sources.length > 0,
     ),
+  );
+  const sharedEnemyIds = [
+    "cultist_brawler",
+    "cultist_acolyte",
+    "brigand_cutthroat",
+    "brigand_fusilier",
+    "brigand_bloodletter",
+    "brigand_raider",
+    "brigand_hunter",
+    "madman",
+    "maggot",
+    "webber",
+    "spitter",
+    "bone_rabble",
+    "ghoul",
+    "gargoyle",
+  ];
+  const sharedEnemies = knowledge.enemies.filter(({ id }) =>
+    sharedEnemyIds.includes(id),
+  );
+  assert.equal(sharedEnemies.length, 14);
+  assert.ok(
+    sharedEnemies.every(
+      ({ regions, dangerousActions, effectiveResponses, sources }) =>
+        regions.length >= 3 &&
+        dangerousActions.length > 0 &&
+        effectiveResponses.length > 0 &&
+        sources.length > 0,
+    ),
+  );
+  assert.deepEqual(
+    knowledge.enemies.find(({ id }) => id === "webber")?.regions,
+    ["ruins", "warrens", "weald"],
   );
 });

@@ -745,6 +745,252 @@
       "effectiveResponses": ["Treat it as an immediate Champion-tier priority and use high-accuracy attacks.", "Exploit its moderate move resistance to interrupt the front-to-back attack cycle when possible."],
       "cautions": ["Repeated stun attempts are unreliable because of its high resistance.", "If only two enemies remain it may keep using Maddening Shanty instead of completing the usual cycle."],
       "sources": [{ "title": "Official Darkest Dungeon Wiki: Squiffy Ghast", "url": "https://darkestdungeon.wiki.gg/wiki/Squiffy_Ghast", "verifiedAt": "2026-09-01" }]
+    },
+    {
+      "id": "cultist_brawler",
+      "enemyType": "common",
+      "names": { "en": "Cultist Brawler" },
+      "aliases": ["Cultist Gladiator", "Cultist Champion"],
+      "regions": ["ruins", "warrens", "weald", "cove"],
+      "dlcs": [],
+      "priority": "medium",
+      "priorityReasons": ["Rend for the Old Gods inflicts bleed and increases stress received.", "It deals increased damage to heroes marked by a Cultist Acolyte."],
+      "traits": ["Human", "Frontline attacker", "Bleed", "Marked-target synergy"],
+      "dangerousActions": [
+        { "name": "Rend for the Old Gods", "threats": ["health_damage", "bleed", "debuff", "mark"], "description": "A frontline attack that bleeds, increases stress received, and deals increased damage to marked heroes.", "counters": ["Kill or control the Acolyte", "Clear marks", "Bleed cure", "Push the Brawler backward"] }
+      ],
+      "effectiveResponses": ["Remove its supporting Acolyte first when stress and marks are the larger threat.", "Push it to the rear to force the weak Stumbling Scratch."],
+      "cautions": ["Its priority rises when a vulnerable frontline hero is marked."],
+      "sources": [{ "title": "Official Darkest Dungeon Wiki: Cultist Brawler", "url": "https://darkestdungeon.wiki.gg/wiki/Cultist_Brawler", "verifiedAt": "2026-09-01" }]
+    },
+    {
+      "id": "cultist_acolyte",
+      "enemyType": "common",
+      "names": { "en": "Cultist Acolyte" },
+      "aliases": ["Cultist Enchantress", "Cultist Witch"],
+      "regions": ["ruins", "warrens", "weald", "cove"],
+      "dlcs": [],
+      "priority": "high",
+      "priorityReasons": ["Stressful Incantation creates persistent expedition risk and later marks targets for Brawlers.", "Pull and push attacks disrupt party formation while adding stress at higher difficulty."],
+      "traits": ["Human", "Fast stress dealer", "Party movement", "Mark support", "High dodge"],
+      "dangerousActions": [
+        { "name": "Stressful Incantation", "threats": ["stress", "mark", "other"], "description": "Inflicts heavy stress, reduces torchlight, and marks its target at Veteran and Champion difficulty.", "counters": ["Kill or stun the Acolyte", "Clear marks", "Stress recovery"] },
+        { "name": "Eldritch Pull / Eldritch Push", "threats": ["movement", "stress", "health_damage"], "description": "Moves a backline hero forward or a frontline hero backward, adding stress at higher difficulty.", "counters": ["Position-tolerant party", "Movement resistance", "Repositioning skills"] }
+      ],
+      "effectiveResponses": ["Prioritize it before the Brawler it supports.", "Use high-accuracy backline damage or stun."],
+      "cautions": ["Moving it forward does not disable its stress or push abilities because they remain usable from the front."],
+      "sources": [{ "title": "Official Darkest Dungeon Wiki: Cultist Acolyte", "url": "https://darkestdungeon.wiki.gg/wiki/Cultist_Acolyte", "verifiedAt": "2026-09-01" }]
+    },
+    {
+      "id": "brigand_cutthroat",
+      "enemyType": "common",
+      "names": { "en": "Brigand Cutthroat" },
+      "aliases": ["Outlaw Cutthroat", "Infamous Cutthroat"],
+      "regions": ["ruins", "warrens", "weald", "cove"],
+      "dlcs": [],
+      "priority": "high",
+      "priorityReasons": ["Its attacks have high critical potential and reach broadly.", "Slice and Dice reduces bleed resistance before Shank and Bloodletter attacks exploit it."],
+      "traits": ["Human", "High critical chance", "Bleed setup", "Low health"],
+      "dangerousActions": [
+        { "name": "Slice and Dice", "threats": ["health_damage", "debuff"], "description": "Hits both frontline heroes and reduces bleed resistance.", "counters": ["Kill or stun the Cutthroat", "Bleed protection", "Push it to enemy position 4"] },
+        { "name": "Shank", "threats": ["health_damage", "bleed", "mark"], "description": "A high-damage bleed attack with broad targeting and a preference for exposed or marked heroes.", "counters": ["Bleed cure", "Guard", "Fast focused damage"] }
+      ],
+      "effectiveResponses": ["Kill it before the tougher Bloodletter when its damage is not otherwise controlled.", "Push it to position 4 to force Harmless Poke."],
+      "cautions": ["Its bleed-resistance debuff also increases the threat of a paired Bloodletter."],
+      "sources": [{ "title": "Official Darkest Dungeon Wiki: Brigand Cutthroat", "url": "https://darkestdungeon.wiki.gg/wiki/Brigand_Cutthroat", "verifiedAt": "2026-09-01" }]
+    },
+    {
+      "id": "brigand_fusilier",
+      "enemyType": "common",
+      "names": { "en": "Brigand Fusilier" },
+      "aliases": ["Outlaw Fusilier", "Infamous Fusilier"],
+      "regions": ["ruins", "warrens", "weald", "cove"],
+      "dlcs": [],
+      "priority": "high",
+      "priorityReasons": ["Blanket Fire damages the entire party and repeatedly reduces dodge.", "Its speed and backline position let the debuff accumulate while allies exploit reduced evasion."],
+      "traits": ["Human", "Fast backline attacker", "Party-wide damage", "Dodge debuff", "Stealth at higher difficulty"],
+      "dangerousActions": [
+        { "name": "Blanket Fire", "threats": ["health_damage", "debuff"], "description": "Attacks all four heroes and reduces dodge.", "counters": ["Backline damage", "Stun", "Pull to enemy position 1", "Riposte"] }
+      ],
+      "effectiveResponses": ["Pull it to the front to force the weak Rushed Shot while exposing other brigands.", "Use area riposte to punish its party-wide attack."],
+      "cautions": ["Veteran and Champion variants begin stealthed."],
+      "sources": [{ "title": "Official Darkest Dungeon Wiki: Brigand Fusilier", "url": "https://darkestdungeon.wiki.gg/wiki/Brigand_Fusilier", "verifiedAt": "2026-09-01" }]
+    },
+    {
+      "id": "brigand_bloodletter",
+      "enemyType": "elite",
+      "names": { "en": "Brigand Bloodletter" },
+      "aliases": ["Outlaw Bloodletter", "Infamous Bloodletter"],
+      "regions": ["ruins", "warrens", "weald", "cove"],
+      "dlcs": [],
+      "priority": "medium",
+      "priorityReasons": ["Rain of Whips applies bleed and stress across the party.", "Its large health pool often makes removing its fragile allies first more efficient."],
+      "traits": ["Human", "Large enemy", "High health", "Party-wide bleed", "High move resistance"],
+      "dangerousActions": [
+        { "name": "Rain of Whips", "threats": ["health_damage", "bleed", "stress"], "description": "Attacks the whole party with bleed and stress.", "counters": ["Bleed cure", "Damage reduction", "Eliminate the Cutthroat that encourages this attack"] },
+        { "name": "Point Blank Shot", "threats": ["health_damage", "movement"], "description": "A high-critical frontline shot that knocks the first hero backward.", "counters": ["Keep another enemy or corpse in front of it", "Guard", "Move the Bloodletter away from position 1"] }
+      ],
+      "effectiveResponses": ["Remove fragile Cutthroats and Fusiliers first when Point Blank Shot is contained.", "Use damage-over-time and debuffs while reducing its action value."],
+      "cautions": ["Its priority rises sharply when it occupies enemy position 1 against an exposed hero."],
+      "sources": [{ "title": "Official Darkest Dungeon Wiki: Brigand Bloodletter", "url": "https://darkestdungeon.wiki.gg/wiki/Brigand_Bloodletter", "verifiedAt": "2026-09-01" }]
+    },
+    {
+      "id": "brigand_raider",
+      "enemyType": "elite",
+      "names": { "en": "Brigand Raider" },
+      "aliases": [],
+      "regions": ["ruins", "warrens", "weald", "cove"],
+      "dlcs": [],
+      "priority": "high",
+      "priorityReasons": ["This Champion-tier Cutthroat variant combines high damage, bleed, and protection.", "Its Shank can mark a hero and create dangerous regional synergies."],
+      "traits": ["Human", "Champion expeditions", "High dodge", "Protection", "Bleed and mark pressure"],
+      "dangerousActions": [
+        { "name": "Shank", "threats": ["health_damage", "bleed", "mark"], "description": "Deals heavy damage and bleed and can mark its target for allied follow-up attacks.", "counters": ["Kill or disable the Raider", "Clear marks", "Bleed cure", "Push it to position 4"] }
+      ],
+      "effectiveResponses": ["Treat it as a priority Champion attacker.", "Use high accuracy and armor piercing, or push it to the rear."],
+      "cautions": ["A mark can enable region-specific threats such as Rabid Gnashers even when no other brigand uses it."],
+      "sources": [{ "title": "Official Darkest Dungeon Wiki: Brigand Raider", "url": "https://darkestdungeon.wiki.gg/wiki/Brigand_Raider", "verifiedAt": "2026-09-01" }]
+    },
+    {
+      "id": "brigand_hunter",
+      "enemyType": "elite",
+      "names": { "en": "Brigand Hunter" },
+      "aliases": [],
+      "regions": ["ruins", "warrens", "weald", "cove"],
+      "dlcs": [],
+      "priority": "high",
+      "priorityReasons": ["Its improved Blanket Fire deals party-wide damage, stress, and a dodge debuff.", "High speed and starting stealth make it difficult to prevent the first attack."],
+      "traits": ["Human", "Champion expeditions", "Fast", "Stealth", "Party-wide damage and stress"],
+      "dangerousActions": [
+        { "name": "Blanket Fire", "threats": ["health_damage", "stress", "debuff"], "description": "Attacks every hero, adds stress, and reduces dodge.", "counters": ["Destealth", "Backline control", "Pull to enemy position 1", "Riposte"] }
+      ],
+      "effectiveResponses": ["Prioritize it before durable brigands.", "Pulling it forward forces the weaker Rushed Shot."],
+      "cautions": ["Without destealth, plan to control its allies until the Hunter becomes targetable."],
+      "sources": [{ "title": "Official Darkest Dungeon Wiki: Brigand Hunter", "url": "https://darkestdungeon.wiki.gg/wiki/Brigand_Hunter", "verifiedAt": "2026-09-01" }]
+    },
+    {
+      "id": "madman",
+      "enemyType": "common",
+      "names": { "en": "Madman" },
+      "aliases": ["Frothing Madman", "Raving Madman"],
+      "regions": ["ruins", "warrens", "weald", "cove"],
+      "dlcs": [],
+      "priority": "critical",
+      "priorityReasons": ["Doomsay applies stress across the entire party.", "Accusation applies horror and a stacking stress-received debuff that lasts until camp."],
+      "traits": ["Human", "Very fast", "High dodge", "Party-wide stress", "Expedition-long stress debuff"],
+      "dangerousActions": [
+        { "name": "Doomsay", "threats": ["stress"], "description": "Attempts to stress every hero at once.", "counters": ["Kill or stun the Madman", "Stress recovery", "High accuracy"] },
+        { "name": "Accusation", "threats": ["stress", "debuff"], "description": "Applies horror and increases stress received until the next camp, with a bias toward already-stressed heroes.", "counters": ["Kill or stun the Madman", "Horror cure", "Camp to remove the debuff"] }
+      ],
+      "effectiveResponses": ["Treat it as an immediate priority in nearly every formation.", "Use accuracy support or dodge reduction to secure the kill."],
+      "cautions": ["Its attacks work from every enemy position, so movement alone does not disable it."],
+      "sources": [{ "title": "Official Darkest Dungeon Wiki: Madman", "url": "https://darkestdungeon.wiki.gg/wiki/Madman", "verifiedAt": "2026-09-01" }]
+    },
+    {
+      "id": "maggot",
+      "enemyType": "common",
+      "names": { "en": "Maggot" },
+      "aliases": ["Twitching Maggot", "Bulbous Maggot"],
+      "regions": ["ruins", "warrens", "weald", "cove"],
+      "dlcs": [],
+      "priority": "medium",
+      "priorityReasons": ["Grave Nibble can stun, stress, and spread disease despite low direct damage.", "Its very low health makes removing this persistent risk inexpensive."],
+      "traits": ["Beast", "Low health", "No corpse", "High stun resistance", "Disease source"],
+      "dangerousActions": [
+        { "name": "Grave Nibble", "threats": ["health_damage", "stress", "stun", "disease"], "description": "A low-accuracy attack against any hero that can stun, stress, and inflict a random disease.", "counters": ["Direct damage", "Disease resistance", "Stun resistance"] }
+      ],
+      "effectiveResponses": ["Kill it with direct damage rather than trying to stun it.", "Its death leaves no corpse, making cleanup straightforward."],
+      "cautions": ["A pack left alive can generate several stun or disease attempts despite each Maggot's weak damage."],
+      "sources": [{ "title": "Official Darkest Dungeon Wiki: Maggot", "url": "https://darkestdungeon.wiki.gg/wiki/Maggot", "verifiedAt": "2026-09-01" }]
+    },
+    {
+      "id": "webber",
+      "enemyType": "common",
+      "names": { "en": "Webber" },
+      "aliases": ["Overgrown Webber", "Ancient Webber"],
+      "regions": ["ruins", "warrens", "weald"],
+      "dlcs": [],
+      "priority": "high",
+      "priorityReasons": ["Web stuns and marks a hero while reducing blight resistance.", "The mark lets both Webbers and paired Spitters deal double damage."],
+      "traits": ["Beast", "Fast", "High dodge", "Mark and stun setup", "Does not normally appear in Cove"],
+      "dangerousActions": [
+        { "name": "Web", "threats": ["stun", "mark", "debuff", "health_damage"], "description": "Stuns and marks any hero while reducing blight resistance.", "counters": ["Kill the Webber first", "Clear marks", "Stun resistance", "High accuracy"] },
+        { "name": "Bite", "threats": ["health_damage", "blight", "mark"], "description": "Blights its target and deals double damage against marked heroes.", "counters": ["Clear marks", "Blight cure", "Guard"] }
+      ],
+      "effectiveResponses": ["Kill Webbers before Spitters to prevent the mark setup.", "Use accuracy support against their dodge."],
+      "cautions": ["Every enemy and hero position is valid for both actions, so movement does not disable it."],
+      "sources": [{ "title": "Official Darkest Dungeon Wiki: Webber", "url": "https://darkestdungeon.wiki.gg/wiki/Webber", "verifiedAt": "2026-09-01" }]
+    },
+    {
+      "id": "spitter",
+      "enemyType": "common",
+      "names": { "en": "Spitter" },
+      "aliases": ["Overgrown Spitter", "Ancient Spitter"],
+      "regions": ["ruins", "warrens", "weald"],
+      "dlcs": [],
+      "priority": "high",
+      "priorityReasons": ["Spit deals double damage to marked heroes while applying blight and an accuracy debuff.", "Its high dodge and backline position can make a marked-target burst difficult to prevent."],
+      "traits": ["Beast", "Fast", "High dodge", "Backline blight attacker", "Marked-target synergy", "Does not normally appear in Cove"],
+      "dangerousActions": [
+        { "name": "Spit", "threats": ["health_damage", "blight", "debuff", "mark"], "description": "A high-critical ranged attack that doubles damage against marked heroes and applies blight and reduced accuracy.", "counters": ["Kill the Webber applying marks", "Clear marks", "Pull the Spitter forward", "Blight cure"] }
+      ],
+      "effectiveResponses": ["Remove Webbers first when they can create a mark, then kill or pull the Spitter.", "Use high accuracy against its dodge."],
+      "cautions": ["Pulling it forward replaces Spit with Bite, but Bite still blights and deals double damage to marked heroes."],
+      "sources": [{ "title": "Official Darkest Dungeon Wiki: Spitter", "url": "https://darkestdungeon.wiki.gg/wiki/Spitter", "verifiedAt": "2026-09-01" }]
+    },
+    {
+      "id": "bone_rabble",
+      "enemyType": "common",
+      "names": { "en": "Bone Rabble" },
+      "aliases": ["Bone Conscript", "Bone Militia"],
+      "regions": ["ruins", "warrens", "weald", "cove"],
+      "dlcs": [],
+      "priority": "low",
+      "priorityReasons": ["It is slow, fragile, and inaccurate with little direct threat.", "Its main value is occupying space and leaving a corpse that screens more urgent enemies."],
+      "traits": ["Unholy", "Very high bleed resistance", "Low health", "Low speed", "Common in Ruins and uncommon elsewhere"],
+      "dangerousActions": [
+        { "name": "Bump in the Night", "threats": ["health_damage", "debuff"], "description": "A weak frontline attack that reduces dodge at higher difficulty.", "counters": ["Leave it until urgent enemies are controlled", "Blight", "Direct damage"] }
+      ],
+      "effectiveResponses": ["Attack the higher-priority enemies it screens when possible.", "Use blight or direct damage rather than bleed."],
+      "cautions": ["Its corpse may continue blocking access to the backline after the Rabble dies."],
+      "sources": [{ "title": "Official Darkest Dungeon Wiki: Bone Rabble", "url": "https://darkestdungeon.wiki.gg/wiki/Bone_Rabble", "verifiedAt": "2026-09-01" }]
+    },
+    {
+      "id": "ghoul",
+      "enemyType": "elite",
+      "names": { "en": "Ghoul" },
+      "aliases": ["Slavering Ghoul", "Insatiable Ghoul"],
+      "regions": ["ruins", "warrens", "weald", "cove"],
+      "dlcs": [],
+      "priority": "high",
+      "priorityReasons": ["Howl applies party-wide horror, reduces torchlight, and may inflict The Worries.", "Skull Toss combines backline damage, stress, and stun while its durability delays removal."],
+      "traits": ["Unholy", "Large enemy", "Veteran and Champion expeditions", "High protection and health", "Stress and horror pressure"],
+      "dangerousActions": [
+        { "name": "Howl", "threats": ["stress", "disease", "other"], "description": "Applies horror across the party, reduces torchlight, and may inflict The Worries.", "counters": ["Horror cure", "Maintain torchlight", "Kill or control the Ghoul"] },
+        { "name": "Skull Toss", "threats": ["health_damage", "stress", "stun"], "description": "Hits a backline hero with significant damage, stress, and stun.", "counters": ["Guard a vulnerable backliner", "Stun resistance", "Damage reduction"] },
+        { "name": "Rend", "threats": ["health_damage", "bleed", "debuff"], "description": "A heavy frontline bleed attack that increases stress received.", "counters": ["Bleed cure", "Protection", "Move frontline heroes out of reach"] }
+      ],
+      "effectiveResponses": ["Use bleed, blight, armor piercing, or protection reduction to work through its defenses.", "A strong stun setup may buy one turn, but sustained control is unreliable."],
+      "cautions": ["Unlike most Unholy enemies, the Ghoul is a practical bleed target.", "It can threaten the backline from every enemy position."],
+      "sources": [{ "title": "Official Darkest Dungeon Wiki: Ghoul", "url": "https://darkestdungeon.wiki.gg/wiki/Ghoul", "verifiedAt": "2026-09-01" }]
+    },
+    {
+      "id": "gargoyle",
+      "enemyType": "common",
+      "names": { "en": "Gargoyle" },
+      "aliases": ["Menacing Gargoyle"],
+      "regions": ["ruins", "warrens", "weald", "cove"],
+      "dlcs": [],
+      "priority": "low",
+      "priorityReasons": ["Its damage is low and its main threat is occasional stun or movement disruption.", "High protection makes ordinary direct attacks inefficient relative to more urgent enemies."],
+      "traits": ["Unholy", "Stonework", "Veteran and Champion expeditions", "High protection", "Very high bleed and move resistance", "Common in Ruins and rare elsewhere"],
+      "dangerousActions": [
+        { "name": "Lash of the Tail", "threats": ["health_damage", "stun", "movement", "mark"], "description": "Targets any hero with a stun and later knockback, with increased preference for marked targets.", "counters": ["Stun resistance", "Clear marks", "Stun the Gargoyle"] },
+        { "name": "Flurry of Claws", "threats": ["health_damage", "movement"], "description": "A low-damage frontline attack that can shuffle its targets at higher difficulty.", "counters": ["Position tolerance", "Leave it until higher priorities are handled"] }
+      ],
+      "effectiveResponses": ["Use blight or armor piercing to bypass protection.", "Stun it while dealing with more dangerous enemies."],
+      "cautions": ["Do not waste bleed or movement actions against its extreme resistances."],
+      "sources": [{ "title": "Official Darkest Dungeon Wiki: Gargoyle", "url": "https://darkestdungeon.wiki.gg/wiki/Gargoyle", "verifiedAt": "2026-09-01" }]
     }
   ]
 }
