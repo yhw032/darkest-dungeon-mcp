@@ -144,6 +144,10 @@ with installed hero upgrade definitions. The raw values under
 levels. Without `--game-dir`, `get_hero` returns selected skills with
 `level: null` rather than guessing.
 
+With a configured game installation, combat skill details also include the
+hero ranks where each skill can be used, its target side and ranks, whether it
+targets one, a group, or a random unit, and any forward or backward movement.
+
 Hero resolve levels are derived from the thresholds in the configured game
 installation. Hero results also report whether each hero can be newly selected
 for a party and list concrete blockers such as an existing raid or town

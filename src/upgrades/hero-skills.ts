@@ -3,6 +3,7 @@ import { basename, join, resolve } from "node:path";
 
 import type {
   HeroCombatSkillDetail,
+  HeroCombatSkillPositionDefinition,
   HeroCombatSkillTree,
 } from "../domain/hero-skills.js";
 import type { Hero } from "../domain/hero.js";
@@ -111,6 +112,7 @@ export function getHeroCombatSkillDetails(
   hero: Hero,
   upgrades: UpgradeState,
   trees?: HeroCombatSkillTree[],
+  positions?: HeroCombatSkillPositionDefinition[],
 ): HeroCombatSkillDetail[] {
   const selections = new Map(
     hero.combatSkillSelections.map(({ id, rawSelectionValue }) => [
@@ -119,12 +121,28 @@ export function getHeroCombatSkillDetails(
     ]),
   );
   const classTrees = trees?.filter((tree) => tree.heroClass === hero.heroClass);
+  const positionBySkill = new Map(
+    positions
+      ?.filter((definition) => definition.heroClass === hero.heroClass)
+      .map((definition) => [definition.skillId, definition]),
+  );
+  const positionFields = (id: string) => {
+    const position = positionBySkill.get(id);
+    return position === undefined
+      ? { usableFromRanks: null, target: null, movement: null }
+      : {
+          usableFromRanks: [...position.usableFromRanks],
+          target: { ...position.target, ranks: [...position.target.ranks] },
+          movement: { ...position.movement },
+        };
+  };
   if (classTrees === undefined || classTrees.length === 0) {
     return hero.combatSkills.map((id) => ({
       id,
       level: null,
       isSelected: true,
       rawSelectionValue: selections.get(id) ?? null,
+      ...positionFields(id),
     }));
   }
 
@@ -150,6 +168,7 @@ export function getHeroCombatSkillDetails(
       level: highestPurchasedIndex === -1 ? null : highestPurchasedIndex + 1,
       isSelected: selections.has(tree.skillId),
       rawSelectionValue: selections.get(tree.skillId) ?? null,
+      ...positionFields(tree.skillId),
     };
   });
 }

@@ -17,7 +17,10 @@ import {
 
 import type { BuildingUpgradeTree } from "../domain/building-upgrades.js";
 import type { CurioKnowledgeBase } from "../domain/curio-knowledge.js";
-import type { HeroCombatSkillTree } from "../domain/hero-skills.js";
+import type {
+  HeroCombatSkillPositionDefinition,
+  HeroCombatSkillTree,
+} from "../domain/hero-skills.js";
 import type { HeroProgressionRules } from "../domain/hero-progression.js";
 import type { QuirkDefinition } from "../domain/quirk-definitions.js";
 import type { QuirkTreatmentKnowledgeBase } from "../domain/quirk-treatment-knowledge.js";
@@ -33,6 +36,7 @@ import {
   loadHeroProgressionRules,
 } from "../progression/hero-progression.js";
 import { getHero } from "../queries/get-hero.js";
+import { loadHeroCombatSkillPositions } from "../skills/combat-skill-positions.js";
 import { getQuest } from "../queries/get-quest.js";
 import { listHeroes } from "../queries/list-heroes.js";
 import { listQuests } from "../queries/list-quests.js";
@@ -60,6 +64,7 @@ export interface DarkestDungeonServerOptions {
   gameDirectory?: string;
   loadBuildingUpgradeTrees?: () => Promise<BuildingUpgradeTree[]>;
   loadHeroCombatSkillTrees?: () => Promise<HeroCombatSkillTree[]>;
+  loadHeroCombatSkillPositions?: () => Promise<HeroCombatSkillPositionDefinition[]>;
   loadHeroProgressionRules?: () => Promise<HeroProgressionRules>;
   loadQuirkDefinitions?: () => Promise<QuirkDefinition[]>;
   loadQuirkTreatmentKnowledge?: () => Promise<QuirkTreatmentKnowledgeBase>;
@@ -70,6 +75,7 @@ export const serverInstructions = [
   "Use save-state tools for facts about the current campaign instead of guessing.",
   "Use resolveLevel instead of resolveXp when stating a hero level, and use availability.isAvailableForPartySelection when choosing new party members.",
   "In hero details, use combatSkillDetails.level for combat skill levels; rawSelectionValue is not a level.",
+  "Use combatSkillDetails.usableFromRanks, target, and movement for position claims instead of relying on class stereotypes.",
   "Use list_building_upgrades for verified building upgrade progress and next costs.",
   "Use list_risky_quirks for treatment-priority questions, and present its policy as editorial guidance rather than an absolute game value.",
   "For curio questions, call search_curios when the identity is uncertain, then call get_curio_advice.",
@@ -135,6 +141,23 @@ export function createDarkestDungeonServer(
       heroCombatSkillTreeLoader,
     );
     return heroCombatSkillTreesPromise;
+  };
+  const heroCombatSkillPositionLoader =
+    options.loadHeroCombatSkillPositions ??
+    (() => {
+      const gameDirectory = options.gameDirectory?.trim();
+      return gameDirectory === undefined || gameDirectory === ""
+        ? Promise.resolve(undefined)
+        : loadHeroCombatSkillPositions(gameDirectory);
+    });
+  let heroCombatSkillPositionsPromise:
+    | Promise<HeroCombatSkillPositionDefinition[] | undefined>
+    | undefined;
+  const getHeroCombatSkillPositions = () => {
+    heroCombatSkillPositionsPromise ??= Promise.resolve().then(
+      heroCombatSkillPositionLoader,
+    );
+    return heroCombatSkillPositionsPromise;
   };
   const heroProgressionRulesLoader =
     options.loadHeroProgressionRules ??
@@ -332,9 +355,10 @@ export function createDarkestDungeonServer(
       annotations: readOnlyAnnotations,
     },
     async ({ heroId }) => {
-      const [state, skillTrees, progressionRules] = await Promise.all([
+      const [state, skillTrees, skillPositions, progressionRules] = await Promise.all([
         dataSource.load(),
         getHeroCombatSkillTrees(),
+        getHeroCombatSkillPositions(),
         getHeroProgressionRules(),
       ]);
       const hero = getHero(state.roster, heroId);
@@ -355,6 +379,7 @@ export function createDarkestDungeonServer(
           hero,
           state.upgrades,
           skillTrees,
+          skillPositions,
         ),
       };
 

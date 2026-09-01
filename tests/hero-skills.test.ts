@@ -169,12 +169,18 @@ test("derives displayed levels from per-hero upgrade purchases", () => {
       level: 2,
       isSelected: true,
       rawSelectionValue: 0,
+      usableFromRanks: null,
+      target: null,
+      movement: null,
     },
     {
       id: "iron_swan",
       level: null,
       isSelected: false,
       rawSelectionValue: null,
+      usableFromRanks: null,
+      target: null,
+      movement: null,
     },
   ]);
 });
@@ -188,6 +194,9 @@ test("does not infer levels without game definitions", () => {
         level: null,
         isSelected: true,
         rawSelectionValue: 0,
+        usableFromRanks: null,
+        target: null,
+        movement: null,
       },
     ],
   );

@@ -59,6 +59,14 @@ test("MCP server advertises and executes read-only game tools", async (t) => {
     loadHeroProgressionRules: async () => ({
       resolveLevelThresholds: [0, 2, 8, 14, 24, 36, 48],
     }),
+    loadHeroCombatSkillPositions: async () =>
+      expectedHero.combatSkillSelections.map(({ id }) => ({
+        heroClass: expectedHero.heroClass,
+        skillId: id,
+        usableFromRanks: [2, 3, 4],
+        target: { side: "enemy", mode: "single", ranks: [2, 3, 4] },
+        movement: { backward: 0, forward: 0 },
+      })),
     loadQuirkDefinitions: async () => [
       {
         id: riskyQuirk.id,
@@ -263,6 +271,9 @@ test("MCP server advertises and executes read-only game tools", async (t) => {
         level: null,
         isSelected: true,
         rawSelectionValue,
+        usableFromRanks: [2, 3, 4],
+        target: { side: "enemy", mode: "single", ranks: [2, 3, 4] },
+        movement: { backward: 0, forward: 0 },
       }),
     ),
   });

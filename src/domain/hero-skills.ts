@@ -11,4 +11,29 @@ export interface HeroCombatSkillDetail {
   level: number | null;
   isSelected: boolean;
   rawSelectionValue: number | null;
+  usableFromRanks: number[] | null;
+  target: HeroCombatSkillTarget | null;
+  movement: HeroCombatSkillMovement | null;
+}
+
+export type HeroCombatSkillTargetSide = "enemy" | "ally" | "self";
+export type HeroCombatSkillTargetMode = "single" | "group" | "random";
+
+export interface HeroCombatSkillTarget {
+  side: HeroCombatSkillTargetSide;
+  mode: HeroCombatSkillTargetMode;
+  ranks: number[];
+}
+
+export interface HeroCombatSkillMovement {
+  backward: number;
+  forward: number;
+}
+
+export interface HeroCombatSkillPositionDefinition {
+  heroClass: string;
+  skillId: string;
+  usableFromRanks: number[];
+  target: HeroCombatSkillTarget;
+  movement: HeroCombatSkillMovement;
 }

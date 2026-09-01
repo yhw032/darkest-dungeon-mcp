@@ -188,6 +188,21 @@ const combatSkillDetailSchema = z.object({
   level: z.number().int().positive().nullable().describe("Verified one-based skill level, or null when game definitions are unavailable."),
   isSelected: z.boolean(),
   rawSelectionValue: finiteNumber.nullable().describe("Raw selection flag/value; never use as a skill level."),
+  usableFromRanks: z
+    .array(z.number().int().min(1).max(4))
+    .nullable()
+    .describe("Hero ranks where this skill can be used; null without game definitions."),
+  target: z
+    .object({
+      side: z.enum(["enemy", "ally", "self"]),
+      mode: z.enum(["single", "group", "random"]),
+      ranks: z.array(z.number().int().min(1).max(4)),
+    })
+    .nullable(),
+  movement: z
+    .object({ backward: count, forward: count })
+    .nullable()
+    .describe("Ranks moved after use; zeroes mean no movement, null means definitions unavailable."),
 });
 
 export const heroDetailSchema = heroSummarySchema.extend({
