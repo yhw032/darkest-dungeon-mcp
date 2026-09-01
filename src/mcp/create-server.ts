@@ -6,6 +6,7 @@ import {
   curioRegionSchema,
   curioSummarySchema,
   gameStateSummarySchema,
+  heroComparisonSchema,
   heroDetailSchema,
   heroSummarySchema,
   heroTownContextSchema,
@@ -37,6 +38,7 @@ import {
   loadHeroProgressionRules,
 } from "../progression/hero-progression.js";
 import { getHero } from "../queries/get-hero.js";
+import { getHeroComparisonHighlights } from "../queries/compare-heroes.js";
 import { loadHeroCombatSkillPositions } from "../skills/combat-skill-positions.js";
 import { analyzeHeroCombatPositions } from "../skills/analyze-combat-positions.js";
 import { getQuest } from "../queries/get-quest.js";
@@ -82,6 +84,7 @@ export const serverInstructions = [
   "Use save-state tools for facts about the current campaign instead of guessing.",
   "Use resolveLevel instead of resolveXp when stating a hero level, and use availability.isAvailableForPartySelection when choosing new party members.",
   "For a specific quest, pass questId to list_heroes or get_hero and use questEligibility instead of inferring level restrictions.",
+  "Use compare_heroes for objective comparisons instead of selecting a winner from raw experience points or class stereotypes.",
   "In hero details, use combatSkillDetails.level for combat skill levels; rawSelectionValue is not a level.",
   "Use combatSkillDetails.usableFromPartyPositions, target, and movement for formation claims instead of relying on class stereotypes.",
   "Formation position 1 is frontmost and position 4 is rearmost for both parties.",
@@ -402,6 +405,145 @@ export function createDarkestDungeonServer(
           !eligibleOnly || hero.questEligibility?.isEligible === true,
       );
       return toolResult("heroes", heroes);
+    },
+  );
+
+  server.registerTool(
+    "compare_heroes",
+    {
+      title: "Compare heroes",
+      description:
+        "Compare 2 to 8 heroes using resolve level, stress, availability, optional quest eligibility, equipment, selected combat skills, formation coverage, and curated quirk treatment risk. Returns objective highlights without choosing an overall winner.",
+      inputSchema: z.object({
+        heroIds: z
+          .array(z.string().min(1))
+          .min(2)
+          .max(8)
+          .refine((ids) => new Set(ids).size === ids.length, {
+            message: "heroIds must be unique.",
+          }),
+        questId: z.string().min(1).optional(),
+      }),
+      outputSchema: z.object({ comparison: heroComparisonSchema }),
+      annotations: readOnlyAnnotations,
+    },
+    async ({ heroIds, questId }) => {
+      const canAnalyzeQuirkRisk =
+        options.loadQuirkDefinitions !== undefined ||
+        (options.gameDirectory?.trim() ?? "") !== "";
+      const [
+        state,
+        skillTrees,
+        skillPositions,
+        progressionRules,
+        restrictionRules,
+        quirkDefinitions,
+        treatmentKnowledge,
+      ] = await Promise.all([
+        dataSource.load(),
+        getHeroCombatSkillTrees(),
+        getHeroCombatSkillPositions(),
+        getHeroProgressionRules(),
+        questId === undefined
+          ? Promise.resolve(undefined)
+          : getQuestRestrictionRules(),
+        canAnalyzeQuirkRisk
+          ? getQuirkDefinitions()
+          : Promise.resolve(undefined),
+        canAnalyzeQuirkRisk
+          ? getTreatmentKnowledge()
+          : Promise.resolve(undefined),
+      ]);
+      const missingHeroIds = heroIds.filter(
+        (heroId) => getHero(state.roster, heroId) === undefined,
+      );
+      if (missingHeroIds.length > 0) {
+        return {
+          isError: true,
+          content: [
+            {
+              type: "text",
+              text: `Heroes not found: ${missingHeroIds.join(", ")}`,
+            },
+          ],
+        };
+      }
+      const quest = questId === undefined
+        ? undefined
+        : getQuest(state.quests, questId);
+      if (questId !== undefined && quest === undefined) {
+        return notFoundResult("Quest", questId);
+      }
+      const riskyHeroes =
+        quirkDefinitions === undefined || treatmentKnowledge === undefined
+          ? []
+          : heroIds.flatMap((heroId) =>
+              analyzeRiskyQuirks(
+                state.roster,
+                quirkDefinitions,
+                treatmentKnowledge,
+                { minimumPriority: "low", heroId, limit: 1 },
+              ),
+            );
+      const riskByHeroId = new Map(
+        riskyHeroes.map((hero) => [hero.heroId, hero]),
+      );
+      const heroes = heroIds.map((heroId) => {
+        const hero = getHero(state.roster, heroId)!;
+        const townContext = getHeroTownContext(
+          state.roster,
+          state.town,
+          heroId,
+        )!;
+        const resolveLevel = getResolveLevel(
+          hero.resolveXp,
+          progressionRules,
+        );
+        const combatSkillDetails = getHeroCombatSkillDetails(
+          hero,
+          state.upgrades,
+          skillTrees,
+          skillPositions,
+        );
+        const risk = riskByHeroId.get(heroId);
+        return {
+          id: hero.id,
+          name: hero.name,
+          heroClass: hero.heroClass,
+          resolveXp: hero.resolveXp,
+          resolveLevel,
+          stress: hero.stress,
+          availability: getHeroAvailability(hero, townContext),
+          questEligibility:
+            quest === undefined
+              ? null
+              : getQuestEligibility(quest, resolveLevel, restrictionRules),
+          equipment: {
+            weaponRank: hero.weaponRank,
+            armourRank: hero.armourRank,
+          },
+          selectedCombatSkills: combatSkillDetails.filter(
+            (skill) => skill.isSelected,
+          ),
+          combatPositionAnalysis:
+            analyzeHeroCombatPositions(combatSkillDetails),
+          quirkTreatmentAnalysis: {
+            status: canAnalyzeQuirkRisk
+              ? "available" as const
+              : "unavailable" as const,
+            risk: risk === undefined
+              ? null
+              : {
+                  overallPriority: risk.overallPriority,
+                  riskyQuirkIds: risk.riskyQuirks.map((quirk) => quirk.id),
+                },
+          },
+        };
+      });
+      return toolResult("comparison", {
+        heroes,
+        highlights: getHeroComparisonHighlights(heroes),
+      });
     },
   );
 

@@ -127,6 +127,7 @@ runner through `tsx`. Tests never access the user's live save directory.
 | `list_risky_quirks` | Rank heroes with treatment-worthy quirks and explain the risks. |
 | `list_heroes` | Filter heroes by class, roster status, stress, party availability, and optional quest eligibility. |
 | `get_hero` | Return one hero with resolve level, availability, optional quest eligibility, combat skills, and town activity. |
+| `compare_heroes` | Compare 2–8 heroes using objective readiness, equipment, skill-position, and curated quirk-risk evidence. |
 | `list_quests` | Filter available quests. |
 | `get_quest` | Return one quest by ID. |
 | `list_trinkets` | List trinkets in storage, on heroes, or in stores. |

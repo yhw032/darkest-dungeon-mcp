@@ -3,7 +3,7 @@ import { z } from "zod";
 const finiteNumber = z.number().finite();
 const count = z.number().int().nonnegative();
 const nullableString = z.string().nullable();
-const questEligibilitySchema = z.object({
+export const questEligibilitySchema = z.object({
   questId: z.string(),
   questDifficulty: z.number().int().nonnegative(),
   status: z.enum(["eligible", "ineligible", "unknown"]),
@@ -54,6 +54,8 @@ export const heroSummarySchema = z.object({
     .nullable()
     .describe("Eligibility for the requested quest; null when no questId was supplied."),
 });
+
+export const heroAvailabilitySchema = heroSummarySchema.shape.availability;
 
 const questRewardItemSchema = z.object({
   id: z.string(),
@@ -201,7 +203,7 @@ const quirkSchema = z.object({
 });
 const trinketStackSchema = z.object({ id: z.string(), type: z.string(), amount: finiteNumber });
 const skillSelectionSchema = z.object({ id: z.string(), rawSelectionValue: finiteNumber });
-const combatSkillDetailSchema = z.object({
+export const combatSkillDetailSchema = z.object({
   id: z.string(),
   level: z.number().int().positive().nullable().describe("Verified one-based skill level, or null when game definitions are unavailable."),
   isSelected: z.boolean(),
@@ -224,7 +226,7 @@ const combatSkillDetailSchema = z.object({
     .nullable()
     .describe("Positions moved after use; zeroes mean no movement, null means definitions unavailable."),
 });
-const combatPositionAnalysisSchema = z.object({
+export const combatPositionAnalysisSchema = z.object({
   status: z
     .enum(["complete", "partial", "unavailable"])
     .describe("Whether position definitions cover all, some, or none of the selected skills."),
@@ -268,6 +270,45 @@ export const heroDetailSchema = heroSummarySchema.extend({
   campingSkillSelections: z.array(skillSelectionSchema),
   combatSkillDetails: z.array(combatSkillDetailSchema),
   combatPositionAnalysis: combatPositionAnalysisSchema,
+});
+
+export const heroComparisonSchema = z.object({
+  heroes: z.array(
+    z.object({
+      id: z.string(),
+      name: z.string(),
+      heroClass: z.string(),
+      resolveXp: finiteNumber.describe("Raw resolve experience, not resolve level."),
+      resolveLevel: z.number().int().nonnegative().nullable(),
+      stress: finiteNumber,
+      availability: heroAvailabilitySchema,
+      questEligibility: questEligibilitySchema.nullable(),
+      equipment: z.object({
+        weaponRank: z.number().int(),
+        armourRank: z.number().int(),
+      }),
+      selectedCombatSkills: z.array(combatSkillDetailSchema),
+      combatPositionAnalysis: combatPositionAnalysisSchema,
+      quirkTreatmentAnalysis: z.object({
+        status: z.enum(["available", "unavailable"]),
+        risk: z
+          .object({
+            overallPriority: z.enum(["critical", "high", "medium", "low"]),
+            riskyQuirkIds: z.array(z.string()),
+          })
+          .nullable()
+          .describe("Curated treatment risk; null means no curated match only when status is available."),
+      }),
+    }),
+  ),
+  highlights: z.object({
+    availableHeroIds: z.array(z.string()),
+    questEligibleHeroIds: z.array(z.string()).nullable(),
+    lowestStressHeroIds: z.array(z.string()),
+    highestResolveLevelHeroIds: z.array(z.string()),
+    highestWeaponRankHeroIds: z.array(z.string()),
+    highestArmourRankHeroIds: z.array(z.string()),
+  }),
 });
 
 export const heroTownContextSchema = z.object({

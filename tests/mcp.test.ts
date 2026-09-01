@@ -126,11 +126,13 @@ test("MCP server advertises and executes read-only game tools", async (t) => {
   assert.match(instructions ?? "", /do not infer it from estate storage/);
   assert.match(instructions ?? "", /list_risky_quirks/);
   assert.match(instructions ?? "", /editorial guidance/);
+  assert.match(instructions ?? "", /compare_heroes/);
 
   const { tools } = await client.listTools();
   assert.deepEqual(
     tools.map((tool) => tool.name).sort(),
     [
+      "compare_heroes",
       "get_curio_advice",
       "get_game_state",
       "get_hero",
@@ -323,6 +325,29 @@ test("MCP server advertises and executes read-only game tools", async (t) => {
       bestCoveragePartyPositions: [2, 3, 4],
     },
   });
+
+  const secondHero = state.roster.heroes[1];
+  assert.ok(secondHero);
+  const comparisonResult = await client.callTool({
+    name: "compare_heroes",
+    arguments: {
+      heroIds: [expectedHero.id, secondHero.id],
+      questId: expectedQuest.id,
+    },
+  });
+  assert.equal(comparisonResult.isError, undefined);
+  const comparison = (
+    comparisonResult.structuredContent as
+      | { comparison?: { heroes?: unknown[]; highlights?: unknown } }
+      | undefined
+  )?.comparison;
+  assert.equal(comparison?.heroes?.length, 2);
+  assert.ok(comparison?.highlights);
+  assert.deepEqual(
+    comparison?.heroes?.map((candidate) =>
+      (candidate as { id?: unknown }).id),
+    [expectedHero.id, secondHero.id],
+  );
 
   const missingResult = await client.callTool({
     name: "get_hero",
