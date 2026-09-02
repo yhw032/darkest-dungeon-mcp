@@ -1,7 +1,7 @@
 import { readFile } from "node:fs/promises";
 import { resolve } from "node:path";
 
-import type { Quest } from "../domain/quest.js";
+import type { Quest, QuestReward } from "../domain/quest.js";
 import {
   localizeGameString,
   type GameLanguage,
@@ -23,6 +23,17 @@ export interface LocalizedDungeon {
 export interface LocalizedQuestLength {
   value: number;
   name: string | null;
+}
+
+export interface LocalizedQuestRewardItem {
+  id: string;
+  type: string;
+  amount: number;
+  name: string | null;
+}
+
+export interface LocalizedQuestReward extends Omit<QuestReward, "items"> {
+  items: LocalizedQuestRewardItem[];
 }
 
 export type QuestLocalization = LocalizationByLanguage;
@@ -73,18 +84,21 @@ export async function loadQuestLocalization(
 }
 
 export interface LocalizedQuestSummary
-  extends Omit<QuestSummary, "dungeon" | "length"> {
+  extends Omit<QuestSummary, "dungeon" | "length" | "reward"> {
   dungeon: LocalizedDungeon;
   title: string | null;
   description: string | null;
   length: LocalizedQuestLength;
+  reward: LocalizedQuestReward;
 }
 
-export interface LocalizedQuest extends Omit<Quest, "dungeon" | "length"> {
+export interface LocalizedQuest
+  extends Omit<Quest, "dungeon" | "length" | "reward"> {
   dungeon: LocalizedDungeon;
   title: string | null;
   description: string | null;
   length: LocalizedQuestLength;
+  reward: LocalizedQuestReward;
 }
 
 function questLocalizationSuffix(
@@ -96,7 +110,10 @@ function questLocalizationSuffix(
 }
 
 function localizeQuestFields(
-  quest: Pick<Quest, "id" | "type" | "dungeon" | "length" | "goalIds">,
+  quest: Pick<
+    Quest,
+    "id" | "type" | "dungeon" | "length" | "goalIds" | "reward"
+  >,
   language: QuestLanguage,
   localization?: QuestLocalization,
 ) {
@@ -120,6 +137,17 @@ function localizeQuestFields(
         language,
         localization,
       ),
+    },
+    reward: {
+      resolveXp: quest.reward.resolveXp,
+      items: quest.reward.items.map((item) => ({
+        ...item,
+        name: localizeGameString(
+          `str_inventory_title_${item.type}${item.id}`,
+          language,
+          localization,
+        ),
+      })),
     },
   };
 }

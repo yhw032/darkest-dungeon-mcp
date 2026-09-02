@@ -32,6 +32,7 @@ function questLocalization(): QuestLocalization {
           "Explore the target area.",
         ],
         ["town_quest_length_2", "Medium"],
+        ["str_inventory_title_gold", "Gold"],
       ]),
     ],
     [
@@ -136,6 +137,7 @@ test("selects one verified dungeon name for the requested language", () => {
   assert.equal(localizedQuest.title, "Scout the Weald");
   assert.equal(localizedQuest.description, "Explore the target area.");
   assert.deepEqual(localizedQuest.length, { value: 2, name: "Medium" });
+  assert.equal(localizedQuest.reward.items[0]?.name, "Gold");
 });
 
 test("covers every dungeon id in the checked-in quest sample", async () => {

@@ -110,6 +110,9 @@ const questRewardItemSchema = z.object({
   id: z.string(),
   type: z.string(),
   amount: finiteNumber,
+  name: nullableString.describe(
+    "Official reward name in the requested language; null when unavailable.",
+  ),
 });
 
 const questRewardSchema = z.object({

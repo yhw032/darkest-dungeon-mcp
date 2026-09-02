@@ -57,6 +57,10 @@ test("MCP server advertises and executes read-only game tools", async (t) => {
               "세이렌을 찾아 처치하십시오.",
             ],
             [`town_quest_length_${String(expectedQuest.length)}`, "중간"],
+            ...expectedQuest.reward.items.map((item) => [
+              `str_inventory_title_${item.type}${item.id}`,
+              `시험 보상 ${item.type}:${item.id}`,
+            ] as const),
             ["str_monstername_bloated_corpse_A", "익사한 노예"],
             [`hero_class_name_${expectedHero.heroClass}`, "시험 직업"],
             ...expectedHero.combatSkillSelections.map(({ id }) => [
@@ -436,6 +440,13 @@ test("MCP server advertises and executes read-only game tools", async (t) => {
     title: "세이렌 처치",
     description: "세이렌을 찾아 처치하십시오.",
     length: { value: expectedQuest.length, name: "중간" },
+    reward: {
+      ...expectedQuest.reward,
+      items: expectedQuest.reward.items.map((item) => ({
+        ...item,
+        name: `시험 보상 ${item.type}:${item.id}`,
+      })),
+    },
   });
   assert.equal(
     (

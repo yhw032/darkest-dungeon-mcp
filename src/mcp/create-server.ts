@@ -115,7 +115,7 @@ export const serverInstructions = [
   "list_heroes excludes deceased heroes by default; set includeDeceased only when historical records are requested.",
   "Use resolveLevel instead of resolveXp when stating a hero level, and use availability.isAvailableForPartySelection when choosing new party members.",
   "For a specific quest, pass questId to list_heroes or get_hero and use questEligibility instead of inferring level restrictions.",
-  "Pass the user's language to quest tools and display dungeon.name, title, description, and length.name; their ids and raw values are stable machine-readable fields.",
+  "Pass the user's language to quest tools and display dungeon.name, title, description, length.name, and reward item names; their ids and raw values are stable machine-readable fields.",
   "Use compare_heroes for objective comparisons instead of selecting a winner from raw experience points or class stereotypes.",
   "Pass the user's language to hero tools and display heroClassName and combatSkillDetails.name; preserve their ids only as stable identifiers.",
   "In hero details, use combatSkillDetails.level for combat skill levels; rawSelectionValue is not a level.",
