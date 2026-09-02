@@ -124,7 +124,7 @@ export const serverInstructions = [
   "Use combatPositionAnalysis for objective selected-skill position coverage; bestCoveragePartyPositions is not by itself a tactical recommendation.",
   "Use list_building_upgrades for verified building upgrade progress and next costs.",
   "Use list_risky_quirks for treatment-priority questions, and present its policy as editorial guidance rather than an absolute game value.",
-  "Use query_classes for verified class roles, strengths, limitations, position guidance, mechanics, and party synergies instead of relying on class stereotypes.",
+  "Use query_classes for verified class roles, strengths, limitations, position guidance, mechanics, and party synergies instead of relying on class stereotypes; pass the user's language and display the localized class and skill names it returns.",
   "Use query_combat for verified region and enemy priorities, dangerous actions, threat types, and counters instead of inventing combat advice; pass the user's language and display the localized region name.",
   "Class position guidance is editorial strategy knowledge; use combatSkillDetails for the current hero's exact selected-skill positions.",
   "For curio questions, call search_curios when the identity is uncertain, then call get_curio_advice.",
@@ -842,23 +842,29 @@ export function createDarkestDungeonServer(
         role: z.string().min(1).optional(),
         isDlc: z.boolean().optional(),
         dlc: z.string().min(1).optional(),
+        language: z.enum(["en", "ko"]).default("en"),
         limit: z.number().int().min(1).max(20).default(20),
       }),
       outputSchema: z.object({ classes: z.array(classKnowledgeSchema) }),
       annotations: readOnlyAnnotations,
     },
-    async ({ id, query, role, isDlc, dlc, limit }) => {
+    async ({ id, query, role, isDlc, dlc, language, limit }) => {
       const filters = {
         ...(id === undefined ? {} : { id }),
         ...(query === undefined ? {} : { query }),
         ...(role === undefined ? {} : { role }),
         ...(isDlc === undefined ? {} : { isDlc }),
         ...(dlc === undefined ? {} : { dlc }),
+        language,
         limit,
       };
+      const [knowledge, localization] = await Promise.all([
+        getClassKnowledge(),
+        getGameLocalization(),
+      ]);
       return toolResult(
         "classes",
-        queryClasses(await getClassKnowledge(), filters),
+        queryClasses(knowledge, filters, localization),
       );
     },
   );

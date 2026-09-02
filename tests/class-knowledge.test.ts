@@ -48,11 +48,10 @@ function positionDefinitions(): HeroCombatSkillPositionDefinition[] {
 
 function validKnowledge(): unknown {
   return {
-    schemaVersion: 1,
+    schemaVersion: 2,
     classes: [
       {
         id: "plague_doctor",
-        names: { en: "Plague Doctor", ko: "역병 의사" },
         aliases: [],
         dlcs: [],
         summary: "A backline controller specializing in blight and stuns.",
@@ -161,7 +160,7 @@ test("rejects malformed class knowledge JSON", () => {
 test("loads the checked-in class knowledge base", async () => {
   const knowledge = await loadClassKnowledge();
 
-  assert.equal(knowledge.schemaVersion, 1);
+  assert.equal(knowledge.schemaVersion, 2);
   assert.equal(knowledge.classes.length, 18);
   assert.deepEqual(
     knowledge.classes.map(({ id }) => id).sort(),

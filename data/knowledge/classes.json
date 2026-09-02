@@ -1,12 +1,8 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "classes": [
     {
       "id": "abomination",
-      "names": {
-        "en": "Abomination",
-        "ko": "괴인"
-      },
       "aliases": [],
       "dlcs": [],
       "summary": "A controller and self-sustaining damage dealer who changes roles by transforming between human and beast forms.",
@@ -150,10 +146,6 @@
     },
     {
       "id": "antiquarian",
-      "names": {
-        "en": "Antiquarian",
-        "ko": "유물수집상"
-      },
       "aliases": [],
       "dlcs": [],
       "summary": "An economic and defensive support hero who increases expedition loot at the cost of direct combat power.",
@@ -297,10 +289,6 @@
     },
     {
       "id": "arbalest",
-      "names": {
-        "en": "Arbalest",
-        "ko": "석궁사수"
-      },
       "aliases": [],
       "dlcs": [],
       "summary": "A durable backline marksman who converts marks into accurate ranged damage and supplies secondary healing and debuffs.",
@@ -443,10 +431,6 @@
     },
     {
       "id": "bounty_hunter",
-      "names": {
-        "en": "Bounty Hunter",
-        "ko": "현상금 사냥꾼"
-      },
       "aliases": [],
       "dlcs": [],
       "summary": "A flexible disruption and execution specialist who exploits marked or stunned enemies.",
@@ -591,10 +575,6 @@
     },
     {
       "id": "crusader",
-      "names": {
-        "en": "Crusader",
-        "ko": "성전사"
-      },
       "aliases": [],
       "dlcs": [],
       "summary": "A durable generalist combining frontline damage with stuns, recovery, and a forward movement attack.",
@@ -739,10 +719,6 @@
     },
     {
       "id": "grave_robber",
-      "names": {
-        "en": "Grave Robber",
-        "ko": "도굴꾼"
-      },
       "aliases": [],
       "dlcs": [],
       "summary": "A fast, evasive damage dealer using movement, blight interaction, and armor piercing to reach priority targets.",
@@ -885,10 +861,6 @@
     },
     {
       "id": "hellion",
-      "names": {
-        "en": "Hellion",
-        "ko": "야만인"
-      },
       "aliases": [],
       "dlcs": [],
       "summary": "A frontline damage dealer with rare back-rank reach, bleed attacks, limited control, and self-recovery.",
@@ -1030,10 +1002,6 @@
     },
     {
       "id": "highwayman",
-      "names": {
-        "en": "Highwayman",
-        "ko": "노상강도"
-      },
       "aliases": [],
       "dlcs": [],
       "summary": "A mobile damage dealer with broad reach whose riposte converts enemy attacks into additional offense.",
@@ -1177,10 +1145,6 @@
     },
     {
       "id": "houndmaster",
-      "names": {
-        "en": "Houndmaster",
-        "ko": "조련사"
-      },
       "aliases": [
         "Hound Master"
       ],
@@ -1329,10 +1293,6 @@
     },
     {
       "id": "jester",
-      "names": {
-        "en": "Jester",
-        "ko": "광대"
-      },
       "aliases": [],
       "dlcs": [],
       "summary": "A fast stress healer and combat buffer who can add bleed damage or build toward a risky movement-based burst attack.",
@@ -1478,10 +1438,6 @@
     },
     {
       "id": "leper",
-      "names": {
-        "en": "Leper",
-        "ko": "나병환자"
-      },
       "aliases": [],
       "dlcs": [],
       "summary": "A self-sufficient frontline specialist with exceptional raw damage and durability but limited reach and accuracy.",
@@ -1625,10 +1581,6 @@
     },
     {
       "id": "man_at_arms",
-      "names": {
-        "en": "Man-at-Arms",
-        "ko": "중보병"
-      },
       "aliases": [
         "Man at Arms"
       ],
@@ -1779,10 +1731,6 @@
     },
     {
       "id": "musketeer",
-      "names": {
-        "en": "Musketeer",
-        "ko": "총사"
-      },
       "aliases": [],
       "dlcs": [
         "musketeer"
@@ -1826,13 +1774,88 @@
         }
       ],
       "skillGuidance": [
-        { "skillId": "aimed_shot", "useCases": ["Deal primary ranged damage, especially against a marked target."], "synergies": ["Use a faster ally to establish the mark first."], "cautions": ["Frontline displacement can disable the shot."] },
-        { "skillId": "smokescreen", "useCases": ["Reduce backline accuracy and critical chance in prolonged fights."], "synergies": ["Strengthens dodge-oriented defensive plans."], "cautions": ["Repeated debuffing delays focused kills."] },
-        { "skillId": "call_the_shot", "useCases": ["Mark and reduce dodge when no ally can provide better setup."], "synergies": ["Supports other marked-target attackers."], "cautions": ["Self-marking often costs the attack that should exploit the mark."] },
-        { "skillId": "buckshot", "useCases": ["Attack and disrupt the enemy frontline or recover limited offense after displacement."], "synergies": [], "cautions": ["Spread damage is usually weaker than eliminating one threat."] },
-        { "skillId": "sidearm", "useCases": ["Attack while displaced and gain speed for a following round."], "synergies": ["Can help restore favorable turn order."], "cautions": ["Random targeting cannot reliably remove a priority enemy."] },
-        { "skillId": "patch_up", "useCases": ["Provide secondary healing and amplify later heals on an ally."], "synergies": ["Improves follow-up healing from Vestal or Occultist."], "cautions": ["Cannot heal the Musketeer herself."] },
-        { "skillId": "skeet_shot", "useCases": ["Clear marks and stuns from allies or remove enemy stealth."], "synergies": ["Useful against encounters built around marks or stealth."], "cautions": ["Its utility is encounter-dependent and deals no focused damage."] }
+        {
+          "skillId": "aimed_shot",
+          "useCases": [
+            "Deal primary ranged damage, especially against a marked target."
+          ],
+          "synergies": [
+            "Use a faster ally to establish the mark first."
+          ],
+          "cautions": [
+            "Frontline displacement can disable the shot."
+          ]
+        },
+        {
+          "skillId": "smokescreen",
+          "useCases": [
+            "Reduce backline accuracy and critical chance in prolonged fights."
+          ],
+          "synergies": [
+            "Strengthens dodge-oriented defensive plans."
+          ],
+          "cautions": [
+            "Repeated debuffing delays focused kills."
+          ]
+        },
+        {
+          "skillId": "call_the_shot",
+          "useCases": [
+            "Mark and reduce dodge when no ally can provide better setup."
+          ],
+          "synergies": [
+            "Supports other marked-target attackers."
+          ],
+          "cautions": [
+            "Self-marking often costs the attack that should exploit the mark."
+          ]
+        },
+        {
+          "skillId": "buckshot",
+          "useCases": [
+            "Attack and disrupt the enemy frontline or recover limited offense after displacement."
+          ],
+          "synergies": [],
+          "cautions": [
+            "Spread damage is usually weaker than eliminating one threat."
+          ]
+        },
+        {
+          "skillId": "sidearm",
+          "useCases": [
+            "Attack while displaced and gain speed for a following round."
+          ],
+          "synergies": [
+            "Can help restore favorable turn order."
+          ],
+          "cautions": [
+            "Random targeting cannot reliably remove a priority enemy."
+          ]
+        },
+        {
+          "skillId": "patch_up",
+          "useCases": [
+            "Provide secondary healing and amplify later heals on an ally."
+          ],
+          "synergies": [
+            "Improves follow-up healing from Vestal or Occultist."
+          ],
+          "cautions": [
+            "Cannot heal the Musketeer herself."
+          ]
+        },
+        {
+          "skillId": "skeet_shot",
+          "useCases": [
+            "Clear marks and stuns from allies or remove enemy stealth."
+          ],
+          "synergies": [
+            "Useful against encounters built around marks or stealth."
+          ],
+          "cautions": [
+            "Its utility is encounter-dependent and deals no focused damage."
+          ]
+        }
       ],
       "partySynergies": [
         {
@@ -1852,10 +1875,6 @@
     },
     {
       "id": "occultist",
-      "names": {
-        "en": "Occultist",
-        "ko": "신비학자"
-      },
       "aliases": [],
       "dlcs": [],
       "summary": "A flexible support hero with variable healing, strong marks and debuffs, enemy movement, and a frontline stun.",
@@ -1899,13 +1918,90 @@
         }
       ],
       "skillGuidance": [
-        { "skillId": "bloodlet", "useCases": ["Apply direct damage, bleed, and an offensive debuff to a frontline target."], "synergies": ["Provides offense in a frontline Occultist build."], "cautions": ["Bleed resistance and limited reach reduce reliability."] },
-        { "skillId": "abyssal_artillery", "useCases": ["Damage both enemy backliners with a bonus against Eldritch targets."], "synergies": ["Pairs with other backline pressure."], "cautions": ["Spread damage may be slower than killing one priority enemy."] },
-        { "skillId": "weakening_curse", "useCases": ["Reduce the damage and protection of a durable enemy."], "synergies": ["Helps physical attackers damage protected targets."], "cautions": ["Debuff resistance can negate the setup action."] },
-        { "skillId": "wyrd_reconstruction", "useCases": ["Attempt a potentially large single-target heal."], "synergies": ["Healing-received buffs improve its successful outcomes."], "cautions": ["It can heal for zero and may inflict bleed, so keep a backup recovery plan."] },
-        { "skillId": "disruptive_curse", "useCases": ["Mark a target while reducing dodge for concentrated attacks."], "synergies": ["Enables Arbalest, Musketeer, Houndmaster, and Bounty Hunter."], "cautions": ["The mark is wasted if allies cannot exploit it promptly."] },
-        { "skillId": "hands_from_abyss", "useCases": ["Deliver a strong frontline stun from a forward position."], "synergies": ["Creates recovery time or enables stunned-target damage."], "cautions": ["It reduces torchlight and requires exposing the Occultist near the front."] },
-        { "skillId": "daemons_pull", "useCases": ["Pull a backliner forward and clear corpses."], "synergies": ["Moves priority targets into limited-range frontline attacks."], "cautions": ["Move resistance can prevent repositioning."] }
+        {
+          "skillId": "bloodlet",
+          "useCases": [
+            "Apply direct damage, bleed, and an offensive debuff to a frontline target."
+          ],
+          "synergies": [
+            "Provides offense in a frontline Occultist build."
+          ],
+          "cautions": [
+            "Bleed resistance and limited reach reduce reliability."
+          ]
+        },
+        {
+          "skillId": "abyssal_artillery",
+          "useCases": [
+            "Damage both enemy backliners with a bonus against Eldritch targets."
+          ],
+          "synergies": [
+            "Pairs with other backline pressure."
+          ],
+          "cautions": [
+            "Spread damage may be slower than killing one priority enemy."
+          ]
+        },
+        {
+          "skillId": "weakening_curse",
+          "useCases": [
+            "Reduce the damage and protection of a durable enemy."
+          ],
+          "synergies": [
+            "Helps physical attackers damage protected targets."
+          ],
+          "cautions": [
+            "Debuff resistance can negate the setup action."
+          ]
+        },
+        {
+          "skillId": "wyrd_reconstruction",
+          "useCases": [
+            "Attempt a potentially large single-target heal."
+          ],
+          "synergies": [
+            "Healing-received buffs improve its successful outcomes."
+          ],
+          "cautions": [
+            "It can heal for zero and may inflict bleed, so keep a backup recovery plan."
+          ]
+        },
+        {
+          "skillId": "disruptive_curse",
+          "useCases": [
+            "Mark a target while reducing dodge for concentrated attacks."
+          ],
+          "synergies": [
+            "Enables Arbalest, Musketeer, Houndmaster, and Bounty Hunter."
+          ],
+          "cautions": [
+            "The mark is wasted if allies cannot exploit it promptly."
+          ]
+        },
+        {
+          "skillId": "hands_from_abyss",
+          "useCases": [
+            "Deliver a strong frontline stun from a forward position."
+          ],
+          "synergies": [
+            "Creates recovery time or enables stunned-target damage."
+          ],
+          "cautions": [
+            "It reduces torchlight and requires exposing the Occultist near the front."
+          ]
+        },
+        {
+          "skillId": "daemons_pull",
+          "useCases": [
+            "Pull a backliner forward and clear corpses."
+          ],
+          "synergies": [
+            "Moves priority targets into limited-range frontline attacks."
+          ],
+          "cautions": [
+            "Move resistance can prevent repositioning."
+          ]
+        }
       ],
       "partySynergies": [
         {
@@ -1925,10 +2021,6 @@
     },
     {
       "id": "plague_doctor",
-      "names": {
-        "en": "Plague Doctor",
-        "ko": "역병 의사"
-      },
       "aliases": [],
       "dlcs": [],
       "summary": "A fast backline controller specializing in stuns, blight, corpse disruption, and bleed or blight removal.",
@@ -1970,13 +2062,90 @@
         }
       ],
       "skillGuidance": [
-        { "skillId": "noxious_blast", "useCases": ["Apply concentrated blight and accuracy reduction to a frontline target."], "synergies": ["Repeated blight ignores protection and compounds over time."], "cautions": ["High blight resistance makes direct alternatives preferable."] },
-        { "skillId": "plague_grenade", "useCases": ["Apply blight to both enemy backliners."], "synergies": ["Supports Grave Robber's blighted-target damage."], "cautions": ["Damage over time may be too slow when an immediate kill is possible."] },
-        { "skillId": "blinding_gas", "useCases": ["Attempt to stun both enemy backliners before they act."], "synergies": ["Denies stress and control actions while allies attack."], "cautions": ["Limited uses and rising stun resistance prevent indefinite control."] },
-        { "skillId": "incision", "useCases": ["Use direct melee bleed against blight-resistant enemies."], "synergies": ["Offers an alternate damage type in hostile regions."], "cautions": ["Requires a more forward position than her main backline kit."] },
-        { "skillId": "battlefield_medicine", "useCases": ["Clear bleed and blight from an ally and the Plague Doctor while healing slightly."], "synergies": ["Prevents large pending damage-over-time ticks."], "cautions": ["The direct heal is too small to replace a primary healer."] },
-        { "skillId": "emboldening_vapours", "useCases": ["Apply a limited-use damage and speed buff for a long or critical fight."], "synergies": ["Amplifies a dedicated damage dealer over multiple turns."], "cautions": ["Setup is inefficient if the fight will end quickly."] },
-        { "skillId": "disorienting_blast", "useCases": ["Stun and shuffle one enemy while clearing a corpse."], "synergies": ["Corpse clearing opens back targets to limited-range allies."], "cautions": ["Shuffle results are not predictable."] }
+        {
+          "skillId": "noxious_blast",
+          "useCases": [
+            "Apply concentrated blight and accuracy reduction to a frontline target."
+          ],
+          "synergies": [
+            "Repeated blight ignores protection and compounds over time."
+          ],
+          "cautions": [
+            "High blight resistance makes direct alternatives preferable."
+          ]
+        },
+        {
+          "skillId": "plague_grenade",
+          "useCases": [
+            "Apply blight to both enemy backliners."
+          ],
+          "synergies": [
+            "Supports Grave Robber's blighted-target damage."
+          ],
+          "cautions": [
+            "Damage over time may be too slow when an immediate kill is possible."
+          ]
+        },
+        {
+          "skillId": "blinding_gas",
+          "useCases": [
+            "Attempt to stun both enemy backliners before they act."
+          ],
+          "synergies": [
+            "Denies stress and control actions while allies attack."
+          ],
+          "cautions": [
+            "Limited uses and rising stun resistance prevent indefinite control."
+          ]
+        },
+        {
+          "skillId": "incision",
+          "useCases": [
+            "Use direct melee bleed against blight-resistant enemies."
+          ],
+          "synergies": [
+            "Offers an alternate damage type in hostile regions."
+          ],
+          "cautions": [
+            "Requires a more forward position than her main backline kit."
+          ]
+        },
+        {
+          "skillId": "battlefield_medicine",
+          "useCases": [
+            "Clear bleed and blight from an ally and the Plague Doctor while healing slightly."
+          ],
+          "synergies": [
+            "Prevents large pending damage-over-time ticks."
+          ],
+          "cautions": [
+            "The direct heal is too small to replace a primary healer."
+          ]
+        },
+        {
+          "skillId": "emboldening_vapours",
+          "useCases": [
+            "Apply a limited-use damage and speed buff for a long or critical fight."
+          ],
+          "synergies": [
+            "Amplifies a dedicated damage dealer over multiple turns."
+          ],
+          "cautions": [
+            "Setup is inefficient if the fight will end quickly."
+          ]
+        },
+        {
+          "skillId": "disorienting_blast",
+          "useCases": [
+            "Stun and shuffle one enemy while clearing a corpse."
+          ],
+          "synergies": [
+            "Corpse clearing opens back targets to limited-range allies."
+          ],
+          "cautions": [
+            "Shuffle results are not predictable."
+          ]
+        }
       ],
       "partySynergies": [
         {
@@ -1996,10 +2165,6 @@
     },
     {
       "id": "vestal",
-      "names": {
-        "en": "Vestal",
-        "ko": "성녀"
-      },
       "aliases": [],
       "dlcs": [],
       "summary": "A dependable healer whose backline kit combines single-target and party recovery with stun and light support.",
@@ -2041,13 +2206,88 @@
         }
       ],
       "skillGuidance": [
-        { "skillId": "mace_bash", "useCases": ["Deal frontline melee damage when using a forward Vestal build."], "synergies": [], "cautions": ["Forward placement sacrifices access to her standard single-target heal."] },
-        { "skillId": "judgement", "useCases": ["Damage an enemy while restoring some of the Vestal's own health."], "synergies": ["Lets her contribute offense without abandoning self-sustain."], "cautions": ["The self-heal does not help an endangered ally."] },
-        { "skillId": "dazzling_light", "useCases": ["Stun a reachable enemy and increase torchlight."], "synergies": ["Creates time for healing or focused attacks."], "cautions": ["Stun resistance can make healing or damage the safer action."] },
-        { "skillId": "divine_grace", "useCases": ["Provide dependable focused healing to one endangered ally."], "synergies": ["Healing-received buffs increase its value."], "cautions": ["It requires a backline Vestal and cannot restore the whole party."] },
-        { "skillId": "gods_comfort", "useCases": ["Heal the entire party or remove several heroes from Death's Door."], "synergies": ["Efficient when damage is distributed across the party."], "cautions": ["Individual healing is modest against focused damage."] },
-        { "skillId": "gods_illumination", "useCases": ["Reduce enemy dodge, remove stealth, and increase torchlight."], "synergies": ["Improves allied accuracy against an evasive priority target."], "cautions": ["It competes with the Vestal's crucial healing actions."] },
-        { "skillId": "gods_hand", "useCases": ["Attack and debuff a frontline enemy while empowering the Vestal's offense."], "synergies": ["Supports a deliberate frontline Vestal build."], "cautions": ["Its position requirements conflict with conventional backline healing."] }
+        {
+          "skillId": "mace_bash",
+          "useCases": [
+            "Deal frontline melee damage when using a forward Vestal build."
+          ],
+          "synergies": [],
+          "cautions": [
+            "Forward placement sacrifices access to her standard single-target heal."
+          ]
+        },
+        {
+          "skillId": "judgement",
+          "useCases": [
+            "Damage an enemy while restoring some of the Vestal's own health."
+          ],
+          "synergies": [
+            "Lets her contribute offense without abandoning self-sustain."
+          ],
+          "cautions": [
+            "The self-heal does not help an endangered ally."
+          ]
+        },
+        {
+          "skillId": "dazzling_light",
+          "useCases": [
+            "Stun a reachable enemy and increase torchlight."
+          ],
+          "synergies": [
+            "Creates time for healing or focused attacks."
+          ],
+          "cautions": [
+            "Stun resistance can make healing or damage the safer action."
+          ]
+        },
+        {
+          "skillId": "divine_grace",
+          "useCases": [
+            "Provide dependable focused healing to one endangered ally."
+          ],
+          "synergies": [
+            "Healing-received buffs increase its value."
+          ],
+          "cautions": [
+            "It requires a backline Vestal and cannot restore the whole party."
+          ]
+        },
+        {
+          "skillId": "gods_comfort",
+          "useCases": [
+            "Heal the entire party or remove several heroes from Death's Door."
+          ],
+          "synergies": [
+            "Efficient when damage is distributed across the party."
+          ],
+          "cautions": [
+            "Individual healing is modest against focused damage."
+          ]
+        },
+        {
+          "skillId": "gods_illumination",
+          "useCases": [
+            "Reduce enemy dodge, remove stealth, and increase torchlight."
+          ],
+          "synergies": [
+            "Improves allied accuracy against an evasive priority target."
+          ],
+          "cautions": [
+            "It competes with the Vestal's crucial healing actions."
+          ]
+        },
+        {
+          "skillId": "gods_hand",
+          "useCases": [
+            "Attack and debuff a frontline enemy while empowering the Vestal's offense."
+          ],
+          "synergies": [
+            "Supports a deliberate frontline Vestal build."
+          ],
+          "cautions": [
+            "Its position requirements conflict with conventional backline healing."
+          ]
+        }
       ],
       "partySynergies": [
         {
@@ -2067,10 +2307,6 @@
     },
     {
       "id": "flagellant",
-      "names": {
-        "en": "Flagellant",
-        "ko": "고행자"
-      },
       "aliases": [],
       "dlcs": [
         "crimson_court"
@@ -2222,10 +2458,6 @@
     },
     {
       "id": "shieldbreaker",
-      "names": {
-        "en": "Shieldbreaker",
-        "ko": "방패 파괴자"
-      },
       "aliases": [],
       "dlcs": [
         "shieldbreaker"
@@ -2274,13 +2506,90 @@
         }
       ],
       "skillGuidance": [
-        { "skillId": "pierce", "useCases": ["Use a mobile armor-piercing attack against a protected target."], "synergies": ["Forward movement supports a dance rotation."], "cautions": ["Movement can disrupt position-dependent allies."] },
-        { "skillId": "break_guard", "useCases": ["Bypass guard, break the guard relationship, and expose the protector."], "synergies": ["Allows the party to focus the originally protected target."], "cautions": ["Its special value disappears when no guard is active."] },
-        { "skillId": "adders_kiss", "useCases": ["Apply strong blight to a frontline target while moving backward."], "synergies": ["Can reset the Shieldbreaker after forward movement."], "cautions": ["Strict positioning and blight resistance make it situational."] },
-        { "skillId": "spearing", "useCases": ["Damage multiple enemies with armor piercing from a forward position."], "synergies": ["Useful when several protected enemies are already weakened."], "cautions": ["Spread damage usually removes actions more slowly than focused attacks."] },
-        { "skillId": "expose", "useCases": ["Move backward while removing stealth and lowering speed and dodge."], "synergies": ["Prepares an exposed target for allied attacks."], "cautions": ["Movement must fit the party's formation plan."] },
-        { "skillId": "single_out", "useCases": ["Damage and blight a target, gaining bonus damage when it is marked."], "synergies": ["A faster ally can establish the mark before the Shieldbreaker attacks."], "cautions": ["It does not pierce protection and loses part of its value without a mark."] },
-        { "skillId": "serpents_sway", "useCases": ["Gain Aegis blocks and move forward before expected direct attacks."], "synergies": ["Protects her low health while restoring front position."], "cautions": ["Aegis does not block stress or existing bleed and blight."] }
+        {
+          "skillId": "pierce",
+          "useCases": [
+            "Use a mobile armor-piercing attack against a protected target."
+          ],
+          "synergies": [
+            "Forward movement supports a dance rotation."
+          ],
+          "cautions": [
+            "Movement can disrupt position-dependent allies."
+          ]
+        },
+        {
+          "skillId": "break_guard",
+          "useCases": [
+            "Bypass guard, break the guard relationship, and expose the protector."
+          ],
+          "synergies": [
+            "Allows the party to focus the originally protected target."
+          ],
+          "cautions": [
+            "Its special value disappears when no guard is active."
+          ]
+        },
+        {
+          "skillId": "adders_kiss",
+          "useCases": [
+            "Apply strong blight to a frontline target while moving backward."
+          ],
+          "synergies": [
+            "Can reset the Shieldbreaker after forward movement."
+          ],
+          "cautions": [
+            "Strict positioning and blight resistance make it situational."
+          ]
+        },
+        {
+          "skillId": "spearing",
+          "useCases": [
+            "Damage multiple enemies with armor piercing from a forward position."
+          ],
+          "synergies": [
+            "Useful when several protected enemies are already weakened."
+          ],
+          "cautions": [
+            "Spread damage usually removes actions more slowly than focused attacks."
+          ]
+        },
+        {
+          "skillId": "expose",
+          "useCases": [
+            "Move backward while removing stealth and lowering speed and dodge."
+          ],
+          "synergies": [
+            "Prepares an exposed target for allied attacks."
+          ],
+          "cautions": [
+            "Movement must fit the party's formation plan."
+          ]
+        },
+        {
+          "skillId": "single_out",
+          "useCases": [
+            "Damage and blight a target, gaining bonus damage when it is marked."
+          ],
+          "synergies": [
+            "A faster ally can establish the mark before the Shieldbreaker attacks."
+          ],
+          "cautions": [
+            "It does not pierce protection and loses part of its value without a mark."
+          ]
+        },
+        {
+          "skillId": "serpents_sway",
+          "useCases": [
+            "Gain Aegis blocks and move forward before expected direct attacks."
+          ],
+          "synergies": [
+            "Protects her low health while restoring front position."
+          ],
+          "cautions": [
+            "Aegis does not block stress or existing bleed and blight."
+          ]
+        }
       ],
       "partySynergies": [
         {

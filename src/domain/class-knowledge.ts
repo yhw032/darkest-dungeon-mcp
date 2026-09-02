@@ -35,10 +35,6 @@ export interface ClassSynergyKnowledge {
 
 export interface ClassKnowledge {
   id: string;
-  names: {
-    en: string;
-    ko?: string;
-  };
   aliases: string[];
   dlcs: string[];
   summary: string;
@@ -53,6 +49,6 @@ export interface ClassKnowledge {
 }
 
 export interface ClassKnowledgeBase {
-  schemaVersion: 1;
+  schemaVersion: 2;
   classes: ClassKnowledge[];
 }

@@ -67,6 +67,11 @@ test("MCP server advertises and executes read-only game tools", async (t) => {
               `combat_skill_name_${expectedHero.heroClass}_${id}`,
               `시험 기술 ${id}`,
             ] as const),
+            ["hero_class_name_leper", "나병환자"],
+            [
+              "combat_skill_name_leper_chop",
+              "토막치기",
+            ],
           ]),
         ],
       ]),
@@ -517,7 +522,7 @@ test("MCP server advertises and executes read-only game tools", async (t) => {
 
   const classQueryResult = await client.callTool({
     name: "query_classes",
-    arguments: { query: "역병 의사", role: "blight" },
+    arguments: { query: "나병환자", role: "damage", language: "ko" },
   });
   const classQueryContent = classQueryResult.structuredContent as
     | Record<string, unknown>
@@ -526,7 +531,11 @@ test("MCP server advertises and executes read-only game tools", async (t) => {
   assert.ok(Array.isArray(classes));
   assert.equal(
     (classes[0] as { id?: unknown } | undefined)?.id,
-    "plague_doctor",
+    "leper",
+  );
+  assert.equal(
+    (classes[0] as { name?: unknown } | undefined)?.name,
+    "나병환자",
   );
   assert.ok(
     Array.isArray(
@@ -539,6 +548,12 @@ test("MCP server advertises and executes read-only game tools", async (t) => {
       ?.length,
     7,
   );
+  const chop = (
+    classes[0] as
+      | { skillGuidance?: Array<{ skillId?: unknown; name?: unknown }> }
+      | undefined
+  )?.skillGuidance?.find(({ skillId }) => skillId === "chop");
+  assert.equal(chop?.name, "토막치기");
 
   const combatQueryResult = await client.callTool({
     name: "query_combat",

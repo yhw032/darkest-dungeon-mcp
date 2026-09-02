@@ -11,8 +11,7 @@ const classKnowledgeSourceSchema = z.object({
 });
 export const classKnowledgeSchema = z.object({
   id: z.string(),
-  names: z.object({ en: z.string(), ko: z.string().optional() }),
-  aliases: z.array(z.string()),
+  name: nullableString,
   dlcs: z.array(z.string()),
   summary: z.string(),
   roles: z.array(z.string()),
@@ -34,13 +33,18 @@ export const classKnowledgeSchema = z.object({
   skillGuidance: z.array(
     z.object({
       skillId: z.string(),
+      name: nullableString,
       useCases: z.array(z.string()),
       synergies: z.array(z.string()),
       cautions: z.array(z.string()),
     }),
   ),
   partySynergies: z.array(
-    z.object({ heroClassId: z.string(), reasons: z.array(z.string()) }),
+    z.object({
+      heroClassId: z.string(),
+      heroClassName: nullableString,
+      reasons: z.array(z.string()),
+    }),
   ),
   sources: z.array(classKnowledgeSourceSchema),
 });

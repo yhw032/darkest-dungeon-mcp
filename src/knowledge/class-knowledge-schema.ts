@@ -64,12 +64,6 @@ const partySynergySchema = z
 const classSchema = z
   .object({
     id: identifier,
-    names: z
-      .object({
-        en: nonEmptyString,
-        ko: nonEmptyString.optional(),
-      })
-      .strict(),
     aliases: uniqueStrings("aliases must be unique"),
     dlcs: uniqueStrings("dlcs must be unique"),
     summary: nonEmptyString,
@@ -108,7 +102,7 @@ const classSchema = z
 
 const knowledgeBaseSchema = z
   .object({
-    schemaVersion: z.literal(1),
+    schemaVersion: z.literal(2),
     classes: z.array(classSchema),
   })
   .strict()
