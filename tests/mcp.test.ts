@@ -61,6 +61,10 @@ test("MCP server advertises and executes read-only game tools", async (t) => {
               `str_inventory_title_${item.type}${item.id}`,
               `시험 보상 ${item.type}:${item.id}`,
             ] as const),
+            [
+              `str_inventory_title_trinket${expectedStoredTrinket.id}`,
+              "시험 장신구",
+            ],
             ["str_monstername_bloated_corpse_A", "익사한 노예"],
             [`hero_class_name_${expectedHero.heroClass}`, "시험 직업"],
             ...expectedHero.combatSkillSelections.map(({ id }) => [
@@ -465,7 +469,7 @@ test("MCP server advertises and executes read-only game tools", async (t) => {
 
   const trinketListResult = await client.callTool({
     name: "list_trinkets",
-    arguments: { location: "storage" },
+    arguments: { location: "storage", language: "ko" },
   });
   const trinketListContent = trinketListResult.structuredContent as
     | Record<string, unknown>
@@ -481,6 +485,31 @@ test("MCP server advertises and executes read-only game tools", async (t) => {
         typeof trinket.storageAmount === "number" &&
         trinket.storageAmount > 0,
     ),
+  );
+  assert.equal(
+    (
+      trinkets.find(
+        (trinket) =>
+          typeof trinket === "object" &&
+          trinket !== null &&
+          "id" in trinket &&
+          trinket.id === expectedStoredTrinket.id,
+      ) as { name?: unknown } | undefined
+    )?.name,
+    "시험 장신구",
+  );
+
+  const localizedTrinketResult = await client.callTool({
+    name: "list_trinkets",
+    arguments: { query: "시험 장신구", language: "ko" },
+  });
+  assert.equal(
+    (
+      localizedTrinketResult.structuredContent as
+        | { trinkets?: Array<{ id?: unknown }> }
+        | undefined
+    )?.trinkets?.[0]?.id,
+    expectedStoredTrinket.id,
   );
 
   const trinketResult = await client.callTool({

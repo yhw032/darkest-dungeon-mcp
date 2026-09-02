@@ -8,6 +8,7 @@ import {
   loadGameLocalization,
   localizeCombatSkill,
   localizeHeroClass,
+  localizeTrinket,
 } from "../src/localization/game-localization.js";
 
 function table(language: string, entries: Array<[string, string]>): string {
@@ -36,6 +37,13 @@ test("loads official hero class and combat skill names", async (t) => {
     ]),
     "utf8",
   );
+  await writeFile(
+    join(localizationDirectory, "backertrinkets.string_table.xml"),
+    table("koreana", [
+      ["str_inventory_title_trinketaurora_pendant", "오로라 펜던트"],
+    ]),
+    "utf8",
+  );
 
   const localization = await loadGameLocalization(temporaryDirectory);
 
@@ -45,4 +53,8 @@ test("loads official hero class and combat skill names", async (t) => {
     "토막치기",
   );
   assert.equal(localizeCombatSkill("leper", "missing", "ko", localization), null);
+  assert.equal(
+    localizeTrinket("aurora_pendant", "ko", localization),
+    "오로라 펜던트",
+  );
 });

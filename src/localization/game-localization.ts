@@ -19,6 +19,7 @@ const supportedLanguageIds = new Set(Object.values(languageIds));
 const localizationFiles = [
   { path: ["localization", "miscellaneous.string_table.xml"], optional: false },
   { path: ["localization", "heroes.string_table.xml"], optional: false },
+  { path: ["localization", "backertrinkets.string_table.xml"], optional: true },
   {
     path: ["dlc", "580100_crimson_court", "localization", "CC.string_table.xml"],
     optional: true,
@@ -91,6 +92,27 @@ export function localizeCombatSkill(
     language,
     localization,
   );
+}
+
+export function localizeInventoryItem(
+  type: string,
+  itemId: string,
+  language: GameLanguage,
+  localization?: GameLocalization,
+): string | null {
+  return localizeGameString(
+    `str_inventory_title_${type}${itemId}`,
+    language,
+    localization,
+  );
+}
+
+export function localizeTrinket(
+  trinketId: string,
+  language: GameLanguage,
+  localization?: GameLocalization,
+): string | null {
+  return localizeInventoryItem("trinket", trinketId, language, localization);
 }
 
 export function localizeGameStrings(

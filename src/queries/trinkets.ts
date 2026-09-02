@@ -2,6 +2,12 @@ import type { Estate } from "../domain/estate.js";
 import type { Roster } from "../domain/hero.js";
 import type { Town } from "../domain/town.js";
 import { isDeceasedHero } from "../roster/hero-roster-state.js";
+import {
+  localizeTrinket,
+  type GameLanguage,
+  type GameLocalization,
+} from "../localization/game-localization.js";
+import { normalizeKnowledgeTerm } from "./search-curios.js";
 
 export type TrinketLocation = "storage" | "equipped" | "store";
 
@@ -19,6 +25,7 @@ export interface TrinketStoreListing {
 
 export interface TrinketRecord {
   id: string;
+  name: string | null;
   storageAmount: number;
   equippedBy: EquippedTrinketAssignment[];
   storeListings: TrinketStoreListing[];
@@ -33,7 +40,9 @@ export interface TrinketSources {
 
 export interface TrinketFilters {
   id?: string;
+  query?: string;
   location?: TrinketLocation;
+  language?: GameLanguage;
 }
 
 function getOrCreate(
@@ -45,6 +54,7 @@ function getOrCreate(
 
   const created: TrinketRecord = {
     id,
+    name: null,
     storageAmount: 0,
     equippedBy: [],
     storeListings: [],
@@ -106,12 +116,32 @@ function existsAt(record: TrinketRecord, location: TrinketLocation): boolean {
 export function listTrinkets(
   sources: TrinketSources,
   filters: TrinketFilters = {},
+  localization?: GameLocalization,
 ): TrinketRecord[] {
-  return buildTrinketCatalog(sources).filter(
-    (record) =>
-      (filters.id === undefined || record.id === filters.id) &&
-      (filters.location === undefined || existsAt(record, filters.location)),
-  );
+  const query =
+    filters.query === undefined
+      ? undefined
+      : normalizeKnowledgeTerm(filters.query);
+  const language = filters.language ?? "en";
+  return buildTrinketCatalog(sources)
+    .filter((record) => {
+      const searchableNames = [
+        record.id,
+        ...[...(localization?.values() ?? [])]
+          .map((strings) => strings.get(`str_inventory_title_trinket${record.id}`))
+          .filter((name): name is string => name !== undefined),
+      ].map(normalizeKnowledgeTerm);
+      return (
+        (filters.id === undefined || record.id === filters.id) &&
+        (query === undefined ||
+          searchableNames.some((name) => name.includes(query))) &&
+        (filters.location === undefined || existsAt(record, filters.location))
+      );
+    })
+    .map((record) => ({
+      ...record,
+      name: localizeTrinket(record.id, language, localization),
+    }));
 }
 
 export function getTrinket(

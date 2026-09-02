@@ -12,6 +12,17 @@ import {
   type TrinketSources,
 } from "../src/queries/trinkets.js";
 
+const localization = new Map([
+  [
+    "english",
+    new Map([["str_inventory_title_trinketflag_5", "Quickdraw Charm"]]),
+  ],
+  [
+    "koreana",
+    new Map([["str_inventory_title_trinketflag_5", "선제 공격의 부적"]]),
+  ],
+]);
+
 async function loadSources(): Promise<TrinketSources> {
   const [rosterText, estateText, townText] = await Promise.all([
     readFile(
@@ -81,6 +92,23 @@ test("filters the catalog by id and location", async () => {
   assert.deepEqual(
     listTrinkets(sources, { id: "flag_5", location: "store" }),
     [],
+  );
+});
+
+test("searches and displays localized trinket names", async () => {
+  const sources = await loadSources();
+  const results = listTrinkets(
+    sources,
+    { query: "  선제 공격 ", language: "ko" },
+    localization,
+  );
+
+  assert.deepEqual(results.map(({ id }) => id), ["flag_5"]);
+  assert.equal(results[0]?.name, "선제 공격의 부적");
+  assert.equal(
+    listTrinkets(sources, { query: "quickdraw", language: "en" }, localization)[0]
+      ?.name,
+    "Quickdraw Charm",
   );
 });
 

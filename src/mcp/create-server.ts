@@ -123,6 +123,7 @@ export const serverInstructions = [
   "Formation position 1 is frontmost and position 4 is rearmost for both parties.",
   "Use combatPositionAnalysis for objective selected-skill position coverage; bestCoveragePartyPositions is not by itself a tactical recommendation.",
   "Use list_building_upgrades for verified building upgrade progress and next costs.",
+  "Use list_trinkets for owned, equipped, and store trinkets; pass the user's language and display the localized name while preserving id as a stable identifier.",
   "Use list_risky_quirks for treatment-priority questions, and present its policy as editorial guidance rather than an absolute game value.",
   "Use query_classes for verified class roles, strengths, limitations, position guidance, mechanics, and party synergies instead of relying on class stereotypes; pass the user's language and display the localized class and skill names it returns.",
   "Use query_combat for verified region and enemy priorities, dangerous actions, threat types, and counters instead of inventing combat advice; pass the user's language and display the localized region name.",
@@ -812,21 +813,28 @@ export function createDarkestDungeonServer(
     {
       title: "Query trinkets",
       description:
-        "Query trinkets across estate storage, equipped heroes, and town stores. Supply id for one exact trinket or omit it to list matching trinkets.",
+        "Query trinkets across estate storage, equipped heroes, and town stores by exact id or localized name. Omit filters to list all trinkets.",
       inputSchema: z.object({
         id: z.string().min(1).optional(),
+        query: z.string().min(1).optional(),
         location: z.enum(["storage", "equipped", "store"]).optional(),
+        language: z.enum(["en", "ko"]).default("en"),
       }),
       outputSchema: z.object({ trinkets: z.array(trinketRecordSchema) }),
       annotations: readOnlyAnnotations,
     },
-    async ({ id, location }) => {
-      const state = await dataSource.load();
+    async ({ id, query, location, language }) => {
+      const [state, localization] = await Promise.all([
+        dataSource.load(),
+        getGameLocalization(),
+      ]);
       const filters = {
         ...(id === undefined ? {} : { id }),
+        ...(query === undefined ? {} : { query }),
         ...(location === undefined ? {} : { location }),
+        language,
       };
-      return toolResult("trinkets", listTrinkets(state, filters));
+      return toolResult("trinkets", listTrinkets(state, filters, localization));
     },
   );
 

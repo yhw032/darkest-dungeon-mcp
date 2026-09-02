@@ -415,6 +415,7 @@ export const heroTownContextSchema = z.object({
 
 export const trinketRecordSchema = z.object({
   id: z.string(),
+  name: nullableString,
   storageAmount: finiteNumber,
   equippedBy: z.array(z.object({ heroId: z.string(), heroName: z.string(), amount: finiteNumber })),
   storeListings: z.array(z.object({ buildingId: z.string(), storeId: z.string(), amount: finiteNumber })),

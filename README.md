@@ -130,7 +130,7 @@ runner through `tsx`. Tests never access the user's live save directory.
 | `compare_heroes` | Compare 2–8 heroes using localized class and skill names plus objective readiness, equipment, skill-position, and curated quirk-risk evidence. |
 | `list_quests` | Filter available quests with localized titles, objectives, regions, lengths, and reward names. |
 | `get_quest` | Return one quest by ID with localized official quest and reward text. |
-| `list_trinkets` | Query all trinkets or one exact ID across storage, heroes, and stores. |
+| `list_trinkets` | Query trinkets by ID or localized name across storage, heroes, and stores. |
 | `query_classes` | Query verified class guidance with official class, skill, and synergy names localized from the installed game. |
 | `query_combat` | Query verified region and enemy guidance by name, region, threat type, or priority. |
 | `search_curios` | Search verified curios by ID, name, alias, or region. |
@@ -144,6 +144,9 @@ Class knowledge covers all 18 playable Darkest Dungeon 1 classes and all 126 com
 `ko`). When `DD_GAME_DIR` is configured, `heroClassName` and combat skill
 `name` values come directly from the installed game's localization files;
 stable internal IDs remain available alongside them.
+
+`list_trinkets` also accepts `language` and resolves official trinket names
+from `DD_GAME_DIR`, including base-game, official DLC, and backer trinkets.
 
 Combat knowledge currently covers Ruins, Warrens, Weald, Cove, their
 region-specific enemies, and base-game enemies shared across those regions.
