@@ -128,8 +128,8 @@ runner through `tsx`. Tests never access the user's live save directory.
 | `list_heroes` | Filter heroes by class, roster status, stress, party availability, and optional quest eligibility; localize class names with `language`. |
 | `get_hero` | Return one hero with localized class and combat-skill names, resolve level, availability, optional quest eligibility, and town activity. |
 | `compare_heroes` | Compare 2–8 heroes using localized class and skill names plus objective readiness, equipment, skill-position, and curated quirk-risk evidence. |
-| `list_quests` | Filter available quests. |
-| `get_quest` | Return one quest by ID. |
+| `list_quests` | Filter available quests with localized titles, objective descriptions, region names, and length labels. |
+| `get_quest` | Return one quest by ID with localized official quest text. |
 | `list_trinkets` | Query all trinkets or one exact ID across storage, heroes, and stores. |
 | `query_classes` | Query verified class roles, strengths, limitations, positions, mechanics, and synergies. |
 | `query_combat` | Query verified region and enemy guidance by name, region, threat type, or priority. |

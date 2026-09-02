@@ -3,16 +3,25 @@ import { resolve } from "node:path";
 
 import type { Quest } from "../domain/quest.js";
 import {
+  localizeGameString,
+  type GameLanguage,
+} from "../localization/game-localization.js";
+import {
   mergeStringTables,
   parseStringTableXml,
   type LocalizationByLanguage,
 } from "../localization/string-table.js";
 import type { QuestSummary } from "../queries/list-quests.js";
 
-export type QuestLanguage = "en" | "ko";
+export type QuestLanguage = GameLanguage;
 
 export interface LocalizedDungeon {
   id: string;
+  name: string | null;
+}
+
+export interface LocalizedQuestLength {
+  value: number;
   name: string | null;
 }
 
@@ -63,13 +72,57 @@ export async function loadQuestLocalization(
   return localization;
 }
 
-export type LocalizedQuestSummary = Omit<QuestSummary, "dungeon"> & {
+export interface LocalizedQuestSummary
+  extends Omit<QuestSummary, "dungeon" | "length"> {
   dungeon: LocalizedDungeon;
-};
+  title: string | null;
+  description: string | null;
+  length: LocalizedQuestLength;
+}
 
-export type LocalizedQuest = Omit<Quest, "dungeon"> & {
+export interface LocalizedQuest extends Omit<Quest, "dungeon" | "length"> {
   dungeon: LocalizedDungeon;
-};
+  title: string | null;
+  description: string | null;
+  length: LocalizedQuestLength;
+}
+
+function questLocalizationSuffix(
+  quest: Pick<Quest, "id" | "type" | "dungeon" | "length" | "goalIds">,
+): string {
+  return quest.id.startsWith("generated_")
+    ? [quest.type, quest.length, quest.dungeon, ...quest.goalIds].join("+")
+    : quest.id;
+}
+
+function localizeQuestFields(
+  quest: Pick<Quest, "id" | "type" | "dungeon" | "length" | "goalIds">,
+  language: QuestLanguage,
+  localization?: QuestLocalization,
+) {
+  const suffix = questLocalizationSuffix(quest);
+  return {
+    dungeon: localizeDungeon(quest.dungeon, language, localization),
+    title: localizeGameString(
+      `town_quest_name_${suffix}`,
+      language,
+      localization,
+    ),
+    description: localizeGameString(
+      `town_quest_description_${suffix}`,
+      language,
+      localization,
+    ),
+    length: {
+      value: quest.length,
+      name: localizeGameString(
+        `town_quest_length_${String(quest.length)}`,
+        language,
+        localization,
+      ),
+    },
+  };
+}
 
 export function localizeDungeon(
   dungeonId: string,
@@ -91,7 +144,7 @@ export function localizeQuestSummary(
 ): LocalizedQuestSummary {
   return {
     ...quest,
-    dungeon: localizeDungeon(quest.dungeon, language, localization),
+    ...localizeQuestFields(quest, language, localization),
   };
 }
 
@@ -102,6 +155,6 @@ export function localizeQuest(
 ): LocalizedQuest {
   return {
     ...quest,
-    dungeon: localizeDungeon(quest.dungeon, language, localization),
+    ...localizeQuestFields(quest, language, localization),
   };
 }

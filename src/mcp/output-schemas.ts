@@ -119,6 +119,12 @@ const questRewardSchema = z.object({
 
 export const questSummarySchema = z.object({
   id: z.string(),
+  title: nullableString.describe(
+    "Official quest title in the requested language.",
+  ),
+  description: nullableString.describe(
+    "Official quest objective description in the requested language.",
+  ),
   isPlotQuest: z.boolean(),
   type: z.string(),
   dungeon: z.object({
@@ -128,7 +134,15 @@ export const questSummarySchema = z.object({
     ),
   }),
   difficulty: z.number().int().nonnegative(),
-  length: z.number().int().nonnegative(),
+  length: z.object({
+    value: z.number().int().nonnegative().describe("Raw quest length value."),
+    name: nullableString.describe(
+      "Official quest length label in the requested language.",
+    ),
+  }),
+  goalIds: z.array(z.string()).describe(
+    "Stable internal goal identifiers; use title and description for display.",
+  ),
   reward: questRewardSchema,
 });
 
@@ -136,7 +150,6 @@ export const questSchema = questSummarySchema.extend({
   saveKey: z.string(),
   mapName: z.string(),
   isFromTownEvent: z.boolean(),
-  goalIds: z.array(z.string()),
 });
 
 const estateResourceSchema = z.object({

@@ -51,6 +51,12 @@ test("MCP server advertises and executes read-only game tools", async (t) => {
           "koreana",
           new Map([
             ["dungeon_name_cove", "해안 만"],
+            [`town_quest_name_${expectedQuest.id}`, "세이렌 처치"],
+            [
+              `town_quest_description_${expectedQuest.id}`,
+              "세이렌을 찾아 처치하십시오.",
+            ],
+            [`town_quest_length_${String(expectedQuest.length)}`, "중간"],
             ["str_monstername_bloated_corpse_A", "익사한 노예"],
             [`hero_class_name_${expectedHero.heroClass}`, "시험 직업"],
             ...expectedHero.combatSkillSelections.map(({ id }) => [
@@ -427,6 +433,9 @@ test("MCP server advertises and executes read-only game tools", async (t) => {
   assert.deepEqual(questContent?.quest, {
     ...expectedQuest,
     dungeon: { id: expectedQuest.dungeon, name: "해안 만" },
+    title: "세이렌 처치",
+    description: "세이렌을 찾아 처치하십시오.",
+    length: { value: expectedQuest.length, name: "중간" },
   });
   assert.equal(
     (

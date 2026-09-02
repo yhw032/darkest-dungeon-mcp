@@ -26,6 +26,12 @@ function questLocalization(): QuestLocalization {
       "english",
       new Map([
         ["dungeon_name_weald", "Weald"],
+        ["town_quest_name_explore+2+weald+explore", "Scout the Weald"],
+        [
+          "town_quest_description_explore+2+weald+explore",
+          "Explore the target area.",
+        ],
+        ["town_quest_length_2", "Medium"],
       ]),
     ],
     [
@@ -126,6 +132,10 @@ test("selects one verified dungeon name for the requested language", () => {
     id: "modded_region",
     name: null,
   });
+  const localizedQuest = localizeQuest(quest, "en", localization);
+  assert.equal(localizedQuest.title, "Scout the Weald");
+  assert.equal(localizedQuest.description, "Explore the target area.");
+  assert.deepEqual(localizedQuest.length, { value: 2, name: "Medium" });
 });
 
 test("covers every dungeon id in the checked-in quest sample", async () => {

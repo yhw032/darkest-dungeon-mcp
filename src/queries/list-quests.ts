@@ -8,6 +8,7 @@ export type QuestSummary = Pick<
   | "dungeon"
   | "difficulty"
   | "length"
+  | "goalIds"
   | "reward"
 >;
 
@@ -19,8 +20,17 @@ export interface QuestFilters {
 }
 
 export function toQuestSummary(quest: Quest): QuestSummary {
-  const { id, isPlotQuest, type, dungeon, difficulty, length, reward } = quest;
-  return { id, isPlotQuest, type, dungeon, difficulty, length, reward };
+  const {
+    id,
+    isPlotQuest,
+    type,
+    dungeon,
+    difficulty,
+    length,
+    goalIds,
+    reward,
+  } = quest;
+  return { id, isPlotQuest, type, dungeon, difficulty, length, goalIds, reward };
 }
 
 export function listQuests(
