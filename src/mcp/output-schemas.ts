@@ -64,6 +64,11 @@ export const heroSummarySchema = z.object({
   id: z.string().describe("Stable hero identifier used by get_hero."),
   name: z.string().describe("Hero's displayed name."),
   heroClass: z.string().describe("Internal Darkest Dungeon 1 class id."),
+  heroClassName: nullableString
+    .describe(
+      "Official class name in the requested language; null without game localization.",
+    )
+    .optional(),
   resolveXp: finiteNumber.describe(
     "Raw resolve experience points. This is not the hero's resolve level.",
   ),
@@ -259,6 +264,11 @@ const trinketStackSchema = z.object({ id: z.string(), type: z.string(), amount: 
 const skillSelectionSchema = z.object({ id: z.string(), rawSelectionValue: finiteNumber });
 export const combatSkillDetailSchema = z.object({
   id: z.string(),
+  name: nullableString
+    .describe(
+      "Official combat skill name in the requested language; null without game localization.",
+    )
+    .optional(),
   level: z.number().int().positive().nullable().describe("Verified one-based skill level, or null when game definitions are unavailable."),
   isSelected: z.boolean(),
   rawSelectionValue: finiteNumber.nullable().describe("Raw selection flag/value; never use as a skill level."),
@@ -332,6 +342,7 @@ export const heroComparisonSchema = z.object({
       id: z.string(),
       name: z.string(),
       heroClass: z.string(),
+      heroClassName: nullableString,
       rosterState: z
         .enum(["active", "deceased", "unknown"])
         .describe("Lifecycle state; only active heroes are included in comparison highlights."),

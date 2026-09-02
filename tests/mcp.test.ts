@@ -45,9 +45,19 @@ test("MCP server advertises and executes read-only game tools", async (t) => {
   assert.ok(riskyQuirk);
 
   const server = createDarkestDungeonServer(dataSource, {
-    loadQuestLocalization: async () =>
+    loadGameLocalization: async () =>
       new Map([
-        ["koreana", new Map([["dungeon_name_cove", "해안 만"]])],
+        [
+          "koreana",
+          new Map([
+            ["dungeon_name_cove", "해안 만"],
+            [`hero_class_name_${expectedHero.heroClass}`, "시험 직업"],
+            ...expectedHero.combatSkillSelections.map(({ id }) => [
+              `combat_skill_name_${expectedHero.heroClass}_${id}`,
+              `시험 기술 ${id}`,
+            ] as const),
+          ]),
+        ],
       ]),
     loadBuildingUpgradeTrees: async () => [
       {
@@ -242,7 +252,7 @@ test("MCP server advertises and executes read-only game tools", async (t) => {
 
   const listResult = await client.callTool({
     name: "list_heroes",
-    arguments: { heroClass: expectedHero.heroClass },
+    arguments: { heroClass: expectedHero.heroClass, language: "ko" },
   });
   const listContent = listResult.structuredContent as
     | Record<string, unknown>
@@ -256,6 +266,8 @@ test("MCP server advertises and executes read-only game tools", async (t) => {
         hero !== null &&
         "heroClass" in hero &&
         hero.heroClass === expectedHero.heroClass &&
+        "heroClassName" in hero &&
+        hero.heroClassName === "시험 직업" &&
         "rosterState" in hero &&
         hero.rosterState !== "deceased",
     ),
@@ -285,13 +297,14 @@ test("MCP server advertises and executes read-only game tools", async (t) => {
 
   const heroResult = await client.callTool({
     name: "get_hero",
-    arguments: { heroId: expectedHero.id },
+    arguments: { heroId: expectedHero.id, language: "ko" },
   });
   const heroContent = heroResult.structuredContent as
     | Record<string, unknown>
     | undefined;
   assert.deepEqual(heroContent?.hero, {
     ...expectedHero,
+    heroClassName: "시험 직업",
     rosterState: "deceased",
     resolveLevel: expectedHero.resolveXp >= 2 ? 1 : 0,
     availability: {
@@ -310,6 +323,7 @@ test("MCP server advertises and executes read-only game tools", async (t) => {
     combatSkillDetails: expectedHero.combatSkillSelections.map(
       ({ id, rawSelectionValue }) => ({
         id,
+        name: `시험 기술 ${id}`,
         level: null,
         isSelected: true,
         rawSelectionValue,
@@ -347,6 +361,7 @@ test("MCP server advertises and executes read-only game tools", async (t) => {
     arguments: {
       heroIds: [expectedHero.id, secondHero.id],
       questId: expectedQuest.id,
+      language: "ko",
     },
   });
   assert.equal(comparisonResult.isError, undefined);

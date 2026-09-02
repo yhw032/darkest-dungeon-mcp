@@ -37,6 +37,12 @@ import type { QuestRestrictionRules } from "../domain/quest-restrictions.js";
 import { loadCurioKnowledge } from "../knowledge/load-curio-knowledge.js";
 import { loadClassKnowledge } from "../knowledge/load-class-knowledge.js";
 import { loadCombatKnowledge } from "../knowledge/load-combat-knowledge.js";
+import {
+  loadGameLocalization,
+  localizeCombatSkill,
+  localizeHeroClass,
+  type GameLocalization,
+} from "../localization/game-localization.js";
 import { loadQuirkTreatmentKnowledge } from "../knowledge/load-quirk-treatment-knowledge.js";
 import { analyzeRiskyQuirks } from "../queries/analyze-risky-quirks.js";
 import { getCurioAdvice } from "../queries/get-curio-advice.js";
@@ -58,7 +64,6 @@ import {
   loadQuestRestrictionRules,
 } from "../quests/quest-eligibility.js";
 import {
-  loadQuestLocalization,
   localizeQuest,
   localizeQuestSummary,
   type QuestLocalization,
@@ -97,6 +102,7 @@ export interface DarkestDungeonServerOptions {
   loadHeroProgressionRules?: () => Promise<HeroProgressionRules>;
   loadQuestRestrictionRules?: () => Promise<QuestRestrictionRules>;
   loadQuestLocalization?: () => Promise<QuestLocalization>;
+  loadGameLocalization?: () => Promise<GameLocalization>;
   loadQuirkDefinitions?: () => Promise<QuirkDefinition[]>;
   loadQuirkTreatmentKnowledge?: () => Promise<QuirkTreatmentKnowledgeBase>;
 }
@@ -110,6 +116,7 @@ export const serverInstructions = [
   "For a specific quest, pass questId to list_heroes or get_hero and use questEligibility instead of inferring level restrictions.",
   "Pass the user's language to quest tools and use dungeon.name for display; dungeon.id is the stable save identifier.",
   "Use compare_heroes for objective comparisons instead of selecting a winner from raw experience points or class stereotypes.",
+  "Pass the user's language to hero tools and display heroClassName and combatSkillDetails.name; preserve their ids only as stable identifiers.",
   "In hero details, use combatSkillDetails.level for combat skill levels; rawSelectionValue is not a level.",
   "Use combatSkillDetails.usableFromPartyPositions, target, and movement for formation claims instead of relying on class stereotypes.",
   "Formation position 1 is frontmost and position 4 is rearmost for both parties.",
@@ -248,22 +255,23 @@ export function createDarkestDungeonServer(
     );
     return questRestrictionRulesPromise;
   };
-  const questLocalizationLoader =
+  const gameLocalizationLoader =
+    options.loadGameLocalization ??
     options.loadQuestLocalization ??
     (() => {
       const gameDirectory = options.gameDirectory?.trim();
       return gameDirectory === undefined || gameDirectory === ""
         ? Promise.resolve(undefined)
-        : loadQuestLocalization(gameDirectory);
+        : loadGameLocalization(gameDirectory);
     });
-  let questLocalizationPromise:
+  let gameLocalizationPromise:
     | Promise<QuestLocalization | undefined>
     | undefined;
-  const getQuestLocalization = () => {
-    questLocalizationPromise ??= Promise.resolve().then(
-      questLocalizationLoader,
+  const getGameLocalization = () => {
+    gameLocalizationPromise ??= Promise.resolve().then(
+      gameLocalizationLoader,
     );
-    return questLocalizationPromise;
+    return gameLocalizationPromise;
   };
   const quirkDefinitionLoader =
     options.loadQuirkDefinitions ??
@@ -414,6 +422,7 @@ export function createDarkestDungeonServer(
           .describe("Include deceased historical hero records. Defaults to false."),
         questId: z.string().min(1).optional(),
         eligibleOnly: z.boolean().default(false),
+        language: z.enum(["en", "ko"]).default("en"),
       }).refine(
         ({ questId, eligibleOnly }) => !eligibleOnly || questId !== undefined,
         { message: "eligibleOnly requires questId." },
@@ -429,13 +438,15 @@ export function createDarkestDungeonServer(
       includeDeceased,
       questId,
       eligibleOnly,
+      language,
     }) => {
-      const [state, progressionRules, restrictionRules] = await Promise.all([
+      const [state, progressionRules, restrictionRules, localization] = await Promise.all([
         dataSource.load(),
         getHeroProgressionRules(),
         questId === undefined
           ? Promise.resolve(undefined)
           : getQuestRestrictionRules(),
+        getGameLocalization(),
       ]);
       const quest = questId === undefined
         ? undefined
@@ -457,6 +468,7 @@ export function createDarkestDungeonServer(
         progressionRules,
       ).map((hero) => ({
         ...hero,
+        heroClassName: localizeHeroClass(hero.heroClass, language, localization),
         questEligibility:
           quest === undefined
             ? null
@@ -488,11 +500,12 @@ export function createDarkestDungeonServer(
             message: "heroIds must be unique.",
           }),
         questId: z.string().min(1).optional(),
+        language: z.enum(["en", "ko"]).default("en"),
       }),
       outputSchema: z.object({ comparison: heroComparisonSchema }),
       annotations: readOnlyAnnotations,
     },
-    async ({ heroIds, questId }) => {
+    async ({ heroIds, questId, language }) => {
       const canAnalyzeQuirkRisk =
         options.loadQuirkDefinitions !== undefined ||
         (options.gameDirectory?.trim() ?? "") !== "";
@@ -504,6 +517,7 @@ export function createDarkestDungeonServer(
         restrictionRules,
         quirkDefinitions,
         treatmentKnowledge,
+        localization,
       ] = await Promise.all([
         dataSource.load(),
         getHeroCombatSkillTrees(),
@@ -518,6 +532,7 @@ export function createDarkestDungeonServer(
         canAnalyzeQuirkRisk
           ? getTreatmentKnowledge()
           : Promise.resolve(undefined),
+        getGameLocalization(),
       ]);
       const missingHeroIds = heroIds.filter(
         (heroId) => getHero(state.roster, heroId) === undefined,
@@ -575,6 +590,7 @@ export function createDarkestDungeonServer(
           id: hero.id,
           name: hero.name,
           heroClass: hero.heroClass,
+          heroClassName: localizeHeroClass(hero.heroClass, language, localization),
           rosterState: getHeroRosterState(hero.rosterStatus),
           resolveXp: hero.resolveXp,
           resolveLevel,
@@ -588,9 +604,17 @@ export function createDarkestDungeonServer(
             weaponRank: hero.weaponRank,
             armourRank: hero.armourRank,
           },
-          selectedCombatSkills: combatSkillDetails.filter(
-            (skill) => skill.isSelected,
-          ),
+          selectedCombatSkills: combatSkillDetails
+            .filter((skill) => skill.isSelected)
+            .map((skill) => ({
+              ...skill,
+              name: localizeCombatSkill(
+                hero.heroClass,
+                skill.id,
+                language,
+                localization,
+              ),
+            })),
           combatPositionAnalysis:
             analyzeHeroCombatPositions(combatSkillDetails),
           quirkTreatmentAnalysis: {
@@ -622,6 +646,7 @@ export function createDarkestDungeonServer(
       inputSchema: z.object({
         heroId: z.string().min(1),
         questId: z.string().min(1).optional(),
+        language: z.enum(["en", "ko"]).default("en"),
       }),
       outputSchema: z.object({
         hero: heroDetailSchema,
@@ -629,13 +654,14 @@ export function createDarkestDungeonServer(
       }),
       annotations: readOnlyAnnotations,
     },
-    async ({ heroId, questId }) => {
+    async ({ heroId, questId, language }) => {
       const [
         state,
         skillTrees,
         skillPositions,
         progressionRules,
         restrictionRules,
+        localization,
       ] = await Promise.all([
         dataSource.load(),
         getHeroCombatSkillTrees(),
@@ -644,6 +670,7 @@ export function createDarkestDungeonServer(
         questId === undefined
           ? Promise.resolve(undefined)
           : getQuestRestrictionRules(),
+        getGameLocalization(),
       ]);
       const hero = getHero(state.roster, heroId);
       if (hero === undefined) {
@@ -670,6 +697,7 @@ export function createDarkestDungeonServer(
       const resolveLevel = getResolveLevel(hero.resolveXp, progressionRules);
       const heroDetails = {
         ...hero,
+        heroClassName: localizeHeroClass(hero.heroClass, language, localization),
         rosterState: getHeroRosterState(hero.rosterStatus),
         resolveLevel,
         availability: getHeroAvailability(hero, townContext!),
@@ -677,7 +705,15 @@ export function createDarkestDungeonServer(
           quest === undefined
             ? null
             : getQuestEligibility(quest, resolveLevel, restrictionRules),
-        combatSkillDetails,
+        combatSkillDetails: combatSkillDetails.map((skill) => ({
+          ...skill,
+          name: localizeCombatSkill(
+            hero.heroClass,
+            skill.id,
+            language,
+            localization,
+          ),
+        })),
         combatPositionAnalysis: analyzeHeroCombatPositions(combatSkillDetails),
       };
 
@@ -725,7 +761,7 @@ export function createDarkestDungeonServer(
     async ({ dungeon, type, difficulty, isPlotQuest, language }) => {
       const [state, localization] = await Promise.all([
         dataSource.load(),
-        getQuestLocalization(),
+        getGameLocalization(),
       ]);
       const filters = {
         ...(dungeon === undefined ? {} : { dungeon }),
@@ -761,7 +797,7 @@ export function createDarkestDungeonServer(
     async ({ questId, language }) => {
       const [state, localization] = await Promise.all([
         dataSource.load(),
-        getQuestLocalization(),
+        getGameLocalization(),
       ]);
       const quest = getQuest(state.quests, questId);
       return quest === undefined
@@ -859,7 +895,7 @@ export function createDarkestDungeonServer(
       };
       const [knowledge, localization] = await Promise.all([
         getCombatKnowledge(),
-        getQuestLocalization(),
+        getGameLocalization(),
       ]);
       const result = queryCombatKnowledge(knowledge, filters, localization);
       return {
