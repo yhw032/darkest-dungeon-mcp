@@ -64,7 +64,8 @@ export interface RegionCombatKnowledge {
 }
 
 export interface EnemyActionKnowledge {
-  name: string;
+  id: string;
+  localizationIds: string[];
   threats: CombatThreatType[];
   description: string;
   counters: string[];
@@ -73,7 +74,7 @@ export interface EnemyActionKnowledge {
 export interface EnemyCombatKnowledge {
   id: string;
   enemyType: EnemyType;
-  names: { en: string; ko?: string };
+  localizationId: string;
   aliases: string[];
   regions: CombatRegionId[];
   dlcs: string[];
@@ -87,7 +88,7 @@ export interface EnemyCombatKnowledge {
 }
 
 export interface CombatKnowledgeBase {
-  schemaVersion: 1;
+  schemaVersion: 2;
   regions: RegionCombatKnowledge[];
   enemies: EnemyCombatKnowledge[];
 }

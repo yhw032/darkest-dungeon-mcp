@@ -15,7 +15,7 @@ function validKnowledge(): unknown {
     verifiedAt: "2026-09-01",
   };
   return {
-    schemaVersion: 1,
+    schemaVersion: 2,
     regions: [
       {
         id: "ruins",
@@ -45,7 +45,7 @@ function validKnowledge(): unknown {
       {
         id: "bone_courtier",
         enemyType: "common",
-        names: { en: "Bone Courtier" },
+        localizationId: "str_monstername_skeleton_courtier_A",
         aliases: [],
         regions: ["ruins"],
         dlcs: [],
@@ -54,7 +54,8 @@ function validKnowledge(): unknown {
         traits: ["Unholy"],
         dangerousActions: [
           {
-            name: "Tempting Goblet",
+            id: "tempting_goblet",
+            localizationIds: ["str_monster_skill_tempting_goblet"],
             threats: ["stress", "debuff"],
             description: "Applies stress and a stress-received debuff.",
             counters: ["Stun", "Backline damage"],
@@ -146,7 +147,7 @@ test("rejects malformed combat knowledge JSON", () => {
 test("loads the checked-in combat knowledge base", async () => {
   const knowledge = await loadCombatKnowledge();
 
-  assert.equal(knowledge.schemaVersion, 1);
+  assert.equal(knowledge.schemaVersion, 2);
   assert.deepEqual(knowledge.regions.map(({ id }) => id), [
     "ruins",
     "warrens",

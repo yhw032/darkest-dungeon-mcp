@@ -44,10 +44,6 @@ const sourceSchema = z
     verifiedAt: z.iso.date(),
   })
   .strict();
-const namesSchema = z
-  .object({ en: nonEmptyString, ko: nonEmptyString.optional() })
-  .strict();
-
 const regionSchema = z
   .object({
     id: regionIdSchema,
@@ -102,7 +98,7 @@ const enemySchema = z
   .object({
     id: identifier,
     enemyType: z.enum(["common", "elite", "miniboss"]),
-    names: namesSchema,
+    localizationId: nonEmptyString,
     aliases: uniqueStrings("aliases must be unique"),
     regions: z
       .array(regionIdSchema)
@@ -115,9 +111,10 @@ const enemySchema = z
     priorityReasons: uniqueStrings("priorityReasons must be unique").min(1),
     traits: uniqueStrings("traits must be unique"),
     dangerousActions: z.array(
-      z
-        .object({
-          name: nonEmptyString,
+        z
+          .object({
+            id: identifier,
+            localizationIds: uniqueStrings("localizationIds must be unique").min(1),
           threats: z
             .array(threatTypeSchema)
             .min(1)
@@ -139,8 +136,8 @@ const enemySchema = z
   .superRefine((enemy, context) => {
     checkUniqueBy(
       enemy.dangerousActions,
-      ({ name }) => name.toLocaleLowerCase("en-US"),
-      "duplicate dangerous action",
+      ({ id }) => id,
+      "duplicate dangerous action id",
       "dangerousActions",
       context,
     );
@@ -169,7 +166,7 @@ function checkUniqueBy<T>(
 
 const knowledgeBaseSchema = z
   .object({
-    schemaVersion: z.literal(1),
+    schemaVersion: z.literal(2),
     regions: z.array(regionSchema),
     enemies: z.array(enemySchema),
   })

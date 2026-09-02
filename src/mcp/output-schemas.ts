@@ -445,15 +445,15 @@ export const regionCombatKnowledgeSchema = z.object({
 export const enemyCombatKnowledgeSchema = z.object({
   id: z.string(),
   enemyType: z.enum(["common", "elite", "miniboss"]),
-  names: z.object({ en: z.string(), ko: z.string().optional() }),
-  aliases: z.array(z.string()),
+  name: nullableString,
   regions: z.array(combatRegionSchema),
   dlcs: z.array(z.string()),
   priority: enemyPrioritySchema,
   priorityReasons: z.array(z.string()),
   traits: z.array(z.string()),
   dangerousActions: z.array(z.object({
-    name: z.string(),
+    id: z.string(),
+    name: nullableString,
     threats: z.array(combatThreatSchema),
     description: z.string(),
     counters: z.array(z.string()),

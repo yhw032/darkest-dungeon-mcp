@@ -150,6 +150,9 @@ region-specific enemies, and base-game enemies shared across those regions.
 `query_combat` accepts `query`, `region`, `threat`, `priority`, `scope`, and
 `language` filters. Region display names and localized-name search come from
 the installed game's localization files when `DD_GAME_DIR` is configured.
+Enemy and dangerous-action names use the same localization source; English
+strategy guidance remains language-neutral source material for the client to
+summarize in the user's language.
 The guidance describes qualitative priorities, dangerous actions,
 and counters; it does not provide live turn state, exact enemy stats, bosses,
 or DLC-region coverage.

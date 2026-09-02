@@ -92,3 +92,14 @@ export function localizeCombatSkill(
     localization,
   );
 }
+
+export function localizeGameStrings(
+  ids: string[],
+  language: GameLanguage,
+  localization?: GameLocalization,
+): string | null {
+  const names = ids.map((id) => localizeGameString(id, language, localization));
+  return names.every((name): name is string => name !== null)
+    ? names.join(" / ")
+    : null;
+}

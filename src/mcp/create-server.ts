@@ -109,6 +109,7 @@ export interface DarkestDungeonServerOptions {
 
 export const serverInstructions = [
   "This read-only server provides normalized Darkest Dungeon 1 save state and verified gameplay knowledge.",
+  "Answer in the user's language. Treat English guidance fields as source material to summarize rather than text to reproduce verbatim, and use localized name fields for game terminology.",
   "Use save-state tools for facts about the current campaign instead of guessing.",
   "Use roster.activeHeroes for the current barracks count; roster.totalHeroRecords includes deceased history.",
   "list_heroes excludes deceased heroes by default; set includeDeceased only when historical records are requested.",

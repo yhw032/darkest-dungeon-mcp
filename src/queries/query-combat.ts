@@ -2,14 +2,17 @@ import type {
   CombatKnowledgeBase,
   CombatRegionId,
   CombatThreatType,
+  EnemyActionKnowledge,
   EnemyCombatKnowledge,
   EnemyPriority,
   RegionCombatKnowledge,
 } from "../domain/combat-knowledge.js";
-import type {
-  QuestLanguage,
-  QuestLocalization,
-} from "../quests/localize-quest.js";
+import {
+  localizeGameString,
+  localizeGameStrings,
+  type GameLanguage,
+  type GameLocalization,
+} from "../localization/game-localization.js";
 import { localizeDungeon } from "../quests/localize-quest.js";
 import { normalizeKnowledgeTerm } from "./search-curios.js";
 
@@ -22,16 +25,29 @@ export interface CombatQueryFilters {
   priority?: EnemyPriority;
   scope?: CombatQueryScope;
   limit?: number;
-  language?: QuestLanguage;
+  language?: GameLanguage;
 }
 
 export type LocalizedRegionCombatKnowledge = RegionCombatKnowledge & {
   name: string | null;
 };
 
+export type LocalizedEnemyActionKnowledge = Omit<
+  EnemyActionKnowledge,
+  "localizationIds"
+> & { name: string | null };
+
+export type LocalizedEnemyCombatKnowledge = Omit<
+  EnemyCombatKnowledge,
+  "localizationId" | "aliases" | "dangerousActions"
+> & {
+  name: string | null;
+  dangerousActions: LocalizedEnemyActionKnowledge[];
+};
+
 export interface CombatQueryResult {
   regions: LocalizedRegionCombatKnowledge[];
-  enemies: EnemyCombatKnowledge[];
+  enemies: LocalizedEnemyCombatKnowledge[];
 }
 
 const dungeonIdByCombatRegion: Record<CombatRegionId, string> = {
@@ -52,23 +68,19 @@ function matchScore(values: string[], query: string): number | undefined {
   return undefined;
 }
 
-function localizedNames(
-  id: string,
-  names: { en: string; ko?: string },
-  aliases: string[] = [],
+function namesInAllLanguages(
+  localizationId: string,
+  localization?: GameLocalization,
 ): string[] {
-  return [
-    id,
-    names.en,
-    ...(names.ko === undefined ? [] : [names.ko]),
-    ...aliases,
-  ];
+  return [...(localization?.values() ?? [])]
+    .map((strings) => strings.get(localizationId))
+    .filter((name): name is string => name !== undefined);
 }
 
 export function queryCombatKnowledge(
   knowledgeBase: CombatKnowledgeBase,
   filters: CombatQueryFilters = {},
-  localization?: QuestLocalization,
+  localization?: GameLocalization,
 ): CombatQueryResult {
   const query = normalizeKnowledgeTerm(filters.query ?? "");
   const scope = filters.scope ?? "all";
@@ -150,7 +162,11 @@ export function queryCombatKnowledge(
               query === ""
                 ? 0
                 : matchScore(
-                    localizedNames(enemy.id, enemy.names, enemy.aliases),
+                    [
+                      enemy.id,
+                      ...enemy.aliases,
+                      ...namesInAllLanguages(enemy.localizationId, localization),
+                    ],
                     query,
                   );
             return score === undefined ? [] : [{ knowledge: enemy, score }];
@@ -158,10 +174,36 @@ export function queryCombatKnowledge(
           .sort(
             (left, right) =>
               left.score - right.score ||
-              left.knowledge.names.en.localeCompare(right.knowledge.names.en),
+              left.knowledge.id.localeCompare(right.knowledge.id),
           )
           .slice(0, limit)
-          .map(({ knowledge }) => knowledge);
+          .map(({ knowledge }) => {
+            const {
+              localizationId,
+              aliases: _aliases,
+              dangerousActions,
+              ...enemy
+            } = knowledge;
+            return {
+              ...enemy,
+              name: localizeGameString(
+                localizationId,
+                filters.language ?? "en",
+                localization,
+              ),
+              dangerousActions: dangerousActions.map((action) => {
+                const { localizationIds, ...details } = action;
+                return {
+                  ...details,
+                  name: localizeGameStrings(
+                    localizationIds,
+                    filters.language ?? "en",
+                    localization,
+                  ),
+                };
+              }),
+            };
+          });
 
   return { regions, enemies };
 }

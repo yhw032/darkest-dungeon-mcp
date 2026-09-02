@@ -6,6 +6,12 @@ import { queryCombatKnowledge } from "../src/queries/query-combat.js";
 
 test("queries an enemy by id, name, and alias", async () => {
   const knowledge = await loadCombatKnowledge();
+  const localization = new Map([
+    [
+      "english",
+      new Map([["str_monstername_bloated_corpse_A", "Drowned Thrall"]]),
+    ],
+  ]);
 
   assert.equal(
     queryCombatKnowledge(knowledge, { query: "drowned_thrall" }).enemies[0]
@@ -13,14 +19,47 @@ test("queries an enemy by id, name, and alias", async () => {
     "drowned_thrall",
   );
   assert.equal(
-    queryCombatKnowledge(knowledge, { query: "Drowned Thrall" }).enemies[0]
-      ?.id,
+    queryCombatKnowledge(
+      knowledge,
+      { query: "Drowned Thrall" },
+      localization,
+    ).enemies[0]?.id,
     "drowned_thrall",
   );
   assert.equal(
     queryCombatKnowledge(knowledge, { query: "Bloated Thrall" }).enemies[0]
       ?.id,
     "drowned_thrall",
+  );
+});
+
+test("localizes enemy and dangerous action names from game strings", async () => {
+  const knowledge = await loadCombatKnowledge();
+  const localization = new Map([
+    [
+      "koreana",
+      new Map([
+        ["str_monstername_bloated_corpse_A", "익사한 노예"],
+        ["str_monster_skill_bloated_swipe", "거품물고 돌격"],
+        ["str_monster_skill_explode", "복수"],
+      ]),
+    ],
+  ]);
+
+  const enemy = queryCombatKnowledge(
+    knowledge,
+    { query: "익사한 노예", scope: "enemies", language: "ko" },
+    localization,
+  ).enemies[0];
+
+  assert.equal(enemy?.id, "drowned_thrall");
+  assert.equal(enemy?.name, "익사한 노예");
+  assert.deepEqual(
+    enemy?.dangerousActions.map(({ id, name }) => ({ id, name })),
+    [
+      { id: "gargling_grab", name: "거품물고 돌격" },
+      { id: "the_revenge", name: "복수" },
+    ],
   );
 });
 
