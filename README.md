@@ -124,7 +124,7 @@ runner through `tsx`. Tests never access the user's live save directory.
 | --- | --- |
 | `get_game_state` | Return a combined campaign summary. |
 | `list_building_upgrades` | List building upgrade progress and the next heirloom costs. |
-| `list_risky_quirks` | Rank heroes with treatment-worthy quirks and explain the risks. |
+| `list_risky_quirks` | Rank treatment-worthy quirks with localized class, quirk, and effect text. |
 | `list_heroes` | Filter heroes by class, roster status, stress, party availability, and optional quest eligibility; localize class names with `language`. |
 | `get_hero` | Return one hero with localized class and combat-skill names, resolve level, availability, optional quest eligibility, and town activity. |
 | `compare_heroes` | Compare 2–8 heroes using localized class and skill names plus objective readiness, equipment, skill-position, and curated quirk-risk evidence. |
@@ -147,6 +147,11 @@ stable internal IDs remain available alongside them.
 
 `list_trinkets` also accepts `language` and resolves official trinket names
 from `DD_GAME_DIR`, including base-game, official DLC, and backer trinkets.
+
+`list_risky_quirks` accepts `language` and returns one official localized
+quirk name and description plus the hero's localized class name. Treatment
+priorities, reasons, and policy text remain English editorial source material
+for the client to summarize in the user's language.
 
 Combat knowledge currently covers Ruins, Warrens, Weald, Cove, their
 region-specific enemies, and base-game enemies shared across those regions.

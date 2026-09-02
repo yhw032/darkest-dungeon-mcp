@@ -67,6 +67,7 @@ test("MCP server advertises and executes read-only game tools", async (t) => {
             ],
             ["str_monstername_bloated_corpse_A", "익사한 노예"],
             [`hero_class_name_${expectedHero.heroClass}`, "시험 직업"],
+            [`hero_class_name_${riskyHero.heroClass}`, "시험 직업"],
             ...expectedHero.combatSkillSelections.map(({ id }) => [
               `combat_skill_name_${expectedHero.heroClass}_${id}`,
               `시험 기술 ${id}`,
@@ -253,7 +254,7 @@ test("MCP server advertises and executes read-only game tools", async (t) => {
 
   const riskyResult = await client.callTool({
     name: "list_risky_quirks",
-    arguments: { heroId: riskyHero.id },
+    arguments: { heroId: riskyHero.id, language: "ko" },
   });
   const riskyContent = riskyResult.structuredContent as
     | Record<string, unknown>
@@ -269,6 +270,17 @@ test("MCP server advertises and executes read-only game tools", async (t) => {
     (riskyHeroes[0] as { heroId?: unknown } | undefined)?.heroId,
     riskyHero.id,
   );
+  assert.equal(
+    (riskyHeroes[0] as { heroClassName?: unknown } | undefined)?.heroClassName,
+    "시험 직업",
+  );
+  const localizedRiskyQuirk = (
+    riskyHeroes[0] as
+      | { riskyQuirks?: Array<{ name?: unknown; description?: unknown }> }
+      | undefined
+  )?.riskyQuirks?.[0];
+  assert.equal(localizedRiskyQuirk?.name, "위험 테스트 기벽");
+  assert.equal(localizedRiskyQuirk?.description, "테스트 위험");
 
   const listResult = await client.callTool({
     name: "list_heroes",

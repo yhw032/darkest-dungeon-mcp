@@ -126,8 +126,21 @@ test("ranks heroes and quirks by treatment priority", () => {
     chance: 0.35,
     keepsLoot: true,
   });
-  assert.equal(result[0]?.riskyQuirks[0]?.name.korean, "Kleptomaniac KO");
+  assert.equal(result[0]?.riskyQuirks[0]?.name, "Kleptomaniac");
   assert.equal(result[1]?.heroName, "Beta");
+});
+
+test("selects quirk text in the requested language", () => {
+  const result = analyzeRiskyQuirks(roster, definitions, knowledge, {
+    heroId: "1",
+    language: "ko",
+  });
+
+  assert.equal(result[0]?.riskyQuirks[0]?.name, "Kleptomaniac KO");
+  assert.equal(
+    result[0]?.riskyQuirks[0]?.description,
+    "Kleptomaniac KO description",
+  );
 });
 
 test("filters by minimum priority, locked state, hero, and limit", () => {
@@ -160,10 +173,7 @@ test("preserves a matched rule when its game definition is unavailable", () => {
   });
 
   assert.equal(result[0]?.riskyQuirks[0]?.definitionFound, false);
-  assert.deepEqual(result[0]?.riskyQuirks[0]?.name, {
-    english: null,
-    korean: null,
-  });
+  assert.equal(result[0]?.riskyQuirks[0]?.name, null);
   assert.deepEqual(result[0]?.riskyQuirks[0]?.effects, []);
 });
 

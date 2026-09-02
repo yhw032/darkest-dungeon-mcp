@@ -2,7 +2,6 @@ import type { Roster } from "../domain/hero.js";
 import type {
   QuirkBuffEffect,
   QuirkDefinition,
-  QuirkLocalizedText,
 } from "../domain/quirk-definitions.js";
 import type {
   QuirkRiskFactor,
@@ -10,17 +9,12 @@ import type {
   QuirkTreatmentPriority,
 } from "../domain/quirk-treatment-knowledge.js";
 import { isDeceasedHero } from "../roster/hero-roster-state.js";
+import type { GameLanguage } from "../localization/game-localization.js";
 
 export interface RiskyQuirkAnalysis {
   id: string;
-  name: {
-    english: string | null;
-    korean: string | null;
-  };
-  description: {
-    english: string | null;
-    korean: string | null;
-  };
+  name: string | null;
+  description: string | null;
   priority: QuirkTreatmentPriority;
   factors: QuirkRiskFactor[];
   reasons: string[];
@@ -52,6 +46,7 @@ export interface RiskyQuirkFilters {
   lockedOnly?: boolean;
   heroId?: string;
   limit?: number;
+  language?: GameLanguage;
 }
 
 const priorityRank: Record<QuirkTreatmentPriority, number> = {
@@ -60,14 +55,6 @@ const priorityRank: Record<QuirkTreatmentPriority, number> = {
   medium: 2,
   low: 1,
 };
-
-function copyLocalizedText(
-  localization: QuirkLocalizedText | undefined,
-): QuirkLocalizedText {
-  return localization === undefined
-    ? { name: null, description: null }
-    : { ...localization };
-}
 
 function compareQuirks(
   left: RiskyQuirkAnalysis,
@@ -102,6 +89,7 @@ export function analyzeRiskyQuirks(
   filters: RiskyQuirkFilters = {},
 ): RiskyHeroAnalysis[] {
   const minimumPriority = filters.minimumPriority ?? "low";
+  const language = filters.language ?? "en";
   const minimumRank = priorityRank[minimumPriority];
   const definitionById = new Map(
     definitions.map((definition) => [definition.id, definition]),
@@ -123,16 +111,15 @@ export function analyzeRiskyQuirks(
         if (filters.lockedOnly === true && !quirk.isLocked) return [];
 
         const definition = definitionById.get(quirk.id);
-        const english = copyLocalizedText(definition?.localization.english);
-        const korean = copyLocalizedText(definition?.localization.korean);
+        const localized =
+          language === "ko"
+            ? definition?.localization.korean
+            : definition?.localization.english;
         return [
           {
             id: quirk.id,
-            name: { english: english.name, korean: korean.name },
-            description: {
-              english: english.description,
-              korean: korean.description,
-            },
+            name: localized?.name ?? null,
+            description: localized?.description ?? null,
             priority: rule.priority,
             factors: [...rule.factors],
             reasons: [...rule.reasons],

@@ -124,7 +124,7 @@ export const serverInstructions = [
   "Use combatPositionAnalysis for objective selected-skill position coverage; bestCoveragePartyPositions is not by itself a tactical recommendation.",
   "Use list_building_upgrades for verified building upgrade progress and next costs.",
   "Use list_trinkets for owned, equipped, and store trinkets; pass the user's language and display the localized name while preserving id as a stable identifier.",
-  "Use list_risky_quirks for treatment-priority questions, and present its policy as editorial guidance rather than an absolute game value.",
+  "Use list_risky_quirks for treatment-priority questions; pass the user's language, display localized hero-class and quirk names, and present its English policy and reasons as editorial guidance to summarize rather than absolute game values.",
   "Use query_classes for verified class roles, strengths, limitations, position guidance, mechanics, and party synergies instead of relying on class stereotypes; pass the user's language and display the localized class and skill names it returns.",
   "Use query_combat for verified region and enemy priorities, dangerous actions, threat types, and counters instead of inventing combat advice; pass the user's language and display the localized region name.",
   "Class position guidance is editorial strategy knowledge; use combatSkillDetails for the current hero's exact selected-skill positions.",
@@ -369,6 +369,7 @@ export function createDarkestDungeonServer(
           .default("high"),
         lockedOnly: z.boolean().default(false),
         heroId: z.string().min(1).optional(),
+        language: z.enum(["en", "ko"]).default("en"),
         limit: z.number().int().min(1).max(50).default(10),
       }),
       outputSchema: z.object({
@@ -377,26 +378,36 @@ export function createDarkestDungeonServer(
       }),
       annotations: readOnlyAnnotations,
     },
-    async ({ minimumPriority, lockedOnly, heroId, limit }) => {
-      const [state, definitions, knowledge] = await Promise.all([
+    async ({ minimumPriority, lockedOnly, heroId, language, limit }) => {
+      const [state, definitions, knowledge, localization] = await Promise.all([
         dataSource.load(),
         getQuirkDefinitions(),
         getTreatmentKnowledge(),
+        getGameLocalization(),
       ]);
       const filters = {
         minimumPriority,
         lockedOnly,
         ...(heroId === undefined ? {} : { heroId }),
+        language,
         limit,
       };
+      const heroes = analyzeRiskyQuirks(
+        state.roster,
+        definitions,
+        knowledge,
+        filters,
+      ).map((hero) => ({
+        ...hero,
+        heroClassName: localizeHeroClass(
+          hero.heroClass,
+          language,
+          localization,
+        ),
+      }));
       const structuredContent = {
         policy: knowledge.policy,
-        heroes: analyzeRiskyQuirks(
-          state.roster,
-          definitions,
-          knowledge,
-          filters,
-        ),
+        heroes,
       };
       return {
         content: [

@@ -234,7 +234,6 @@ const quirkEffectSchema = z.object({
   ruleType: z.string(),
   isFalseRule: z.boolean(),
 });
-const localizedTextSchema = z.object({ english: nullableString, korean: nullableString });
 const prioritySchema = z.enum(["critical", "high", "medium", "low"]);
 const riskFactorSchema = z.enum([
   "forced_curio_interaction",
@@ -250,14 +249,15 @@ export const riskyHeroSchema = z.object({
   heroId: z.string(),
   heroName: z.string(),
   heroClass: z.string(),
+  heroClassName: nullableString,
   resolveXp: finiteNumber.describe("Raw resolve experience, not resolve level."),
   stress: finiteNumber,
   overallPriority: prioritySchema,
   riskyQuirks: z.array(
     z.object({
       id: z.string(),
-      name: localizedTextSchema,
-      description: localizedTextSchema,
+      name: nullableString,
+      description: nullableString,
       priority: prioritySchema,
       factors: z.array(riskFactorSchema),
       reasons: z.array(z.string()),
