@@ -65,6 +65,7 @@ test("MCP server advertises and executes read-only game tools", async (t) => {
               `str_inventory_title_trinket${expectedStoredTrinket.id}`,
               "시험 장신구",
             ],
+            ["str_monstername_collector_A", "수집가"],
             ["str_monstername_bloated_corpse_A", "익사한 노예"],
             [`hero_class_name_${expectedHero.heroClass}`, "시험 직업"],
             [`hero_class_name_${riskyHero.heroClass}`, "시험 직업"],
@@ -899,11 +900,19 @@ test("MCP server advertises and executes read-only game tools", async (t) => {
   assert.deepEqual(combatQueryContent?.regions, []);
   assert.deepEqual(
     combatQueryContent?.enemies?.map(({ id }) => id),
-    ["drowned_thrall", "madman", "squiffy_ghast"],
+    [
+      "collector",
+      "drowned_crew",
+      "drowned_thrall",
+      "madman",
+      "shambler",
+      "siren",
+      "squiffy_ghast",
+    ],
   );
   assert.equal(
     (combatQueryContent?.enemies?.[0] as { name?: unknown } | undefined)?.name,
-    "익사한 노예",
+    "수집가",
   );
 
   const localizedCombatRegionResult = await client.callTool({

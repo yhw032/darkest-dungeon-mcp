@@ -3593,6 +3593,699 @@
           "verifiedAt": "2026-09-01"
         }
       ]
+    },
+    {
+      "id": "necromancer",
+      "enemyType": "boss",
+      "localizationId": "str_monstername_necromancer_A",
+      "aliases": [
+        "Necromancer Apprentice",
+        "Necromancer",
+        "Necromancer Lord",
+        "강령술사",
+        "견습 강령술사"
+      ],
+      "regions": [
+        "ruins"
+      ],
+      "dlcs": [],
+      "priority": "critical",
+      "priorityReasons": [
+        "Summons Unholy skeletons with every attack and retreats backward."
+      ],
+      "traits": [
+        "Unholy"
+      ],
+      "dangerousActions": [
+        {
+          "id": "the_flesh_is_willing",
+          "localizationIds": [
+            "str_monster_skill_necromancer_claw"
+          ],
+          "threats": [
+            "summon",
+            "health_damage"
+          ],
+          "description": "Strikes frontline heroes and summons an Unholy skeleton ally.",
+          "counters": [
+            "Direct burst on boss",
+            "Corpse clearing",
+            "Ignore summons"
+          ]
+        },
+        {
+          "id": "six_feet_under",
+          "localizationIds": [
+            "str_monster_skill_necromancer_stress"
+          ],
+          "threats": [
+            "stress",
+            "summon"
+          ],
+          "description": "Inflicts party-wide stress damage while spawning additional skeletons.",
+          "counters": [
+            "High stress resistance",
+            "Holy water",
+            "Frontline pulls"
+          ]
+        }
+      ],
+      "effectiveResponses": [
+        "Focus single-target damage directly on the Necromancer rather than clearing summons.",
+        "Bring skills that can reach enemy ranks 3 and 4 with high raw damage."
+      ],
+      "cautions": [
+        "The Necromancer retreats backward upon attacking, pushing himself into the backline behind fresh minions."
+      ],
+      "sources": [
+        {
+          "title": "Official Darkest Dungeon Wiki: Necromancer",
+          "url": "https://darkestdungeon.wiki.gg/wiki/Necromancer",
+          "verifiedAt": "2026-09-01"
+        }
+      ]
+    },
+    {
+      "id": "prophet",
+      "enemyType": "boss",
+      "localizationId": "str_monstername_prophet_A",
+      "aliases": [
+        "Sonorous Prophet",
+        "Fulminating Prophet",
+        "Gibbering Prophet",
+        "예언자",
+        "낭송하는 예언자"
+      ],
+      "regions": [
+        "ruins"
+      ],
+      "dlcs": [],
+      "priority": "critical",
+      "priorityReasons": [
+        "Predicts and strikes designated ranks with massive collapsing rubble damage."
+      ],
+      "traits": [
+        "Human",
+        "Unholy"
+      ],
+      "dangerousActions": [
+        {
+          "id": "rubble_of_ruin",
+          "localizationIds": [
+            "str_monster_skill_prophet_rocks"
+          ],
+          "threats": [
+            "health_damage",
+            "stun"
+          ],
+          "description": "Calls down massive stone rubble onto marked hero positions for devastating damage.",
+          "counters": [
+            "Man-at-Arms Defender guard",
+            "Occultist Weakening Curse damage debuff",
+            "Aegis scales"
+          ]
+        },
+        {
+          "id": "calamitous_prognostication",
+          "localizationIds": [
+            "str_monster_skill_prophet_mark"
+          ],
+          "threats": [
+            "mark",
+            "stress"
+          ],
+          "description": "Marks 1-2 hero ranks for impending Rubble of Ruin strikes.",
+          "counters": [
+            "Guard the targeted heroes",
+            "Prepare burst heals"
+          ]
+        }
+      ],
+      "effectiveResponses": [
+        "Stack damage debuffs on the Prophet using Occultist's Weakening Curse.",
+        "Guard marked heroes using Man-at-Arms or Houndmaster."
+      ],
+      "cautions": [
+        "Pews in front of the Prophet absorb front-rank attacks; bring dedicated rank 4 snipers or break pews with heavy blight."
+      ],
+      "sources": [
+        {
+          "title": "Official Darkest Dungeon Wiki: Prophet",
+          "url": "https://darkestdungeon.wiki.gg/wiki/Prophet",
+          "verifiedAt": "2026-09-01"
+        }
+      ]
+    },
+    {
+      "id": "swine_prince",
+      "enemyType": "boss",
+      "localizationId": "str_monstername_swine_prince_A",
+      "aliases": [
+        "Swine Prince",
+        "Swine King",
+        "Swine God",
+        "돼지 왕자",
+        "돼지 왕",
+        "돼지 신"
+      ],
+      "regions": [
+        "warrens"
+      ],
+      "dlcs": [],
+      "priority": "critical",
+      "priorityReasons": [
+        "Deals catastrophic physical damage to heroes targeted by Wilbur."
+      ],
+      "traits": [
+        "Beast",
+        "Human"
+      ],
+      "dangerousActions": [
+        {
+          "id": "enraged_destruction",
+          "localizationIds": [
+            "str_monster_skill_swine_berserk"
+          ],
+          "threats": [
+            "health_damage",
+            "stress",
+            "stun"
+          ],
+          "description": "Wipes out the entire party if Wilbur is attacked or killed before the Swine Prince.",
+          "counters": [
+            "NEVER attack or stun Wilbur while Swine Prince is alive"
+          ]
+        },
+        {
+          "id": "wild_flailing",
+          "localizationIds": [
+            "str_monster_skill_swine_smash"
+          ],
+          "threats": [
+            "health_damage",
+            "stun"
+          ],
+          "description": "Heavy cleave against marked ranks.",
+          "counters": [
+            "Arbalest Rallying Flare to clear marks",
+            "Damage debuffs"
+          ]
+        }
+      ],
+      "effectiveResponses": [
+        "Use Arbalest's Rallying Flare to clear marks placed by Wilbur.",
+        "Stack Riposte and heavy Bleed damage on the Prince."
+      ],
+      "cautions": [
+        "DO NOT target or kill Wilbur first; doing so immediately triggers Enraged Destruction every turn."
+      ],
+      "sources": [
+        {
+          "title": "Official Darkest Dungeon Wiki: Swine Prince",
+          "url": "https://darkestdungeon.wiki.gg/wiki/Swine_Prince",
+          "verifiedAt": "2026-09-01"
+        }
+      ]
+    },
+    {
+      "id": "hag",
+      "enemyType": "boss",
+      "localizationId": "str_monstername_hag_A",
+      "aliases": [
+        "Wizened Hag",
+        "Hag Witch",
+        "Hag Ravenous",
+        "마녀",
+        "마귀할멈"
+      ],
+      "regions": [
+        "weald"
+      ],
+      "dlcs": [],
+      "priority": "critical",
+      "priorityReasons": [
+        "Throws heroes into a boiling pot, dealing continuous max HP damage."
+      ],
+      "traits": [
+        "Human"
+      ],
+      "dangerousActions": [
+        {
+          "id": "into_the_pot",
+          "localizationIds": [
+            "str_monster_skill_hag_pot"
+          ],
+          "threats": [
+            "other",
+            "health_damage"
+          ],
+          "description": "Imprisons one hero inside the boiling pot, removing them from combat and dealing rapid health loss.",
+          "counters": [
+            "Burst down the Hag directly instead of attacking the pot",
+            "Reach positions 3 and 4"
+          ]
+        },
+        {
+          "id": "meat_tenderizer",
+          "localizationIds": [
+            "str_monster_skill_hag_cleave"
+          ],
+          "threats": [
+            "health_damage"
+          ],
+          "description": "Attacks remaining party members with high-damage cleaves.",
+          "counters": [
+            "Self-sustaining heroes",
+            "High speed DPS"
+          ]
+        }
+      ],
+      "effectiveResponses": [
+        "Focus 100% of party damage on the Hag in ranks 3 and 4; destroying the pot only temporarily frees the hero before she recasts it.",
+        "Bring backline reach like Hellion (Iron Swan), Arbalest, Houndmaster, and Grave Robber."
+      ],
+      "cautions": [
+        "Frontline-locked heroes like Leper and Crusader are severely handicapped against the Hag."
+      ],
+      "sources": [
+        {
+          "title": "Official Darkest Dungeon Wiki: Hag",
+          "url": "https://darkestdungeon.wiki.gg/wiki/Hag",
+          "verifiedAt": "2026-09-01"
+        }
+      ]
+    },
+    {
+      "id": "siren",
+      "enemyType": "boss",
+      "localizationId": "str_monstername_siren_A",
+      "aliases": [
+        "Siren",
+        "Seductive Siren",
+        "Alluring Siren",
+        "세이렌"
+      ],
+      "regions": [
+        "cove"
+      ],
+      "dlcs": [],
+      "priority": "critical",
+      "priorityReasons": [
+        "Charms a party member to fight on her side."
+      ],
+      "traits": [
+        "Eldritch"
+      ],
+      "dangerousActions": [
+        {
+          "id": "song_of_desire",
+          "localizationIds": [
+            "str_monster_skill_siren_charm"
+          ],
+          "threats": [
+            "other",
+            "stress"
+          ],
+          "description": "Takes control of one hero for several turns, forcing them to attack allies.",
+          "counters": [
+            "Equip Holy Water before combat to boost Debuff resist",
+            "Bring stunners to control charmed allies without killing them"
+          ]
+        },
+        {
+          "id": "call_of_the_deep",
+          "localizationIds": [
+            "str_monster_skill_siren_summon"
+          ],
+          "threats": [
+            "summon"
+          ],
+          "description": "Summons Pelagic guardians to shield herself.",
+          "counters": [
+            "Focus fire on Siren with Eldritch-slaying skills"
+          ]
+        }
+      ],
+      "effectiveResponses": [
+        "Drink Holy Water on all heroes to resist Song of Desire.",
+        "Antiquarian has lowest debuff resist and makes a harmless charmed target."
+      ],
+      "cautions": [
+        "Do not kill your charmed hero; stun them or buff through their actions until control lapses."
+      ],
+      "sources": [
+        {
+          "title": "Official Darkest Dungeon Wiki: Siren",
+          "url": "https://darkestdungeon.wiki.gg/wiki/Siren",
+          "verifiedAt": "2026-09-01"
+        }
+      ]
+    },
+    {
+      "id": "drowned_crew",
+      "enemyType": "boss",
+      "localizationId": "str_monstername_drowned_captain_C",
+      "aliases": [
+        "Sodden Crew",
+        "Sunken Crew",
+        "Drowned Crew",
+        "익사한 선원들",
+        "가라앉은 선원",
+        "흠뻑 젖은 선원"
+      ],
+      "regions": [
+        "cove"
+      ],
+      "dlcs": [],
+      "priority": "critical",
+      "priorityReasons": [
+        "Anchors a frontline hero, immobilizing them and siphoning healing and stress into the crew."
+      ],
+      "traits": [
+        "Unholy",
+        "Eldritch"
+      ],
+      "dangerousActions": [
+        {
+          "id": "all_hands_on_deck",
+          "localizationIds": [
+            "str_monster_skill_crew_anchor"
+          ],
+          "threats": [
+            "movement",
+            "stress"
+          ],
+          "description": "Summons the Drowned Anchorman and immobilizes rank 1 hero with an anchor.",
+          "counters": [
+            "Stun or kill the Anchorman immediately",
+            "Virtued heroes are immune to the anchor siphoning"
+          ]
+        },
+        {
+          "id": "drink_with_the_dead",
+          "localizationIds": [
+            "str_monster_skill_crew_stress"
+          ],
+          "threats": [
+            "stress",
+            "health_damage"
+          ],
+          "description": "Heals the crew and inflicts massive party stress while a hero is anchored.",
+          "counters": [
+            "Break the anchor promptly"
+          ]
+        }
+      ],
+      "effectiveResponses": [
+        "Put a high-virtue or stun-capable hero in rank 1 to disable the Anchorman.",
+        "Apply heavy Blight to bypass the crew's high PROT."
+      ],
+      "cautions": [
+        "If the Anchorman remains alive while anchoring a hero, the crew continuously recovers HP and stress-nukes the party."
+      ],
+      "sources": [
+        {
+          "title": "Official Darkest Dungeon Wiki: Drowned Crew",
+          "url": "https://darkestdungeon.wiki.gg/wiki/Drowned_Crew",
+          "verifiedAt": "2026-09-01"
+        }
+      ]
+    },
+    {
+      "id": "collector",
+      "enemyType": "miniboss",
+      "localizationId": "str_monstername_collector_A",
+      "aliases": [
+        "The Collector",
+        "Collector",
+        "수집가"
+      ],
+      "regions": [
+        "ruins",
+        "warrens",
+        "weald",
+        "cove"
+      ],
+      "dlcs": [],
+      "priority": "critical",
+      "priorityReasons": [
+        "Wandering corridor boss appearing when inventory is over 65% full. Summons collected hero heads."
+      ],
+      "traits": [
+        "Eldritch"
+      ],
+      "dangerousActions": [
+        {
+          "id": "collect_call",
+          "localizationIds": [
+            "str_monster_skill_collector_summon"
+          ],
+          "threats": [
+            "summon"
+          ],
+          "description": "Summons three collected heads (Highwayman, Man-at-Arms, Vestal).",
+          "counters": [
+            "Stun Collector on round 1 to delay summons",
+            "Prioritize killing Collected Highwayman"
+          ]
+        },
+        {
+          "id": "headhunt",
+          "localizationIds": [
+            "str_monster_skill_collector_attack"
+          ],
+          "threats": [
+            "health_damage",
+            "stress"
+          ],
+          "description": "Collected Highwayman deals massive bleed and critical damage.",
+          "counters": [
+            "Kill Collected Highwayman immediately"
+          ]
+        }
+      ],
+      "effectiveResponses": [
+        "Stun the Collector round 1 to prevent immediate summon.",
+        "Eliminate Collected Highwaymen first to remove high burst threat."
+      ],
+      "cautions": [
+        "Collected Man-at-Arms guards the Collector and buffs prot; stun him or use stun/bleed bypass."
+      ],
+      "sources": [
+        {
+          "title": "Official Darkest Dungeon Wiki: Collector",
+          "url": "https://darkestdungeon.wiki.gg/wiki/The_Collector",
+          "verifiedAt": "2026-09-01"
+        }
+      ]
+    },
+    {
+      "id": "shambler",
+      "enemyType": "miniboss",
+      "localizationId": "str_monstername_shambler_A",
+      "aliases": [
+        "Shambler",
+        "기는 혼돈"
+      ],
+      "regions": [
+        "ruins",
+        "warrens",
+        "weald",
+        "cove"
+      ],
+      "dlcs": [],
+      "priority": "critical",
+      "priorityReasons": [
+        "Forces zero torchlight, scrambles party ranks, and spawns hyper-buffing Claws."
+      ],
+      "traits": [
+        "Eldritch"
+      ],
+      "dangerousActions": [
+        {
+          "id": "undulating_terror",
+          "localizationIds": [
+            "str_monster_skill_shambler_shuffle"
+          ],
+          "threats": [
+            "movement",
+            "stress",
+            "blight"
+          ],
+          "description": "Shuffles party positions and applies dual-target blight and stress.",
+          "counters": [
+            "Bring position-flexible heroes (Houndmaster, Grave Robber, Highwayman)",
+            "Pre-shuffle party before activating altar"
+          ]
+        },
+        {
+          "id": "claws_growth",
+          "localizationIds": [
+            "str_monster_skill_tentacle_buff"
+          ],
+          "threats": [
+            "health_damage",
+            "other"
+          ],
+          "description": "Shambler Claws gain stacking damage, speed, and protection buffs every time they attack.",
+          "counters": [
+            "Clear tentacles with multi-target attacks (Hound's Harry, Plague Grenade)"
+          ]
+        }
+      ],
+      "effectiveResponses": [
+        "Intentionally reverse party formation before placing a torch in the Shambler's Altar.",
+        "Clear or control Claws so they do not accumulate lethally high damage buffs."
+      ],
+      "cautions": [
+        "Never fight the Shambler with a rigid, position-dependent party composition like Leper/Arbalest."
+      ],
+      "sources": [
+        {
+          "title": "Official Darkest Dungeon Wiki: Shambler",
+          "url": "https://darkestdungeon.wiki.gg/wiki/Shambler",
+          "verifiedAt": "2026-09-01"
+        }
+      ]
+    },
+    {
+      "id": "crocodilian",
+      "enemyType": "miniboss",
+      "localizationId": "str_monstername_crocodile_A",
+      "aliases": [
+        "Crocodilian",
+        "악어충"
+      ],
+      "regions": [
+        "courtyard"
+      ],
+      "dlcs": [
+        "crimson_court"
+      ],
+      "priority": "critical",
+      "priorityReasons": [
+        "Lurks in vegetation with high dodge and launches lethal Apex Predator strikes."
+      ],
+      "traits": [
+        "Beast",
+        "Bloodsucker"
+      ],
+      "dangerousActions": [
+        {
+          "id": "submerge",
+          "localizationIds": [
+            "str_monster_skill_croc_dive"
+          ],
+          "threats": [
+            "stealth",
+            "other"
+          ],
+          "description": "Dives into the reeds, gaining massive DODGE and PROT while preparing Apex Predator.",
+          "counters": [
+            "Rank movement skills to pull him out of rank 2/3",
+            "High accuracy attacks"
+          ]
+        },
+        {
+          "id": "apex_predator",
+          "localizationIds": [
+            "str_monster_skill_croc_strike"
+          ],
+          "threats": [
+            "health_damage",
+            "stress",
+            "bleed"
+          ],
+          "description": "Devastating party-wide strike executed from rank 2 or 3.",
+          "counters": [
+            "Displace Crocodilian to rank 1 or 4 to disrupt skill requirements"
+          ]
+        }
+      ],
+      "effectiveResponses": [
+        "Use push and pull skills (Demon's Pull, Rampart, Uppercut) to move Crocodilian away from ranks 2 and 3 where Apex Predator is usable.",
+        "Apply heavy Blight while he hides in reeds."
+      ],
+      "cautions": [
+        "Apex Predator can instantly put multiple heroes at Death's Door."
+      ],
+      "sources": [
+        {
+          "title": "Official Darkest Dungeon Wiki: Crocodilian",
+          "url": "https://darkestdungeon.wiki.gg/wiki/Crocodilian",
+          "verifiedAt": "2026-09-01"
+        }
+      ]
+    },
+    {
+      "id": "miller",
+      "enemyType": "boss",
+      "localizationId": "str_monstername_miller_A",
+      "aliases": [
+        "The Miller",
+        "Miller",
+        "방앗간지기"
+      ],
+      "regions": [
+        "farmstead"
+      ],
+      "dlcs": [
+        "color_of_madness"
+      ],
+      "priority": "critical",
+      "priorityReasons": [
+        "Swings a wide sweeping scythe and guards himself behind harvested thralls."
+      ],
+      "traits": [
+        "Husk",
+        "Human"
+      ],
+      "dangerousActions": [
+        {
+          "id": "the_reaping",
+          "localizationIds": [
+            "str_monster_skill_miller_scythe"
+          ],
+          "threats": [
+            "health_damage",
+            "stress"
+          ],
+          "description": "Massive frontline scythe sweep inflicting high damage and stress.",
+          "counters": [
+            "High PROT and Dodge",
+            "Sustained party recovery"
+          ]
+        },
+        {
+          "id": "master_and_servant",
+          "localizationIds": [
+            "str_monster_skill_miller_guard"
+          ],
+          "threats": [
+            "guard",
+            "summon"
+          ],
+          "description": "Summons a Frozen Farmhand who guards the Miller with high protection.",
+          "counters": [
+            "Shieldbreaker Pierce to bypass Guard",
+            "Stun the guarding farmhand"
+          ]
+        }
+      ],
+      "effectiveResponses": [
+        "Use Shieldbreaker to ignore the Farmhand's guard and pierce the Miller directly.",
+        "Pack Miller's Pipe trinket for massive damage bonus."
+      ],
+      "cautions": [
+        "Attacking the guarded Miller without armor-piercing or guard-breaking wastes actions."
+      ],
+      "sources": [
+        {
+          "title": "Official Darkest Dungeon Wiki: The Miller",
+          "url": "https://darkestdungeon.wiki.gg/wiki/The_Miller",
+          "verifiedAt": "2026-09-01"
+        }
+      ]
     }
   ]
 }

@@ -104,7 +104,15 @@ test("combines region, threat, and priority enemy filters", async () => {
 
   assert.deepEqual(
     result.enemies.map(({ id }) => id),
-    ["drowned_thrall", "madman", "squiffy_ghast"],
+    [
+      "collector",
+      "drowned_crew",
+      "drowned_thrall",
+      "madman",
+      "shambler",
+      "siren",
+      "squiffy_ghast",
+    ],
   );
   assert.deepEqual(result.regions, []);
 });

@@ -174,8 +174,10 @@ activity, district, upgrade-tree, heirloom, estate resource, class count, and
 dungeon quest count names from `DD_GAME_DIR`. Stable IDs are retained alongside
 localized display names.
 
-Combat knowledge currently covers Ruins, Warrens, Weald, Cove, their
-region-specific enemies, and base-game enemies shared across those regions.
+Combat knowledge covers Ruins, Warrens, Weald, Cove, Courtyard (Crimson Court),
+Farmstead (Color of Madness), their region-specific enemies, shared roaming enemies,
+and key bosses / minibosses (Necromancer, Prophet, Swine Prince, Hag, Siren,
+Drowned Crew, Collector, Shambler, Crocodilian, and The Miller).
 `query_combat` accepts `query`, `region`, `threat`, `priority`, `scope`, and
 `language` filters. Region display names and localized-name search come from
 the installed game's localization files when `DD_GAME_DIR` is configured.

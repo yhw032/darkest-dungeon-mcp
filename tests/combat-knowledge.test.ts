@@ -202,6 +202,16 @@ test("loads the checked-in combat knowledge base", async () => {
       "bone_rabble",
       "ghoul",
       "gargoyle",
+      "necromancer",
+      "prophet",
+      "swine_prince",
+      "hag",
+      "siren",
+      "drowned_crew",
+      "collector",
+      "shambler",
+      "crocodilian",
+      "miller",
     ],
   );
   assert.equal(
@@ -234,7 +244,7 @@ test("loads the checked-in combat knowledge base", async () => {
   const warrensEnemies = knowledge.enemies.filter(({ regions }) =>
     regions.length === 1 && regions.includes("warrens"),
   );
-  assert.equal(warrensEnemies.length, 6);
+  assert.equal(warrensEnemies.length, 7);
   assert.ok(
     warrensEnemies.every(
       ({ dangerousActions, effectiveResponses, sources }) =>
@@ -246,7 +256,7 @@ test("loads the checked-in combat knowledge base", async () => {
   const wealdEnemies = knowledge.enemies.filter(({ regions }) =>
     regions.length === 1 && regions.includes("weald"),
   );
-  assert.equal(wealdEnemies.length, 8);
+  assert.equal(wealdEnemies.length, 9);
   assert.ok(
     wealdEnemies.every(
       ({ dangerousActions, effectiveResponses, sources }) =>
@@ -258,7 +268,7 @@ test("loads the checked-in combat knowledge base", async () => {
   const coveEnemies = knowledge.enemies.filter(({ regions }) =>
     regions.length === 1 && regions.includes("cove"),
   );
-  assert.equal(coveEnemies.length, 8);
+  assert.equal(coveEnemies.length, 10);
   assert.ok(
     coveEnemies.every(
       ({ dangerousActions, effectiveResponses, sources }) =>
@@ -313,4 +323,50 @@ test("loads courtyard and farmstead DLC region combat knowledge", async () => {
   assert.ok(farmstead);
   assert.deepEqual(farmstead.dlcs, ["color_of_madness"]);
   assert.ok(farmstead.commonThreats.some((t) => t.id === "endless_attrition"));
+});
+
+test("loads boss and miniboss combat knowledge", async () => {
+  const knowledge = await loadCombatKnowledge();
+  const necromancer = knowledge.enemies.find(({ id }) => id === "necromancer");
+  assert.ok(necromancer);
+  assert.equal(necromancer.enemyType, "boss");
+  assert.equal(necromancer.priority, "critical");
+
+  const swinePrince = knowledge.enemies.find(({ id }) => id === "swine_prince");
+  assert.ok(swinePrince);
+  assert.equal(swinePrince.enemyType, "boss");
+  assert.ok(swinePrince.cautions.some((c) => c.includes("Wilbur")));
+
+  const crocodilian = knowledge.enemies.find(({ id }) => id === "crocodilian");
+  assert.ok(crocodilian);
+  assert.equal(crocodilian.enemyType, "miniboss");
+  assert.deepEqual(crocodilian.regions, ["courtyard"]);
+  assert.deepEqual(crocodilian.dlcs, ["crimson_court"]);
+});
+
+test("verifies that all checked-in enemy localizationIds exist in the game install", async () => {
+  const gameDirectory =
+    process.env.DD_GAME_DIR ??
+    "D:\\SteamLibrary\\steamapps\\common\\DarkestDungeon";
+
+  let localization;
+  try {
+    const { loadGameLocalization } = await import(
+      "../src/localization/game-localization.js"
+    );
+    localization = await loadGameLocalization(gameDirectory);
+  } catch {
+    return;
+  }
+
+  const enMap = localization.get("english");
+  if (!enMap) return;
+
+  const knowledge = await loadCombatKnowledge();
+  for (const enemy of knowledge.enemies) {
+    assert.ok(
+      enMap.has(enemy.localizationId),
+      `Enemy localizationId "${enemy.localizationId}" for "${enemy.id}" was not found in game strings!`,
+    );
+  }
 });
