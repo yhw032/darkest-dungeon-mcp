@@ -80,7 +80,12 @@ export function recommendBuildingUpgrades(
 
     // Find priority configuration
     const config = priorityKnowledge.treePriorities.find(
-      (p) => p.buildingId === buildingId && p.treeId === treeId,
+      (p) =>
+        p.buildingId === buildingId &&
+        (p.treeId === treeId ||
+          p.treeId === `${buildingId}.${treeId}` ||
+          p.treeId.endsWith(`.${treeId}`) ||
+          treeId.endsWith(`.${p.treeId}`)),
     );
     const priorityTier: UpgradePriorityTier = config?.priorityTier ?? "C";
     const strategicImportance =
