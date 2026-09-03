@@ -417,6 +417,14 @@ export const heroComparisonSchema = z.object({
           .object({
             overallPriority: z.enum(["critical", "high", "medium", "low"]),
             riskyQuirkIds: z.array(z.string()),
+            riskyQuirks: z.array(
+              z.object({
+                id: z.string(),
+                name: nullableString.describe(
+                  "Official quirk name in the requested language; null without game localization.",
+                ),
+              }),
+            ),
           })
           .nullable()
           .describe("Curated treatment risk; null means no curated match only when status is available."),

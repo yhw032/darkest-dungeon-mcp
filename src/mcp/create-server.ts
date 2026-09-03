@@ -125,7 +125,7 @@ export const serverInstructions = [
   "Use resolveLevel instead of resolveXp when stating a hero level, and use availability.isAvailableForPartySelection when choosing new party members.",
   "For a specific quest, pass questId to list_heroes or get_hero and use questEligibility instead of inferring level restrictions.",
   "Pass the user's language to quest tools and display dungeon.name, title, description, length.name, and reward item names; their ids and raw values are stable machine-readable fields.",
-  "Use compare_heroes for objective comparisons instead of selecting a winner from raw experience points or class stereotypes.",
+  "Use compare_heroes for objective comparisons instead of selecting a winner from raw experience points or class stereotypes; pass the user's language and display heroClassName, selectedCombatSkills.name, and quirkTreatmentAnalysis.risk.riskyQuirks.name.",
   "Pass the user's language to hero tools and display heroClassName, combatSkillDetails.name, equippedTrinkets.name, quirks[].name, afflictionName, virtueName, and localized town building or activity names; preserve their ids only as stable identifiers.",
   "In hero details, use combatSkillDetails.level for combat skill levels; rawSelectionValue is not a level.",
   "Use combatSkillDetails.usableFromPartyPositions, target, and movement for formation claims instead of relying on class stereotypes.",
@@ -598,7 +598,7 @@ export function createDarkestDungeonServer(
                 state.roster,
                 quirkDefinitions,
                 treatmentKnowledge,
-                { minimumPriority: "low", heroId, limit: 1 },
+                { minimumPriority: "low", heroId, limit: 1, language },
               ),
             );
       const riskByHeroId = new Map(
@@ -662,6 +662,12 @@ export function createDarkestDungeonServer(
               : {
                   overallPriority: risk.overallPriority,
                   riskyQuirkIds: risk.riskyQuirks.map((quirk) => quirk.id),
+                  riskyQuirks: risk.riskyQuirks.map((quirk) => ({
+                    id: quirk.id,
+                    name:
+                      quirk.name ??
+                      localizeQuirk(quirk.id, language, localization),
+                  })),
                 },
           },
         };

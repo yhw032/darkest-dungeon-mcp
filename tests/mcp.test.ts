@@ -507,6 +507,44 @@ test("MCP server advertises and executes read-only game tools", async (t) => {
     !JSON.stringify(comparison?.highlights).includes(expectedHero.id),
   );
 
+  const riskyComparisonResult = await client.callTool({
+    name: "compare_heroes",
+    arguments: {
+      heroIds: [expectedHero.id, riskyHero.id],
+      language: "ko",
+    },
+  });
+  const riskyComparison = (
+    riskyComparisonResult.structuredContent as
+      | {
+          comparison?: {
+            heroes?: Array<{
+              id: string;
+              quirkTreatmentAnalysis?: {
+                status: string;
+                risk: {
+                  overallPriority: string;
+                  riskyQuirkIds: string[];
+                  riskyQuirks: Array<{ id: string; name: string | null }>;
+                } | null;
+              };
+            }>;
+          };
+        }
+      | undefined
+  )?.comparison;
+  const comparedRiskyHero = riskyComparison?.heroes?.find(
+    (h) => h.id === riskyHero.id,
+  );
+  assert.equal(
+    comparedRiskyHero?.quirkTreatmentAnalysis?.status,
+    "available",
+  );
+  assert.deepEqual(
+    comparedRiskyHero?.quirkTreatmentAnalysis?.risk?.riskyQuirks,
+    [{ id: riskyQuirk.id, name: "위험 테스트 기벽" }],
+  );
+
   const missingResult = await client.callTool({
     name: "get_hero",
     arguments: { heroId: "missing-hero" },
