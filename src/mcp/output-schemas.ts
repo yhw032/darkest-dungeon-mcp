@@ -647,3 +647,93 @@ export const curioAdviceSchema = z.discriminatedUnion("status", [
   }),
   z.object({ status: z.literal("ambiguous"), query: z.string(), candidates: z.array(curioSummarySchema) }),
 ]);
+
+export const trinketTierSchema = z.enum(["S", "A", "B", "situational", "trap"]);
+
+export const trinketOwnershipStatusSchema = z.enum([
+  "in_storage",
+  "equipped_by_self",
+  "equipped_by_other",
+  "in_store",
+  "not_owned",
+]);
+
+export const recommendedTrinketItemSchema = z.object({
+  trinketId: z.string(),
+  trinketName: nullableString,
+  tier: trinketTierSchema,
+  rarity: nullableString.optional(),
+  heroClassRequirements: z.array(z.string()).optional(),
+  heroClassRequirementNames: z
+    .array(z.object({ id: z.string(), name: nullableString }))
+    .optional(),
+  effects: z.array(trinketEffectSchema).optional(),
+  ownership: z.object({
+    isOwned: z.boolean(),
+    status: trinketOwnershipStatusSchema,
+    storageAmount: finiteNumber,
+    equippedBy: z.array(
+      z.object({
+        heroId: z.string(),
+        heroName: z.string(),
+        amount: finiteNumber,
+      }),
+    ),
+    storeListings: z.array(
+      z.object({
+        buildingId: z.string(),
+        buildingName: nullableString,
+        storeId: z.string(),
+        amount: finiteNumber,
+      }),
+    ),
+  }),
+  recommendedRoles: z.array(z.string()),
+  synergies: z.array(z.string()),
+  cautions: z.array(z.string()),
+  playstyleAdvice: z.string(),
+  matchReason: z.string(),
+});
+
+export const candidateHeroRecommendationSchema = z.object({
+  heroId: z.string(),
+  heroName: z.string(),
+  heroClass: z.string(),
+  heroClassName: nullableString,
+  resolveLevel: finiteNumber.nullable(),
+  isCurrentlyEquipped: z.boolean(),
+  suitabilityReason: z.string(),
+});
+
+export const recommendTrinketsOutputSchema = z.object({
+  heroContext: z
+    .object({
+      heroId: z.string(),
+      heroName: z.string(),
+      heroClass: z.string(),
+      heroClassName: nullableString,
+      equippedTrinkets: z.array(
+        z.object({
+          id: z.string(),
+          name: nullableString,
+        }),
+      ),
+    })
+    .nullable()
+    .optional(),
+  trinketContext: z
+    .object({
+      trinketId: z.string(),
+      trinketName: nullableString,
+      tier: trinketTierSchema,
+      recommendedRoles: z.array(z.string()),
+      recommendedClasses: z.array(z.string()),
+      synergies: z.array(z.string()),
+      cautions: z.array(z.string()),
+      playstyleAdvice: z.string(),
+    })
+    .nullable()
+    .optional(),
+  recommendations: z.array(recommendedTrinketItemSchema),
+  candidateHeroes: z.array(candidateHeroRecommendationSchema).optional(),
+});

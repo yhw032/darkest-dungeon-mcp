@@ -211,6 +211,7 @@ test("MCP server advertises and executes read-only game tools", async (t) => {
   assert.match(instructions ?? "", /compare_heroes/);
   assert.match(instructions ?? "", /query_classes/);
   assert.match(instructions ?? "", /query_combat/);
+  assert.match(instructions ?? "", /recommend_trinkets/);
   assert.match(instructions ?? "", /editorial strategy knowledge/);
 
   const { tools } = await client.listTools();
@@ -229,6 +230,7 @@ test("MCP server advertises and executes read-only game tools", async (t) => {
       "list_trinkets",
       "query_classes",
       "query_combat",
+      "recommend_trinkets",
       "search_curios",
     ],
   );
@@ -798,6 +800,35 @@ test("MCP server advertises and executes read-only game tools", async (t) => {
   assert.equal(heavensHairpin?.rarity, "very_rare");
   assert.deepEqual(heavensHairpin?.heroClassRequirements, ["hellion"]);
   assert.equal(heavensHairpin?.effects?.length, 1);
+
+  const recommendResult = await client.callTool({
+    name: "recommend_trinkets",
+    arguments: { heroId: "18", onlyOwned: true, language: "ko" },
+  });
+  const recommendContent = recommendResult.structuredContent as
+    | {
+        recommendations?: {
+          heroContext?: { heroId: string; heroClass: string };
+          recommendations?: Array<{
+            trinketId: string;
+            tier: string;
+            matchReason: string;
+            ownership: { isOwned: boolean; status: string };
+          }>;
+        };
+      }
+    | undefined;
+  assert.ok(recommendContent?.recommendations);
+  assert.equal(recommendContent.recommendations.heroContext?.heroId, "18");
+  assert.equal(recommendContent.recommendations.heroContext?.heroClass, "hellion");
+  assert.ok((recommendContent.recommendations.recommendations?.length ?? 0) > 0);
+  const recommendedHairpin =
+    recommendContent.recommendations.recommendations?.find(
+      (r) => r.trinketId === "heavens_hairpin",
+    );
+  assert.ok(recommendedHairpin);
+  assert.equal(recommendedHairpin.tier, "S");
+  assert.equal(recommendedHairpin.ownership.isOwned, true);
 
   const curioSearchResult = await client.callTool({
     name: "search_curios",

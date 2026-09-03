@@ -131,6 +131,7 @@ runner through `tsx`. Tests never access the user's live save directory.
 | `list_quests` | Filter available quests with localized titles, objectives, regions, lengths, and reward names. |
 | `get_quest` | Return one quest by ID with localized official quest and reward text. |
 | `list_trinkets` | Query trinkets across storage, heroes, and stores by ID, localized name, hero class eligibility, or rarity. |
+| `recommend_trinkets` | Recommend optimal trinkets for a hero or class, or match candidate heroes for a specific trinket based on estate ownership, tier rankings, and synergies. |
 | `query_classes` | Query verified class guidance with official class, skill, and synergy names localized from the installed game. |
 | `query_combat` | Query verified region and enemy guidance by name, region, threat type, or priority. |
 | `search_curios` | Search verified curios by ID, localized name, alias, or region. |
@@ -153,6 +154,12 @@ also includes official `rarity`, `heroClassRequirements`, class compatibility
 `language`. It resolves official trinket names, rarities, hero class
 requirements (with localized class names), and stat buff/debuff `effects` from
 `DD_GAME_DIR`, including base-game, official DLC, and backer trinkets.
+
+`recommend_trinkets` evaluates equipment options for a hero (`heroId`), a class
+(`heroClass`), or a specific item (`trinketId`). It matches curated S/A/B/situational
+tier ratings, class-specific synergies, and usage cautions against current estate
+ownership (`in_storage`, `equipped_by_self`, `equipped_by_other`, `in_store`, or `not_owned`).
+When given `trinketId`, it returns candidate roster heroes ranked by suitability.
 
 `list_risky_quirks` accepts `language` and returns one official localized
 quirk name and description plus the hero's localized class name. Treatment

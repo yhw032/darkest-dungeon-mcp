@@ -20,6 +20,7 @@ import {
   riskyHeroSchema,
   regionCombatKnowledgeSchema,
   trinketRecordSchema,
+  recommendTrinketsOutputSchema,
 } from "./output-schemas.js";
 
 import type { BuildingUpgradeTree } from "../domain/building-upgrades.js";
@@ -33,10 +34,12 @@ import type {
 import type { HeroProgressionRules } from "../domain/hero-progression.js";
 import type { QuirkDefinition } from "../domain/quirk-definitions.js";
 import type { QuirkTreatmentKnowledgeBase } from "../domain/quirk-treatment-knowledge.js";
+import type { TrinketGuidanceKnowledgeBase } from "../domain/trinket-guidance.js";
 import type { QuestRestrictionRules } from "../domain/quest-restrictions.js";
 import { loadCurioKnowledge } from "../knowledge/load-curio-knowledge.js";
 import { loadClassKnowledge } from "../knowledge/load-class-knowledge.js";
 import { loadCombatKnowledge } from "../knowledge/load-combat-knowledge.js";
+import { loadTrinketGuidance } from "../knowledge/load-trinket-guidance.js";
 import {
   loadGameLocalization,
   localizeAffliction,
@@ -79,6 +82,7 @@ import { queryClasses } from "../queries/query-classes.js";
 import { queryCombatKnowledge } from "../queries/query-combat.js";
 import { searchCurios } from "../queries/search-curios.js";
 import { listTrinkets } from "../queries/trinkets.js";
+import { recommendTrinkets } from "../queries/recommend-trinkets.js";
 import {
   localizeBuildingUpgradeProgress,
   localizeHeroTownContext,
@@ -119,6 +123,7 @@ export interface DarkestDungeonServerOptions {
   loadQuirkDefinitions?: () => Promise<QuirkDefinition[]>;
   loadQuirkTreatmentKnowledge?: () => Promise<QuirkTreatmentKnowledgeBase>;
   loadTrinketDefinitions?: () => Promise<TrinketDefinition[]>;
+  loadTrinketGuidance?: () => Promise<TrinketGuidanceKnowledgeBase>;
 }
 
 export const serverInstructions = [
@@ -139,6 +144,7 @@ export const serverInstructions = [
   "Use combatPositionAnalysis for objective selected-skill position coverage; bestCoveragePartyPositions is not by itself a tactical recommendation.",
   "Use list_building_upgrades for verified building upgrade progress and next costs; pass the user's language and display localized building, upgrade-tree, and heirloom names.",
   "Use list_trinkets for owned, equipped, and store trinkets; pass the user's language and display localized name, rarity, class requirements, and buff effects while preserving id as a stable identifier.",
+  "Use recommend_trinkets when suggesting optimal equipment for a hero, evaluating class-specific trinkets, or finding suitable owners for owned items; pass the user's language and present editorial synergies and cautions as guidance rather than absolute rules.",
   "Use list_risky_quirks for treatment-priority questions; pass the user's language, display localized hero-class and quirk names, and present its English policy and reasons as editorial guidance to summarize rather than absolute game values.",
   "Use query_classes for verified class roles, strengths, limitations, position guidance, mechanics, and party synergies instead of relying on class stereotypes; pass the user's language and display the localized class and skill names it returns.",
   "Use query_combat for verified region and enemy priorities, dangerous actions, threat types, and counters instead of inventing combat advice; pass the user's language and display the localized region name.",
@@ -331,6 +337,15 @@ export function createDarkestDungeonServer(
       trinketDefinitionLoader,
     );
     return trinketDefinitionsPromise;
+  };
+  const trinketGuidanceLoader =
+    options.loadTrinketGuidance ?? loadTrinketGuidance;
+  let trinketGuidancePromise:
+    | Promise<TrinketGuidanceKnowledgeBase>
+    | undefined;
+  const getTrinketGuidance = () => {
+    trinketGuidancePromise ??= trinketGuidanceLoader();
+    return trinketGuidancePromise;
   };
   const server = new McpServer(
     { name: "darkest-dungeon-mcp", version: "1.0.0" },
@@ -989,6 +1004,50 @@ export function createDarkestDungeonServer(
         "trinkets",
         listTrinkets(state, filters, localization, trinketDefinitions),
       );
+    },
+  );
+
+  server.registerTool(
+    "recommend_trinkets",
+    {
+      title: "Recommend trinkets",
+      description:
+        "Recommend optimal trinkets for a hero, hero class, or inspect candidate heroes for a specific trinket based on estate ownership, tier rankings, and tactical synergies.",
+      inputSchema: z.object({
+        heroId: z.string().min(1).optional().describe("Optional hero id to evaluate recommendations for."),
+        heroClass: z.string().min(1).optional().describe("Optional hero class to evaluate recommendations for."),
+        trinketId: z.string().min(1).optional().describe("Optional trinket id to inspect synergies and candidate heroes for."),
+        onlyOwned: z.boolean().default(true).describe("If true (default), only recommend trinkets currently in estate storage, equipped, or in stores."),
+        language: z.enum(["en", "ko"]).default("en"),
+      }),
+      outputSchema: z.object({ recommendations: recommendTrinketsOutputSchema }),
+      annotations: readOnlyAnnotations,
+    },
+    async ({ heroId, heroClass, trinketId, onlyOwned, language }) => {
+      const [
+        state,
+        guidance,
+        trinketDefinitions,
+        progressionRules,
+        localization,
+      ] = await Promise.all([
+        dataSource.load(),
+        getTrinketGuidance(),
+        getTrinketDefinitions(),
+        getHeroProgressionRules(),
+        getGameLocalization(),
+      ]);
+
+      const result = recommendTrinkets(
+        state,
+        guidance,
+        { heroId, heroClass, trinketId, onlyOwned, language },
+        trinketDefinitions,
+        localization,
+        progressionRules,
+      );
+
+      return toolResult("recommendations", result);
     },
   );
 
