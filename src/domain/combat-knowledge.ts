@@ -16,7 +16,7 @@ export type CombatEffectType =
 
 export type ResistanceTendency = "low" | "mixed" | "high";
 export type EnemyPriority = "low" | "medium" | "high" | "critical";
-export type EnemyType = "common" | "elite" | "miniboss";
+export type EnemyType = "common" | "elite" | "miniboss" | "boss";
 export type CombatThreatType =
   | "health_damage"
   | "stress"

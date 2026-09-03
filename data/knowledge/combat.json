@@ -10,32 +10,64 @@
           "id": "backline_stress",
           "type": "stress",
           "description": "Bone Courtiers and shared stress dealers can create lasting expedition risk from the back ranks.",
-          "counters": ["Fast backline damage", "Backline stun", "Pull vulnerable ranged enemies forward"]
+          "counters": [
+            "Fast backline damage",
+            "Backline stun",
+            "Pull vulnerable ranged enemies forward"
+          ]
         },
         {
           "id": "backline_ranged_damage",
           "type": "health_damage",
           "description": "Bone Arbalists attack from safety and become more dangerous when attacking marked heroes.",
-          "counters": ["Backline reach", "Stun", "Pull the Arbalist into a weak forward attack pattern"]
+          "counters": [
+            "Backline reach",
+            "Stun",
+            "Pull the Arbalist into a weak forward attack pattern"
+          ]
         },
         {
           "id": "protected_frontline",
           "type": "health_damage",
           "description": "Bone Defenders and later Bone Captains can absorb direct damage while more urgent enemies act behind them.",
-          "counters": ["Blight through protection", "Armor piercing", "Attack or disable the backline first"]
+          "counters": [
+            "Blight through protection",
+            "Armor piercing",
+            "Attack or disable the backline first"
+          ]
         },
         {
           "id": "late_tier_disruption",
           "type": "stun",
           "description": "Veteran and Champion enemies add party-wide attacks, stuns, movement, buffs, and corpse revival.",
-          "counters": ["Reliable control", "Corpse clearing against Bone Bearer", "Broad position tolerance"]
+          "counters": [
+            "Reliable control",
+            "Corpse clearing against Bone Bearer",
+            "Broad position tolerance"
+          ]
         }
       ],
       "resistanceTendencies": [
-        { "effect": "bleed", "tendency": "high", "note": "Ruins-specific skeletons are effectively unsuitable bleed targets." },
-        { "effect": "blight", "tendency": "low", "note": "Skeletons are generally vulnerable to blight, though resistance rises with expedition difficulty." },
-        { "effect": "stun", "tendency": "mixed", "note": "Backline skeletons begin vulnerable to stun, while large and higher-tier enemies resist it more strongly." },
-        { "effect": "move", "tendency": "mixed", "note": "Courtier and Arbalist can be disrupted by movement, while Defender, Captain, and Bearer are less practical move targets." }
+        {
+          "effect": "bleed",
+          "tendency": "high",
+          "note": "Ruins-specific skeletons are effectively unsuitable bleed targets."
+        },
+        {
+          "effect": "blight",
+          "tendency": "low",
+          "note": "Skeletons are generally vulnerable to blight, though resistance rises with expedition difficulty."
+        },
+        {
+          "effect": "stun",
+          "tendency": "mixed",
+          "note": "Backline skeletons begin vulnerable to stun, while large and higher-tier enemies resist it more strongly."
+        },
+        {
+          "effect": "move",
+          "tendency": "mixed",
+          "note": "Courtier and Arbalist can be disrupted by movement, while Defender, Captain, and Bearer are less practical move targets."
+        }
       ],
       "recommendedCapabilities": [
         "Reach enemy positions 3 and 4 quickly",
@@ -50,8 +82,16 @@
         "Champion expeditions require an immediate plan for Bone Bearer and its corpse revival."
       ],
       "sources": [
-        { "title": "Official Darkest Dungeon Wiki: Ruins", "url": "https://darkestdungeon.wiki.gg/wiki/Ruins", "verifiedAt": "2026-09-01" },
-        { "title": "Official Darkest Dungeon Wiki: Enemy types", "url": "https://darkestdungeon.wiki.gg/wiki/Enemy_Types", "verifiedAt": "2026-09-01" }
+        {
+          "title": "Official Darkest Dungeon Wiki: Ruins",
+          "url": "https://darkestdungeon.wiki.gg/wiki/Ruins",
+          "verifiedAt": "2026-09-01"
+        },
+        {
+          "title": "Official Darkest Dungeon Wiki: Enemy types",
+          "url": "https://darkestdungeon.wiki.gg/wiki/Enemy_Types",
+          "verifiedAt": "2026-09-01"
+        }
       ]
     },
     {
@@ -63,32 +103,64 @@
           "id": "disease_and_stress",
           "type": "disease",
           "description": "Swine Wretches attack quickly from the back ranks, inflicting stress and potentially a random disease on any hero.",
-          "counters": ["Fast backline damage", "Backline stun", "Disease resistance and cures"]
+          "counters": [
+            "Fast backline damage",
+            "Backline stun",
+            "Disease resistance and cures"
+          ]
         },
         {
           "id": "mark_support",
           "type": "mark",
           "description": "Swine Drummers mark heroes and reduce dodge, enabling dangerous follow-up attacks from other Warrens enemies.",
-          "counters": ["Kill or stun the Drummer", "Clear marks", "Guard the marked hero"]
+          "counters": [
+            "Kill or stun the Drummer",
+            "Clear marks",
+            "Guard the marked hero"
+          ]
         },
         {
           "id": "party_disruption",
           "type": "movement",
           "description": "Choppers, Swinetaurs, and Skivers can stun, knock heroes back, or pressure multiple party positions at once.",
-          "counters": ["Position-tolerant party", "Stun resistance", "Control high-impact enemies before they act"]
+          "counters": [
+            "Position-tolerant party",
+            "Stun resistance",
+            "Control high-impact enemies before they act"
+          ]
         },
         {
           "id": "champion_backline_burst",
           "type": "health_damage",
           "description": "Champion Warrens expeditions add the Swine Skiver, whose backline attacks combine heavy damage with stun, movement, blight, and debuffs.",
-          "counters": ["Pull or shuffle the Skiver forward", "Fast focused damage", "Backline control"]
+          "counters": [
+            "Pull or shuffle the Skiver forward",
+            "Fast focused damage",
+            "Backline control"
+          ]
         }
       ],
       "resistanceTendencies": [
-        { "effect": "bleed", "tendency": "low", "note": "Warrens enemies are generally more practical bleed targets than blight targets, though individual and higher-tier resistances still vary." },
-        { "effect": "blight", "tendency": "high", "note": "Swinefolk commonly resist blight, with resistance increasing at higher expedition difficulties." },
-        { "effect": "stun", "tendency": "mixed", "note": "Small backline enemies are often controllable, while large enemies and Champion variants resist stun more strongly." },
-        { "effect": "move", "tendency": "mixed", "note": "Movement is especially valuable against Swinetaur and Swine Skiver, but reliability falls against larger or higher-tier targets." }
+        {
+          "effect": "bleed",
+          "tendency": "low",
+          "note": "Warrens enemies are generally more practical bleed targets than blight targets, though individual and higher-tier resistances still vary."
+        },
+        {
+          "effect": "blight",
+          "tendency": "high",
+          "note": "Swinefolk commonly resist blight, with resistance increasing at higher expedition difficulties."
+        },
+        {
+          "effect": "stun",
+          "tendency": "mixed",
+          "note": "Small backline enemies are often controllable, while large enemies and Champion variants resist stun more strongly."
+        },
+        {
+          "effect": "move",
+          "tendency": "mixed",
+          "note": "Movement is especially valuable against Swinetaur and Swine Skiver, but reliability falls against larger or higher-tier targets."
+        }
       ],
       "recommendedCapabilities": [
         "Reach enemy positions 3 and 4 quickly",
@@ -105,8 +177,16 @@
         "Champion expeditions require immediate control or displacement of the Swine Skiver."
       ],
       "sources": [
-        { "title": "Official Darkest Dungeon Wiki: Warrens", "url": "https://darkestdungeon.wiki.gg/wiki/Warrens", "verifiedAt": "2026-09-01" },
-        { "title": "Official Darkest Dungeon Wiki: Enemy types", "url": "https://darkestdungeon.wiki.gg/wiki/Enemy_Types", "verifiedAt": "2026-09-01" }
+        {
+          "title": "Official Darkest Dungeon Wiki: Warrens",
+          "url": "https://darkestdungeon.wiki.gg/wiki/Warrens",
+          "verifiedAt": "2026-09-01"
+        },
+        {
+          "title": "Official Darkest Dungeon Wiki: Enemy types",
+          "url": "https://darkestdungeon.wiki.gg/wiki/Enemy_Types",
+          "verifiedAt": "2026-09-01"
+        }
       ]
     },
     {
@@ -118,32 +198,65 @@
           "id": "fungal_mark_combo",
           "type": "mark",
           "description": "Fungal Artillery and Crones mark and debuff heroes so Fungal Scratchers can use their stronger marked-target attack.",
-          "counters": ["Kill or control the marker first", "Clear marks", "Move a marked frontline hero out of reach"]
+          "counters": [
+            "Kill or control the marker first",
+            "Clear marks",
+            "Move a marked frontline hero out of reach"
+          ]
         },
         {
           "id": "bleed_blight_disease",
           "type": "other",
           "description": "Gnashers inflict bleed and disease while fungal enemies and Giants apply blight, creating simultaneous damage-over-time pressure.",
-          "counters": ["Bring both bleed and blight cures", "Disease resistance", "Prevent fast enemies from acting repeatedly"]
+          "counters": [
+            "Bring both bleed and blight cures",
+            "Disease resistance",
+            "Prevent fast enemies from acting repeatedly"
+          ]
         },
         {
           "id": "multiplying_ectoplasm",
           "type": "summon",
           "description": "Ectoplasms can multiply or merge when other Ectoplasms and their corpses remain available, prolonging the battle.",
-          "counters": ["Focus Ectoplasms one at a time", "Clear corpses", "Use attacks that leave no corpse"]
+          "counters": [
+            "Focus Ectoplasms one at a time",
+            "Clear corpses",
+            "Use attacks that leave no corpse"
+          ]
         },
         {
           "id": "large_enemy_burst",
           "type": "health_damage",
           "description": "Unclean Giants combine extreme frontline burst with party shuffle and blight, while resisting many direct control effects.",
-          "counters": ["Damage debuffs", "Guard or protection", "Position-tolerant party", "Reliable recovery"]
+          "counters": [
+            "Damage debuffs",
+            "Guard or protection",
+            "Position-tolerant party",
+            "Reliable recovery"
+          ]
         }
       ],
       "resistanceTendencies": [
-        { "effect": "bleed", "tendency": "low", "note": "Bleed is the region's most consistent damage-over-time option and bypasses fungal protection." },
-        { "effect": "blight", "tendency": "high", "note": "Fungal and other Weald enemies commonly resist blight, especially at higher difficulty." },
-        { "effect": "debuff", "tendency": "mixed", "note": "Small enemies vary, but the Unclean Giant is notably more practical to weaken than to move." },
-        { "effect": "move", "tendency": "mixed", "note": "Moving fungal frontliners can disable their main attacks, while large enemies strongly resist movement." }
+        {
+          "effect": "bleed",
+          "tendency": "low",
+          "note": "Bleed is the region's most consistent damage-over-time option and bypasses fungal protection."
+        },
+        {
+          "effect": "blight",
+          "tendency": "high",
+          "note": "Fungal and other Weald enemies commonly resist blight, especially at higher difficulty."
+        },
+        {
+          "effect": "debuff",
+          "tendency": "mixed",
+          "note": "Small enemies vary, but the Unclean Giant is notably more practical to weaken than to move."
+        },
+        {
+          "effect": "move",
+          "tendency": "mixed",
+          "note": "Moving fungal frontliners can disable their main attacks, while large enemies strongly resist movement."
+        }
       ],
       "recommendedCapabilities": [
         "Reach and control enemy positions 3 and 4",
@@ -161,8 +274,16 @@
         "Champion expeditions require immediate answers to Hateful Virago's healing denial."
       ],
       "sources": [
-        { "title": "Official Darkest Dungeon Wiki: Weald", "url": "https://darkestdungeon.wiki.gg/wiki/Weald", "verifiedAt": "2026-09-01" },
-        { "title": "Official Darkest Dungeon Wiki: Enemy types", "url": "https://darkestdungeon.wiki.gg/wiki/Enemy_Types", "verifiedAt": "2026-09-01" }
+        {
+          "title": "Official Darkest Dungeon Wiki: Weald",
+          "url": "https://darkestdungeon.wiki.gg/wiki/Weald",
+          "verifiedAt": "2026-09-01"
+        },
+        {
+          "title": "Official Darkest Dungeon Wiki: Enemy types",
+          "url": "https://darkestdungeon.wiki.gg/wiki/Enemy_Types",
+          "verifiedAt": "2026-09-01"
+        }
       ]
     },
     {
@@ -174,32 +295,66 @@
           "id": "thrall_explosion",
           "type": "health_damage",
           "description": "A Drowned Thrall explodes on its second action, dealing severe health and stress damage to the entire party.",
-          "counters": ["Kill the Thrall immediately", "Stun it to delay the sequence", "Break any guard protecting it"]
+          "counters": [
+            "Kill the Thrall immediately",
+            "Stun it to delay the sequence",
+            "Break any guard protecting it"
+          ]
         },
         {
           "id": "health_and_stress_pressure",
           "type": "other",
           "description": "Pelagic Groupers deliver high direct damage while Shamans apply stress, buffs, and healing, forcing priorities to follow the party's current risk.",
-          "counters": ["Prioritize Groupers when health is low", "Prioritize Shamans when stress is high", "Control whichever threat cannot be killed first"]
+          "counters": [
+            "Prioritize Groupers when health is low",
+            "Prioritize Shamans when stress is high",
+            "Control whichever threat cannot be killed first"
+          ]
         },
         {
           "id": "guard_and_protection",
           "type": "guard",
           "description": "Pelagic Guardians protect dangerous allies, while Sea Maggots and Uca enemies make direct attacks inefficient through high protection.",
-          "counters": ["Blight", "Armor piercing", "Protection reduction", "Stun or break guard"]
+          "counters": [
+            "Blight",
+            "Armor piercing",
+            "Protection reduction",
+            "Stun or break guard"
+          ]
         },
         {
           "id": "stun_bleed_and_movement",
           "type": "stun",
           "description": "Deep Stingers and Uca enemies combine stun, bleed vulnerability, severe bleeding, and party-position disruption.",
-          "counters": ["Stun resistance", "Bandages or bleed cure", "Position-tolerant party", "Fast control"]
+          "counters": [
+            "Stun resistance",
+            "Bandages or bleed cure",
+            "Position-tolerant party",
+            "Fast control"
+          ]
         }
       ],
       "resistanceTendencies": [
-        { "effect": "bleed", "tendency": "high", "note": "Pelagic scales and several drowned enemies make bleed an unreliable primary plan." },
-        { "effect": "blight", "tendency": "low", "note": "Blight is broadly effective and bypasses the protection common among Cove enemies." },
-        { "effect": "stun", "tendency": "mixed", "note": "Basic Pelagics can be vulnerable, while Stingers, Thralls, large enemies, and Champion threats resist stun more strongly." },
-        { "effect": "move", "tendency": "mixed", "note": "Pulling a Shaman forward is valuable, but large enemies and higher-tier variants are harder to displace." }
+        {
+          "effect": "bleed",
+          "tendency": "high",
+          "note": "Pelagic scales and several drowned enemies make bleed an unreliable primary plan."
+        },
+        {
+          "effect": "blight",
+          "tendency": "low",
+          "note": "Blight is broadly effective and bypasses the protection common among Cove enemies."
+        },
+        {
+          "effect": "stun",
+          "tendency": "mixed",
+          "note": "Basic Pelagics can be vulnerable, while Stingers, Thralls, large enemies, and Champion threats resist stun more strongly."
+        },
+        {
+          "effect": "move",
+          "tendency": "mixed",
+          "note": "Pulling a Shaman forward is valuable, but large enemies and higher-tier variants are harder to displace."
+        }
       ],
       "recommendedCapabilities": [
         "Apply blight reliably",
@@ -218,8 +373,167 @@
         "Champion expeditions require fast control of Squiffy Ghast's party-wide stress and horror."
       ],
       "sources": [
-        { "title": "Official Darkest Dungeon Wiki: Cove", "url": "https://darkestdungeon.wiki.gg/wiki/Cove", "verifiedAt": "2026-09-01" },
-        { "title": "Official Darkest Dungeon Wiki: Status effects", "url": "https://darkestdungeon.wiki.gg/wiki/Status_Effects_(Darkest_Dungeon)", "verifiedAt": "2026-09-01" }
+        {
+          "title": "Official Darkest Dungeon Wiki: Cove",
+          "url": "https://darkestdungeon.wiki.gg/wiki/Cove",
+          "verifiedAt": "2026-09-01"
+        },
+        {
+          "title": "Official Darkest Dungeon Wiki: Status effects",
+          "url": "https://darkestdungeon.wiki.gg/wiki/Status_Effects_(Darkest_Dungeon)",
+          "verifiedAt": "2026-09-01"
+        }
+      ]
+    },
+    {
+      "id": "courtyard",
+      "dlcs": [
+        "crimson_court"
+      ],
+      "overview": "The Courtyard is infested with Bloodsuckers. Enemies possess formidable speed, evasion, high bleed output, and the ability to transmit the persistent Crimson Curse disease.",
+      "commonThreats": [
+        {
+          "id": "crimson_curse",
+          "type": "disease",
+          "description": "Sycophants and Courtyard bloodsuckers transmit the Crimson Curse, locking heroes into craving, wasting, and bloodlust cycles.",
+          "counters": [
+            "Carry ample Blood consumables",
+            "Target curse-bearers before they use The Thirst",
+            "Defeat Courtyard bosses to cure the roster"
+          ]
+        },
+        {
+          "id": "courtyard_bleed",
+          "type": "bleed",
+          "description": "Chevaliers and Esquires inflict crippling bleed stacks alongside heavy physical strikes.",
+          "counters": [
+            "Bandages and bleed curing skills",
+            "Equip bleed resistance trinkets like Fortifying Garlic"
+          ]
+        },
+        {
+          "id": "high_speed_evasion",
+          "type": "health_damage",
+          "description": "Mosquitoes and Courtyard elites act with high speed and high base Dodge.",
+          "counters": [
+            "Equip Accuracy trinkets like Focus Ring",
+            "High-speed stun openers"
+          ]
+        }
+      ],
+      "resistanceTendencies": [
+        {
+          "effect": "bleed",
+          "tendency": "high",
+          "note": "Bloodsuckers are naturally resistant to bleeding effects."
+        },
+        {
+          "effect": "blight",
+          "tendency": "low",
+          "note": "Insectoid bloodsuckers are vulnerable to blight damage-over-time."
+        },
+        {
+          "effect": "stun",
+          "tendency": "mixed",
+          "note": "Lesser bugs are easily stunned; heavy elites resist control more strongly."
+        },
+        {
+          "effect": "move",
+          "tendency": "mixed",
+          "note": "Displacing Esquires and Sycophants degrades their preferred attack patterns."
+        }
+      ],
+      "recommendedCapabilities": [
+        "Carry ample Bandages and the Blood",
+        "Equip high Accuracy trinkets to counter high enemy Dodge",
+        "Apply Blight damage rather than Bleed",
+        "Bring reliable stunners to interrupt The Thirst and Submerge"
+      ],
+      "cautions": [
+        "Never embark into the Courtyard without the Blood in your inventory.",
+        "Do not rely on Bleed-centric compositions against Bloodsucker enemies.",
+        "Chevalier's Subterranean Skewer can stun and deal massive damage to any rank."
+      ],
+      "sources": [
+        {
+          "title": "Official Darkest Dungeon Wiki: Courtyard",
+          "url": "https://darkestdungeon.wiki.gg/wiki/Courtyard",
+          "verifiedAt": "2026-09-01"
+        }
+      ]
+    },
+    {
+      "id": "farmstead",
+      "dlcs": [
+        "color_of_madness"
+      ],
+      "overview": "The Farmstead features crystalline Husks and Aberrations in continuous wave combat. Time and space warp as heroes endure ceaseless attrition, high stress, and unique crystal mechanics.",
+      "commonThreats": [
+        {
+          "id": "endless_attrition",
+          "type": "stress",
+          "description": "Continuous enemy waves without camping opportunities generate relentless stress and HP attrition.",
+          "counters": [
+            "Dedicated stress healers like Jester and Crusader",
+            "Sustained party HP healing with Vestal"
+          ]
+        },
+        {
+          "id": "crystallization",
+          "type": "other",
+          "description": "Husk enemies leave behind crystalline corpses that explode or buff surviving foes.",
+          "counters": [
+            "Corpse clearing skills",
+            "Armor-piercing attacks against high crystal protection"
+          ]
+        },
+        {
+          "id": "reflection_and_riposte",
+          "type": "health_damage",
+          "description": "Aberrations and Miller summons retaliate with wide-range ripostes and party blights.",
+          "counters": [
+            "Targeted burst damage",
+            "Stun locks on priority targets"
+          ]
+        }
+      ],
+      "resistanceTendencies": [
+        {
+          "effect": "bleed",
+          "tendency": "mixed",
+          "note": "Husk creatures have moderate bleed resistance."
+        },
+        {
+          "effect": "blight",
+          "tendency": "mixed",
+          "note": "Aberrations exhibit balanced blight resistance."
+        },
+        {
+          "effect": "stun",
+          "tendency": "mixed",
+          "note": "Stun resistance scales as wave difficulty escalates."
+        },
+        {
+          "effect": "move",
+          "tendency": "low",
+          "note": "Disrupting ranks disrupts special wave mechanics effectively."
+        }
+      ],
+      "recommendedCapabilities": [
+        "Run sustainable endless party engines (Vestal + Jester core)",
+        "Equip Armor Piercing abilities like Shieldbreaker Pierce",
+        "Pack Laudanum and Shard Dust consumables"
+      ],
+      "cautions": [
+        "Do not enter endless harvest without reliable in-combat stress healing.",
+        "Crystal corpses explode if left unattended for several rounds."
+      ],
+      "sources": [
+        {
+          "title": "Official Darkest Dungeon Wiki: Farmstead",
+          "url": "https://darkestdungeon.wiki.gg/wiki/Farmstead",
+          "verifiedAt": "2026-09-01"
+        }
       ]
     }
   ],
@@ -228,765 +542,3057 @@
       "id": "bone_soldier",
       "enemyType": "common",
       "localizationId": "str_monstername_skeleton_militia_A",
-      "aliases": ["Bone Veteran", "Bone Sergeant"],
-      "regions": ["ruins"],
+      "aliases": [
+        "Bone Veteran",
+        "Bone Sergeant"
+      ],
+      "regions": [
+        "ruins"
+      ],
       "dlcs": [],
       "priority": "medium",
-      "priorityReasons": ["Deals straightforward health damage with broader reach than many basic frontliners.", "Usually presents less lasting risk than active backline stress or ranged enemies."],
-      "traits": ["Unholy", "High bleed resistance", "Modest protection"],
-      "dangerousActions": [
-        { "id": "graveyard_slash", "localizationIds": ["str_monster_skill_sword_strike"], "threats": ["health_damage"], "description": "A direct melee attack that can reach beyond the frontmost hero.", "counters": ["Stun", "Direct damage", "Move it to the backmost position"] }
+      "priorityReasons": [
+        "Deals straightforward health damage with broader reach than many basic frontliners.",
+        "Usually presents less lasting risk than active backline stress or ranged enemies."
       ],
-      "effectiveResponses": ["Remove it after more urgent backline threats unless immediate health damage is the greater concern.", "Use blight or Unholy bonuses when convenient."],
-      "cautions": ["At higher difficulties it may begin stealthed, delaying direct targeting without destealth."],
-      "sources": [{ "title": "Official Darkest Dungeon Wiki: Bone Soldier", "url": "https://darkestdungeon.wiki.gg/wiki/Bone_Soldier", "verifiedAt": "2026-09-01" }]
+      "traits": [
+        "Unholy",
+        "High bleed resistance",
+        "Modest protection"
+      ],
+      "dangerousActions": [
+        {
+          "id": "graveyard_slash",
+          "localizationIds": [
+            "str_monster_skill_sword_strike"
+          ],
+          "threats": [
+            "health_damage"
+          ],
+          "description": "A direct melee attack that can reach beyond the frontmost hero.",
+          "counters": [
+            "Stun",
+            "Direct damage",
+            "Move it to the backmost position"
+          ]
+        }
+      ],
+      "effectiveResponses": [
+        "Remove it after more urgent backline threats unless immediate health damage is the greater concern.",
+        "Use blight or Unholy bonuses when convenient."
+      ],
+      "cautions": [
+        "At higher difficulties it may begin stealthed, delaying direct targeting without destealth."
+      ],
+      "sources": [
+        {
+          "title": "Official Darkest Dungeon Wiki: Bone Soldier",
+          "url": "https://darkestdungeon.wiki.gg/wiki/Bone_Soldier",
+          "verifiedAt": "2026-09-01"
+        }
+      ]
     },
     {
       "id": "bone_courtier",
       "enemyType": "common",
       "localizationId": "str_monstername_skeleton_courtier_A",
-      "aliases": ["Bone Noble", "Bone Royalty"],
-      "regions": ["ruins"],
+      "aliases": [
+        "Bone Noble",
+        "Bone Royalty"
+      ],
+      "regions": [
+        "ruins"
+      ],
       "dlcs": [],
       "priority": "high",
-      "priorityReasons": ["Tempting Goblet inflicts stress that persists beyond the current fight.", "High speed often lets it act before slower heroes."],
-      "traits": ["Unholy", "Backline stress dealer", "High bleed resistance", "Low early move and stun resistance"],
-      "dangerousActions": [
-        { "id": "tempting_goblet", "localizationIds": ["str_monster_skill_tempting_goblet"], "threats": ["stress", "debuff"], "description": "Attacks any hero from the back ranks, inflicting substantial stress and later a critical-chance debuff.", "counters": ["Kill it quickly", "Stun it", "Pull or shuffle it to enemy position 1"] }
+      "priorityReasons": [
+        "Tempting Goblet inflicts stress that persists beyond the current fight.",
+        "High speed often lets it act before slower heroes."
       ],
-      "effectiveResponses": ["Prioritize it when expedition stress is a concern.", "Pulling it to the front forces a much weaker attack pattern."],
-      "cautions": ["Enemy position 2 may still allow Tempting Goblet, so a partial pull is not a complete shutdown."],
-      "sources": [{ "title": "Official Darkest Dungeon Wiki: Bone Courtier", "url": "https://darkestdungeon.wiki.gg/wiki/Bone_Courtier", "verifiedAt": "2026-09-01" }]
+      "traits": [
+        "Unholy",
+        "Backline stress dealer",
+        "High bleed resistance",
+        "Low early move and stun resistance"
+      ],
+      "dangerousActions": [
+        {
+          "id": "tempting_goblet",
+          "localizationIds": [
+            "str_monster_skill_tempting_goblet"
+          ],
+          "threats": [
+            "stress",
+            "debuff"
+          ],
+          "description": "Attacks any hero from the back ranks, inflicting substantial stress and later a critical-chance debuff.",
+          "counters": [
+            "Kill it quickly",
+            "Stun it",
+            "Pull or shuffle it to enemy position 1"
+          ]
+        }
+      ],
+      "effectiveResponses": [
+        "Prioritize it when expedition stress is a concern.",
+        "Pulling it to the front forces a much weaker attack pattern."
+      ],
+      "cautions": [
+        "Enemy position 2 may still allow Tempting Goblet, so a partial pull is not a complete shutdown."
+      ],
+      "sources": [
+        {
+          "title": "Official Darkest Dungeon Wiki: Bone Courtier",
+          "url": "https://darkestdungeon.wiki.gg/wiki/Bone_Courtier",
+          "verifiedAt": "2026-09-01"
+        }
+      ]
     },
     {
       "id": "bone_arbalist",
       "enemyType": "common",
       "localizationId": "str_monstername_skeleton_arbalist_A",
-      "aliases": ["Bone Marksman", "Bone Sharpshooter"],
-      "regions": ["ruins"],
+      "aliases": [
+        "Bone Marksman",
+        "Bone Sharpshooter"
+      ],
+      "regions": [
+        "ruins"
+      ],
       "dlcs": [],
       "priority": "high",
-      "priorityReasons": ["Quarrel delivers strong backline health damage with meaningful critical potential.", "It preferentially threatens marked heroes."],
-      "traits": ["Unholy", "Backline ranged attacker", "High bleed resistance", "Low early stun resistance"],
-      "dangerousActions": [
-        { "id": "quarrel", "localizationIds": ["str_monster_skill_crossbow_shot"], "threats": ["health_damage", "mark"], "description": "A strong ranged attack against the party backline that is more dangerous to marked heroes.", "counters": ["Backline damage", "Stun", "Pull it into the front two positions", "Clear marks from vulnerable heroes"] }
+      "priorityReasons": [
+        "Quarrel delivers strong backline health damage with meaningful critical potential.",
+        "It preferentially threatens marked heroes."
       ],
-      "effectiveResponses": ["Disable or kill it before it repeatedly pressures fragile backliners.", "A successful pull replaces Quarrel with its weaker Bayonet Jab until it retreats."],
-      "cautions": ["Bayonet Jab moves it backward, so movement disruption may need to be repeated."],
-      "sources": [{ "title": "Official Darkest Dungeon Wiki: Bone Arbalist", "url": "https://darkestdungeon.wiki.gg/wiki/Bone_Arbalist", "verifiedAt": "2026-09-01" }]
+      "traits": [
+        "Unholy",
+        "Backline ranged attacker",
+        "High bleed resistance",
+        "Low early stun resistance"
+      ],
+      "dangerousActions": [
+        {
+          "id": "quarrel",
+          "localizationIds": [
+            "str_monster_skill_crossbow_shot"
+          ],
+          "threats": [
+            "health_damage",
+            "mark"
+          ],
+          "description": "A strong ranged attack against the party backline that is more dangerous to marked heroes.",
+          "counters": [
+            "Backline damage",
+            "Stun",
+            "Pull it into the front two positions",
+            "Clear marks from vulnerable heroes"
+          ]
+        }
+      ],
+      "effectiveResponses": [
+        "Disable or kill it before it repeatedly pressures fragile backliners.",
+        "A successful pull replaces Quarrel with its weaker Bayonet Jab until it retreats."
+      ],
+      "cautions": [
+        "Bayonet Jab moves it backward, so movement disruption may need to be repeated."
+      ],
+      "sources": [
+        {
+          "title": "Official Darkest Dungeon Wiki: Bone Arbalist",
+          "url": "https://darkestdungeon.wiki.gg/wiki/Bone_Arbalist",
+          "verifiedAt": "2026-09-01"
+        }
+      ]
     },
     {
       "id": "bone_defender",
       "enemyType": "common",
       "localizationId": "str_monstername_skeleton_defender_A",
-      "aliases": ["Bone Bulwark", "Bone Shieldwall"],
-      "regions": ["ruins"],
+      "aliases": [
+        "Bone Bulwark",
+        "Bone Shieldwall"
+      ],
+      "regions": [
+        "ruins"
+      ],
       "dlcs": [],
       "priority": "low",
-      "priorityReasons": ["Its protection makes direct attacks inefficient.", "Its damage pressure is usually lower than the enemies it accompanies."],
-      "traits": ["Unholy", "High protection", "High bleed resistance", "Slow"],
-      "dangerousActions": [
-        { "id": "dead_weight", "localizationIds": ["str_monster_skill_shield_bash"], "threats": ["stun", "movement", "health_damage"], "description": "Hits a front hero and can stun and knock the target backward.", "counters": ["Stun resistance", "Position-tolerant party", "Disable it during recovery turns"] }
+      "priorityReasons": [
+        "Its protection makes direct attacks inefficient.",
+        "Its damage pressure is usually lower than the enemies it accompanies."
       ],
-      "effectiveResponses": ["Leave it until urgent backline enemies are controlled.", "Use blight or armor piercing instead of inefficient direct damage."],
-      "cautions": ["Dead Weight can still disrupt a position-dependent frontline even when the Defender is left for last."],
-      "sources": [{ "title": "Official Darkest Dungeon Wiki: Bone Defender", "url": "https://darkestdungeon.wiki.gg/wiki/Bone_Defender", "verifiedAt": "2026-09-01" }]
+      "traits": [
+        "Unholy",
+        "High protection",
+        "High bleed resistance",
+        "Slow"
+      ],
+      "dangerousActions": [
+        {
+          "id": "dead_weight",
+          "localizationIds": [
+            "str_monster_skill_shield_bash"
+          ],
+          "threats": [
+            "stun",
+            "movement",
+            "health_damage"
+          ],
+          "description": "Hits a front hero and can stun and knock the target backward.",
+          "counters": [
+            "Stun resistance",
+            "Position-tolerant party",
+            "Disable it during recovery turns"
+          ]
+        }
+      ],
+      "effectiveResponses": [
+        "Leave it until urgent backline enemies are controlled.",
+        "Use blight or armor piercing instead of inefficient direct damage."
+      ],
+      "cautions": [
+        "Dead Weight can still disrupt a position-dependent frontline even when the Defender is left for last."
+      ],
+      "sources": [
+        {
+          "title": "Official Darkest Dungeon Wiki: Bone Defender",
+          "url": "https://darkestdungeon.wiki.gg/wiki/Bone_Defender",
+          "verifiedAt": "2026-09-01"
+        }
+      ]
     },
     {
       "id": "bone_spearman",
       "enemyType": "elite",
       "localizationId": "str_monstername_skeleton_spear_A",
-      "aliases": ["Bone Lancer"],
-      "regions": ["ruins"],
+      "aliases": [
+        "Bone Lancer"
+      ],
+      "regions": [
+        "ruins"
+      ],
       "dlcs": [],
       "priority": "high",
-      "priorityReasons": ["Its attacks have broad reach and high critical potential.", "Impale damages the entire party while it remains in the front."],
-      "traits": ["Unholy", "Veteran and Champion expeditions", "High bleed resistance", "Broad attack reach"],
-      "dangerousActions": [
-        { "id": "spear_thrust", "localizationIds": ["str_monster_skill_spear_thrust"], "threats": ["health_damage", "movement"], "description": "A strong attack that can reach any hero and knock the target backward.", "counters": ["Stun", "Damage reduction", "Guard an endangered hero"] },
-        { "id": "impale", "localizationIds": ["str_monster_skill_impale"], "threats": ["health_damage"], "description": "A party-wide attack available while the Spearman occupies the enemy front.", "counters": ["Kill or stun it", "Push it out of the front two positions", "Party-wide recovery"] }
+      "priorityReasons": [
+        "Its attacks have broad reach and high critical potential.",
+        "Impale damages the entire party while it remains in the front."
       ],
-      "effectiveResponses": ["Prioritize it before low-pressure defenders.", "Stun it or push it backward to prevent Impale."],
-      "cautions": ["Spear Thrust remains usable from any enemy position, so pushing it back only removes Impale."],
-      "sources": [{ "title": "Official Darkest Dungeon Wiki: Bone Spearman", "url": "https://darkestdungeon.wiki.gg/wiki/Bone_Spearman", "verifiedAt": "2026-09-01" }]
+      "traits": [
+        "Unholy",
+        "Veteran and Champion expeditions",
+        "High bleed resistance",
+        "Broad attack reach"
+      ],
+      "dangerousActions": [
+        {
+          "id": "spear_thrust",
+          "localizationIds": [
+            "str_monster_skill_spear_thrust"
+          ],
+          "threats": [
+            "health_damage",
+            "movement"
+          ],
+          "description": "A strong attack that can reach any hero and knock the target backward.",
+          "counters": [
+            "Stun",
+            "Damage reduction",
+            "Guard an endangered hero"
+          ]
+        },
+        {
+          "id": "impale",
+          "localizationIds": [
+            "str_monster_skill_impale"
+          ],
+          "threats": [
+            "health_damage"
+          ],
+          "description": "A party-wide attack available while the Spearman occupies the enemy front.",
+          "counters": [
+            "Kill or stun it",
+            "Push it out of the front two positions",
+            "Party-wide recovery"
+          ]
+        }
+      ],
+      "effectiveResponses": [
+        "Prioritize it before low-pressure defenders.",
+        "Stun it or push it backward to prevent Impale."
+      ],
+      "cautions": [
+        "Spear Thrust remains usable from any enemy position, so pushing it back only removes Impale."
+      ],
+      "sources": [
+        {
+          "title": "Official Darkest Dungeon Wiki: Bone Spearman",
+          "url": "https://darkestdungeon.wiki.gg/wiki/Bone_Spearman",
+          "verifiedAt": "2026-09-01"
+        }
+      ]
     },
     {
       "id": "bone_captain",
       "enemyType": "elite",
       "localizationId": "str_monstername_skeleton_captain_A",
-      "aliases": ["Bone Commander", "Bone General"],
-      "regions": ["ruins"],
+      "aliases": [
+        "Bone Commander",
+        "Bone General"
+      ],
+      "regions": [
+        "ruins"
+      ],
       "dlcs": [],
       "priority": "high",
-      "priorityReasons": ["Ground Pound can stun the entire party.", "Crushing Blow combines high frontline damage with reduced stun resistance."],
-      "traits": ["Unholy", "Large enemy", "Veteran and Champion expeditions", "High protection", "High move resistance"],
-      "dangerousActions": [
-        { "id": "crushing_blow", "localizationIds": ["str_monster_skill_crushing_blow"], "threats": ["health_damage", "debuff"], "description": "Heavy frontline damage that reduces the target's stun resistance.", "counters": ["Guard", "Damage reduction", "Focused healing"] },
-        { "id": "ground_pound", "localizationIds": ["str_monster_skill_ground_pound"], "threats": ["stun", "health_damage"], "description": "A party-wide attack that can stun multiple heroes.", "counters": ["Stun resistance", "Damage debuff", "Kill or control the Captain"] }
+      "priorityReasons": [
+        "Ground Pound can stun the entire party.",
+        "Crushing Blow combines high frontline damage with reduced stun resistance."
       ],
-      "effectiveResponses": ["Use blight, armor piercing, or protection reduction.", "Damage reduction is useful when its high resistances make direct control unreliable."],
-      "cautions": ["Do not assume a stun or move attempt will reliably disable this large enemy."],
-      "sources": [{ "title": "Official Darkest Dungeon Wiki: Bone Captain", "url": "https://darkestdungeon.wiki.gg/wiki/Bone_Captain", "verifiedAt": "2026-09-01" }]
+      "traits": [
+        "Unholy",
+        "Large enemy",
+        "Veteran and Champion expeditions",
+        "High protection",
+        "High move resistance"
+      ],
+      "dangerousActions": [
+        {
+          "id": "crushing_blow",
+          "localizationIds": [
+            "str_monster_skill_crushing_blow"
+          ],
+          "threats": [
+            "health_damage",
+            "debuff"
+          ],
+          "description": "Heavy frontline damage that reduces the target's stun resistance.",
+          "counters": [
+            "Guard",
+            "Damage reduction",
+            "Focused healing"
+          ]
+        },
+        {
+          "id": "ground_pound",
+          "localizationIds": [
+            "str_monster_skill_ground_pound"
+          ],
+          "threats": [
+            "stun",
+            "health_damage"
+          ],
+          "description": "A party-wide attack that can stun multiple heroes.",
+          "counters": [
+            "Stun resistance",
+            "Damage debuff",
+            "Kill or control the Captain"
+          ]
+        }
+      ],
+      "effectiveResponses": [
+        "Use blight, armor piercing, or protection reduction.",
+        "Damage reduction is useful when its high resistances make direct control unreliable."
+      ],
+      "cautions": [
+        "Do not assume a stun or move attempt will reliably disable this large enemy."
+      ],
+      "sources": [
+        {
+          "title": "Official Darkest Dungeon Wiki: Bone Captain",
+          "url": "https://darkestdungeon.wiki.gg/wiki/Bone_Captain",
+          "verifiedAt": "2026-09-01"
+        }
+      ]
     },
     {
       "id": "bone_bearer",
       "enemyType": "elite",
       "localizationId": "str_monstername_skeleton_bearer_A",
       "aliases": [],
-      "regions": ["ruins"],
+      "regions": [
+        "ruins"
+      ],
       "dlcs": [],
       "priority": "critical",
-      "priorityReasons": ["Passively increases allied damage and can add further offensive buffs.", "Unholy Rally revives corpses at full health as an automatic action."],
-      "traits": ["Unholy", "Champion expeditions", "Passive enemy damage support", "Corpse revival", "Extremely high stun resistance"],
-      "dangerousActions": [
-        { "id": "wicked_surge", "localizationIds": ["str_monster_skill_wicked_surge"], "threats": ["other"], "description": "Improves another enemy's accuracy and damage.", "counters": ["Kill the Bearer", "Eliminate buffed attackers", "Damage reduction"] },
-        { "id": "unholy_rally", "localizationIds": ["str_monster_skill_unholy_rally"], "threats": ["summon"], "description": "Automatically revives an available enemy corpse at full health.", "counters": ["Clear corpses", "Use attacks that leave no corpse", "Kill the Bearer before more enemies die"] }
+      "priorityReasons": [
+        "Passively increases allied damage and can add further offensive buffs.",
+        "Unholy Rally revives corpses at full health as an automatic action."
       ],
-      "effectiveResponses": ["Treat it as an immediate Champion-tier priority.", "Use corpse clearing while working through enemies that screen it."],
-      "cautions": ["Repeated stun attempts are not a dependable plan because its stun resistance is exceptionally high.", "Ignoring corpses allows defeated enemies to return at full health."],
-      "sources": [{ "title": "Official Darkest Dungeon Wiki: Bone Bearer", "url": "https://darkestdungeon.wiki.gg/wiki/Bone_Bearer", "verifiedAt": "2026-09-01" }]
+      "traits": [
+        "Unholy",
+        "Champion expeditions",
+        "Passive enemy damage support",
+        "Corpse revival",
+        "Extremely high stun resistance"
+      ],
+      "dangerousActions": [
+        {
+          "id": "wicked_surge",
+          "localizationIds": [
+            "str_monster_skill_wicked_surge"
+          ],
+          "threats": [
+            "other"
+          ],
+          "description": "Improves another enemy's accuracy and damage.",
+          "counters": [
+            "Kill the Bearer",
+            "Eliminate buffed attackers",
+            "Damage reduction"
+          ]
+        },
+        {
+          "id": "unholy_rally",
+          "localizationIds": [
+            "str_monster_skill_unholy_rally"
+          ],
+          "threats": [
+            "summon"
+          ],
+          "description": "Automatically revives an available enemy corpse at full health.",
+          "counters": [
+            "Clear corpses",
+            "Use attacks that leave no corpse",
+            "Kill the Bearer before more enemies die"
+          ]
+        }
+      ],
+      "effectiveResponses": [
+        "Treat it as an immediate Champion-tier priority.",
+        "Use corpse clearing while working through enemies that screen it."
+      ],
+      "cautions": [
+        "Repeated stun attempts are not a dependable plan because its stun resistance is exceptionally high.",
+        "Ignoring corpses allows defeated enemies to return at full health."
+      ],
+      "sources": [
+        {
+          "title": "Official Darkest Dungeon Wiki: Bone Bearer",
+          "url": "https://darkestdungeon.wiki.gg/wiki/Bone_Bearer",
+          "verifiedAt": "2026-09-01"
+        }
+      ]
     },
     {
       "id": "swine_chopper",
       "enemyType": "common",
       "localizationId": "str_monstername_swine_reaver_A",
-      "aliases": ["Swine Wrecker", "Swine Butcher"],
-      "regions": ["warrens"],
+      "aliases": [
+        "Swine Wrecker",
+        "Swine Butcher"
+      ],
+      "regions": [
+        "warrens"
+      ],
       "dlcs": [],
       "priority": "medium",
-      "priorityReasons": ["Its durable frontline presence delivers bleed and disruptive stun or knockback.", "Fragile Warrens support enemies usually create greater lasting risk and should often be removed first."],
-      "traits": ["Human", "Beast", "Durable frontline", "Low bleed resistance", "High move resistance"],
-      "dangerousActions": [
-        { "id": "butcher_cut", "localizationIds": ["str_monster_skill_butcher_cut"], "threats": ["health_damage", "bleed", "debuff"], "description": "A frontline attack that causes bleed and at higher difficulty reduces healing received.", "counters": ["Bleed resistance", "Bleed cure", "Guard or damage reduction"] },
-        { "id": "ball_and_chain", "localizationIds": ["str_monster_skill_ball_and_chain"], "threats": ["health_damage", "stun", "movement"], "description": "Targets the party backline and can stun and knock the victim backward.", "counters": ["Stun resistance", "Position tolerance", "Disable the Chopper"] }
+      "priorityReasons": [
+        "Its durable frontline presence delivers bleed and disruptive stun or knockback.",
+        "Fragile Warrens support enemies usually create greater lasting risk and should often be removed first."
       ],
-      "effectiveResponses": ["Control it while eliminating Wretches, Drummers, or Skivers behind it.", "Exploit its relatively low bleed resistance instead of relying on movement."],
-      "cautions": ["Leaving it for later is not harmless when bleed or party displacement threatens an already weakened hero."],
-      "sources": [{ "title": "Official Darkest Dungeon Wiki: Swine Chopper", "url": "https://darkestdungeon.wiki.gg/wiki/Swine_Chopper", "verifiedAt": "2026-09-01" }]
+      "traits": [
+        "Human",
+        "Beast",
+        "Durable frontline",
+        "Low bleed resistance",
+        "High move resistance"
+      ],
+      "dangerousActions": [
+        {
+          "id": "butcher_cut",
+          "localizationIds": [
+            "str_monster_skill_butcher_cut"
+          ],
+          "threats": [
+            "health_damage",
+            "bleed",
+            "debuff"
+          ],
+          "description": "A frontline attack that causes bleed and at higher difficulty reduces healing received.",
+          "counters": [
+            "Bleed resistance",
+            "Bleed cure",
+            "Guard or damage reduction"
+          ]
+        },
+        {
+          "id": "ball_and_chain",
+          "localizationIds": [
+            "str_monster_skill_ball_and_chain"
+          ],
+          "threats": [
+            "health_damage",
+            "stun",
+            "movement"
+          ],
+          "description": "Targets the party backline and can stun and knock the victim backward.",
+          "counters": [
+            "Stun resistance",
+            "Position tolerance",
+            "Disable the Chopper"
+          ]
+        }
+      ],
+      "effectiveResponses": [
+        "Control it while eliminating Wretches, Drummers, or Skivers behind it.",
+        "Exploit its relatively low bleed resistance instead of relying on movement."
+      ],
+      "cautions": [
+        "Leaving it for later is not harmless when bleed or party displacement threatens an already weakened hero."
+      ],
+      "sources": [
+        {
+          "title": "Official Darkest Dungeon Wiki: Swine Chopper",
+          "url": "https://darkestdungeon.wiki.gg/wiki/Swine_Chopper",
+          "verifiedAt": "2026-09-01"
+        }
+      ]
     },
     {
       "id": "swine_slasher",
       "enemyType": "common",
       "localizationId": "str_monstername_swine_slasher_A",
-      "aliases": ["Swine Gorer", "Swine Meathooker"],
-      "regions": ["warrens"],
+      "aliases": [
+        "Swine Gorer",
+        "Swine Meathooker"
+      ],
+      "regions": [
+        "warrens"
+      ],
       "dlcs": [],
       "priority": "high",
-      "priorityReasons": ["Hook Where It Hurts reaches the first three heroes from any enemy position and has high critical potential.", "Later variants reduce bleed and disease resistance, amplifying other Warrens threats."],
-      "traits": ["Human", "Beast", "High protection", "Broad attack reach", "Stealth at Veteran and Champion difficulty"],
-      "dangerousActions": [
-        { "id": "hook_where_it_hurts", "localizationIds": ["str_monster_skill_hook_where_it_hurts"], "threats": ["health_damage", "debuff", "movement"], "description": "A high-critical attack that later reduces bleed and disease resistance; the Slasher moves itself backward after attacking.", "counters": ["Armor piercing or protection reduction", "Damage-over-time", "Destealth", "Fast focused damage"] }
+      "priorityReasons": [
+        "Hook Where It Hurts reaches the first three heroes from any enemy position and has high critical potential.",
+        "Later variants reduce bleed and disease resistance, amplifying other Warrens threats."
       ],
-      "effectiveResponses": ["Remove it early when its resistance debuff would expose the party to disease or bleed follow-ups.", "Use attacks that bypass protection and can reach it after it retreats."],
-      "cautions": ["Pulling it forward does not disable its attack because Hook Where It Hurts is usable from every enemy position."],
-      "sources": [{ "title": "Official Darkest Dungeon Wiki: Swine Slasher", "url": "https://darkestdungeon.wiki.gg/wiki/Swine_Slasher", "verifiedAt": "2026-09-01" }]
+      "traits": [
+        "Human",
+        "Beast",
+        "High protection",
+        "Broad attack reach",
+        "Stealth at Veteran and Champion difficulty"
+      ],
+      "dangerousActions": [
+        {
+          "id": "hook_where_it_hurts",
+          "localizationIds": [
+            "str_monster_skill_hook_where_it_hurts"
+          ],
+          "threats": [
+            "health_damage",
+            "debuff",
+            "movement"
+          ],
+          "description": "A high-critical attack that later reduces bleed and disease resistance; the Slasher moves itself backward after attacking.",
+          "counters": [
+            "Armor piercing or protection reduction",
+            "Damage-over-time",
+            "Destealth",
+            "Fast focused damage"
+          ]
+        }
+      ],
+      "effectiveResponses": [
+        "Remove it early when its resistance debuff would expose the party to disease or bleed follow-ups.",
+        "Use attacks that bypass protection and can reach it after it retreats."
+      ],
+      "cautions": [
+        "Pulling it forward does not disable its attack because Hook Where It Hurts is usable from every enemy position."
+      ],
+      "sources": [
+        {
+          "title": "Official Darkest Dungeon Wiki: Swine Slasher",
+          "url": "https://darkestdungeon.wiki.gg/wiki/Swine_Slasher",
+          "verifiedAt": "2026-09-01"
+        }
+      ]
     },
     {
       "id": "swine_wretch",
       "enemyType": "common",
       "localizationId": "str_monstername_swine_wretch_A",
-      "aliases": ["Swine Spawn", "Swine Heaver"],
-      "regions": ["warrens"],
+      "aliases": [
+        "Swine Spawn",
+        "Swine Heaver"
+      ],
+      "regions": [
+        "warrens"
+      ],
       "dlcs": [],
       "priority": "high",
-      "priorityReasons": ["Vomit inflicts persistent expedition costs through stress and random disease.", "High speed and access to every hero let it create risk before slower parties can respond."],
-      "traits": ["Beast", "Fast backline stress dealer", "Disease source", "Low health", "Low early move resistance"],
-      "dangerousActions": [
-        { "id": "vomit", "localizationIds": ["str_monster_skill_vomit"], "threats": ["stress", "disease", "debuff"], "description": "Targets any hero for stress and a chance of random disease, adding a dodge debuff at higher difficulty.", "counters": ["Kill it quickly", "Stun it", "Pull it forward", "Disease resistance and cures"] }
+      "priorityReasons": [
+        "Vomit inflicts persistent expedition costs through stress and random disease.",
+        "High speed and access to every hero let it create risk before slower parties can respond."
       ],
-      "effectiveResponses": ["Prioritize it when expedition stress or disease would be costly.", "Use its low health and early control resistances to prevent repeated Vomit attacks."],
-      "cautions": ["Its speed means a slow party may still suffer one Vomit before removing it."],
-      "sources": [{ "title": "Official Darkest Dungeon Wiki: Swine Wretch", "url": "https://darkestdungeon.wiki.gg/wiki/Swine_Wretch", "verifiedAt": "2026-09-01" }]
+      "traits": [
+        "Beast",
+        "Fast backline stress dealer",
+        "Disease source",
+        "Low health",
+        "Low early move resistance"
+      ],
+      "dangerousActions": [
+        {
+          "id": "vomit",
+          "localizationIds": [
+            "str_monster_skill_vomit"
+          ],
+          "threats": [
+            "stress",
+            "disease",
+            "debuff"
+          ],
+          "description": "Targets any hero for stress and a chance of random disease, adding a dodge debuff at higher difficulty.",
+          "counters": [
+            "Kill it quickly",
+            "Stun it",
+            "Pull it forward",
+            "Disease resistance and cures"
+          ]
+        }
+      ],
+      "effectiveResponses": [
+        "Prioritize it when expedition stress or disease would be costly.",
+        "Use its low health and early control resistances to prevent repeated Vomit attacks."
+      ],
+      "cautions": [
+        "Its speed means a slow party may still suffer one Vomit before removing it."
+      ],
+      "sources": [
+        {
+          "title": "Official Darkest Dungeon Wiki: Swine Wretch",
+          "url": "https://darkestdungeon.wiki.gg/wiki/Swine_Wretch",
+          "verifiedAt": "2026-09-01"
+        }
+      ]
     },
     {
       "id": "swine_drummer",
       "enemyType": "common",
       "localizationId": "str_monstername_swine_drummer_A",
-      "aliases": ["Swine Marcher", "Swine Warchief"],
-      "regions": ["warrens"],
+      "aliases": [
+        "Swine Marcher",
+        "Swine Warchief"
+      ],
+      "regions": [
+        "warrens"
+      ],
       "dlcs": [],
       "priority": "high",
-      "priorityReasons": ["Drum of Doom inflicts stress across the party.", "Its mark and dodge debuff enable stronger follow-up attacks from other Warrens enemies."],
-      "traits": ["Human", "Beast", "Backline support", "Party-wide stress", "Mark support"],
-      "dangerousActions": [
-        { "id": "drum_of_doom", "localizationIds": ["str_monster_skill_drum_fear"], "threats": ["stress"], "description": "Inflicts stress on the entire party from the enemy backline.", "counters": ["Kill it quickly", "Stun", "Pull it forward"] },
-        { "id": "drum_of_debilitation", "localizationIds": ["str_monster_skill_drum_debuff"], "threats": ["mark", "debuff"], "description": "Marks one hero and reduces dodge, setting up allied attacks.", "counters": ["Clear the mark", "Guard the target", "Disable follow-up attackers"] }
+      "priorityReasons": [
+        "Drum of Doom inflicts stress across the party.",
+        "Its mark and dodge debuff enable stronger follow-up attacks from other Warrens enemies."
       ],
-      "effectiveResponses": ["Treat it as an early target because both actions increase expedition-level risk.", "Pulling or shuffling it away from the back ranks restricts its support pattern."],
-      "cautions": ["Judge its priority together with enemies that exploit marked targets; the combination is more dangerous than either enemy alone."],
-      "sources": [{ "title": "Official Darkest Dungeon Wiki: Swine Drummer", "url": "https://darkestdungeon.wiki.gg/wiki/Swine_Drummer", "verifiedAt": "2026-09-01" }]
+      "traits": [
+        "Human",
+        "Beast",
+        "Backline support",
+        "Party-wide stress",
+        "Mark support"
+      ],
+      "dangerousActions": [
+        {
+          "id": "drum_of_doom",
+          "localizationIds": [
+            "str_monster_skill_drum_fear"
+          ],
+          "threats": [
+            "stress"
+          ],
+          "description": "Inflicts stress on the entire party from the enemy backline.",
+          "counters": [
+            "Kill it quickly",
+            "Stun",
+            "Pull it forward"
+          ]
+        },
+        {
+          "id": "drum_of_debilitation",
+          "localizationIds": [
+            "str_monster_skill_drum_debuff"
+          ],
+          "threats": [
+            "mark",
+            "debuff"
+          ],
+          "description": "Marks one hero and reduces dodge, setting up allied attacks.",
+          "counters": [
+            "Clear the mark",
+            "Guard the target",
+            "Disable follow-up attackers"
+          ]
+        }
+      ],
+      "effectiveResponses": [
+        "Treat it as an early target because both actions increase expedition-level risk.",
+        "Pulling or shuffling it away from the back ranks restricts its support pattern."
+      ],
+      "cautions": [
+        "Judge its priority together with enemies that exploit marked targets; the combination is more dangerous than either enemy alone."
+      ],
+      "sources": [
+        {
+          "title": "Official Darkest Dungeon Wiki: Swine Drummer",
+          "url": "https://darkestdungeon.wiki.gg/wiki/Swine_Drummer",
+          "verifiedAt": "2026-09-01"
+        }
+      ]
     },
     {
       "id": "swinetaur",
       "enemyType": "elite",
       "localizationId": "str_monstername_swinetaur_A",
-      "aliases": ["Swine Centaur"],
-      "regions": ["warrens"],
+      "aliases": [
+        "Swine Centaur"
+      ],
+      "regions": [
+        "warrens"
+      ],
       "dlcs": [],
       "priority": "high",
-      "priorityReasons": ["From the back ranks it can use a party-wide attack or a powerful charge with stun and knockback.", "Its large health pool and protection make an unfocused damage race inefficient."],
-      "traits": ["Human", "Beast", "Large enemy", "Veteran and Champion expeditions", "High protection", "High resistances"],
-      "dangerousActions": [
-        { "id": "pig_spear", "localizationIds": ["str_monster_skill_pig_spear"], "threats": ["health_damage"], "description": "A party-wide ranged attack used from the rear enemy positions.", "counters": ["Force it to enemy position 1", "Damage reduction", "Party-wide recovery"] },
-        { "id": "boar_rush", "localizationIds": ["str_monster_skill_bull_rush"], "threats": ["health_damage", "stun", "movement"], "description": "A powerful charge from the rear that can stun and knock a hero backward while moving the Swinetaur forward.", "counters": ["Force it to enemy position 1", "Stun resistance", "Guard an endangered hero"] }
+      "priorityReasons": [
+        "From the back ranks it can use a party-wide attack or a powerful charge with stun and knockback.",
+        "Its large health pool and protection make an unfocused damage race inefficient."
       ],
-      "effectiveResponses": ["Eliminate its allies and their corpses so its size traps it in enemy position 1.", "In the front it is restricted to the weaker Crunching Backhand before using Trot Retreat to reposition."],
-      "cautions": ["Direct movement and stun attempts can be unreliable because of its high resistances.", "Leaving corpses or another enemy in front gives it room to regain its dangerous rear-position pattern."],
-      "sources": [{ "title": "Official Darkest Dungeon Wiki: Swinetaur", "url": "https://darkestdungeon.wiki.gg/wiki/Swinetaur", "verifiedAt": "2026-09-01" }]
+      "traits": [
+        "Human",
+        "Beast",
+        "Large enemy",
+        "Veteran and Champion expeditions",
+        "High protection",
+        "High resistances"
+      ],
+      "dangerousActions": [
+        {
+          "id": "pig_spear",
+          "localizationIds": [
+            "str_monster_skill_pig_spear"
+          ],
+          "threats": [
+            "health_damage"
+          ],
+          "description": "A party-wide ranged attack used from the rear enemy positions.",
+          "counters": [
+            "Force it to enemy position 1",
+            "Damage reduction",
+            "Party-wide recovery"
+          ]
+        },
+        {
+          "id": "boar_rush",
+          "localizationIds": [
+            "str_monster_skill_bull_rush"
+          ],
+          "threats": [
+            "health_damage",
+            "stun",
+            "movement"
+          ],
+          "description": "A powerful charge from the rear that can stun and knock a hero backward while moving the Swinetaur forward.",
+          "counters": [
+            "Force it to enemy position 1",
+            "Stun resistance",
+            "Guard an endangered hero"
+          ]
+        }
+      ],
+      "effectiveResponses": [
+        "Eliminate its allies and their corpses so its size traps it in enemy position 1.",
+        "In the front it is restricted to the weaker Crunching Backhand before using Trot Retreat to reposition."
+      ],
+      "cautions": [
+        "Direct movement and stun attempts can be unreliable because of its high resistances.",
+        "Leaving corpses or another enemy in front gives it room to regain its dangerous rear-position pattern."
+      ],
+      "sources": [
+        {
+          "title": "Official Darkest Dungeon Wiki: Swinetaur",
+          "url": "https://darkestdungeon.wiki.gg/wiki/Swinetaur",
+          "verifiedAt": "2026-09-01"
+        }
+      ]
     },
     {
       "id": "swine_skiver",
       "enemyType": "elite",
       "localizationId": "str_monstername_swine_skiver_A",
       "aliases": [],
-      "regions": ["warrens"],
+      "regions": [
+        "warrens"
+      ],
       "dlcs": [],
       "priority": "critical",
-      "priorityReasons": ["Spit to Roast combines heavy damage, stun, and knockback and preferentially threatens marked heroes.", "Cripple Them attacks three heroes while applying blight and combat debuffs."],
-      "traits": ["Human", "Beast", "Champion expeditions", "Backline attacker", "Mark synergy", "High speed"],
-      "dangerousActions": [
-        { "id": "spit_to_roast", "localizationIds": ["str_monster_skill_spit_to_roast"], "threats": ["health_damage", "stun", "movement", "mark"], "description": "A severe single-target attack from the rear that stuns and knocks the victim backward, with increased danger to marked heroes.", "counters": ["Pull the Skiver to enemy position 1", "Clear marks", "Guard the marked hero", "Stun or kill it"] },
-        { "id": "cripple_them", "localizationIds": ["str_monster_skill_cripple_them"], "threats": ["health_damage", "blight", "debuff"], "description": "Attacks party positions 2 through 4 together, applying blight and reducing dodge and speed.", "counters": ["Pull the Skiver to enemy position 1", "Blight resistance and cure", "Party-wide recovery"] }
+      "priorityReasons": [
+        "Spit to Roast combines heavy damage, stun, and knockback and preferentially threatens marked heroes.",
+        "Cripple Them attacks three heroes while applying blight and combat debuffs."
       ],
-      "effectiveResponses": ["Treat it as an immediate Champion-tier priority.", "Pull or shuffle it into enemy position 1, where it must use the weaker Goring Flight to move backward."],
-      "cautions": ["Goring Flight restores its access to dangerous backline attacks, so displacement may need to be repeated.", "A marked hero makes Spit to Roast especially urgent."],
-      "sources": [{ "title": "Official Darkest Dungeon Wiki: Swine Skiver", "url": "https://darkestdungeon.wiki.gg/wiki/Swine_Skiver", "verifiedAt": "2026-09-01" }]
+      "traits": [
+        "Human",
+        "Beast",
+        "Champion expeditions",
+        "Backline attacker",
+        "Mark synergy",
+        "High speed"
+      ],
+      "dangerousActions": [
+        {
+          "id": "spit_to_roast",
+          "localizationIds": [
+            "str_monster_skill_spit_to_roast"
+          ],
+          "threats": [
+            "health_damage",
+            "stun",
+            "movement",
+            "mark"
+          ],
+          "description": "A severe single-target attack from the rear that stuns and knocks the victim backward, with increased danger to marked heroes.",
+          "counters": [
+            "Pull the Skiver to enemy position 1",
+            "Clear marks",
+            "Guard the marked hero",
+            "Stun or kill it"
+          ]
+        },
+        {
+          "id": "cripple_them",
+          "localizationIds": [
+            "str_monster_skill_cripple_them"
+          ],
+          "threats": [
+            "health_damage",
+            "blight",
+            "debuff"
+          ],
+          "description": "Attacks party positions 2 through 4 together, applying blight and reducing dodge and speed.",
+          "counters": [
+            "Pull the Skiver to enemy position 1",
+            "Blight resistance and cure",
+            "Party-wide recovery"
+          ]
+        }
+      ],
+      "effectiveResponses": [
+        "Treat it as an immediate Champion-tier priority.",
+        "Pull or shuffle it into enemy position 1, where it must use the weaker Goring Flight to move backward."
+      ],
+      "cautions": [
+        "Goring Flight restores its access to dangerous backline attacks, so displacement may need to be repeated.",
+        "A marked hero makes Spit to Roast especially urgent."
+      ],
+      "sources": [
+        {
+          "title": "Official Darkest Dungeon Wiki: Swine Skiver",
+          "url": "https://darkestdungeon.wiki.gg/wiki/Swine_Skiver",
+          "verifiedAt": "2026-09-01"
+        }
+      ]
     },
     {
       "id": "ectoplasm",
       "enemyType": "common",
       "localizationId": "str_monstername_ectoplasm_A",
       "aliases": [],
-      "regions": ["weald"],
+      "regions": [
+        "weald"
+      ],
       "dlcs": [],
       "priority": "high",
-      "priorityReasons": ["Cytokinesis can create another Ectoplasm and extend the fight.", "Multiple Ectoplasms or their corpses enable them to merge into a more durable Large Ectoplasm."],
-      "traits": ["Eldritch", "Low direct threat alone", "Enemy multiplication", "Corpse synergy"],
-      "dangerousActions": [
-        { "id": "cytokinesis", "localizationIds": ["str_monster_skill_summon_slime"], "threats": ["summon"], "description": "Creates another Ectoplasm when space is available, expanding the enemy action economy.", "counters": ["Focus Ectoplasms", "Prevent open enemy positions", "Clear corpses"] },
-        { "id": "ectoplasmic_profusion", "localizationIds": ["str_monster_skill_summon_big_slime"], "threats": ["summon", "healing"], "description": "Combines available Ectoplasms or Ectoplasm corpses into a Large Ectoplasm.", "counters": ["Kill one target at a time", "Clear Ectoplasm corpses", "Use attacks that leave no corpse"] }
+      "priorityReasons": [
+        "Cytokinesis can create another Ectoplasm and extend the fight.",
+        "Multiple Ectoplasms or their corpses enable them to merge into a more durable Large Ectoplasm."
       ],
-      "effectiveResponses": ["Prevent the encounter from growing before spending turns on lower-priority enemies.", "Remove corpses immediately when another Ectoplasm can exploit them."],
-      "cautions": ["Splitting damage between several Ectoplasms gives their multiplication mechanics more time to act."],
-      "sources": [{ "title": "Official Darkest Dungeon Wiki: Ectoplasm", "url": "https://darkestdungeon.wiki.gg/wiki/Ectoplasm", "verifiedAt": "2026-09-01" }]
+      "traits": [
+        "Eldritch",
+        "Low direct threat alone",
+        "Enemy multiplication",
+        "Corpse synergy"
+      ],
+      "dangerousActions": [
+        {
+          "id": "cytokinesis",
+          "localizationIds": [
+            "str_monster_skill_summon_slime"
+          ],
+          "threats": [
+            "summon"
+          ],
+          "description": "Creates another Ectoplasm when space is available, expanding the enemy action economy.",
+          "counters": [
+            "Focus Ectoplasms",
+            "Prevent open enemy positions",
+            "Clear corpses"
+          ]
+        },
+        {
+          "id": "ectoplasmic_profusion",
+          "localizationIds": [
+            "str_monster_skill_summon_big_slime"
+          ],
+          "threats": [
+            "summon",
+            "healing"
+          ],
+          "description": "Combines available Ectoplasms or Ectoplasm corpses into a Large Ectoplasm.",
+          "counters": [
+            "Kill one target at a time",
+            "Clear Ectoplasm corpses",
+            "Use attacks that leave no corpse"
+          ]
+        }
+      ],
+      "effectiveResponses": [
+        "Prevent the encounter from growing before spending turns on lower-priority enemies.",
+        "Remove corpses immediately when another Ectoplasm can exploit them."
+      ],
+      "cautions": [
+        "Splitting damage between several Ectoplasms gives their multiplication mechanics more time to act."
+      ],
+      "sources": [
+        {
+          "title": "Official Darkest Dungeon Wiki: Ectoplasm",
+          "url": "https://darkestdungeon.wiki.gg/wiki/Ectoplasm",
+          "verifiedAt": "2026-09-01"
+        }
+      ]
     },
     {
       "id": "large_ectoplasm",
       "enemyType": "elite",
       "localizationId": "str_monstername_ectoplasm_large_A",
       "aliases": [],
-      "regions": ["weald"],
+      "regions": [
+        "weald"
+      ],
       "dlcs": [],
       "priority": "high",
-      "priorityReasons": ["It can create additional Ectoplasms and restart the multiplication cycle.", "Its large health pool and protection make inefficient direct damage costly."],
-      "traits": ["Eldritch", "Large enemy", "Protection", "Enemy multiplication", "High control resistance"],
-      "dangerousActions": [
-        { "id": "cytokinesis", "localizationIds": ["str_monster_skill_summon_little_slime"], "threats": ["summon"], "description": "Creates a small Ectoplasm in an available enemy position.", "counters": ["Keep enemy positions occupied", "Kill spawned Ectoplasms", "Focus the Large Ectoplasm"] },
-        { "id": "slimesmack", "localizationIds": ["str_monster_skill_slime_stun"], "threats": ["health_damage", "stun"], "description": "A direct attack that can stun its target.", "counters": ["Stun resistance", "Guard", "Damage reduction"] }
+      "priorityReasons": [
+        "It can create additional Ectoplasms and restart the multiplication cycle.",
+        "Its large health pool and protection make inefficient direct damage costly."
       ],
-      "effectiveResponses": ["Use bleed, armor piercing, or protection reduction rather than inefficient raw damage.", "Do not allow newly spawned Ectoplasms to multiply unchecked."],
-      "cautions": ["Its strong resistances make repeated stun or movement attempts unreliable."],
-      "sources": [{ "title": "Official Darkest Dungeon Wiki: Large Ectoplasm", "url": "https://darkestdungeon.wiki.gg/wiki/Large_Ectoplasm", "verifiedAt": "2026-09-01" }]
+      "traits": [
+        "Eldritch",
+        "Large enemy",
+        "Protection",
+        "Enemy multiplication",
+        "High control resistance"
+      ],
+      "dangerousActions": [
+        {
+          "id": "cytokinesis",
+          "localizationIds": [
+            "str_monster_skill_summon_little_slime"
+          ],
+          "threats": [
+            "summon"
+          ],
+          "description": "Creates a small Ectoplasm in an available enemy position.",
+          "counters": [
+            "Keep enemy positions occupied",
+            "Kill spawned Ectoplasms",
+            "Focus the Large Ectoplasm"
+          ]
+        },
+        {
+          "id": "slimesmack",
+          "localizationIds": [
+            "str_monster_skill_slime_stun"
+          ],
+          "threats": [
+            "health_damage",
+            "stun"
+          ],
+          "description": "A direct attack that can stun its target.",
+          "counters": [
+            "Stun resistance",
+            "Guard",
+            "Damage reduction"
+          ]
+        }
+      ],
+      "effectiveResponses": [
+        "Use bleed, armor piercing, or protection reduction rather than inefficient raw damage.",
+        "Do not allow newly spawned Ectoplasms to multiply unchecked."
+      ],
+      "cautions": [
+        "Its strong resistances make repeated stun or movement attempts unreliable."
+      ],
+      "sources": [
+        {
+          "title": "Official Darkest Dungeon Wiki: Large Ectoplasm",
+          "url": "https://darkestdungeon.wiki.gg/wiki/Large_Ectoplasm",
+          "verifiedAt": "2026-09-01"
+        }
+      ]
     },
     {
       "id": "rabid_gnasher",
       "enemyType": "common",
       "localizationId": "str_monstername_rabid_dog_A",
-      "aliases": ["Crazed Gnasher", "Harrying Gnasher"],
-      "regions": ["weald"],
+      "aliases": [
+        "Crazed Gnasher",
+        "Harrying Gnasher"
+      ],
+      "regions": [
+        "weald"
+      ],
       "dlcs": [],
       "priority": "high",
-      "priorityReasons": ["High speed lets packs apply bleed before many heroes can respond.", "Rabid Rush can spread disease and its high critical chance adds party stress."],
-      "traits": ["Beast", "Fast", "High dodge", "Pack enemy", "Bleed and disease source"],
-      "dangerousActions": [
-        { "id": "rabid_rush", "localizationIds": ["str_monster_skill_rabid_rush"], "threats": ["health_damage", "bleed", "disease", "stress", "movement"], "description": "A fast pounce that inflicts bleed, may spread Rabies, and moves the Gnasher forward; critical hits also stress the party.", "counters": ["High accuracy", "Fast focused damage", "Stun", "Bleed and disease protection"] }
+      "priorityReasons": [
+        "High speed lets packs apply bleed before many heroes can respond.",
+        "Rabid Rush can spread disease and its high critical chance adds party stress."
       ],
-      "effectiveResponses": ["Kill the next Gnasher likely to act instead of spreading damage across the pack.", "Use accuracy support to overcome their dodge."],
-      "cautions": ["A missed attack can leave several fast Gnashers free to stack bleed in the same round."],
-      "sources": [{ "title": "Official Darkest Dungeon Wiki: Rabid Gnasher", "url": "https://darkestdungeon.wiki.gg/wiki/Rabid_Gnasher", "verifiedAt": "2026-09-01" }]
+      "traits": [
+        "Beast",
+        "Fast",
+        "High dodge",
+        "Pack enemy",
+        "Bleed and disease source"
+      ],
+      "dangerousActions": [
+        {
+          "id": "rabid_rush",
+          "localizationIds": [
+            "str_monster_skill_rabid_rush"
+          ],
+          "threats": [
+            "health_damage",
+            "bleed",
+            "disease",
+            "stress",
+            "movement"
+          ],
+          "description": "A fast pounce that inflicts bleed, may spread Rabies, and moves the Gnasher forward; critical hits also stress the party.",
+          "counters": [
+            "High accuracy",
+            "Fast focused damage",
+            "Stun",
+            "Bleed and disease protection"
+          ]
+        }
+      ],
+      "effectiveResponses": [
+        "Kill the next Gnasher likely to act instead of spreading damage across the pack.",
+        "Use accuracy support to overcome their dodge."
+      ],
+      "cautions": [
+        "A missed attack can leave several fast Gnashers free to stack bleed in the same round."
+      ],
+      "sources": [
+        {
+          "title": "Official Darkest Dungeon Wiki: Rabid Gnasher",
+          "url": "https://darkestdungeon.wiki.gg/wiki/Rabid_Gnasher",
+          "verifiedAt": "2026-09-01"
+        }
+      ]
     },
     {
       "id": "fungal_scratcher",
       "enemyType": "common",
       "localizationId": "str_monstername_fungal_bloat_A",
-      "aliases": ["Fungal Grabber", "Fungal Crawler"],
-      "regions": ["weald"],
+      "aliases": [
+        "Fungal Grabber",
+        "Fungal Crawler"
+      ],
+      "regions": [
+        "weald"
+      ],
       "dlcs": [],
       "priority": "medium",
-      "priorityReasons": ["High protection makes it slow to remove with direct damage.", "Its ordinary attacks are inaccurate, but Rend the Marked becomes dangerous when allied support marks a frontline hero."],
-      "traits": ["Human", "Eldritch", "High protection", "Slow", "Marked-target synergy", "Low bleed resistance"],
-      "dangerousActions": [
-        { "id": "rend_the_marked", "localizationIds": ["str_monster_skill_fierce_swipe"], "threats": ["health_damage", "mark"], "description": "Deals substantially increased damage to a marked hero in the first two party positions.", "counters": ["Kill or control enemy markers", "Clear the mark", "Move the marked hero out of the front", "Guard the marked hero"] },
-        { "id": "groping_swipe", "localizationIds": ["str_monster_skill_groping_swipe"], "threats": ["health_damage", "blight"], "description": "An inaccurate frontline attack that adds blight at Veteran and Champion difficulty.", "counters": ["Blight cure", "Dodge", "Move the Scratcher backward"] }
+      "priorityReasons": [
+        "High protection makes it slow to remove with direct damage.",
+        "Its ordinary attacks are inaccurate, but Rend the Marked becomes dangerous when allied support marks a frontline hero."
       ],
-      "effectiveResponses": ["Remove the Fungal Artillery or Crone enabling it before grinding through its protection.", "Use bleed or armor piercing, or move it to the back where it is restricted to Harmless Swipe."],
-      "cautions": ["Its priority rises sharply while a vulnerable frontline hero is marked."],
-      "sources": [{ "title": "Official Darkest Dungeon Wiki: Fungal Scratcher", "url": "https://darkestdungeon.wiki.gg/wiki/Fungal_Scratcher", "verifiedAt": "2026-09-01" }]
+      "traits": [
+        "Human",
+        "Eldritch",
+        "High protection",
+        "Slow",
+        "Marked-target synergy",
+        "Low bleed resistance"
+      ],
+      "dangerousActions": [
+        {
+          "id": "rend_the_marked",
+          "localizationIds": [
+            "str_monster_skill_fierce_swipe"
+          ],
+          "threats": [
+            "health_damage",
+            "mark"
+          ],
+          "description": "Deals substantially increased damage to a marked hero in the first two party positions.",
+          "counters": [
+            "Kill or control enemy markers",
+            "Clear the mark",
+            "Move the marked hero out of the front",
+            "Guard the marked hero"
+          ]
+        },
+        {
+          "id": "groping_swipe",
+          "localizationIds": [
+            "str_monster_skill_groping_swipe"
+          ],
+          "threats": [
+            "health_damage",
+            "blight"
+          ],
+          "description": "An inaccurate frontline attack that adds blight at Veteran and Champion difficulty.",
+          "counters": [
+            "Blight cure",
+            "Dodge",
+            "Move the Scratcher backward"
+          ]
+        }
+      ],
+      "effectiveResponses": [
+        "Remove the Fungal Artillery or Crone enabling it before grinding through its protection.",
+        "Use bleed or armor piercing, or move it to the back where it is restricted to Harmless Swipe."
+      ],
+      "cautions": [
+        "Its priority rises sharply while a vulnerable frontline hero is marked."
+      ],
+      "sources": [
+        {
+          "title": "Official Darkest Dungeon Wiki: Fungal Scratcher",
+          "url": "https://darkestdungeon.wiki.gg/wiki/Fungal_Scratcher",
+          "verifiedAt": "2026-09-01"
+        }
+      ]
     },
     {
       "id": "fungal_artillery",
       "enemyType": "common",
       "localizationId": "str_monstername_fungal_artillery_A",
-      "aliases": ["Fungal Battery", "Fungal Bombard"],
-      "regions": ["weald"],
+      "aliases": [
+        "Fungal Battery",
+        "Fungal Bombard"
+      ],
+      "regions": [
+        "weald"
+      ],
       "dlcs": [],
       "priority": "high",
-      "priorityReasons": ["Mark Prey enables Fungal Scratchers to deal increased damage to frontline heroes.", "Rain of Blight pressures both backline heroes and may spread disease."],
-      "traits": ["Human", "Eldritch", "Backline support", "Mark synergy", "Blight and disease source"],
-      "dangerousActions": [
-        { "id": "mark_prey", "localizationIds": ["str_monster_skill_artillery_tag"], "threats": ["mark", "debuff"], "description": "Marks a frontline hero and reduces dodge, enabling allied marked-target attacks.", "counters": ["Kill or stun the Artillery", "Clear the mark", "Guard or reposition the target"] },
-        { "id": "rain_of_blight", "localizationIds": ["str_monster_skill_artillery_blight"], "threats": ["blight", "disease", "health_damage"], "description": "Attacks both backline heroes with blight and a chance of random disease.", "counters": ["Blight and disease resistance", "Cure damage-over-time", "Backline control"] }
+      "priorityReasons": [
+        "Mark Prey enables Fungal Scratchers to deal increased damage to frontline heroes.",
+        "Rain of Blight pressures both backline heroes and may spread disease."
       ],
-      "effectiveResponses": ["Eliminate it before the protected Scratchers it supports.", "Pull it into the front to force Escape Cloud, reducing its immediate support pressure."],
-      "cautions": ["Escape Cloud blights the front two heroes while moving the Artillery back, so a pull is disruption rather than a permanent shutdown."],
-      "sources": [{ "title": "Official Darkest Dungeon Wiki: Fungal Artillery", "url": "https://darkestdungeon.wiki.gg/wiki/Fungal_Artillery", "verifiedAt": "2026-09-01" }]
+      "traits": [
+        "Human",
+        "Eldritch",
+        "Backline support",
+        "Mark synergy",
+        "Blight and disease source"
+      ],
+      "dangerousActions": [
+        {
+          "id": "mark_prey",
+          "localizationIds": [
+            "str_monster_skill_artillery_tag"
+          ],
+          "threats": [
+            "mark",
+            "debuff"
+          ],
+          "description": "Marks a frontline hero and reduces dodge, enabling allied marked-target attacks.",
+          "counters": [
+            "Kill or stun the Artillery",
+            "Clear the mark",
+            "Guard or reposition the target"
+          ]
+        },
+        {
+          "id": "rain_of_blight",
+          "localizationIds": [
+            "str_monster_skill_artillery_blight"
+          ],
+          "threats": [
+            "blight",
+            "disease",
+            "health_damage"
+          ],
+          "description": "Attacks both backline heroes with blight and a chance of random disease.",
+          "counters": [
+            "Blight and disease resistance",
+            "Cure damage-over-time",
+            "Backline control"
+          ]
+        }
+      ],
+      "effectiveResponses": [
+        "Eliminate it before the protected Scratchers it supports.",
+        "Pull it into the front to force Escape Cloud, reducing its immediate support pressure."
+      ],
+      "cautions": [
+        "Escape Cloud blights the front two heroes while moving the Artillery back, so a pull is disruption rather than a permanent shutdown."
+      ],
+      "sources": [
+        {
+          "title": "Official Darkest Dungeon Wiki: Fungal Artillery",
+          "url": "https://darkestdungeon.wiki.gg/wiki/Fungal_Artillery",
+          "verifiedAt": "2026-09-01"
+        }
+      ]
     },
     {
       "id": "crone",
       "enemyType": "elite",
       "localizationId": "str_monstername_crone_A",
-      "aliases": ["Tenacious Crone", "Blighted Crone"],
-      "regions": ["weald"],
+      "aliases": [
+        "Tenacious Crone",
+        "Blighted Crone"
+      ],
+      "regions": [
+        "weald"
+      ],
       "dlcs": [],
       "priority": "high",
-      "priorityReasons": ["Her mark and accuracy or dodge debuffs set up lethal allied attacks against multiple heroes.", "She also inflicts multi-target stress or frontline blight and disease from any position."],
-      "traits": ["Human", "Veteran and Champion expeditions", "Fast", "High dodge", "Stealthed", "Mark and stress support"],
-      "dangerousActions": [
-        { "id": "curse_of_vulnerability", "localizationIds": ["str_monster_skill_curse_vulnerability"], "threats": ["mark", "debuff", "health_damage"], "description": "Damages and marks up to two heroes while reducing accuracy and dodge.", "counters": ["Destealth", "High accuracy", "Kill or stun the Crone", "Clear marks"] },
-        { "id": "embrace_the_dark", "localizationIds": ["str_monster_skill_embrace_the_dark"], "threats": ["stress", "other"], "description": "Inflicts stress on up to two heroes and reduces torchlight.", "counters": ["Fast focused damage", "Stress recovery", "Maintain torchlight"] },
-        { "id": "fetid_censer", "localizationIds": ["str_monster_skill_fetid_censer"], "threats": ["stress", "blight", "disease"], "description": "From the front, attacks both frontline heroes with stress, blight, and a disease chance.", "counters": ["Blight and disease protection", "Do not rely on pulling her forward as a shutdown"] }
+      "priorityReasons": [
+        "Her mark and accuracy or dodge debuffs set up lethal allied attacks against multiple heroes.",
+        "She also inflicts multi-target stress or frontline blight and disease from any position."
       ],
-      "effectiveResponses": ["Prioritize her early and bring destealth or attacks that bypass stealth.", "Use accuracy support or dodge reduction to overcome her evasion."],
-      "cautions": ["Unlike many backline supports, moving her forward does not make her harmless."],
-      "sources": [{ "title": "Official Darkest Dungeon Wiki: Crone", "url": "https://darkestdungeon.wiki.gg/wiki/Crone", "verifiedAt": "2026-09-01" }]
+      "traits": [
+        "Human",
+        "Veteran and Champion expeditions",
+        "Fast",
+        "High dodge",
+        "Stealthed",
+        "Mark and stress support"
+      ],
+      "dangerousActions": [
+        {
+          "id": "curse_of_vulnerability",
+          "localizationIds": [
+            "str_monster_skill_curse_vulnerability"
+          ],
+          "threats": [
+            "mark",
+            "debuff",
+            "health_damage"
+          ],
+          "description": "Damages and marks up to two heroes while reducing accuracy and dodge.",
+          "counters": [
+            "Destealth",
+            "High accuracy",
+            "Kill or stun the Crone",
+            "Clear marks"
+          ]
+        },
+        {
+          "id": "embrace_the_dark",
+          "localizationIds": [
+            "str_monster_skill_embrace_the_dark"
+          ],
+          "threats": [
+            "stress",
+            "other"
+          ],
+          "description": "Inflicts stress on up to two heroes and reduces torchlight.",
+          "counters": [
+            "Fast focused damage",
+            "Stress recovery",
+            "Maintain torchlight"
+          ]
+        },
+        {
+          "id": "fetid_censer",
+          "localizationIds": [
+            "str_monster_skill_fetid_censer"
+          ],
+          "threats": [
+            "stress",
+            "blight",
+            "disease"
+          ],
+          "description": "From the front, attacks both frontline heroes with stress, blight, and a disease chance.",
+          "counters": [
+            "Blight and disease protection",
+            "Do not rely on pulling her forward as a shutdown"
+          ]
+        }
+      ],
+      "effectiveResponses": [
+        "Prioritize her early and bring destealth or attacks that bypass stealth.",
+        "Use accuracy support or dodge reduction to overcome her evasion."
+      ],
+      "cautions": [
+        "Unlike many backline supports, moving her forward does not make her harmless."
+      ],
+      "sources": [
+        {
+          "title": "Official Darkest Dungeon Wiki: Crone",
+          "url": "https://darkestdungeon.wiki.gg/wiki/Crone",
+          "verifiedAt": "2026-09-01"
+        }
+      ]
     },
     {
       "id": "unclean_giant",
       "enemyType": "elite",
       "localizationId": "str_monstername_unclean_giant_A",
-      "aliases": ["Blighted Giant", "Corrupted Giant"],
-      "regions": ["weald"],
+      "aliases": [
+        "Blighted Giant",
+        "Corrupted Giant"
+      ],
+      "regions": [
+        "weald"
+      ],
       "dlcs": [],
       "priority": "high",
-      "priorityReasons": ["Treebranch Smackdown can deliver extreme burst damage to a frontline hero.", "Confusion Spores shuffles the entire party while reducing accuracy."],
-      "traits": ["Human", "Beast", "Large enemy", "Veteran and Champion expeditions", "Very high health", "High control resistance"],
-      "dangerousActions": [
-        { "id": "treebranch_smackdown", "localizationIds": ["str_monster_skill_club_smack"], "threats": ["health_damage", "movement"], "description": "One of the strongest non-boss single-target attacks, striking the frontline and knocking the victim backward.", "counters": ["Damage debuff", "Guard", "Protection", "Keep frontline heroes healthy"] },
-        { "id": "confusion_spores", "localizationIds": ["str_monster_skill_confusion_spores"], "threats": ["movement", "debuff", "health_damage"], "description": "Attacks and shuffles the entire party while reducing accuracy.", "counters": ["Position-tolerant party", "Movement skills", "Accuracy support"] },
-        { "id": "poison_spores", "localizationIds": ["str_monster_skill_poison_spores"], "threats": ["blight", "health_damage"], "description": "Applies blight to any hero and becomes more likely against a critically wounded target.", "counters": ["Blight cure", "Heal heroes away from Death's Door", "Guard"] }
+      "priorityReasons": [
+        "Treebranch Smackdown can deliver extreme burst damage to a frontline hero.",
+        "Confusion Spores shuffles the entire party while reducing accuracy."
       ],
-      "effectiveResponses": ["Reduce its damage while removing more fragile support enemies, then focus it safely.", "Use bleed and direct damage; do not expect movement control to work reliably."],
-      "cautions": ["Its enormous health pool makes a one-round kill unlikely.", "A shuffled position-dependent party may lose both damage and healing access."],
-      "sources": [{ "title": "Official Darkest Dungeon Wiki: Unclean Giant", "url": "https://darkestdungeon.wiki.gg/wiki/Unclean_Giant", "verifiedAt": "2026-09-01" }]
+      "traits": [
+        "Human",
+        "Beast",
+        "Large enemy",
+        "Veteran and Champion expeditions",
+        "Very high health",
+        "High control resistance"
+      ],
+      "dangerousActions": [
+        {
+          "id": "treebranch_smackdown",
+          "localizationIds": [
+            "str_monster_skill_club_smack"
+          ],
+          "threats": [
+            "health_damage",
+            "movement"
+          ],
+          "description": "One of the strongest non-boss single-target attacks, striking the frontline and knocking the victim backward.",
+          "counters": [
+            "Damage debuff",
+            "Guard",
+            "Protection",
+            "Keep frontline heroes healthy"
+          ]
+        },
+        {
+          "id": "confusion_spores",
+          "localizationIds": [
+            "str_monster_skill_confusion_spores"
+          ],
+          "threats": [
+            "movement",
+            "debuff",
+            "health_damage"
+          ],
+          "description": "Attacks and shuffles the entire party while reducing accuracy.",
+          "counters": [
+            "Position-tolerant party",
+            "Movement skills",
+            "Accuracy support"
+          ]
+        },
+        {
+          "id": "poison_spores",
+          "localizationIds": [
+            "str_monster_skill_poison_spores"
+          ],
+          "threats": [
+            "blight",
+            "health_damage"
+          ],
+          "description": "Applies blight to any hero and becomes more likely against a critically wounded target.",
+          "counters": [
+            "Blight cure",
+            "Heal heroes away from Death's Door",
+            "Guard"
+          ]
+        }
+      ],
+      "effectiveResponses": [
+        "Reduce its damage while removing more fragile support enemies, then focus it safely.",
+        "Use bleed and direct damage; do not expect movement control to work reliably."
+      ],
+      "cautions": [
+        "Its enormous health pool makes a one-round kill unlikely.",
+        "A shuffled position-dependent party may lose both damage and healing access."
+      ],
+      "sources": [
+        {
+          "title": "Official Darkest Dungeon Wiki: Unclean Giant",
+          "url": "https://darkestdungeon.wiki.gg/wiki/Unclean_Giant",
+          "verifiedAt": "2026-09-01"
+        }
+      ]
     },
     {
       "id": "hateful_virago",
       "enemyType": "elite",
       "localizationId": "str_monstername_virago_hateful_A",
       "aliases": [],
-      "regions": ["weald"],
+      "regions": [
+        "weald"
+      ],
       "dlcs": [],
       "priority": "critical",
-      "priorityReasons": ["From Death Comes Life turns corpses into Necrotic Fungus, preventing all hero healing while the growth remains.", "Ruinous Hex marks and severely weakens multiple heroes for allied attacks."],
-      "traits": ["Human", "Champion expeditions", "Fast", "Extremely high dodge", "Near immunity to stun", "Corpse transformation", "Healing denial"],
-      "dangerousActions": [
-        { "id": "from_death_comes_life", "localizationIds": ["str_monster_skill_from_death_comes_life"], "threats": ["summon", "healing"], "description": "An automatic end-of-round action that converts an available corpse into a Necrotic Fungus, blocking hero healing while it lives.", "counters": ["Clear corpses", "Use attacks that leave no corpse", "Kill the Virago", "Destroy the Necrotic Fungus immediately"] },
-        { "id": "ruinous_hex", "localizationIds": ["str_monster_skill_ruinous_hex"], "threats": ["health_damage", "mark", "debuff"], "description": "Damages and marks up to two heroes while heavily reducing accuracy and dodge.", "counters": ["Clear marks", "Accuracy support", "Protect exposed heroes", "Kill the Virago"] },
-        { "id": "putrefying_breath", "localizationIds": ["str_monster_skill_putrefying_breath"], "threats": ["health_damage", "blight", "movement"], "description": "Hits the first three heroes with damage, blight, and knockback.", "counters": ["Blight cure", "Position tolerance", "Guard or recovery"] }
+      "priorityReasons": [
+        "From Death Comes Life turns corpses into Necrotic Fungus, preventing all hero healing while the growth remains.",
+        "Ruinous Hex marks and severely weakens multiple heroes for allied attacks."
       ],
-      "effectiveResponses": ["Treat her as an immediate Champion-tier priority while accounting for other lethal attackers.", "Use high-accuracy attacks and corpse clearing rather than repeated stun attempts."],
-      "cautions": ["Do not create a corpse without a plan to clear it before her automatic action.", "Focusing her can still be dangerous if an Unclean Giant or marked-target attacker remains uncontrolled."],
-      "sources": [{ "title": "Official Darkest Dungeon Wiki: Hateful Virago", "url": "https://darkestdungeon.wiki.gg/wiki/Hateful_Virago", "verifiedAt": "2026-09-01" }]
+      "traits": [
+        "Human",
+        "Champion expeditions",
+        "Fast",
+        "Extremely high dodge",
+        "Near immunity to stun",
+        "Corpse transformation",
+        "Healing denial"
+      ],
+      "dangerousActions": [
+        {
+          "id": "from_death_comes_life",
+          "localizationIds": [
+            "str_monster_skill_from_death_comes_life"
+          ],
+          "threats": [
+            "summon",
+            "healing"
+          ],
+          "description": "An automatic end-of-round action that converts an available corpse into a Necrotic Fungus, blocking hero healing while it lives.",
+          "counters": [
+            "Clear corpses",
+            "Use attacks that leave no corpse",
+            "Kill the Virago",
+            "Destroy the Necrotic Fungus immediately"
+          ]
+        },
+        {
+          "id": "ruinous_hex",
+          "localizationIds": [
+            "str_monster_skill_ruinous_hex"
+          ],
+          "threats": [
+            "health_damage",
+            "mark",
+            "debuff"
+          ],
+          "description": "Damages and marks up to two heroes while heavily reducing accuracy and dodge.",
+          "counters": [
+            "Clear marks",
+            "Accuracy support",
+            "Protect exposed heroes",
+            "Kill the Virago"
+          ]
+        },
+        {
+          "id": "putrefying_breath",
+          "localizationIds": [
+            "str_monster_skill_putrefying_breath"
+          ],
+          "threats": [
+            "health_damage",
+            "blight",
+            "movement"
+          ],
+          "description": "Hits the first three heroes with damage, blight, and knockback.",
+          "counters": [
+            "Blight cure",
+            "Position tolerance",
+            "Guard or recovery"
+          ]
+        }
+      ],
+      "effectiveResponses": [
+        "Treat her as an immediate Champion-tier priority while accounting for other lethal attackers.",
+        "Use high-accuracy attacks and corpse clearing rather than repeated stun attempts."
+      ],
+      "cautions": [
+        "Do not create a corpse without a plan to clear it before her automatic action.",
+        "Focusing her can still be dangerous if an Unclean Giant or marked-target attacker remains uncontrolled."
+      ],
+      "sources": [
+        {
+          "title": "Official Darkest Dungeon Wiki: Hateful Virago",
+          "url": "https://darkestdungeon.wiki.gg/wiki/Hateful_Virago",
+          "verifiedAt": "2026-09-01"
+        }
+      ]
     },
     {
       "id": "pelagic_grouper",
       "enemyType": "common",
       "localizationId": "str_monstername_fishman_harpoon_A",
-      "aliases": ["Pelagic Widemouth", "Pelagic Piranha"],
-      "regions": ["cove"],
+      "aliases": [
+        "Pelagic Widemouth",
+        "Pelagic Piranha"
+      ],
+      "regions": [
+        "cove"
+      ],
       "dlcs": [],
       "priority": "high",
-      "priorityReasons": ["It deals high direct damage for a common enemy and can pressure either half of the party.", "Groups of several Groupers can rapidly overwhelm healing capacity."],
-      "traits": ["Eldritch", "Fast direct attacker", "High bleed resistance", "Low early control resistance"],
-      "dangerousActions": [
-        { "id": "seaward_slash", "localizationIds": ["str_monster_skill_fish_cutlass"], "threats": ["health_damage"], "description": "A strong attack used from the front two enemy positions against frontline heroes.", "counters": ["Stun", "Damage reduction", "Guard", "Focused damage"] },
-        { "id": "spearfishing", "localizationIds": ["str_monster_skill_fish_harpoon"], "threats": ["health_damage", "movement"], "description": "Attacks backline heroes from the rear and pulls the target forward at higher difficulty.", "counters": ["Stun", "Position tolerance", "Move the Grouper to a less useful position"] }
+      "priorityReasons": [
+        "It deals high direct damage for a common enemy and can pressure either half of the party.",
+        "Groups of several Groupers can rapidly overwhelm healing capacity."
       ],
-      "effectiveResponses": ["Prioritize Groupers when party health is the immediate constraint.", "Use blight, stun, or debuffs against their generally low non-bleed resistances."],
-      "cautions": ["Moving a Grouper changes its targets but does not remove its high damage output."],
-      "sources": [{ "title": "Official Darkest Dungeon Wiki: Pelagic Grouper", "url": "https://darkestdungeon.wiki.gg/wiki/Pelagic_Grouper", "verifiedAt": "2026-09-01" }]
+      "traits": [
+        "Eldritch",
+        "Fast direct attacker",
+        "High bleed resistance",
+        "Low early control resistance"
+      ],
+      "dangerousActions": [
+        {
+          "id": "seaward_slash",
+          "localizationIds": [
+            "str_monster_skill_fish_cutlass"
+          ],
+          "threats": [
+            "health_damage"
+          ],
+          "description": "A strong attack used from the front two enemy positions against frontline heroes.",
+          "counters": [
+            "Stun",
+            "Damage reduction",
+            "Guard",
+            "Focused damage"
+          ]
+        },
+        {
+          "id": "spearfishing",
+          "localizationIds": [
+            "str_monster_skill_fish_harpoon"
+          ],
+          "threats": [
+            "health_damage",
+            "movement"
+          ],
+          "description": "Attacks backline heroes from the rear and pulls the target forward at higher difficulty.",
+          "counters": [
+            "Stun",
+            "Position tolerance",
+            "Move the Grouper to a less useful position"
+          ]
+        }
+      ],
+      "effectiveResponses": [
+        "Prioritize Groupers when party health is the immediate constraint.",
+        "Use blight, stun, or debuffs against their generally low non-bleed resistances."
+      ],
+      "cautions": [
+        "Moving a Grouper changes its targets but does not remove its high damage output."
+      ],
+      "sources": [
+        {
+          "title": "Official Darkest Dungeon Wiki: Pelagic Grouper",
+          "url": "https://darkestdungeon.wiki.gg/wiki/Pelagic_Grouper",
+          "verifiedAt": "2026-09-01"
+        }
+      ]
     },
     {
       "id": "pelagic_shaman",
       "enemyType": "common",
       "localizationId": "str_monstername_fishman_shaman_A",
-      "aliases": ["Pelagic Oracle", "Pelagic Tidemaster"],
-      "regions": ["cove"],
+      "aliases": [
+        "Pelagic Oracle",
+        "Pelagic Tidemaster"
+      ],
+      "regions": [
+        "cove"
+      ],
       "dlcs": [],
       "priority": "high",
-      "priorityReasons": ["Stress Wave can stress two heroes at once.", "Call of the Deep and Sea Breeze increase allied damage output and undo progress through buffs and healing."],
-      "traits": ["Eldritch", "Fast backline support", "Stress dealer", "Healing and offensive buffs", "Stealth at Veteran and Champion difficulty"],
-      "dangerousActions": [
-        { "id": "stress_wave", "localizationIds": ["str_monster_skill_fish_stresscast"], "threats": ["stress"], "description": "Inflicts substantial stress on one hero with a chance to hit a second target.", "counters": ["Kill or stun the Shaman", "Pull it to enemy position 1", "Stress recovery"] },
-        { "id": "call_of_the_deep", "localizationIds": ["str_monster_skill_call_of_the_deep"], "threats": ["other"], "description": "Buffs another enemy's accuracy, critical chance, and damage.", "counters": ["Disable the Shaman", "Kill the buffed attacker", "Damage reduction"] },
-        { "id": "sea_breeze", "localizationIds": ["str_monster_skill_shaman_heal"], "threats": ["healing"], "description": "Heals the lowest-health ally other than the Shaman.", "counters": ["Finish wounded enemies", "Stun or kill the Shaman", "Apply damage-over-time"] }
+      "priorityReasons": [
+        "Stress Wave can stress two heroes at once.",
+        "Call of the Deep and Sea Breeze increase allied damage output and undo progress through buffs and healing."
       ],
-      "effectiveResponses": ["Prioritize it when stress is the party's main expedition risk.", "Pull it into enemy position 1 to force the weak Ceremonial Cut."],
-      "cautions": ["Veteran and Champion variants begin stealthed, requiring destealth, area attacks, or temporary control of their allies."],
-      "sources": [{ "title": "Official Darkest Dungeon Wiki: Pelagic Shaman", "url": "https://darkestdungeon.wiki.gg/wiki/Pelagic_Shaman", "verifiedAt": "2026-09-01" }]
+      "traits": [
+        "Eldritch",
+        "Fast backline support",
+        "Stress dealer",
+        "Healing and offensive buffs",
+        "Stealth at Veteran and Champion difficulty"
+      ],
+      "dangerousActions": [
+        {
+          "id": "stress_wave",
+          "localizationIds": [
+            "str_monster_skill_fish_stresscast"
+          ],
+          "threats": [
+            "stress"
+          ],
+          "description": "Inflicts substantial stress on one hero with a chance to hit a second target.",
+          "counters": [
+            "Kill or stun the Shaman",
+            "Pull it to enemy position 1",
+            "Stress recovery"
+          ]
+        },
+        {
+          "id": "call_of_the_deep",
+          "localizationIds": [
+            "str_monster_skill_call_of_the_deep"
+          ],
+          "threats": [
+            "other"
+          ],
+          "description": "Buffs another enemy's accuracy, critical chance, and damage.",
+          "counters": [
+            "Disable the Shaman",
+            "Kill the buffed attacker",
+            "Damage reduction"
+          ]
+        },
+        {
+          "id": "sea_breeze",
+          "localizationIds": [
+            "str_monster_skill_shaman_heal"
+          ],
+          "threats": [
+            "healing"
+          ],
+          "description": "Heals the lowest-health ally other than the Shaman.",
+          "counters": [
+            "Finish wounded enemies",
+            "Stun or kill the Shaman",
+            "Apply damage-over-time"
+          ]
+        }
+      ],
+      "effectiveResponses": [
+        "Prioritize it when stress is the party's main expedition risk.",
+        "Pull it into enemy position 1 to force the weak Ceremonial Cut."
+      ],
+      "cautions": [
+        "Veteran and Champion variants begin stealthed, requiring destealth, area attacks, or temporary control of their allies."
+      ],
+      "sources": [
+        {
+          "title": "Official Darkest Dungeon Wiki: Pelagic Shaman",
+          "url": "https://darkestdungeon.wiki.gg/wiki/Pelagic_Shaman",
+          "verifiedAt": "2026-09-01"
+        }
+      ]
     },
     {
       "id": "pelagic_guardian",
       "enemyType": "common",
       "localizationId": "str_monstername_octotank_A",
-      "aliases": ["Pelagic Bulwark", "Pelagic Champion"],
-      "regions": ["cove"],
+      "aliases": [
+        "Pelagic Bulwark",
+        "Pelagic Champion"
+      ],
+      "regions": [
+        "cove"
+      ],
       "dlcs": [],
       "priority": "medium",
-      "priorityReasons": ["Barnacle Barrier redirects attacks from a more dangerous ally while increasing the Guardian's protection.", "Its own damage is modest, so its urgency depends on which enemy it guards."],
-      "traits": ["Eldritch", "High protection", "Slow", "Guard support", "Low blight resistance"],
-      "dangerousActions": [
-        { "id": "barnacle_barrier", "localizationIds": ["str_monster_skill_octo_guard"], "threats": ["guard"], "description": "Guards an ally and further increases the Guardian's protection.", "counters": ["Stun the Guardian", "Break guard", "Armor piercing", "Area attacks", "Blight"] },
-        { "id": "octocestus", "localizationIds": ["str_monster_skill_octo_cestus"], "threats": ["health_damage", "bleed"], "description": "A modest frontline attack that inflicts bleed.", "counters": ["Bleed cure", "Dodge", "Control the Guardian"] }
+      "priorityReasons": [
+        "Barnacle Barrier redirects attacks from a more dangerous ally while increasing the Guardian's protection.",
+        "Its own damage is modest, so its urgency depends on which enemy it guards."
       ],
-      "effectiveResponses": ["Break or disable its guard before attacking a protected priority target.", "Use blight or armor piercing instead of grinding through stacked protection."],
-      "cautions": ["Its priority becomes critical when it guards a Drowned Thrall approaching The Revenge."],
-      "sources": [{ "title": "Official Darkest Dungeon Wiki: Pelagic Guardian", "url": "https://darkestdungeon.wiki.gg/wiki/Pelagic_Guardian", "verifiedAt": "2026-09-01" }]
+      "traits": [
+        "Eldritch",
+        "High protection",
+        "Slow",
+        "Guard support",
+        "Low blight resistance"
+      ],
+      "dangerousActions": [
+        {
+          "id": "barnacle_barrier",
+          "localizationIds": [
+            "str_monster_skill_octo_guard"
+          ],
+          "threats": [
+            "guard"
+          ],
+          "description": "Guards an ally and further increases the Guardian's protection.",
+          "counters": [
+            "Stun the Guardian",
+            "Break guard",
+            "Armor piercing",
+            "Area attacks",
+            "Blight"
+          ]
+        },
+        {
+          "id": "octocestus",
+          "localizationIds": [
+            "str_monster_skill_octo_cestus"
+          ],
+          "threats": [
+            "health_damage",
+            "bleed"
+          ],
+          "description": "A modest frontline attack that inflicts bleed.",
+          "counters": [
+            "Bleed cure",
+            "Dodge",
+            "Control the Guardian"
+          ]
+        }
+      ],
+      "effectiveResponses": [
+        "Break or disable its guard before attacking a protected priority target.",
+        "Use blight or armor piercing instead of grinding through stacked protection."
+      ],
+      "cautions": [
+        "Its priority becomes critical when it guards a Drowned Thrall approaching The Revenge."
+      ],
+      "sources": [
+        {
+          "title": "Official Darkest Dungeon Wiki: Pelagic Guardian",
+          "url": "https://darkestdungeon.wiki.gg/wiki/Pelagic_Guardian",
+          "verifiedAt": "2026-09-01"
+        }
+      ]
     },
     {
       "id": "sea_maggot",
       "enemyType": "common",
       "localizationId": "str_monstername_snail_urchin_A",
-      "aliases": ["Plated Maggot", "Armored Maggot"],
-      "regions": ["cove"],
+      "aliases": [
+        "Plated Maggot",
+        "Armored Maggot"
+      ],
+      "regions": [
+        "cove"
+      ],
       "dlcs": [],
       "priority": "low",
-      "priorityReasons": ["Its extremely low speed and poor accuracy usually make it less urgent than Cove damage and stress dealers.", "Very high protection makes ordinary direct attacks inefficient despite its tiny health pool."],
-      "traits": ["Eldritch", "Extremely slow", "Very high protection", "Low health", "Disease and debuff source"],
-      "dangerousActions": [
-        { "id": "brine", "localizationIds": ["str_monster_skill_snail_slime"], "threats": ["health_damage", "disease", "debuff"], "description": "A low-accuracy attack that may spread disease and sharply reduces dodge and speed.", "counters": ["Dodge", "Disease resistance", "Cure or outlast the debuff", "Stun"] }
+      "priorityReasons": [
+        "Its extremely low speed and poor accuracy usually make it less urgent than Cove damage and stress dealers.",
+        "Very high protection makes ordinary direct attacks inefficient despite its tiny health pool."
       ],
-      "effectiveResponses": ["Leave it until urgent enemies are controlled unless its debuff would expose a vulnerable hero.", "Use blight, armor piercing, or protection reduction to bypass its armor."],
-      "cautions": ["Low priority does not mean harmless when a disease or dodge debuff would compound other threats."],
-      "sources": [{ "title": "Official Darkest Dungeon Wiki: Sea Maggot", "url": "https://darkestdungeon.wiki.gg/wiki/Sea_Maggot", "verifiedAt": "2026-09-01" }]
+      "traits": [
+        "Eldritch",
+        "Extremely slow",
+        "Very high protection",
+        "Low health",
+        "Disease and debuff source"
+      ],
+      "dangerousActions": [
+        {
+          "id": "brine",
+          "localizationIds": [
+            "str_monster_skill_snail_slime"
+          ],
+          "threats": [
+            "health_damage",
+            "disease",
+            "debuff"
+          ],
+          "description": "A low-accuracy attack that may spread disease and sharply reduces dodge and speed.",
+          "counters": [
+            "Dodge",
+            "Disease resistance",
+            "Cure or outlast the debuff",
+            "Stun"
+          ]
+        }
+      ],
+      "effectiveResponses": [
+        "Leave it until urgent enemies are controlled unless its debuff would expose a vulnerable hero.",
+        "Use blight, armor piercing, or protection reduction to bypass its armor."
+      ],
+      "cautions": [
+        "Low priority does not mean harmless when a disease or dodge debuff would compound other threats."
+      ],
+      "sources": [
+        {
+          "title": "Official Darkest Dungeon Wiki: Sea Maggot",
+          "url": "https://darkestdungeon.wiki.gg/wiki/Sea_Maggot",
+          "verifiedAt": "2026-09-01"
+        }
+      ]
     },
     {
       "id": "deep_stinger",
       "enemyType": "common",
       "localizationId": "str_monstername_jellyfish_A",
-      "aliases": ["Energized Stinger", "Paralyzing Stinger"],
-      "regions": ["cove"],
+      "aliases": [
+        "Energized Stinger",
+        "Paralyzing Stinger"
+      ],
+      "regions": [
+        "cove"
+      ],
       "dlcs": [],
       "priority": "high",
-      "priorityReasons": ["Shocker combines stun with reduced bleed resistance and may spread disease.", "Its broad targeting and speed let it set up Salty Gouge or allied bleed attacks against any hero."],
-      "traits": ["Eldritch", "Fast", "Backline enemy", "Stun and bleed setup", "Disease source", "High stun resistance"],
-      "dangerousActions": [
-        { "id": "shocker", "localizationIds": ["str_monster_skill_jellyfish_sting"], "threats": ["stun", "disease", "debuff", "health_damage"], "description": "Stuns any hero, may spread disease, and reduces bleed resistance.", "counters": ["Kill or move the Stinger", "Stun resistance", "Disease resistance"] },
-        { "id": "salty_gouge", "localizationIds": ["str_monster_skill_jellyfish_rend"], "threats": ["health_damage", "bleed", "disease", "debuff"], "description": "Inflicts bleed, may spread disease, and reduces dodge on any hero.", "counters": ["Bleed cure", "Disease resistance", "Fast focused damage"] }
+      "priorityReasons": [
+        "Shocker combines stun with reduced bleed resistance and may spread disease.",
+        "Its broad targeting and speed let it set up Salty Gouge or allied bleed attacks against any hero."
       ],
-      "effectiveResponses": ["Remove it early before Shocker enables repeated bleed pressure.", "Use blight, direct damage, debuffs, or movement rather than relying on stun."],
-      "cautions": ["It can use both skills from any enemy position, so movement disrupts formation but does not fully disable it."],
-      "sources": [{ "title": "Official Darkest Dungeon Wiki: Deep Stinger", "url": "https://darkestdungeon.wiki.gg/wiki/Deep_Stinger", "verifiedAt": "2026-09-01" }]
+      "traits": [
+        "Eldritch",
+        "Fast",
+        "Backline enemy",
+        "Stun and bleed setup",
+        "Disease source",
+        "High stun resistance"
+      ],
+      "dangerousActions": [
+        {
+          "id": "shocker",
+          "localizationIds": [
+            "str_monster_skill_jellyfish_sting"
+          ],
+          "threats": [
+            "stun",
+            "disease",
+            "debuff",
+            "health_damage"
+          ],
+          "description": "Stuns any hero, may spread disease, and reduces bleed resistance.",
+          "counters": [
+            "Kill or move the Stinger",
+            "Stun resistance",
+            "Disease resistance"
+          ]
+        },
+        {
+          "id": "salty_gouge",
+          "localizationIds": [
+            "str_monster_skill_jellyfish_rend"
+          ],
+          "threats": [
+            "health_damage",
+            "bleed",
+            "disease",
+            "debuff"
+          ],
+          "description": "Inflicts bleed, may spread disease, and reduces dodge on any hero.",
+          "counters": [
+            "Bleed cure",
+            "Disease resistance",
+            "Fast focused damage"
+          ]
+        }
+      ],
+      "effectiveResponses": [
+        "Remove it early before Shocker enables repeated bleed pressure.",
+        "Use blight, direct damage, debuffs, or movement rather than relying on stun."
+      ],
+      "cautions": [
+        "It can use both skills from any enemy position, so movement disrupts formation but does not fully disable it."
+      ],
+      "sources": [
+        {
+          "title": "Official Darkest Dungeon Wiki: Deep Stinger",
+          "url": "https://darkestdungeon.wiki.gg/wiki/Deep_Stinger",
+          "verifiedAt": "2026-09-01"
+        }
+      ]
     },
     {
       "id": "drowned_thrall",
       "enemyType": "common",
       "localizationId": "str_monstername_bloated_corpse_A",
-      "aliases": ["Pustulant Thrall", "Bloated Thrall"],
-      "regions": ["cove"],
+      "aliases": [
+        "Pustulant Thrall",
+        "Bloated Thrall"
+      ],
+      "regions": [
+        "cove"
+      ],
       "dlcs": [],
       "priority": "critical",
-      "priorityReasons": ["The Revenge deals massive health and stress damage to the entire party on the Thrall's second action.", "Its explosion can cause a party wipe and is dangerous from every enemy position."],
-      "traits": ["Unholy", "Eldritch", "Delayed self-destruct", "Party-wide burst", "Moderate to high stun resistance"],
-      "dangerousActions": [
-        { "id": "gargling_grab", "localizationIds": ["str_monster_skill_bloated_swipe"], "threats": ["health_damage", "stress"], "description": "The Thrall's first action damages and stresses a frontline hero, signaling that The Revenge follows on its next action.", "counters": ["Kill the Thrall before its next turn", "Stun it to buy time"] },
-        { "id": "the_revenge", "localizationIds": ["str_monster_skill_explode"], "threats": ["health_damage", "stress"], "description": "The Thrall self-destructs, dealing severe damage and stress to the entire party.", "counters": ["Kill it immediately", "Stun it", "Break a Guardian's protection of it"] }
+      "priorityReasons": [
+        "The Revenge deals massive health and stress damage to the entire party on the Thrall's second action.",
+        "Its explosion can cause a party wipe and is dangerous from every enemy position."
       ],
-      "effectiveResponses": ["Treat it as the default first target regardless of party health or stress.", "If it is guarded, break or stun the Guardian and keep the Thrall controlled until it can be killed."],
-      "cautions": ["Moving it does not prevent The Revenge.", "Higher-tier stun resistance makes repeated delay less reliable than killing it."],
-      "sources": [{ "title": "Official Darkest Dungeon Wiki: Drowned Thrall", "url": "https://darkestdungeon.wiki.gg/wiki/Drowned_Thrall", "verifiedAt": "2026-09-01" }]
+      "traits": [
+        "Unholy",
+        "Eldritch",
+        "Delayed self-destruct",
+        "Party-wide burst",
+        "Moderate to high stun resistance"
+      ],
+      "dangerousActions": [
+        {
+          "id": "gargling_grab",
+          "localizationIds": [
+            "str_monster_skill_bloated_swipe"
+          ],
+          "threats": [
+            "health_damage",
+            "stress"
+          ],
+          "description": "The Thrall's first action damages and stresses a frontline hero, signaling that The Revenge follows on its next action.",
+          "counters": [
+            "Kill the Thrall before its next turn",
+            "Stun it to buy time"
+          ]
+        },
+        {
+          "id": "the_revenge",
+          "localizationIds": [
+            "str_monster_skill_explode"
+          ],
+          "threats": [
+            "health_damage",
+            "stress"
+          ],
+          "description": "The Thrall self-destructs, dealing severe damage and stress to the entire party.",
+          "counters": [
+            "Kill it immediately",
+            "Stun it",
+            "Break a Guardian's protection of it"
+          ]
+        }
+      ],
+      "effectiveResponses": [
+        "Treat it as the default first target regardless of party health or stress.",
+        "If it is guarded, break or stun the Guardian and keep the Thrall controlled until it can be killed."
+      ],
+      "cautions": [
+        "Moving it does not prevent The Revenge.",
+        "Higher-tier stun resistance makes repeated delay less reliable than killing it."
+      ],
+      "sources": [
+        {
+          "title": "Official Darkest Dungeon Wiki: Drowned Thrall",
+          "url": "https://darkestdungeon.wiki.gg/wiki/Drowned_Thrall",
+          "verifiedAt": "2026-09-01"
+        }
+      ]
     },
     {
       "id": "uca_major",
       "enemyType": "elite",
       "localizationId": "str_monstername_fishman_crabby_A",
-      "aliases": ["Uca Crusher", "Uca Savage"],
-      "regions": ["cove"],
+      "aliases": [
+        "Uca Crusher",
+        "Uca Savage"
+      ],
+      "regions": [
+        "cove"
+      ],
       "dlcs": [],
       "priority": "high",
-      "priorityReasons": ["Arterial Pinch inflicts extreme bleed while reducing healing received.", "Tidal Slam can stun and knock a frontline hero three positions backward."],
-      "traits": ["Eldritch", "Large enemy", "Veteran and Champion expeditions", "High protection", "High health", "Severe bleed and movement disruption"],
-      "dangerousActions": [
-        { "id": "arterial_pinch", "localizationIds": ["str_monster_skill_the_pinch"], "threats": ["bleed", "debuff", "health_damage"], "description": "Applies catastrophic bleed and reduces healing received, with the effect able to stack.", "counters": ["Bandage or bleed cure immediately", "Blight or armor piercing", "Stun", "Protection reduction"] },
-        { "id": "tidal_slam", "localizationIds": ["str_monster_skill_pincer_smack"], "threats": ["health_damage", "stun", "movement"], "description": "Damages and stuns a frontline hero while knocking the target to the back.", "counters": ["Stun resistance", "Position-tolerant party", "Movement skills"] }
+      "priorityReasons": [
+        "Arterial Pinch inflicts extreme bleed while reducing healing received.",
+        "Tidal Slam can stun and knock a frontline hero three positions backward."
       ],
-      "effectiveResponses": ["Use blight to bypass its protection and apply protection reduction when available.", "Control it while curing Arterial Pinch rather than allowing the bleed to tick or stack."],
-      "cautions": ["Its high stun resistance makes control useful but unreliable.", "A position-dependent frontline can lose several turns after Tidal Slam."],
-      "sources": [{ "title": "Official Darkest Dungeon Wiki: Uca Major", "url": "https://darkestdungeon.wiki.gg/wiki/Uca_Major", "verifiedAt": "2026-09-01" }]
+      "traits": [
+        "Eldritch",
+        "Large enemy",
+        "Veteran and Champion expeditions",
+        "High protection",
+        "High health",
+        "Severe bleed and movement disruption"
+      ],
+      "dangerousActions": [
+        {
+          "id": "arterial_pinch",
+          "localizationIds": [
+            "str_monster_skill_the_pinch"
+          ],
+          "threats": [
+            "bleed",
+            "debuff",
+            "health_damage"
+          ],
+          "description": "Applies catastrophic bleed and reduces healing received, with the effect able to stack.",
+          "counters": [
+            "Bandage or bleed cure immediately",
+            "Blight or armor piercing",
+            "Stun",
+            "Protection reduction"
+          ]
+        },
+        {
+          "id": "tidal_slam",
+          "localizationIds": [
+            "str_monster_skill_pincer_smack"
+          ],
+          "threats": [
+            "health_damage",
+            "stun",
+            "movement"
+          ],
+          "description": "Damages and stuns a frontline hero while knocking the target to the back.",
+          "counters": [
+            "Stun resistance",
+            "Position-tolerant party",
+            "Movement skills"
+          ]
+        }
+      ],
+      "effectiveResponses": [
+        "Use blight to bypass its protection and apply protection reduction when available.",
+        "Control it while curing Arterial Pinch rather than allowing the bleed to tick or stack."
+      ],
+      "cautions": [
+        "Its high stun resistance makes control useful but unreliable.",
+        "A position-dependent frontline can lose several turns after Tidal Slam."
+      ],
+      "sources": [
+        {
+          "title": "Official Darkest Dungeon Wiki: Uca Major",
+          "url": "https://darkestdungeon.wiki.gg/wiki/Uca_Major",
+          "verifiedAt": "2026-09-01"
+        }
+      ]
     },
     {
       "id": "squiffy_ghast",
       "enemyType": "elite",
       "localizationId": "str_monstername_drowned_pirate_A",
       "aliases": [],
-      "regions": ["cove"],
+      "regions": [
+        "cove"
+      ],
       "dlcs": [],
       "priority": "critical",
-      "priorityReasons": ["Offkilter Jig inflicts heavy stress and horror on the entire party.", "Maddening Shanty adds a stress-received debuff that lasts until camp, increasing expedition-wide risk."],
-      "traits": ["Unholy", "Champion expeditions", "Fast", "High dodge", "Very high bleed and stun resistance", "Party-wide stress and horror"],
-      "dangerousActions": [
-        { "id": "maddening_shanty", "localizationIds": ["str_monster_skill_maddening_shanty"], "threats": ["stress", "debuff", "movement"], "description": "Stresses one hero, increases stress received until camp, and moves the Ghast to the front; it always targets a Jester if present.", "counters": ["Kill or control the Ghast", "Stress recovery", "High accuracy", "Move it away from the front before its follow-up"] },
-        { "id": "offkilter_jig", "localizationIds": ["str_monster_skill_offkilter_jig"], "threats": ["stress", "movement"], "description": "From the front, inflicts stress and horror on the entire party before moving the Ghast back.", "counters": ["Prevent its next action", "Move it out of the front", "Horror cure", "Stress recovery"] }
+      "priorityReasons": [
+        "Offkilter Jig inflicts heavy stress and horror on the entire party.",
+        "Maddening Shanty adds a stress-received debuff that lasts until camp, increasing expedition-wide risk."
       ],
-      "effectiveResponses": ["Treat it as an immediate Champion-tier priority and use high-accuracy attacks.", "Exploit its moderate move resistance to interrupt the front-to-back attack cycle when possible."],
-      "cautions": ["Repeated stun attempts are unreliable because of its high resistance.", "If only two enemies remain it may keep using Maddening Shanty instead of completing the usual cycle."],
-      "sources": [{ "title": "Official Darkest Dungeon Wiki: Squiffy Ghast", "url": "https://darkestdungeon.wiki.gg/wiki/Squiffy_Ghast", "verifiedAt": "2026-09-01" }]
+      "traits": [
+        "Unholy",
+        "Champion expeditions",
+        "Fast",
+        "High dodge",
+        "Very high bleed and stun resistance",
+        "Party-wide stress and horror"
+      ],
+      "dangerousActions": [
+        {
+          "id": "maddening_shanty",
+          "localizationIds": [
+            "str_monster_skill_maddening_shanty"
+          ],
+          "threats": [
+            "stress",
+            "debuff",
+            "movement"
+          ],
+          "description": "Stresses one hero, increases stress received until camp, and moves the Ghast to the front; it always targets a Jester if present.",
+          "counters": [
+            "Kill or control the Ghast",
+            "Stress recovery",
+            "High accuracy",
+            "Move it away from the front before its follow-up"
+          ]
+        },
+        {
+          "id": "offkilter_jig",
+          "localizationIds": [
+            "str_monster_skill_offkilter_jig"
+          ],
+          "threats": [
+            "stress",
+            "movement"
+          ],
+          "description": "From the front, inflicts stress and horror on the entire party before moving the Ghast back.",
+          "counters": [
+            "Prevent its next action",
+            "Move it out of the front",
+            "Horror cure",
+            "Stress recovery"
+          ]
+        }
+      ],
+      "effectiveResponses": [
+        "Treat it as an immediate Champion-tier priority and use high-accuracy attacks.",
+        "Exploit its moderate move resistance to interrupt the front-to-back attack cycle when possible."
+      ],
+      "cautions": [
+        "Repeated stun attempts are unreliable because of its high resistance.",
+        "If only two enemies remain it may keep using Maddening Shanty instead of completing the usual cycle."
+      ],
+      "sources": [
+        {
+          "title": "Official Darkest Dungeon Wiki: Squiffy Ghast",
+          "url": "https://darkestdungeon.wiki.gg/wiki/Squiffy_Ghast",
+          "verifiedAt": "2026-09-01"
+        }
+      ]
     },
     {
       "id": "cultist_brawler",
       "enemyType": "common",
       "localizationId": "str_monstername_cultist_brawler_A",
-      "aliases": ["Cultist Gladiator", "Cultist Champion"],
-      "regions": ["ruins", "warrens", "weald", "cove"],
+      "aliases": [
+        "Cultist Gladiator",
+        "Cultist Champion"
+      ],
+      "regions": [
+        "ruins",
+        "warrens",
+        "weald",
+        "cove"
+      ],
       "dlcs": [],
       "priority": "medium",
-      "priorityReasons": ["Rend for the Old Gods inflicts bleed and increases stress received.", "It deals increased damage to heroes marked by a Cultist Acolyte."],
-      "traits": ["Human", "Frontline attacker", "Bleed", "Marked-target synergy"],
-      "dangerousActions": [
-        { "id": "rend_for_the_old_gods", "localizationIds": ["str_monster_skill_brawler_claw"], "threats": ["health_damage", "bleed", "debuff", "mark"], "description": "A frontline attack that bleeds, increases stress received, and deals increased damage to marked heroes.", "counters": ["Kill or control the Acolyte", "Clear marks", "Bleed cure", "Push the Brawler backward"] }
+      "priorityReasons": [
+        "Rend for the Old Gods inflicts bleed and increases stress received.",
+        "It deals increased damage to heroes marked by a Cultist Acolyte."
       ],
-      "effectiveResponses": ["Remove its supporting Acolyte first when stress and marks are the larger threat.", "Push it to the rear to force the weak Stumbling Scratch."],
-      "cautions": ["Its priority rises when a vulnerable frontline hero is marked."],
-      "sources": [{ "title": "Official Darkest Dungeon Wiki: Cultist Brawler", "url": "https://darkestdungeon.wiki.gg/wiki/Cultist_Brawler", "verifiedAt": "2026-09-01" }]
+      "traits": [
+        "Human",
+        "Frontline attacker",
+        "Bleed",
+        "Marked-target synergy"
+      ],
+      "dangerousActions": [
+        {
+          "id": "rend_for_the_old_gods",
+          "localizationIds": [
+            "str_monster_skill_brawler_claw"
+          ],
+          "threats": [
+            "health_damage",
+            "bleed",
+            "debuff",
+            "mark"
+          ],
+          "description": "A frontline attack that bleeds, increases stress received, and deals increased damage to marked heroes.",
+          "counters": [
+            "Kill or control the Acolyte",
+            "Clear marks",
+            "Bleed cure",
+            "Push the Brawler backward"
+          ]
+        }
+      ],
+      "effectiveResponses": [
+        "Remove its supporting Acolyte first when stress and marks are the larger threat.",
+        "Push it to the rear to force the weak Stumbling Scratch."
+      ],
+      "cautions": [
+        "Its priority rises when a vulnerable frontline hero is marked."
+      ],
+      "sources": [
+        {
+          "title": "Official Darkest Dungeon Wiki: Cultist Brawler",
+          "url": "https://darkestdungeon.wiki.gg/wiki/Cultist_Brawler",
+          "verifiedAt": "2026-09-01"
+        }
+      ]
     },
     {
       "id": "cultist_acolyte",
       "enemyType": "common",
       "localizationId": "str_monstername_cultist_witch_A",
-      "aliases": ["Cultist Enchantress", "Cultist Witch"],
-      "regions": ["ruins", "warrens", "weald", "cove"],
+      "aliases": [
+        "Cultist Enchantress",
+        "Cultist Witch"
+      ],
+      "regions": [
+        "ruins",
+        "warrens",
+        "weald",
+        "cove"
+      ],
       "dlcs": [],
       "priority": "high",
-      "priorityReasons": ["Stressful Incantation creates persistent expedition risk and later marks targets for Brawlers.", "Pull and push attacks disrupt party formation while adding stress at higher difficulty."],
-      "traits": ["Human", "Fast stress dealer", "Party movement", "Mark support", "High dodge"],
-      "dangerousActions": [
-        { "id": "stressful_incantation", "localizationIds": ["str_monster_skill_cultist_incantation"], "threats": ["stress", "mark", "other"], "description": "Inflicts heavy stress, reduces torchlight, and marks its target at Veteran and Champion difficulty.", "counters": ["Kill or stun the Acolyte", "Clear marks", "Stress recovery"] },
-        { "id": "eldritch_pull_eldritch_push", "localizationIds": ["str_monster_skill_cultist_pull","str_monster_skill_cultist_push"], "threats": ["movement", "stress", "health_damage"], "description": "Moves a backline hero forward or a frontline hero backward, adding stress at higher difficulty.", "counters": ["Position-tolerant party", "Movement resistance", "Repositioning skills"] }
+      "priorityReasons": [
+        "Stressful Incantation creates persistent expedition risk and later marks targets for Brawlers.",
+        "Pull and push attacks disrupt party formation while adding stress at higher difficulty."
       ],
-      "effectiveResponses": ["Prioritize it before the Brawler it supports.", "Use high-accuracy backline damage or stun."],
-      "cautions": ["Moving it forward does not disable its stress or push abilities because they remain usable from the front."],
-      "sources": [{ "title": "Official Darkest Dungeon Wiki: Cultist Acolyte", "url": "https://darkestdungeon.wiki.gg/wiki/Cultist_Acolyte", "verifiedAt": "2026-09-01" }]
+      "traits": [
+        "Human",
+        "Fast stress dealer",
+        "Party movement",
+        "Mark support",
+        "High dodge"
+      ],
+      "dangerousActions": [
+        {
+          "id": "stressful_incantation",
+          "localizationIds": [
+            "str_monster_skill_cultist_incantation"
+          ],
+          "threats": [
+            "stress",
+            "mark",
+            "other"
+          ],
+          "description": "Inflicts heavy stress, reduces torchlight, and marks its target at Veteran and Champion difficulty.",
+          "counters": [
+            "Kill or stun the Acolyte",
+            "Clear marks",
+            "Stress recovery"
+          ]
+        },
+        {
+          "id": "eldritch_pull_eldritch_push",
+          "localizationIds": [
+            "str_monster_skill_cultist_pull",
+            "str_monster_skill_cultist_push"
+          ],
+          "threats": [
+            "movement",
+            "stress",
+            "health_damage"
+          ],
+          "description": "Moves a backline hero forward or a frontline hero backward, adding stress at higher difficulty.",
+          "counters": [
+            "Position-tolerant party",
+            "Movement resistance",
+            "Repositioning skills"
+          ]
+        }
+      ],
+      "effectiveResponses": [
+        "Prioritize it before the Brawler it supports.",
+        "Use high-accuracy backline damage or stun."
+      ],
+      "cautions": [
+        "Moving it forward does not disable its stress or push abilities because they remain usable from the front."
+      ],
+      "sources": [
+        {
+          "title": "Official Darkest Dungeon Wiki: Cultist Acolyte",
+          "url": "https://darkestdungeon.wiki.gg/wiki/Cultist_Acolyte",
+          "verifiedAt": "2026-09-01"
+        }
+      ]
     },
     {
       "id": "brigand_cutthroat",
       "enemyType": "common",
       "localizationId": "str_monstername_brigand_cutthroat_A",
-      "aliases": ["Outlaw Cutthroat", "Infamous Cutthroat"],
-      "regions": ["ruins", "warrens", "weald", "cove"],
+      "aliases": [
+        "Outlaw Cutthroat",
+        "Infamous Cutthroat"
+      ],
+      "regions": [
+        "ruins",
+        "warrens",
+        "weald",
+        "cove"
+      ],
       "dlcs": [],
       "priority": "high",
-      "priorityReasons": ["Its attacks have high critical potential and reach broadly.", "Slice and Dice reduces bleed resistance before Shank and Bloodletter attacks exploit it."],
-      "traits": ["Human", "High critical chance", "Bleed setup", "Low health"],
-      "dangerousActions": [
-        { "id": "slice_and_dice", "localizationIds": ["str_monster_skill_double_slice"], "threats": ["health_damage", "debuff"], "description": "Hits both frontline heroes and reduces bleed resistance.", "counters": ["Kill or stun the Cutthroat", "Bleed protection", "Push it to enemy position 4"] },
-        { "id": "shank", "localizationIds": ["str_monster_skill_bandit_stabby"], "threats": ["health_damage", "bleed", "mark"], "description": "A high-damage bleed attack with broad targeting and a preference for exposed or marked heroes.", "counters": ["Bleed cure", "Guard", "Fast focused damage"] }
+      "priorityReasons": [
+        "Its attacks have high critical potential and reach broadly.",
+        "Slice and Dice reduces bleed resistance before Shank and Bloodletter attacks exploit it."
       ],
-      "effectiveResponses": ["Kill it before the tougher Bloodletter when its damage is not otherwise controlled.", "Push it to position 4 to force Harmless Poke."],
-      "cautions": ["Its bleed-resistance debuff also increases the threat of a paired Bloodletter."],
-      "sources": [{ "title": "Official Darkest Dungeon Wiki: Brigand Cutthroat", "url": "https://darkestdungeon.wiki.gg/wiki/Brigand_Cutthroat", "verifiedAt": "2026-09-01" }]
+      "traits": [
+        "Human",
+        "High critical chance",
+        "Bleed setup",
+        "Low health"
+      ],
+      "dangerousActions": [
+        {
+          "id": "slice_and_dice",
+          "localizationIds": [
+            "str_monster_skill_double_slice"
+          ],
+          "threats": [
+            "health_damage",
+            "debuff"
+          ],
+          "description": "Hits both frontline heroes and reduces bleed resistance.",
+          "counters": [
+            "Kill or stun the Cutthroat",
+            "Bleed protection",
+            "Push it to enemy position 4"
+          ]
+        },
+        {
+          "id": "shank",
+          "localizationIds": [
+            "str_monster_skill_bandit_stabby"
+          ],
+          "threats": [
+            "health_damage",
+            "bleed",
+            "mark"
+          ],
+          "description": "A high-damage bleed attack with broad targeting and a preference for exposed or marked heroes.",
+          "counters": [
+            "Bleed cure",
+            "Guard",
+            "Fast focused damage"
+          ]
+        }
+      ],
+      "effectiveResponses": [
+        "Kill it before the tougher Bloodletter when its damage is not otherwise controlled.",
+        "Push it to position 4 to force Harmless Poke."
+      ],
+      "cautions": [
+        "Its bleed-resistance debuff also increases the threat of a paired Bloodletter."
+      ],
+      "sources": [
+        {
+          "title": "Official Darkest Dungeon Wiki: Brigand Cutthroat",
+          "url": "https://darkestdungeon.wiki.gg/wiki/Brigand_Cutthroat",
+          "verifiedAt": "2026-09-01"
+        }
+      ]
     },
     {
       "id": "brigand_fusilier",
       "enemyType": "common",
       "localizationId": "str_monstername_brigand_fusilier_A",
-      "aliases": ["Outlaw Fusilier", "Infamous Fusilier"],
-      "regions": ["ruins", "warrens", "weald", "cove"],
+      "aliases": [
+        "Outlaw Fusilier",
+        "Infamous Fusilier"
+      ],
+      "regions": [
+        "ruins",
+        "warrens",
+        "weald",
+        "cove"
+      ],
       "dlcs": [],
       "priority": "high",
-      "priorityReasons": ["Blanket Fire damages the entire party and repeatedly reduces dodge.", "Its speed and backline position let the debuff accumulate while allies exploit reduced evasion."],
-      "traits": ["Human", "Fast backline attacker", "Party-wide damage", "Dodge debuff", "Stealth at higher difficulty"],
-      "dangerousActions": [
-        { "id": "blanket_fire", "localizationIds": ["str_monster_skill_blunderbuss_shot"], "threats": ["health_damage", "debuff"], "description": "Attacks all four heroes and reduces dodge.", "counters": ["Backline damage", "Stun", "Pull to enemy position 1", "Riposte"] }
+      "priorityReasons": [
+        "Blanket Fire damages the entire party and repeatedly reduces dodge.",
+        "Its speed and backline position let the debuff accumulate while allies exploit reduced evasion."
       ],
-      "effectiveResponses": ["Pull it to the front to force the weak Rushed Shot while exposing other brigands.", "Use area riposte to punish its party-wide attack."],
-      "cautions": ["Veteran and Champion variants begin stealthed."],
-      "sources": [{ "title": "Official Darkest Dungeon Wiki: Brigand Fusilier", "url": "https://darkestdungeon.wiki.gg/wiki/Brigand_Fusilier", "verifiedAt": "2026-09-01" }]
+      "traits": [
+        "Human",
+        "Fast backline attacker",
+        "Party-wide damage",
+        "Dodge debuff",
+        "Stealth at higher difficulty"
+      ],
+      "dangerousActions": [
+        {
+          "id": "blanket_fire",
+          "localizationIds": [
+            "str_monster_skill_blunderbuss_shot"
+          ],
+          "threats": [
+            "health_damage",
+            "debuff"
+          ],
+          "description": "Attacks all four heroes and reduces dodge.",
+          "counters": [
+            "Backline damage",
+            "Stun",
+            "Pull to enemy position 1",
+            "Riposte"
+          ]
+        }
+      ],
+      "effectiveResponses": [
+        "Pull it to the front to force the weak Rushed Shot while exposing other brigands.",
+        "Use area riposte to punish its party-wide attack."
+      ],
+      "cautions": [
+        "Veteran and Champion variants begin stealthed."
+      ],
+      "sources": [
+        {
+          "title": "Official Darkest Dungeon Wiki: Brigand Fusilier",
+          "url": "https://darkestdungeon.wiki.gg/wiki/Brigand_Fusilier",
+          "verifiedAt": "2026-09-01"
+        }
+      ]
     },
     {
       "id": "brigand_bloodletter",
       "enemyType": "elite",
       "localizationId": "str_monstername_brigand_blood_A",
-      "aliases": ["Outlaw Bloodletter", "Infamous Bloodletter"],
-      "regions": ["ruins", "warrens", "weald", "cove"],
+      "aliases": [
+        "Outlaw Bloodletter",
+        "Infamous Bloodletter"
+      ],
+      "regions": [
+        "ruins",
+        "warrens",
+        "weald",
+        "cove"
+      ],
       "dlcs": [],
       "priority": "medium",
-      "priorityReasons": ["Rain of Whips applies bleed and stress across the party.", "Its large health pool often makes removing its fragile allies first more efficient."],
-      "traits": ["Human", "Large enemy", "High health", "Party-wide bleed", "High move resistance"],
-      "dangerousActions": [
-        { "id": "rain_of_whips", "localizationIds": ["str_monster_skill_whip_party"], "threats": ["health_damage", "bleed", "stress"], "description": "Attacks the whole party with bleed and stress.", "counters": ["Bleed cure", "Damage reduction", "Eliminate the Cutthroat that encourages this attack"] },
-        { "id": "point_blank_shot", "localizationIds": ["str_monster_skill_point_blank_shot"], "threats": ["health_damage", "movement"], "description": "A high-critical frontline shot that knocks the first hero backward.", "counters": ["Keep another enemy or corpse in front of it", "Guard", "Move the Bloodletter away from position 1"] }
+      "priorityReasons": [
+        "Rain of Whips applies bleed and stress across the party.",
+        "Its large health pool often makes removing its fragile allies first more efficient."
       ],
-      "effectiveResponses": ["Remove fragile Cutthroats and Fusiliers first when Point Blank Shot is contained.", "Use damage-over-time and debuffs while reducing its action value."],
-      "cautions": ["Its priority rises sharply when it occupies enemy position 1 against an exposed hero."],
-      "sources": [{ "title": "Official Darkest Dungeon Wiki: Brigand Bloodletter", "url": "https://darkestdungeon.wiki.gg/wiki/Brigand_Bloodletter", "verifiedAt": "2026-09-01" }]
+      "traits": [
+        "Human",
+        "Large enemy",
+        "High health",
+        "Party-wide bleed",
+        "High move resistance"
+      ],
+      "dangerousActions": [
+        {
+          "id": "rain_of_whips",
+          "localizationIds": [
+            "str_monster_skill_whip_party"
+          ],
+          "threats": [
+            "health_damage",
+            "bleed",
+            "stress"
+          ],
+          "description": "Attacks the whole party with bleed and stress.",
+          "counters": [
+            "Bleed cure",
+            "Damage reduction",
+            "Eliminate the Cutthroat that encourages this attack"
+          ]
+        },
+        {
+          "id": "point_blank_shot",
+          "localizationIds": [
+            "str_monster_skill_point_blank_shot"
+          ],
+          "threats": [
+            "health_damage",
+            "movement"
+          ],
+          "description": "A high-critical frontline shot that knocks the first hero backward.",
+          "counters": [
+            "Keep another enemy or corpse in front of it",
+            "Guard",
+            "Move the Bloodletter away from position 1"
+          ]
+        }
+      ],
+      "effectiveResponses": [
+        "Remove fragile Cutthroats and Fusiliers first when Point Blank Shot is contained.",
+        "Use damage-over-time and debuffs while reducing its action value."
+      ],
+      "cautions": [
+        "Its priority rises sharply when it occupies enemy position 1 against an exposed hero."
+      ],
+      "sources": [
+        {
+          "title": "Official Darkest Dungeon Wiki: Brigand Bloodletter",
+          "url": "https://darkestdungeon.wiki.gg/wiki/Brigand_Bloodletter",
+          "verifiedAt": "2026-09-01"
+        }
+      ]
     },
     {
       "id": "brigand_raider",
       "enemyType": "elite",
       "localizationId": "str_monstername_brigand_raider_D",
       "aliases": [],
-      "regions": ["ruins", "warrens", "weald", "cove"],
+      "regions": [
+        "ruins",
+        "warrens",
+        "weald",
+        "cove"
+      ],
       "dlcs": [],
       "priority": "high",
-      "priorityReasons": ["This Champion-tier Cutthroat variant combines high damage, bleed, and protection.", "Its Shank can mark a hero and create dangerous regional synergies."],
-      "traits": ["Human", "Champion expeditions", "High dodge", "Protection", "Bleed and mark pressure"],
-      "dangerousActions": [
-        { "id": "shank", "localizationIds": ["str_monster_skill_bandit_stabby"], "threats": ["health_damage", "bleed", "mark"], "description": "Deals heavy damage and bleed and can mark its target for allied follow-up attacks.", "counters": ["Kill or disable the Raider", "Clear marks", "Bleed cure", "Push it to position 4"] }
+      "priorityReasons": [
+        "This Champion-tier Cutthroat variant combines high damage, bleed, and protection.",
+        "Its Shank can mark a hero and create dangerous regional synergies."
       ],
-      "effectiveResponses": ["Treat it as a priority Champion attacker.", "Use high accuracy and armor piercing, or push it to the rear."],
-      "cautions": ["A mark can enable region-specific threats such as Rabid Gnashers even when no other brigand uses it."],
-      "sources": [{ "title": "Official Darkest Dungeon Wiki: Brigand Raider", "url": "https://darkestdungeon.wiki.gg/wiki/Brigand_Raider", "verifiedAt": "2026-09-01" }]
+      "traits": [
+        "Human",
+        "Champion expeditions",
+        "High dodge",
+        "Protection",
+        "Bleed and mark pressure"
+      ],
+      "dangerousActions": [
+        {
+          "id": "shank",
+          "localizationIds": [
+            "str_monster_skill_bandit_stabby"
+          ],
+          "threats": [
+            "health_damage",
+            "bleed",
+            "mark"
+          ],
+          "description": "Deals heavy damage and bleed and can mark its target for allied follow-up attacks.",
+          "counters": [
+            "Kill or disable the Raider",
+            "Clear marks",
+            "Bleed cure",
+            "Push it to position 4"
+          ]
+        }
+      ],
+      "effectiveResponses": [
+        "Treat it as a priority Champion attacker.",
+        "Use high accuracy and armor piercing, or push it to the rear."
+      ],
+      "cautions": [
+        "A mark can enable region-specific threats such as Rabid Gnashers even when no other brigand uses it."
+      ],
+      "sources": [
+        {
+          "title": "Official Darkest Dungeon Wiki: Brigand Raider",
+          "url": "https://darkestdungeon.wiki.gg/wiki/Brigand_Raider",
+          "verifiedAt": "2026-09-01"
+        }
+      ]
     },
     {
       "id": "brigand_hunter",
       "enemyType": "elite",
       "localizationId": "str_monstername_brigand_hunter_D",
       "aliases": [],
-      "regions": ["ruins", "warrens", "weald", "cove"],
+      "regions": [
+        "ruins",
+        "warrens",
+        "weald",
+        "cove"
+      ],
       "dlcs": [],
       "priority": "high",
-      "priorityReasons": ["Its improved Blanket Fire deals party-wide damage, stress, and a dodge debuff.", "High speed and starting stealth make it difficult to prevent the first attack."],
-      "traits": ["Human", "Champion expeditions", "Fast", "Stealth", "Party-wide damage and stress"],
-      "dangerousActions": [
-        { "id": "blanket_fire", "localizationIds": ["str_monster_skill_blunderbuss_shot"], "threats": ["health_damage", "stress", "debuff"], "description": "Attacks every hero, adds stress, and reduces dodge.", "counters": ["Destealth", "Backline control", "Pull to enemy position 1", "Riposte"] }
+      "priorityReasons": [
+        "Its improved Blanket Fire deals party-wide damage, stress, and a dodge debuff.",
+        "High speed and starting stealth make it difficult to prevent the first attack."
       ],
-      "effectiveResponses": ["Prioritize it before durable brigands.", "Pulling it forward forces the weaker Rushed Shot."],
-      "cautions": ["Without destealth, plan to control its allies until the Hunter becomes targetable."],
-      "sources": [{ "title": "Official Darkest Dungeon Wiki: Brigand Hunter", "url": "https://darkestdungeon.wiki.gg/wiki/Brigand_Hunter", "verifiedAt": "2026-09-01" }]
+      "traits": [
+        "Human",
+        "Champion expeditions",
+        "Fast",
+        "Stealth",
+        "Party-wide damage and stress"
+      ],
+      "dangerousActions": [
+        {
+          "id": "blanket_fire",
+          "localizationIds": [
+            "str_monster_skill_blunderbuss_shot"
+          ],
+          "threats": [
+            "health_damage",
+            "stress",
+            "debuff"
+          ],
+          "description": "Attacks every hero, adds stress, and reduces dodge.",
+          "counters": [
+            "Destealth",
+            "Backline control",
+            "Pull to enemy position 1",
+            "Riposte"
+          ]
+        }
+      ],
+      "effectiveResponses": [
+        "Prioritize it before durable brigands.",
+        "Pulling it forward forces the weaker Rushed Shot."
+      ],
+      "cautions": [
+        "Without destealth, plan to control its allies until the Hunter becomes targetable."
+      ],
+      "sources": [
+        {
+          "title": "Official Darkest Dungeon Wiki: Brigand Hunter",
+          "url": "https://darkestdungeon.wiki.gg/wiki/Brigand_Hunter",
+          "verifiedAt": "2026-09-01"
+        }
+      ]
     },
     {
       "id": "madman",
       "enemyType": "common",
       "localizationId": "str_monstername_madman_A",
-      "aliases": ["Frothing Madman", "Raving Madman"],
-      "regions": ["ruins", "warrens", "weald", "cove"],
+      "aliases": [
+        "Frothing Madman",
+        "Raving Madman"
+      ],
+      "regions": [
+        "ruins",
+        "warrens",
+        "weald",
+        "cove"
+      ],
       "dlcs": [],
       "priority": "critical",
-      "priorityReasons": ["Doomsay applies stress across the entire party.", "Accusation applies horror and a stacking stress-received debuff that lasts until camp."],
-      "traits": ["Human", "Very fast", "High dodge", "Party-wide stress", "Expedition-long stress debuff"],
-      "dangerousActions": [
-        { "id": "doomsay", "localizationIds": ["str_monster_skill_doomsay"], "threats": ["stress"], "description": "Attempts to stress every hero at once.", "counters": ["Kill or stun the Madman", "Stress recovery", "High accuracy"] },
-        { "id": "accusation", "localizationIds": ["str_monster_skill_accusation"], "threats": ["stress", "debuff"], "description": "Applies horror and increases stress received until the next camp, with a bias toward already-stressed heroes.", "counters": ["Kill or stun the Madman", "Horror cure", "Camp to remove the debuff"] }
+      "priorityReasons": [
+        "Doomsay applies stress across the entire party.",
+        "Accusation applies horror and a stacking stress-received debuff that lasts until camp."
       ],
-      "effectiveResponses": ["Treat it as an immediate priority in nearly every formation.", "Use accuracy support or dodge reduction to secure the kill."],
-      "cautions": ["Its attacks work from every enemy position, so movement alone does not disable it."],
-      "sources": [{ "title": "Official Darkest Dungeon Wiki: Madman", "url": "https://darkestdungeon.wiki.gg/wiki/Madman", "verifiedAt": "2026-09-01" }]
+      "traits": [
+        "Human",
+        "Very fast",
+        "High dodge",
+        "Party-wide stress",
+        "Expedition-long stress debuff"
+      ],
+      "dangerousActions": [
+        {
+          "id": "doomsay",
+          "localizationIds": [
+            "str_monster_skill_doomsay"
+          ],
+          "threats": [
+            "stress"
+          ],
+          "description": "Attempts to stress every hero at once.",
+          "counters": [
+            "Kill or stun the Madman",
+            "Stress recovery",
+            "High accuracy"
+          ]
+        },
+        {
+          "id": "accusation",
+          "localizationIds": [
+            "str_monster_skill_accusation"
+          ],
+          "threats": [
+            "stress",
+            "debuff"
+          ],
+          "description": "Applies horror and increases stress received until the next camp, with a bias toward already-stressed heroes.",
+          "counters": [
+            "Kill or stun the Madman",
+            "Horror cure",
+            "Camp to remove the debuff"
+          ]
+        }
+      ],
+      "effectiveResponses": [
+        "Treat it as an immediate priority in nearly every formation.",
+        "Use accuracy support or dodge reduction to secure the kill."
+      ],
+      "cautions": [
+        "Its attacks work from every enemy position, so movement alone does not disable it."
+      ],
+      "sources": [
+        {
+          "title": "Official Darkest Dungeon Wiki: Madman",
+          "url": "https://darkestdungeon.wiki.gg/wiki/Madman",
+          "verifiedAt": "2026-09-01"
+        }
+      ]
     },
     {
       "id": "maggot",
       "enemyType": "common",
       "localizationId": "str_monstername_maggot_A",
-      "aliases": ["Twitching Maggot", "Bulbous Maggot"],
-      "regions": ["ruins", "warrens", "weald", "cove"],
+      "aliases": [
+        "Twitching Maggot",
+        "Bulbous Maggot"
+      ],
+      "regions": [
+        "ruins",
+        "warrens",
+        "weald",
+        "cove"
+      ],
       "dlcs": [],
       "priority": "medium",
-      "priorityReasons": ["Grave Nibble can stun, stress, and spread disease despite low direct damage.", "Its very low health makes removing this persistent risk inexpensive."],
-      "traits": ["Beast", "Low health", "No corpse", "High stun resistance", "Disease source"],
-      "dangerousActions": [
-        { "id": "grave_nibble", "localizationIds": ["str_monster_skill_grave_nibble"], "threats": ["health_damage", "stress", "stun", "disease"], "description": "A low-accuracy attack against any hero that can stun, stress, and inflict a random disease.", "counters": ["Direct damage", "Disease resistance", "Stun resistance"] }
+      "priorityReasons": [
+        "Grave Nibble can stun, stress, and spread disease despite low direct damage.",
+        "Its very low health makes removing this persistent risk inexpensive."
       ],
-      "effectiveResponses": ["Kill it with direct damage rather than trying to stun it.", "Its death leaves no corpse, making cleanup straightforward."],
-      "cautions": ["A pack left alive can generate several stun or disease attempts despite each Maggot's weak damage."],
-      "sources": [{ "title": "Official Darkest Dungeon Wiki: Maggot", "url": "https://darkestdungeon.wiki.gg/wiki/Maggot", "verifiedAt": "2026-09-01" }]
+      "traits": [
+        "Beast",
+        "Low health",
+        "No corpse",
+        "High stun resistance",
+        "Disease source"
+      ],
+      "dangerousActions": [
+        {
+          "id": "grave_nibble",
+          "localizationIds": [
+            "str_monster_skill_grave_nibble"
+          ],
+          "threats": [
+            "health_damage",
+            "stress",
+            "stun",
+            "disease"
+          ],
+          "description": "A low-accuracy attack against any hero that can stun, stress, and inflict a random disease.",
+          "counters": [
+            "Direct damage",
+            "Disease resistance",
+            "Stun resistance"
+          ]
+        }
+      ],
+      "effectiveResponses": [
+        "Kill it with direct damage rather than trying to stun it.",
+        "Its death leaves no corpse, making cleanup straightforward."
+      ],
+      "cautions": [
+        "A pack left alive can generate several stun or disease attempts despite each Maggot's weak damage."
+      ],
+      "sources": [
+        {
+          "title": "Official Darkest Dungeon Wiki: Maggot",
+          "url": "https://darkestdungeon.wiki.gg/wiki/Maggot",
+          "verifiedAt": "2026-09-01"
+        }
+      ]
     },
     {
       "id": "webber",
       "enemyType": "common",
       "localizationId": "str_monstername_spider_webber_A",
-      "aliases": ["Overgrown Webber", "Ancient Webber"],
-      "regions": ["ruins", "warrens", "weald"],
+      "aliases": [
+        "Overgrown Webber",
+        "Ancient Webber"
+      ],
+      "regions": [
+        "ruins",
+        "warrens",
+        "weald"
+      ],
       "dlcs": [],
       "priority": "high",
-      "priorityReasons": ["Web stuns and marks a hero while reducing blight resistance.", "The mark lets both Webbers and paired Spitters deal double damage."],
-      "traits": ["Beast", "Fast", "High dodge", "Mark and stun setup", "Does not normally appear in Cove"],
-      "dangerousActions": [
-        { "id": "web", "localizationIds": ["str_monster_skill_spider_web"], "threats": ["stun", "mark", "debuff", "health_damage"], "description": "Stuns and marks any hero while reducing blight resistance.", "counters": ["Kill the Webber first", "Clear marks", "Stun resistance", "High accuracy"] },
-        { "id": "bite", "localizationIds": ["str_monster_skill_spider_bite"], "threats": ["health_damage", "blight", "mark"], "description": "Blights its target and deals double damage against marked heroes.", "counters": ["Clear marks", "Blight cure", "Guard"] }
+      "priorityReasons": [
+        "Web stuns and marks a hero while reducing blight resistance.",
+        "The mark lets both Webbers and paired Spitters deal double damage."
       ],
-      "effectiveResponses": ["Kill Webbers before Spitters to prevent the mark setup.", "Use accuracy support against their dodge."],
-      "cautions": ["Every enemy and hero position is valid for both actions, so movement does not disable it."],
-      "sources": [{ "title": "Official Darkest Dungeon Wiki: Webber", "url": "https://darkestdungeon.wiki.gg/wiki/Webber", "verifiedAt": "2026-09-01" }]
+      "traits": [
+        "Beast",
+        "Fast",
+        "High dodge",
+        "Mark and stun setup",
+        "Does not normally appear in Cove"
+      ],
+      "dangerousActions": [
+        {
+          "id": "web",
+          "localizationIds": [
+            "str_monster_skill_spider_web"
+          ],
+          "threats": [
+            "stun",
+            "mark",
+            "debuff",
+            "health_damage"
+          ],
+          "description": "Stuns and marks any hero while reducing blight resistance.",
+          "counters": [
+            "Kill the Webber first",
+            "Clear marks",
+            "Stun resistance",
+            "High accuracy"
+          ]
+        },
+        {
+          "id": "bite",
+          "localizationIds": [
+            "str_monster_skill_spider_bite"
+          ],
+          "threats": [
+            "health_damage",
+            "blight",
+            "mark"
+          ],
+          "description": "Blights its target and deals double damage against marked heroes.",
+          "counters": [
+            "Clear marks",
+            "Blight cure",
+            "Guard"
+          ]
+        }
+      ],
+      "effectiveResponses": [
+        "Kill Webbers before Spitters to prevent the mark setup.",
+        "Use accuracy support against their dodge."
+      ],
+      "cautions": [
+        "Every enemy and hero position is valid for both actions, so movement does not disable it."
+      ],
+      "sources": [
+        {
+          "title": "Official Darkest Dungeon Wiki: Webber",
+          "url": "https://darkestdungeon.wiki.gg/wiki/Webber",
+          "verifiedAt": "2026-09-01"
+        }
+      ]
     },
     {
       "id": "spitter",
       "enemyType": "common",
       "localizationId": "str_monstername_spider_spitter_A",
-      "aliases": ["Overgrown Spitter", "Ancient Spitter"],
-      "regions": ["ruins", "warrens", "weald"],
+      "aliases": [
+        "Overgrown Spitter",
+        "Ancient Spitter"
+      ],
+      "regions": [
+        "ruins",
+        "warrens",
+        "weald"
+      ],
       "dlcs": [],
       "priority": "high",
-      "priorityReasons": ["Spit deals double damage to marked heroes while applying blight and an accuracy debuff.", "Its high dodge and backline position can make a marked-target burst difficult to prevent."],
-      "traits": ["Beast", "Fast", "High dodge", "Backline blight attacker", "Marked-target synergy", "Does not normally appear in Cove"],
-      "dangerousActions": [
-        { "id": "spit", "localizationIds": ["str_monster_skill_spider_spit"], "threats": ["health_damage", "blight", "debuff", "mark"], "description": "A high-critical ranged attack that doubles damage against marked heroes and applies blight and reduced accuracy.", "counters": ["Kill the Webber applying marks", "Clear marks", "Pull the Spitter forward", "Blight cure"] }
+      "priorityReasons": [
+        "Spit deals double damage to marked heroes while applying blight and an accuracy debuff.",
+        "Its high dodge and backline position can make a marked-target burst difficult to prevent."
       ],
-      "effectiveResponses": ["Remove Webbers first when they can create a mark, then kill or pull the Spitter.", "Use high accuracy against its dodge."],
-      "cautions": ["Pulling it forward replaces Spit with Bite, but Bite still blights and deals double damage to marked heroes."],
-      "sources": [{ "title": "Official Darkest Dungeon Wiki: Spitter", "url": "https://darkestdungeon.wiki.gg/wiki/Spitter", "verifiedAt": "2026-09-01" }]
+      "traits": [
+        "Beast",
+        "Fast",
+        "High dodge",
+        "Backline blight attacker",
+        "Marked-target synergy",
+        "Does not normally appear in Cove"
+      ],
+      "dangerousActions": [
+        {
+          "id": "spit",
+          "localizationIds": [
+            "str_monster_skill_spider_spit"
+          ],
+          "threats": [
+            "health_damage",
+            "blight",
+            "debuff",
+            "mark"
+          ],
+          "description": "A high-critical ranged attack that doubles damage against marked heroes and applies blight and reduced accuracy.",
+          "counters": [
+            "Kill the Webber applying marks",
+            "Clear marks",
+            "Pull the Spitter forward",
+            "Blight cure"
+          ]
+        }
+      ],
+      "effectiveResponses": [
+        "Remove Webbers first when they can create a mark, then kill or pull the Spitter.",
+        "Use high accuracy against its dodge."
+      ],
+      "cautions": [
+        "Pulling it forward replaces Spit with Bite, but Bite still blights and deals double damage to marked heroes."
+      ],
+      "sources": [
+        {
+          "title": "Official Darkest Dungeon Wiki: Spitter",
+          "url": "https://darkestdungeon.wiki.gg/wiki/Spitter",
+          "verifiedAt": "2026-09-01"
+        }
+      ]
     },
     {
       "id": "bone_rabble",
       "enemyType": "common",
       "localizationId": "str_monstername_skeleton_common_A",
-      "aliases": ["Bone Conscript", "Bone Militia"],
-      "regions": ["ruins", "warrens", "weald", "cove"],
+      "aliases": [
+        "Bone Conscript",
+        "Bone Militia"
+      ],
+      "regions": [
+        "ruins",
+        "warrens",
+        "weald",
+        "cove"
+      ],
       "dlcs": [],
       "priority": "low",
-      "priorityReasons": ["It is slow, fragile, and inaccurate with little direct threat.", "Its main value is occupying space and leaving a corpse that screens more urgent enemies."],
-      "traits": ["Unholy", "Very high bleed resistance", "Low health", "Low speed", "Common in Ruins and uncommon elsewhere"],
-      "dangerousActions": [
-        { "id": "bump_in_the_night", "localizationIds": ["str_monster_skill_cudgel"], "threats": ["health_damage", "debuff"], "description": "A weak frontline attack that reduces dodge at higher difficulty.", "counters": ["Leave it until urgent enemies are controlled", "Blight", "Direct damage"] }
+      "priorityReasons": [
+        "It is slow, fragile, and inaccurate with little direct threat.",
+        "Its main value is occupying space and leaving a corpse that screens more urgent enemies."
       ],
-      "effectiveResponses": ["Attack the higher-priority enemies it screens when possible.", "Use blight or direct damage rather than bleed."],
-      "cautions": ["Its corpse may continue blocking access to the backline after the Rabble dies."],
-      "sources": [{ "title": "Official Darkest Dungeon Wiki: Bone Rabble", "url": "https://darkestdungeon.wiki.gg/wiki/Bone_Rabble", "verifiedAt": "2026-09-01" }]
+      "traits": [
+        "Unholy",
+        "Very high bleed resistance",
+        "Low health",
+        "Low speed",
+        "Common in Ruins and uncommon elsewhere"
+      ],
+      "dangerousActions": [
+        {
+          "id": "bump_in_the_night",
+          "localizationIds": [
+            "str_monster_skill_cudgel"
+          ],
+          "threats": [
+            "health_damage",
+            "debuff"
+          ],
+          "description": "A weak frontline attack that reduces dodge at higher difficulty.",
+          "counters": [
+            "Leave it until urgent enemies are controlled",
+            "Blight",
+            "Direct damage"
+          ]
+        }
+      ],
+      "effectiveResponses": [
+        "Attack the higher-priority enemies it screens when possible.",
+        "Use blight or direct damage rather than bleed."
+      ],
+      "cautions": [
+        "Its corpse may continue blocking access to the backline after the Rabble dies."
+      ],
+      "sources": [
+        {
+          "title": "Official Darkest Dungeon Wiki: Bone Rabble",
+          "url": "https://darkestdungeon.wiki.gg/wiki/Bone_Rabble",
+          "verifiedAt": "2026-09-01"
+        }
+      ]
     },
     {
       "id": "ghoul",
       "enemyType": "elite",
       "localizationId": "str_monstername_ghoul_A",
-      "aliases": ["Slavering Ghoul", "Insatiable Ghoul"],
-      "regions": ["ruins", "warrens", "weald", "cove"],
+      "aliases": [
+        "Slavering Ghoul",
+        "Insatiable Ghoul"
+      ],
+      "regions": [
+        "ruins",
+        "warrens",
+        "weald",
+        "cove"
+      ],
       "dlcs": [],
       "priority": "high",
-      "priorityReasons": ["Howl applies party-wide horror, reduces torchlight, and may inflict The Worries.", "Skull Toss combines backline damage, stress, and stun while its durability delays removal."],
-      "traits": ["Unholy", "Large enemy", "Veteran and Champion expeditions", "High protection and health", "Stress and horror pressure"],
-      "dangerousActions": [
-        { "id": "howl", "localizationIds": ["str_monster_skill_howl"], "threats": ["stress", "disease", "other"], "description": "Applies horror across the party, reduces torchlight, and may inflict The Worries.", "counters": ["Horror cure", "Maintain torchlight", "Kill or control the Ghoul"] },
-        { "id": "skull_toss", "localizationIds": ["str_monster_skill_skull_toss"], "threats": ["health_damage", "stress", "stun"], "description": "Hits a backline hero with significant damage, stress, and stun.", "counters": ["Guard a vulnerable backliner", "Stun resistance", "Damage reduction"] },
-        { "id": "rend", "localizationIds": ["str_monster_skill_rend"], "threats": ["health_damage", "bleed", "debuff"], "description": "A heavy frontline bleed attack that increases stress received.", "counters": ["Bleed cure", "Protection", "Move frontline heroes out of reach"] }
+      "priorityReasons": [
+        "Howl applies party-wide horror, reduces torchlight, and may inflict The Worries.",
+        "Skull Toss combines backline damage, stress, and stun while its durability delays removal."
       ],
-      "effectiveResponses": ["Use bleed, blight, armor piercing, or protection reduction to work through its defenses.", "A strong stun setup may buy one turn, but sustained control is unreliable."],
-      "cautions": ["Unlike most Unholy enemies, the Ghoul is a practical bleed target.", "It can threaten the backline from every enemy position."],
-      "sources": [{ "title": "Official Darkest Dungeon Wiki: Ghoul", "url": "https://darkestdungeon.wiki.gg/wiki/Ghoul", "verifiedAt": "2026-09-01" }]
+      "traits": [
+        "Unholy",
+        "Large enemy",
+        "Veteran and Champion expeditions",
+        "High protection and health",
+        "Stress and horror pressure"
+      ],
+      "dangerousActions": [
+        {
+          "id": "howl",
+          "localizationIds": [
+            "str_monster_skill_howl"
+          ],
+          "threats": [
+            "stress",
+            "disease",
+            "other"
+          ],
+          "description": "Applies horror across the party, reduces torchlight, and may inflict The Worries.",
+          "counters": [
+            "Horror cure",
+            "Maintain torchlight",
+            "Kill or control the Ghoul"
+          ]
+        },
+        {
+          "id": "skull_toss",
+          "localizationIds": [
+            "str_monster_skill_skull_toss"
+          ],
+          "threats": [
+            "health_damage",
+            "stress",
+            "stun"
+          ],
+          "description": "Hits a backline hero with significant damage, stress, and stun.",
+          "counters": [
+            "Guard a vulnerable backliner",
+            "Stun resistance",
+            "Damage reduction"
+          ]
+        },
+        {
+          "id": "rend",
+          "localizationIds": [
+            "str_monster_skill_rend"
+          ],
+          "threats": [
+            "health_damage",
+            "bleed",
+            "debuff"
+          ],
+          "description": "A heavy frontline bleed attack that increases stress received.",
+          "counters": [
+            "Bleed cure",
+            "Protection",
+            "Move frontline heroes out of reach"
+          ]
+        }
+      ],
+      "effectiveResponses": [
+        "Use bleed, blight, armor piercing, or protection reduction to work through its defenses.",
+        "A strong stun setup may buy one turn, but sustained control is unreliable."
+      ],
+      "cautions": [
+        "Unlike most Unholy enemies, the Ghoul is a practical bleed target.",
+        "It can threaten the backline from every enemy position."
+      ],
+      "sources": [
+        {
+          "title": "Official Darkest Dungeon Wiki: Ghoul",
+          "url": "https://darkestdungeon.wiki.gg/wiki/Ghoul",
+          "verifiedAt": "2026-09-01"
+        }
+      ]
     },
     {
       "id": "gargoyle",
       "enemyType": "common",
       "localizationId": "str_monstername_gargoyle_A",
-      "aliases": ["Menacing Gargoyle"],
-      "regions": ["ruins", "warrens", "weald", "cove"],
+      "aliases": [
+        "Menacing Gargoyle"
+      ],
+      "regions": [
+        "ruins",
+        "warrens",
+        "weald",
+        "cove"
+      ],
       "dlcs": [],
       "priority": "low",
-      "priorityReasons": ["Its damage is low and its main threat is occasional stun or movement disruption.", "High protection makes ordinary direct attacks inefficient relative to more urgent enemies."],
-      "traits": ["Unholy", "Stonework", "Veteran and Champion expeditions", "High protection", "Very high bleed and move resistance", "Common in Ruins and rare elsewhere"],
-      "dangerousActions": [
-        { "id": "lash_of_the_tail", "localizationIds": ["str_monster_skill_tail_whip"], "threats": ["health_damage", "stun", "movement", "mark"], "description": "Targets any hero with a stun and later knockback, with increased preference for marked targets.", "counters": ["Stun resistance", "Clear marks", "Stun the Gargoyle"] },
-        { "id": "flurry_of_claws", "localizationIds": ["str_monster_skill_claw_flurry"], "threats": ["health_damage", "movement"], "description": "A low-damage frontline attack that can shuffle its targets at higher difficulty.", "counters": ["Position tolerance", "Leave it until higher priorities are handled"] }
+      "priorityReasons": [
+        "Its damage is low and its main threat is occasional stun or movement disruption.",
+        "High protection makes ordinary direct attacks inefficient relative to more urgent enemies."
       ],
-      "effectiveResponses": ["Use blight or armor piercing to bypass protection.", "Stun it while dealing with more dangerous enemies."],
-      "cautions": ["Do not waste bleed or movement actions against its extreme resistances."],
-      "sources": [{ "title": "Official Darkest Dungeon Wiki: Gargoyle", "url": "https://darkestdungeon.wiki.gg/wiki/Gargoyle", "verifiedAt": "2026-09-01" }]
+      "traits": [
+        "Unholy",
+        "Stonework",
+        "Veteran and Champion expeditions",
+        "High protection",
+        "Very high bleed and move resistance",
+        "Common in Ruins and rare elsewhere"
+      ],
+      "dangerousActions": [
+        {
+          "id": "lash_of_the_tail",
+          "localizationIds": [
+            "str_monster_skill_tail_whip"
+          ],
+          "threats": [
+            "health_damage",
+            "stun",
+            "movement",
+            "mark"
+          ],
+          "description": "Targets any hero with a stun and later knockback, with increased preference for marked targets.",
+          "counters": [
+            "Stun resistance",
+            "Clear marks",
+            "Stun the Gargoyle"
+          ]
+        },
+        {
+          "id": "flurry_of_claws",
+          "localizationIds": [
+            "str_monster_skill_claw_flurry"
+          ],
+          "threats": [
+            "health_damage",
+            "movement"
+          ],
+          "description": "A low-damage frontline attack that can shuffle its targets at higher difficulty.",
+          "counters": [
+            "Position tolerance",
+            "Leave it until higher priorities are handled"
+          ]
+        }
+      ],
+      "effectiveResponses": [
+        "Use blight or armor piercing to bypass protection.",
+        "Stun it while dealing with more dangerous enemies."
+      ],
+      "cautions": [
+        "Do not waste bleed or movement actions against its extreme resistances."
+      ],
+      "sources": [
+        {
+          "title": "Official Darkest Dungeon Wiki: Gargoyle",
+          "url": "https://darkestdungeon.wiki.gg/wiki/Gargoyle",
+          "verifiedAt": "2026-09-01"
+        }
+      ]
     }
   ]
 }

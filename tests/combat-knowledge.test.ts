@@ -153,6 +153,8 @@ test("loads the checked-in combat knowledge base", async () => {
     "warrens",
     "weald",
     "cove",
+    "courtyard",
+    "farmstead",
   ]);
   assert.deepEqual(
     knowledge.enemies.map(({ id }) => id),
@@ -298,4 +300,17 @@ test("loads the checked-in combat knowledge base", async () => {
     knowledge.enemies.find(({ id }) => id === "webber")?.regions,
     ["ruins", "warrens", "weald"],
   );
+});
+
+test("loads courtyard and farmstead DLC region combat knowledge", async () => {
+  const knowledge = await loadCombatKnowledge();
+  const courtyard = knowledge.regions.find(({ id }) => id === "courtyard");
+  assert.ok(courtyard);
+  assert.deepEqual(courtyard.dlcs, ["crimson_court"]);
+  assert.ok(courtyard.commonThreats.some((t) => t.id === "crimson_curse"));
+
+  const farmstead = knowledge.regions.find(({ id }) => id === "farmstead");
+  assert.ok(farmstead);
+  assert.deepEqual(farmstead.dlcs, ["color_of_madness"]);
+  assert.ok(farmstead.commonThreats.some((t) => t.id === "endless_attrition"));
 });

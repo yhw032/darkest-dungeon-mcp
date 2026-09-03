@@ -97,7 +97,7 @@ const regionSchema = z
 const enemySchema = z
   .object({
     id: identifier,
-    enemyType: z.enum(["common", "elite", "miniboss"]),
+    enemyType: z.enum(["common", "elite", "miniboss", "boss"]),
     localizationId: nonEmptyString,
     aliases: uniqueStrings("aliases must be unique"),
     regions: z

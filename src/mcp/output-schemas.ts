@@ -587,7 +587,7 @@ export const regionCombatKnowledgeSchema = z.object({
 });
 export const enemyCombatKnowledgeSchema = z.object({
   id: z.string(),
-  enemyType: z.enum(["common", "elite", "miniboss"]),
+  enemyType: z.enum(["common", "elite", "miniboss", "boss"]),
   name: nullableString,
   regions: z.array(combatRegionSchema),
   dlcs: z.array(z.string()),
