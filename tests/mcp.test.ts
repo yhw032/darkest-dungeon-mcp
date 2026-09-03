@@ -158,6 +158,37 @@ test("MCP server advertises and executes read-only game tools", async (t) => {
         },
       ],
     }),
+    loadTrinketDefinitions: async () => [
+      {
+        id: "heavens_hairpin",
+        rarity: "very_rare",
+        price: 25000,
+        limit: 0,
+        heroClassRequirements: ["hellion"],
+        originDungeon: null,
+        effects: [
+          {
+            buffId: "BUFF_CRIT",
+            statType: "crit_chance",
+            statSubType: "",
+            amount: 0.1,
+            ruleType: "always",
+            isFalseRule: false,
+          },
+        ],
+        unresolvedBuffIds: [],
+      },
+      {
+        id: "collector_1",
+        rarity: "collector",
+        price: 15000,
+        limit: 1,
+        heroClassRequirements: [],
+        originDungeon: null,
+        effects: [],
+        unresolvedBuffIds: [],
+      },
+    ],
   });
   const client = new Client({ name: "mcp-test-client", version: "1.0.0" });
   const [clientTransport, serverTransport] = InMemoryTransport.createLinkedPair();
@@ -466,7 +497,18 @@ test("MCP server advertises and executes read-only game tools", async (t) => {
   });
   const equippedHero = (
     equippedHeroResult.structuredContent as
-      | { hero?: { equippedTrinkets?: Array<{ id: string; name: string | null }> } }
+      | {
+          hero?: {
+            equippedTrinkets?: Array<{
+              id: string;
+              name: string | null;
+              rarity?: string | null;
+              isUsableByHeroClass?: boolean;
+              heroClassRequirements?: string[];
+              effects?: Array<{ statType: string; amount: number }>;
+            }>;
+          };
+        }
       | undefined
   )?.hero;
   assert.deepEqual(
@@ -476,6 +518,19 @@ test("MCP server advertises and executes read-only game tools", async (t) => {
       { id: "collector_1", name: "디스마스의 머리" },
     ],
   );
+  assert.equal(equippedHero?.equippedTrinkets?.[0]?.rarity, "very_rare");
+  assert.equal(equippedHero?.equippedTrinkets?.[0]?.isUsableByHeroClass, true);
+  assert.deepEqual(
+    equippedHero?.equippedTrinkets?.[0]?.heroClassRequirements,
+    ["hellion"],
+  );
+  assert.equal(equippedHero?.equippedTrinkets?.[0]?.effects?.length, 1);
+  assert.equal(
+    equippedHero?.equippedTrinkets?.[0]?.effects?.[0]?.statType,
+    "crit_chance",
+  );
+  assert.equal(equippedHero?.equippedTrinkets?.[1]?.rarity, "collector");
+  assert.equal(equippedHero?.equippedTrinkets?.[1]?.isUsableByHeroClass, true);
 
   const afflictedHeroResult = await client.callTool({
     name: "get_hero",
@@ -721,6 +776,28 @@ test("MCP server advertises and executes read-only game tools", async (t) => {
       .trinkets,
     [],
   );
+
+  const classFilteredResult = await client.callTool({
+    name: "list_trinkets",
+    arguments: { heroClass: "hellion", rarity: "very_rare", language: "ko" },
+  });
+  const classFilteredContent = classFilteredResult.structuredContent as
+    | {
+        trinkets?: Array<{
+          id: string;
+          rarity?: string;
+          heroClassRequirements?: string[];
+          effects?: unknown[];
+        }>;
+      }
+    | undefined;
+  assert.ok(classFilteredContent?.trinkets?.some((t) => t.id === "heavens_hairpin"));
+  const heavensHairpin = classFilteredContent?.trinkets?.find(
+    (t) => t.id === "heavens_hairpin",
+  );
+  assert.equal(heavensHairpin?.rarity, "very_rare");
+  assert.deepEqual(heavensHairpin?.heroClassRequirements, ["hellion"]);
+  assert.equal(heavensHairpin?.effects?.length, 1);
 
   const curioSearchResult = await client.callTool({
     name: "search_curios",

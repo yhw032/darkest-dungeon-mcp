@@ -131,3 +131,96 @@ test("excludes trinkets attached only to deceased hero records", async () => {
 
   assert.equal(getTrinket(sources, "historical_trinket"), undefined);
 });
+
+test("maps trinket definitions, effects, and filters by heroClass and rarity", async () => {
+  const sources = await loadSources();
+  const definitions = [
+    {
+      id: "flag_5",
+      rarity: "very_rare",
+      price: 25000,
+      limit: 1,
+      heroClassRequirements: [],
+      originDungeon: null,
+      effects: [
+        {
+          buffId: "BUFF_SPD",
+          statType: "speed_rating",
+          statSubType: "",
+          amount: 8,
+          ruleType: "round_first",
+          isFalseRule: false,
+        },
+      ],
+      unresolvedBuffIds: [],
+    },
+    {
+      id: "gamblers_charm",
+      rarity: "common",
+      price: 5000,
+      limit: 0,
+      heroClassRequirements: ["vestal"],
+      originDungeon: null,
+      effects: [],
+      unresolvedBuffIds: [],
+    },
+  ];
+
+  const localizedClassMap = new Map([
+    ["koreana", new Map([["hero_class_name_vestal", "성녀"]])],
+  ]);
+
+  const results = listTrinkets(
+    sources,
+    { id: "flag_5", language: "ko" },
+    localization,
+    definitions,
+  );
+  assert.equal(results.length, 1);
+  const flag = results[0]!;
+  assert.equal(flag.rarity, "very_rare");
+  assert.equal(flag.price, 25000);
+  assert.equal(flag.limit, 1);
+  assert.deepEqual(flag.heroClassRequirements, []);
+  assert.deepEqual(flag.heroClassRequirementNames, []);
+  assert.equal(flag.effects?.length, 1);
+  assert.equal(flag.effects?.[0]?.statType, "speed_rating");
+  assert.equal(flag.effects?.[0]?.amount, 8);
+
+  // Filter by heroClass
+  const vestalResults = listTrinkets(
+    sources,
+    { heroClass: "vestal" },
+    localizedClassMap,
+    definitions,
+  );
+  // flag_5 is unrestricted ([]), gamblers_charm is vestal -> both match
+  assert.ok(vestalResults.some((t) => t.id === "flag_5"));
+  assert.ok(vestalResults.some((t) => t.id === "gamblers_charm"));
+
+  const crusaderResults = listTrinkets(
+    sources,
+    { heroClass: "crusader" },
+    localizedClassMap,
+    definitions,
+  );
+  // flag_5 is unrestricted ([]), gamblers_charm is vestal only -> gamblers_charm excluded
+  assert.ok(crusaderResults.some((t) => t.id === "flag_5"));
+  assert.ok(!crusaderResults.some((t) => t.id === "gamblers_charm"));
+
+  // Filter by rarity
+  const veryRareResults = listTrinkets(
+    sources,
+    { rarity: "very_rare" },
+    localization,
+    definitions,
+  );
+  assert.ok(veryRareResults.some((t) => t.id === "flag_5"));
+  assert.ok(!veryRareResults.some((t) => t.id === "gamblers_charm"));
+
+  // getTrinket with definitions
+  const single = getTrinket(sources, "flag_5", "ko", localization, definitions);
+  assert.ok(single);
+  assert.equal(single.rarity, "very_rare");
+  assert.equal(single.effects?.length, 1);
+});

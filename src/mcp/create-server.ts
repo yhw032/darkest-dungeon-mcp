@@ -86,6 +86,8 @@ import {
 } from "../queries/localize-town.js";
 import { loadQuirkDefinitions } from "../quirks/load-quirk-definitions.js";
 import { getHeroRosterState } from "../roster/hero-roster-state.js";
+import { loadTrinketDefinitions } from "../trinkets/load-trinket-definitions.js";
+import type { TrinketDefinition } from "../domain/trinket-definitions.js";
 import {
   getBuildingUpgradeProgress,
   loadBuildingUpgradeTrees,
@@ -116,6 +118,7 @@ export interface DarkestDungeonServerOptions {
   loadGameLocalization?: () => Promise<GameLocalization>;
   loadQuirkDefinitions?: () => Promise<QuirkDefinition[]>;
   loadQuirkTreatmentKnowledge?: () => Promise<QuirkTreatmentKnowledgeBase>;
+  loadTrinketDefinitions?: () => Promise<TrinketDefinition[]>;
 }
 
 export const serverInstructions = [
@@ -129,13 +132,13 @@ export const serverInstructions = [
   "For a specific quest, pass questId to list_heroes or get_hero and use questEligibility instead of inferring level restrictions.",
   "Pass the user's language to quest tools and display dungeon.name, title, description, length.name, and reward item names; their ids and raw values are stable machine-readable fields.",
   "Use compare_heroes for objective comparisons instead of selecting a winner from raw experience points or class stereotypes; pass the user's language and display heroClassName, selectedCombatSkills.name, and quirkTreatmentAnalysis.risk.riskyQuirks.name.",
-  "Pass the user's language to hero tools and display heroClassName, combatSkillDetails.name, equippedTrinkets.name, quirks[].name, afflictionName, virtueName, and localized town building or activity names; preserve their ids only as stable identifiers.",
+  "Pass the user's language to hero tools and display heroClassName, combatSkillDetails.name, equippedTrinkets (name, rarity, class usability, and buff effects), quirks[].name, afflictionName, virtueName, and localized town building or activity names; preserve their ids only as stable identifiers.",
   "In hero details, use combatSkillDetails.level for combat skill levels; rawSelectionValue is not a level.",
   "Use combatSkillDetails.usableFromPartyPositions, target, and movement for formation claims instead of relying on class stereotypes.",
   "Formation position 1 is frontmost and position 4 is rearmost for both parties.",
   "Use combatPositionAnalysis for objective selected-skill position coverage; bestCoveragePartyPositions is not by itself a tactical recommendation.",
   "Use list_building_upgrades for verified building upgrade progress and next costs; pass the user's language and display localized building, upgrade-tree, and heirloom names.",
-  "Use list_trinkets for owned, equipped, and store trinkets; pass the user's language and display the localized name while preserving id as a stable identifier.",
+  "Use list_trinkets for owned, equipped, and store trinkets; pass the user's language and display localized name, rarity, class requirements, and buff effects while preserving id as a stable identifier.",
   "Use list_risky_quirks for treatment-priority questions; pass the user's language, display localized hero-class and quirk names, and present its English policy and reasons as editorial guidance to summarize rather than absolute game values.",
   "Use query_classes for verified class roles, strengths, limitations, position guidance, mechanics, and party synergies instead of relying on class stereotypes; pass the user's language and display the localized class and skill names it returns.",
   "Use query_combat for verified region and enemy priorities, dangerous actions, threat types, and counters instead of inventing combat advice; pass the user's language and display the localized region name.",
@@ -311,6 +314,23 @@ export function createDarkestDungeonServer(
   const getTreatmentKnowledge = () => {
     treatmentKnowledgePromise ??= treatmentKnowledgeLoader();
     return treatmentKnowledgePromise;
+  };
+  const trinketDefinitionLoader =
+    options.loadTrinketDefinitions ??
+    (() => {
+      const gameDirectory = options.gameDirectory?.trim();
+      return gameDirectory === undefined || gameDirectory === ""
+        ? Promise.resolve(undefined)
+        : loadTrinketDefinitions(gameDirectory);
+    });
+  let trinketDefinitionsPromise:
+    | Promise<TrinketDefinition[] | undefined>
+    | undefined;
+  const getTrinketDefinitions = () => {
+    trinketDefinitionsPromise ??= Promise.resolve().then(
+      trinketDefinitionLoader,
+    );
+    return trinketDefinitionsPromise;
   };
   const server = new McpServer(
     { name: "darkest-dungeon-mcp", version: "1.0.0" },
@@ -755,6 +775,7 @@ export function createDarkestDungeonServer(
         progressionRules,
         restrictionRules,
         localization,
+        trinketDefinitions,
       ] = await Promise.all([
         dataSource.load(),
         getHeroCombatSkillTrees(),
@@ -764,6 +785,7 @@ export function createDarkestDungeonServer(
           ? Promise.resolve(undefined)
           : getQuestRestrictionRules(),
         getGameLocalization(),
+        getTrinketDefinitions(),
       ]);
       const hero = getHero(state.roster, heroId);
       if (hero === undefined) {
@@ -776,6 +798,9 @@ export function createDarkestDungeonServer(
         return notFoundResult("Quest", questId);
       }
 
+      const trinketDefinitionsById = new Map(
+        trinketDefinitions?.map((d) => [d.id, d]),
+      );
       const townContext = getHeroTownContext(
         state.roster,
         state.town,
@@ -811,10 +836,23 @@ export function createDarkestDungeonServer(
           ...quirk,
           name: localizeQuirk(quirk.id, language, localization),
         })),
-        equippedTrinkets: hero.equippedTrinkets.map((trinket) => ({
-          ...trinket,
-          name: localizeTrinket(trinket.id, language, localization),
-        })),
+        equippedTrinkets: hero.equippedTrinkets.map((trinket) => {
+          const def = trinketDefinitionsById.get(trinket.id);
+          const heroClassRequirements = def?.heroClassRequirements;
+          const isUsableByHeroClass =
+            def === undefined
+              ? undefined
+              : def.heroClassRequirements.length === 0 ||
+                def.heroClassRequirements.includes(hero.heroClass);
+          return {
+            ...trinket,
+            name: localizeTrinket(trinket.id, language, localization),
+            rarity: def?.rarity ?? null,
+            heroClassRequirements,
+            isUsableByHeroClass,
+            effects: def?.effects,
+          };
+        }),
         combatSkillDetails: combatSkillDetails.map((skill) => ({
           ...skill,
           name: localizeCombatSkill(
@@ -921,28 +959,36 @@ export function createDarkestDungeonServer(
     {
       title: "Query trinkets",
       description:
-        "Query trinkets across estate storage, equipped heroes, and town stores by exact id or localized name. Omit filters to list all trinkets.",
+        "Query trinkets across estate storage, equipped heroes, and town stores by exact id, localized name, hero class eligibility, or rarity. Omit filters to list all trinkets.",
       inputSchema: z.object({
         id: z.string().min(1).optional(),
         query: z.string().min(1).optional(),
         location: z.enum(["storage", "equipped", "store"]).optional(),
+        heroClass: z.string().min(1).optional(),
+        rarity: z.string().min(1).optional(),
         language: z.enum(["en", "ko"]).default("en"),
       }),
       outputSchema: z.object({ trinkets: z.array(trinketRecordSchema) }),
       annotations: readOnlyAnnotations,
     },
-    async ({ id, query, location, language }) => {
-      const [state, localization] = await Promise.all([
+    async ({ id, query, location, heroClass, rarity, language }) => {
+      const [state, localization, trinketDefinitions] = await Promise.all([
         dataSource.load(),
         getGameLocalization(),
+        getTrinketDefinitions(),
       ]);
       const filters = {
         ...(id === undefined ? {} : { id }),
         ...(query === undefined ? {} : { query }),
         ...(location === undefined ? {} : { location }),
+        ...(heroClass === undefined ? {} : { heroClass }),
+        ...(rarity === undefined ? {} : { rarity }),
         language,
       };
-      return toolResult("trinkets", listTrinkets(state, filters, localization));
+      return toolResult(
+        "trinkets",
+        listTrinkets(state, filters, localization, trinketDefinitions),
+      );
     },
   );
 

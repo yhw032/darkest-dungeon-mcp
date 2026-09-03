@@ -319,6 +319,16 @@ const quirkSchema = z.object({
   isNew: z.boolean(),
   evolutionDurationRemaining: finiteNumber,
 });
+
+export const trinketEffectSchema = z.object({
+  buffId: z.string(),
+  statType: z.string(),
+  statSubType: z.string(),
+  amount: finiteNumber,
+  ruleType: z.string(),
+  isFalseRule: z.boolean(),
+});
+
 const trinketStackSchema = z.object({
   id: z.string(),
   type: z.string(),
@@ -328,6 +338,16 @@ const trinketStackSchema = z.object({
       "Official trinket name in the requested language; null without game localization.",
     )
     .optional(),
+  rarity: nullableString.optional(),
+  heroClassRequirements: z
+    .array(z.string())
+    .optional()
+    .describe("Hero classes allowed to equip this trinket; empty array means any class can equip."),
+  isUsableByHeroClass: z
+    .boolean()
+    .optional()
+    .describe("Whether the equipping hero class satisfies trinket class requirements; true if unrestricted."),
+  effects: z.array(trinketEffectSchema).optional(),
 });
 const skillSelectionSchema = z.object({ id: z.string(), rawSelectionValue: finiteNumber });
 export const combatSkillDetailSchema = z.object({
@@ -486,6 +506,33 @@ export const heroTownContextSchema = z.object({
 export const trinketRecordSchema = z.object({
   id: z.string(),
   name: nullableString,
+  rarity: nullableString
+    .describe(
+      "Official trinket rarity (e.g. common, rare, very_rare, ancestral); null when game definitions are unavailable.",
+    )
+    .optional(),
+  price: finiteNumber.nullable().optional(),
+  limit: finiteNumber.nullable().optional(),
+  originDungeon: nullableString.optional(),
+  heroClassRequirements: z
+    .array(z.string())
+    .optional()
+    .describe(
+      "Hero classes allowed to equip this trinket; empty array means unrestricted.",
+    ),
+  heroClassRequirementNames: z
+    .array(
+      z.object({
+        id: z.string(),
+        name: nullableString,
+      }),
+    )
+    .optional()
+    .describe("Localized class names for hero class requirements."),
+  effects: z
+    .array(trinketEffectSchema)
+    .optional()
+    .describe("Stat buff and debuff effects applied by this trinket."),
   storageAmount: finiteNumber,
   equippedBy: z.array(z.object({ heroId: z.string(), heroName: z.string(), amount: finiteNumber })),
   storeListings: z.array(z.object({

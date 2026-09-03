@@ -1,8 +1,13 @@
 import type { Estate } from "../domain/estate.js";
 import type { Roster } from "../domain/hero.js";
 import type { Town } from "../domain/town.js";
+import type {
+  TrinketBuffEffect,
+  TrinketDefinition,
+} from "../domain/trinket-definitions.js";
 import { isDeceasedHero } from "../roster/hero-roster-state.js";
 import {
+  localizeHeroClass,
   localizeTrinket,
   localizeTownBuilding,
   type GameLanguage,
@@ -28,6 +33,13 @@ export interface TrinketStoreListing {
 export interface TrinketRecord {
   id: string;
   name: string | null;
+  rarity?: string | null;
+  price?: number | null;
+  limit?: number | null;
+  originDungeon?: string | null;
+  heroClassRequirements?: string[];
+  heroClassRequirementNames?: Array<{ id: string; name: string | null }>;
+  effects?: TrinketBuffEffect[];
   storageAmount: number;
   equippedBy: EquippedTrinketAssignment[];
   storeListings: TrinketStoreListing[];
@@ -44,6 +56,8 @@ export interface TrinketFilters {
   id?: string;
   query?: string;
   location?: TrinketLocation;
+  heroClass?: string;
+  rarity?: string;
   language?: GameLanguage;
 }
 
@@ -120,14 +134,32 @@ export function listTrinkets(
   sources: TrinketSources,
   filters: TrinketFilters = {},
   localization?: GameLocalization,
+  definitions?: TrinketDefinition[],
 ): TrinketRecord[] {
   const query =
     filters.query === undefined
       ? undefined
       : normalizeKnowledgeTerm(filters.query);
   const language = filters.language ?? "en";
+  const definitionsById = new Map<string, TrinketDefinition>(
+    definitions?.map((d) => [d.id, d]),
+  );
+
   return buildTrinketCatalog(sources)
     .filter((record) => {
+      const def = definitionsById.get(record.id);
+      if (
+        filters.heroClass !== undefined &&
+        def !== undefined &&
+        def.heroClassRequirements.length > 0 &&
+        !def.heroClassRequirements.includes(filters.heroClass)
+      ) {
+        return false;
+      }
+      if (filters.rarity !== undefined && def?.rarity !== filters.rarity) {
+        return false;
+      }
+
       const searchableNames = [
         record.id,
         ...[...(localization?.values() ?? [])]
@@ -141,25 +173,56 @@ export function listTrinkets(
         (filters.location === undefined || existsAt(record, filters.location))
       );
     })
-    .map((record) => ({
-      ...record,
-      name: localizeTrinket(record.id, language, localization),
-      storeListings: record.storeListings.map((listing) => ({
-        ...listing,
-        buildingName: localizeTownBuilding(
-          listing.buildingId,
-          language,
-          localization,
-        ),
-      })),
-    }));
+    .map((record) => {
+      const def = definitionsById.get(record.id);
+      const heroClassRequirements = def?.heroClassRequirements;
+      const heroClassRequirementNames =
+        heroClassRequirements === undefined
+          ? undefined
+          : heroClassRequirements.map((id) => ({
+              id,
+              name: localizeHeroClass(id, language, localization),
+            }));
+
+      return {
+        ...record,
+        name: localizeTrinket(record.id, language, localization),
+        ...(def === undefined
+          ? {}
+          : {
+              rarity: def.rarity,
+              price: def.price,
+              limit: def.limit,
+              originDungeon: def.originDungeon,
+              heroClassRequirements: def.heroClassRequirements,
+              ...(heroClassRequirementNames === undefined
+                ? {}
+                : { heroClassRequirementNames }),
+              effects: def.effects,
+            }),
+        storeListings: record.storeListings.map((listing) => ({
+          ...listing,
+          buildingName: localizeTownBuilding(
+            listing.buildingId,
+            language,
+            localization,
+          ),
+        })),
+      };
+    });
 }
 
 export function getTrinket(
   sources: TrinketSources,
   trinketId: string,
+  language: GameLanguage = "en",
+  localization?: GameLocalization,
+  definitions?: TrinketDefinition[],
 ): TrinketRecord | undefined {
-  return buildTrinketCatalog(sources).find(
-    (record) => record.id === trinketId,
-  );
+  return listTrinkets(
+    sources,
+    { id: trinketId, language },
+    localization,
+    definitions,
+  )[0];
 }
