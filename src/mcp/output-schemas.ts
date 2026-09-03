@@ -289,7 +289,16 @@ const quirkSchema = z.object({
   isNew: z.boolean(),
   evolutionDurationRemaining: finiteNumber,
 });
-const trinketStackSchema = z.object({ id: z.string(), type: z.string(), amount: finiteNumber });
+const trinketStackSchema = z.object({
+  id: z.string(),
+  type: z.string(),
+  amount: finiteNumber,
+  name: nullableString
+    .describe(
+      "Official trinket name in the requested language; null without game localization.",
+    )
+    .optional(),
+});
 const skillSelectionSchema = z.object({ id: z.string(), rawSelectionValue: finiteNumber });
 export const combatSkillDetailSchema = z.object({
   id: z.string(),

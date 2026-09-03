@@ -80,6 +80,8 @@ test("MCP server advertises and executes read-only game tools", async (t) => {
             ["town_name_guild", "길드"],
             ["upgrade_tree_name_guild.skill_levels", "훈련 교관 숙련도"],
             ["str_inventory_title_heirloomportrait", "초상화"],
+            ["str_inventory_title_trinketheavens_hairpin", "천국의 머리핀"],
+            ["str_inventory_title_trinketcollector_1", "디스마스의 머리"],
             ["str_curio_title_eldritch_altar", "괴이한 제단"],
             ["str_curio_title_shamblers_altar", "기는 혼돈의 제단"],
           ]),
@@ -393,6 +395,23 @@ test("MCP server advertises and executes read-only game tools", async (t) => {
       bestCoveragePartyPositions: [2, 3, 4],
     },
   });
+
+  const equippedHeroResult = await client.callTool({
+    name: "get_hero",
+    arguments: { heroId: "18", language: "ko" },
+  });
+  const equippedHero = (
+    equippedHeroResult.structuredContent as
+      | { hero?: { equippedTrinkets?: Array<{ id: string; name: string | null }> } }
+      | undefined
+  )?.hero;
+  assert.deepEqual(
+    equippedHero?.equippedTrinkets?.map(({ id, name }) => ({ id, name })),
+    [
+      { id: "heavens_hairpin", name: "천국의 머리핀" },
+      { id: "collector_1", name: "디스마스의 머리" },
+    ],
+  );
 
   const secondHero = state.roster.heroes[1];
   assert.ok(secondHero);

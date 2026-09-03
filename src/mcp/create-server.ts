@@ -41,6 +41,7 @@ import {
   loadGameLocalization,
   localizeCombatSkill,
   localizeHeroClass,
+  localizeTrinket,
   type GameLocalization,
 } from "../localization/game-localization.js";
 import { loadQuirkTreatmentKnowledge } from "../knowledge/load-quirk-treatment-knowledge.js";
@@ -122,7 +123,7 @@ export const serverInstructions = [
   "For a specific quest, pass questId to list_heroes or get_hero and use questEligibility instead of inferring level restrictions.",
   "Pass the user's language to quest tools and display dungeon.name, title, description, length.name, and reward item names; their ids and raw values are stable machine-readable fields.",
   "Use compare_heroes for objective comparisons instead of selecting a winner from raw experience points or class stereotypes.",
-  "Pass the user's language to hero tools and display heroClassName, combatSkillDetails.name, and localized town building or activity names; preserve their ids only as stable identifiers.",
+  "Pass the user's language to hero tools and display heroClassName, combatSkillDetails.name, equippedTrinkets.name, and localized town building or activity names; preserve their ids only as stable identifiers.",
   "In hero details, use combatSkillDetails.level for combat skill levels; rawSelectionValue is not a level.",
   "Use combatSkillDetails.usableFromPartyPositions, target, and movement for formation claims instead of relying on class stereotypes.",
   "Formation position 1 is frontmost and position 4 is rearmost for both parties.",
@@ -744,6 +745,10 @@ export function createDarkestDungeonServer(
           quest === undefined
             ? null
             : getQuestEligibility(quest, resolveLevel, restrictionRules),
+        equippedTrinkets: hero.equippedTrinkets.map((trinket) => ({
+          ...trinket,
+          name: localizeTrinket(trinket.id, language, localization),
+        })),
         combatSkillDetails: combatSkillDetails.map((skill) => ({
           ...skill,
           name: localizeCombatSkill(

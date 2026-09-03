@@ -126,7 +126,7 @@ runner through `tsx`. Tests never access the user's live save directory.
 | `list_building_upgrades` | List building upgrades and costs with localized building, tree, and heirloom names. |
 | `list_risky_quirks` | Rank treatment-worthy quirks with localized class, quirk, and effect text. |
 | `list_heroes` | Filter heroes by class, roster status, stress, party availability, and optional quest eligibility; localize class names with `language`. |
-| `get_hero` | Return one hero with localized class and combat-skill names, resolve level, availability, optional quest eligibility, and town activity. |
+| `get_hero` | Return one hero with localized class, combat-skill, and equipped-trinket names, resolve level, availability, optional quest eligibility, and town activity. |
 | `compare_heroes` | Compare 2–8 heroes using localized class and skill names plus objective readiness, equipment, skill-position, and curated quirk-risk evidence. |
 | `list_quests` | Filter available quests with localized titles, objectives, regions, lengths, and reward names. |
 | `get_quest` | Return one quest by ID with localized official quest and reward text. |
@@ -141,9 +141,9 @@ Curio coverage includes shared curios, Ruins, Warrens, Weald, Cove, Courtyard, F
 Class knowledge covers all 18 playable Darkest Dungeon 1 classes and all 126 combat skills. `query_classes` accepts `language` (`en` or `ko`) and resolves official class and skill names from `DD_GAME_DIR`; the knowledge set retains only search aliases and language-neutral strategy guidance. Skill guidance uses internal IDs verified against the installed game definitions and describes use cases, synergies, and cautions without duplicating exact position or target data.
 
 `list_heroes`, `get_hero`, and `compare_heroes` accept `language` (`en` or
-`ko`). When `DD_GAME_DIR` is configured, `heroClassName` and combat skill
-`name` values come directly from the installed game's localization files;
-stable internal IDs remain available alongside them.
+`ko`). When `DD_GAME_DIR` is configured, `heroClassName`, combat skill `name`,
+and equipped trinket `name` values come directly from the installed game's
+localization files; stable internal IDs remain available alongside them.
 
 `list_trinkets` also accepts `language` and resolves official trinket names
 from `DD_GAME_DIR`, including base-game, official DLC, and backer trinkets.
