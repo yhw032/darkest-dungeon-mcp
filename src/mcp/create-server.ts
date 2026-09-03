@@ -21,6 +21,7 @@ import {
   regionCombatKnowledgeSchema,
   trinketRecordSchema,
   recommendTrinketsOutputSchema,
+  planExpeditionOutputSchema,
 } from "./output-schemas.js";
 
 import type { BuildingUpgradeTree } from "../domain/building-upgrades.js";
@@ -83,6 +84,7 @@ import { queryCombatKnowledge } from "../queries/query-combat.js";
 import { searchCurios } from "../queries/search-curios.js";
 import { listTrinkets } from "../queries/trinkets.js";
 import { recommendTrinkets } from "../queries/recommend-trinkets.js";
+import { planExpedition } from "../queries/plan-expedition.js";
 import {
   localizeBuildingUpgradeProgress,
   localizeHeroTownContext,
@@ -152,6 +154,7 @@ export const serverInstructions = [
   "For curio questions, call search_curios when the identity is uncertain, then call get_curio_advice; pass the user's language and display the localized curio name.",
   "Treat only returned knowledge as verified; never invent curio effects, probabilities, item interactions, or localized names.",
   "The availableItems argument means expedition items explicitly supplied by the user; do not infer it from estate storage.",
+  "Use plan_expedition when preparing an expedition, recommending teams, or calculating provision supplies; pass the user's language and use its scored role pools, strict eligibility filtering, and itemized provision estimates as objective groundwork for party synergy advice.",
   "Keep Darkest Dungeon 1 information separate from Darkest Dungeon 2.",
 ].join(" ");
 
@@ -1209,6 +1212,96 @@ export function createDarkestDungeonServer(
         };
       }
       return toolResult("advice", advice);
+    },
+  );
+
+  server.registerTool(
+    "plan_expedition",
+    {
+      description:
+        "Generates a comprehensive expedition briefing (dossier) for a target quest or region. Combines strict hero eligibility (resolve levels, town activity isolation), scored role candidate pools (Frontline DPS, Control/Disruptor, Support/Stress Healer, Primary Healer), automated provision estimates with gold costs, and regional/boss tactics.",
+      inputSchema: {
+        questId: z
+          .string()
+          .optional()
+          .describe(
+            "Specific quest ID to plan for; if omitted, dungeon/difficulty or first available quest is used.",
+          ),
+        dungeon: z
+          .string()
+          .optional()
+          .describe(
+            "Target dungeon region (e.g. 'ruins', 'warrens', 'weald', 'cove', 'courtyard', 'farmstead')",
+          ),
+        difficulty: z
+          .number()
+          .int()
+          .optional()
+          .describe(
+            "Target quest difficulty (0=Apprentice, 1=Veteran, 2=Champion, 3=Darkest)",
+          ),
+        preferredHeroIds: z
+          .array(z.string())
+          .optional()
+          .describe("Optional list of hero IDs the user strongly prefers to bring"),
+        language: z.enum(["en", "ko"]).default("en"),
+      },
+      outputSchema: z.object({ plan: planExpeditionOutputSchema }),
+      annotations: readOnlyAnnotations,
+    },
+    async ({ questId, dungeon, difficulty, preferredHeroIds, language }) => {
+      const [
+        state,
+        combatKnowledge,
+        trinketGuidance,
+        trinketDefinitions,
+        quirkTreatmentKnowledge,
+        progressionRules,
+        restrictionRules,
+        localization,
+      ] = await Promise.all([
+        dataSource.load(),
+        getCombatKnowledge(),
+        getTrinketGuidance(),
+        getTrinketDefinitions(),
+        getTreatmentKnowledge(),
+        getHeroProgressionRules(),
+        getQuestRestrictionRules(),
+        getGameLocalization(),
+      ]);
+
+      try {
+        const result = planExpedition(
+          state,
+          {
+            ...(questId === undefined ? {} : { questId }),
+            ...(dungeon === undefined ? {} : { dungeon }),
+            ...(difficulty === undefined ? {} : { difficulty }),
+            ...(preferredHeroIds === undefined ? {} : { preferredHeroIds }),
+            language,
+          },
+          {
+            combatKnowledge,
+            trinketGuidance,
+            trinketDefinitions,
+            quirkTreatmentKnowledge,
+            progressionRules,
+            restrictionRules,
+            localization,
+          },
+        );
+        return toolResult("plan", result);
+      } catch (error) {
+        return {
+          isError: true,
+          content: [
+            {
+              type: "text",
+              text: error instanceof Error ? error.message : String(error),
+            },
+          ],
+        };
+      }
     },
   );
 

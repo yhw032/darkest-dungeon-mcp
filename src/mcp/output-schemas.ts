@@ -565,22 +565,24 @@ const combatSourceSchema = z.object({
   url: z.string(),
   verifiedAt: z.string(),
 });
+export const regionThreatSchema = z.object({
+  id: z.string(),
+  type: combatThreatSchema,
+  description: z.string(),
+  counters: z.array(z.string()),
+});
+export const regionResistanceSchema = z.object({
+  effect: z.enum(["bleed", "blight", "stun", "debuff", "move"]),
+  tendency: z.enum(["low", "mixed", "high"]),
+  note: z.string(),
+});
 export const regionCombatKnowledgeSchema = z.object({
   id: combatRegionSchema,
   name: nullableString,
   dlcs: z.array(z.string()),
   overview: z.string(),
-  commonThreats: z.array(z.object({
-    id: z.string(),
-    type: combatThreatSchema,
-    description: z.string(),
-    counters: z.array(z.string()),
-  })),
-  resistanceTendencies: z.array(z.object({
-    effect: z.enum(["bleed", "blight", "stun", "debuff", "move"]),
-    tendency: z.enum(["low", "mixed", "high"]),
-    note: z.string(),
-  })),
+  commonThreats: z.array(regionThreatSchema),
+  resistanceTendencies: z.array(regionResistanceSchema),
   recommendedCapabilities: z.array(z.string()),
   cautions: z.array(z.string()),
   sources: z.array(combatSourceSchema),
@@ -736,4 +738,76 @@ export const recommendTrinketsOutputSchema = z.object({
     .optional(),
   recommendations: z.array(recommendedTrinketItemSchema),
   candidateHeroes: z.array(candidateHeroRecommendationSchema).optional(),
+});
+
+export const expeditionProvisionItemSchema = z.object({
+  id: z.string(),
+  name: z.string(),
+  amount: z.number(),
+  costPerUnit: z.number(),
+  totalCost: z.number(),
+  purpose: z.string(),
+});
+
+export const expeditionProvisionEstimateSchema = z.object({
+  items: z.array(expeditionProvisionItemSchema),
+  totalEstimatedCost: z.number(),
+  notes: z.array(z.string()),
+});
+
+export const expeditionHeroCandidateSchema = z.object({
+  id: z.string(),
+  name: z.string(),
+  heroClass: z.string(),
+  heroClassName: nullableString,
+  resolveLevel: finiteNumber.nullable(),
+  stress: z.number(),
+  roleScore: z.number(),
+  suitabilityReasons: z.array(z.string()),
+  cautions: z.array(z.string()),
+  recommendedTrinketIds: z.array(z.string()),
+  isPreferred: z.boolean(),
+});
+
+export const expeditionRolePoolSchema = z.object({
+  frontlineDps: z.array(expeditionHeroCandidateSchema),
+  controlDisruptor: z.array(expeditionHeroCandidateSchema),
+  supportStressHealer: z.array(expeditionHeroCandidateSchema),
+  primaryHealer: z.array(expeditionHeroCandidateSchema),
+});
+
+export const ineligibleHeroSchema = z.object({
+  id: z.string(),
+  name: z.string(),
+  heroClass: z.string(),
+  heroClassName: nullableString,
+  resolveLevel: finiteNumber.nullable(),
+  stress: z.number(),
+  reasons: z.array(z.string()),
+});
+
+export const expeditionQuestContextSchema = z.object({
+  id: z.string(),
+  dungeon: z.string(),
+  dungeonName: nullableString,
+  difficulty: z.number(),
+  length: z.number(),
+  questName: nullableString,
+  questDescription: nullableString,
+  isPlotQuest: z.boolean(),
+  goalIds: z.array(z.string()),
+  bossGuidance: enemyCombatKnowledgeSchema.nullable(),
+  regionOverview: nullableString,
+  regionCommonThreats: z.array(regionThreatSchema),
+  regionResistanceTendencies: z.array(regionResistanceSchema),
+  regionRecommendedCapabilities: z.array(z.string()),
+  regionCautions: z.array(z.string()),
+});
+
+export const planExpeditionOutputSchema = z.object({
+  quest: expeditionQuestContextSchema,
+  rolePool: expeditionRolePoolSchema,
+  ineligibleHeroes: z.array(ineligibleHeroSchema),
+  provisions: expeditionProvisionEstimateSchema,
+  tacticalAdvice: z.array(z.string()),
 });

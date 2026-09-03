@@ -161,6 +161,14 @@ tier ratings, class-specific synergies, and usage cautions against current estat
 ownership (`in_storage`, `equipped_by_self`, `equipped_by_other`, `in_store`, or `not_owned`).
 When given `trinketId`, it returns candidate roster heroes ranked by suitability.
 
+`plan_expedition` prepares a comprehensive expedition briefing (dossier) for a
+target quest or dungeon region (`questId`, `dungeon`, `difficulty`, `preferredHeroIds`,
+and `language`). It integrates strict eligibility pruning (resolve levels, town
+activity isolation, high stress flags), categorized candidate pools across 4 functional
+roles (Frontline DPS, Control/Disruptor, Support/Stress Healer, and Primary Healer),
+automated supply provision calculations with itemized gold costs based on dungeon
+length and regional curio cleansing needs, and target boss / regional combat tactics.
+
 `list_risky_quirks` accepts `language` and returns ranked treatment candidates
 across 40 curated high-risk quirks covering forced curio interactions, loot loss,
 critical combat stat penalties (Speed, Accuracy, Max HP, PROT, Crits), and stress

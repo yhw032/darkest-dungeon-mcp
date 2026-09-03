@@ -213,6 +213,7 @@ test("MCP server advertises and executes read-only game tools", async (t) => {
   assert.match(instructions ?? "", /query_classes/);
   assert.match(instructions ?? "", /query_combat/);
   assert.match(instructions ?? "", /recommend_trinkets/);
+  assert.match(instructions ?? "", /plan_expedition/);
   assert.match(instructions ?? "", /editorial strategy knowledge/);
 
   const { tools } = await client.listTools();
@@ -229,6 +230,7 @@ test("MCP server advertises and executes read-only game tools", async (t) => {
       "list_quests",
       "list_risky_quirks",
       "list_trinkets",
+      "plan_expedition",
       "query_classes",
       "query_combat",
       "recommend_trinkets",
@@ -956,4 +958,28 @@ test("MCP server advertises and executes read-only game tools", async (t) => {
     arguments: { name: "missing curio" },
   });
   assert.equal(missingCurioResult.isError, true);
+
+  const planExpeditionResult = await client.callTool({
+    name: "plan_expedition",
+    arguments: { language: "ko" },
+  });
+  const planContent = planExpeditionResult.structuredContent as
+    | {
+        plan?: {
+          quest?: { id?: unknown; dungeon?: unknown };
+          rolePool?: {
+            frontlineDps?: unknown[];
+            primaryHealer?: unknown[];
+          };
+          provisions?: {
+            items?: Array<{ id?: unknown; amount?: unknown }>;
+            totalEstimatedCost?: unknown;
+          };
+        };
+      }
+    | undefined;
+  assert.ok(planContent?.plan?.quest?.id);
+  assert.ok(planContent?.plan?.rolePool?.frontlineDps);
+  assert.ok(planContent?.plan?.provisions?.items);
+  assert.ok(Number(planContent?.plan?.provisions?.totalEstimatedCost) > 0);
 });

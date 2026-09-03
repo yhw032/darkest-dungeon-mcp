@@ -1,0 +1,494 @@
+import type { CombatKnowledgeBase } from "../domain/combat-knowledge.js";
+import type {
+  ExpeditionHeroCandidate,
+  ExpeditionPlanResult,
+  ExpeditionProvisionEstimate,
+  ExpeditionProvisionItem,
+  ExpeditionQuestContext,
+  ExpeditionRolePool,
+  IneligibleHero,
+} from "../domain/expedition-plan.js";
+import type { GameState } from "../domain/game-state.js";
+import type { Hero } from "../domain/hero.js";
+import type { HeroProgressionRules } from "../domain/hero-progression.js";
+import type { Quest } from "../domain/quest.js";
+import type { QuestRestrictionRules } from "../domain/quest-restrictions.js";
+import type { QuirkTreatmentKnowledgeBase } from "../domain/quirk-treatment-knowledge.js";
+import type { TrinketDefinition } from "../domain/trinket-definitions.js";
+import type { TrinketGuidanceKnowledgeBase } from "../domain/trinket-guidance.js";
+import {
+  localizeGameString,
+  localizeGameStrings,
+  type GameLanguage,
+  type GameLocalization,
+} from "../localization/game-localization.js";
+import { getResolveLevel } from "../progression/hero-progression.js";
+import { getQuestEligibility } from "../quests/quest-eligibility.js";
+import type { LocalizedEnemyCombatKnowledge } from "./query-combat.js";
+
+export interface PlanExpeditionOptions {
+  questId?: string;
+  dungeon?: string;
+  difficulty?: number;
+  preferredHeroIds?: string[];
+  language?: GameLanguage;
+}
+
+export interface PlanExpeditionDependencies {
+  combatKnowledge: CombatKnowledgeBase;
+  trinketGuidance?: TrinketGuidanceKnowledgeBase | undefined;
+  trinketDefinitions?:
+    | TrinketDefinition[]
+    | Map<string, TrinketDefinition>
+    | undefined;
+  quirkTreatmentKnowledge?: QuirkTreatmentKnowledgeBase | undefined;
+  progressionRules?: HeroProgressionRules | undefined;
+  restrictionRules?: QuestRestrictionRules | undefined;
+  localization?: GameLocalization | undefined;
+}
+
+const provisionBaseCosts: Record<string, number> = {
+  food: 75,
+  torch: 75,
+  shovel: 250,
+  skeleton_key: 200,
+  holy_water: 150,
+  medicinal_herbs: 200,
+  bandage: 150,
+  antivenom: 150,
+  the_blood: 0,
+};
+
+function getLocalized(
+  localization: GameLocalization | undefined,
+  language: GameLanguage,
+  key: string,
+): string | null {
+  if (!localization) return null;
+  const langKey = language === "ko" ? "koreana" : "english";
+  return localization.get(langKey)?.get(key) ?? null;
+}
+
+function findBossGuidance(
+  quest: Quest,
+  combatKnowledge: CombatKnowledgeBase,
+  language: GameLanguage,
+  localization?: GameLocalization,
+): LocalizedEnemyCombatKnowledge | null {
+  const targetTokens = [
+    quest.id.toLowerCase(),
+    ...quest.goalIds.map((g) => g.toLowerCase()),
+  ];
+  for (const enemy of combatKnowledge.enemies) {
+    if (enemy.enemyType !== "boss" && enemy.enemyType !== "miniboss") continue;
+    for (const token of targetTokens) {
+      if (token.includes(enemy.id) || enemy.aliases.some((a) => token.includes(a.toLowerCase()))) {
+        const { localizationId, aliases: _aliases, dangerousActions, ...rest } = enemy;
+        return {
+          ...rest,
+          name: localizeGameString(localizationId, language, localization),
+          dangerousActions: dangerousActions.map((action) => {
+            const { localizationIds, ...details } = action;
+            return {
+              ...details,
+              name: localizeGameStrings(localizationIds, language, localization),
+            };
+          }),
+        };
+      }
+    }
+  }
+  return null;
+}
+
+function calculateProvisions(
+  quest: Quest,
+  language: GameLanguage,
+  localization?: GameLocalization,
+): ExpeditionProvisionEstimate {
+  const dungeon = quest.dungeon.toLowerCase();
+  const length = quest.length; // 0=short, 1=medium, 2=long
+
+  const items: ExpeditionProvisionItem[] = [];
+
+  function addItem(id: string, amount: number, purpose: string) {
+    if (amount <= 0) return;
+    const costPerUnit = provisionBaseCosts[id] ?? 100;
+    const name =
+      getLocalized(localization, language, `str_inventory_title_${id}`) ??
+      getLocalized(localization, language, `str_inventory_title_estate_currency${id}`) ??
+      id;
+    items.push({
+      id,
+      name,
+      amount,
+      costPerUnit,
+      totalCost: amount * costPerUnit,
+      purpose,
+    });
+  }
+
+  // Food
+  const foodAmount = length === 0 ? 8 : length === 1 ? 16 : 24;
+  addItem("food", foodAmount, "Camping meals and hallway hunger checks");
+
+  // Torches (Courtyard and Farmstead have fixed light mechanics)
+  if (dungeon !== "courtyard" && dungeon !== "farmstead") {
+    const torchAmount = length === 0 ? 8 : length === 1 ? 14 : 18;
+    addItem("torch", torchAmount, "Maintain high radiant light for ACC and CRT buffs");
+  }
+
+  // Shovels
+  const shovelExtra = dungeon === "weald" || dungeon === "cove" ? 1 : 0;
+  const shovelAmount = (length === 0 ? 2 : length === 1 ? 3 : 4) + shovelExtra;
+  addItem("shovel", shovelAmount, "Clear blockages without severe HP/stress damage");
+
+  // Skeleton Keys
+  const keyExtra = dungeon === "ruins" ? 1 : 0;
+  const keyAmount = (length === 0 ? 1 : length === 1 ? 2 : 3) + keyExtra;
+  addItem("skeleton_key", keyAmount, "Safely unlock heirloom chests and secret rooms");
+
+  // Regional provisions
+  if (dungeon === "ruins") {
+    const holyWaterAmount = length === 0 ? 2 : length === 1 ? 3 : 4;
+    addItem("holy_water", holyWaterAmount, "Purify confession booths and unholy altars");
+    const herbsAmount = length === 0 ? 1 : 2;
+    addItem("medicinal_herbs", herbsAmount, "Cleanse alchemy tables and iron maidens");
+  } else if (dungeon === "warrens") {
+    const herbsAmount = length === 0 ? 2 : length === 1 ? 3 : 4;
+    addItem("medicinal_herbs", herbsAmount, "Harvest food carts and dinner carts safely");
+    const bandageAmount = length === 0 ? 1 : length === 1 ? 2 : 3;
+    addItem("bandage", bandageAmount, "Cure severe swine bleeds and arterial cuts");
+  } else if (dungeon === "weald") {
+    const antivenomAmount = length === 0 ? 2 : length === 1 ? 3 : 4;
+    addItem("antivenom", antivenomAmount, "Cure fungal blights and open venomous mackinaws");
+    const bandageAmount = length === 0 ? 2 : length === 1 ? 3 : 4;
+    addItem("bandage", bandageAmount, "Cure rabid bites and tree branch bleeds");
+  } else if (dungeon === "cove") {
+    const herbsAmount = length === 0 ? 2 : length === 1 ? 3 : 4;
+    addItem("medicinal_herbs", herbsAmount, "Purify coral for negative quirk removal");
+    const bandageAmount = length === 0 ? 2 : length === 1 ? 3 : 4;
+    addItem("bandage", bandageAmount, "Counter Uca Major's catastrophic arterial bleeds");
+  } else if (dungeon === "courtyard") {
+    const bandageAmount = length === 0 ? 3 : length === 1 ? 4 : 5;
+    addItem("bandage", bandageAmount, "Counter heavy bloodsucker bleeds");
+    addItem("the_blood", length === 0 ? 2 : length === 1 ? 4 : 6, "Sustain cursed heroes entering craving/wasting states");
+  }
+
+  const totalEstimatedCost = items.reduce((sum, item) => sum + item.totalCost, 0);
+  const notes: string[] = [
+    "Always reserve at least one key for a possible Secret Room (found by critical scouting).",
+    "Bring additional food if running heroes with stress-eating or tapeworm quirks.",
+  ];
+
+  return { items, totalEstimatedCost, notes };
+}
+
+export function planExpedition(
+  gameState: GameState,
+  options: PlanExpeditionOptions,
+  dependencies: PlanExpeditionDependencies,
+): ExpeditionPlanResult {
+  const language = options.language ?? "en";
+  const {
+    combatKnowledge,
+    trinketGuidance,
+    trinketDefinitions,
+    quirkTreatmentKnowledge,
+    progressionRules,
+    restrictionRules,
+    localization,
+  } = dependencies;
+
+  const trinketDefMap =
+    trinketDefinitions instanceof Map
+      ? trinketDefinitions
+      : trinketDefinitions
+        ? new Map(trinketDefinitions.map((d) => [d.id, d]))
+        : undefined;
+
+  // 1. Resolve Target Quest
+  const quests = gameState.quests.quests;
+  if (quests.length === 0) {
+    throw new Error("No quests available in current game state");
+  }
+
+  let selectedQuest: Quest | undefined;
+  if (options.questId) {
+    selectedQuest = quests.find((q) => q.id === options.questId);
+    if (!selectedQuest) {
+      throw new Error(`Quest "${options.questId}" was not found`);
+    }
+  } else {
+    selectedQuest = quests.find((q) => {
+      if (options.dungeon && q.dungeon.toLowerCase() !== options.dungeon.toLowerCase()) {
+        return false;
+      }
+      if (options.difficulty !== undefined && q.difficulty !== options.difficulty) {
+        return false;
+      }
+      return true;
+    });
+    if (!selectedQuest) {
+      selectedQuest = quests[0];
+    }
+  }
+  if (!selectedQuest) {
+    throw new Error("Unable to select target quest");
+  }
+
+  const dungeonId = selectedQuest.dungeon.toLowerCase();
+  const regionKnowledge = combatKnowledge.regions.find(
+    (r) => r.id === dungeonId || (dungeonId === "crypts" && r.id === "ruins"),
+  );
+  const bossGuidance = findBossGuidance(selectedQuest, combatKnowledge, language, localization);
+
+  const questContext: ExpeditionQuestContext = {
+    id: selectedQuest.id,
+    dungeon: selectedQuest.dungeon,
+    dungeonName:
+      getLocalized(localization, language, `dungeon_name_${dungeonId}`) ??
+      selectedQuest.dungeon,
+    difficulty: selectedQuest.difficulty,
+    length: selectedQuest.length,
+    questName:
+      getLocalized(localization, language, `town_quest_name_${selectedQuest.id}`) ??
+      selectedQuest.id,
+    questDescription:
+      getLocalized(localization, language, `town_quest_description_${selectedQuest.id}`) ??
+      null,
+    isPlotQuest: selectedQuest.isPlotQuest,
+    goalIds: selectedQuest.goalIds,
+    bossGuidance,
+    regionOverview: regionKnowledge?.overview ?? null,
+    regionCommonThreats: regionKnowledge?.commonThreats ?? [],
+    regionResistanceTendencies: regionKnowledge?.resistanceTendencies ?? [],
+    regionRecommendedCapabilities: regionKnowledge?.recommendedCapabilities ?? [],
+    regionCautions: regionKnowledge?.cautions ?? [],
+  };
+
+  // 2. Roster Evaluation (Eligible vs Ineligible)
+  const eligibleCandidates: Hero[] = [];
+  const ineligibleHeroes: IneligibleHero[] = [];
+  const preferredSet = new Set(options.preferredHeroIds ?? []);
+
+  // Owned S/A tier trinkets map
+  const ownedTrinketIds = new Set<string>();
+  for (const stack of gameState.estate.trinkets) {
+    ownedTrinketIds.add(stack.id);
+  }
+  for (const hero of gameState.roster.heroes) {
+    for (const t of hero.equippedTrinkets) {
+      ownedTrinketIds.add(t.id);
+    }
+  }
+
+  for (const hero of gameState.roster.heroes) {
+    if (hero.rosterStatus === 3) continue; // Dead
+
+    const resolveLevel = getResolveLevel(hero.resolveXp, progressionRules);
+    const eligibility = getQuestEligibility(selectedQuest, resolveLevel, restrictionRules);
+
+    const reasons: string[] = [];
+    if (hero.rosterStatus === 1) {
+      reasons.push("Already selected for raid party");
+    } else if (hero.rosterStatus !== 0) {
+      reasons.push("Hero roster status unavailable");
+    }
+    if (hero.buildingName !== null) {
+      reasons.push(`In town building (${hero.buildingName})`);
+    }
+    if (eligibility.isEligible === false) {
+      reasons.push(`Resolve level too high for quest (Level ${resolveLevel ?? "?"} > Max ${eligibility.maximumResolveLevel ?? "?"})`);
+    }
+
+    const heroClassName =
+      getLocalized(localization, language, `hero_class_name_${hero.heroClass}`) ??
+      hero.heroClass;
+
+    if (reasons.length > 0) {
+      ineligibleHeroes.push({
+        id: hero.id,
+        name: hero.name,
+        heroClass: hero.heroClass,
+        heroClassName,
+        resolveLevel,
+        stress: hero.stress,
+        reasons,
+      });
+    } else {
+      eligibleCandidates.push(hero);
+    }
+  }
+
+  // 3. Score and Classify Candidates into Roles
+  function buildCandidate(
+    hero: Hero,
+    baseScore: number,
+    reasons: string[],
+  ): ExpeditionHeroCandidate {
+    const resolveLevel = getResolveLevel(hero.resolveXp, progressionRules);
+    const heroClassName =
+      getLocalized(localization, language, `hero_class_name_${hero.heroClass}`) ??
+      hero.heroClass;
+
+    let score = baseScore + (resolveLevel ?? 0) * 10;
+    const cautions: string[] = [];
+
+    // Stress penalty
+    if (hero.stress >= 70) {
+      score -= 25;
+      cautions.push(`Elevated stress (${hero.stress}/100); high affliction hazard`);
+    } else if (hero.stress >= 40) {
+      score -= 10;
+    }
+
+    // Risky quirks
+    if (quirkTreatmentKnowledge) {
+      for (const quirk of hero.quirks) {
+        const rule = quirkTreatmentKnowledge.rules.find((r) => r.quirkId === quirk.id);
+        if (rule && (rule.priority === "critical" || rule.priority === "high")) {
+          cautions.push(`Risky quirk [${quirk.id}] (${rule.priority})`);
+          score -= rule.priority === "critical" ? 15 : 8;
+        }
+      }
+    }
+
+    // Preferred hero bonus
+    const isPreferred = preferredSet.has(hero.id);
+    if (isPreferred) {
+      score += 50;
+      reasons.unshift("User preferred hero");
+    }
+
+    // Recommended owned trinkets
+    const recommendedTrinketIds: string[] = [];
+    if (trinketGuidance) {
+      for (const entry of trinketGuidance.trinkets) {
+        if (!ownedTrinketIds.has(entry.trinketId)) continue;
+        if (entry.tier !== "S" && entry.tier !== "A") continue;
+        const def = trinketDefMap?.get(entry.trinketId);
+        if (def && def.heroClassRequirements.length > 0 && !def.heroClassRequirements.includes(hero.heroClass)) {
+          continue;
+        }
+        recommendedTrinketIds.push(entry.trinketId);
+        if (recommendedTrinketIds.length >= 2) break;
+      }
+    }
+
+    return {
+      id: hero.id,
+      name: hero.name,
+      heroClass: hero.heroClass,
+      heroClassName,
+      resolveLevel,
+      stress: hero.stress,
+      roleScore: Math.round(score),
+      suitabilityReasons: reasons,
+      cautions,
+      recommendedTrinketIds,
+      isPreferred,
+    };
+  }
+
+  const rolePool: ExpeditionRolePool = {
+    frontlineDps: [],
+    controlDisruptor: [],
+    supportStressHealer: [],
+    primaryHealer: [],
+  };
+
+  for (const hero of eligibleCandidates) {
+    const c = hero.heroClass.toLowerCase();
+
+    // 1) Frontline DPS
+    if (["crusader", "hellion", "leper", "bounty_hunter", "highwayman", "shieldbreaker", "abomination"].includes(c)) {
+      let base = 60;
+      const reasons: string[] = ["Strong direct physical damage"];
+      if (dungeonId === "ruins" && c === "crusader") {
+        base += 30;
+        reasons.push("Bonus damage against Unholy skeletons");
+      }
+      if ((dungeonId === "warrens" || dungeonId === "weald") && (c === "houndmaster" || c === "bounty_hunter")) {
+        base += 20;
+        reasons.push("High bonus against Beast/Human targets");
+      }
+      if (dungeonId === "cove" && c === "shieldbreaker") {
+        base += 25;
+        reasons.push("Pierce high PROT on Pelagic and Uca foes");
+      }
+      rolePool.frontlineDps.push(buildCandidate(hero, base, reasons));
+    }
+
+    // 2) Control / Disruptor
+    if (["plague_doctor", "occultist", "bounty_hunter", "man_at_arms", "houndmaster"].includes(c)) {
+      let base = 60;
+      const reasons: string[] = ["Reliable stun, displacement, or debuffs"];
+      if ((dungeonId === "ruins" || dungeonId === "cove") && c === "plague_doctor") {
+        base += 35;
+        reasons.push("Dominant double backline stun and high blight");
+      }
+      if (dungeonId === "cove" && c === "occultist") {
+        base += 30;
+        reasons.push("Bonus Eldritch damage and damage-reducing debuffs");
+      }
+      rolePool.controlDisruptor.push(buildCandidate(hero, base, reasons));
+    }
+
+    // 3) Support / Stress Healer
+    if (["jester", "crusader", "houndmaster", "man_at_arms", "antiquarian"].includes(c)) {
+      let base = 60;
+      const reasons: string[] = ["In-combat stress recovery or team-wide buffs"];
+      if (c === "jester") {
+        base += 35;
+        reasons.push("Premier single-target stress healing (Inspiring Tune) & Battle Ballad speed/crit buffs");
+      }
+      if (dungeonId === "farmstead") {
+        base += 25;
+        reasons.push("Essential endless harvest longevity");
+      }
+      rolePool.supportStressHealer.push(buildCandidate(hero, base, reasons));
+    }
+
+    // 4) Primary Healer
+    if (["vestal", "occultist", "flagellant", "arbalest", "musketeer"].includes(c)) {
+      let base = 60;
+      const reasons: string[] = ["Vital HP recovery and Death's Door protection"];
+      if (c === "vestal") {
+        base += 35;
+        reasons.push("Consistent reliable single-target and party-wide Divine Comfort healing");
+      }
+      if (c === "occultist") {
+        base += 15;
+        reasons.push("High burst single-target heal (cautious with bleed proc)");
+      }
+      rolePool.primaryHealer.push(buildCandidate(hero, base, reasons));
+    }
+  }
+
+  // Sort each pool by score descending
+  rolePool.frontlineDps.sort((a, b) => b.roleScore - a.roleScore);
+  rolePool.controlDisruptor.sort((a, b) => b.roleScore - a.roleScore);
+  rolePool.supportStressHealer.sort((a, b) => b.roleScore - a.roleScore);
+  rolePool.primaryHealer.sort((a, b) => b.roleScore - a.roleScore);
+
+  // 4. Provisions Estimate
+  const provisions = calculateProvisions(selectedQuest, language, localization);
+
+  // 5. Tactical Advice
+  const tacticalAdvice: string[] = [
+    "Construct a balanced 4-hero party covering Ranks 1 to 4 with at least 1 reliable healer and 1 backline reach attacker.",
+    `Review the provided ${provisions.items.length} provision items to ensure adequate curio cleansing tools for ${selectedQuest.dungeon}.`,
+  ];
+  if (bossGuidance) {
+    tacticalAdvice.unshift(`Target boss detected [${bossGuidance.id}]: ${bossGuidance.effectiveResponses[0] ?? ""}`);
+  }
+
+  return {
+    quest: questContext,
+    rolePool,
+    ineligibleHeroes,
+    provisions,
+    tacticalAdvice,
+  };
+}
