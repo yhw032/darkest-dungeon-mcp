@@ -1,0 +1,707 @@
+{
+  "schemaVersion": 1,
+  "policy": {
+    "title": "Darkest Dungeon 1 Trinket Guidance & Synergies",
+    "disclaimer": "Curated tactical ratings, class synergies, and usage cautions. Ratings represent baseline recommendations and should adapt to expedition goals, light levels, and dungeon hazards."
+  },
+  "trinkets": [
+    {
+      "trinketId": "focus_ring",
+      "tier": "S",
+      "recommendedRoles": [
+        "damage",
+        "accuracy"
+      ],
+      "recommendedClasses": [],
+      "synergies": [
+        "Leper, Crusader, and other low-accuracy frontline attackers"
+      ],
+      "cautions": [
+        "Reduces DODGE by 8."
+      ],
+      "playstyleAdvice": "One of the best universal offensive trinkets, fixing accuracy deficits while boosting critical hit chance."
+    },
+    {
+      "trinketId": "sun_ring",
+      "tier": "S",
+      "recommendedRoles": [
+        "damage",
+        "accuracy"
+      ],
+      "recommendedClasses": [],
+      "synergies": [
+        "Radiant and high torchlight party compositions"
+      ],
+      "cautions": [
+        "Increases stress damage received by 10%."
+      ],
+      "playstyleAdvice": "Standard offensive powerhouse when maintaining light above 75, granting substantial damage and accuracy."
+    },
+    {
+      "trinketId": "moon_ring",
+      "tier": "A",
+      "recommendedRoles": [
+        "damage",
+        "accuracy"
+      ],
+      "recommendedClasses": [],
+      "synergies": [
+        "Pitch black and dark dungeon crawling"
+      ],
+      "cautions": [
+        "Increases stress damage received by 10%."
+      ],
+      "playstyleAdvice": "Mirror to Sun Ring for dark runs, providing heavy offensive stats in zero torchlight."
+    },
+    {
+      "trinketId": "ancestors_candle",
+      "tier": "S",
+      "recommendedRoles": [
+        "damage",
+        "speed"
+      ],
+      "recommendedClasses": [],
+      "synergies": [
+        "Fast offensive openers and mobile attackers in radiant light"
+      ],
+      "cautions": [
+        "Increases stress damage received by 10%."
+      ],
+      "playstyleAdvice": "Superb high-light stat bundle granting SPD, DMG, and DODGE for front-line and back-line attackers."
+    },
+    {
+      "trinketId": "ancestors_map",
+      "tier": "S",
+      "recommendedRoles": [
+        "scouting",
+        "trap_disarm"
+      ],
+      "recommendedClasses": [],
+      "synergies": [
+        "Dungeon exploration, surprise chance manipulation, secret room discovery"
+      ],
+      "cautions": [
+        "Increases stress damage received by 10%."
+      ],
+      "playstyleAdvice": "Essential scouting trinket that prevents party surprises, detects traps, and reveals secret rooms."
+    },
+    {
+      "trinketId": "ancestors_pen",
+      "tier": "S",
+      "recommendedRoles": [
+        "melee_damage",
+        "crit"
+      ],
+      "recommendedClasses": [
+        "crusader",
+        "leper",
+        "hellion",
+        "bounty_hunter",
+        "highwayman"
+      ],
+      "synergies": [
+        "High-base damage melee skills like Chop, Wicked Hack, and Collect Bounty"
+      ],
+      "cautions": [
+        "Increases stress damage received by 10%."
+      ],
+      "playstyleAdvice": "Premier melee damage amplifier that significantly boosts raw output and critical strike rates."
+    },
+    {
+      "trinketId": "ancestors_musket_ball",
+      "tier": "S",
+      "recommendedRoles": [
+        "ranged_damage",
+        "crit"
+      ],
+      "recommendedClasses": [
+        "arbalest",
+        "musketeer",
+        "highwayman",
+        "grave_robber"
+      ],
+      "synergies": [
+        "Sniper Shot, Pistol Shot, and Flashing Daggers"
+      ],
+      "cautions": [
+        "Increases stress damage received by 10%."
+      ],
+      "playstyleAdvice": "Top-tier ranged enhancement for dedicated backline marksmen."
+    },
+    {
+      "trinketId": "ancestors_scroll",
+      "tier": "S",
+      "recommendedRoles": [
+        "healing",
+        "stress_relief"
+      ],
+      "recommendedClasses": [
+        "vestal",
+        "occultist",
+        "crusader",
+        "jester"
+      ],
+      "synergies": [
+        "Dedicated healers and stress recovery specialists"
+      ],
+      "cautions": [
+        "Increases stress damage received by 10%."
+      ],
+      "playstyleAdvice": "Dual-purpose utility trinket maximizing both HP recovery and stress restoration."
+    },
+    {
+      "trinketId": "ancestors_signet_ring",
+      "tier": "S",
+      "recommendedRoles": [
+        "tank",
+        "accuracy"
+      ],
+      "recommendedClasses": [
+        "crusader",
+        "man_at_arms",
+        "leper"
+      ],
+      "synergies": [
+        "Frontline anchors requiring protection and hit consistency"
+      ],
+      "cautions": [
+        "None."
+      ],
+      "playstyleAdvice": "Flawless defensive and offensive hybrid granting PROT, ACC, and stress resistance without penalty."
+    },
+    {
+      "trinketId": "blasphemous_vial",
+      "tier": "S",
+      "recommendedRoles": [
+        "stun_support",
+        "blight_support",
+        "accuracy"
+      ],
+      "recommendedClasses": [
+        "plague_doctor"
+      ],
+      "synergies": [
+        "Blinding Gas double-stun and backline Plague Grenade blights"
+      ],
+      "cautions": [
+        "Increases stress damage received by 15%."
+      ],
+      "playstyleAdvice": "The gold standard class trinket, granting overwhelming stun chance, blight chance, and ranged accuracy."
+    },
+    {
+      "trinketId": "sacred_scroll",
+      "tier": "A",
+      "recommendedRoles": [
+        "healing"
+      ],
+      "recommendedClasses": [
+        "vestal"
+      ],
+      "synergies": [
+        "Divine Grace single-target and Divine Comfort party heals"
+      ],
+      "cautions": [
+        "Reduces stun skill chance by 33% and lowers damage."
+      ],
+      "playstyleAdvice": "Heavy heal booster turning Vestal into a dedicated recovery turret at the expense of stun utility."
+    },
+    {
+      "trinketId": "book_of_holy_healing",
+      "tier": "S",
+      "recommendedRoles": [
+        "healing"
+      ],
+      "recommendedClasses": [
+        "vestal"
+      ],
+      "synergies": [
+        "Vestals seeking healing output while retaining Dazzling Light stuns"
+      ],
+      "cautions": [
+        "Reduces maximum HP by 15%."
+      ],
+      "playstyleAdvice": "Preferred healing trinket when you want strong heals without sacrificing stun accuracy."
+    },
+    {
+      "trinketId": "collector_1",
+      "tier": "A",
+      "recommendedRoles": [
+        "damage"
+      ],
+      "recommendedClasses": [],
+      "synergies": [
+        "Raw burst damage dealers"
+      ],
+      "cautions": [
+        "Increases stress damage received by 20%."
+      ],
+      "playstyleAdvice": "High-risk, high-reward burst item granting +25% raw damage."
+    },
+    {
+      "trinketId": "collector_2",
+      "tier": "A",
+      "recommendedRoles": [
+        "tank",
+        "defense"
+      ],
+      "recommendedClasses": [
+        "man_at_arms",
+        "crusader",
+        "leper"
+      ],
+      "synergies": [
+        "Protection stacking and guard abilities like Defender"
+      ],
+      "cautions": [
+        "Increases stress damage received by 20%."
+      ],
+      "playstyleAdvice": "Grants +25% PROT, enabling frontline tanks to shrug off massive physical strikes."
+    },
+    {
+      "trinketId": "collector_3",
+      "tier": "A",
+      "recommendedRoles": [
+        "healing"
+      ],
+      "recommendedClasses": [
+        "vestal",
+        "occultist"
+      ],
+      "synergies": [
+        "Primary healers needing strong output before Ancestor's Scroll"
+      ],
+      "cautions": [
+        "Increases stress damage received by 20%."
+      ],
+      "playstyleAdvice": "Massive +30% heal increase, highly effective if stress healing is available in the party."
+    },
+    {
+      "trinketId": "flag_5",
+      "tier": "A",
+      "recommendedRoles": [
+        "opener",
+        "speed"
+      ],
+      "recommendedClasses": [],
+      "synergies": [
+        "Round 1 priority stuns, marks, or critical buff setup"
+      ],
+      "cautions": [
+        "Speed bonus applies only on round one."
+      ],
+      "playstyleAdvice": "Guarantees round-one tempo advantage to disable dangerous enemies before they act."
+    },
+    {
+      "trinketId": "berserk_charm",
+      "tier": "A",
+      "recommendedRoles": [
+        "speed",
+        "damage"
+      ],
+      "recommendedClasses": [],
+      "synergies": [
+        "Fast attackers and mobile sweepers"
+      ],
+      "cautions": [
+        "Increases stress taken by 15% and reduces virtue chance."
+      ],
+      "playstyleAdvice": "Combines substantial speed (+3 SPD) and damage for aggressive offensive pacing."
+    },
+    {
+      "trinketId": "cudgel_weight",
+      "tier": "S",
+      "recommendedRoles": [
+        "stun_support"
+      ],
+      "recommendedClasses": [
+        "houndmaster"
+      ],
+      "synergies": [
+        "Blackjack rank 1-3 stuns"
+      ],
+      "cautions": [
+        "Reduces speed by 2."
+      ],
+      "playstyleAdvice": "Elevates Houndmaster's Blackjack into one of the most dependable stuns in the game."
+    },
+    {
+      "trinketId": "spiked_collar",
+      "tier": "A",
+      "recommendedRoles": [
+        "damage",
+        "bleed_support"
+      ],
+      "recommendedClasses": [
+        "houndmaster"
+      ],
+      "synergies": [
+        "Hound's Rush bleed attacks against beasts and eldritch"
+      ],
+      "cautions": [
+        "Reduces healing received and maximum HP."
+      ],
+      "playstyleAdvice": "Turns Houndmaster into a premier physical and bleed damage dealer."
+    },
+    {
+      "trinketId": "scouting_whistle",
+      "tier": "A",
+      "recommendedRoles": [
+        "scouting"
+      ],
+      "recommendedClasses": [
+        "houndmaster"
+      ],
+      "synergies": [
+        "Hound's Watch camping skill and dungeon navigation"
+      ],
+      "cautions": [
+        "Reduces stress resistance."
+      ],
+      "playstyleAdvice": "Consistent scouting bonus that dramatically reduces dungeon hazard encounters."
+    },
+    {
+      "trinketId": "demons_cauldron",
+      "tier": "S",
+      "recommendedRoles": [
+        "stun_support",
+        "debuff"
+      ],
+      "recommendedClasses": [
+        "occultist"
+      ],
+      "synergies": [
+        "Hands from the Abyss frontline stuns and Vulnerability Hex"
+      ],
+      "cautions": [
+        "Increases stress damage received by 15%."
+      ],
+      "playstyleAdvice": "Transforms rank 1 or 2 Occultist into an elite stunner and debuffer."
+    },
+    {
+      "trinketId": "rampart_shield",
+      "tier": "S",
+      "recommendedRoles": [
+        "stun_support",
+        "movement"
+      ],
+      "recommendedClasses": [
+        "man_at_arms"
+      ],
+      "synergies": [
+        "Rampart stun and knockback cycling"
+      ],
+      "cautions": [
+        "Reduces damage by 10%."
+      ],
+      "playstyleAdvice": "Greatly boosts Rampart stun and move chances, locking down priority enemy targets."
+    },
+    {
+      "trinketId": "guardians_shield",
+      "tier": "A",
+      "recommendedRoles": [
+        "tank",
+        "defense"
+      ],
+      "recommendedClasses": [
+        "man_at_arms"
+      ],
+      "synergies": [
+        "Rank 4 Guard and Command setup"
+      ],
+      "cautions": [
+        "Effects only apply when positioned in rank 4."
+      ],
+      "playstyleAdvice": "Enables a unique backline protector playstyle with massive PROT, DODGE, and healing received."
+    },
+    {
+      "trinketId": "berserk_mask",
+      "tier": "A",
+      "recommendedRoles": [
+        "speed",
+        "crit"
+      ],
+      "recommendedClasses": [
+        "leper"
+      ],
+      "synergies": [
+        "Chop, Hew, and Revenge offensive sequencing"
+      ],
+      "cautions": [
+        "Reduces virtue chance and increases stress taken."
+      ],
+      "playstyleAdvice": "Solves Leper's sluggish base speed, letting him strike before enemies take their turns."
+    },
+    {
+      "trinketId": "fortunate_armlet",
+      "tier": "A",
+      "recommendedRoles": [
+        "accuracy",
+        "crit"
+      ],
+      "recommendedClasses": [
+        "leper"
+      ],
+      "synergies": [
+        "Compensating for Leper's severe base accuracy deficit"
+      ],
+      "cautions": [
+        "Increases stress damage received by 10%."
+      ],
+      "playstyleAdvice": "Crucial class accuracy correction ensuring Leper's massive base damage connects reliably."
+    },
+    {
+      "trinketId": "heavens_hairpin",
+      "tier": "S",
+      "recommendedRoles": [
+        "accuracy",
+        "crit"
+      ],
+      "recommendedClasses": [
+        "hellion"
+      ],
+      "synergies": [
+        "Iron Swan and Wicked Hack in high torchlight"
+      ],
+      "cautions": [
+        "Requires torchlight above 75."
+      ],
+      "playstyleAdvice": "Outstanding high-light trinket providing top-tier accuracy and crit with zero downside."
+    },
+    {
+      "trinketId": "sharpening_sheath",
+      "tier": "A",
+      "recommendedRoles": [
+        "melee_damage",
+        "crit"
+      ],
+      "recommendedClasses": [
+        "highwayman"
+      ],
+      "synergies": [
+        "Duelist's Advance, Open Vein, and Riposte counterattacks"
+      ],
+      "cautions": [
+        "Reduces speed slightly."
+      ],
+      "playstyleAdvice": "Specialized melee booster maximizing Highwayman's Riposte and Open Vein bleed crits."
+    },
+    {
+      "trinketId": "raiders_talisman",
+      "tier": "S",
+      "recommendedRoles": [
+        "scouting",
+        "speed",
+        "crit"
+      ],
+      "recommendedClasses": [
+        "grave_robber"
+      ],
+      "synergies": [
+        "Lunge burst setups, trap disarming, and surprise avoidance"
+      ],
+      "cautions": [
+        "Increases food consumed by 100%."
+      ],
+      "playstyleAdvice": "Premier all-in-one class trinket offering SPD, Crit, Trap Disarm, and Scouting simultaneously."
+    },
+    {
+      "trinketId": "feather_crystal",
+      "tier": "S",
+      "recommendedRoles": [
+        "speed",
+        "dodge"
+      ],
+      "recommendedClasses": [],
+      "synergies": [
+        "Fast utility supports, Jester, Grave Robber, and dodge builders"
+      ],
+      "cautions": [
+        "Reduces stun and move resistance by 10%."
+      ],
+      "playstyleAdvice": "Top utility stat package giving +2 SPD and +8 DODGE with negligible drawbacks."
+    },
+    {
+      "trinketId": "recovery_charm",
+      "tier": "A",
+      "recommendedRoles": [
+        "survivability",
+        "healing_received"
+      ],
+      "recommendedClasses": [],
+      "synergies": [
+        "Occultist heal recipients, Leper, and Flagellant"
+      ],
+      "cautions": [
+        "None."
+      ],
+      "playstyleAdvice": "Boosts incoming heals by 40%, ensuring any single heal fully restores the wearer."
+    },
+    {
+      "trinketId": "book_of_sanity",
+      "tier": "A",
+      "recommendedRoles": [
+        "stress_mitigation"
+      ],
+      "recommendedClasses": [],
+      "synergies": [
+        "Long expeditions, Darkest Dungeon quests, stress-fragile heroes"
+      ],
+      "cautions": [
+        "None."
+      ],
+      "playstyleAdvice": "Clean -20% stress damage mitigation with zero stat penalty."
+    },
+    {
+      "trinketId": "madman_1",
+      "tier": "A",
+      "recommendedRoles": [
+        "stress_mitigation"
+      ],
+      "recommendedClasses": [],
+      "synergies": [
+        "Stress-vulnerable heroes and dark run crawling"
+      ],
+      "cautions": [
+        "None."
+      ],
+      "playstyleAdvice": "Huge -25% stress reduction awarded from defeating the Madman."
+    },
+    {
+      "trinketId": "madman_2",
+      "tier": "A",
+      "recommendedRoles": [
+        "survivability",
+        "max_hp"
+      ],
+      "recommendedClasses": [],
+      "synergies": [
+        "Low-HP heroes like Plague Doctor, Grave Robber, and Antiquarian"
+      ],
+      "cautions": [
+        "Reduces speed by 2."
+      ],
+      "playstyleAdvice": "Substantial +25% maximum HP buffer against sudden death checks."
+    },
+    {
+      "trinketId": "madman_3",
+      "tier": "S",
+      "recommendedRoles": [
+        "speed",
+        "damage"
+      ],
+      "recommendedClasses": [],
+      "synergies": [
+        "Primary damage dealers and fast control heroes"
+      ],
+      "cautions": [
+        "Increases stress damage received by 10%."
+      ],
+      "playstyleAdvice": "Premier aggressive music box granting +2 SPD and +15% raw damage universally."
+    },
+    {
+      "trinketId": "martyrs_seal",
+      "tier": "B",
+      "recommendedRoles": [
+        "death_door_tank"
+      ],
+      "recommendedClasses": [
+        "leper",
+        "flagellant"
+      ],
+      "synergies": [
+        "Death's Door buffer and last-stand survivability"
+      ],
+      "cautions": [
+        "Maximum stat benefits trigger only when at Death's Door."
+      ],
+      "playstyleAdvice": "High-stakes safety net that massively boosts damage, crit, and death blow resist near death."
+    },
+    {
+      "trinketId": "fortifying_garlic",
+      "tier": "A",
+      "recommendedRoles": [
+        "disease_resist",
+        "dot_resist"
+      ],
+      "recommendedClasses": [],
+      "synergies": [
+        "Warrens and Weald expeditions, front-line blight/bleed absorbers"
+      ],
+      "cautions": [
+        "None."
+      ],
+      "playstyleAdvice": "Provides sweeping resistance to Blight, Bleed, and Disease, effectively neutralizing dungeon hazards."
+    },
+    {
+      "trinketId": "chirurgeons_charm",
+      "tier": "B",
+      "recommendedRoles": [
+        "healing"
+      ],
+      "recommendedClasses": [
+        "vestal",
+        "occultist",
+        "arbalest",
+        "crusader"
+      ],
+      "synergies": [
+        "Early game healing enhancement"
+      ],
+      "cautions": [
+        "None."
+      ],
+      "playstyleAdvice": "Solid early-game +15% healing increase with zero downside."
+    },
+    {
+      "trinketId": "paralyzers_crest",
+      "tier": "A",
+      "recommendedRoles": [
+        "stun_support"
+      ],
+      "recommendedClasses": [
+        "crusader"
+      ],
+      "synergies": [
+        "Stunning Blow frontline lockdown"
+      ],
+      "cautions": [
+        "Reduces dodge slightly."
+      ],
+      "playstyleAdvice": "Significantly improves Crusader's Stunning Blow consistency against high-resist enemies."
+    },
+    {
+      "trinketId": "bright_tambourine",
+      "tier": "S",
+      "recommendedRoles": [
+        "stress_relief"
+      ],
+      "recommendedClasses": [
+        "jester"
+      ],
+      "synergies": [
+        "Inspiring Tune stress reduction in high light"
+      ],
+      "cautions": [
+        "Requires torchlight above 75."
+      ],
+      "playstyleAdvice": "Unmatched radiant stress healing booster turning Jester into a bottomless stress relief fountain."
+    },
+    {
+      "trinketId": "padlock_1",
+      "tier": "S",
+      "recommendedRoles": [
+        "stress_mitigation"
+      ],
+      "recommendedClasses": [
+        "abomination"
+      ],
+      "synergies": [
+        "Transform spam and prolonged Beast form sustain"
+      ],
+      "cautions": [
+        "None."
+      ],
+      "playstyleAdvice": "Drastically cuts party transformation stress, allowing Abomination to fight freely in beast form."
+    }
+  ]
+}
