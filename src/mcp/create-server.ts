@@ -73,6 +73,11 @@ import { queryClasses } from "../queries/query-classes.js";
 import { queryCombatKnowledge } from "../queries/query-combat.js";
 import { searchCurios } from "../queries/search-curios.js";
 import { listTrinkets } from "../queries/trinkets.js";
+import {
+  localizeBuildingUpgradeProgress,
+  localizeHeroTownContext,
+  localizeTownSummary,
+} from "../queries/localize-town.js";
 import { loadQuirkDefinitions } from "../quirks/load-quirk-definitions.js";
 import { getHeroRosterState } from "../roster/hero-roster-state.js";
 import {
@@ -117,12 +122,12 @@ export const serverInstructions = [
   "For a specific quest, pass questId to list_heroes or get_hero and use questEligibility instead of inferring level restrictions.",
   "Pass the user's language to quest tools and display dungeon.name, title, description, length.name, and reward item names; their ids and raw values are stable machine-readable fields.",
   "Use compare_heroes for objective comparisons instead of selecting a winner from raw experience points or class stereotypes.",
-  "Pass the user's language to hero tools and display heroClassName and combatSkillDetails.name; preserve their ids only as stable identifiers.",
+  "Pass the user's language to hero tools and display heroClassName, combatSkillDetails.name, and localized town building or activity names; preserve their ids only as stable identifiers.",
   "In hero details, use combatSkillDetails.level for combat skill levels; rawSelectionValue is not a level.",
   "Use combatSkillDetails.usableFromPartyPositions, target, and movement for formation claims instead of relying on class stereotypes.",
   "Formation position 1 is frontmost and position 4 is rearmost for both parties.",
   "Use combatPositionAnalysis for objective selected-skill position coverage; bestCoveragePartyPositions is not by itself a tactical recommendation.",
-  "Use list_building_upgrades for verified building upgrade progress and next costs.",
+  "Use list_building_upgrades for verified building upgrade progress and next costs; pass the user's language and display localized building, upgrade-tree, and heirloom names.",
   "Use list_trinkets for owned, equipped, and store trinkets; pass the user's language and display the localized name while preserving id as a stable identifier.",
   "Use list_risky_quirks for treatment-priority questions; pass the user's language, display localized hero-class and quirk names, and present its English policy and reasons as editorial guidance to summarize rather than absolute game values.",
   "Use query_classes for verified class roles, strengths, limitations, position guidance, mechanics, and party synergies instead of relying on class stereotypes; pass the user's language and display the localized class and skill names it returns.",
@@ -313,21 +318,31 @@ export function createDarkestDungeonServer(
     {
       title: "Get game state summary",
       description:
-        "Return a read-only summary of the roster, estate, town, and available quests.",
+        "Return a read-only summary of the roster, estate, town, and available quests with localized built-district details.",
       inputSchema: z.object({
         stressThreshold: z.number().finite().nonnegative().optional(),
+        language: z.enum(["en", "ko"]).default("en"),
       }),
       outputSchema: z.object({ gameState: gameStateSummarySchema }),
       annotations: readOnlyAnnotations,
     },
-    async ({ stressThreshold }) => {
-      const [state, progressionRules] = await Promise.all([
+    async ({ stressThreshold, language }) => {
+      const [state, progressionRules, localization] = await Promise.all([
         dataSource.load(),
         getHeroProgressionRules(),
+        getGameLocalization(),
       ]);
+      const summary = getGameStateSummary(
+        state,
+        stressThreshold,
+        progressionRules,
+      );
       return toolResult(
         "gameState",
-        getGameStateSummary(state, stressThreshold, progressionRules),
+        {
+          ...summary,
+          town: localizeTownSummary(summary.town, language, localization),
+        },
       );
     },
   );
@@ -337,21 +352,25 @@ export function createDarkestDungeonServer(
     {
       title: "List building upgrade progress",
       description:
-        "List purchased building upgrades and the next verified heirloom cost, optionally filtered by building id.",
+        "List purchased building upgrades and the next verified heirloom cost with localized building, upgrade-tree, and heirloom names, optionally filtered by building id.",
       inputSchema: z.object({
         buildingId: z.string().min(1).optional(),
+        language: z.enum(["en", "ko"]).default("en"),
       }),
       outputSchema: z.object({ upgrades: z.array(buildingUpgradeProgressSchema) }),
       annotations: readOnlyAnnotations,
     },
-    async ({ buildingId }) => {
-      const [state, trees] = await Promise.all([
+    async ({ buildingId, language }) => {
+      const [state, trees, localization] = await Promise.all([
         dataSource.load(),
         getUpgradeTrees(),
+        getGameLocalization(),
       ]);
       const upgrades = getBuildingUpgradeProgress(state.upgrades, trees).filter(
         (upgrade) =>
           buildingId === undefined || upgrade.buildingId === buildingId,
+      ).map((upgrade) =>
+        localizeBuildingUpgradeProgress(upgrade, language, localization),
       );
       return toolResult("upgrades", upgrades);
     },
@@ -701,6 +720,11 @@ export function createDarkestDungeonServer(
         state.town,
         heroId,
       );
+      const localizedTownContext = localizeHeroTownContext(
+        townContext!,
+        language,
+        localization,
+      );
       const combatSkillDetails = getHeroCombatSkillDetails(
         hero,
         state.upgrades,
@@ -710,6 +734,8 @@ export function createDarkestDungeonServer(
       const resolveLevel = getResolveLevel(hero.resolveXp, progressionRules);
       const heroDetails = {
         ...hero,
+        buildingId: hero.buildingName,
+        buildingName: localizedTownContext.buildingName,
         heroClassName: localizeHeroClass(hero.heroClass, language, localization),
         rosterState: getHeroRosterState(hero.rosterStatus),
         resolveLevel,
@@ -736,13 +762,13 @@ export function createDarkestDungeonServer(
             type: "text",
             text: JSON.stringify({
               hero: heroDetails,
-              townContext,
+              townContext: localizedTownContext,
             }),
           },
         ],
         structuredContent: {
           hero: heroDetails,
-          townContext,
+          townContext: localizedTownContext,
         },
       };
     },

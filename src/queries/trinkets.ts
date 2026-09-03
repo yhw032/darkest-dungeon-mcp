@@ -4,6 +4,7 @@ import type { Town } from "../domain/town.js";
 import { isDeceasedHero } from "../roster/hero-roster-state.js";
 import {
   localizeTrinket,
+  localizeTownBuilding,
   type GameLanguage,
   type GameLocalization,
 } from "../localization/game-localization.js";
@@ -19,6 +20,7 @@ export interface EquippedTrinketAssignment {
 
 export interface TrinketStoreListing {
   buildingId: string;
+  buildingName: string | null;
   storeId: string;
   amount: number;
 }
@@ -90,6 +92,7 @@ export function buildTrinketCatalog(sources: TrinketSources): TrinketRecord[] {
         record.storeAmount += item.amount;
         record.storeListings.push({
           buildingId: building.id,
+          buildingName: null,
           storeId: store.id,
           amount: item.amount,
         });
@@ -141,6 +144,14 @@ export function listTrinkets(
     .map((record) => ({
       ...record,
       name: localizeTrinket(record.id, language, localization),
+      storeListings: record.storeListings.map((listing) => ({
+        ...listing,
+        buildingName: localizeTownBuilding(
+          listing.buildingId,
+          language,
+          localization,
+        ),
+      })),
     }));
 }
 

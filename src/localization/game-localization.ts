@@ -20,6 +20,7 @@ const localizationFiles = [
   { path: ["localization", "miscellaneous.string_table.xml"], optional: false },
   { path: ["localization", "heroes.string_table.xml"], optional: false },
   { path: ["localization", "backertrinkets.string_table.xml"], optional: true },
+  { path: ["localization", "arena_base.string_table.xml"], optional: true },
   {
     path: ["dlc", "580100_crimson_court", "localization", "CC.string_table.xml"],
     optional: true,
@@ -113,6 +114,46 @@ export function localizeTrinket(
   localization?: GameLocalization,
 ): string | null {
   return localizeInventoryItem("trinket", trinketId, language, localization);
+}
+
+export function localizeTownBuilding(
+  buildingId: string,
+  language: GameLanguage,
+  localization?: GameLocalization,
+): string | null {
+  return localizeGameString(`town_name_${buildingId}`, language, localization);
+}
+
+export function localizeTownActivity(
+  activityId: string,
+  language: GameLanguage,
+  localization?: GameLocalization,
+): string | null {
+  return localizeGameString(
+    `town_activity_name_${activityId}`,
+    language,
+    localization,
+  );
+}
+
+export function localizeDistrict(
+  districtId: string,
+  language: GameLanguage,
+  localization?: GameLocalization,
+): string | null {
+  return localizeGameString(`str_${districtId}_title`, language, localization);
+}
+
+export function localizeBuildingUpgradeTree(
+  treeId: string,
+  language: GameLanguage,
+  localization?: GameLocalization,
+): string | null {
+  return localizeGameString(
+    `upgrade_tree_name_${treeId}`,
+    language,
+    localization,
+  );
 }
 
 export function localizeGameStrings(

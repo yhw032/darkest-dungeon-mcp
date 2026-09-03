@@ -77,6 +77,9 @@ test("MCP server advertises and executes read-only game tools", async (t) => {
               "combat_skill_name_leper_chop",
               "토막치기",
             ],
+            ["town_name_guild", "길드"],
+            ["upgrade_tree_name_guild.skill_levels", "훈련 교관 숙련도"],
+            ["str_inventory_title_heirloomportrait", "초상화"],
           ]),
         ],
       ]),
@@ -220,7 +223,7 @@ test("MCP server advertises and executes read-only game tools", async (t) => {
 
   const summaryResult = await client.callTool({
     name: "get_game_state",
-    arguments: { stressThreshold: 50 },
+    arguments: { stressThreshold: 50, language: "ko" },
   });
   assert.equal(summaryResult.isError, undefined);
   const summaryContent = summaryResult.structuredContent as
@@ -230,7 +233,7 @@ test("MCP server advertises and executes read-only game tools", async (t) => {
 
   const upgradeResult = await client.callTool({
     name: "list_building_upgrades",
-    arguments: { buildingId: "guild" },
+    arguments: { buildingId: "guild", language: "ko" },
   });
   const upgradeContent = upgradeResult.structuredContent as
     | Record<string, unknown>
@@ -240,14 +243,16 @@ test("MCP server advertises and executes read-only game tools", async (t) => {
   assert.equal(upgrades.length, 1);
   assert.deepEqual(upgrades[0], {
     treeId: "guild.skill_levels",
+    treeName: "훈련 교관 숙련도",
     buildingId: "guild",
+    buildingName: "길드",
     purchasedCodes: ["a", "b", "c"],
     purchasedCount: 3,
     totalCount: 4,
     highestPurchasedCode: "c",
     nextRequirement: {
       code: "d",
-      currencyCost: [{ type: "portrait", amount: 33 }],
+      currencyCost: [{ type: "portrait", name: "초상화", amount: 33 }],
     },
     isComplete: false,
   });
@@ -336,6 +341,7 @@ test("MCP server advertises and executes read-only game tools", async (t) => {
     | undefined;
   assert.deepEqual(heroContent?.hero, {
     ...expectedHero,
+    buildingId: expectedHero.buildingName,
     heroClassName: "시험 직업",
     rosterState: "deceased",
     resolveLevel: expectedHero.resolveXp >= 2 ? 1 : 0,

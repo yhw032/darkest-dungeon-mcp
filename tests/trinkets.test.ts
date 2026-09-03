@@ -75,7 +75,12 @@ test("identifies store-only trinkets and their listings", async () => {
   assert.equal(trinket?.storageAmount, 0);
   assert.equal(trinket?.storeAmount, 1);
   assert.deepEqual(trinket?.storeListings, [
-    { buildingId: "nomad_wagon", storeId: "trinket_supply", amount: 1 },
+    {
+      buildingId: "nomad_wagon",
+      buildingName: null,
+      storeId: "trinket_supply",
+      amount: 1,
+    },
   ]);
 });
 

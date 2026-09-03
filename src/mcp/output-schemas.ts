@@ -199,6 +199,9 @@ export const gameStateSummarySchema = z.object({
     ),
     districts: count,
     builtDistricts: z.array(z.string()),
+    builtDistrictDetails: z.array(
+      z.object({ id: z.string(), name: nullableString }),
+    ),
   }),
   quests: z.object({
     totalQuests: count,
@@ -209,7 +212,11 @@ export const gameStateSummarySchema = z.object({
   upgrades: z.object({ totalPurchases: count, purchased: count }),
 });
 
-const currencyCostSchema = z.object({ type: z.string(), amount: finiteNumber });
+const currencyCostSchema = z.object({
+  type: z.string(),
+  name: nullableString,
+  amount: finiteNumber,
+});
 const upgradeRequirementSchema = z.object({
   code: z.string(),
   currencyCost: z.array(currencyCostSchema),
@@ -217,7 +224,9 @@ const upgradeRequirementSchema = z.object({
 
 export const buildingUpgradeProgressSchema = z.object({
   treeId: z.string(),
+  treeName: nullableString,
   buildingId: z.string(),
+  buildingName: nullableString,
   purchasedCodes: z.array(z.string()),
   purchasedCount: count,
   totalCount: count,
@@ -337,6 +346,7 @@ export const combatPositionAnalysisSchema = z.object({
 });
 
 export const heroDetailSchema = heroSummarySchema.extend({
+  buildingId: nullableString,
   buildingName: nullableString,
   weaponRank: z.number().int(),
   armourRank: z.number().int(),
@@ -400,11 +410,14 @@ export const heroComparisonSchema = z.object({
 });
 
 export const heroTownContextSchema = z.object({
+  buildingId: nullableString,
   buildingName: nullableString,
   activityAssignments: z.array(
     z.object({
       buildingId: z.string(),
+      buildingName: nullableString,
       activityId: z.string(),
+      activityName: nullableString,
       slotId: z.string(),
       visitsRemaining: finiteNumber,
       residentOccupied: finiteNumber,
@@ -418,7 +431,12 @@ export const trinketRecordSchema = z.object({
   name: nullableString,
   storageAmount: finiteNumber,
   equippedBy: z.array(z.object({ heroId: z.string(), heroName: z.string(), amount: finiteNumber })),
-  storeListings: z.array(z.object({ buildingId: z.string(), storeId: z.string(), amount: finiteNumber })),
+  storeListings: z.array(z.object({
+    buildingId: z.string(),
+    buildingName: nullableString,
+    storeId: z.string(),
+    amount: finiteNumber,
+  })),
   storeAmount: finiteNumber,
 });
 

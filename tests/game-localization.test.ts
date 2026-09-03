@@ -6,8 +6,12 @@ import test from "node:test";
 
 import {
   loadGameLocalization,
+  localizeBuildingUpgradeTree,
   localizeCombatSkill,
+  localizeDistrict,
   localizeHeroClass,
+  localizeTownActivity,
+  localizeTownBuilding,
   localizeTrinket,
 } from "../src/localization/game-localization.js";
 
@@ -26,7 +30,13 @@ test("loads official hero class and combat skill names", async (t) => {
   await mkdir(localizationDirectory, { recursive: true });
   await writeFile(
     join(localizationDirectory, "miscellaneous.string_table.xml"),
-    table("koreana", [["dungeon_name_crypts", "폐허"]]),
+    table("koreana", [
+      ["dungeon_name_crypts", "폐허"],
+      ["town_name_abbey", "수도원"],
+      ["town_activity_name_meditation", "명상실"],
+      ["str_bank_title", "은행"],
+      ["upgrade_tree_name_abbey.meditation", "명상실"],
+    ]),
     "utf8",
   );
   await writeFile(
@@ -56,5 +66,15 @@ test("loads official hero class and combat skill names", async (t) => {
   assert.equal(
     localizeTrinket("aurora_pendant", "ko", localization),
     "오로라 펜던트",
+  );
+  assert.equal(localizeTownBuilding("abbey", "ko", localization), "수도원");
+  assert.equal(
+    localizeTownActivity("meditation", "ko", localization),
+    "명상실",
+  );
+  assert.equal(localizeDistrict("bank", "ko", localization), "은행");
+  assert.equal(
+    localizeBuildingUpgradeTree("abbey.meditation", "ko", localization),
+    "명상실",
   );
 });
