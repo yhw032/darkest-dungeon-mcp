@@ -51,10 +51,7 @@ export interface KnowledgeSource {
 
 export interface CurioKnowledge {
   id: string;
-  names: {
-    en: string;
-    ko?: string;
-  };
+  localizationId?: string;
   aliases: string[];
   regions: CurioRegion[];
   dlcs: string[];
@@ -65,6 +62,6 @@ export interface CurioKnowledge {
 }
 
 export interface CurioKnowledgeBase {
-  schemaVersion: 1;
+  schemaVersion: 2;
   curios: CurioKnowledge[];
 }

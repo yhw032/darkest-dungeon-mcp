@@ -133,10 +133,10 @@ runner through `tsx`. Tests never access the user's live save directory.
 | `list_trinkets` | Query trinkets by ID or localized name across storage, heroes, and stores. |
 | `query_classes` | Query verified class guidance with official class, skill, and synergy names localized from the installed game. |
 | `query_combat` | Query verified region and enemy guidance by name, region, threat type, or priority. |
-| `search_curios` | Search verified curios by ID, name, alias, or region. |
-| `get_curio_advice` | Return item-aware interaction advice and warnings. |
+| `search_curios` | Search verified curios by ID, localized name, alias, or region. |
+| `get_curio_advice` | Return item-aware interaction advice and warnings with localized curio names. |
 
-Curio coverage includes shared curios, Ruins, Warrens, Weald, Cove, Courtyard, Farmstead, Darkest Dungeon, Old Road, and relevant Hamlet quests. Retired curios that are no longer used by the game are intentionally excluded.
+Curio coverage includes shared curios, Ruins, Warrens, Weald, Cove, Courtyard, Farmstead, Darkest Dungeon, Old Road, and relevant Hamlet quests. Retired curios that are no longer used by the game are intentionally excluded. `search_curios` and `get_curio_advice` accept `language` (`en` or `ko`) and resolve official curio names from `DD_GAME_DIR`; the curated knowledge set retains search aliases and language-neutral interaction outcomes and advice.
 
 Class knowledge covers all 18 playable Darkest Dungeon 1 classes and all 126 combat skills. `query_classes` accepts `language` (`en` or `ko`) and resolves official class and skill names from `DD_GAME_DIR`; the knowledge set retains only search aliases and language-neutral strategy guidance. Skill guidance uses internal IDs verified against the installed game definitions and describes use cases, synergies, and cautions without duplicating exact position or target data.
 

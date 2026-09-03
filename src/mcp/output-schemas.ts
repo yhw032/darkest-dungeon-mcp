@@ -507,7 +507,9 @@ const availabilitySchema = z.discriminatedUnion("type", [
 ]);
 export const curioSummarySchema = z.object({
   id: z.string(),
-  names: z.object({ en: z.string(), ko: z.string().optional() }),
+  name: nullableString.describe(
+    "Official curio name in the requested language; null when unavailable.",
+  ),
   aliases: z.array(z.string()),
   regions: z.array(curioRegionSchema),
   dlcs: z.array(z.string()),

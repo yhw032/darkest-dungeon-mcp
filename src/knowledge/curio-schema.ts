@@ -62,12 +62,7 @@ const availabilitySchema = z.discriminatedUnion("type", [
 const curioSchema = z
   .object({
     id: z.string().regex(/^[a-z0-9]+(?:_[a-z0-9]+)*$/),
-    names: z
-      .object({
-        en: nonEmptyString,
-        ko: nonEmptyString.optional(),
-      })
-      .strict(),
+    localizationId: nonEmptyString.optional(),
     aliases: z.array(nonEmptyString),
     regions: z
       .array(
@@ -94,7 +89,7 @@ const curioSchema = z
 
 const knowledgeBaseSchema = z
   .object({
-    schemaVersion: z.literal(1),
+    schemaVersion: z.literal(2),
     curios: z.array(curioSchema),
   })
   .strict()

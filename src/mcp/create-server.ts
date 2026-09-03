@@ -133,7 +133,7 @@ export const serverInstructions = [
   "Use query_classes for verified class roles, strengths, limitations, position guidance, mechanics, and party synergies instead of relying on class stereotypes; pass the user's language and display the localized class and skill names it returns.",
   "Use query_combat for verified region and enemy priorities, dangerous actions, threat types, and counters instead of inventing combat advice; pass the user's language and display the localized region name.",
   "Class position guidance is editorial strategy knowledge; use combatSkillDetails for the current hero's exact selected-skill positions.",
-  "For curio questions, call search_curios when the identity is uncertain, then call get_curio_advice.",
+  "For curio questions, call search_curios when the identity is uncertain, then call get_curio_advice; pass the user's language and display the localized curio name.",
   "Treat only returned knowledge as verified; never invent curio effects, probabilities, item interactions, or localized names.",
   "The availableItems argument means expedition items explicitly supplied by the user; do not infer it from estate storage.",
   "Keep Darkest Dungeon 1 information separate from Darkest Dungeon 2.",
@@ -966,20 +966,26 @@ export function createDarkestDungeonServer(
       inputSchema: z.object({
         query: z.string().min(1).optional(),
         region: curioRegionSchema.optional(),
+        language: z.enum(["en", "ko"]).default("en"),
         limit: z.number().int().min(1).max(50).default(20),
       }),
       outputSchema: z.object({ curios: z.array(curioSummarySchema) }),
       annotations: readOnlyAnnotations,
     },
-    async ({ query, region, limit }) => {
+    async ({ query, region, language, limit }) => {
       const filters = {
         ...(query === undefined ? {} : { query }),
         ...(region === undefined ? {} : { region }),
+        language,
         limit,
       };
+      const [knowledge, localization] = await Promise.all([
+        getKnowledge(),
+        getGameLocalization(),
+      ]);
       return toolResult(
         "curios",
-        searchCurios(await getKnowledge(), filters),
+        searchCurios(knowledge, filters, localization),
       );
     },
   );
@@ -995,6 +1001,7 @@ export function createDarkestDungeonServer(
           curioId: z.string().min(1).optional(),
           name: z.string().min(1).optional(),
           availableItems: z.array(z.string().min(1)).max(64).optional(),
+          language: z.enum(["en", "ko"]).default("en"),
         })
         .refine(
           ({ curioId, name }) =>
@@ -1004,13 +1011,18 @@ export function createDarkestDungeonServer(
       outputSchema: z.object({ advice: curioAdviceSchema }),
       annotations: readOnlyAnnotations,
     },
-    async ({ curioId, name, availableItems }) => {
+    async ({ curioId, name, availableItems, language }) => {
       const request = {
         ...(curioId === undefined ? {} : { curioId }),
         ...(name === undefined ? {} : { name }),
         ...(availableItems === undefined ? {} : { availableItems }),
+        language,
       };
-      const advice = getCurioAdvice(await getKnowledge(), request);
+      const [knowledge, localization] = await Promise.all([
+        getKnowledge(),
+        getGameLocalization(),
+      ]);
+      const advice = getCurioAdvice(knowledge, request, localization);
       if (advice.status === "not_found") {
         return notFoundResult("Curio", advice.query);
       }

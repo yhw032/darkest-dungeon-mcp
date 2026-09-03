@@ -4,6 +4,11 @@ import type {
   CurioKnowledgeBase,
 } from "../domain/curio-knowledge.js";
 import {
+  localizeCurio,
+  type GameLanguage,
+  type GameLocalization,
+} from "../localization/game-localization.js";
+import {
   normalizeKnowledgeTerm,
   searchCurios,
   type CurioSummary,
@@ -13,11 +18,16 @@ export interface CurioAdviceRequest {
   curioId?: string;
   name?: string;
   availableItems?: string[];
+  language?: GameLanguage;
 }
+
+export type LocalizedCurioKnowledge = Omit<CurioKnowledge, "localizationId"> & {
+  name: string | null;
+};
 
 export interface CurioAdvice {
   status: "found";
-  curio: CurioKnowledge;
+  curio: LocalizedCurioKnowledge;
   usableInteractions: CurioInteraction[];
   recommendedInteraction: CurioInteraction | null;
   warnings: string[];
@@ -52,6 +62,7 @@ function canonicalItem(value: string): string {
 function resolveCurio(
   knowledge: CurioKnowledgeBase,
   request: CurioAdviceRequest,
+  localization?: GameLocalization,
 ):
   | { status: "found"; curio: CurioKnowledge }
   | CurioAdviceNotFound
@@ -77,7 +88,12 @@ function resolveCurio(
   }
 
   const name = request.name!;
-  const candidates = searchCurios(knowledge, { query: name });
+  const language = request.language ?? "en";
+  const candidates = searchCurios(
+    knowledge,
+    { query: name, language },
+    localization,
+  );
   if (candidates.length === 0) return { status: "not_found", query: name };
   if (candidates.length > 1) {
     return { status: "ambiguous", query: name, candidates };
@@ -90,13 +106,27 @@ function resolveCurio(
   };
 }
 
+function toLocalizedCurio(
+  curio: CurioKnowledge,
+  language: GameLanguage = "en",
+  localization?: GameLocalization,
+): LocalizedCurioKnowledge {
+  const { localizationId: _localizationId, ...rest } = curio;
+  return {
+    ...rest,
+    name: localizeCurio(curio.localizationId ?? curio.id, language, localization),
+  };
+}
+
 export function getCurioAdvice(
   knowledge: CurioKnowledgeBase,
   request: CurioAdviceRequest,
+  localization?: GameLocalization,
 ): CurioAdviceResult {
-  const resolved = resolveCurio(knowledge, request);
+  const resolved = resolveCurio(knowledge, request, localization);
   if (resolved.status !== "found") return resolved;
 
+  const language = request.language ?? "en";
   const availableItems =
     request.availableItems === undefined
       ? undefined
@@ -133,7 +163,7 @@ export function getCurioAdvice(
 
   return {
     status: "found",
-    curio: resolved.curio,
+    curio: toLocalizedCurio(resolved.curio, language, localization),
     usableInteractions,
     recommendedInteraction,
     warnings,

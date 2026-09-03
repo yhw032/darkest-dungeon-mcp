@@ -10,11 +10,11 @@ import { loadCurioKnowledge } from "../src/knowledge/load-curio-knowledge.js";
 
 function validKnowledge(): unknown {
   return {
-    schemaVersion: 1,
+    schemaVersion: 2,
     curios: [
       {
         id: "test_curio",
-        names: { en: "Test Curio", ko: "시험용 골동품" },
+        localizationId: "test_curio_key",
         aliases: ["Test"],
         regions: ["ruins"],
         dlcs: [],
@@ -46,12 +46,12 @@ function validKnowledge(): unknown {
   };
 }
 
-test("validates and preserves localized curio knowledge", () => {
+test("validates and preserves curio knowledge", () => {
   const result = parseCurioKnowledge(validKnowledge());
 
-  assert.equal(result.schemaVersion, 1);
+  assert.equal(result.schemaVersion, 2);
   assert.deepEqual(result.curios[0]?.availability, { type: "standard" });
-  assert.equal(result.curios[0]?.names.ko, "시험용 골동품");
+  assert.equal(result.curios[0]?.localizationId, "test_curio_key");
   assert.equal(
     result.curios[0]?.interactions[0]?.outcomes[0]?.chancePercent,
     100,

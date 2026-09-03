@@ -19,6 +19,7 @@ const supportedLanguageIds = new Set(Object.values(languageIds));
 const localizationFiles = [
   { path: ["localization", "miscellaneous.string_table.xml"], optional: false },
   { path: ["localization", "heroes.string_table.xml"], optional: false },
+  { path: ["localization", "curios.string_table.xml"], optional: true },
   { path: ["localization", "backertrinkets.string_table.xml"], optional: true },
   { path: ["localization", "arena_base.string_table.xml"], optional: true },
   {
@@ -114,6 +115,17 @@ export function localizeTrinket(
   localization?: GameLocalization,
 ): string | null {
   return localizeInventoryItem("trinket", trinketId, language, localization);
+}
+
+export function localizeCurio(
+  curioIdOrKey: string,
+  language: GameLanguage,
+  localization?: GameLocalization,
+): string | null {
+  const key = curioIdOrKey.startsWith("str_")
+    ? curioIdOrKey
+    : `str_curio_title_${curioIdOrKey}`;
+  return localizeGameString(key, language, localization);
 }
 
 export function localizeTownBuilding(

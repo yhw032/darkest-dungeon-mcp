@@ -1,11 +1,17 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "curios": [
     {
       "id": "crate",
-      "names": { "en": "Crate" },
-      "aliases": [],
-      "regions": ["ruins", "warrens", "weald", "cove"],
+      "aliases": [
+        "Crate"
+      ],
+      "regions": [
+        "ruins",
+        "warrens",
+        "weald",
+        "cove"
+      ],
       "dlcs": [],
       "interactions": [
         {
@@ -13,12 +19,24 @@
           "recommendation": "situational",
           "certainty": "possible",
           "outcomes": [
-            { "type": "loot", "polarity": "positive", "description": "Provides heirlooms.", "chancePercent": 75 },
-            { "type": "nothing", "polarity": "neutral", "description": "Nothing happens.", "chancePercent": 25 }
+            {
+              "type": "loot",
+              "polarity": "positive",
+              "description": "Provides heirlooms.",
+              "chancePercent": 75
+            },
+            {
+              "type": "nothing",
+              "polarity": "neutral",
+              "description": "Nothing happens.",
+              "chancePercent": 25
+            }
           ]
         }
       ],
-      "notes": ["No provision item changes this curio's outcomes."],
+      "notes": [
+        "No provision item changes this curio's outcomes."
+      ],
       "sources": [
         {
           "title": "Official Darkest Dungeon Wiki: Curio data module",
@@ -29,9 +47,16 @@
     },
     {
       "id": "discarded_pack",
-      "names": { "en": "Discarded Pack" },
-      "aliases": [],
-      "regions": ["ruins", "warrens", "weald", "cove", "courtyard"],
+      "aliases": [
+        "Discarded Pack"
+      ],
+      "regions": [
+        "ruins",
+        "warrens",
+        "weald",
+        "cove",
+        "courtyard"
+      ],
       "dlcs": [],
       "interactions": [
         {
@@ -39,13 +64,30 @@
           "recommendation": "recommended",
           "certainty": "possible",
           "outcomes": [
-            { "type": "loot", "polarity": "positive", "description": "Provides one supplies roll, two gold or gem rolls, and a journal entry.", "chancePercent": 60 },
-            { "type": "other", "polarity": "positive", "description": "Scouts ahead.", "chancePercent": 20 },
-            { "type": "nothing", "polarity": "neutral", "description": "Nothing happens.", "chancePercent": 20 }
+            {
+              "type": "loot",
+              "polarity": "positive",
+              "description": "Provides one supplies roll, two gold or gem rolls, and a journal entry.",
+              "chancePercent": 60
+            },
+            {
+              "type": "other",
+              "polarity": "positive",
+              "description": "Scouts ahead.",
+              "chancePercent": 20
+            },
+            {
+              "type": "nothing",
+              "polarity": "neutral",
+              "description": "Nothing happens.",
+              "chancePercent": 20
+            }
           ]
         }
       ],
-      "notes": ["Every possible outcome is non-harmful."],
+      "notes": [
+        "Every possible outcome is non-harmful."
+      ],
       "sources": [
         {
           "title": "Official Darkest Dungeon Wiki: Curio data module",
@@ -56,9 +98,16 @@
     },
     {
       "id": "sack",
-      "names": { "en": "Sack" },
-      "aliases": [],
-      "regions": ["ruins", "warrens", "weald", "cove", "courtyard"],
+      "aliases": [
+        "Sack"
+      ],
+      "regions": [
+        "ruins",
+        "warrens",
+        "weald",
+        "cove",
+        "courtyard"
+      ],
       "dlcs": [],
       "interactions": [
         {
@@ -66,12 +115,24 @@
           "recommendation": "recommended",
           "certainty": "possible",
           "outcomes": [
-            { "type": "loot", "polarity": "positive", "description": "Provides gold.", "chancePercent": 75 },
-            { "type": "nothing", "polarity": "neutral", "description": "Nothing happens.", "chancePercent": 25 }
+            {
+              "type": "loot",
+              "polarity": "positive",
+              "description": "Provides gold.",
+              "chancePercent": 75
+            },
+            {
+              "type": "nothing",
+              "polarity": "neutral",
+              "description": "Nothing happens.",
+              "chancePercent": 25
+            }
           ]
         }
       ],
-      "notes": ["Every possible outcome is non-harmful."],
+      "notes": [
+        "Every possible outcome is non-harmful."
+      ],
       "sources": [
         {
           "title": "Official Darkest Dungeon Wiki: Curio data module",
@@ -82,9 +143,15 @@
     },
     {
       "id": "sconce",
-      "names": { "en": "Sconce" },
-      "aliases": [],
-      "regions": ["ruins", "warrens", "weald", "cove"],
+      "aliases": [
+        "Sconce"
+      ],
+      "regions": [
+        "ruins",
+        "warrens",
+        "weald",
+        "cove"
+      ],
       "dlcs": [],
       "interactions": [
         {
@@ -92,11 +159,17 @@
           "recommendation": "recommended",
           "certainty": "guaranteed",
           "outcomes": [
-            { "type": "loot", "polarity": "positive", "description": "Provides one torch." }
+            {
+              "type": "loot",
+              "polarity": "positive",
+              "description": "Provides one torch."
+            }
           ]
         }
       ],
-      "notes": ["Every interaction is beneficial."],
+      "notes": [
+        "Every interaction is beneficial."
+      ],
       "sources": [
         {
           "title": "Official Darkest Dungeon Wiki: Curio data module",
@@ -107,9 +180,13 @@
     },
     {
       "id": "stack_of_books",
-      "names": { "en": "Stack of Books" },
-      "aliases": ["Book Stack"],
-      "regions": ["ruins", "warrens"],
+      "aliases": [
+        "Book Stack"
+      ],
+      "regions": [
+        "ruins",
+        "warrens"
+      ],
       "dlcs": [],
       "interactions": [
         {
@@ -117,7 +194,11 @@
           "recommendation": "avoid",
           "certainty": "guaranteed",
           "outcomes": [
-            { "type": "stress", "polarity": "negative", "description": "Increases stress by 100." }
+            {
+              "type": "stress",
+              "polarity": "negative",
+              "description": "Increases stress by 100."
+            }
           ]
         },
         {
@@ -125,16 +206,48 @@
           "recommendation": "avoid",
           "certainty": "possible",
           "outcomes": [
-            { "type": "quirk", "polarity": "positive", "description": "Grants a random positive quirk.", "chancePercent": 22.2 },
-            { "type": "loot", "polarity": "positive", "description": "Provides a journal entry.", "chancePercent": 16.7 },
-            { "type": "stress", "polarity": "negative", "description": "Increases stress by 25.", "chancePercent": 22.2 },
-            { "type": "quirk", "polarity": "negative", "description": "Grants a random negative quirk.", "chancePercent": 11.1 },
-            { "type": "other", "polarity": "negative", "description": "Reduces the light meter by 25.", "chancePercent": 11.1 },
-            { "type": "nothing", "polarity": "neutral", "description": "Nothing happens.", "chancePercent": 16.7 }
+            {
+              "type": "quirk",
+              "polarity": "positive",
+              "description": "Grants a random positive quirk.",
+              "chancePercent": 22.2
+            },
+            {
+              "type": "loot",
+              "polarity": "positive",
+              "description": "Provides a journal entry.",
+              "chancePercent": 16.7
+            },
+            {
+              "type": "stress",
+              "polarity": "negative",
+              "description": "Increases stress by 25.",
+              "chancePercent": 22.2
+            },
+            {
+              "type": "quirk",
+              "polarity": "negative",
+              "description": "Grants a random negative quirk.",
+              "chancePercent": 11.1
+            },
+            {
+              "type": "other",
+              "polarity": "negative",
+              "description": "Reduces the light meter by 25.",
+              "chancePercent": 11.1
+            },
+            {
+              "type": "nothing",
+              "polarity": "neutral",
+              "description": "Nothing happens.",
+              "chancePercent": 16.7
+            }
           ]
         }
       ],
-      "notes": ["Burning the books with a Torch is guaranteed to maximize the interacting hero's stress."],
+      "notes": [
+        "Burning the books with a Torch is guaranteed to maximize the interacting hero's stress."
+      ],
       "sources": [
         {
           "title": "Official Darkest Dungeon Wiki: Curio data module",
@@ -145,9 +258,17 @@
     },
     {
       "id": "heirloom_chest_1",
-      "names": { "en": "Heirloom Chest (1)" },
-      "aliases": ["Heirloom Chest", "Original Heirloom Chest"],
-      "regions": ["ruins", "warrens", "weald", "cove"],
+      "localizationId": "heirloom_chest",
+      "aliases": [
+        "Heirloom Chest",
+        "Original Heirloom Chest"
+      ],
+      "regions": [
+        "ruins",
+        "warrens",
+        "weald",
+        "cove"
+      ],
       "dlcs": [],
       "interactions": [
         {
@@ -155,7 +276,11 @@
           "recommendation": "recommended",
           "certainty": "guaranteed",
           "outcomes": [
-            { "type": "loot", "polarity": "positive", "description": "Provides four heirloom rolls." }
+            {
+              "type": "loot",
+              "polarity": "positive",
+              "description": "Provides four heirloom rolls."
+            }
           ]
         },
         {
@@ -163,7 +288,11 @@
           "recommendation": "recommended",
           "certainty": "guaranteed",
           "outcomes": [
-            { "type": "loot", "polarity": "positive", "description": "Provides three heirloom rolls." }
+            {
+              "type": "loot",
+              "polarity": "positive",
+              "description": "Provides three heirloom rolls."
+            }
           ],
           "note": "Safe, but yields one fewer heirloom roll than a Skeleton Key."
         },
@@ -172,13 +301,30 @@
           "recommendation": "avoid",
           "certainty": "possible",
           "outcomes": [
-            { "type": "loot", "polarity": "positive", "description": "Provides two heirloom rolls.", "chancePercent": 75 },
-            { "type": "status", "polarity": "negative", "description": "Inflicts bleed.", "chancePercent": 25 },
-            { "type": "status", "polarity": "negative", "description": "Inflicts blight.", "chancePercent": 25 }
+            {
+              "type": "loot",
+              "polarity": "positive",
+              "description": "Provides two heirloom rolls.",
+              "chancePercent": 75
+            },
+            {
+              "type": "status",
+              "polarity": "negative",
+              "description": "Inflicts bleed.",
+              "chancePercent": 25
+            },
+            {
+              "type": "status",
+              "polarity": "negative",
+              "description": "Inflicts blight.",
+              "chancePercent": 25
+            }
           ]
         }
       ],
-      "notes": ["This variant looks identical to Heirloom Chest (2)."],
+      "notes": [
+        "This variant looks identical to Heirloom Chest (2)."
+      ],
       "sources": [
         {
           "title": "Official Darkest Dungeon Wiki: Curio data module",
@@ -194,9 +340,17 @@
     },
     {
       "id": "heirloom_chest_2",
-      "names": { "en": "Heirloom Chest (2)" },
-      "aliases": ["Heirloom Chest", "Locked Strongbox"],
-      "regions": ["ruins", "warrens", "weald", "cove"],
+      "localizationId": "heirloom_chest",
+      "aliases": [
+        "Heirloom Chest",
+        "Locked Strongbox"
+      ],
+      "regions": [
+        "ruins",
+        "warrens",
+        "weald",
+        "cove"
+      ],
       "dlcs": [],
       "interactions": [
         {
@@ -204,7 +358,11 @@
           "recommendation": "recommended",
           "certainty": "guaranteed",
           "outcomes": [
-            { "type": "loot", "polarity": "positive", "description": "Provides three rolls from the unrestricted loot table." }
+            {
+              "type": "loot",
+              "polarity": "positive",
+              "description": "Provides three rolls from the unrestricted loot table."
+            }
           ]
         },
         {
@@ -212,8 +370,18 @@
           "recommendation": "situational",
           "certainty": "possible",
           "outcomes": [
-            { "type": "loot", "polarity": "positive", "description": "Provides two rolls from the unrestricted loot table.", "chancePercent": 66.7 },
-            { "type": "nothing", "polarity": "neutral", "description": "Nothing happens.", "chancePercent": 33.3 }
+            {
+              "type": "loot",
+              "polarity": "positive",
+              "description": "Provides two rolls from the unrestricted loot table.",
+              "chancePercent": 66.7
+            },
+            {
+              "type": "nothing",
+              "polarity": "neutral",
+              "description": "Nothing happens.",
+              "chancePercent": 33.3
+            }
           ]
         },
         {
@@ -221,13 +389,30 @@
           "recommendation": "avoid",
           "certainty": "possible",
           "outcomes": [
-            { "type": "loot", "polarity": "positive", "description": "Provides two rolls from the unrestricted loot table.", "chancePercent": 50 },
-            { "type": "status", "polarity": "negative", "description": "Inflicts bleed.", "chancePercent": 25 },
-            { "type": "status", "polarity": "negative", "description": "Inflicts blight.", "chancePercent": 25 }
+            {
+              "type": "loot",
+              "polarity": "positive",
+              "description": "Provides two rolls from the unrestricted loot table.",
+              "chancePercent": 50
+            },
+            {
+              "type": "status",
+              "polarity": "negative",
+              "description": "Inflicts bleed.",
+              "chancePercent": 25
+            },
+            {
+              "type": "status",
+              "polarity": "negative",
+              "description": "Inflicts blight.",
+              "chancePercent": 25
+            }
           ]
         }
       ],
-      "notes": ["This variant is a reskinned Locked Strongbox and looks identical to Heirloom Chest (1)."],
+      "notes": [
+        "This variant is a reskinned Locked Strongbox and looks identical to Heirloom Chest (1)."
+      ],
       "sources": [
         {
           "title": "Official Darkest Dungeon Wiki: Curio data module",
@@ -243,9 +428,16 @@
     },
     {
       "id": "unlocked_strongbox",
-      "names": { "en": "Unlocked Strongbox" },
-      "aliases": ["Strongbox"],
-      "regions": ["ruins", "warrens", "weald", "cove", "courtyard"],
+      "aliases": [
+        "Strongbox"
+      ],
+      "regions": [
+        "ruins",
+        "warrens",
+        "weald",
+        "cove",
+        "courtyard"
+      ],
       "dlcs": [],
       "interactions": [
         {
@@ -253,12 +445,24 @@
           "recommendation": "situational",
           "certainty": "possible",
           "outcomes": [
-            { "type": "loot", "polarity": "positive", "description": "Provides two rolls from the unrestricted loot table.", "chancePercent": 75 },
-            { "type": "status", "polarity": "negative", "description": "Inflicts blight.", "chancePercent": 25 }
+            {
+              "type": "loot",
+              "polarity": "positive",
+              "description": "Provides two rolls from the unrestricted loot table.",
+              "chancePercent": 75
+            },
+            {
+              "type": "status",
+              "polarity": "negative",
+              "description": "Inflicts blight.",
+              "chancePercent": 25
+            }
           ]
         }
       ],
-      "notes": ["No provision item changes this curio's outcomes."],
+      "notes": [
+        "No provision item changes this curio's outcomes."
+      ],
       "sources": [
         {
           "title": "Official Darkest Dungeon Wiki: Curio data module",
@@ -269,9 +473,16 @@
     },
     {
       "id": "ancient_artifact",
-      "names": { "en": "Ancient Artifact" },
-      "aliases": ["Secret Room Chest"],
-      "regions": ["ruins", "warrens", "weald", "cove"],
+      "localizationId": "secret_stash",
+      "aliases": [
+        "Secret Room Chest"
+      ],
+      "regions": [
+        "ruins",
+        "warrens",
+        "weald",
+        "cove"
+      ],
       "dlcs": [],
       "interactions": [
         {
@@ -279,7 +490,11 @@
           "recommendation": "recommended",
           "certainty": "guaranteed",
           "outcomes": [
-            { "type": "loot", "polarity": "positive", "description": "Provides a Collector trinket or three Puzzling Trapezohedrons." }
+            {
+              "type": "loot",
+              "polarity": "positive",
+              "description": "Provides a Collector trinket or three Puzzling Trapezohedrons."
+            }
           ]
         },
         {
@@ -287,11 +502,17 @@
           "recommendation": "situational",
           "certainty": "guaranteed",
           "outcomes": [
-            { "type": "loot", "polarity": "positive", "description": "Provides three gold or gem rolls." }
+            {
+              "type": "loot",
+              "polarity": "positive",
+              "description": "Provides three gold or gem rolls."
+            }
           ]
         }
       ],
-      "notes": ["Found in secret rooms; a Skeleton Key gives the special reward table."],
+      "notes": [
+        "Found in secret rooms; a Skeleton Key gives the special reward table."
+      ],
       "sources": [
         {
           "title": "Official Darkest Dungeon Wiki: Curio data module",
@@ -302,22 +523,38 @@
     },
     {
       "id": "throbbing_cocoons_infestation",
-      "names": { "en": "Throbbing Cocoons (Infestation)" },
-      "aliases": ["Throbbing Cocoons", "Infestation Cocoons"],
-      "regions": ["ruins", "warrens", "weald", "cove"],
-      "dlcs": ["crimson_court"],
+      "localizationId": "cc_infested_egg_cluster",
+      "aliases": [
+        "Throbbing Cocoons",
+        "Infestation Cocoons"
+      ],
+      "regions": [
+        "ruins",
+        "warrens",
+        "weald",
+        "cove"
+      ],
+      "dlcs": [
+        "crimson_court"
+      ],
       "interactions": [
         {
           "item": null,
           "recommendation": "situational",
           "certainty": "guaranteed",
           "outcomes": [
-            { "type": "combat", "polarity": "mixed", "description": "Summons a Gatekeeper encounter with Bloodsucker enemies." }
+            {
+              "type": "combat",
+              "polarity": "mixed",
+              "description": "Summons a Gatekeeper encounter with Bloodsucker enemies."
+            }
           ],
           "note": "Activate only when deliberately seeking a Gatekeeper encounter for a Courtyard invitation."
         }
       ],
-      "notes": ["Appears only at high Crimson Court infestation in regular dungeons."],
+      "notes": [
+        "Appears only at high Crimson Court infestation in regular dungeons."
+      ],
       "sources": [
         {
           "title": "Official Darkest Dungeon Wiki: Curio data module",
@@ -333,9 +570,13 @@
     },
     {
       "id": "eldritch_altar",
-      "names": { "en": "Eldritch Altar" },
       "aliases": [],
-      "regions": ["ruins", "warrens", "weald", "cove"],
+      "regions": [
+        "ruins",
+        "warrens",
+        "weald",
+        "cove"
+      ],
       "dlcs": [],
       "interactions": [
         {
@@ -376,7 +617,9 @@
           ]
         }
       ],
-      "notes": ["Select a hero who has a removable negative quirk."],
+      "notes": [
+        "Select a hero who has a removable negative quirk."
+      ],
       "sources": [
         {
           "title": "Official Darkest Dungeon Wiki: Quirks",
@@ -387,9 +630,10 @@
     },
     {
       "id": "alchemy_table",
-      "names": { "en": "Alchemy Table" },
       "aliases": [],
-      "regions": ["ruins"],
+      "regions": [
+        "ruins"
+      ],
       "dlcs": [],
       "interactions": [
         {
@@ -454,9 +698,10 @@
     },
     {
       "id": "altar_of_light",
-      "names": { "en": "Altar of Light" },
       "aliases": [],
-      "regions": ["ruins"],
+      "regions": [
+        "ruins"
+      ],
       "dlcs": [],
       "interactions": [
         {
@@ -484,7 +729,9 @@
           ]
         }
       ],
-      "notes": ["Use a hero who benefits from a damage buff for the rest of the expedition."],
+      "notes": [
+        "Use a hero who benefits from a damage buff for the rest of the expedition."
+      ],
       "sources": [
         {
           "title": "Official Darkest Dungeon Wiki: Curio data module",
@@ -495,9 +742,10 @@
     },
     {
       "id": "bookshelf",
-      "names": { "en": "Bookshelf" },
       "aliases": [],
-      "regions": ["ruins"],
+      "regions": [
+        "ruins"
+      ],
       "dlcs": [],
       "interactions": [
         {
@@ -505,16 +753,48 @@
           "recommendation": "situational",
           "certainty": "possible",
           "outcomes": [
-            { "type": "other", "polarity": "positive", "description": "Scouts ahead.", "chancePercent": 20 },
-            { "type": "stress", "polarity": "negative", "description": "Increases stress by 15.", "chancePercent": 20 },
-            { "type": "quirk", "polarity": "positive", "description": "Grants a random positive quirk.", "chancePercent": 13.3 },
-            { "type": "quirk", "polarity": "negative", "description": "Grants a random negative quirk.", "chancePercent": 6.7 },
-            { "type": "loot", "polarity": "positive", "description": "Provides a journal entry.", "chancePercent": 20 },
-            { "type": "nothing", "polarity": "neutral", "description": "Nothing happens.", "chancePercent": 20 }
+            {
+              "type": "other",
+              "polarity": "positive",
+              "description": "Scouts ahead.",
+              "chancePercent": 20
+            },
+            {
+              "type": "stress",
+              "polarity": "negative",
+              "description": "Increases stress by 15.",
+              "chancePercent": 20
+            },
+            {
+              "type": "quirk",
+              "polarity": "positive",
+              "description": "Grants a random positive quirk.",
+              "chancePercent": 13.3
+            },
+            {
+              "type": "quirk",
+              "polarity": "negative",
+              "description": "Grants a random negative quirk.",
+              "chancePercent": 6.7
+            },
+            {
+              "type": "loot",
+              "polarity": "positive",
+              "description": "Provides a journal entry.",
+              "chancePercent": 20
+            },
+            {
+              "type": "nothing",
+              "polarity": "neutral",
+              "description": "Nothing happens.",
+              "chancePercent": 20
+            }
           ]
         }
       ],
-      "notes": ["No provision item changes this curio's outcomes."],
+      "notes": [
+        "No provision item changes this curio's outcomes."
+      ],
       "sources": [
         {
           "title": "Official Darkest Dungeon Wiki: Curio data module",
@@ -525,9 +805,10 @@
     },
     {
       "id": "confession_booth",
-      "names": { "en": "Confession Booth" },
       "aliases": [],
-      "regions": ["ruins"],
+      "regions": [
+        "ruins"
+      ],
       "dlcs": [],
       "interactions": [
         {
@@ -535,7 +816,11 @@
           "recommendation": "recommended",
           "certainty": "guaranteed",
           "outcomes": [
-            { "type": "stress", "polarity": "positive", "description": "Reduces stress by 30." }
+            {
+              "type": "stress",
+              "polarity": "positive",
+              "description": "Reduces stress by 30."
+            }
           ]
         },
         {
@@ -543,9 +828,24 @@
           "recommendation": "situational",
           "certainty": "possible",
           "outcomes": [
-            { "type": "stress", "polarity": "negative", "description": "Increases stress by 15.", "chancePercent": 50 },
-            { "type": "loot", "polarity": "positive", "description": "Provides six rolls from the gold and trinket loot table and a journal entry.", "chancePercent": 25 },
-            { "type": "quirk", "polarity": "positive", "description": "Removes one random negative quirk.", "chancePercent": 25 }
+            {
+              "type": "stress",
+              "polarity": "negative",
+              "description": "Increases stress by 15.",
+              "chancePercent": 50
+            },
+            {
+              "type": "loot",
+              "polarity": "positive",
+              "description": "Provides six rolls from the gold and trinket loot table and a journal entry.",
+              "chancePercent": 25
+            },
+            {
+              "type": "quirk",
+              "polarity": "positive",
+              "description": "Removes one random negative quirk.",
+              "chancePercent": 25
+            }
           ]
         }
       ],
@@ -560,9 +860,10 @@
     },
     {
       "id": "decorative_urn",
-      "names": { "en": "Decorative Urn" },
       "aliases": [],
-      "regions": ["ruins"],
+      "regions": [
+        "ruins"
+      ],
       "dlcs": [],
       "interactions": [
         {
@@ -570,7 +871,11 @@
           "recommendation": "recommended",
           "certainty": "guaranteed",
           "outcomes": [
-            { "type": "loot", "polarity": "positive", "description": "Provides two gem or trinket rolls and two gem rolls." }
+            {
+              "type": "loot",
+              "polarity": "positive",
+              "description": "Provides two gem or trinket rolls and two gem rolls."
+            }
           ]
         },
         {
@@ -578,7 +883,11 @@
           "recommendation": "avoid",
           "certainty": "guaranteed",
           "outcomes": [
-            { "type": "quirk", "polarity": "negative", "description": "Inflicts the Guilty Conscience quirk." }
+            {
+              "type": "quirk",
+              "polarity": "negative",
+              "description": "Inflicts the Guilty Conscience quirk."
+            }
           ]
         },
         {
@@ -586,11 +895,36 @@
           "recommendation": "avoid",
           "certainty": "possible",
           "outcomes": [
-            { "type": "loot", "polarity": "positive", "description": "Provides one gem or trinket roll and two gem rolls.", "chancePercent": 44.4 },
-            { "type": "status", "polarity": "negative", "description": "Inflicts blight.", "chancePercent": 22.2 },
-            { "type": "disease", "polarity": "negative", "description": "Inflicts Creeping Cough.", "chancePercent": 7.4 },
-            { "type": "disease", "polarity": "negative", "description": "Inflicts a random disease.", "chancePercent": 3.7 },
-            { "type": "nothing", "polarity": "neutral", "description": "Nothing happens.", "chancePercent": 22.2 }
+            {
+              "type": "loot",
+              "polarity": "positive",
+              "description": "Provides one gem or trinket roll and two gem rolls.",
+              "chancePercent": 44.4
+            },
+            {
+              "type": "status",
+              "polarity": "negative",
+              "description": "Inflicts blight.",
+              "chancePercent": 22.2
+            },
+            {
+              "type": "disease",
+              "polarity": "negative",
+              "description": "Inflicts Creeping Cough.",
+              "chancePercent": 7.4
+            },
+            {
+              "type": "disease",
+              "polarity": "negative",
+              "description": "Inflicts a random disease.",
+              "chancePercent": 3.7
+            },
+            {
+              "type": "nothing",
+              "polarity": "neutral",
+              "description": "Nothing happens.",
+              "chancePercent": 22.2
+            }
           ]
         }
       ],
@@ -605,9 +939,10 @@
     },
     {
       "id": "iron_maiden",
-      "names": { "en": "Iron Maiden" },
       "aliases": [],
-      "regions": ["ruins"],
+      "regions": [
+        "ruins"
+      ],
       "dlcs": [],
       "interactions": [
         {
@@ -615,7 +950,11 @@
           "recommendation": "recommended",
           "certainty": "guaranteed",
           "outcomes": [
-            { "type": "loot", "polarity": "positive", "description": "Provides two rolls from the unrestricted loot table." }
+            {
+              "type": "loot",
+              "polarity": "positive",
+              "description": "Provides two rolls from the unrestricted loot table."
+            }
           ]
         },
         {
@@ -623,11 +962,36 @@
           "recommendation": "avoid",
           "certainty": "possible",
           "outcomes": [
-            { "type": "loot", "polarity": "positive", "description": "Provides two rolls from the unrestricted loot table.", "chancePercent": 40 },
-            { "type": "quirk", "polarity": "negative", "description": "Inflicts the Claustrophobia quirk.", "chancePercent": 20 },
-            { "type": "disease", "polarity": "negative", "description": "Inflicts Tetanus.", "chancePercent": 13.3 },
-            { "type": "disease", "polarity": "negative", "description": "Inflicts a random disease.", "chancePercent": 6.7 },
-            { "type": "nothing", "polarity": "neutral", "description": "Nothing happens.", "chancePercent": 20 }
+            {
+              "type": "loot",
+              "polarity": "positive",
+              "description": "Provides two rolls from the unrestricted loot table.",
+              "chancePercent": 40
+            },
+            {
+              "type": "quirk",
+              "polarity": "negative",
+              "description": "Inflicts the Claustrophobia quirk.",
+              "chancePercent": 20
+            },
+            {
+              "type": "disease",
+              "polarity": "negative",
+              "description": "Inflicts Tetanus.",
+              "chancePercent": 13.3
+            },
+            {
+              "type": "disease",
+              "polarity": "negative",
+              "description": "Inflicts a random disease.",
+              "chancePercent": 6.7
+            },
+            {
+              "type": "nothing",
+              "polarity": "neutral",
+              "description": "Nothing happens.",
+              "chancePercent": 20
+            }
           ]
         }
       ],
@@ -642,9 +1006,12 @@
     },
     {
       "id": "locked_display_cabinet",
-      "names": { "en": "Locked Display Cabinet" },
-      "aliases": ["Display Cabinet"],
-      "regions": ["ruins"],
+      "aliases": [
+        "Display Cabinet"
+      ],
+      "regions": [
+        "ruins"
+      ],
       "dlcs": [],
       "interactions": [
         {
@@ -652,7 +1019,11 @@
           "recommendation": "recommended",
           "certainty": "guaranteed",
           "outcomes": [
-            { "type": "loot", "polarity": "positive", "description": "Provides three gold or heirloom rolls and two gold or gem rolls." }
+            {
+              "type": "loot",
+              "polarity": "positive",
+              "description": "Provides three gold or heirloom rolls and two gold or gem rolls."
+            }
           ]
         },
         {
@@ -660,7 +1031,11 @@
           "recommendation": "situational",
           "certainty": "guaranteed",
           "outcomes": [
-            { "type": "loot", "polarity": "positive", "description": "Provides two gold or heirloom rolls and two gold or gem rolls." }
+            {
+              "type": "loot",
+              "polarity": "positive",
+              "description": "Provides two gold or heirloom rolls and two gold or gem rolls."
+            }
           ],
           "note": "Safe but yields one fewer gold or heirloom roll than a Skeleton Key."
         },
@@ -669,8 +1044,18 @@
           "recommendation": "avoid",
           "certainty": "possible",
           "outcomes": [
-            { "type": "status", "polarity": "negative", "description": "Inflicts bleed.", "chancePercent": 50 },
-            { "type": "status", "polarity": "negative", "description": "Inflicts blight.", "chancePercent": 50 }
+            {
+              "type": "status",
+              "polarity": "negative",
+              "description": "Inflicts bleed.",
+              "chancePercent": 50
+            },
+            {
+              "type": "status",
+              "polarity": "negative",
+              "description": "Inflicts blight.",
+              "chancePercent": 50
+            }
           ]
         }
       ],
@@ -685,9 +1070,10 @@
     },
     {
       "id": "holy_fountain",
-      "names": { "en": "Holy Fountain" },
       "aliases": [],
-      "regions": ["ruins"],
+      "regions": [
+        "ruins"
+      ],
       "dlcs": [],
       "interactions": [
         {
@@ -743,9 +1129,10 @@
     },
     {
       "id": "locked_sarcophagus",
-      "names": { "en": "Locked Sarcophagus" },
       "aliases": [],
-      "regions": ["ruins"],
+      "regions": [
+        "ruins"
+      ],
       "dlcs": [],
       "interactions": [
         {
@@ -753,7 +1140,11 @@
           "recommendation": "recommended",
           "certainty": "guaranteed",
           "outcomes": [
-            { "type": "loot", "polarity": "positive", "description": "Provides two gold or heirloom rolls and one gold or trinket roll." }
+            {
+              "type": "loot",
+              "polarity": "positive",
+              "description": "Provides two gold or heirloom rolls and one gold or trinket roll."
+            }
           ]
         },
         {
@@ -761,7 +1152,11 @@
           "recommendation": "situational",
           "certainty": "guaranteed",
           "outcomes": [
-            { "type": "loot", "polarity": "positive", "description": "Provides one gold or heirloom roll and one gold or trinket roll." }
+            {
+              "type": "loot",
+              "polarity": "positive",
+              "description": "Provides one gold or heirloom roll and one gold or trinket roll."
+            }
           ],
           "note": "Safe but yields one fewer gold or heirloom roll than a Skeleton Key."
         },
@@ -770,8 +1165,18 @@
           "recommendation": "avoid",
           "certainty": "possible",
           "outcomes": [
-            { "type": "status", "polarity": "negative", "description": "Inflicts bleed.", "chancePercent": 50 },
-            { "type": "status", "polarity": "negative", "description": "Inflicts blight.", "chancePercent": 50 }
+            {
+              "type": "status",
+              "polarity": "negative",
+              "description": "Inflicts bleed.",
+              "chancePercent": 50
+            },
+            {
+              "type": "status",
+              "polarity": "negative",
+              "description": "Inflicts blight.",
+              "chancePercent": 50
+            }
           ]
         }
       ],
@@ -786,9 +1191,10 @@
     },
     {
       "id": "sarcophagus",
-      "names": { "en": "Sarcophagus" },
       "aliases": [],
-      "regions": ["ruins"],
+      "regions": [
+        "ruins"
+      ],
       "dlcs": [],
       "interactions": [
         {
@@ -796,13 +1202,30 @@
           "recommendation": "situational",
           "certainty": "possible",
           "outcomes": [
-            { "type": "loot", "polarity": "positive", "description": "Provides two gold or heirloom rolls.", "chancePercent": 60 },
-            { "type": "quirk", "polarity": "negative", "description": "Inflicts the Thanatophobia quirk.", "chancePercent": 20 },
-            { "type": "nothing", "polarity": "neutral", "description": "Nothing happens.", "chancePercent": 20 }
+            {
+              "type": "loot",
+              "polarity": "positive",
+              "description": "Provides two gold or heirloom rolls.",
+              "chancePercent": 60
+            },
+            {
+              "type": "quirk",
+              "polarity": "negative",
+              "description": "Inflicts the Thanatophobia quirk.",
+              "chancePercent": 20
+            },
+            {
+              "type": "nothing",
+              "polarity": "neutral",
+              "description": "Nothing happens.",
+              "chancePercent": 20
+            }
           ]
         }
       ],
-      "notes": ["No provision item changes this curio's outcomes."],
+      "notes": [
+        "No provision item changes this curio's outcomes."
+      ],
       "sources": [
         {
           "title": "Official Darkest Dungeon Wiki: Curio data module",
@@ -813,9 +1236,12 @@
     },
     {
       "id": "suit_of_armor",
-      "names": { "en": "Suit of Armor" },
-      "aliases": ["Armor"],
-      "regions": ["ruins"],
+      "aliases": [
+        "Armor"
+      ],
+      "regions": [
+        "ruins"
+      ],
       "dlcs": [],
       "interactions": [
         {
@@ -823,13 +1249,30 @@
           "recommendation": "recommended",
           "certainty": "possible",
           "outcomes": [
-            { "type": "buff", "polarity": "positive", "description": "Grants +15% protection and +10 dodge until camp.", "chancePercent": 75 },
-            { "type": "quirk", "polarity": "positive", "description": "Grants the Ruins Adventurer quirk.", "chancePercent": 12.5 },
-            { "type": "quirk", "polarity": "positive", "description": "Grants the Ruins Tactician quirk.", "chancePercent": 12.5 }
+            {
+              "type": "buff",
+              "polarity": "positive",
+              "description": "Grants +15% protection and +10 dodge until camp.",
+              "chancePercent": 75
+            },
+            {
+              "type": "quirk",
+              "polarity": "positive",
+              "description": "Grants the Ruins Adventurer quirk.",
+              "chancePercent": 12.5
+            },
+            {
+              "type": "quirk",
+              "polarity": "positive",
+              "description": "Grants the Ruins Tactician quirk.",
+              "chancePercent": 12.5
+            }
           ]
         }
       ],
-      "notes": ["Every possible outcome is beneficial."],
+      "notes": [
+        "Every possible outcome is beneficial."
+      ],
       "sources": [
         {
           "title": "Official Darkest Dungeon Wiki: Curio data module",
@@ -840,9 +1283,10 @@
     },
     {
       "id": "dinner_cart",
-      "names": { "en": "Dinner Cart" },
       "aliases": [],
-      "regions": ["warrens"],
+      "regions": [
+        "warrens"
+      ],
       "dlcs": [],
       "interactions": [
         {
@@ -850,7 +1294,11 @@
           "recommendation": "recommended",
           "certainty": "guaranteed",
           "outcomes": [
-            { "type": "loot", "polarity": "positive", "description": "Provides three food rolls and one gold or trinket roll." }
+            {
+              "type": "loot",
+              "polarity": "positive",
+              "description": "Provides three food rolls and one gold or trinket roll."
+            }
           ]
         },
         {
@@ -858,10 +1306,30 @@
           "recommendation": "avoid",
           "certainty": "possible",
           "outcomes": [
-            { "type": "loot", "polarity": "positive", "description": "Provides one food roll and one gold or trinket roll.", "chancePercent": 37.5 },
-            { "type": "status", "polarity": "negative", "description": "Inflicts blight.", "chancePercent": 25 },
-            { "type": "disease", "polarity": "negative", "description": "Inflicts The Black Plague.", "chancePercent": 12.5 },
-            { "type": "nothing", "polarity": "neutral", "description": "Nothing happens.", "chancePercent": 25 }
+            {
+              "type": "loot",
+              "polarity": "positive",
+              "description": "Provides one food roll and one gold or trinket roll.",
+              "chancePercent": 37.5
+            },
+            {
+              "type": "status",
+              "polarity": "negative",
+              "description": "Inflicts blight.",
+              "chancePercent": 25
+            },
+            {
+              "type": "disease",
+              "polarity": "negative",
+              "description": "Inflicts The Black Plague.",
+              "chancePercent": 12.5
+            },
+            {
+              "type": "nothing",
+              "polarity": "neutral",
+              "description": "Nothing happens.",
+              "chancePercent": 25
+            }
           ]
         }
       ],
@@ -876,9 +1344,10 @@
     },
     {
       "id": "moonshine_barrel",
-      "names": { "en": "Moonshine Barrel" },
       "aliases": [],
-      "regions": ["warrens"],
+      "regions": [
+        "warrens"
+      ],
       "dlcs": [],
       "interactions": [
         {
@@ -886,7 +1355,11 @@
           "recommendation": "recommended",
           "certainty": "guaranteed",
           "outcomes": [
-            { "type": "buff", "polarity": "positive", "description": "Grants +30% damage until camp." }
+            {
+              "type": "buff",
+              "polarity": "positive",
+              "description": "Grants +30% damage until camp."
+            }
           ]
         },
         {
@@ -894,14 +1367,36 @@
           "recommendation": "avoid",
           "certainty": "possible",
           "outcomes": [
-            { "type": "loot", "polarity": "positive", "description": "Provides one food roll and one gold or supplies roll.", "chancePercent": 33.3 },
-            { "type": "status", "polarity": "negative", "description": "Inflicts blight.", "chancePercent": 33.3 },
-            { "type": "quirk", "polarity": "negative", "description": "Inflicts the Tippler quirk.", "chancePercent": 11.1 },
-            { "type": "nothing", "polarity": "neutral", "description": "Nothing happens.", "chancePercent": 22.2 }
+            {
+              "type": "loot",
+              "polarity": "positive",
+              "description": "Provides one food roll and one gold or supplies roll.",
+              "chancePercent": 33.3
+            },
+            {
+              "type": "status",
+              "polarity": "negative",
+              "description": "Inflicts blight.",
+              "chancePercent": 33.3
+            },
+            {
+              "type": "quirk",
+              "polarity": "negative",
+              "description": "Inflicts the Tippler quirk.",
+              "chancePercent": 11.1
+            },
+            {
+              "type": "nothing",
+              "polarity": "neutral",
+              "description": "Nothing happens.",
+              "chancePercent": 22.2
+            }
           ]
         }
       ],
-      "notes": ["Use a hero who benefits from a damage buff for the rest of the expedition."],
+      "notes": [
+        "Use a hero who benefits from a damage buff for the rest of the expedition."
+      ],
       "sources": [
         {
           "title": "Official Darkest Dungeon Wiki: Curio data module",
@@ -912,9 +1407,10 @@
     },
     {
       "id": "occult_scrawlings",
-      "names": { "en": "Occult Scrawlings" },
       "aliases": [],
-      "regions": ["warrens"],
+      "regions": [
+        "warrens"
+      ],
       "dlcs": [],
       "interactions": [
         {
@@ -922,7 +1418,11 @@
           "recommendation": "avoid",
           "certainty": "guaranteed",
           "outcomes": [
-            { "type": "buff", "polarity": "negative", "description": "Inflicts -20 dodge until camp." }
+            {
+              "type": "buff",
+              "polarity": "negative",
+              "description": "Inflicts -20 dodge until camp."
+            }
           ]
         },
         {
@@ -930,14 +1430,36 @@
           "recommendation": "avoid",
           "certainty": "possible",
           "outcomes": [
-            { "type": "quirk", "polarity": "positive", "description": "Grants a random positive quirk.", "chancePercent": 33.3 },
-            { "type": "quirk", "polarity": "negative", "description": "Grants a random negative quirk.", "chancePercent": 16.7 },
-            { "type": "stress", "polarity": "negative", "description": "Increases stress by 25.", "chancePercent": 25 },
-            { "type": "nothing", "polarity": "neutral", "description": "Nothing happens.", "chancePercent": 25 }
+            {
+              "type": "quirk",
+              "polarity": "positive",
+              "description": "Grants a random positive quirk.",
+              "chancePercent": 33.3
+            },
+            {
+              "type": "quirk",
+              "polarity": "negative",
+              "description": "Grants a random negative quirk.",
+              "chancePercent": 16.7
+            },
+            {
+              "type": "stress",
+              "polarity": "negative",
+              "description": "Increases stress by 25.",
+              "chancePercent": 25
+            },
+            {
+              "type": "nothing",
+              "polarity": "neutral",
+              "description": "Nothing happens.",
+              "chancePercent": 25
+            }
           ]
         }
       ],
-      "notes": ["Holy Water is actively harmful on this curio."],
+      "notes": [
+        "Holy Water is actively harmful on this curio."
+      ],
       "sources": [
         {
           "title": "Official Darkest Dungeon Wiki: Curio data module",
@@ -948,9 +1470,10 @@
     },
     {
       "id": "pile_of_bones",
-      "names": { "en": "Pile of Bones" },
       "aliases": [],
-      "regions": ["warrens"],
+      "regions": [
+        "warrens"
+      ],
       "dlcs": [],
       "interactions": [
         {
@@ -958,7 +1481,11 @@
           "recommendation": "recommended",
           "certainty": "guaranteed",
           "outcomes": [
-            { "type": "loot", "polarity": "positive", "description": "Provides two rolls from the unrestricted loot table." }
+            {
+              "type": "loot",
+              "polarity": "positive",
+              "description": "Provides two rolls from the unrestricted loot table."
+            }
           ]
         },
         {
@@ -966,10 +1493,30 @@
           "recommendation": "avoid",
           "certainty": "possible",
           "outcomes": [
-            { "type": "loot", "polarity": "positive", "description": "Provides two rolls from the unrestricted loot table.", "chancePercent": 25 },
-            { "type": "quirk", "polarity": "negative", "description": "Inflicts the Bloodthirsty quirk.", "chancePercent": 25 },
-            { "type": "disease", "polarity": "negative", "description": "Inflicts a random disease.", "chancePercent": 25 },
-            { "type": "nothing", "polarity": "neutral", "description": "Nothing happens.", "chancePercent": 25 }
+            {
+              "type": "loot",
+              "polarity": "positive",
+              "description": "Provides two rolls from the unrestricted loot table.",
+              "chancePercent": 25
+            },
+            {
+              "type": "quirk",
+              "polarity": "negative",
+              "description": "Inflicts the Bloodthirsty quirk.",
+              "chancePercent": 25
+            },
+            {
+              "type": "disease",
+              "polarity": "negative",
+              "description": "Inflicts a random disease.",
+              "chancePercent": 25
+            },
+            {
+              "type": "nothing",
+              "polarity": "neutral",
+              "description": "Nothing happens.",
+              "chancePercent": 25
+            }
           ]
         }
       ],
@@ -984,9 +1531,13 @@
     },
     {
       "id": "rack_of_blades",
-      "names": { "en": "Rack of Blades" },
-      "aliases": ["Knife Rack"],
-      "regions": ["warrens"],
+      "localizationId": "knife_rack",
+      "aliases": [
+        "Knife Rack"
+      ],
+      "regions": [
+        "warrens"
+      ],
       "dlcs": [],
       "interactions": [
         {
@@ -994,7 +1545,11 @@
           "recommendation": "recommended",
           "certainty": "guaranteed",
           "outcomes": [
-            { "type": "loot", "polarity": "positive", "description": "Provides two gold or gem rolls and one food roll." }
+            {
+              "type": "loot",
+              "polarity": "positive",
+              "description": "Provides two gold or gem rolls and one food roll."
+            }
           ]
         },
         {
@@ -1002,9 +1557,24 @@
           "recommendation": "avoid",
           "certainty": "possible",
           "outcomes": [
-            { "type": "loot", "polarity": "positive", "description": "Provides one gold or gem roll and one food roll.", "chancePercent": 40 },
-            { "type": "status", "polarity": "negative", "description": "Inflicts bleed.", "chancePercent": 40 },
-            { "type": "nothing", "polarity": "neutral", "description": "Nothing happens.", "chancePercent": 20 }
+            {
+              "type": "loot",
+              "polarity": "positive",
+              "description": "Provides one gold or gem roll and one food roll.",
+              "chancePercent": 40
+            },
+            {
+              "type": "status",
+              "polarity": "negative",
+              "description": "Inflicts bleed.",
+              "chancePercent": 40
+            },
+            {
+              "type": "nothing",
+              "polarity": "neutral",
+              "description": "Nothing happens.",
+              "chancePercent": 20
+            }
           ]
         }
       ],
@@ -1019,9 +1589,13 @@
     },
     {
       "id": "bone_altar",
-      "names": { "en": "Bone Altar" },
-      "aliases": ["Skull Altar"],
-      "regions": ["warrens"],
+      "localizationId": "skull_altar",
+      "aliases": [
+        "Skull Altar"
+      ],
+      "regions": [
+        "warrens"
+      ],
       "dlcs": [],
       "interactions": [
         {
@@ -1029,11 +1603,17 @@
           "recommendation": "recommended",
           "certainty": "guaranteed",
           "outcomes": [
-            { "type": "buff", "polarity": "positive", "description": "Grants +15% damage, +10 accuracy, and +5% critical chance until camp, and cures current status effects." }
+            {
+              "type": "buff",
+              "polarity": "positive",
+              "description": "Grants +15% damage, +10 accuracy, and +5% critical chance until camp, and cures current status effects."
+            }
           ]
         }
       ],
-      "notes": ["Every interaction is beneficial."],
+      "notes": [
+        "Every interaction is beneficial."
+      ],
       "sources": [
         {
           "title": "Official Darkest Dungeon Wiki: Curio data module",
@@ -1044,9 +1624,12 @@
     },
     {
       "id": "makeshift_dining_table",
-      "names": { "en": "Makeshift Dining Table" },
-      "aliases": ["Makeshift Table"],
-      "regions": ["warrens"],
+      "aliases": [
+        "Makeshift Table"
+      ],
+      "regions": [
+        "warrens"
+      ],
       "dlcs": [],
       "interactions": [
         {
@@ -1054,7 +1637,11 @@
           "recommendation": "recommended",
           "certainty": "guaranteed",
           "outcomes": [
-            { "type": "loot", "polarity": "positive", "description": "Provides two food rolls and one gold or supplies roll." }
+            {
+              "type": "loot",
+              "polarity": "positive",
+              "description": "Provides two food rolls and one gold or supplies roll."
+            }
           ]
         },
         {
@@ -1062,10 +1649,30 @@
           "recommendation": "avoid",
           "certainty": "possible",
           "outcomes": [
-            { "type": "loot", "polarity": "positive", "description": "Provides one food roll and one gold or supplies roll.", "chancePercent": 25 },
-            { "type": "status", "polarity": "negative", "description": "Inflicts blight.", "chancePercent": 25 },
-            { "type": "disease", "polarity": "negative", "description": "Inflicts Tapeworm.", "chancePercent": 25 },
-            { "type": "nothing", "polarity": "neutral", "description": "Nothing happens.", "chancePercent": 25 }
+            {
+              "type": "loot",
+              "polarity": "positive",
+              "description": "Provides one food roll and one gold or supplies roll.",
+              "chancePercent": 25
+            },
+            {
+              "type": "status",
+              "polarity": "negative",
+              "description": "Inflicts blight.",
+              "chancePercent": 25
+            },
+            {
+              "type": "disease",
+              "polarity": "negative",
+              "description": "Inflicts Tapeworm.",
+              "chancePercent": 25
+            },
+            {
+              "type": "nothing",
+              "polarity": "neutral",
+              "description": "Nothing happens.",
+              "chancePercent": 25
+            }
           ]
         }
       ],
@@ -1080,9 +1687,10 @@
     },
     {
       "id": "sacrificial_stone",
-      "names": { "en": "Sacrificial Stone" },
       "aliases": [],
-      "regions": ["warrens"],
+      "regions": [
+        "warrens"
+      ],
       "dlcs": [],
       "interactions": [
         {
@@ -1090,14 +1698,36 @@
           "recommendation": "avoid",
           "certainty": "possible",
           "outcomes": [
-            { "type": "stress", "polarity": "negative", "description": "Increases stress by 50.", "chancePercent": 50 },
-            { "type": "quirk", "polarity": "positive", "description": "Removes one random negative quirk.", "chancePercent": 25 },
-            { "type": "quirk", "polarity": "positive", "description": "Grants the Warrens Explorer quirk.", "chancePercent": 12.5 },
-            { "type": "quirk", "polarity": "positive", "description": "Grants the Warrens Scrounger quirk.", "chancePercent": 12.5 }
+            {
+              "type": "stress",
+              "polarity": "negative",
+              "description": "Increases stress by 50.",
+              "chancePercent": 50
+            },
+            {
+              "type": "quirk",
+              "polarity": "positive",
+              "description": "Removes one random negative quirk.",
+              "chancePercent": 25
+            },
+            {
+              "type": "quirk",
+              "polarity": "positive",
+              "description": "Grants the Warrens Explorer quirk.",
+              "chancePercent": 12.5
+            },
+            {
+              "type": "quirk",
+              "polarity": "positive",
+              "description": "Grants the Warrens Scrounger quirk.",
+              "chancePercent": 12.5
+            }
           ]
         }
       ],
-      "notes": ["No provision item changes this curio's outcomes."],
+      "notes": [
+        "No provision item changes this curio's outcomes."
+      ],
       "sources": [
         {
           "title": "Official Darkest Dungeon Wiki: Curio data module",
@@ -1108,9 +1738,10 @@
     },
     {
       "id": "pile_of_scrolls",
-      "names": { "en": "Pile of Scrolls" },
       "aliases": [],
-      "regions": ["warrens"],
+      "regions": [
+        "warrens"
+      ],
       "dlcs": [],
       "interactions": [
         {
@@ -1130,16 +1761,48 @@
           "recommendation": "situational",
           "certainty": "possible",
           "outcomes": [
-            { "type": "other", "polarity": "positive", "description": "Scouts ahead.", "chancePercent": 28.6 },
-            { "type": "stress", "polarity": "negative", "description": "Increases stress by 15.", "chancePercent": 14.3 },
-            { "type": "loot", "polarity": "positive", "description": "Provides a journal entry.", "chancePercent": 14.3 },
-            { "type": "quirk", "polarity": "positive", "description": "Grants a random positive quirk.", "chancePercent": 9.5 },
-            { "type": "quirk", "polarity": "negative", "description": "Grants a random negative quirk.", "chancePercent": 4.8 },
-            { "type": "nothing", "polarity": "neutral", "description": "Nothing happens.", "chancePercent": 28.6 }
+            {
+              "type": "other",
+              "polarity": "positive",
+              "description": "Scouts ahead.",
+              "chancePercent": 28.6
+            },
+            {
+              "type": "stress",
+              "polarity": "negative",
+              "description": "Increases stress by 15.",
+              "chancePercent": 14.3
+            },
+            {
+              "type": "loot",
+              "polarity": "positive",
+              "description": "Provides a journal entry.",
+              "chancePercent": 14.3
+            },
+            {
+              "type": "quirk",
+              "polarity": "positive",
+              "description": "Grants a random positive quirk.",
+              "chancePercent": 9.5
+            },
+            {
+              "type": "quirk",
+              "polarity": "negative",
+              "description": "Grants a random negative quirk.",
+              "chancePercent": 4.8
+            },
+            {
+              "type": "nothing",
+              "polarity": "neutral",
+              "description": "Nothing happens.",
+              "chancePercent": 28.6
+            }
           ]
         }
       ],
-      "notes": ["Select a hero who has a removable negative quirk."],
+      "notes": [
+        "Select a hero who has a removable negative quirk."
+      ],
       "sources": [
         {
           "title": "Official Darkest Dungeon Wiki: Quirks",
@@ -1150,9 +1813,10 @@
     },
     {
       "id": "beast_carcass",
-      "names": { "en": "Beast Carcass" },
       "aliases": [],
-      "regions": ["weald"],
+      "regions": [
+        "weald"
+      ],
       "dlcs": [],
       "interactions": [
         {
@@ -1160,7 +1824,11 @@
           "recommendation": "recommended",
           "certainty": "guaranteed",
           "outcomes": [
-            { "type": "loot", "polarity": "positive", "description": "Provides two food rolls." }
+            {
+              "type": "loot",
+              "polarity": "positive",
+              "description": "Provides two food rolls."
+            }
           ]
         },
         {
@@ -1168,11 +1836,36 @@
           "recommendation": "avoid",
           "certainty": "possible",
           "outcomes": [
-            { "type": "loot", "polarity": "positive", "description": "Provides one food roll.", "chancePercent": 42.9 },
-            { "type": "disease", "polarity": "negative", "description": "Inflicts a random disease.", "chancePercent": 19 },
-            { "type": "disease", "polarity": "negative", "description": "Inflicts Rabies.", "chancePercent": 9.5 },
-            { "type": "quirk", "polarity": "negative", "description": "Inflicts the Zoophobia quirk.", "chancePercent": 14.3 },
-            { "type": "nothing", "polarity": "neutral", "description": "Nothing happens.", "chancePercent": 14.3 }
+            {
+              "type": "loot",
+              "polarity": "positive",
+              "description": "Provides one food roll.",
+              "chancePercent": 42.9
+            },
+            {
+              "type": "disease",
+              "polarity": "negative",
+              "description": "Inflicts a random disease.",
+              "chancePercent": 19
+            },
+            {
+              "type": "disease",
+              "polarity": "negative",
+              "description": "Inflicts Rabies.",
+              "chancePercent": 9.5
+            },
+            {
+              "type": "quirk",
+              "polarity": "negative",
+              "description": "Inflicts the Zoophobia quirk.",
+              "chancePercent": 14.3
+            },
+            {
+              "type": "nothing",
+              "polarity": "neutral",
+              "description": "Nothing happens.",
+              "chancePercent": 14.3
+            }
           ]
         }
       ],
@@ -1187,9 +1880,13 @@
     },
     {
       "id": "eerie_spiderweb",
-      "names": { "en": "Eerie Spiderweb" },
-      "aliases": ["Cosmic Spiderweb"],
-      "regions": ["weald"],
+      "localizationId": "cosmic_spiderweb",
+      "aliases": [
+        "Cosmic Spiderweb"
+      ],
+      "regions": [
+        "weald"
+      ],
       "dlcs": [],
       "interactions": [
         {
@@ -1197,7 +1894,11 @@
           "recommendation": "recommended",
           "certainty": "guaranteed",
           "outcomes": [
-            { "type": "loot", "polarity": "positive", "description": "Provides two gold or gem rolls and one gem or trinket roll." }
+            {
+              "type": "loot",
+              "polarity": "positive",
+              "description": "Provides two gold or gem rolls and one gem or trinket roll."
+            }
           ]
         },
         {
@@ -1205,10 +1906,30 @@
           "recommendation": "situational",
           "certainty": "possible",
           "outcomes": [
-            { "type": "loot", "polarity": "positive", "description": "Provides one gold or gem roll and one gem or trinket roll.", "chancePercent": 40 },
-            { "type": "quirk", "polarity": "negative", "description": "Inflicts the Slow Reflexes quirk.", "chancePercent": 10 },
-            { "type": "quirk", "polarity": "negative", "description": "Inflicts the Slowdraw quirk.", "chancePercent": 10 },
-            { "type": "nothing", "polarity": "neutral", "description": "Nothing happens.", "chancePercent": 40 }
+            {
+              "type": "loot",
+              "polarity": "positive",
+              "description": "Provides one gold or gem roll and one gem or trinket roll.",
+              "chancePercent": 40
+            },
+            {
+              "type": "quirk",
+              "polarity": "negative",
+              "description": "Inflicts the Slow Reflexes quirk.",
+              "chancePercent": 10
+            },
+            {
+              "type": "quirk",
+              "polarity": "negative",
+              "description": "Inflicts the Slowdraw quirk.",
+              "chancePercent": 10
+            },
+            {
+              "type": "nothing",
+              "polarity": "neutral",
+              "description": "Nothing happens.",
+              "chancePercent": 40
+            }
           ]
         }
       ],
@@ -1223,9 +1944,13 @@
     },
     {
       "id": "left_luggage",
-      "names": { "en": "Left Luggage" },
-      "aliases": ["Lost Luggage"],
-      "regions": ["weald"],
+      "localizationId": "lost_luggage",
+      "aliases": [
+        "Lost Luggage"
+      ],
+      "regions": [
+        "weald"
+      ],
       "dlcs": [],
       "interactions": [
         {
@@ -1233,7 +1958,11 @@
           "recommendation": "recommended",
           "certainty": "guaranteed",
           "outcomes": [
-            { "type": "loot", "polarity": "positive", "description": "Provides three rolls from the unrestricted loot table." }
+            {
+              "type": "loot",
+              "polarity": "positive",
+              "description": "Provides three rolls from the unrestricted loot table."
+            }
           ]
         },
         {
@@ -1241,7 +1970,11 @@
           "recommendation": "recommended",
           "certainty": "guaranteed",
           "outcomes": [
-            { "type": "loot", "polarity": "positive", "description": "Provides three rolls from the unrestricted loot table." }
+            {
+              "type": "loot",
+              "polarity": "positive",
+              "description": "Provides three rolls from the unrestricted loot table."
+            }
           ]
         },
         {
@@ -1249,12 +1982,24 @@
           "recommendation": "avoid",
           "certainty": "possible",
           "outcomes": [
-            { "type": "loot", "polarity": "positive", "description": "Provides four rolls from the unrestricted loot table and a journal entry.", "chancePercent": 50 },
-            { "type": "status", "polarity": "negative", "description": "Inflicts blight.", "chancePercent": 50 }
+            {
+              "type": "loot",
+              "polarity": "positive",
+              "description": "Provides four rolls from the unrestricted loot table and a journal entry.",
+              "chancePercent": 50
+            },
+            {
+              "type": "status",
+              "polarity": "negative",
+              "description": "Inflicts blight.",
+              "chancePercent": 50
+            }
           ]
         }
       ],
-      "notes": ["Skeleton Key and Antivenom produce the same guaranteed loot quantity."],
+      "notes": [
+        "Skeleton Key and Antivenom produce the same guaranteed loot quantity."
+      ],
       "sources": [
         {
           "title": "Official Darkest Dungeon Wiki: Curio data module",
@@ -1265,9 +2010,10 @@
     },
     {
       "id": "mummified_remains",
-      "names": { "en": "Mummified Remains" },
       "aliases": [],
-      "regions": ["weald"],
+      "regions": [
+        "weald"
+      ],
       "dlcs": [],
       "interactions": [
         {
@@ -1275,7 +2021,11 @@
           "recommendation": "recommended",
           "certainty": "guaranteed",
           "outcomes": [
-            { "type": "loot", "polarity": "positive", "description": "Provides two gold or trinket rolls." }
+            {
+              "type": "loot",
+              "polarity": "positive",
+              "description": "Provides two gold or trinket rolls."
+            }
           ]
         },
         {
@@ -1283,9 +2033,24 @@
           "recommendation": "avoid",
           "certainty": "possible",
           "outcomes": [
-            { "type": "loot", "polarity": "positive", "description": "Provides one gold or trinket roll.", "chancePercent": 40 },
-            { "type": "status", "polarity": "negative", "description": "Inflicts blight.", "chancePercent": 40 },
-            { "type": "nothing", "polarity": "neutral", "description": "Nothing happens.", "chancePercent": 20 }
+            {
+              "type": "loot",
+              "polarity": "positive",
+              "description": "Provides one gold or trinket roll.",
+              "chancePercent": 40
+            },
+            {
+              "type": "status",
+              "polarity": "negative",
+              "description": "Inflicts blight.",
+              "chancePercent": 40
+            },
+            {
+              "type": "nothing",
+              "polarity": "neutral",
+              "description": "Nothing happens.",
+              "chancePercent": 20
+            }
           ]
         }
       ],
@@ -1300,9 +2065,10 @@
     },
     {
       "id": "old_tree",
-      "names": { "en": "Old Tree" },
       "aliases": [],
-      "regions": ["weald"],
+      "regions": [
+        "weald"
+      ],
       "dlcs": [],
       "interactions": [
         {
@@ -1310,7 +2076,11 @@
           "recommendation": "recommended",
           "certainty": "guaranteed",
           "outcomes": [
-            { "type": "loot", "polarity": "positive", "description": "Provides three rolls from the unrestricted loot table." }
+            {
+              "type": "loot",
+              "polarity": "positive",
+              "description": "Provides three rolls from the unrestricted loot table."
+            }
           ]
         },
         {
@@ -1318,9 +2088,24 @@
           "recommendation": "avoid",
           "certainty": "possible",
           "outcomes": [
-            { "type": "loot", "polarity": "positive", "description": "Provides two rolls from the unrestricted loot table.", "chancePercent": 50 },
-            { "type": "status", "polarity": "negative", "description": "Inflicts blight.", "chancePercent": 25 },
-            { "type": "nothing", "polarity": "neutral", "description": "Nothing happens.", "chancePercent": 25 }
+            {
+              "type": "loot",
+              "polarity": "positive",
+              "description": "Provides two rolls from the unrestricted loot table.",
+              "chancePercent": 50
+            },
+            {
+              "type": "status",
+              "polarity": "negative",
+              "description": "Inflicts blight.",
+              "chancePercent": 25
+            },
+            {
+              "type": "nothing",
+              "polarity": "neutral",
+              "description": "Nothing happens.",
+              "chancePercent": 25
+            }
           ]
         }
       ],
@@ -1335,9 +2120,10 @@
     },
     {
       "id": "shallow_grave",
-      "names": { "en": "Shallow Grave" },
       "aliases": [],
-      "regions": ["weald"],
+      "regions": [
+        "weald"
+      ],
       "dlcs": [],
       "interactions": [
         {
@@ -1345,7 +2131,11 @@
           "recommendation": "recommended",
           "certainty": "guaranteed",
           "outcomes": [
-            { "type": "loot", "polarity": "positive", "description": "Provides three gem or heirloom rolls." }
+            {
+              "type": "loot",
+              "polarity": "positive",
+              "description": "Provides three gem or heirloom rolls."
+            }
           ]
         },
         {
@@ -1353,8 +2143,18 @@
           "recommendation": "avoid",
           "certainty": "possible",
           "outcomes": [
-            { "type": "status", "polarity": "negative", "description": "Inflicts blight.", "chancePercent": 50 },
-            { "type": "disease", "polarity": "negative", "description": "Inflicts a random disease.", "chancePercent": 50 }
+            {
+              "type": "status",
+              "polarity": "negative",
+              "description": "Inflicts blight.",
+              "chancePercent": 50
+            },
+            {
+              "type": "disease",
+              "polarity": "negative",
+              "description": "Inflicts a random disease.",
+              "chancePercent": 50
+            }
           ]
         }
       ],
@@ -1369,9 +2169,10 @@
     },
     {
       "id": "troubling_effigy",
-      "names": { "en": "Troubling Effigy" },
       "aliases": [],
-      "regions": ["weald"],
+      "regions": [
+        "weald"
+      ],
       "dlcs": [],
       "interactions": [
         {
@@ -1379,7 +2180,11 @@
           "recommendation": "recommended",
           "certainty": "guaranteed",
           "outcomes": [
-            { "type": "quirk", "polarity": "positive", "description": "Grants a random positive quirk." }
+            {
+              "type": "quirk",
+              "polarity": "positive",
+              "description": "Grants a random positive quirk."
+            }
           ]
         },
         {
@@ -1387,12 +2192,42 @@
           "recommendation": "avoid",
           "certainty": "possible",
           "outcomes": [
-            { "type": "quirk", "polarity": "positive", "description": "Grants a random positive quirk.", "chancePercent": 18.8 },
-            { "type": "quirk", "polarity": "negative", "description": "Grants a random negative quirk.", "chancePercent": 18.8 },
-            { "type": "status", "polarity": "negative", "description": "Inflicts bleed.", "chancePercent": 18.8 },
-            { "type": "status", "polarity": "negative", "description": "Inflicts blight.", "chancePercent": 9.4 },
-            { "type": "stress", "polarity": "negative", "description": "Increases stress by 15.", "chancePercent": 9.4 },
-            { "type": "nothing", "polarity": "neutral", "description": "Nothing happens.", "chancePercent": 25 }
+            {
+              "type": "quirk",
+              "polarity": "positive",
+              "description": "Grants a random positive quirk.",
+              "chancePercent": 18.8
+            },
+            {
+              "type": "quirk",
+              "polarity": "negative",
+              "description": "Grants a random negative quirk.",
+              "chancePercent": 18.8
+            },
+            {
+              "type": "status",
+              "polarity": "negative",
+              "description": "Inflicts bleed.",
+              "chancePercent": 18.8
+            },
+            {
+              "type": "status",
+              "polarity": "negative",
+              "description": "Inflicts blight.",
+              "chancePercent": 9.4
+            },
+            {
+              "type": "stress",
+              "polarity": "negative",
+              "description": "Increases stress by 15.",
+              "chancePercent": 9.4
+            },
+            {
+              "type": "nothing",
+              "polarity": "neutral",
+              "description": "Nothing happens.",
+              "chancePercent": 25
+            }
           ]
         }
       ],
@@ -1407,9 +2242,10 @@
     },
     {
       "id": "ancient_coffin",
-      "names": { "en": "Ancient Coffin" },
       "aliases": [],
-      "regions": ["weald"],
+      "regions": [
+        "weald"
+      ],
       "dlcs": [],
       "interactions": [
         {
@@ -1417,14 +2253,36 @@
           "recommendation": "situational",
           "certainty": "possible",
           "outcomes": [
-            { "type": "loot", "polarity": "positive", "description": "Provides two gold or heirloom rolls.", "chancePercent": 50 },
-            { "type": "quirk", "polarity": "positive", "description": "Grants the Weald Adventurer quirk.", "chancePercent": 8.3 },
-            { "type": "quirk", "polarity": "positive", "description": "Grants the Weald Explorer quirk.", "chancePercent": 8.3 },
-            { "type": "nothing", "polarity": "neutral", "description": "Nothing happens.", "chancePercent": 33.3 }
+            {
+              "type": "loot",
+              "polarity": "positive",
+              "description": "Provides two gold or heirloom rolls.",
+              "chancePercent": 50
+            },
+            {
+              "type": "quirk",
+              "polarity": "positive",
+              "description": "Grants the Weald Adventurer quirk.",
+              "chancePercent": 8.3
+            },
+            {
+              "type": "quirk",
+              "polarity": "positive",
+              "description": "Grants the Weald Explorer quirk.",
+              "chancePercent": 8.3
+            },
+            {
+              "type": "nothing",
+              "polarity": "neutral",
+              "description": "Nothing happens.",
+              "chancePercent": 33.3
+            }
           ]
         }
       ],
-      "notes": ["No provision item changes this curio's outcomes."],
+      "notes": [
+        "No provision item changes this curio's outcomes."
+      ],
       "sources": [
         {
           "title": "Official Darkest Dungeon Wiki: Curio data module",
@@ -1435,9 +2293,10 @@
     },
     {
       "id": "pristine_fountain",
-      "names": { "en": "Pristine Fountain" },
       "aliases": [],
-      "regions": ["weald"],
+      "regions": [
+        "weald"
+      ],
       "dlcs": [],
       "interactions": [
         {
@@ -1445,7 +2304,11 @@
           "recommendation": "recommended",
           "certainty": "guaranteed",
           "outcomes": [
-            { "type": "stress", "polarity": "positive", "description": "Reduces stress by 30." }
+            {
+              "type": "stress",
+              "polarity": "positive",
+              "description": "Reduces stress by 30."
+            }
           ]
         },
         {
@@ -1453,7 +2316,11 @@
           "recommendation": "situational",
           "certainty": "guaranteed",
           "outcomes": [
-            { "type": "stress", "polarity": "positive", "description": "Reduces stress by 20." }
+            {
+              "type": "stress",
+              "polarity": "positive",
+              "description": "Reduces stress by 20."
+            }
           ]
         }
       ],
@@ -1468,9 +2335,14 @@
     },
     {
       "id": "travelers_tent",
-      "names": { "en": "Traveler's Tent" },
-      "aliases": ["Travellers Tent", "Traveler Tent"],
-      "regions": ["weald"],
+      "localizationId": "travellers_tent",
+      "aliases": [
+        "Travellers Tent",
+        "Traveler Tent"
+      ],
+      "regions": [
+        "weald"
+      ],
       "dlcs": [],
       "interactions": [
         {
@@ -1478,14 +2350,36 @@
           "recommendation": "situational",
           "certainty": "possible",
           "outcomes": [
-            { "type": "loot", "polarity": "positive", "description": "Provides four gold or supplies rolls, four gold or heirloom rolls, and a journal entry.", "chancePercent": 37.5 },
-            { "type": "other", "polarity": "positive", "description": "Scouts ahead.", "chancePercent": 37.5 },
-            { "type": "stress", "polarity": "negative", "description": "Increases stress by 25.", "chancePercent": 12.5 },
-            { "type": "nothing", "polarity": "neutral", "description": "Nothing happens.", "chancePercent": 12.5 }
+            {
+              "type": "loot",
+              "polarity": "positive",
+              "description": "Provides four gold or supplies rolls, four gold or heirloom rolls, and a journal entry.",
+              "chancePercent": 37.5
+            },
+            {
+              "type": "other",
+              "polarity": "positive",
+              "description": "Scouts ahead.",
+              "chancePercent": 37.5
+            },
+            {
+              "type": "stress",
+              "polarity": "negative",
+              "description": "Increases stress by 25.",
+              "chancePercent": 12.5
+            },
+            {
+              "type": "nothing",
+              "polarity": "neutral",
+              "description": "Nothing happens.",
+              "chancePercent": 12.5
+            }
           ]
         }
       ],
-      "notes": ["No provision item changes this curio's outcomes."],
+      "notes": [
+        "No provision item changes this curio's outcomes."
+      ],
       "sources": [
         {
           "title": "Official Darkest Dungeon Wiki: Curio data module",
@@ -1496,9 +2390,12 @@
     },
     {
       "id": "barnacle_crusted_chest",
-      "names": { "en": "Barnacle Crusted Chest" },
-      "aliases": ["Barnacle-Crusted Chest"],
-      "regions": ["cove"],
+      "aliases": [
+        "Barnacle-Crusted Chest"
+      ],
+      "regions": [
+        "cove"
+      ],
       "dlcs": [],
       "interactions": [
         {
@@ -1506,7 +2403,11 @@
           "recommendation": "recommended",
           "certainty": "guaranteed",
           "outcomes": [
-            { "type": "loot", "polarity": "positive", "description": "Provides three rolls from the unrestricted loot table." }
+            {
+              "type": "loot",
+              "polarity": "positive",
+              "description": "Provides three rolls from the unrestricted loot table."
+            }
           ]
         },
         {
@@ -1514,9 +2415,24 @@
           "recommendation": "situational",
           "certainty": "possible",
           "outcomes": [
-            { "type": "loot", "polarity": "positive", "description": "Provides two rolls from the unrestricted loot table.", "chancePercent": 50 },
-            { "type": "status", "polarity": "negative", "description": "Inflicts bleed.", "chancePercent": 25 },
-            { "type": "nothing", "polarity": "neutral", "description": "Nothing happens.", "chancePercent": 25 }
+            {
+              "type": "loot",
+              "polarity": "positive",
+              "description": "Provides two rolls from the unrestricted loot table.",
+              "chancePercent": 50
+            },
+            {
+              "type": "status",
+              "polarity": "negative",
+              "description": "Inflicts bleed.",
+              "chancePercent": 25
+            },
+            {
+              "type": "nothing",
+              "polarity": "neutral",
+              "description": "Nothing happens.",
+              "chancePercent": 25
+            }
           ]
         }
       ],
@@ -1531,9 +2447,12 @@
     },
     {
       "id": "bas_relief",
-      "names": { "en": "Bas-Relief" },
-      "aliases": ["Bas Relief"],
-      "regions": ["cove"],
+      "aliases": [
+        "Bas Relief"
+      ],
+      "regions": [
+        "cove"
+      ],
       "dlcs": [],
       "interactions": [
         {
@@ -1541,7 +2460,11 @@
           "recommendation": "avoid",
           "certainty": "guaranteed",
           "outcomes": [
-            { "type": "stress", "polarity": "negative", "description": "Increases stress by 100." }
+            {
+              "type": "stress",
+              "polarity": "negative",
+              "description": "Increases stress by 100."
+            }
           ]
         },
         {
@@ -1549,13 +2472,30 @@
           "recommendation": "situational",
           "certainty": "possible",
           "outcomes": [
-            { "type": "quirk", "polarity": "positive", "description": "Grants a random positive quirk.", "chancePercent": 66.7 },
-            { "type": "quirk", "polarity": "negative", "description": "Grants a random negative quirk.", "chancePercent": 22.2 },
-            { "type": "disease", "polarity": "negative", "description": "Inflicts a random disease.", "chancePercent": 11.1 }
+            {
+              "type": "quirk",
+              "polarity": "positive",
+              "description": "Grants a random positive quirk.",
+              "chancePercent": 66.7
+            },
+            {
+              "type": "quirk",
+              "polarity": "negative",
+              "description": "Grants a random negative quirk.",
+              "chancePercent": 22.2
+            },
+            {
+              "type": "disease",
+              "polarity": "negative",
+              "description": "Inflicts a random disease.",
+              "chancePercent": 11.1
+            }
           ]
         }
       ],
-      "notes": ["Using a Shovel is guaranteed to maximize the interacting hero's stress."],
+      "notes": [
+        "Using a Shovel is guaranteed to maximize the interacting hero's stress."
+      ],
       "sources": [
         {
           "title": "Official Darkest Dungeon Wiki: Curio data module",
@@ -1566,9 +2506,13 @@
     },
     {
       "id": "brackish_tide_pool",
-      "names": { "en": "Brackish Tide Pool" },
-      "aliases": ["Brackish Tidepool"],
-      "regions": ["cove"],
+      "localizationId": "brackish_tidepool",
+      "aliases": [
+        "Brackish Tidepool"
+      ],
+      "regions": [
+        "cove"
+      ],
       "dlcs": [],
       "interactions": [
         {
@@ -1576,8 +2520,18 @@
           "recommendation": "recommended",
           "certainty": "possible",
           "outcomes": [
-            { "type": "health", "polarity": "positive", "description": "Restores 5 HP.", "chancePercent": 50 },
-            { "type": "stress", "polarity": "positive", "description": "Reduces stress by 6.", "chancePercent": 50 }
+            {
+              "type": "health",
+              "polarity": "positive",
+              "description": "Restores 5 HP.",
+              "chancePercent": 50
+            },
+            {
+              "type": "stress",
+              "polarity": "positive",
+              "description": "Reduces stress by 6.",
+              "chancePercent": 50
+            }
           ]
         },
         {
@@ -1585,12 +2539,24 @@
           "recommendation": "situational",
           "certainty": "possible",
           "outcomes": [
-            { "type": "buff", "polarity": "positive", "description": "Grants +33% blight, bleed, disease, and debuff resistance until camp.", "chancePercent": 75 },
-            { "type": "disease", "polarity": "negative", "description": "Inflicts a random disease.", "chancePercent": 25 }
+            {
+              "type": "buff",
+              "polarity": "positive",
+              "description": "Grants +33% blight, bleed, disease, and debuff resistance until camp.",
+              "chancePercent": 75
+            },
+            {
+              "type": "disease",
+              "polarity": "negative",
+              "description": "Inflicts a random disease.",
+              "chancePercent": 25
+            }
           ]
         }
       ],
-      "notes": ["Antivenom guarantees a beneficial result, but the specific benefit is random."],
+      "notes": [
+        "Antivenom guarantees a beneficial result, but the specific benefit is random."
+      ],
       "sources": [
         {
           "title": "Official Darkest Dungeon Wiki: Curio data module",
@@ -1601,9 +2567,10 @@
     },
     {
       "id": "eerie_coral",
-      "names": { "en": "Eerie Coral" },
       "aliases": [],
-      "regions": ["cove"],
+      "regions": [
+        "cove"
+      ],
       "dlcs": [],
       "interactions": [
         {
@@ -1611,7 +2578,11 @@
           "recommendation": "recommended",
           "certainty": "guaranteed",
           "outcomes": [
-            { "type": "quirk", "polarity": "positive", "description": "Removes one random negative quirk." }
+            {
+              "type": "quirk",
+              "polarity": "positive",
+              "description": "Removes one random negative quirk."
+            }
           ]
         },
         {
@@ -1619,13 +2590,30 @@
           "recommendation": "situational",
           "certainty": "possible",
           "outcomes": [
-            { "type": "stress", "polarity": "positive", "description": "Reduces stress by 10.", "chancePercent": 50 },
-            { "type": "stress", "polarity": "negative", "description": "Increases stress by 25.", "chancePercent": 25 },
-            { "type": "nothing", "polarity": "neutral", "description": "Nothing happens.", "chancePercent": 25 }
+            {
+              "type": "stress",
+              "polarity": "positive",
+              "description": "Reduces stress by 10.",
+              "chancePercent": 50
+            },
+            {
+              "type": "stress",
+              "polarity": "negative",
+              "description": "Increases stress by 25.",
+              "chancePercent": 25
+            },
+            {
+              "type": "nothing",
+              "polarity": "neutral",
+              "description": "Nothing happens.",
+              "chancePercent": 25
+            }
           ]
         }
       ],
-      "notes": ["Select a hero who has a removable negative quirk when using Medicinal Herbs."],
+      "notes": [
+        "Select a hero who has a removable negative quirk when using Medicinal Herbs."
+      ],
       "sources": [
         {
           "title": "Official Darkest Dungeon Wiki: Curio data module",
@@ -1636,9 +2624,13 @@
     },
     {
       "id": "fish_carcass",
-      "names": { "en": "Fish Carcass" },
-      "aliases": ["Giant Fish Carcass"],
-      "regions": ["cove"],
+      "localizationId": "giant_fish_carcass",
+      "aliases": [
+        "Giant Fish Carcass"
+      ],
+      "regions": [
+        "cove"
+      ],
       "dlcs": [],
       "interactions": [
         {
@@ -1646,7 +2638,11 @@
           "recommendation": "recommended",
           "certainty": "guaranteed",
           "outcomes": [
-            { "type": "loot", "polarity": "positive", "description": "Provides two gem or trinket rolls, one gem or gold roll, and two supplies rolls." }
+            {
+              "type": "loot",
+              "polarity": "positive",
+              "description": "Provides two gem or trinket rolls, one gem or gold roll, and two supplies rolls."
+            }
           ]
         },
         {
@@ -1654,11 +2650,36 @@
           "recommendation": "avoid",
           "certainty": "possible",
           "outcomes": [
-            { "type": "loot", "polarity": "positive", "description": "Provides one gem or trinket roll, one gold or gem roll, and one supplies roll.", "chancePercent": 16.7 },
-            { "type": "disease", "polarity": "negative", "description": "Inflicts The Red Plague.", "chancePercent": 16.7 },
-            { "type": "status", "polarity": "negative", "description": "Inflicts blight.", "chancePercent": 11.1 },
-            { "type": "status", "polarity": "negative", "description": "Inflicts bleed.", "chancePercent": 5.6 },
-            { "type": "nothing", "polarity": "neutral", "description": "Nothing happens.", "chancePercent": 50 }
+            {
+              "type": "loot",
+              "polarity": "positive",
+              "description": "Provides one gem or trinket roll, one gold or gem roll, and one supplies roll.",
+              "chancePercent": 16.7
+            },
+            {
+              "type": "disease",
+              "polarity": "negative",
+              "description": "Inflicts The Red Plague.",
+              "chancePercent": 16.7
+            },
+            {
+              "type": "status",
+              "polarity": "negative",
+              "description": "Inflicts blight.",
+              "chancePercent": 11.1
+            },
+            {
+              "type": "status",
+              "polarity": "negative",
+              "description": "Inflicts bleed.",
+              "chancePercent": 5.6
+            },
+            {
+              "type": "nothing",
+              "polarity": "neutral",
+              "description": "Nothing happens.",
+              "chancePercent": 50
+            }
           ]
         }
       ],
@@ -1673,9 +2694,10 @@
     },
     {
       "id": "fish_idol",
-      "names": { "en": "Fish Idol" },
       "aliases": [],
-      "regions": ["cove"],
+      "regions": [
+        "cove"
+      ],
       "dlcs": [],
       "interactions": [
         {
@@ -1683,7 +2705,11 @@
           "recommendation": "recommended",
           "certainty": "guaranteed",
           "outcomes": [
-            { "type": "buff", "polarity": "positive", "description": "Grants +18% damage until camp." }
+            {
+              "type": "buff",
+              "polarity": "positive",
+              "description": "Grants +18% damage until camp."
+            }
           ]
         },
         {
@@ -1691,8 +2717,18 @@
           "recommendation": "avoid",
           "certainty": "possible",
           "outcomes": [
-            { "type": "buff", "polarity": "negative", "description": "Inflicts -25% damage and -10 accuracy until camp.", "chancePercent": 50 },
-            { "type": "buff", "polarity": "negative", "description": "Inflicts -12 dodge until camp.", "chancePercent": 50 }
+            {
+              "type": "buff",
+              "polarity": "negative",
+              "description": "Inflicts -25% damage and -10 accuracy until camp.",
+              "chancePercent": 50
+            },
+            {
+              "type": "buff",
+              "polarity": "negative",
+              "description": "Inflicts -12 dodge until camp.",
+              "chancePercent": 50
+            }
           ]
         }
       ],
@@ -1707,9 +2743,10 @@
     },
     {
       "id": "giant_oyster",
-      "names": { "en": "Giant Oyster" },
       "aliases": [],
-      "regions": ["cove"],
+      "regions": [
+        "cove"
+      ],
       "dlcs": [],
       "interactions": [
         {
@@ -1717,7 +2754,11 @@
           "recommendation": "recommended",
           "certainty": "guaranteed",
           "outcomes": [
-            { "type": "loot", "polarity": "positive", "description": "Provides three gold or trinket rolls." }
+            {
+              "type": "loot",
+              "polarity": "positive",
+              "description": "Provides three gold or trinket rolls."
+            }
           ],
           "note": "Choose this interaction when guaranteed loot is the priority."
         },
@@ -1726,7 +2767,11 @@
           "recommendation": "recommended",
           "certainty": "guaranteed",
           "outcomes": [
-            { "type": "buff", "polarity": "positive", "description": "Grants +25 dodge until camp." }
+            {
+              "type": "buff",
+              "polarity": "positive",
+              "description": "Grants +25 dodge until camp."
+            }
           ],
           "note": "Choose this interaction when a large dodge buff is more valuable than loot."
         },
@@ -1735,9 +2780,24 @@
           "recommendation": "avoid",
           "certainty": "possible",
           "outcomes": [
-            { "type": "loot", "polarity": "positive", "description": "Provides two gold or trinket rolls.", "chancePercent": 40 },
-            { "type": "status", "polarity": "negative", "description": "Inflicts bleed.", "chancePercent": 40 },
-            { "type": "nothing", "polarity": "neutral", "description": "Nothing happens.", "chancePercent": 20 }
+            {
+              "type": "loot",
+              "polarity": "positive",
+              "description": "Provides two gold or trinket rolls.",
+              "chancePercent": 40
+            },
+            {
+              "type": "status",
+              "polarity": "negative",
+              "description": "Inflicts bleed.",
+              "chancePercent": 40
+            },
+            {
+              "type": "nothing",
+              "polarity": "neutral",
+              "description": "Nothing happens.",
+              "chancePercent": 20
+            }
           ]
         }
       ],
@@ -1752,9 +2812,12 @@
     },
     {
       "id": "ships_figurehead",
-      "names": { "en": "Ship's Figurehead" },
-      "aliases": ["Ships Figurehead"],
-      "regions": ["cove"],
+      "aliases": [
+        "Ships Figurehead"
+      ],
+      "regions": [
+        "cove"
+      ],
       "dlcs": [],
       "interactions": [
         {
@@ -1762,12 +2825,24 @@
           "recommendation": "recommended",
           "certainty": "possible",
           "outcomes": [
-            { "type": "stress", "polarity": "positive", "description": "Reduces stress by 25 to 30.", "chancePercent": 66.7 },
-            { "type": "buff", "polarity": "positive", "description": "Grants +20% damage and +4 speed until camp.", "chancePercent": 33.3 }
+            {
+              "type": "stress",
+              "polarity": "positive",
+              "description": "Reduces stress by 25 to 30.",
+              "chancePercent": 66.7
+            },
+            {
+              "type": "buff",
+              "polarity": "positive",
+              "description": "Grants +20% damage and +4 speed until camp.",
+              "chancePercent": 33.3
+            }
           ]
         }
       ],
-      "notes": ["Every possible outcome is beneficial."],
+      "notes": [
+        "Every possible outcome is beneficial."
+      ],
       "sources": [
         {
           "title": "Official Darkest Dungeon Wiki: Curio data module",
@@ -1778,18 +2853,34 @@
     },
     {
       "id": "pile_of_strange_bones",
-      "names": { "en": "Pile of Strange Bones" },
-      "aliases": ["Strange Bones"],
-      "regions": ["courtyard"],
-      "dlcs": ["crimson_court"],
+      "localizationId": "cc_bone_pile",
+      "aliases": [
+        "Strange Bones"
+      ],
+      "regions": [
+        "courtyard"
+      ],
+      "dlcs": [
+        "crimson_court"
+      ],
       "interactions": [
         {
           "item": "bandage",
           "recommendation": "recommended",
           "certainty": "possible",
           "outcomes": [
-            { "type": "loot", "polarity": "positive", "description": "Provides one roll from the unrestricted loot table.", "chancePercent": 50 },
-            { "type": "loot", "polarity": "positive", "description": "Provides one vial of The Blood.", "chancePercent": 50 }
+            {
+              "type": "loot",
+              "polarity": "positive",
+              "description": "Provides one roll from the unrestricted loot table.",
+              "chancePercent": 50
+            },
+            {
+              "type": "loot",
+              "polarity": "positive",
+              "description": "Provides one vial of The Blood.",
+              "chancePercent": 50
+            }
           ]
         },
         {
@@ -1797,7 +2888,11 @@
           "recommendation": "avoid",
           "certainty": "guaranteed",
           "outcomes": [
-            { "type": "combat", "polarity": "negative", "description": "Summons a Supplicant, a Sycophant, and an Esquire." }
+            {
+              "type": "combat",
+              "polarity": "negative",
+              "description": "Summons a Supplicant, a Sycophant, and an Esquire."
+            }
           ]
         },
         {
@@ -1805,31 +2900,67 @@
           "recommendation": "avoid",
           "certainty": "possible",
           "outcomes": [
-            { "type": "status", "polarity": "negative", "description": "Inflicts bleed.", "chancePercent": 50 },
-            { "type": "loot", "polarity": "positive", "description": "Provides two unrestricted loot rolls with a chance for The Blood.", "chancePercent": 20 },
-            { "type": "disease", "polarity": "negative", "description": "Inflicts the Crimson Curse.", "chancePercent": 10 },
-            { "type": "nothing", "polarity": "neutral", "description": "Nothing happens.", "chancePercent": 20 }
+            {
+              "type": "status",
+              "polarity": "negative",
+              "description": "Inflicts bleed.",
+              "chancePercent": 50
+            },
+            {
+              "type": "loot",
+              "polarity": "positive",
+              "description": "Provides two unrestricted loot rolls with a chance for The Blood.",
+              "chancePercent": 20
+            },
+            {
+              "type": "disease",
+              "polarity": "negative",
+              "description": "Inflicts the Crimson Curse.",
+              "chancePercent": 10
+            },
+            {
+              "type": "nothing",
+              "polarity": "neutral",
+              "description": "Nothing happens.",
+              "chancePercent": 20
+            }
           ]
         }
       ],
-      "notes": ["Never spend The Blood on this curio unless deliberately seeking the summoned fight."],
+      "notes": [
+        "Never spend The Blood on this curio unless deliberately seeking the summoned fight."
+      ],
       "sources": [
-        { "title": "Official Darkest Dungeon Wiki: Curio data module", "url": "https://darkestdungeon.wiki.gg/wiki/Module:Curios/Data", "verifiedAt": "2026-08-31" }
+        {
+          "title": "Official Darkest Dungeon Wiki: Curio data module",
+          "url": "https://darkestdungeon.wiki.gg/wiki/Module:Curios/Data",
+          "verifiedAt": "2026-08-31"
+        }
       ]
     },
     {
       "id": "bloodflowers",
-      "names": { "en": "Bloodflowers" },
-      "aliases": ["Blood Flowers"],
-      "regions": ["courtyard"],
-      "dlcs": ["crimson_court"],
+      "localizationId": "cc_bloodflower",
+      "aliases": [
+        "Blood Flowers"
+      ],
+      "regions": [
+        "courtyard"
+      ],
+      "dlcs": [
+        "crimson_court"
+      ],
       "interactions": [
         {
           "item": "shovel",
           "recommendation": "recommended",
           "certainty": "guaranteed",
           "outcomes": [
-            { "type": "loot", "polarity": "positive", "description": "Provides two heirloom rolls and one unrestricted loot roll." }
+            {
+              "type": "loot",
+              "polarity": "positive",
+              "description": "Provides two heirloom rolls and one unrestricted loot roll."
+            }
           ]
         },
         {
@@ -1837,7 +2968,11 @@
           "recommendation": "avoid",
           "certainty": "guaranteed",
           "outcomes": [
-            { "type": "stress", "polarity": "negative", "description": "Increases stress by 15." }
+            {
+              "type": "stress",
+              "polarity": "negative",
+              "description": "Increases stress by 15."
+            }
           ]
         },
         {
@@ -1845,7 +2980,11 @@
           "recommendation": "avoid",
           "certainty": "guaranteed",
           "outcomes": [
-            { "type": "nothing", "polarity": "neutral", "description": "Nothing happens." }
+            {
+              "type": "nothing",
+              "polarity": "neutral",
+              "description": "Nothing happens."
+            }
           ]
         },
         {
@@ -1853,33 +2992,75 @@
           "recommendation": "avoid",
           "certainty": "possible",
           "outcomes": [
-            { "type": "stress", "polarity": "negative", "description": "Increases stress by 15.", "chancePercent": 38.5 },
-            { "type": "other", "polarity": "positive", "description": "Scouts ahead.", "chancePercent": 23.1 },
-            { "type": "loot", "polarity": "positive", "description": "Provides two unrestricted loot rolls with a chance for The Blood.", "chancePercent": 15.3 },
-            { "type": "disease", "polarity": "negative", "description": "Inflicts Tetanus.", "chancePercent": 5.1 },
-            { "type": "disease", "polarity": "negative", "description": "Inflicts a random disease.", "chancePercent": 2.5 },
-            { "type": "nothing", "polarity": "neutral", "description": "Nothing happens.", "chancePercent": 15.3 }
+            {
+              "type": "stress",
+              "polarity": "negative",
+              "description": "Increases stress by 15.",
+              "chancePercent": 38.5
+            },
+            {
+              "type": "other",
+              "polarity": "positive",
+              "description": "Scouts ahead.",
+              "chancePercent": 23.1
+            },
+            {
+              "type": "loot",
+              "polarity": "positive",
+              "description": "Provides two unrestricted loot rolls with a chance for The Blood.",
+              "chancePercent": 15.3
+            },
+            {
+              "type": "disease",
+              "polarity": "negative",
+              "description": "Inflicts Tetanus.",
+              "chancePercent": 5.1
+            },
+            {
+              "type": "disease",
+              "polarity": "negative",
+              "description": "Inflicts a random disease.",
+              "chancePercent": 2.5
+            },
+            {
+              "type": "nothing",
+              "polarity": "neutral",
+              "description": "Nothing happens.",
+              "chancePercent": 15.3
+            }
           ]
         }
       ],
       "notes": [],
       "sources": [
-        { "title": "Official Darkest Dungeon Wiki: Curio data module", "url": "https://darkestdungeon.wiki.gg/wiki/Module:Curios/Data", "verifiedAt": "2026-08-31" }
+        {
+          "title": "Official Darkest Dungeon Wiki: Curio data module",
+          "url": "https://darkestdungeon.wiki.gg/wiki/Module:Curios/Data",
+          "verifiedAt": "2026-08-31"
+        }
       ]
     },
     {
       "id": "damned_fountain",
-      "names": { "en": "Damned Fountain" },
+      "localizationId": "cc_damned_fountain",
       "aliases": [],
-      "regions": ["courtyard"],
-      "dlcs": ["crimson_court"],
+      "regions": [
+        "courtyard"
+      ],
+      "dlcs": [
+        "crimson_court"
+      ],
       "interactions": [
         {
           "item": "holy_water",
           "recommendation": "recommended",
           "certainty": "guaranteed",
           "outcomes": [
-            { "type": "stress", "polarity": "positive", "description": "Reduces stress by 30." }
+            {
+              "type": "stress",
+              "polarity": "positive",
+              "description": "Reduces stress by 30."
+            }
           ]
         },
         {
@@ -1887,7 +3068,11 @@
           "recommendation": "avoid",
           "certainty": "guaranteed",
           "outcomes": [
-            { "type": "stress", "polarity": "negative", "description": "Increases stress by 5." }
+            {
+              "type": "stress",
+              "polarity": "negative",
+              "description": "Increases stress by 5."
+            }
           ]
         },
         {
@@ -1895,30 +3080,57 @@
           "recommendation": "avoid",
           "certainty": "possible",
           "outcomes": [
-            { "type": "status", "polarity": "negative", "description": "Inflicts bleed.", "chancePercent": 60 },
-            { "type": "disease", "polarity": "negative", "description": "Inflicts the Crimson Curse.", "chancePercent": 20 },
-            { "type": "loot", "polarity": "positive", "description": "Provides two unrestricted loot rolls with a chance to bleed.", "chancePercent": 20 }
+            {
+              "type": "status",
+              "polarity": "negative",
+              "description": "Inflicts bleed.",
+              "chancePercent": 60
+            },
+            {
+              "type": "disease",
+              "polarity": "negative",
+              "description": "Inflicts the Crimson Curse.",
+              "chancePercent": 20
+            },
+            {
+              "type": "loot",
+              "polarity": "positive",
+              "description": "Provides two unrestricted loot rolls with a chance to bleed.",
+              "chancePercent": 20
+            }
           ]
         }
       ],
       "notes": [],
       "sources": [
-        { "title": "Official Darkest Dungeon Wiki: Curio data module", "url": "https://darkestdungeon.wiki.gg/wiki/Module:Curios/Data", "verifiedAt": "2026-08-31" }
+        {
+          "title": "Official Darkest Dungeon Wiki: Curio data module",
+          "url": "https://darkestdungeon.wiki.gg/wiki/Module:Curios/Data",
+          "verifiedAt": "2026-08-31"
+        }
       ]
     },
     {
       "id": "disturbing_diversion",
-      "names": { "en": "Disturbing Diversion" },
+      "localizationId": "cc_hammer_game",
       "aliases": [],
-      "regions": ["courtyard"],
-      "dlcs": ["crimson_court"],
+      "regions": [
+        "courtyard"
+      ],
+      "dlcs": [
+        "crimson_court"
+      ],
       "interactions": [
         {
           "item": "shovel",
           "recommendation": "recommended",
           "certainty": "guaranteed",
           "outcomes": [
-            { "type": "loot", "polarity": "positive", "description": "Provides three heirloom rolls." }
+            {
+              "type": "loot",
+              "polarity": "positive",
+              "description": "Provides three heirloom rolls."
+            }
           ]
         },
         {
@@ -1926,32 +3138,71 @@
           "recommendation": "avoid",
           "certainty": "possible",
           "outcomes": [
-            { "type": "stress", "polarity": "negative", "description": "Increases stress by 25.", "chancePercent": 40 },
-            { "type": "quirk", "polarity": "positive", "description": "Grants a random positive quirk.", "chancePercent": 15 },
-            { "type": "quirk", "polarity": "negative", "description": "Grants a random negative quirk.", "chancePercent": 15 },
-            { "type": "loot", "polarity": "positive", "description": "Provides two unrestricted loot rolls with a chance for two vials of The Blood.", "chancePercent": 10 },
-            { "type": "nothing", "polarity": "neutral", "description": "Nothing happens.", "chancePercent": 20 }
+            {
+              "type": "stress",
+              "polarity": "negative",
+              "description": "Increases stress by 25.",
+              "chancePercent": 40
+            },
+            {
+              "type": "quirk",
+              "polarity": "positive",
+              "description": "Grants a random positive quirk.",
+              "chancePercent": 15
+            },
+            {
+              "type": "quirk",
+              "polarity": "negative",
+              "description": "Grants a random negative quirk.",
+              "chancePercent": 15
+            },
+            {
+              "type": "loot",
+              "polarity": "positive",
+              "description": "Provides two unrestricted loot rolls with a chance for two vials of The Blood.",
+              "chancePercent": 10
+            },
+            {
+              "type": "nothing",
+              "polarity": "neutral",
+              "description": "Nothing happens.",
+              "chancePercent": 20
+            }
           ]
         }
       ],
       "notes": [],
       "sources": [
-        { "title": "Official Darkest Dungeon Wiki: Curio data module", "url": "https://darkestdungeon.wiki.gg/wiki/Module:Curios/Data", "verifiedAt": "2026-08-31" }
+        {
+          "title": "Official Darkest Dungeon Wiki: Curio data module",
+          "url": "https://darkestdungeon.wiki.gg/wiki/Module:Curios/Data",
+          "verifiedAt": "2026-08-31"
+        }
       ]
     },
     {
       "id": "forgotten_delicacies",
-      "names": { "en": "Forgotten Delicacies" },
-      "aliases": ["Forgotten Delicacy"],
-      "regions": ["courtyard"],
-      "dlcs": ["crimson_court"],
+      "localizationId": "cc_food_cart",
+      "aliases": [
+        "Forgotten Delicacy"
+      ],
+      "regions": [
+        "courtyard"
+      ],
+      "dlcs": [
+        "crimson_court"
+      ],
       "interactions": [
         {
           "item": "medicinal_herbs",
           "recommendation": "recommended",
           "certainty": "guaranteed",
           "outcomes": [
-            { "type": "loot", "polarity": "positive", "description": "Provides two food rolls and one gold or supplies roll." }
+            {
+              "type": "loot",
+              "polarity": "positive",
+              "description": "Provides two food rolls and one gold or supplies roll."
+            }
           ]
         },
         {
@@ -1959,33 +3210,75 @@
           "recommendation": "avoid",
           "certainty": "possible",
           "outcomes": [
-            { "type": "loot", "polarity": "positive", "description": "Provides four gold or supplies rolls, one supplies roll, and a chance for The Blood.", "chancePercent": 20 },
-            { "type": "quirk", "polarity": "negative", "description": "Inflicts the Stress Eater quirk.", "chancePercent": 20 },
-            { "type": "status", "polarity": "negative", "description": "Inflicts blight.", "chancePercent": 20 },
-            { "type": "disease", "polarity": "negative", "description": "Inflicts the Crimson Curse.", "chancePercent": 13.3 },
-            { "type": "disease", "polarity": "negative", "description": "Inflicts a random disease.", "chancePercent": 6.7 },
-            { "type": "nothing", "polarity": "neutral", "description": "Nothing happens.", "chancePercent": 20 }
+            {
+              "type": "loot",
+              "polarity": "positive",
+              "description": "Provides four gold or supplies rolls, one supplies roll, and a chance for The Blood.",
+              "chancePercent": 20
+            },
+            {
+              "type": "quirk",
+              "polarity": "negative",
+              "description": "Inflicts the Stress Eater quirk.",
+              "chancePercent": 20
+            },
+            {
+              "type": "status",
+              "polarity": "negative",
+              "description": "Inflicts blight.",
+              "chancePercent": 20
+            },
+            {
+              "type": "disease",
+              "polarity": "negative",
+              "description": "Inflicts the Crimson Curse.",
+              "chancePercent": 13.3
+            },
+            {
+              "type": "disease",
+              "polarity": "negative",
+              "description": "Inflicts a random disease.",
+              "chancePercent": 6.7
+            },
+            {
+              "type": "nothing",
+              "polarity": "neutral",
+              "description": "Nothing happens.",
+              "chancePercent": 20
+            }
           ]
         }
       ],
       "notes": [],
       "sources": [
-        { "title": "Official Darkest Dungeon Wiki: Curio data module", "url": "https://darkestdungeon.wiki.gg/wiki/Module:Curios/Data", "verifiedAt": "2026-08-31" }
+        {
+          "title": "Official Darkest Dungeon Wiki: Curio data module",
+          "url": "https://darkestdungeon.wiki.gg/wiki/Module:Curios/Data",
+          "verifiedAt": "2026-08-31"
+        }
       ]
     },
     {
       "id": "hooded_shrew",
-      "names": { "en": "Hooded Shrew" },
+      "localizationId": "cc_shrew_hooded",
       "aliases": [],
-      "regions": ["courtyard"],
-      "dlcs": ["crimson_court"],
+      "regions": [
+        "courtyard"
+      ],
+      "dlcs": [
+        "crimson_court"
+      ],
       "interactions": [
         {
           "item": "blood",
           "recommendation": "recommended",
           "certainty": "guaranteed",
           "outcomes": [
-            { "type": "loot", "polarity": "positive", "description": "Provides two non-set trinkets." }
+            {
+              "type": "loot",
+              "polarity": "positive",
+              "description": "Provides two non-set trinkets."
+            }
           ]
         },
         {
@@ -1993,31 +3286,68 @@
           "recommendation": "avoid",
           "certainty": "possible",
           "outcomes": [
-            { "type": "stress", "polarity": "negative", "description": "Increases stress by 15.", "chancePercent": 42.8 },
-            { "type": "loot", "polarity": "positive", "description": "Provides one unrestricted loot roll.", "chancePercent": 28.5 },
-            { "type": "disease", "polarity": "negative", "description": "Inflicts a random disease.", "chancePercent": 7.6 },
-            { "type": "nothing", "polarity": "neutral", "description": "Nothing happens.", "chancePercent": 14.2 }
+            {
+              "type": "stress",
+              "polarity": "negative",
+              "description": "Increases stress by 15.",
+              "chancePercent": 42.8
+            },
+            {
+              "type": "loot",
+              "polarity": "positive",
+              "description": "Provides one unrestricted loot roll.",
+              "chancePercent": 28.5
+            },
+            {
+              "type": "disease",
+              "polarity": "negative",
+              "description": "Inflicts a random disease.",
+              "chancePercent": 7.6
+            },
+            {
+              "type": "nothing",
+              "polarity": "neutral",
+              "description": "Nothing happens.",
+              "chancePercent": 14.2
+            }
           ]
         }
       ],
-      "notes": ["Preserves the probabilities published by the official data module; displayed rounded values do not sum to 100%."],
+      "notes": [
+        "Preserves the probabilities published by the official data module; displayed rounded values do not sum to 100%."
+      ],
       "sources": [
-        { "title": "Official Darkest Dungeon Wiki: Curio data module", "url": "https://darkestdungeon.wiki.gg/wiki/Module:Curios/Data", "verifiedAt": "2026-08-31" }
+        {
+          "title": "Official Darkest Dungeon Wiki: Curio data module",
+          "url": "https://darkestdungeon.wiki.gg/wiki/Module:Curios/Data",
+          "verifiedAt": "2026-08-31"
+        }
       ]
     },
     {
       "id": "throbbing_cocoons_courtyard",
-      "names": { "en": "Throbbing Cocoons (Courtyard)" },
-      "aliases": ["Throbbing Cocoons", "Courtyard Cocoons"],
-      "regions": ["courtyard"],
-      "dlcs": ["crimson_court"],
+      "localizationId": "cc_egg_cluster",
+      "aliases": [
+        "Throbbing Cocoons",
+        "Courtyard Cocoons"
+      ],
+      "regions": [
+        "courtyard"
+      ],
+      "dlcs": [
+        "crimson_court"
+      ],
       "interactions": [
         {
           "item": "torch",
           "recommendation": "recommended",
           "certainty": "guaranteed",
           "outcomes": [
-            { "type": "stress", "polarity": "positive", "description": "Reduces stress by 30." }
+            {
+              "type": "stress",
+              "polarity": "positive",
+              "description": "Reduces stress by 30."
+            }
           ]
         },
         {
@@ -2025,31 +3355,64 @@
           "recommendation": "avoid",
           "certainty": "possible",
           "outcomes": [
-            { "type": "combat", "polarity": "negative", "description": "Summons a Supplicant, a Sycophant, and an Esquire.", "chancePercent": 75 },
-            { "type": "loot", "polarity": "positive", "description": "Provides three unrestricted loot rolls with a chance for The Blood.", "chancePercent": 12.5 },
-            { "type": "nothing", "polarity": "neutral", "description": "Nothing happens.", "chancePercent": 12.5 }
+            {
+              "type": "combat",
+              "polarity": "negative",
+              "description": "Summons a Supplicant, a Sycophant, and an Esquire.",
+              "chancePercent": 75
+            },
+            {
+              "type": "loot",
+              "polarity": "positive",
+              "description": "Provides three unrestricted loot rolls with a chance for The Blood.",
+              "chancePercent": 12.5
+            },
+            {
+              "type": "nothing",
+              "polarity": "neutral",
+              "description": "Nothing happens.",
+              "chancePercent": 12.5
+            }
           ]
         }
       ],
-      "notes": ["This variant looks identical to the high-infestation variant found in regular dungeons."],
+      "notes": [
+        "This variant looks identical to the high-infestation variant found in regular dungeons."
+      ],
       "sources": [
-        { "title": "Official Darkest Dungeon Wiki: Curio data module", "url": "https://darkestdungeon.wiki.gg/wiki/Module:Curios/Data", "verifiedAt": "2026-08-31" },
-        { "title": "Official Darkest Dungeon Wiki: Curios", "url": "https://darkestdungeon.wiki.gg/wiki/Curios#Throbbing_Cocoons_Variants", "verifiedAt": "2026-08-31" }
+        {
+          "title": "Official Darkest Dungeon Wiki: Curio data module",
+          "url": "https://darkestdungeon.wiki.gg/wiki/Module:Curios/Data",
+          "verifiedAt": "2026-08-31"
+        },
+        {
+          "title": "Official Darkest Dungeon Wiki: Curios",
+          "url": "https://darkestdungeon.wiki.gg/wiki/Curios#Throbbing_Cocoons_Variants",
+          "verifiedAt": "2026-08-31"
+        }
       ]
     },
     {
       "id": "thronging_hive",
-      "names": { "en": "Thronging Hive" },
+      "localizationId": "cc_hive",
       "aliases": [],
-      "regions": ["courtyard"],
-      "dlcs": ["crimson_court"],
+      "regions": [
+        "courtyard"
+      ],
+      "dlcs": [
+        "crimson_court"
+      ],
       "interactions": [
         {
           "item": "torch",
           "recommendation": "recommended",
           "certainty": "guaranteed",
           "outcomes": [
-            { "type": "loot", "polarity": "positive", "description": "Provides three unrestricted loot rolls with a chance for The Blood." }
+            {
+              "type": "loot",
+              "polarity": "positive",
+              "description": "Provides three unrestricted loot rolls with a chance for The Blood."
+            }
           ]
         },
         {
@@ -2057,29 +3420,51 @@
           "recommendation": "avoid",
           "certainty": "possible",
           "outcomes": [
-            { "type": "loot", "polarity": "positive", "description": "Provides two unrestricted loot rolls with a chance for The Blood.", "chancePercent": 75 },
-            { "type": "status", "polarity": "negative", "description": "Inflicts bleed.", "chancePercent": 25 }
+            {
+              "type": "loot",
+              "polarity": "positive",
+              "description": "Provides two unrestricted loot rolls with a chance for The Blood.",
+              "chancePercent": 75
+            },
+            {
+              "type": "status",
+              "polarity": "negative",
+              "description": "Inflicts bleed.",
+              "chancePercent": 25
+            }
           ]
         }
       ],
       "notes": [],
       "sources": [
-        { "title": "Official Darkest Dungeon Wiki: Curio data module", "url": "https://darkestdungeon.wiki.gg/wiki/Module:Curios/Data", "verifiedAt": "2026-08-31" }
+        {
+          "title": "Official Darkest Dungeon Wiki: Curio data module",
+          "url": "https://darkestdungeon.wiki.gg/wiki/Module:Curios/Data",
+          "verifiedAt": "2026-08-31"
+        }
       ]
     },
     {
       "id": "wine_crate",
-      "names": { "en": "Wine Crate" },
+      "localizationId": "cc_wine_crate",
       "aliases": [],
-      "regions": ["courtyard"],
-      "dlcs": ["crimson_court"],
+      "regions": [
+        "courtyard"
+      ],
+      "dlcs": [
+        "crimson_court"
+      ],
       "interactions": [
         {
           "item": "shovel",
           "recommendation": "recommended",
           "certainty": "guaranteed",
           "outcomes": [
-            { "type": "loot", "polarity": "positive", "description": "Provides one firewood for camping." }
+            {
+              "type": "loot",
+              "polarity": "positive",
+              "description": "Provides one firewood for camping."
+            }
           ],
           "note": "This is the only way to obtain Firewood while exploring the Courtyard."
         },
@@ -2088,7 +3473,11 @@
           "recommendation": "recommended",
           "certainty": "guaranteed",
           "outcomes": [
-            { "type": "stress", "polarity": "positive", "description": "Reduces stress by 30." }
+            {
+              "type": "stress",
+              "polarity": "positive",
+              "description": "Reduces stress by 30."
+            }
           ]
         },
         {
@@ -2096,33 +3485,75 @@
           "recommendation": "avoid",
           "certainty": "possible",
           "outcomes": [
-            { "type": "loot", "polarity": "positive", "description": "Provides loot with a chance for The Blood.", "chancePercent": 41.7 },
-            { "type": "disease", "polarity": "negative", "description": "Inflicts the Crimson Curse.", "chancePercent": 16.7 },
-            { "type": "quirk", "polarity": "negative", "description": "Inflicts the Tippler quirk.", "chancePercent": 16.7 },
-            { "type": "other", "polarity": "positive", "description": "Scouts ahead.", "chancePercent": 8.3 },
-            { "type": "status", "polarity": "negative", "description": "Inflicts bleed.", "chancePercent": 8.3 },
-            { "type": "nothing", "polarity": "neutral", "description": "Nothing happens.", "chancePercent": 8.3 }
+            {
+              "type": "loot",
+              "polarity": "positive",
+              "description": "Provides loot with a chance for The Blood.",
+              "chancePercent": 41.7
+            },
+            {
+              "type": "disease",
+              "polarity": "negative",
+              "description": "Inflicts the Crimson Curse.",
+              "chancePercent": 16.7
+            },
+            {
+              "type": "quirk",
+              "polarity": "negative",
+              "description": "Inflicts the Tippler quirk.",
+              "chancePercent": 16.7
+            },
+            {
+              "type": "other",
+              "polarity": "positive",
+              "description": "Scouts ahead.",
+              "chancePercent": 8.3
+            },
+            {
+              "type": "status",
+              "polarity": "negative",
+              "description": "Inflicts bleed.",
+              "chancePercent": 8.3
+            },
+            {
+              "type": "nothing",
+              "polarity": "neutral",
+              "description": "Nothing happens.",
+              "chancePercent": 8.3
+            }
           ]
         }
       ],
       "notes": [],
       "sources": [
-        { "title": "Official Darkest Dungeon Wiki: Curio data module", "url": "https://darkestdungeon.wiki.gg/wiki/Module:Curios/Data", "verifiedAt": "2026-08-31" }
+        {
+          "title": "Official Darkest Dungeon Wiki: Curio data module",
+          "url": "https://darkestdungeon.wiki.gg/wiki/Module:Curios/Data",
+          "verifiedAt": "2026-08-31"
+        }
       ]
     },
     {
       "id": "wizened_shrew",
-      "names": { "en": "Wizened Shrew" },
+      "localizationId": "cc_shrew_elder",
       "aliases": [],
-      "regions": ["courtyard"],
-      "dlcs": ["crimson_court"],
+      "regions": [
+        "courtyard"
+      ],
+      "dlcs": [
+        "crimson_court"
+      ],
       "interactions": [
         {
           "item": "blood",
           "recommendation": "recommended",
           "certainty": "guaranteed",
           "outcomes": [
-            { "type": "loot", "polarity": "positive", "description": "Provides three non-set trinkets." }
+            {
+              "type": "loot",
+              "polarity": "positive",
+              "description": "Provides three non-set trinkets."
+            }
           ]
         },
         {
@@ -2130,31 +3561,66 @@
           "recommendation": "situational",
           "certainty": "possible",
           "outcomes": [
-            { "type": "other", "polarity": "positive", "description": "Scouts ahead.", "chancePercent": 33.3 },
-            { "type": "disease", "polarity": "negative", "description": "Inflicts a random disease.", "chancePercent": 16.7 },
-            { "type": "nothing", "polarity": "neutral", "description": "A harmless ritual occurs.", "chancePercent": 33.3 },
-            { "type": "nothing", "polarity": "neutral", "description": "Nothing happens.", "chancePercent": 16.7 }
+            {
+              "type": "other",
+              "polarity": "positive",
+              "description": "Scouts ahead.",
+              "chancePercent": 33.3
+            },
+            {
+              "type": "disease",
+              "polarity": "negative",
+              "description": "Inflicts a random disease.",
+              "chancePercent": 16.7
+            },
+            {
+              "type": "nothing",
+              "polarity": "neutral",
+              "description": "A harmless ritual occurs.",
+              "chancePercent": 33.3
+            },
+            {
+              "type": "nothing",
+              "polarity": "neutral",
+              "description": "Nothing happens.",
+              "chancePercent": 16.7
+            }
           ]
         }
       ],
       "notes": [],
       "sources": [
-        { "title": "Official Darkest Dungeon Wiki: Curio data module", "url": "https://darkestdungeon.wiki.gg/wiki/Module:Curios/Data", "verifiedAt": "2026-08-31" }
+        {
+          "title": "Official Darkest Dungeon Wiki: Curio data module",
+          "url": "https://darkestdungeon.wiki.gg/wiki/Module:Curios/Data",
+          "verifiedAt": "2026-08-31"
+        }
       ]
     },
     {
       "id": "lost_treasure_box",
-      "names": { "en": "Lost Treasure Box" },
-      "aliases": ["Lost Treasury Chest"],
-      "regions": ["courtyard"],
-      "dlcs": ["crimson_court"],
+      "localizationId": "cc_treasure_chest",
+      "aliases": [
+        "Lost Treasury Chest",
+        "Lost Treasure Box"
+      ],
+      "regions": [
+        "courtyard"
+      ],
+      "dlcs": [
+        "crimson_court"
+      ],
       "interactions": [
         {
           "item": "skeleton_key",
           "recommendation": "avoid",
           "certainty": "guaranteed",
           "outcomes": [
-            { "type": "loot", "polarity": "positive", "description": "Provides two heirloom rolls and one unrestricted loot roll." }
+            {
+              "type": "loot",
+              "polarity": "positive",
+              "description": "Provides two heirloom rolls and one unrestricted loot roll."
+            }
           ],
           "note": "The key replaces the chest's guaranteed trinket rewards with ordinary loot."
         },
@@ -2163,29 +3629,52 @@
           "recommendation": "recommended",
           "certainty": "guaranteed",
           "outcomes": [
-            { "type": "loot", "polarity": "positive", "description": "Provides one unrestricted loot roll, two non-set trinkets, and one gem roll." }
+            {
+              "type": "loot",
+              "polarity": "positive",
+              "description": "Provides one unrestricted loot roll, two non-set trinkets, and one gem roll."
+            }
           ]
         }
       ],
-      "notes": ["Open by hand to preserve the guaranteed non-set trinket rewards."],
+      "notes": [
+        "Open by hand to preserve the guaranteed non-set trinket rewards."
+      ],
       "sources": [
-        { "title": "Official Darkest Dungeon Wiki: Curio data module", "url": "https://darkestdungeon.wiki.gg/wiki/Module:Curios/Data", "verifiedAt": "2026-08-31" },
-        { "title": "Official Darkest Dungeon Wiki: Courtyard", "url": "https://darkestdungeon.wiki.gg/wiki/Courtyard#Curios", "verifiedAt": "2026-08-31" }
+        {
+          "title": "Official Darkest Dungeon Wiki: Curio data module",
+          "url": "https://darkestdungeon.wiki.gg/wiki/Module:Curios/Data",
+          "verifiedAt": "2026-08-31"
+        },
+        {
+          "title": "Official Darkest Dungeon Wiki: Courtyard",
+          "url": "https://darkestdungeon.wiki.gg/wiki/Courtyard#Curios",
+          "verifiedAt": "2026-08-31"
+        }
       ]
     },
     {
       "id": "trinket_chest",
-      "names": { "en": "Trinket Chest" },
-      "aliases": ["Courtyard Locked Strongbox"],
-      "regions": ["courtyard"],
-      "dlcs": ["crimson_court"],
+      "aliases": [
+        "Courtyard Locked Strongbox"
+      ],
+      "regions": [
+        "courtyard"
+      ],
+      "dlcs": [
+        "crimson_court"
+      ],
       "interactions": [
         {
           "item": "skeleton_key",
           "recommendation": "avoid",
           "certainty": "guaranteed",
           "outcomes": [
-            { "type": "loot", "polarity": "positive", "description": "Provides two heirloom rolls and one unrestricted loot roll." }
+            {
+              "type": "loot",
+              "polarity": "positive",
+              "description": "Provides two heirloom rolls and one unrestricted loot roll."
+            }
           ],
           "note": "The key replaces the guaranteed set trinket with ordinary loot."
         },
@@ -2194,155 +3683,259 @@
           "recommendation": "recommended",
           "certainty": "guaranteed",
           "outcomes": [
-            { "type": "loot", "polarity": "positive", "description": "Provides one Crimson Court set trinket." }
+            {
+              "type": "loot",
+              "polarity": "positive",
+              "description": "Provides one Crimson Court set trinket."
+            }
           ]
         }
       ],
-      "notes": ["Appears only during the main Courtyard campaign expeditions; open by hand."],
+      "notes": [
+        "Appears only during the main Courtyard campaign expeditions; open by hand."
+      ],
       "sources": [
-        { "title": "Official Darkest Dungeon Wiki: Curio data module", "url": "https://darkestdungeon.wiki.gg/wiki/Module:Curios/Data", "verifiedAt": "2026-08-31" },
-        { "title": "Official Darkest Dungeon Wiki: Courtyard", "url": "https://darkestdungeon.wiki.gg/wiki/Courtyard#Curios", "verifiedAt": "2026-08-31" }
+        {
+          "title": "Official Darkest Dungeon Wiki: Curio data module",
+          "url": "https://darkestdungeon.wiki.gg/wiki/Module:Curios/Data",
+          "verifiedAt": "2026-08-31"
+        },
+        {
+          "title": "Official Darkest Dungeon Wiki: Courtyard",
+          "url": "https://darkestdungeon.wiki.gg/wiki/Courtyard#Curios",
+          "verifiedAt": "2026-08-31"
+        }
       ]
     },
     {
       "id": "corrupted_harvest",
-      "names": { "en": "Corrupted Harvest" },
+      "localizationId": "com_party_stress_heal",
       "aliases": [],
-      "regions": ["farmstead"],
-      "dlcs": ["color_of_madness"],
+      "regions": [
+        "farmstead"
+      ],
+      "dlcs": [
+        "color_of_madness"
+      ],
       "interactions": [
         {
           "item": null,
           "recommendation": "recommended",
           "certainty": "guaranteed",
           "outcomes": [
-            { "type": "stress", "polarity": "positive", "description": "Reduces stress by 60 for the entire party." }
+            {
+              "type": "stress",
+              "polarity": "positive",
+              "description": "Reduces stress by 60 for the entire party."
+            }
           ]
         }
       ],
-      "notes": ["Appears in a Farmstead curio room between combat waves."],
+      "notes": [
+        "Appears in a Farmstead curio room between combat waves."
+      ],
       "sources": [
-        { "title": "Farmstead - Official Darkest Dungeon Wiki", "url": "https://darkestdungeon.wiki.gg/wiki/Farmstead#Curios", "verifiedAt": "2026-08-31" }
+        {
+          "title": "Farmstead - Official Darkest Dungeon Wiki",
+          "url": "https://darkestdungeon.wiki.gg/wiki/Farmstead#Curios",
+          "verifiedAt": "2026-08-31"
+        }
       ]
     },
     {
       "id": "fresh_harvest",
-      "names": { "en": "Fresh Harvest" },
+      "localizationId": "com_hero_health_heal",
       "aliases": [],
-      "regions": ["farmstead"],
-      "dlcs": ["color_of_madness"],
+      "regions": [
+        "farmstead"
+      ],
+      "dlcs": [
+        "color_of_madness"
+      ],
       "interactions": [
         {
           "item": null,
           "recommendation": "recommended",
           "certainty": "guaranteed",
           "outcomes": [
-            { "type": "health", "polarity": "positive", "description": "Heals the selected hero for 90% of maximum health." }
+            {
+              "type": "health",
+              "polarity": "positive",
+              "description": "Heals the selected hero for 90% of maximum health."
+            }
           ]
         }
       ],
-      "notes": ["Select the hero who most needs healing before interacting."],
+      "notes": [
+        "Select the hero who most needs healing before interacting."
+      ],
       "sources": [
-        { "title": "Farmstead - Official Darkest Dungeon Wiki", "url": "https://darkestdungeon.wiki.gg/wiki/Farmstead#Curios", "verifiedAt": "2026-08-31" }
+        {
+          "title": "Farmstead - Official Darkest Dungeon Wiki",
+          "url": "https://darkestdungeon.wiki.gg/wiki/Farmstead#Curios",
+          "verifiedAt": "2026-08-31"
+        }
       ]
     },
     {
       "id": "gleaming_shards",
-      "names": { "en": "Gleaming Shards" },
+      "localizationId": "com_treasure",
       "aliases": [],
-      "regions": ["farmstead"],
-      "dlcs": ["color_of_madness"],
+      "regions": [
+        "farmstead"
+      ],
+      "dlcs": [
+        "color_of_madness"
+      ],
       "interactions": [
         {
           "item": null,
           "recommendation": "recommended",
           "certainty": "guaranteed",
           "outcomes": [
-            { "type": "loot", "polarity": "positive", "description": "Provides 5 to 15 Comet Shards." }
+            {
+              "type": "loot",
+              "polarity": "positive",
+              "description": "Provides 5 to 15 Comet Shards."
+            }
           ]
         }
       ],
       "notes": [],
       "sources": [
-        { "title": "Farmstead - Official Darkest Dungeon Wiki", "url": "https://darkestdungeon.wiki.gg/wiki/Farmstead#Curios", "verifiedAt": "2026-08-31" }
+        {
+          "title": "Farmstead - Official Darkest Dungeon Wiki",
+          "url": "https://darkestdungeon.wiki.gg/wiki/Farmstead#Curios",
+          "verifiedAt": "2026-08-31"
+        }
       ]
     },
     {
       "id": "millers_hearth",
-      "names": { "en": "Miller's Hearth" },
-      "aliases": ["Millers Hearth"],
-      "regions": ["farmstead"],
-      "dlcs": ["color_of_madness"],
+      "localizationId": "com_fireplace",
+      "aliases": [
+        "Millers Hearth"
+      ],
+      "regions": [
+        "farmstead"
+      ],
+      "dlcs": [
+        "color_of_madness"
+      ],
       "interactions": [
         {
           "item": null,
           "recommendation": "recommended",
           "certainty": "guaranteed",
           "outcomes": [
-            { "type": "other", "polarity": "positive", "description": "Allows the party to camp without consuming Firewood." }
+            {
+              "type": "other",
+              "polarity": "positive",
+              "description": "Allows the party to camp without consuming Firewood."
+            }
           ]
         }
       ],
-      "notes": ["Farmstead expeditions do not supply Firewood; this curio provides the opportunity to camp."],
+      "notes": [
+        "Farmstead expeditions do not supply Firewood; this curio provides the opportunity to camp."
+      ],
       "sources": [
-        { "title": "Farmstead - Official Darkest Dungeon Wiki", "url": "https://darkestdungeon.wiki.gg/wiki/Farmstead#Curios", "verifiedAt": "2026-08-31" }
+        {
+          "title": "Farmstead - Official Darkest Dungeon Wiki",
+          "url": "https://darkestdungeon.wiki.gg/wiki/Farmstead#Curios",
+          "verifiedAt": "2026-08-31"
+        }
       ]
     },
     {
       "id": "plentiful_bounty",
-      "names": { "en": "Plentiful Bounty" },
+      "localizationId": "com_party_health_heal",
       "aliases": [],
-      "regions": ["farmstead"],
-      "dlcs": ["color_of_madness"],
+      "regions": [
+        "farmstead"
+      ],
+      "dlcs": [
+        "color_of_madness"
+      ],
       "interactions": [
         {
           "item": null,
           "recommendation": "recommended",
           "certainty": "guaranteed",
           "outcomes": [
-            { "type": "health", "polarity": "positive", "description": "Heals the entire party for 65% of each hero's maximum health." }
+            {
+              "type": "health",
+              "polarity": "positive",
+              "description": "Heals the entire party for 65% of each hero's maximum health."
+            }
           ]
         }
       ],
       "notes": [],
       "sources": [
-        { "title": "Farmstead - Official Darkest Dungeon Wiki", "url": "https://darkestdungeon.wiki.gg/wiki/Farmstead#Curios", "verifiedAt": "2026-08-31" }
+        {
+          "title": "Farmstead - Official Darkest Dungeon Wiki",
+          "url": "https://darkestdungeon.wiki.gg/wiki/Farmstead#Curios",
+          "verifiedAt": "2026-08-31"
+        }
       ]
     },
     {
       "id": "rotted_fare",
-      "names": { "en": "Rotted Fare" },
+      "localizationId": "com_hero_stress_heal",
       "aliases": [],
-      "regions": ["farmstead"],
-      "dlcs": ["color_of_madness"],
+      "regions": [
+        "farmstead"
+      ],
+      "dlcs": [
+        "color_of_madness"
+      ],
       "interactions": [
         {
           "item": null,
           "recommendation": "recommended",
           "certainty": "guaranteed",
           "outcomes": [
-            { "type": "stress", "polarity": "positive", "description": "Reduces the selected hero's stress by 100." }
+            {
+              "type": "stress",
+              "polarity": "positive",
+              "description": "Reduces the selected hero's stress by 100."
+            }
           ]
         }
       ],
-      "notes": ["Select the hero with the highest useful stress reduction before interacting."],
+      "notes": [
+        "Select the hero with the highest useful stress reduction before interacting."
+      ],
       "sources": [
-        { "title": "Farmstead - Official Darkest Dungeon Wiki", "url": "https://darkestdungeon.wiki.gg/wiki/Farmstead#Curios", "verifiedAt": "2026-08-31" }
+        {
+          "title": "Farmstead - Official Darkest Dungeon Wiki",
+          "url": "https://darkestdungeon.wiki.gg/wiki/Farmstead#Curios",
+          "verifiedAt": "2026-08-31"
+        }
       ]
     },
     {
       "id": "stockpile",
-      "names": { "en": "Stockpile" },
+      "localizationId": "com_provisionbox_1",
       "aliases": [],
-      "regions": ["farmstead"],
-      "dlcs": ["color_of_madness"],
+      "regions": [
+        "farmstead"
+      ],
+      "dlcs": [
+        "color_of_madness"
+      ],
       "interactions": [
         {
           "item": "skeleton_key",
           "recommendation": "recommended",
           "certainty": "guaranteed",
           "outcomes": [
-            { "type": "loot", "polarity": "positive", "description": "Provides 6 to 12 food, assorted supplies, and one trinket." }
+            {
+              "type": "loot",
+              "polarity": "positive",
+              "description": "Provides 6 to 12 food, assorted supplies, and one trinket."
+            }
           ],
           "note": "The key opens a hidden compartment and improves the reward."
         },
@@ -2351,95 +3944,174 @@
           "recommendation": "situational",
           "certainty": "possible",
           "outcomes": [
-            { "type": "loot", "polarity": "positive", "description": "Provides Laudanum, Medicinal Herbs, or Food.", "chancePercent": 66.7 },
-            { "type": "nothing", "polarity": "neutral", "description": "The stockpile is empty.", "chancePercent": 33.3 }
+            {
+              "type": "loot",
+              "polarity": "positive",
+              "description": "Provides Laudanum, Medicinal Herbs, or Food.",
+              "chancePercent": 66.7
+            },
+            {
+              "type": "nothing",
+              "polarity": "neutral",
+              "description": "The stockpile is empty.",
+              "chancePercent": 33.3
+            }
           ]
         }
       ],
-      "notes": ["Skeleton Keys are useful provisions for long Farmstead expeditions because they improve this curio's loot."],
+      "notes": [
+        "Skeleton Keys are useful provisions for long Farmstead expeditions because they improve this curio's loot."
+      ],
       "sources": [
-        { "title": "Farmstead - Official Darkest Dungeon Wiki", "url": "https://darkestdungeon.wiki.gg/wiki/Farmstead#Curios", "verifiedAt": "2026-08-31" }
+        {
+          "title": "Farmstead - Official Darkest Dungeon Wiki",
+          "url": "https://darkestdungeon.wiki.gg/wiki/Farmstead#Curios",
+          "verifiedAt": "2026-08-31"
+        }
       ]
     },
     {
       "id": "mildred",
-      "names": { "en": "Mildred" },
+      "localizationId": "com_millerwife_curio",
       "aliases": [],
-      "regions": ["farmstead"],
-      "dlcs": ["color_of_madness"],
+      "regions": [
+        "farmstead"
+      ],
+      "dlcs": [
+        "color_of_madness"
+      ],
       "interactions": [
         {
           "item": null,
           "recommendation": "recommended",
           "certainty": "guaranteed",
           "outcomes": [
-            { "type": "loot", "polarity": "positive", "description": "Provides Mildred's Locket on the first encounter; subsequent encounters provide a random trinket or Comet Shards." }
+            {
+              "type": "loot",
+              "polarity": "positive",
+              "description": "Provides Mildred's Locket on the first encounter; subsequent encounters provide a random trinket or Comet Shards."
+            }
           ]
         }
       ],
-      "notes": ["Mildred's Locket has a unique beneficial interaction with the Miller boss."],
+      "notes": [
+        "Mildred's Locket has a unique beneficial interaction with the Miller boss."
+      ],
       "sources": [
-        { "title": "Farmstead - Official Darkest Dungeon Wiki", "url": "https://darkestdungeon.wiki.gg/wiki/Farmstead#Curios", "verifiedAt": "2026-08-31" }
+        {
+          "title": "Farmstead - Official Darkest Dungeon Wiki",
+          "url": "https://darkestdungeon.wiki.gg/wiki/Farmstead#Curios",
+          "verifiedAt": "2026-08-31"
+        }
       ]
     },
     {
       "id": "brigands_tent",
-      "names": { "en": "Brigand's Tent" },
-      "aliases": ["Brigands Tent"],
-      "regions": ["old_road"],
+      "localizationId": "travellers_tent_tutorial",
+      "aliases": [
+        "Brigands Tent"
+      ],
+      "regions": [
+        "old_road"
+      ],
       "dlcs": [],
-      "availability": { "type": "quest", "questIds": ["old_road"] },
+      "availability": {
+        "type": "quest",
+        "questIds": [
+          "old_road"
+        ]
+      },
       "interactions": [
         {
           "item": null,
           "recommendation": "recommended",
           "certainty": "guaranteed",
           "outcomes": [
-            { "type": "loot", "polarity": "positive", "description": "Provides two unrestricted loot rolls." }
+            {
+              "type": "loot",
+              "polarity": "positive",
+              "description": "Provides two unrestricted loot rolls."
+            }
           ]
         }
       ],
-      "notes": ["Appears on the Old Road when not playing on Stygian difficulty."],
+      "notes": [
+        "Appears on the Old Road when not playing on Stygian difficulty."
+      ],
       "sources": [
-        { "title": "Curios - Official Darkest Dungeon Wiki", "url": "https://darkestdungeon.wiki.gg/wiki/Curios#Special_Curios", "verifiedAt": "2026-08-31" }
+        {
+          "title": "Curios - Official Darkest Dungeon Wiki",
+          "url": "https://darkestdungeon.wiki.gg/wiki/Curios#Special_Curios",
+          "verifiedAt": "2026-08-31"
+        }
       ]
     },
     {
       "id": "transcendent_terror",
-      "names": { "en": "Transcendent Terror" },
+      "localizationId": "open_grave",
       "aliases": [],
-      "regions": ["old_road"],
+      "regions": [
+        "old_road"
+      ],
       "dlcs": [],
-      "availability": { "type": "quest", "questIds": ["old_road_stygian"] },
+      "availability": {
+        "type": "quest",
+        "questIds": [
+          "old_road_stygian"
+        ]
+      },
       "interactions": [
         {
           "item": null,
           "recommendation": "avoid",
           "certainty": "guaranteed",
           "outcomes": [
-            { "type": "stress", "polarity": "negative", "description": "Inflicts 100 stress." }
+            {
+              "type": "stress",
+              "polarity": "negative",
+              "description": "Inflicts 100 stress."
+            }
           ]
         }
       ],
-      "notes": ["Replaces Brigand's Tent on the Old Road in Stygian mode."],
+      "notes": [
+        "Replaces Brigand's Tent on the Old Road in Stygian mode."
+      ],
       "sources": [
-        { "title": "Curios - Official Darkest Dungeon Wiki", "url": "https://darkestdungeon.wiki.gg/wiki/Curios#Special_Curios", "verifiedAt": "2026-08-31" }
+        {
+          "title": "Curios - Official Darkest Dungeon Wiki",
+          "url": "https://darkestdungeon.wiki.gg/wiki/Curios#Special_Curios",
+          "verifiedAt": "2026-08-31"
+        }
       ]
     },
     {
       "id": "bandits_trapped_chest",
-      "names": { "en": "Bandit's Trapped Chest" },
-      "aliases": ["Bandits Trapped Chest", "Trapped Strongbox"],
-      "regions": ["old_road"],
+      "aliases": [
+        "Bandits Trapped Chest",
+        "Trapped Strongbox"
+      ],
+      "regions": [
+        "old_road"
+      ],
       "dlcs": [],
-      "availability": { "type": "quest", "questIds": ["old_road"] },
+      "availability": {
+        "type": "quest",
+        "questIds": [
+          "old_road"
+        ]
+      },
       "interactions": [
         {
           "item": "skeleton_key",
           "recommendation": "recommended",
           "certainty": "guaranteed",
           "outcomes": [
-            { "type": "loot", "polarity": "positive", "description": "Provides two random trinkets." }
+            {
+              "type": "loot",
+              "polarity": "positive",
+              "description": "Provides two random trinkets."
+            }
           ],
           "note": "A Skeleton Key safely bypasses the trap."
         },
@@ -2448,75 +4120,140 @@
           "recommendation": "avoid",
           "certainty": "guaranteed",
           "outcomes": [
-            { "type": "status", "polarity": "negative", "description": "Inflicts blight." }
+            {
+              "type": "status",
+              "polarity": "negative",
+              "description": "Inflicts blight."
+            }
           ],
           "note": "Opening the chest without a key provides no loot and always triggers the trap."
         }
       ],
-      "notes": ["A Skeleton Key can rarely be obtained from Old Road combat loot; otherwise ignore this chest."],
+      "notes": [
+        "A Skeleton Key can rarely be obtained from Old Road combat loot; otherwise ignore this chest."
+      ],
       "sources": [
-        { "title": "Curios - Official Darkest Dungeon Wiki", "url": "https://darkestdungeon.wiki.gg/wiki/Curios#Special_Curios", "verifiedAt": "2026-08-31" },
-        { "title": "Old Road - Official Darkest Dungeon Wiki", "url": "https://darkestdungeon.wiki.gg/wiki/Old_Road", "verifiedAt": "2026-08-31" }
+        {
+          "title": "Curios - Official Darkest Dungeon Wiki",
+          "url": "https://darkestdungeon.wiki.gg/wiki/Curios#Special_Curios",
+          "verifiedAt": "2026-08-31"
+        },
+        {
+          "title": "Old Road - Official Darkest Dungeon Wiki",
+          "url": "https://darkestdungeon.wiki.gg/wiki/Old_Road",
+          "verifiedAt": "2026-08-31"
+        }
       ]
     },
     {
       "id": "forgotten_strongbox",
-      "names": { "en": "Forgotten Strongbox" },
+      "localizationId": "bluekey_heirloom_chest",
       "aliases": [],
-      "regions": ["courtyard"],
-      "dlcs": ["crimson_court"],
-      "availability": { "type": "quest", "questIds": ["courtyard_boss_quests"] },
+      "regions": [
+        "courtyard"
+      ],
+      "dlcs": [
+        "crimson_court"
+      ],
+      "availability": {
+        "type": "quest",
+        "questIds": [
+          "courtyard_boss_quests"
+        ]
+      },
       "interactions": [
         {
           "item": null,
           "recommendation": "recommended",
           "certainty": "guaranteed",
           "outcomes": [
-            { "type": "other", "polarity": "positive", "description": "Provides the colored key required for the current Courtyard quest." }
+            {
+              "type": "other",
+              "polarity": "positive",
+              "description": "Provides the colored key required for the current Courtyard quest."
+            }
           ]
         }
       ],
-      "notes": ["There are four quest-specific variants, each containing a different colored key; no provision is required."],
+      "notes": [
+        "There are four quest-specific variants, each containing a different colored key; no provision is required."
+      ],
       "sources": [
-        { "title": "Curios - Official Darkest Dungeon Wiki", "url": "https://darkestdungeon.wiki.gg/wiki/Curios#Special_Curios", "verifiedAt": "2026-08-31" }
+        {
+          "title": "Curios - Official Darkest Dungeon Wiki",
+          "url": "https://darkestdungeon.wiki.gg/wiki/Curios#Special_Curios",
+          "verifiedAt": "2026-08-31"
+        }
       ]
     },
     {
       "id": "ancestors_knapsack",
-      "names": { "en": "Ancestor's Knapsack" },
-      "aliases": ["Ancestors Knapsack"],
-      "regions": ["darkest_dungeon", "hamlet"],
+      "aliases": [
+        "Ancestors Knapsack",
+        "Ancestor's Knapsack"
+      ],
+      "regions": [
+        "darkest_dungeon",
+        "hamlet"
+      ],
       "dlcs": [],
-      "availability": { "type": "quest", "questIds": ["darkest_dungeon_expeditions", "wolves_at_the_door"] },
+      "availability": {
+        "type": "quest",
+        "questIds": [
+          "darkest_dungeon_expeditions",
+          "wolves_at_the_door"
+        ]
+      },
       "interactions": [
         {
           "item": null,
           "recommendation": "recommended",
           "certainty": "guaranteed",
           "outcomes": [
-            { "type": "loot", "polarity": "positive", "description": "Provides five gold or gem rolls and one Ancestral trinket." }
+            {
+              "type": "loot",
+              "polarity": "positive",
+              "description": "Provides five gold or gem rolls and one Ancestral trinket."
+            }
           ]
         }
       ],
-      "notes": ["Appears only in the Darkest Dungeon or during Wolves at the Door."],
+      "notes": [
+        "Appears only in the Darkest Dungeon or during Wolves at the Door."
+      ],
       "sources": [
-        { "title": "Curios - Official Darkest Dungeon Wiki", "url": "https://darkestdungeon.wiki.gg/wiki/Curios#Special_Curios", "verifiedAt": "2026-08-31" }
+        {
+          "title": "Curios - Official Darkest Dungeon Wiki",
+          "url": "https://darkestdungeon.wiki.gg/wiki/Curios#Special_Curios",
+          "verifiedAt": "2026-08-31"
+        }
       ]
     },
     {
       "id": "iron_crown",
-      "names": { "en": "Iron Crown" },
+      "localizationId": "beacon",
       "aliases": [],
-      "regions": ["darkest_dungeon"],
+      "regions": [
+        "darkest_dungeon"
+      ],
       "dlcs": [],
-      "availability": { "type": "quest", "questIds": ["darkest_dungeon_2"] },
+      "availability": {
+        "type": "quest",
+        "questIds": [
+          "darkest_dungeon_2"
+        ]
+      },
       "interactions": [
         {
           "item": "hand_of_glory",
           "recommendation": "recommended",
           "certainty": "guaranteed",
           "outcomes": [
-            { "type": "other", "polarity": "positive", "description": "Advances the quest objective by one of three required activations." }
+            {
+              "type": "other",
+              "polarity": "positive",
+              "description": "Advances the quest objective by one of three required activations."
+            }
           ]
         },
         {
@@ -2524,42 +4261,75 @@
           "recommendation": "avoid",
           "certainty": "guaranteed",
           "outcomes": [
-            { "type": "nothing", "polarity": "neutral", "description": "Cannot be activated without a Hand of Glory." }
+            {
+              "type": "nothing",
+              "polarity": "neutral",
+              "description": "Cannot be activated without a Hand of Glory."
+            }
           ]
         }
       ],
-      "notes": ["Appears only in the second Darkest Dungeon expedition."],
+      "notes": [
+        "Appears only in the second Darkest Dungeon expedition."
+      ],
       "sources": [
-        { "title": "Curios - Official Darkest Dungeon Wiki", "url": "https://darkestdungeon.wiki.gg/wiki/Curios#Special_Curios", "verifiedAt": "2026-08-31" }
+        {
+          "title": "Curios - Official Darkest Dungeon Wiki",
+          "url": "https://darkestdungeon.wiki.gg/wiki/Curios#Special_Curios",
+          "verifiedAt": "2026-08-31"
+        }
       ]
     },
     {
       "id": "locus_beacon",
-      "names": { "en": "Locus Beacon" },
+      "localizationId": "teleporter",
       "aliases": [],
-      "regions": ["darkest_dungeon"],
+      "regions": [
+        "darkest_dungeon"
+      ],
       "dlcs": [],
-      "availability": { "type": "quest", "questIds": ["darkest_dungeon_3"] },
+      "availability": {
+        "type": "quest",
+        "questIds": [
+          "darkest_dungeon_3"
+        ]
+      },
       "interactions": [
         {
           "item": null,
           "recommendation": "recommended",
           "certainty": "guaranteed",
           "outcomes": [
-            { "type": "other", "polarity": "positive", "description": "Completes the quest objective." }
+            {
+              "type": "other",
+              "polarity": "positive",
+              "description": "Completes the quest objective."
+            }
           ]
         }
       ],
-      "notes": ["Appears only in the third Darkest Dungeon expedition."],
+      "notes": [
+        "Appears only in the third Darkest Dungeon expedition."
+      ],
       "sources": [
-        { "title": "Curios - Official Darkest Dungeon Wiki", "url": "https://darkestdungeon.wiki.gg/wiki/Curios#Special_Curios", "verifiedAt": "2026-08-31" }
+        {
+          "title": "Curios - Official Darkest Dungeon Wiki",
+          "url": "https://darkestdungeon.wiki.gg/wiki/Curios#Special_Curios",
+          "verifiedAt": "2026-08-31"
+        }
       ]
     },
     {
       "id": "shamblers_altar",
-      "names": { "en": "Shambler's Altar" },
-      "aliases": ["Shambler Altar"],
-      "regions": ["ruins", "warrens", "weald", "cove"],
+      "aliases": [
+        "Shambler Altar"
+      ],
+      "regions": [
+        "ruins",
+        "warrens",
+        "weald",
+        "cove"
+      ],
       "dlcs": [],
       "interactions": [
         {
@@ -2588,7 +4358,9 @@
           ]
         }
       ],
-      "notes": ["The summoned fight begins at zero torchlight."],
+      "notes": [
+        "The summoned fight begins at zero torchlight."
+      ],
       "sources": [
         {
           "title": "Official Darkest Dungeon Wiki: Shambler",

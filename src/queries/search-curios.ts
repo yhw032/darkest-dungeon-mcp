@@ -3,15 +3,23 @@ import type {
   CurioKnowledgeBase,
   CurioRegion,
 } from "../domain/curio-knowledge.js";
+import {
+  localizeCurio,
+  type GameLanguage,
+  type GameLocalization,
+} from "../localization/game-localization.js";
 
-export type CurioSummary = Pick<
+export type CurioSummary = Omit<
   CurioKnowledge,
-  "id" | "names" | "aliases" | "regions" | "dlcs" | "availability"
->;
+  "interactions" | "notes" | "sources" | "localizationId"
+> & {
+  name: string | null;
+};
 
 export interface CurioSearchFilters {
   query?: string;
   region?: CurioRegion;
+  language?: GameLanguage;
   limit?: number;
 }
 
@@ -25,33 +33,57 @@ export function normalizeKnowledgeTerm(value: string): string {
     .trim();
 }
 
-function searchableNames(curio: CurioKnowledge): string[] {
+function searchableNames(
+  curio: CurioKnowledge,
+  localization?: GameLocalization,
+): string[] {
+  const locKey = curio.localizationId ?? curio.id;
+  const localizedNames = [...(localization?.values() ?? [])]
+    .map((strings) => strings.get(`str_curio_title_${locKey}`))
+    .filter((name): name is string => name !== undefined);
+
   return [
     curio.id,
-    curio.names.en,
-    ...(curio.names.ko === undefined ? [] : [curio.names.ko]),
     ...curio.aliases,
+    ...localizedNames,
   ].map(normalizeKnowledgeTerm);
 }
 
-function matchScore(curio: CurioKnowledge, query: string): number | undefined {
-  const names = searchableNames(curio);
+function matchScore(
+  curio: CurioKnowledge,
+  query: string,
+  localization?: GameLocalization,
+): number | undefined {
+  const names = searchableNames(curio, localization);
   if (names.some((name) => name === query)) return 0;
   if (names.some((name) => name.startsWith(query))) return 1;
   if (names.some((name) => name.includes(query))) return 2;
   return undefined;
 }
 
-export function toCurioSummary(curio: CurioKnowledge): CurioSummary {
-  const { id, names, aliases, regions, dlcs, availability } = curio;
-  return { id, names, aliases, regions, dlcs, availability };
+export function toCurioSummary(
+  curio: CurioKnowledge,
+  language: GameLanguage = "en",
+  localization?: GameLocalization,
+): CurioSummary {
+  const { id, aliases, regions, dlcs, availability } = curio;
+  return {
+    id,
+    name: localizeCurio(curio.localizationId ?? curio.id, language, localization),
+    aliases,
+    regions,
+    dlcs,
+    availability,
+  };
 }
 
 export function searchCurios(
   knowledge: CurioKnowledgeBase,
   filters: CurioSearchFilters = {},
+  localization?: GameLocalization,
 ): CurioSummary[] {
   const query = normalizeKnowledgeTerm(filters.query ?? "");
+  const language = filters.language ?? "en";
   const matches = knowledge.curios.flatMap((curio) => {
     if (
       filters.region !== undefined &&
@@ -60,19 +92,21 @@ export function searchCurios(
       return [];
     }
 
-    const score = query === "" ? 0 : matchScore(curio, query);
+    const score = query === "" ? 0 : matchScore(curio, query, localization);
     return score === undefined ? [] : [{ curio, score }];
   });
 
   matches.sort(
     (left, right) =>
       left.score - right.score ||
-      left.curio.names.en.localeCompare(right.curio.names.en),
+      left.curio.id.localeCompare(right.curio.id),
   );
 
   const limit =
     filters.limit === undefined
       ? matches.length
       : Math.max(0, Math.floor(filters.limit));
-  return matches.slice(0, limit).map(({ curio }) => toCurioSummary(curio));
+  return matches
+    .slice(0, limit)
+    .map(({ curio }) => toCurioSummary(curio, language, localization));
 }

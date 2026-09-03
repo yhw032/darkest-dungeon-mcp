@@ -32,13 +32,13 @@ test("searches curios by id, alias, partial name, and region", async () => {
   );
 });
 
-test("matches normalized Korean names", () => {
+test("matches normalized Korean names with localization", () => {
   const knowledge: CurioKnowledgeBase = {
-    schemaVersion: 1,
+    schemaVersion: 2,
     curios: [
       {
         id: "test_curio",
-        names: { en: "Test Curio", ko: "시험용 골동품" },
+        localizationId: "test_curio",
         aliases: [],
         regions: ["ruins"],
         dlcs: [],
@@ -69,7 +69,17 @@ test("matches normalized Korean names", () => {
     ],
   };
 
-  assert.equal(searchCurios(knowledge, { query: "  시험용  " })[0]?.id, "test_curio");
+  const mockLocalization = new Map([
+    ["koreana", new Map([["str_curio_title_test_curio", "시험용 골동품"]])],
+  ]);
+
+  const results = searchCurios(
+    knowledge,
+    { query: "  시험용  ", language: "ko" },
+    mockLocalization,
+  );
+  assert.equal(results[0]?.id, "test_curio");
+  assert.equal(results[0]?.name, "시험용 골동품");
 });
 
 test("recommends an interaction enabled by supplied items", async () => {
@@ -336,4 +346,118 @@ test("requires exactly one curio locator", async () => {
     getCurioAdvice(knowledge, { name: "missing" }).status,
     "not_found",
   );
+});
+
+test("returns single localized name in searchCurios and getCurioAdvice", async () => {
+  const knowledge = await loadCurioKnowledge();
+  const localization = new Map([
+    [
+      "english",
+      new Map([
+        ["str_curio_title_eldritch_altar", "Eldritch Altar"],
+      ]),
+    ],
+    [
+      "koreana",
+      new Map([
+        ["str_curio_title_eldritch_altar", "괴이한 제단"],
+      ]),
+    ],
+  ]);
+
+  const searchResults = searchCurios(
+    knowledge,
+    { query: "괴이한 제단", language: "ko" },
+    localization,
+  );
+  assert.equal(searchResults.length, 1);
+  assert.equal(searchResults[0]?.id, "eldritch_altar");
+  assert.equal(searchResults[0]?.name, "괴이한 제단");
+
+  const adviceResult = getCurioAdvice(
+    knowledge,
+    { curioId: "eldritch_altar", language: "ko" },
+    localization,
+  );
+  assert.equal(adviceResult.status, "found");
+  if (adviceResult.status === "found") {
+    assert.equal(adviceResult.curio.name, "괴이한 제단");
+  }
+});
+
+test("validates curio en and ko localization coverage against installed game", async (t) => {
+  const { existsSync } = await import("node:fs");
+  const gameDir =
+    process.env.DD_GAME_DIR ??
+    "D:\\SteamLibrary\\steamapps\\common\\DarkestDungeon";
+
+  if (!existsSync(gameDir)) {
+    t.skip("Darkest Dungeon game directory is not available");
+    return;
+  }
+
+  const { loadGameLocalization } = await import(
+    "../src/localization/game-localization.js"
+  );
+  const localization = await loadGameLocalization(gameDir);
+  const knowledge = await loadCurioKnowledge();
+
+  const expectedNullTitles = new Set([
+    "crate",
+    "discarded_pack",
+    "sack",
+    "sconce",
+    "ancestors_knapsack",
+  ]);
+
+  let matchedWithEnAndKo = 0;
+  let explicitNullCount = 0;
+  const missingCurios: string[] = [];
+
+  for (const curio of knowledge.curios) {
+    const enResults = searchCurios(
+      knowledge,
+      { query: curio.id, language: "en" },
+      localization,
+    );
+    const koResults = searchCurios(
+      knowledge,
+      { query: curio.id, language: "ko" },
+      localization,
+    );
+
+    const enName = enResults.find((c) => c.id === curio.id)?.name ?? null;
+    const koName = koResults.find((c) => c.id === curio.id)?.name ?? null;
+
+    if (expectedNullTitles.has(curio.id)) {
+      assert.equal(
+        enName,
+        null,
+        `Expected null en name for instant curio ${curio.id}`,
+      );
+      assert.equal(
+        koName,
+        null,
+        `Expected null ko name for instant curio ${curio.id}`,
+      );
+      explicitNullCount++;
+    } else {
+      if (typeof enName !== "string" || typeof koName !== "string") {
+        missingCurios.push(
+          `${curio.id} (en: ${String(enName)}, ko: ${String(koName)})`,
+        );
+      } else {
+        matchedWithEnAndKo++;
+      }
+    }
+  }
+
+  assert.deepEqual(
+    missingCurios,
+    [],
+    `Curios missing en or ko names: ${missingCurios.join(", ")}`,
+  );
+  assert.equal(explicitNullCount, 5);
+  assert.equal(matchedWithEnAndKo, 72);
+  assert.equal(knowledge.curios.length, 77);
 });

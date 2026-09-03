@@ -80,6 +80,8 @@ test("MCP server advertises and executes read-only game tools", async (t) => {
             ["town_name_guild", "길드"],
             ["upgrade_tree_name_guild.skill_levels", "훈련 교관 숙련도"],
             ["str_inventory_title_heirloomportrait", "초상화"],
+            ["str_curio_title_eldritch_altar", "괴이한 제단"],
+            ["str_curio_title_shamblers_altar", "기는 혼돈의 제단"],
           ]),
         ],
       ]),
@@ -555,7 +557,7 @@ test("MCP server advertises and executes read-only game tools", async (t) => {
 
   const curioSearchResult = await client.callTool({
     name: "search_curios",
-    arguments: { query: "Shambler Altar", region: "ruins" },
+    arguments: { query: "기는 혼돈의 제단", region: "ruins", language: "ko" },
   });
   const curioSearchContent = curioSearchResult.structuredContent as
     | Record<string, unknown>
@@ -565,6 +567,10 @@ test("MCP server advertises and executes read-only game tools", async (t) => {
   assert.equal(
     (curios[0] as { id?: unknown } | undefined)?.id,
     "shamblers_altar",
+  );
+  assert.equal(
+    (curios[0] as { name?: unknown } | undefined)?.name,
+    "기는 혼돈의 제단",
   );
 
   const classQueryResult = await client.callTool({
@@ -642,17 +648,23 @@ test("MCP server advertises and executes read-only game tools", async (t) => {
   const curioAdviceResult = await client.callTool({
     name: "get_curio_advice",
     arguments: {
-      name: "Eldritch Altar",
+      name: "괴이한 제단",
       availableItems: ["Holy Water"],
+      language: "ko",
     },
   });
   const curioAdviceContent = curioAdviceResult.structuredContent as
     | Record<string, unknown>
     | undefined;
   const advice = curioAdviceContent?.advice as
-    | { status?: unknown; recommendedInteraction?: { item?: unknown } }
+    | {
+        status?: unknown;
+        curio?: { name?: unknown };
+        recommendedInteraction?: { item?: unknown };
+      }
     | undefined;
   assert.equal(advice?.status, "found");
+  assert.equal(advice?.curio?.name, "괴이한 제단");
   assert.equal(advice?.recommendedInteraction?.item, "holy_water");
 
   const missingCurioResult = await client.callTool({

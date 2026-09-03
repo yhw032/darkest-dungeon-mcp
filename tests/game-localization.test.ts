@@ -8,6 +8,7 @@ import {
   loadGameLocalization,
   localizeBuildingUpgradeTree,
   localizeCombatSkill,
+  localizeCurio,
   localizeDistrict,
   localizeHeroClass,
   localizeTownActivity,
@@ -54,6 +55,13 @@ test("loads official hero class and combat skill names", async (t) => {
     ]),
     "utf8",
   );
+  await writeFile(
+    join(localizationDirectory, "curios.string_table.xml"),
+    table("koreana", [
+      ["str_curio_title_eldritch_altar", "괴이한 제단"],
+    ]),
+    "utf8",
+  );
 
   const localization = await loadGameLocalization(temporaryDirectory);
 
@@ -67,6 +75,15 @@ test("loads official hero class and combat skill names", async (t) => {
     localizeTrinket("aurora_pendant", "ko", localization),
     "오로라 펜던트",
   );
+  assert.equal(
+    localizeCurio("eldritch_altar", "ko", localization),
+    "괴이한 제단",
+  );
+  assert.equal(
+    localizeCurio("str_curio_title_eldritch_altar", "ko", localization),
+    "괴이한 제단",
+  );
+  assert.equal(localizeCurio("missing", "ko", localization), null);
   assert.equal(localizeTownBuilding("abbey", "ko", localization), "수도원");
   assert.equal(
     localizeTownActivity("meditation", "ko", localization),
