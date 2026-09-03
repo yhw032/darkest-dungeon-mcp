@@ -1,0 +1,148 @@
+{
+  "schemaVersion": 1,
+  "farmingRegionsByHeirloom": {
+    "deed": [
+      "weald"
+    ],
+    "portrait": [
+      "warrens"
+    ],
+    "bust": [
+      "ruins"
+    ],
+    "crest": [
+      "ruins",
+      "warrens",
+      "weald",
+      "cove"
+    ]
+  },
+  "treePriorities": [
+    {
+      "buildingId": "stage_coach",
+      "treeId": "network",
+      "priorityTier": "S",
+      "strategicImportance": "주간 신병 공급 풀을 늘려 필수 직업군을 확보하고 영지 초반 전력 안정화를 달성합니다."
+    },
+    {
+      "buildingId": "blacksmith",
+      "treeId": "weaponsmithing",
+      "priorityTier": "S",
+      "strategicImportance": "영웅의 레벨에 맞춘 공격력, 치명타, 속도 향상으로 적을 먼저 제압하는 데 직결됩니다."
+    },
+    {
+      "buildingId": "blacksmith",
+      "treeId": "armoursmithing",
+      "priorityTier": "S",
+      "strategicImportance": "영웅의 최대 체력과 회피를 높여 높은 난이도 던전에서의 급사(죽음의 문턱)를 방지합니다."
+    },
+    {
+      "buildingId": "guild",
+      "treeId": "training_regimen",
+      "priorityTier": "S",
+      "strategicImportance": "전투 기술 레벨을 올려 명중률, 기절 확률, 치유량을 비약적으로 상승시킵니다."
+    },
+    {
+      "buildingId": "stage_coach",
+      "treeId": "roster_size",
+      "priorityTier": "A",
+      "strategicImportance": "영웅 최대 보유 정원을 늘려 스트레스 치료 및 기벽 관리 로테이션에 여유를 부여합니다."
+    },
+    {
+      "buildingId": "sanitarium",
+      "treeId": "treatment_library",
+      "priorityTier": "A",
+      "strategicImportance": "위험 기벽을 제거할 수 있는 요양원 치료 슬롯을 추가 확보합니다."
+    },
+    {
+      "buildingId": "sanitarium",
+      "treeId": "treatment_cost",
+      "priorityTier": "A",
+      "strategicImportance": "기벽 치료 비용을 대폭 절감하여 골드 유출을 방어합니다."
+    },
+    {
+      "buildingId": "sanitarium",
+      "treeId": "infirmary_patient_cells",
+      "priorityTier": "B",
+      "strategicImportance": "질병 치료 슬롯을 늘려 전염병 및 전투 질병을 빠르게 격리 치료합니다."
+    },
+    {
+      "buildingId": "sanitarium",
+      "treeId": "infirmary_cost",
+      "priorityTier": "B",
+      "strategicImportance": "질병 치료에 소모되는 골드를 할인합니다."
+    },
+    {
+      "buildingId": "blacksmith",
+      "treeId": "furnace",
+      "priorityTier": "B",
+      "strategicImportance": "대장간 무기 및 방어구 업그레이드 골드 비용을 할인합니다."
+    },
+    {
+      "buildingId": "guild",
+      "treeId": "cost_reduction",
+      "priorityTier": "B",
+      "strategicImportance": "길드 스킬 훈련 비용을 할인합니다."
+    },
+    {
+      "buildingId": "stage_coach",
+      "treeId": "upgraded_recruits",
+      "priorityTier": "B",
+      "strategicImportance": "결의 레벨과 스킬/장비가 업그레이드된 베테랑 신병이 역마차에 등장합니다."
+    },
+    {
+      "buildingId": "abbey",
+      "treeId": "cloister",
+      "priorityTier": "C",
+      "strategicImportance": "수도원 명상실 슬롯을 확장합니다 (초중반 가보 낭비 주의)."
+    },
+    {
+      "buildingId": "abbey",
+      "treeId": "transept",
+      "priorityTier": "C",
+      "strategicImportance": "수도원 기도실 슬롯을 확장합니다 (초중반 가보 낭비 주의)."
+    },
+    {
+      "buildingId": "abbey",
+      "treeId": "penance",
+      "priorityTier": "C",
+      "strategicImportance": "수도원 고행실 슬롯을 확장합니다 (초중반 가보 낭비 주의)."
+    },
+    {
+      "buildingId": "tavern",
+      "treeId": "bar",
+      "priorityTier": "C",
+      "strategicImportance": "여관 술집 슬롯을 확장합니다 (초중반 가보 낭비 주의)."
+    },
+    {
+      "buildingId": "tavern",
+      "treeId": "gambling",
+      "priorityTier": "C",
+      "strategicImportance": "여관 도박장 슬롯을 확장합니다 (장신구 분실 위험 주의)."
+    },
+    {
+      "buildingId": "tavern",
+      "treeId": "brothel",
+      "priorityTier": "C",
+      "strategicImportance": "여관 사창가 슬롯을 확장합니다 (초중반 가보 낭비 주의)."
+    },
+    {
+      "buildingId": "survivalist",
+      "treeId": "cost",
+      "priorityTier": "C",
+      "strategicImportance": "야영 기술 습득 비용을 할인합니다."
+    },
+    {
+      "buildingId": "nomad_wagon",
+      "treeId": "num_trinkets",
+      "priorityTier": "C",
+      "strategicImportance": "유목민 마차 판매 장신구 슬롯을 늘립니다 (후반용)."
+    },
+    {
+      "buildingId": "nomad_wagon",
+      "treeId": "cost",
+      "priorityTier": "C",
+      "strategicImportance": "유목민 마차 장신구 구매 비용을 할인합니다 (후반용)."
+    }
+  ]
+}

@@ -811,3 +811,51 @@ export const planExpeditionOutputSchema = z.object({
   provisions: expeditionProvisionEstimateSchema,
   tacticalAdvice: z.array(z.string()),
 });
+
+export const heirloomCostStatusSchema = z.object({
+  type: z.string(),
+  typeName: nullableString,
+  current: z.number(),
+  required: z.number(),
+  missing: z.number(),
+});
+
+export const heirloomExchangeOpportunitySchema = z.object({
+  sourceType: z.string(),
+  sourceTypeName: nullableString,
+  sourceAmountToTrade: z.number(),
+  targetType: z.string(),
+  targetTypeName: nullableString,
+  targetAmountReceived: z.number(),
+});
+
+export const buildingUpgradeRecommendationSchema = z.object({
+  buildingId: z.string(),
+  buildingName: nullableString,
+  treeId: z.string(),
+  treeName: nullableString,
+  nextCode: z.string(),
+  nextLevel: z.number(),
+  priorityTier: z.enum(["S", "A", "B", "C"]),
+  strategicImportance: z.string(),
+  isAffordable: z.boolean(),
+  costs: z.array(heirloomCostStatusSchema),
+  exchangePossibility: z.object({
+    canAffordViaExchange: z.boolean(),
+    recommendedExchanges: z.array(heirloomExchangeOpportunitySchema),
+  }),
+  recommendedFarmingRegions: z.array(z.string()),
+});
+
+export const recommendBuildingUpgradesOutputSchema = z.object({
+  estateResources: z.array(
+    z.object({
+      type: z.string(),
+      name: nullableString,
+      amount: z.number(),
+    }),
+  ),
+  topPriorities: z.array(buildingUpgradeRecommendationSchema),
+  immediateAffordableOptions: z.array(buildingUpgradeRecommendationSchema),
+  strategicGuidance: z.array(z.string()),
+});

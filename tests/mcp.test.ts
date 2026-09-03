@@ -214,6 +214,7 @@ test("MCP server advertises and executes read-only game tools", async (t) => {
   assert.match(instructions ?? "", /query_combat/);
   assert.match(instructions ?? "", /recommend_trinkets/);
   assert.match(instructions ?? "", /plan_expedition/);
+  assert.match(instructions ?? "", /recommend_building_upgrades/);
   assert.match(instructions ?? "", /editorial strategy knowledge/);
 
   const { tools } = await client.listTools();
@@ -233,6 +234,7 @@ test("MCP server advertises and executes read-only game tools", async (t) => {
       "plan_expedition",
       "query_classes",
       "query_combat",
+      "recommend_building_upgrades",
       "recommend_trinkets",
       "search_curios",
     ],
@@ -982,4 +984,22 @@ test("MCP server advertises and executes read-only game tools", async (t) => {
   assert.ok(planContent?.plan?.rolePool?.frontlineDps);
   assert.ok(planContent?.plan?.provisions?.items);
   assert.ok(Number(planContent?.plan?.provisions?.totalEstimatedCost) > 0);
+
+  const upgradeRecResult = await client.callTool({
+    name: "recommend_building_upgrades",
+    arguments: { language: "ko" },
+  });
+  const upgradeRecContent = upgradeRecResult.structuredContent as
+    | {
+        recommendations?: {
+          estateResources?: unknown[];
+          topPriorities?: unknown[];
+          immediateAffordableOptions?: unknown[];
+          strategicGuidance?: unknown[];
+        };
+      }
+    | undefined;
+  assert.ok(upgradeRecContent?.recommendations?.estateResources);
+  assert.ok(upgradeRecContent?.recommendations?.topPriorities);
+  assert.ok(upgradeRecContent?.recommendations?.strategicGuidance);
 });

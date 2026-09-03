@@ -169,6 +169,13 @@ roles (Frontline DPS, Control/Disruptor, Support/Stress Healer, and Primary Heal
 automated supply provision calculations with itemized gold costs based on dungeon
 length and regional curio cleansing needs, and target boss / regional combat tactics.
 
+`recommend_building_upgrades` accepts `language` and analyzes the estate's building
+upgrades and current heirloom resources (Busts, Portraits, Deeds, Crests). It evaluates
+strategic priority tiers (`S`, `A`, `B`, `C`), separates high-priority core targets
+(Blacksmith, Guild, Stage Coach) from immediately affordable alternatives, calculates
+heirloom shortages, simulates Heirloom Exchange feasibility with surplus currencies,
+and recommends targeted farming dungeons (e.g. Weald for Deeds, Warrens for Portraits).
+
 `list_risky_quirks` accepts `language` and returns ranked treatment candidates
 across 40 curated high-risk quirks covering forced curio interactions, loot loss,
 critical combat stat penalties (Speed, Accuracy, Max HP, PROT, Crits), and stress

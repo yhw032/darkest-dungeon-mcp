@@ -22,6 +22,7 @@ import {
   trinketRecordSchema,
   recommendTrinketsOutputSchema,
   planExpeditionOutputSchema,
+  recommendBuildingUpgradesOutputSchema,
 } from "./output-schemas.js";
 
 import type { BuildingUpgradeTree } from "../domain/building-upgrades.js";
@@ -85,6 +86,9 @@ import { searchCurios } from "../queries/search-curios.js";
 import { listTrinkets } from "../queries/trinkets.js";
 import { recommendTrinkets } from "../queries/recommend-trinkets.js";
 import { planExpedition } from "../queries/plan-expedition.js";
+import { recommendBuildingUpgrades } from "../queries/recommend-building-upgrades.js";
+import { loadBuildingUpgradePriorityKnowledge } from "../knowledge/load-building-upgrade-priority.js";
+import type { BuildingUpgradePriorityKnowledge } from "../domain/building-upgrade-recommendations.js";
 import {
   localizeBuildingUpgradeProgress,
   localizeHeroTownContext,
@@ -126,6 +130,7 @@ export interface DarkestDungeonServerOptions {
   loadQuirkTreatmentKnowledge?: () => Promise<QuirkTreatmentKnowledgeBase>;
   loadTrinketDefinitions?: () => Promise<TrinketDefinition[]>;
   loadTrinketGuidance?: () => Promise<TrinketGuidanceKnowledgeBase>;
+  loadBuildingUpgradePriorityKnowledge?: () => Promise<BuildingUpgradePriorityKnowledge>;
 }
 
 export const serverInstructions = [
@@ -145,6 +150,7 @@ export const serverInstructions = [
   "Formation position 1 is frontmost and position 4 is rearmost for both parties.",
   "Use combatPositionAnalysis for objective selected-skill position coverage; bestCoveragePartyPositions is not by itself a tactical recommendation.",
   "Use list_building_upgrades for verified building upgrade progress and next costs; pass the user's language and display localized building, upgrade-tree, and heirloom names.",
+  "Use recommend_building_upgrades when advising on estate progression, heirloom spending, or farming targets; pass the user's language and present S-Tier priorities, missing heirloom gaps, and exchange options as objective factual advice.",
   "Use list_trinkets for owned, equipped, and store trinkets; pass the user's language and display localized name, rarity, class requirements, and buff effects while preserving id as a stable identifier.",
   "Use recommend_trinkets when suggesting optimal equipment for a hero, evaluating class-specific trinkets, or finding suitable owners for owned items; pass the user's language and present editorial synergies and cautions as guidance rather than absolute rules.",
   "Use list_risky_quirks for treatment-priority questions; pass the user's language, display localized hero-class and quirk names, and present its English policy and reasons as editorial guidance to summarize rather than absolute game values.",
@@ -349,6 +355,16 @@ export function createDarkestDungeonServer(
   const getTrinketGuidance = () => {
     trinketGuidancePromise ??= trinketGuidanceLoader();
     return trinketGuidancePromise;
+  };
+  const buildingUpgradePriorityLoader =
+    options.loadBuildingUpgradePriorityKnowledge ??
+    loadBuildingUpgradePriorityKnowledge;
+  let buildingUpgradePriorityPromise:
+    | Promise<BuildingUpgradePriorityKnowledge>
+    | undefined;
+  const getBuildingUpgradePriority = () => {
+    buildingUpgradePriorityPromise ??= buildingUpgradePriorityLoader();
+    return buildingUpgradePriorityPromise;
   };
   const server = new McpServer(
     { name: "darkest-dungeon-mcp", version: "1.0.0" },
@@ -1302,6 +1318,39 @@ export function createDarkestDungeonServer(
           ],
         };
       }
+    },
+  );
+
+  server.registerTool(
+    "recommend_building_upgrades",
+    {
+      description:
+        "Analyzes estate upgrades and recommends strategic investments based on priority tiers (S/A/B/C), heirloom shortages, exchange feasibility, and farming locations. Separates top strategic priorities from immediately affordable alternatives.",
+      inputSchema: z.object({
+        language: z.enum(["en", "ko"]).default("en"),
+      }),
+      outputSchema: z.object({
+        recommendations: recommendBuildingUpgradesOutputSchema,
+      }),
+      annotations: readOnlyAnnotations,
+    },
+    async ({ language }) => {
+      const [state, trees, priorityKnowledge, localization] = await Promise.all([
+        dataSource.load(),
+        getUpgradeTrees(),
+        getBuildingUpgradePriority(),
+        getGameLocalization(),
+      ]);
+
+      const result = recommendBuildingUpgrades(
+        state,
+        trees,
+        priorityKnowledge,
+        { language },
+        { localization },
+      );
+
+      return toolResult("recommendations", result);
     },
   );
 
