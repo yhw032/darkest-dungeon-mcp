@@ -161,10 +161,13 @@ tier ratings, class-specific synergies, and usage cautions against current estat
 ownership (`in_storage`, `equipped_by_self`, `equipped_by_other`, `in_store`, or `not_owned`).
 When given `trinketId`, it returns candidate roster heroes ranked by suitability.
 
-`list_risky_quirks` accepts `language` and returns one official localized
-quirk name and description plus the hero's localized class name. Treatment
-priorities, reasons, and policy text remain English editorial source material
-for the client to summarize in the user's language.
+`list_risky_quirks` accepts `language` and returns ranked treatment candidates
+across 40 curated high-risk quirks covering forced curio interactions, loot loss,
+critical combat stat penalties (Speed, Accuracy, Max HP, PROT, Crits), and stress
+vulnerabilities. It returns official localized quirk names, descriptions, and the
+hero's localized class name. Treatment priorities (`critical`, `high`, `medium`, `low`),
+reasons, and policy text remain English editorial source material for the client
+to summarize in the user's language.
 
 Town-facing and campaign tools accept `language` and resolve official building,
 activity, district, upgrade-tree, heirloom, estate resource, class count, and

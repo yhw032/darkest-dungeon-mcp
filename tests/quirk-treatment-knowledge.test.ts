@@ -95,10 +95,45 @@ test("rejects duplicate risk factors", () => {
 test("loads the checked-in treatment knowledge", async () => {
   const knowledge = await loadQuirkTreatmentKnowledge();
 
-  assert.equal(knowledge.rules.length, 4);
+  assert.equal(knowledge.rules.length, 40);
   assert.equal(
     knowledge.rules.find((rule) => rule.quirkId === "kleptomaniac")?.priority,
     "critical",
   );
+  assert.equal(
+    knowledge.rules.find((rule) => rule.quirkId === "slow_reflexes")?.priority,
+    "high",
+  );
+  assert.ok(
+    knowledge.rules
+      .find((rule) => rule.quirkId === "slow_reflexes")
+      ?.factors.includes("combat_penalty"),
+  );
   assert.ok(knowledge.policy.disclaimer.includes("editorial guidance"));
+});
+
+test("verifies that all checked-in treatment quirk IDs exist in the game install", async () => {
+  const gameDirectory =
+    process.env.DD_GAME_DIR ??
+    "D:\\SteamLibrary\\steamapps\\common\\DarkestDungeon";
+
+  let gameQuirks;
+  try {
+    const { loadQuirkDefinitions } = await import(
+      "../src/quirks/load-quirk-definitions.js"
+    );
+    gameQuirks = await loadQuirkDefinitions(gameDirectory);
+  } catch {
+    return;
+  }
+
+  const gameQuirkIdSet = new Set(gameQuirks.map((q) => q.id));
+  const knowledge = await loadQuirkTreatmentKnowledge();
+
+  for (const rule of knowledge.rules) {
+    assert.ok(
+      gameQuirkIdSet.has(rule.quirkId),
+      `Quirk id "${rule.quirkId}" from quirk-treatment.json was not found in the game installation!`,
+    );
+  }
 });

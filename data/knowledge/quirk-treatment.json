@@ -2,18 +2,23 @@
   "schemaVersion": 1,
   "policy": {
     "title": "Conservative negative-quirk treatment priorities",
-    "disclaimer": "Priorities are editorial guidance, not values supplied by the game. They favor preventing forced interactions and permanent loot loss; party composition and campaign resources can change the best choice."
+    "disclaimer": "Priorities are editorial guidance, not values supplied by the game. They favor preventing forced interactions, permanent loot loss, and critical combat stat penalties (Speed, Accuracy, Max HP); party composition and campaign resources can change the best choice."
   },
   "rules": [
     {
       "quirkId": "kleptomaniac",
       "priority": "critical",
-      "factors": ["forced_curio_interaction", "loot_loss"],
-      "reasons": [
-        "May force interactions with Treasure curios.",
-        "Loot taken during the forced interaction is not retained by the party."
+      "factors": [
+        "forced_curio_interaction",
+        "loot_loss"
       ],
-      "notes": ["Treat early before the quirk becomes locked when campaign resources allow."],
+      "reasons": [
+        "Forces interactions with Treasure curios.",
+        "Loot taken during the forced interaction is permanently lost."
+      ],
+      "notes": [
+        "Treat immediately before the quirk becomes locked in the Sanitarium."
+      ],
       "sources": [
         {
           "title": "Darkest Dungeon base quirk definition",
@@ -22,27 +27,38 @@
       ]
     },
     {
-      "quirkId": "egomania",
-      "priority": "high",
-      "factors": ["forced_curio_interaction", "loot_loss"],
-      "reasons": [
-        "May force interactions with Reflective curios.",
-        "Loot taken during the forced interaction is not retained by the party."
+      "quirkId": "curious",
+      "priority": "critical",
+      "factors": [
+        "forced_curio_interaction"
       ],
-      "notes": [],
+      "reasons": [
+        "Forces interactions with any category of curio (20% chance).",
+        "Triggers hazardous curios without cleansing items, inflicting severe stress, blights, or negative quirks."
+      ],
+      "notes": [
+        "Top-tier removal priority along with Compulsive and Kleptomaniac."
+      ],
       "sources": [
         {
           "title": "Darkest Dungeon base quirk definition",
-          "reference": "shared/quirk/quirk_library.json#egomania"
+          "reference": "shared/quirk/quirk_library.json#curious"
         }
       ]
     },
     {
       "quirkId": "compulsive",
-      "priority": "high",
-      "factors": ["forced_curio_interaction"],
-      "reasons": ["May force interactions with any category of curio."],
-      "notes": ["The actual consequence depends on the curio encountered."],
+      "priority": "critical",
+      "factors": [
+        "forced_curio_interaction"
+      ],
+      "reasons": [
+        "Forces interactions with any category of curio (20% chance).",
+        "Frequently triggers traps, diseases, and stress from unfiltered curio contact."
+      ],
+      "notes": [
+        "Eliminate early to prevent uncontrollable curio outcomes."
+      ],
       "sources": [
         {
           "title": "Darkest Dungeon base quirk definition",
@@ -51,15 +67,752 @@
       ]
     },
     {
-      "quirkId": "curious",
-      "priority": "high",
-      "factors": ["forced_curio_interaction"],
-      "reasons": ["May force interactions with any category of curio."],
-      "notes": ["The actual consequence depends on the curio encountered."],
+      "quirkId": "corvids_curiosity",
+      "priority": "critical",
+      "factors": [
+        "forced_curio_interaction"
+      ],
+      "reasons": [
+        "Forces interactions with any category of curio with an exceptionally high 27.5% chance.",
+        "Renders party curio management chaotic and highly dangerous."
+      ],
+      "notes": [
+        "Acquired from the Shrieker; prioritize Sanitarium treatment immediately."
+      ],
       "sources": [
         {
           "title": "Darkest Dungeon base quirk definition",
-          "reference": "shared/quirk/quirk_library.json#curious"
+          "reference": "shared/quirk/quirk_library.json#corvids_curiosity"
+        }
+      ]
+    },
+    {
+      "quirkId": "dark_temptation",
+      "priority": "critical",
+      "factors": [
+        "forced_curio_interaction",
+        "stress_penalty"
+      ],
+      "reasons": [
+        "Forces interactions with Unholy curios.",
+        "Interactions frequently cause immense stress bursts and direct damage."
+      ],
+      "notes": [
+        "Especially hazardous in the Ruins and Cove where Eldritch/Unholy altars reside."
+      ],
+      "sources": [
+        {
+          "title": "Darkest Dungeon base quirk definition",
+          "reference": "shared/quirk/quirk_library.json#dark_temptation"
+        }
+      ]
+    },
+    {
+      "quirkId": "dipsomania",
+      "priority": "critical",
+      "factors": [
+        "forced_curio_interaction",
+        "disease"
+      ],
+      "reasons": [
+        "Forces interactions with Drink curios.",
+        "Frequently inflicts blights, diseases, and severe alcohol debuffs."
+      ],
+      "notes": [
+        "Critical in the Warrens where moonshine barrels and tainted vats are common."
+      ],
+      "sources": [
+        {
+          "title": "Darkest Dungeon base quirk definition",
+          "reference": "shared/quirk/quirk_library.json#dipsomania"
+        }
+      ]
+    },
+    {
+      "quirkId": "slow_reflexes",
+      "priority": "high",
+      "factors": [
+        "combat_penalty"
+      ],
+      "reasons": [
+        "Inflicts a permanent -4 Speed penalty.",
+        "Speed dictates turn order; acting after enemy stress-dealers drastically increases incoming party damage."
+      ],
+      "notes": [
+        "Treat promptly on damage dealers, stunners, and healers."
+      ],
+      "sources": [
+        {
+          "title": "Darkest Dungeon base quirk definition",
+          "reference": "shared/quirk/quirk_library.json#slow_reflexes"
+        }
+      ]
+    },
+    {
+      "quirkId": "off_guard",
+      "priority": "high",
+      "factors": [
+        "combat_penalty"
+      ],
+      "reasons": [
+        "Reduces Speed by 4 and Dodge by 5 during round one.",
+        "Round one is critical for neutralizing priority threats before they act."
+      ],
+      "notes": [
+        "Severe handicap for openers, stunners, and high-tempo attackers."
+      ],
+      "sources": [
+        {
+          "title": "Darkest Dungeon base quirk definition",
+          "reference": "shared/quirk/quirk_library.json#off_guard"
+        }
+      ]
+    },
+    {
+      "quirkId": "the_yips",
+      "priority": "high",
+      "factors": [
+        "combat_penalty"
+      ],
+      "reasons": [
+        "Inflicts a permanent -5 Accuracy penalty across all combat skills.",
+        "Missed attacks waste valuable actions and prevent enemy elimination."
+      ],
+      "notes": [
+        "High priority on all primary damage dealers and stunners."
+      ],
+      "sources": [
+        {
+          "title": "Darkest Dungeon base quirk definition",
+          "reference": "shared/quirk/quirk_library.json#the_yips"
+        }
+      ]
+    },
+    {
+      "quirkId": "fragile",
+      "priority": "high",
+      "factors": [
+        "combat_penalty"
+      ],
+      "reasons": [
+        "Reduces maximum HP by 10%.",
+        "Significantly lowers burst survivability and increases risk of reaching Death's Door."
+      ],
+      "notes": [
+        "Especially perilous on squishy heroes like Grave Robber, Plague Doctor, and Occultist."
+      ],
+      "sources": [
+        {
+          "title": "Darkest Dungeon base quirk definition",
+          "reference": "shared/quirk/quirk_library.json#fragile"
+        }
+      ]
+    },
+    {
+      "quirkId": "clumsy",
+      "priority": "high",
+      "factors": [
+        "combat_penalty"
+      ],
+      "reasons": [
+        "Inflicts a permanent -5 Dodge penalty.",
+        "Reduces effective avoidance against high-damage attacks and enemy control skills."
+      ],
+      "notes": [
+        "Hurts dodge-reliant frontline and agile heroes."
+      ],
+      "sources": [
+        {
+          "title": "Darkest Dungeon base quirk definition",
+          "reference": "shared/quirk/quirk_library.json#clumsy"
+        }
+      ]
+    },
+    {
+      "quirkId": "inaccurate",
+      "priority": "high",
+      "factors": [
+        "combat_penalty"
+      ],
+      "reasons": [
+        "Reduces melee accuracy by 5.",
+        "Severely degrades hit consistency for frontline physical attackers."
+      ],
+      "notes": [
+        "Critical flaw on classes with already low base accuracy such as Leper and Crusader."
+      ],
+      "sources": [
+        {
+          "title": "Darkest Dungeon base quirk definition",
+          "reference": "shared/quirk/quirk_library.json#inaccurate"
+        }
+      ]
+    },
+    {
+      "quirkId": "scattering",
+      "priority": "high",
+      "factors": [
+        "combat_penalty"
+      ],
+      "reasons": [
+        "Reduces ranged accuracy by 5.",
+        "Causes vital backline snipers to miss priority enemy stress casters."
+      ],
+      "notes": [
+        "High removal priority on Arbalest, Musketeer, and Highwayman."
+      ],
+      "sources": [
+        {
+          "title": "Darkest Dungeon base quirk definition",
+          "reference": "shared/quirk/quirk_library.json#scattering"
+        }
+      ]
+    },
+    {
+      "quirkId": "nervous",
+      "priority": "high",
+      "factors": [
+        "stress_penalty"
+      ],
+      "reasons": [
+        "Increases all incoming stress damage by 10%.",
+        "Accelerates affliction checks and increases party stress management costs."
+      ],
+      "notes": [
+        "Treat early to maintain sanity resilience on long expeditions."
+      ],
+      "sources": [
+        {
+          "title": "Darkest Dungeon base quirk definition",
+          "reference": "shared/quirk/quirk_library.json#nervous"
+        }
+      ]
+    },
+    {
+      "quirkId": "bloodthirsty",
+      "priority": "high",
+      "factors": [
+        "forced_curio_interaction",
+        "disease"
+      ],
+      "reasons": [
+        "Forces interactions with Torture curios (Iron Maiden, Rack, etc.).",
+        "Torture curios carry severe bleed, tetanus, and high stress risks."
+      ],
+      "notes": [
+        "Hazardous in the Ruins and Weald."
+      ],
+      "sources": [
+        {
+          "title": "Darkest Dungeon base quirk definition",
+          "reference": "shared/quirk/quirk_library.json#bloodthirsty"
+        }
+      ]
+    },
+    {
+      "quirkId": "necromania",
+      "priority": "high",
+      "factors": [
+        "forced_curio_interaction",
+        "disease"
+      ],
+      "reasons": [
+        "Forces interactions with Body curios (graves, corpses, remains).",
+        "High probability of contracting debilitating diseases and negative quirks."
+      ],
+      "notes": [
+        "Frequent hazard in the Warrens and Weald."
+      ],
+      "sources": [
+        {
+          "title": "Darkest Dungeon base quirk definition",
+          "reference": "shared/quirk/quirk_library.json#necromania"
+        }
+      ]
+    },
+    {
+      "quirkId": "egomania",
+      "priority": "high",
+      "factors": [
+        "forced_curio_interaction",
+        "loot_loss"
+      ],
+      "reasons": [
+        "Forces interactions with Reflective curios.",
+        "Loot taken during the interaction is permanently lost."
+      ],
+      "notes": [
+        "Risk factor for loot evaporation."
+      ],
+      "sources": [
+        {
+          "title": "Darkest Dungeon base quirk definition",
+          "reference": "shared/quirk/quirk_library.json#egomania"
+        }
+      ]
+    },
+    {
+      "quirkId": "hylomania",
+      "priority": "high",
+      "factors": [
+        "forced_curio_interaction",
+        "loot_loss"
+      ],
+      "reasons": [
+        "Forces interactions with Treasure curios.",
+        "May trigger unlocked chests or bags and waste valuable party loot."
+      ],
+      "notes": [
+        "Similar to Kleptomaniac, though less frequently lethal."
+      ],
+      "sources": [
+        {
+          "title": "Darkest Dungeon base quirk definition",
+          "reference": "shared/quirk/quirk_library.json#hylomania"
+        }
+      ]
+    },
+    {
+      "quirkId": "plutomania",
+      "priority": "high",
+      "factors": [
+        "forced_curio_interaction",
+        "loot_loss"
+      ],
+      "reasons": [
+        "Forces interactions with Treasure curios.",
+        "Can forfeit keys or trigger trapped chests without disarming tools."
+      ],
+      "notes": [
+        "Prevents safe item-assisted treasure harvesting."
+      ],
+      "sources": [
+        {
+          "title": "Darkest Dungeon base quirk definition",
+          "reference": "shared/quirk/quirk_library.json#plutomania"
+        }
+      ]
+    },
+    {
+      "quirkId": "torn_rotator_cuff",
+      "priority": "medium",
+      "factors": [
+        "combat_penalty"
+      ],
+      "reasons": [
+        "Reduces melee skill damage by 10%.",
+        "Lowers burst potential on melee damage dealers."
+      ],
+      "notes": [
+        "Prioritize on frontline bruisers; harmless on pure backline casters."
+      ],
+      "sources": [
+        {
+          "title": "Darkest Dungeon base quirk definition",
+          "reference": "shared/quirk/quirk_library.json#torn_rotator_cuff"
+        }
+      ]
+    },
+    {
+      "quirkId": "flawed_release",
+      "priority": "medium",
+      "factors": [
+        "combat_penalty"
+      ],
+      "reasons": [
+        "Reduces ranged critical strike chance by 3%.",
+        "Reduces burst elimination chance on ranged damage dealers."
+      ],
+      "notes": [
+        "Noticeable damage penalty for snipers like Arbalest and Highwayman."
+      ],
+      "sources": [
+        {
+          "title": "Darkest Dungeon base quirk definition",
+          "reference": "shared/quirk/quirk_library.json#flawed_release"
+        }
+      ]
+    },
+    {
+      "quirkId": "weak_grip",
+      "priority": "medium",
+      "factors": [
+        "combat_penalty"
+      ],
+      "reasons": [
+        "Reduces melee critical strike chance by 3%.",
+        "Lowers overall critical hit frequency and stress-relief procs."
+      ],
+      "notes": [
+        "Hurts melee strikers relying on crits like Hellion and Bounty Hunter."
+      ],
+      "sources": [
+        {
+          "title": "Darkest Dungeon base quirk definition",
+          "reference": "shared/quirk/quirk_library.json#weak_grip"
+        }
+      ]
+    },
+    {
+      "quirkId": "calm",
+      "priority": "medium",
+      "factors": [
+        "combat_penalty"
+      ],
+      "reasons": [
+        "Reduces damage by 15% during the first round of combat.",
+        "Dampens opening turn burst when fast enemy kills are most crucial."
+      ],
+      "notes": [
+        "Significant handicap on alpha-strike party setups."
+      ],
+      "sources": [
+        {
+          "title": "Darkest Dungeon base quirk definition",
+          "reference": "shared/quirk/quirk_library.json#calm"
+        }
+      ]
+    },
+    {
+      "quirkId": "soft",
+      "priority": "medium",
+      "factors": [
+        "combat_penalty"
+      ],
+      "reasons": [
+        "Reduces protection (PROT) by 5%.",
+        "Increases physical damage taken on frontline tanks."
+      ],
+      "notes": [
+        "Directly counteracts PROT stacking on Man-at-Arms, Crusader, and Leper."
+      ],
+      "sources": [
+        {
+          "title": "Darkest Dungeon base quirk definition",
+          "reference": "shared/quirk/quirk_library.json#soft"
+        }
+      ]
+    },
+    {
+      "quirkId": "thin_blooded",
+      "priority": "medium",
+      "factors": [
+        "combat_penalty"
+      ],
+      "reasons": [
+        "Reduces blight resistance by 10%.",
+        "Makes the hero vulnerable to high-damage damage-over-time in the Ruins and Cove."
+      ],
+      "notes": [
+        "Can be mitigated with medicinal herbs, but increases consumable strain."
+      ],
+      "sources": [
+        {
+          "title": "Darkest Dungeon base quirk definition",
+          "reference": "shared/quirk/quirk_library.json#thin_blooded"
+        }
+      ]
+    },
+    {
+      "quirkId": "anemic",
+      "priority": "medium",
+      "factors": [
+        "combat_penalty"
+      ],
+      "reasons": [
+        "Reduces bleed resistance by 10%.",
+        "Increases vulnerability to severe bleeds in the Warrens, Weald, and Courtyard."
+      ],
+      "notes": [
+        "High risk factor during Crimson Court bloodsucker encounters."
+      ],
+      "sources": [
+        {
+          "title": "Darkest Dungeon base quirk definition",
+          "reference": "shared/quirk/quirk_library.json#anemic"
+        }
+      ]
+    },
+    {
+      "quirkId": "sickly",
+      "priority": "medium",
+      "factors": [
+        "disease"
+      ],
+      "reasons": [
+        "Reduces disease resistance by 10%.",
+        "Increases frequency of contracting chronic diseases from beasts and Warrens curios."
+      ],
+      "notes": [
+        "Inflates Sanitarium medical treatment costs across a campaign."
+      ],
+      "sources": [
+        {
+          "title": "Darkest Dungeon base quirk definition",
+          "reference": "shared/quirk/quirk_library.json#sickly"
+        }
+      ]
+    },
+    {
+      "quirkId": "suicidal",
+      "priority": "medium",
+      "factors": [
+        "combat_penalty"
+      ],
+      "reasons": [
+        "Reduces Death Blow resistance by 10%.",
+        "Significantly increases the chance of permanent hero death upon taking damage at Death's Door."
+      ],
+      "notes": [
+        "Dangerous gamble when tackling Champion dungeons or bosses."
+      ],
+      "sources": [
+        {
+          "title": "Darkest Dungeon base quirk definition",
+          "reference": "shared/quirk/quirk_library.json#suicidal"
+        }
+      ]
+    },
+    {
+      "quirkId": "bad_healer",
+      "priority": "medium",
+      "factors": [
+        "combat_penalty"
+      ],
+      "reasons": [
+        "Reduces healing skill output by 20%.",
+        "Cripples recovery capacity on dedicated healers like Vestal and Occultist."
+      ],
+      "notes": [
+        "Critical priority on Vestal/Occultist; negligible on heroes without healing skills."
+      ],
+      "sources": [
+        {
+          "title": "Darkest Dungeon base quirk definition",
+          "reference": "shared/quirk/quirk_library.json#bad_healer"
+        }
+      ]
+    },
+    {
+      "quirkId": "perfectionist",
+      "priority": "medium",
+      "factors": [
+        "stress_penalty"
+      ],
+      "reasons": [
+        "Inflicts +5 stress whenever the hero misses an attack.",
+        "Missed attacks doubly penalize the party by stalling combat and generating internal stress."
+      ],
+      "notes": [
+        "Particularly harmful on low-accuracy heroes like Leper and Crusader."
+      ],
+      "sources": [
+        {
+          "title": "Darkest Dungeon base quirk definition",
+          "reference": "shared/quirk/quirk_library.json#perfectionist"
+        }
+      ]
+    },
+    {
+      "quirkId": "claustrophobia",
+      "priority": "medium",
+      "factors": [
+        "stress_penalty"
+      ],
+      "reasons": [
+        "Increases stress damage received by 20% while in dungeon hallways.",
+        "Most hallway encounters and wandering battles inflict elevated stress."
+      ],
+      "notes": [
+        "Substantially accelerates stress accumulation on medium and long expeditions."
+      ],
+      "sources": [
+        {
+          "title": "Darkest Dungeon base quirk definition",
+          "reference": "shared/quirk/quirk_library.json#claustrophobia"
+        }
+      ]
+    },
+    {
+      "quirkId": "thanatophobia",
+      "priority": "medium",
+      "factors": [
+        "stress_penalty"
+      ],
+      "reasons": [
+        "Increases stress damage received by 20% when HP is below 50%.",
+        "Triggers a vicious cycle where damaged heroes rapidly gain afflictions."
+      ],
+      "notes": [
+        "High risk on frontline heroes who frequently hover around mid-health."
+      ],
+      "sources": [
+        {
+          "title": "Darkest Dungeon base quirk definition",
+          "reference": "shared/quirk/quirk_library.json#thanatophobia"
+        }
+      ]
+    },
+    {
+      "quirkId": "lygophobia",
+      "priority": "medium",
+      "factors": [
+        "stress_penalty"
+      ],
+      "reasons": [
+        "Increases stress damage received by 20% when torchlight is below 26.",
+        "Severe liability during pitch-black runs and Shambler hunting."
+      ],
+      "notes": [
+        "Safe to ignore if strictly maintaining radiant light above 75."
+      ],
+      "sources": [
+        {
+          "title": "Darkest Dungeon base quirk definition",
+          "reference": "shared/quirk/quirk_library.json#lygophobia"
+        }
+      ]
+    },
+    {
+      "quirkId": "ablutomania",
+      "priority": "medium",
+      "factors": [
+        "forced_curio_interaction"
+      ],
+      "reasons": [
+        "Forces interactions with Fountain curios.",
+        "May trigger tainted basins or fountains without Holy Water purification."
+      ],
+      "notes": [
+        "Moderate hazard primarily found in the Ruins and Cove."
+      ],
+      "sources": [
+        {
+          "title": "Darkest Dungeon base quirk definition",
+          "reference": "shared/quirk/quirk_library.json#ablutomania"
+        }
+      ]
+    },
+    {
+      "quirkId": "sitiomania",
+      "priority": "medium",
+      "factors": [
+        "forced_curio_interaction",
+        "disease"
+      ],
+      "reasons": [
+        "Forces interactions with Food curios.",
+        "Risks consuming spoiled carcasses, rotting dining tables, and infected meat carts."
+      ],
+      "notes": [
+        "High disease risk in the Warrens."
+      ],
+      "sources": [
+        {
+          "title": "Darkest Dungeon base quirk definition",
+          "reference": "shared/quirk/quirk_library.json#sitiomania"
+        }
+      ]
+    },
+    {
+      "quirkId": "paranormania",
+      "priority": "medium",
+      "factors": [
+        "forced_curio_interaction",
+        "stress_penalty"
+      ],
+      "reasons": [
+        "Forces interactions with Haunted curios.",
+        "Interactions frequently cause severe stress damage and negative quirks."
+      ],
+      "notes": [
+        "Common in the Weald and Cove."
+      ],
+      "sources": [
+        {
+          "title": "Darkest Dungeon base quirk definition",
+          "reference": "shared/quirk/quirk_library.json#paranormania"
+        }
+      ]
+    },
+    {
+      "quirkId": "demonomania",
+      "priority": "medium",
+      "factors": [
+        "forced_curio_interaction"
+      ],
+      "reasons": [
+        "Forces interactions with Unholy curios.",
+        "Triggers blasphemous altars and cursed statuary without Holy Water."
+      ],
+      "notes": [
+        "Moderate priority compared to Dark Temptation."
+      ],
+      "sources": [
+        {
+          "title": "Darkest Dungeon base quirk definition",
+          "reference": "shared/quirk/quirk_library.json#demonomania"
+        }
+      ]
+    },
+    {
+      "quirkId": "hieromania",
+      "priority": "medium",
+      "factors": [
+        "forced_curio_interaction"
+      ],
+      "reasons": [
+        "Forces interactions with Worship curios.",
+        "Triggers altars, shrines, and confession booths blindly."
+      ],
+      "notes": [
+        "Risk of receiving debuffs and stress in place of blessings."
+      ],
+      "sources": [
+        {
+          "title": "Darkest Dungeon base quirk definition",
+          "reference": "shared/quirk/quirk_library.json#hieromania"
+        }
+      ]
+    },
+    {
+      "quirkId": "hagiomania",
+      "priority": "medium",
+      "factors": [
+        "forced_curio_interaction"
+      ],
+      "reasons": [
+        "Forces interactions with Worship curios.",
+        "Can cause harmful stress and quirk mutations from unpurified holy sites."
+      ],
+      "notes": [
+        "Found primarily in the Ruins."
+      ],
+      "sources": [
+        {
+          "title": "Darkest Dungeon base quirk definition",
+          "reference": "shared/quirk/quirk_library.json#hagiomania"
+        }
+      ]
+    },
+    {
+      "quirkId": "guilty_conscience",
+      "priority": "medium",
+      "factors": [
+        "forced_curio_interaction",
+        "stress_penalty"
+      ],
+      "reasons": [
+        "Forces interactions with Worship curios.",
+        "Triggers confession booths and shrines, often causing high stress penalties."
+      ],
+      "notes": [
+        "Moderate stress hazard in the Ruins."
+      ],
+      "sources": [
+        {
+          "title": "Darkest Dungeon base quirk definition",
+          "reference": "shared/quirk/quirk_library.json#guilty_conscience"
         }
       ]
     }
