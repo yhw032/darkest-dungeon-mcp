@@ -180,6 +180,16 @@ export const gameStateSummarySchema = z.object({
     unknownStateHeroes: count.describe("Records whose raw roster status is not yet classified."),
     totalHeroRecords: count.describe("All save records, including deceased and unknown-state records."),
     byClass: z.record(z.string(), count).describe("Class counts for active heroes only."),
+    byClassDetails: z
+      .array(
+        z.object({
+          id: z.string(),
+          name: nullableString,
+          count: count,
+        }),
+      )
+      .optional()
+      .describe("Class counts with official localized class names."),
     byStatus: z.record(z.string(), count).describe("Counts of all records by raw roster status."),
     stressThreshold: finiteNumber,
     highStressHeroes: z.array(heroSummarySchema),
@@ -208,6 +218,16 @@ export const gameStateSummarySchema = z.object({
     plotQuests: count,
     generatedQuests: count,
     byDungeon: z.record(z.string(), count),
+    byDungeonDetails: z
+      .array(
+        z.object({
+          id: z.string(),
+          name: nullableString,
+          count: count,
+        }),
+      )
+      .optional()
+      .describe("Quest counts by dungeon with official localized dungeon names."),
   }),
   upgrades: z.object({ totalPurchases: count, purchased: count }),
 });

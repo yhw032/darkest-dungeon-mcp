@@ -68,6 +68,7 @@ import {
   loadQuestRestrictionRules,
 } from "../quests/quest-eligibility.js";
 import {
+  localizeDungeon,
   localizeQuest,
   localizeQuestSummary,
   type QuestLocalization,
@@ -120,6 +121,7 @@ export const serverInstructions = [
   "This read-only server provides normalized Darkest Dungeon 1 save state and verified gameplay knowledge.",
   "Answer in the user's language. Treat English guidance fields as source material to summarize rather than text to reproduce verbatim, and use localized name fields for game terminology.",
   "Use save-state tools for facts about the current campaign instead of guessing.",
+  "Pass the user's language to get_game_state and display localized built-district names, roster.byClassDetails, and quests.byDungeonDetails.",
   "Use roster.activeHeroes for the current barracks count; roster.totalHeroRecords includes deceased history.",
   "list_heroes excludes deceased heroes by default; set includeDeceased only when historical records are requested.",
   "Use resolveLevel instead of resolveXp when stating a hero level, and use availability.isAvailableForPartySelection when choosing new party members.",
@@ -322,7 +324,7 @@ export function createDarkestDungeonServer(
     {
       title: "Get game state summary",
       description:
-        "Return a read-only summary of the roster, estate, town, and available quests with localized built-district details.",
+        "Return a read-only summary of the roster, estate, town, and available quests with localized class, dungeon, and built-district details.",
       inputSchema: z.object({
         stressThreshold: z.number().finite().nonnegative().optional(),
         language: z.enum(["en", "ko"]).default("en"),
@@ -341,11 +343,48 @@ export function createDarkestDungeonServer(
         stressThreshold,
         progressionRules,
       );
+      const byClassDetails = Object.entries(summary.roster.byClass)
+        .map(([id, count]) => ({
+          id,
+          name: localizeHeroClass(id, language, localization),
+          count,
+        }))
+        .sort(
+          (left, right) =>
+            right.count - left.count || left.id.localeCompare(right.id),
+        );
+      const byDungeonDetails = Object.entries(summary.quests.byDungeon)
+        .map(([id, count]) => ({
+          id,
+          name: localizeDungeon(id, language, localization).name,
+          count,
+        }))
+        .sort(
+          (left, right) =>
+            right.count - left.count || left.id.localeCompare(right.id),
+        );
+
       return toolResult(
         "gameState",
         {
           ...summary,
+          roster: {
+            ...summary.roster,
+            highStressHeroes: summary.roster.highStressHeroes.map((hero) => ({
+              ...hero,
+              heroClassName: localizeHeroClass(
+                hero.heroClass,
+                language,
+                localization,
+              ),
+            })),
+            byClassDetails,
+          },
           town: localizeTownSummary(summary.town, language, localization),
+          quests: {
+            ...summary.quests,
+            byDungeonDetails,
+          },
         },
       );
     },

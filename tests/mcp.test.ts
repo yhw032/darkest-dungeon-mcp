@@ -238,6 +238,28 @@ test("MCP server advertises and executes read-only game tools", async (t) => {
     | Record<string, unknown>
     | undefined;
   assert.ok(summaryContent?.gameState);
+  const gameStateSummary = summaryContent.gameState as {
+    roster?: {
+      byClassDetails?: Array<{ id: string; name: string | null; count: number }>;
+    };
+    quests?: {
+      byDungeonDetails?: Array<{ id: string; name: string | null; count: number }>;
+    };
+  };
+  assert.ok(Array.isArray(gameStateSummary.roster?.byClassDetails));
+  assert.ok((gameStateSummary.roster?.byClassDetails?.length ?? 0) > 0);
+  assert.equal(
+    gameStateSummary.roster?.byClassDetails?.find(
+      ({ id }) => id === expectedHero.heroClass,
+    )?.name,
+    "시험 직업",
+  );
+  assert.ok(Array.isArray(gameStateSummary.quests?.byDungeonDetails));
+  assert.ok((gameStateSummary.quests?.byDungeonDetails?.length ?? 0) > 0);
+  assert.equal(
+    gameStateSummary.quests?.byDungeonDetails?.find(({ id }) => id === "cove")?.name,
+    "해안 만",
+  );
 
   const upgradeResult = await client.callTool({
     name: "list_building_upgrades",
