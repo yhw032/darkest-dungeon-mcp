@@ -161,6 +161,11 @@ export const questSchema = questSummarySchema.extend({
 
 const estateResourceSchema = z.object({
   type: z.string(),
+  name: nullableString
+    .describe(
+      "Official resource name in the requested language; null without game localization.",
+    )
+    .optional(),
   amount: finiteNumber,
 });
 

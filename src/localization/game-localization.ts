@@ -118,6 +118,25 @@ export function localizeTrinket(
   return localizeInventoryItem("trinket", trinketId, language, localization);
 }
 
+export function localizeEstateResource(
+  resourceType: string,
+  language: GameLanguage,
+  localization?: GameLocalization,
+): string | null {
+  return (
+    localizeGameString(
+      `str_inventory_title_${resourceType}`,
+      language,
+      localization,
+    ) ??
+    localizeGameString(
+      `str_inventory_title_heirloom${resourceType}`,
+      language,
+      localization,
+    )
+  );
+}
+
 export function localizeCurio(
   curioIdOrKey: string,
   language: GameLanguage,

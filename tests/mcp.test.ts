@@ -79,7 +79,10 @@ test("MCP server advertises and executes read-only game tools", async (t) => {
             ],
             ["town_name_guild", "길드"],
             ["upgrade_tree_name_guild.skill_levels", "훈련 교관 숙련도"],
+            ["str_inventory_title_gold", "골드"],
+            ["str_inventory_title_heirloombust", "흉상"],
             ["str_inventory_title_heirloomportrait", "초상화"],
+            ["str_inventory_title_shard", "혜성의 파편"],
             ["str_inventory_title_trinketheavens_hairpin", "천국의 머리핀"],
             ["str_inventory_title_trinketcollector_1", "디스마스의 머리"],
             ["str_curio_title_eldritch_altar", "괴이한 제단"],
@@ -242,6 +245,9 @@ test("MCP server advertises and executes read-only game tools", async (t) => {
     roster?: {
       byClassDetails?: Array<{ id: string; name: string | null; count: number }>;
     };
+    estate?: {
+      resources?: Array<{ type: string; name?: string | null; amount: number }>;
+    };
     quests?: {
       byDungeonDetails?: Array<{ id: string; name: string | null; count: number }>;
     };
@@ -253,6 +259,23 @@ test("MCP server advertises and executes read-only game tools", async (t) => {
       ({ id }) => id === expectedHero.heroClass,
     )?.name,
     "시험 직업",
+  );
+  assert.ok(Array.isArray(gameStateSummary.estate?.resources));
+  assert.equal(
+    gameStateSummary.estate?.resources?.find(({ type }) => type === "gold")?.name,
+    "골드",
+  );
+  assert.equal(
+    gameStateSummary.estate?.resources?.find(({ type }) => type === "bust")?.name,
+    "흉상",
+  );
+  assert.equal(
+    gameStateSummary.estate?.resources?.find(({ type }) => type === "portrait")?.name,
+    "초상화",
+  );
+  assert.equal(
+    gameStateSummary.estate?.resources?.find(({ type }) => type === "shard")?.name,
+    "혜성의 파편",
   );
   assert.ok(Array.isArray(gameStateSummary.quests?.byDungeonDetails));
   assert.ok((gameStateSummary.quests?.byDungeonDetails?.length ?? 0) > 0);
@@ -614,7 +637,10 @@ test("MCP server advertises and executes read-only game tools", async (t) => {
       ...expectedQuest.reward,
       items: expectedQuest.reward.items.map((item) => ({
         ...item,
-        name: `시험 보상 ${item.type}:${item.id}`,
+        name:
+          item.type === "gold"
+            ? "골드"
+            : `시험 보상 ${item.type}:${item.id}`,
       })),
     },
   });

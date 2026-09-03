@@ -11,6 +11,7 @@ import {
   localizeCombatSkill,
   localizeCurio,
   localizeDistrict,
+  localizeEstateResource,
   localizeHeroClass,
   localizeQuirk,
   localizeTownActivity,
@@ -42,6 +43,9 @@ test("loads official hero class and combat skill names", async (t) => {
       ["upgrade_tree_name_abbey.meditation", "명상실"],
       ["str_affliction_name_depressed", "절망"],
       ["str_quirk_name_nervous_bleeder", "출혈 긴장증"],
+      ["str_inventory_title_gold", "골드"],
+      ["str_inventory_title_heirloombust", "흉상"],
+      ["str_inventory_title_shard", "혜성의 파편"],
     ]),
     "utf8",
   );
@@ -117,4 +121,8 @@ test("loads official hero class and combat skill names", async (t) => {
   assert.equal(localizeVirtue("focused", "ko", localization), "정신 집중");
   assert.equal(localizeVirtue(null, "ko", localization), null);
   assert.equal(localizeVirtue("missing", "ko", localization), null);
+  assert.equal(localizeEstateResource("gold", "ko", localization), "골드");
+  assert.equal(localizeEstateResource("bust", "ko", localization), "흉상");
+  assert.equal(localizeEstateResource("shard", "ko", localization), "혜성의 파편");
+  assert.equal(localizeEstateResource("missing", "ko", localization), null);
 });
