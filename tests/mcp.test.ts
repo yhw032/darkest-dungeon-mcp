@@ -84,6 +84,10 @@ test("MCP server advertises and executes read-only game tools", async (t) => {
             ["str_inventory_title_trinketcollector_1", "디스마스의 머리"],
             ["str_curio_title_eldritch_altar", "괴이한 제단"],
             ["str_curio_title_shamblers_altar", "기는 혼돈의 제단"],
+            ["str_affliction_name_depressed", "절망"],
+            ["str_virtue_name_focused", "정신 집중"],
+            ["str_quirk_name_nervous_bleeder", "출혈 긴장증"],
+            ["str_quirk_name_torn_rotator_cuff", "인대 파열"],
           ]),
         ],
       ]),
@@ -362,6 +366,21 @@ test("MCP server advertises and executes read-only game tools", async (t) => {
               : [],
     },
     questEligibility: null,
+    afflictionName: "절망",
+    virtueName: null,
+    quirks: expectedHero.quirks.map((quirk) => ({
+      ...quirk,
+      name:
+        quirk.id === "nervous_bleeder"
+          ? "출혈 긴장증"
+          : quirk.id === "torn_rotator_cuff"
+            ? "인대 파열"
+            : null,
+    })),
+    equippedTrinkets: expectedHero.equippedTrinkets.map((trinket) => ({
+      ...trinket,
+      name: null,
+    })),
     combatSkillDetails: expectedHero.combatSkillSelections.map(
       ({ id, rawSelectionValue }) => ({
         id,
@@ -412,6 +431,49 @@ test("MCP server advertises and executes read-only game tools", async (t) => {
       { id: "collector_1", name: "디스마스의 머리" },
     ],
   );
+
+  const afflictedHeroResult = await client.callTool({
+    name: "get_hero",
+    arguments: { heroId: "7", language: "ko" },
+  });
+  const afflictedHero = (
+    afflictedHeroResult.structuredContent as
+      | {
+          hero?: {
+            afflictionId?: string | null;
+            afflictionName?: string | null;
+            quirks?: Array<{ id: string; name: string | null }>;
+          };
+        }
+      | undefined
+  )?.hero;
+  assert.equal(afflictedHero?.afflictionId, "depressed");
+  assert.equal(afflictedHero?.afflictionName, "절망");
+  assert.equal(
+    afflictedHero?.quirks?.find(({ id }) => id === "nervous_bleeder")?.name,
+    "출혈 긴장증",
+  );
+  assert.equal(
+    afflictedHero?.quirks?.find(({ id }) => id === "torn_rotator_cuff")?.name,
+    "인대 파열",
+  );
+
+  const virtuousHeroResult = await client.callTool({
+    name: "get_hero",
+    arguments: { heroId: "20", language: "ko" },
+  });
+  const virtuousHero = (
+    virtuousHeroResult.structuredContent as
+      | {
+          hero?: {
+            virtueId?: string | null;
+            virtueName?: string | null;
+          };
+        }
+      | undefined
+  )?.hero;
+  assert.equal(virtuousHero?.virtueId, "focused");
+  assert.equal(virtuousHero?.virtueName, "정신 집중");
 
   const secondHero = state.roster.heroes[1];
   assert.ok(secondHero);

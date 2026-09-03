@@ -285,6 +285,11 @@ export const riskyHeroSchema = z.object({
 
 const quirkSchema = z.object({
   id: z.string(),
+  name: nullableString
+    .describe(
+      "Official quirk or disease name in the requested language; null without game localization.",
+    )
+    .optional(),
   isLocked: z.boolean(),
   isNew: z.boolean(),
   evolutionDurationRemaining: finiteNumber,
@@ -360,8 +365,18 @@ export const heroDetailSchema = heroSummarySchema.extend({
   weaponRank: z.number().int(),
   armourRank: z.number().int(),
   afflictionId: nullableString,
+  afflictionName: nullableString
+    .describe(
+      "Official affliction name in the requested language; null if not afflicted or without game localization.",
+    )
+    .optional(),
   afflictionSeverity: finiteNumber,
   virtueId: nullableString,
+  virtueName: nullableString
+    .describe(
+      "Official virtue name in the requested language; null if not virtuous or without game localization.",
+    )
+    .optional(),
   visitedDeathsDoor: z.boolean(),
   hasHadHeartAttack: z.boolean(),
   deathHeartAttackCompleted: z.boolean(),

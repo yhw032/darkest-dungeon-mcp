@@ -6,14 +6,17 @@ import test from "node:test";
 
 import {
   loadGameLocalization,
+  localizeAffliction,
   localizeBuildingUpgradeTree,
   localizeCombatSkill,
   localizeCurio,
   localizeDistrict,
   localizeHeroClass,
+  localizeQuirk,
   localizeTownActivity,
   localizeTownBuilding,
   localizeTrinket,
+  localizeVirtue,
 } from "../src/localization/game-localization.js";
 
 function table(language: string, entries: Array<[string, string]>): string {
@@ -37,6 +40,8 @@ test("loads official hero class and combat skill names", async (t) => {
       ["town_activity_name_meditation", "명상실"],
       ["str_bank_title", "은행"],
       ["upgrade_tree_name_abbey.meditation", "명상실"],
+      ["str_affliction_name_depressed", "절망"],
+      ["str_quirk_name_nervous_bleeder", "출혈 긴장증"],
     ]),
     "utf8",
   );
@@ -59,6 +64,13 @@ test("loads official hero class and combat skill names", async (t) => {
     join(localizationDirectory, "curios.string_table.xml"),
     table("koreana", [
       ["str_curio_title_eldritch_altar", "괴이한 제단"],
+    ]),
+    "utf8",
+  );
+  await writeFile(
+    join(localizationDirectory, "dialogue.string_table.xml"),
+    table("koreana", [
+      ["str_virtue_name_focused", "정신 집중"],
     ]),
     "utf8",
   );
@@ -94,4 +106,15 @@ test("loads official hero class and combat skill names", async (t) => {
     localizeBuildingUpgradeTree("abbey.meditation", "ko", localization),
     "명상실",
   );
+  assert.equal(
+    localizeQuirk("nervous_bleeder", "ko", localization),
+    "출혈 긴장증",
+  );
+  assert.equal(localizeQuirk("missing", "ko", localization), null);
+  assert.equal(localizeAffliction("depressed", "ko", localization), "절망");
+  assert.equal(localizeAffliction(null, "ko", localization), null);
+  assert.equal(localizeAffliction("missing", "ko", localization), null);
+  assert.equal(localizeVirtue("focused", "ko", localization), "정신 집중");
+  assert.equal(localizeVirtue(null, "ko", localization), null);
+  assert.equal(localizeVirtue("missing", "ko", localization), null);
 });

@@ -20,6 +20,7 @@ const localizationFiles = [
   { path: ["localization", "miscellaneous.string_table.xml"], optional: false },
   { path: ["localization", "heroes.string_table.xml"], optional: false },
   { path: ["localization", "curios.string_table.xml"], optional: true },
+  { path: ["localization", "dialogue.string_table.xml"], optional: true },
   { path: ["localization", "backertrinkets.string_table.xml"], optional: true },
   { path: ["localization", "arena_base.string_table.xml"], optional: true },
   {
@@ -163,6 +164,40 @@ export function localizeBuildingUpgradeTree(
 ): string | null {
   return localizeGameString(
     `upgrade_tree_name_${treeId}`,
+    language,
+    localization,
+  );
+}
+
+export function localizeQuirk(
+  quirkId: string,
+  language: GameLanguage,
+  localization?: GameLocalization,
+): string | null {
+  return localizeGameString(`str_quirk_name_${quirkId}`, language, localization);
+}
+
+export function localizeAffliction(
+  afflictionId: string | null | undefined,
+  language: GameLanguage,
+  localization?: GameLocalization,
+): string | null {
+  if (!afflictionId) return null;
+  return localizeGameString(
+    `str_affliction_name_${afflictionId}`,
+    language,
+    localization,
+  );
+}
+
+export function localizeVirtue(
+  virtueId: string | null | undefined,
+  language: GameLanguage,
+  localization?: GameLocalization,
+): string | null {
+  if (!virtueId) return null;
+  return localizeGameString(
+    `str_virtue_name_${virtueId}`,
     language,
     localization,
   );
