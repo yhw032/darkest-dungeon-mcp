@@ -89,10 +89,7 @@ export function recommendBuildingUpgrades(
     );
     const priorityTier: UpgradePriorityTier = config?.priorityTier ?? "C";
     const strategicImportance =
-      config?.strategicImportance ??
-      (language === "ko"
-        ? "영지 보조 시설 업그레이드입니다."
-        : "Secondary estate facility upgrade.");
+      config?.strategicImportance ?? "Secondary estate facility upgrade.";
 
     // Costs analysis
     const costs: HeirloomCostStatus[] = [];
@@ -252,20 +249,12 @@ export function recommendBuildingUpgrades(
     });
 
   // 5. Strategic Guidance
-  const strategicGuidance =
-    language === "ko"
-      ? [
-          "대장간(무기/방어구)과 길드(전투 기술)는 영웅 레벨업에 따른 생존과 전투력에 직결되므로 최우선 순위(S티어)로 투자하십시오.",
-          "역마차 네트워크(주간 신병 풀)는 4명까지 우선 확보하여 전력 손실 시 대체 인력을 상시 유지하십시오.",
-          "수도원, 여관의 스트레스 해소 슬롯이나 유목민 마차는 초중반 가보 낭비의 원인이 되므로 가보가 풍족해질 때까지 투자를 아끼십시오.",
-          "1순위 핵심 업그레이드에 증서나 초상화가 부족할 경우, 해당 가보 집중 드랍 지역으로 원정을 떠나거나 가보 교환소 환전을 활용하십시오.",
-        ]
-      : [
-          "Prioritize Blacksmith (weapons/armor) and Guild (combat skills) as S-Tier to match hero level progression and prevent fatal party wipes.",
-          "Upgrade Stage Coach network to at least 4 recruits weekly to maintain fresh roster depth.",
-          "Avoid spending valuable heirlooms on Abbey/Tavern stress slots or Nomad Wagon in early-to-mid game.",
-          "When key upgrades lack Deeds or Portraits, target their primary farming dungeons (Weald/Warrens) or utilize the Heirloom Exchange.",
-        ];
+  const strategicGuidance = [
+    "Prioritize Blacksmith (weapons/armor) and Guild (combat skills) as S-Tier to match hero level progression and prevent fatal party wipes.",
+    "Upgrade Stage Coach network to at least 4 recruits weekly to maintain fresh roster depth.",
+    "Avoid spending valuable heirlooms on Abbey/Tavern stress slots or Nomad Wagon in early-to-mid game.",
+    "When key upgrades lack Deeds or Portraits, target their primary farming dungeons (Weald/Warrens) or utilize the Heirloom Exchange.",
+  ];
 
   return {
     estateResources,

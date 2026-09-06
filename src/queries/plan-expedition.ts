@@ -223,9 +223,7 @@ function buildCampingStrategy(
       },
       keyCampingSkills: [],
       respitePointPlan: [
-        language === "ko"
-          ? "짧은 원정으로 야영(장작)이 제공되지 않습니다."
-          : "Short expedition without camping (no firewood provided).",
+        "Short expedition without camping (no firewood provided).",
       ],
     };
   }
@@ -289,34 +287,16 @@ function buildCampingStrategy(
   const isAmbushPreventable = ambushProviders.length > 0;
   const warning = isAmbushPreventable
     ? null
-    : language === "ko"
-      ? "주의: 가용 추천 영웅 풀에 야습 방지(야간 기습 방지) 기술을 보유한 영웅이 없습니다. 야영 시 기습 위험에 노출될 수 있습니다."
-      : "Caution: No candidate heroes possess nighttime ambush prevention skills. Camping carries a high ambush risk.";
+    : "Caution: No candidate heroes possess nighttime ambush prevention skills. Camping carries a high ambush risk.";
 
-  const firstProviderName = ambushProviders[0]
-    ? `${ambushProviders[0].heroName}의 [${ambushProviders[0].skillName}]`
-    : language === "ko"
-      ? "성역/감시견/열정적인 기도"
-      : "Sanctuary / Hound's Watch / Zealous Vigil";
-
-  const respitePointPlan: string[] =
-    language === "ko"
-      ? [
-          "총 12의 휴식 시간(Respite Point)이 주어집니다.",
-          isAmbushPreventable
-            ? `1단계 (3~4P): 야습 방지 기술(${firstProviderName})을 반드시 최우선으로 활성화하십시오.`
-            : "1단계 (주의): 야습 방지 기술이 없으므로 기습 시 열 붕괴에 대비하여 전투 스킬 위치 유연성을 확보하십시오.",
-          "2단계 (5~8P): 보스전 직전이라면 명중/치명타/공격력 버프, 일반 던전이라면 스트레스 치유 및 질병 치료 스킬을 사용하십시오.",
-          "3단계 (1~2P): 남는 포인트는 공용 기술(상처 치료, 격려 등)로 알뜰하게 소모하여 12포인트를 모두 활용하십시오.",
-        ]
-      : [
-          "Total 12 Respite Points are available per camp.",
-          isAmbushPreventable
-            ? `Phase 1 (3-4 pts): Prioritize Ambush Prevention skill (${ambushProviders[0]?.skillName ?? "Sanctuary / Hound's Watch / Zealous Vigil"}) to prevent nocturnal surprises.`
-            : "Phase 1 (Warning): No ambush prevention available; ensure hero positioning flexibility in case of night ambush.",
-          "Phase 2 (5-8 pts): Activate high-value offensive buffs (ACC/CRIT/DMG) before bosses, or focus on Stress Healing / Disease Curing in standard dungeons.",
-          "Phase 3 (1-2 pts): Spend remaining points on universal skills (Wound Care, Encourage) to maximize all 12 points.",
-        ];
+  const respitePointPlan: string[] = [
+    "Total 12 Respite Points are available per camp.",
+    isAmbushPreventable
+      ? `Phase 1 (3-4 pts): Prioritize Ambush Prevention skill (${ambushProviders[0]?.skillName ?? "Sanctuary / Hound's Watch / Zealous Vigil"}) to prevent nocturnal surprises.`
+      : "Phase 1 (Warning): No ambush prevention available; ensure hero positioning flexibility in case of night ambush.",
+    "Phase 2 (5-8 pts): Activate high-value offensive buffs (ACC/CRIT/DMG) before bosses, or focus on Stress Healing / Disease Curing in standard dungeons.",
+    "Phase 3 (1-2 pts): Spend remaining points on universal skills (Wound Care, Encourage) to maximize all 12 points.",
+  ];
 
   return {
     hasCamping: true,
@@ -642,15 +622,11 @@ export function planExpedition(
   if (campingStrategy.hasCamping) {
     if (campingStrategy.ambushPrevention.isAvailable) {
       tacticalAdvice.push(
-        language === "ko"
-          ? `야영이 포함된 원정입니다. 안전을 위해 [${campingStrategy.ambushPrevention.providers[0]?.skillName ?? "야습 방지 기술"}]을 최우선 활성화하십시오.`
-          : `Camping included in this expedition. Prioritize [${campingStrategy.ambushPrevention.providers[0]?.skillName ?? "Ambush Prevention"}] to avoid nighttime ambushes.`,
+        `Camping included in this expedition. Prioritize [${campingStrategy.ambushPrevention.providers[0]?.skillName ?? "Ambush Prevention"}] to avoid nighttime ambushes.`,
       );
     } else {
       tacticalAdvice.push(
-        language === "ko"
-          ? "야영이 포함된 원정이나 야습 방지 영웅이 없습니다. 야습 발생 시 진형 붕괴에 주의하십시오."
-          : "Expedition includes camping but no candidate heroes have ambush prevention skills. Beware of nocturnal party shuffling.",
+        "Expedition includes camping but no candidate heroes have ambush prevention skills. Beware of nocturnal party shuffling.",
       );
     }
   }

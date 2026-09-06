@@ -199,7 +199,7 @@ test("warns when no candidate heroes have ambush prevention skills", () => {
   assert.equal(result.campingStrategy.ambushPrevention.isAvailable, false);
   assert.equal(result.campingStrategy.ambushPrevention.providers.length, 0);
   assert.ok(result.campingStrategy.ambushPrevention.warning);
-  assert.match(result.campingStrategy.ambushPrevention.warning ?? "", /야습 방지/);
+  assert.match(result.campingStrategy.ambushPrevention.warning ?? "", /ambush/i);
 });
 
 test("returns hasCamping: false for short quests", () => {

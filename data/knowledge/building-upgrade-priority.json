@@ -22,121 +22,121 @@
       "buildingId": "stage_coach",
       "treeId": "stage_coach.numrecruits",
       "priorityTier": "S",
-      "strategicImportance": "주간 신병 공급 풀을 늘려 필수 직업군을 확보하고 영지 초반 전력 안정화를 달성합니다."
+      "strategicImportance": "Expands the weekly recruit pool to acquire vital classes and stabilize early campaign roster."
     },
     {
       "buildingId": "blacksmith",
       "treeId": "blacksmith.weapon",
       "priorityTier": "S",
-      "strategicImportance": "영웅의 레벨에 맞춘 공격력, 치명타, 속도 향상으로 적을 먼저 제압하는 데 직결됩니다."
+      "strategicImportance": "Directly scales hero damage, critical chance, and speed to match monster progression and eliminate threats first."
     },
     {
       "buildingId": "blacksmith",
       "treeId": "blacksmith.armour",
       "priorityTier": "S",
-      "strategicImportance": "영웅의 최대 체력과 회피를 높여 높은 난이도 던전에서의 급사(죽음의 문턱)를 방지합니다."
+      "strategicImportance": "Boosts hero maximum health and dodge to prevent catastrophic deaths door checks in higher difficulty dungeons."
     },
     {
       "buildingId": "guild",
       "treeId": "guild.skill_levels",
       "priorityTier": "S",
-      "strategicImportance": "전투 기술 레벨을 올려 명중률, 기절 확률, 치유량을 비약적으로 상승시킵니다."
+      "strategicImportance": "Increases combat skill levels, substantially improving accuracy, stun chances, and healing outputs."
     },
     {
       "buildingId": "stage_coach",
       "treeId": "stage_coach.rostersize",
       "priorityTier": "A",
-      "strategicImportance": "영웅 최대 보유 정원을 늘려 스트레스 치료 및 기벽 관리 로테이션에 여유를 부여합니다."
+      "strategicImportance": "Increases maximum hero roster capacity to provide breathing room for stress treatment and quirk curation rotations."
     },
     {
       "buildingId": "sanitarium",
       "treeId": "sanitarium.slots",
       "priorityTier": "A",
-      "strategicImportance": "위험 기벽을 제거할 수 있는 요양원 치료 슬롯을 추가 확보합니다."
+      "strategicImportance": "Unlocks additional sanitarium treatment slots for removing high-risk negative quirks."
     },
     {
       "buildingId": "sanitarium",
       "treeId": "sanitarium.cost",
       "priorityTier": "A",
-      "strategicImportance": "기벽 치료 비용을 대폭 절감하여 골드 유출을 방어합니다."
+      "strategicImportance": "Substantially reduces negative quirk treatment gold costs to protect campaign economy."
     },
     {
       "buildingId": "sanitarium",
       "treeId": "sanitarium.disease_quirk_cost",
       "priorityTier": "B",
-      "strategicImportance": "질병 치료에 소모되는 골드를 할인합니다."
+      "strategicImportance": "Reduces gold costs for curing contagious diseases and combat infections."
     },
     {
       "buildingId": "blacksmith",
       "treeId": "blacksmith.cost",
       "priorityTier": "B",
-      "strategicImportance": "대장간 무기 및 방어구 업그레이드 골드 비용을 할인합니다."
+      "strategicImportance": "Discounts gold costs for blacksmith weapon and armor upgrades."
     },
     {
       "buildingId": "guild",
       "treeId": "guild.cost",
       "priorityTier": "B",
-      "strategicImportance": "길드 스킬 훈련 비용을 할인합니다."
+      "strategicImportance": "Discounts gold costs for guild skill training."
     },
     {
       "buildingId": "stage_coach",
       "treeId": "stage_coach.upgraded_recruits",
       "priorityTier": "B",
-      "strategicImportance": "결의 레벨과 스킬/장비가 업그레이드된 베테랑 신병이 역마차에 등장합니다."
+      "strategicImportance": "Allows veteran recruits with upgraded resolve, weapons, and skills to arrive directly from the stage coach."
     },
     {
       "buildingId": "abbey",
       "treeId": "abbey.meditation",
       "priorityTier": "C",
-      "strategicImportance": "수도원 명상실 슬롯을 확장합니다 (초중반 가보 낭비 주의)."
+      "strategicImportance": "Expands meditation slots in the Abbey (caution: avoid early heirloom waste)."
     },
     {
       "buildingId": "abbey",
       "treeId": "abbey.prayer",
       "priorityTier": "C",
-      "strategicImportance": "수도원 기도실 슬롯을 확장합니다 (초중반 가보 낭비 주의)."
+      "strategicImportance": "Expands transept prayer slots in the Abbey (caution: avoid early heirloom waste)."
     },
     {
       "buildingId": "abbey",
       "treeId": "abbey.flagellation",
       "priorityTier": "C",
-      "strategicImportance": "수도원 고행실 슬롯을 확장합니다 (초중반 가보 낭비 주의)."
+      "strategicImportance": "Expands penance hall slots in the Abbey (caution: avoid early heirloom waste)."
     },
     {
       "buildingId": "tavern",
       "treeId": "tavern.bar",
       "priorityTier": "C",
-      "strategicImportance": "여관 술집 슬롯을 확장합니다 (초중반 가보 낭비 주의)."
+      "strategicImportance": "Expands bar drinking slots in the Tavern (caution: avoid early heirloom waste)."
     },
     {
       "buildingId": "tavern",
       "treeId": "tavern.gambling",
       "priorityTier": "C",
-      "strategicImportance": "여관 도박장 슬롯을 확장합니다 (장신구 분실 위험 주의)."
+      "strategicImportance": "Expands gambling hall slots in the Tavern (caution: risk of losing equipped trinkets)."
     },
     {
       "buildingId": "tavern",
       "treeId": "tavern.brothel",
       "priorityTier": "C",
-      "strategicImportance": "여관 사창가 슬롯을 확장합니다 (초중반 가보 낭비 주의)."
+      "strategicImportance": "Expands brothel slots in the Tavern (caution: avoid early heirloom waste)."
     },
     {
       "buildingId": "camping_trainer",
       "treeId": "camping_trainer.cost",
       "priorityTier": "C",
-      "strategicImportance": "야영 기술 습득 비용을 할인합니다."
+      "strategicImportance": "Discounts gold costs for learning camping skills."
     },
     {
       "buildingId": "nomad_wagon",
       "treeId": "nomad_wagon.numitems",
       "priorityTier": "C",
-      "strategicImportance": "유목민 마차 판매 장신구 슬롯을 늘립니다 (후반용)."
+      "strategicImportance": "Increases the number of trinkets sold in the Nomad Wagon (late-game priority)."
     },
     {
       "buildingId": "nomad_wagon",
       "treeId": "nomad_wagon.cost",
       "priorityTier": "C",
-      "strategicImportance": "유목민 마차 장신구 구매 비용을 할인합니다 (후반용)."
+      "strategicImportance": "Discounts gold costs for purchasing trinkets in the Nomad Wagon (late-game priority)."
     }
   ]
 }
