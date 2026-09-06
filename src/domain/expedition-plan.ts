@@ -3,6 +3,7 @@ import type {
   RegionThreatKnowledge,
 } from "./combat-knowledge.js";
 import type { LocalizedEnemyCombatKnowledge } from "../queries/query-combat.js";
+import type { ExpeditionCampingStrategy } from "./camping-skills.js";
 
 export interface ExpeditionQuestContext {
   id: string;
@@ -73,5 +74,6 @@ export interface ExpeditionPlanResult {
   rolePool: ExpeditionRolePool;
   ineligibleHeroes: IneligibleHero[];
   provisions: ExpeditionProvisionEstimate;
+  campingStrategy: ExpeditionCampingStrategy;
   tacticalAdvice: string[];
 }

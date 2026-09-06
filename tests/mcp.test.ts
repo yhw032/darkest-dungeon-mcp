@@ -476,6 +476,32 @@ test("MCP server advertises and executes read-only game tools", async (t) => {
         movement: { backward: 0, forward: 0 },
       }),
     ),
+    campingSkillDetails: [
+      {
+        id: "first_aid",
+        name: null,
+        cost: 2,
+        preventsNightAmbush: false,
+        curesDisease: false,
+        primaryCategory: "heal",
+      },
+      {
+        id: "experimental_vapours",
+        name: null,
+        cost: 4,
+        preventsNightAmbush: false,
+        curesDisease: false,
+        primaryCategory: "buff",
+      },
+      {
+        id: "leeches",
+        name: null,
+        cost: 3,
+        preventsNightAmbush: false,
+        curesDisease: true,
+        primaryCategory: "heal",
+      },
+    ],
     combatPositionAnalysis: {
       status: "complete",
       selectedSkillCount: expectedHero.combatSkillSelections.length,
@@ -977,6 +1003,12 @@ test("MCP server advertises and executes read-only game tools", async (t) => {
             items?: Array<{ id?: unknown; amount?: unknown }>;
             totalEstimatedCost?: unknown;
           };
+          campingStrategy?: {
+            hasCamping?: boolean;
+            firewoodCount?: number;
+            ambushPrevention?: { isAvailable?: boolean };
+            respitePointPlan?: string[];
+          };
         };
       }
     | undefined;
@@ -984,6 +1016,8 @@ test("MCP server advertises and executes read-only game tools", async (t) => {
   assert.ok(planContent?.plan?.rolePool?.frontlineDps);
   assert.ok(planContent?.plan?.provisions?.items);
   assert.ok(Number(planContent?.plan?.provisions?.totalEstimatedCost) > 0);
+  assert.ok(planContent?.plan?.campingStrategy);
+  assert.ok(planContent?.plan?.campingStrategy?.respitePointPlan);
 
   const upgradeRecResult = await client.callTool({
     name: "recommend_building_upgrades",

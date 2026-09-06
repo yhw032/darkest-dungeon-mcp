@@ -404,6 +404,21 @@ export const combatPositionAnalysisSchema = z.object({
     .describe("Party positions enabling the largest number of selected skills; not an editorial recommendation."),
 });
 
+export const campingSkillDetailSchema = z.object({
+  id: z.string(),
+  name: nullableString,
+  cost: z.number(),
+  preventsNightAmbush: z.boolean(),
+  curesDisease: z.boolean(),
+  primaryCategory: z.enum([
+    "ambush_prevention",
+    "buff",
+    "stress_heal",
+    "heal",
+    "utility",
+  ]),
+});
+
 export const heroDetailSchema = heroSummarySchema.extend({
   buildingId: nullableString,
   buildingName: nullableString,
@@ -432,6 +447,7 @@ export const heroDetailSchema = heroSummarySchema.extend({
   combatSkillSelections: z.array(skillSelectionSchema),
   campingSkillSelections: z.array(skillSelectionSchema),
   combatSkillDetails: z.array(combatSkillDetailSchema),
+  campingSkillDetails: z.array(campingSkillDetailSchema).optional(),
   combatPositionAnalysis: combatPositionAnalysisSchema,
 });
 
@@ -804,11 +820,47 @@ export const expeditionQuestContextSchema = z.object({
   regionCautions: z.array(z.string()),
 });
 
+export const ambushPreventionProviderSchema = z.object({
+  heroId: z.string(),
+  heroName: z.string(),
+  skillId: z.string(),
+  skillName: nullableString,
+  cost: z.number(),
+});
+
+export const keyCampingBuffProviderSchema = z.object({
+  heroId: z.string(),
+  heroName: z.string(),
+  skillId: z.string(),
+  skillName: nullableString,
+  cost: z.number(),
+  category: z.enum([
+    "ambush_prevention",
+    "buff",
+    "stress_heal",
+    "heal",
+    "utility",
+  ]),
+});
+
+export const expeditionCampingStrategySchema = z.object({
+  hasCamping: z.boolean(),
+  firewoodCount: z.number(),
+  ambushPrevention: z.object({
+    isAvailable: z.boolean(),
+    providers: z.array(ambushPreventionProviderSchema),
+    warning: nullableString,
+  }),
+  keyCampingSkills: z.array(keyCampingBuffProviderSchema),
+  respitePointPlan: z.array(z.string()),
+});
+
 export const planExpeditionOutputSchema = z.object({
   quest: expeditionQuestContextSchema,
   rolePool: expeditionRolePoolSchema,
   ineligibleHeroes: z.array(ineligibleHeroSchema),
   provisions: expeditionProvisionEstimateSchema,
+  campingStrategy: expeditionCampingStrategySchema,
   tacticalAdvice: z.array(z.string()),
 });
 

@@ -1,0 +1,732 @@
+{
+  "schemaVersion": 1,
+  "skills": [
+    {
+      "id": "encourage",
+      "cost": 2,
+      "classes": [
+        "bounty_hunter",
+        "crusader",
+        "vestal",
+        "occultist",
+        "hellion",
+        "grave_robber",
+        "highwayman",
+        "plague_doctor",
+        "jester",
+        "leper",
+        "arbalest",
+        "man_at_arms",
+        "houndmaster",
+        "abomination",
+        "antiquarian",
+        "musketeer"
+      ],
+      "preventsNightAmbush": false,
+      "curesDisease": false,
+      "primaryCategory": "stress_heal"
+    },
+    {
+      "id": "first_aid",
+      "cost": 2,
+      "classes": [
+        "bounty_hunter",
+        "crusader",
+        "vestal",
+        "occultist",
+        "hellion",
+        "grave_robber",
+        "highwayman",
+        "plague_doctor",
+        "jester",
+        "leper",
+        "arbalest",
+        "man_at_arms",
+        "houndmaster",
+        "abomination",
+        "antiquarian",
+        "musketeer"
+      ],
+      "preventsNightAmbush": false,
+      "curesDisease": false,
+      "primaryCategory": "heal"
+    },
+    {
+      "id": "pep_talk",
+      "cost": 2,
+      "classes": [
+        "bounty_hunter",
+        "crusader",
+        "vestal",
+        "occultist",
+        "hellion",
+        "grave_robber",
+        "highwayman",
+        "plague_doctor",
+        "jester",
+        "leper",
+        "arbalest",
+        "man_at_arms",
+        "houndmaster",
+        "abomination",
+        "antiquarian",
+        "musketeer"
+      ],
+      "preventsNightAmbush": false,
+      "curesDisease": false,
+      "primaryCategory": "buff"
+    },
+    {
+      "id": "hobby",
+      "cost": 2,
+      "classes": [],
+      "preventsNightAmbush": false,
+      "curesDisease": false,
+      "primaryCategory": "stress_heal"
+    },
+    {
+      "id": "field_dressing",
+      "cost": 2,
+      "classes": [
+        "arbalest",
+        "musketeer"
+      ],
+      "preventsNightAmbush": false,
+      "curesDisease": false,
+      "primaryCategory": "heal"
+    },
+    {
+      "id": "marching_plan",
+      "cost": 3,
+      "classes": [
+        "arbalest",
+        "musketeer"
+      ],
+      "preventsNightAmbush": false,
+      "curesDisease": false,
+      "primaryCategory": "buff"
+    },
+    {
+      "id": "restring_crossbow",
+      "cost": 3,
+      "classes": [
+        "arbalest"
+      ],
+      "preventsNightAmbush": false,
+      "curesDisease": false,
+      "primaryCategory": "buff"
+    },
+    {
+      "id": "clean_musket",
+      "cost": 3,
+      "classes": [
+        "musketeer"
+      ],
+      "preventsNightAmbush": false,
+      "curesDisease": false,
+      "primaryCategory": "buff"
+    },
+    {
+      "id": "triage",
+      "cost": 3,
+      "classes": [
+        "arbalest",
+        "musketeer"
+      ],
+      "preventsNightAmbush": false,
+      "curesDisease": false,
+      "primaryCategory": "heal"
+    },
+    {
+      "id": "how_its_done",
+      "cost": 2,
+      "classes": [
+        "bounty_hunter"
+      ],
+      "preventsNightAmbush": false,
+      "curesDisease": false,
+      "primaryCategory": "buff"
+    },
+    {
+      "id": "tracking",
+      "cost": 2,
+      "classes": [
+        "bounty_hunter"
+      ],
+      "preventsNightAmbush": false,
+      "curesDisease": false,
+      "primaryCategory": "buff"
+    },
+    {
+      "id": "planned_takedown",
+      "cost": 4,
+      "classes": [
+        "bounty_hunter"
+      ],
+      "preventsNightAmbush": false,
+      "curesDisease": false,
+      "primaryCategory": "buff"
+    },
+    {
+      "id": "scout_ahead",
+      "cost": 3,
+      "classes": [
+        "bounty_hunter"
+      ],
+      "preventsNightAmbush": false,
+      "curesDisease": false,
+      "primaryCategory": "buff"
+    },
+    {
+      "id": "unshakeable_leader",
+      "cost": 2,
+      "classes": [
+        "crusader"
+      ],
+      "preventsNightAmbush": false,
+      "curesDisease": false,
+      "primaryCategory": "buff"
+    },
+    {
+      "id": "stand_tall",
+      "cost": 3,
+      "classes": [
+        "crusader"
+      ],
+      "preventsNightAmbush": false,
+      "curesDisease": false,
+      "primaryCategory": "stress_heal"
+    },
+    {
+      "id": "zealous_speech",
+      "cost": 5,
+      "classes": [
+        "crusader"
+      ],
+      "preventsNightAmbush": false,
+      "curesDisease": false,
+      "primaryCategory": "buff"
+    },
+    {
+      "id": "zealous_vigil",
+      "cost": 4,
+      "classes": [
+        "crusader"
+      ],
+      "preventsNightAmbush": true,
+      "curesDisease": false,
+      "primaryCategory": "ambush_prevention"
+    },
+    {
+      "id": "forage",
+      "cost": 3,
+      "classes": [
+        "grave_robber"
+      ],
+      "preventsNightAmbush": false,
+      "curesDisease": true,
+      "primaryCategory": "heal"
+    },
+    {
+      "id": "gallows_humor",
+      "cost": 4,
+      "classes": [
+        "grave_robber",
+        "highwayman"
+      ],
+      "preventsNightAmbush": false,
+      "curesDisease": false,
+      "primaryCategory": "stress_heal"
+    },
+    {
+      "id": "night_steps",
+      "cost": 2,
+      "classes": [
+        "grave_robber"
+      ],
+      "preventsNightAmbush": false,
+      "curesDisease": false,
+      "primaryCategory": "buff"
+    },
+    {
+      "id": "pilfer",
+      "cost": 1,
+      "classes": [
+        "grave_robber"
+      ],
+      "preventsNightAmbush": false,
+      "curesDisease": false,
+      "primaryCategory": "utility"
+    },
+    {
+      "id": "battle_trance",
+      "cost": 3,
+      "classes": [
+        "hellion"
+      ],
+      "preventsNightAmbush": false,
+      "curesDisease": false,
+      "primaryCategory": "buff"
+    },
+    {
+      "id": "revel",
+      "cost": 3,
+      "classes": [
+        "hellion"
+      ],
+      "preventsNightAmbush": false,
+      "curesDisease": false,
+      "primaryCategory": "buff"
+    },
+    {
+      "id": "reject_the_gods",
+      "cost": 2,
+      "classes": [
+        "hellion"
+      ],
+      "preventsNightAmbush": false,
+      "curesDisease": false,
+      "primaryCategory": "stress_heal"
+    },
+    {
+      "id": "sharpen_spear",
+      "cost": 3,
+      "classes": [
+        "hellion"
+      ],
+      "preventsNightAmbush": false,
+      "curesDisease": false,
+      "primaryCategory": "buff"
+    },
+    {
+      "id": "uncatchable",
+      "cost": 4,
+      "classes": [
+        "highwayman"
+      ],
+      "preventsNightAmbush": false,
+      "curesDisease": false,
+      "primaryCategory": "buff"
+    },
+    {
+      "id": "clean_guns",
+      "cost": 4,
+      "classes": [
+        "highwayman"
+      ],
+      "preventsNightAmbush": false,
+      "curesDisease": false,
+      "primaryCategory": "buff"
+    },
+    {
+      "id": "bandits_sense",
+      "cost": 4,
+      "classes": [
+        "highwayman"
+      ],
+      "preventsNightAmbush": true,
+      "curesDisease": false,
+      "primaryCategory": "ambush_prevention"
+    },
+    {
+      "id": "maintain_equipment",
+      "cost": 4,
+      "classes": [
+        "man_at_arms"
+      ],
+      "preventsNightAmbush": false,
+      "curesDisease": false,
+      "primaryCategory": "buff"
+    },
+    {
+      "id": "tactics",
+      "cost": 4,
+      "classes": [
+        "man_at_arms"
+      ],
+      "preventsNightAmbush": false,
+      "curesDisease": false,
+      "primaryCategory": "buff"
+    },
+    {
+      "id": "instruction",
+      "cost": 3,
+      "classes": [
+        "man_at_arms"
+      ],
+      "preventsNightAmbush": false,
+      "curesDisease": false,
+      "primaryCategory": "buff"
+    },
+    {
+      "id": "weapons_practice",
+      "cost": 4,
+      "classes": [
+        "man_at_arms"
+      ],
+      "preventsNightAmbush": false,
+      "curesDisease": false,
+      "primaryCategory": "buff"
+    },
+    {
+      "id": "abandon_hope",
+      "cost": 1,
+      "classes": [
+        "occultist"
+      ],
+      "preventsNightAmbush": false,
+      "curesDisease": false,
+      "primaryCategory": "stress_heal"
+    },
+    {
+      "id": "dark_ritual",
+      "cost": 3,
+      "classes": [
+        "occultist"
+      ],
+      "preventsNightAmbush": false,
+      "curesDisease": false,
+      "primaryCategory": "heal"
+    },
+    {
+      "id": "dark_strength",
+      "cost": 2,
+      "classes": [
+        "occultist"
+      ],
+      "preventsNightAmbush": false,
+      "curesDisease": false,
+      "primaryCategory": "buff"
+    },
+    {
+      "id": "unspeakable_commune",
+      "cost": 3,
+      "classes": [
+        "occultist"
+      ],
+      "preventsNightAmbush": true,
+      "curesDisease": false,
+      "primaryCategory": "ambush_prevention"
+    },
+    {
+      "id": "experimental_vapours",
+      "cost": 4,
+      "classes": [
+        "plague_doctor"
+      ],
+      "preventsNightAmbush": false,
+      "curesDisease": false,
+      "primaryCategory": "buff"
+    },
+    {
+      "id": "leeches",
+      "cost": 3,
+      "classes": [
+        "plague_doctor"
+      ],
+      "preventsNightAmbush": false,
+      "curesDisease": true,
+      "primaryCategory": "heal"
+    },
+    {
+      "id": "preventative_medicine",
+      "cost": 1,
+      "classes": [
+        "plague_doctor"
+      ],
+      "preventsNightAmbush": false,
+      "curesDisease": true,
+      "primaryCategory": "buff"
+    },
+    {
+      "id": "self_medicate",
+      "cost": 3,
+      "classes": [
+        "plague_doctor"
+      ],
+      "preventsNightAmbush": false,
+      "curesDisease": false,
+      "primaryCategory": "buff"
+    },
+    {
+      "id": "bless",
+      "cost": 3,
+      "classes": [
+        "vestal"
+      ],
+      "preventsNightAmbush": false,
+      "curesDisease": false,
+      "primaryCategory": "buff"
+    },
+    {
+      "id": "chant",
+      "cost": 3,
+      "classes": [
+        "vestal"
+      ],
+      "preventsNightAmbush": false,
+      "curesDisease": false,
+      "primaryCategory": "buff"
+    },
+    {
+      "id": "pray",
+      "cost": 3,
+      "classes": [
+        "vestal"
+      ],
+      "preventsNightAmbush": false,
+      "curesDisease": false,
+      "primaryCategory": "buff"
+    },
+    {
+      "id": "sanctuary",
+      "cost": 4,
+      "classes": [
+        "vestal"
+      ],
+      "preventsNightAmbush": true,
+      "curesDisease": false,
+      "primaryCategory": "ambush_prevention"
+    },
+    {
+      "id": "turn_back_time",
+      "cost": 3,
+      "classes": [
+        "jester"
+      ],
+      "preventsNightAmbush": false,
+      "curesDisease": false,
+      "primaryCategory": "stress_heal"
+    },
+    {
+      "id": "every_rose",
+      "cost": 3,
+      "classes": [
+        "jester"
+      ],
+      "preventsNightAmbush": false,
+      "curesDisease": false,
+      "primaryCategory": "buff"
+    },
+    {
+      "id": "tigers_eye",
+      "cost": 3,
+      "classes": [
+        "jester"
+      ],
+      "preventsNightAmbush": false,
+      "curesDisease": false,
+      "primaryCategory": "buff"
+    },
+    {
+      "id": "mockery",
+      "cost": 2,
+      "classes": [
+        "jester"
+      ],
+      "preventsNightAmbush": false,
+      "curesDisease": false,
+      "primaryCategory": "stress_heal"
+    },
+    {
+      "id": "let_the_mask_down",
+      "cost": 1,
+      "classes": [
+        "leper"
+      ],
+      "preventsNightAmbush": false,
+      "curesDisease": false,
+      "primaryCategory": "stress_heal"
+    },
+    {
+      "id": "bloody_shroud",
+      "cost": 2,
+      "classes": [
+        "leper"
+      ],
+      "preventsNightAmbush": false,
+      "curesDisease": false,
+      "primaryCategory": "buff"
+    },
+    {
+      "id": "reflection",
+      "cost": 3,
+      "classes": [
+        "leper"
+      ],
+      "preventsNightAmbush": false,
+      "curesDisease": false,
+      "primaryCategory": "buff"
+    },
+    {
+      "id": "quarantine",
+      "cost": 3,
+      "classes": [
+        "leper"
+      ],
+      "preventsNightAmbush": false,
+      "curesDisease": false,
+      "primaryCategory": "stress_heal"
+    },
+    {
+      "id": "hounds_watch",
+      "cost": 4,
+      "classes": [
+        "houndmaster"
+      ],
+      "preventsNightAmbush": true,
+      "curesDisease": false,
+      "primaryCategory": "ambush_prevention"
+    },
+    {
+      "id": "therapy_dog",
+      "cost": 3,
+      "classes": [
+        "houndmaster"
+      ],
+      "preventsNightAmbush": false,
+      "curesDisease": false,
+      "primaryCategory": "buff"
+    },
+    {
+      "id": "pet_the_hound",
+      "cost": 2,
+      "classes": [
+        "houndmaster"
+      ],
+      "preventsNightAmbush": false,
+      "curesDisease": false,
+      "primaryCategory": "stress_heal"
+    },
+    {
+      "id": "release_the_hound",
+      "cost": 4,
+      "classes": [
+        "houndmaster"
+      ],
+      "preventsNightAmbush": false,
+      "curesDisease": false,
+      "primaryCategory": "buff"
+    },
+    {
+      "id": "anger_management",
+      "cost": 3,
+      "classes": [
+        "abomination"
+      ],
+      "preventsNightAmbush": false,
+      "curesDisease": false,
+      "primaryCategory": "stress_heal"
+    },
+    {
+      "id": "psych_up",
+      "cost": 3,
+      "classes": [
+        "abomination"
+      ],
+      "preventsNightAmbush": false,
+      "curesDisease": false,
+      "primaryCategory": "buff"
+    },
+    {
+      "id": "the_quickening",
+      "cost": 3,
+      "classes": [
+        "abomination"
+      ],
+      "preventsNightAmbush": false,
+      "curesDisease": false,
+      "primaryCategory": "buff"
+    },
+    {
+      "id": "eldritch_blood",
+      "cost": 3,
+      "classes": [
+        "abomination"
+      ],
+      "preventsNightAmbush": false,
+      "curesDisease": false,
+      "primaryCategory": "buff"
+    },
+    {
+      "id": "supply",
+      "cost": 1,
+      "classes": [
+        "antiquarian"
+      ],
+      "preventsNightAmbush": false,
+      "curesDisease": false,
+      "primaryCategory": "utility"
+    },
+    {
+      "id": "trinket_scrounge",
+      "cost": 2,
+      "classes": [
+        "antiquarian"
+      ],
+      "preventsNightAmbush": false,
+      "curesDisease": false,
+      "primaryCategory": "utility"
+    },
+    {
+      "id": "strange_powders",
+      "cost": 2,
+      "classes": [
+        "antiquarian"
+      ],
+      "preventsNightAmbush": false,
+      "curesDisease": false,
+      "primaryCategory": "buff"
+    },
+    {
+      "id": "curious_incantation",
+      "cost": 1,
+      "classes": [
+        "antiquarian"
+      ],
+      "preventsNightAmbush": false,
+      "curesDisease": false,
+      "primaryCategory": "buff"
+    },
+    {
+      "id": "way_of_serpent",
+      "cost": 3,
+      "classes": [
+        "shieldbreaker"
+      ],
+      "preventsNightAmbush": false,
+      "curesDisease": false,
+      "primaryCategory": "buff"
+    },
+    {
+      "id": "way_of_scales",
+      "cost": 3,
+      "classes": [
+        "shieldbreaker"
+      ],
+      "preventsNightAmbush": false,
+      "curesDisease": false,
+      "primaryCategory": "buff"
+    },
+    {
+      "id": "way_of_sway",
+      "cost": 2,
+      "classes": [
+        "shieldbreaker"
+      ],
+      "preventsNightAmbush": false,
+      "curesDisease": false,
+      "primaryCategory": "buff"
+    },
+    {
+      "id": "way_of_adder",
+      "cost": 2,
+      "classes": [
+        "shieldbreaker"
+      ],
+      "preventsNightAmbush": false,
+      "curesDisease": false,
+      "primaryCategory": "buff"
+    }
+  ]
+}

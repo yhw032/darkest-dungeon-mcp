@@ -143,12 +143,14 @@ Class knowledge covers all 18 playable Darkest Dungeon 1 classes and all 126 com
 
 `list_heroes`, `get_hero`, and `compare_heroes` accept `language` (`en` or
 `ko`). When `DD_GAME_DIR` is configured, `heroClassName`, combat skill `name`,
-equipped trinket `name`, `quirks[].name`, `afflictionName`, and `virtueName`
-values come directly from the installed game's localization files; stable
+camping skill `name`, equipped trinket `name`, `quirks[].name`, `afflictionName`, and
+`virtueName` values come directly from the installed game's localization files; stable
 internal IDs remain available alongside them. In `get_hero`, `equippedTrinkets`
 also includes official `rarity`, `heroClassRequirements`, class compatibility
-`isUsableByHeroClass`, and stat `effects`. In `compare_heroes`,
-`quirkTreatmentAnalysis.risk.riskyQuirks` entries also include localized names.
+`isUsableByHeroClass`, and stat `effects`. `campingSkillDetails` provides official
+skill names, respite point costs, nighttime ambush prevention flags, disease cure flags,
+and categorized utility. In `compare_heroes`, `quirkTreatmentAnalysis.risk.riskyQuirks`
+entries also include localized names.
 
 `list_trinkets` accepts `id`, `query`, `location`, `heroClass`, `rarity`, and
 `language`. It resolves official trinket names, rarities, hero class
@@ -167,7 +169,9 @@ and `language`). It integrates strict eligibility pruning (resolve levels, town
 activity isolation, high stress flags), categorized candidate pools across 4 functional
 roles (Frontline DPS, Control/Disruptor, Support/Stress Healer, and Primary Healer),
 automated supply provision calculations with itemized gold costs based on dungeon
-length and regional curio cleansing needs, and target boss / regional combat tactics.
+length and regional curio cleansing needs, nighttime ambush prevention and camping strategy
+analysis (`campingStrategy` with 12-point respite plan and ambush prevention providers),
+and target boss / regional combat tactics.
 
 `recommend_building_upgrades` accepts `language` and analyzes the estate's building
 upgrades and current heirloom resources (Busts, Portraits, Deeds, Crests). It evaluates

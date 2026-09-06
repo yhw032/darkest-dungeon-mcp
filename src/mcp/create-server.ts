@@ -89,6 +89,8 @@ import { planExpedition } from "../queries/plan-expedition.js";
 import { recommendBuildingUpgrades } from "../queries/recommend-building-upgrades.js";
 import { loadBuildingUpgradePriorityKnowledge } from "../knowledge/load-building-upgrade-priority.js";
 import type { BuildingUpgradePriorityKnowledge } from "../domain/building-upgrade-recommendations.js";
+import { loadCampingSkills } from "../knowledge/load-camping-skills.js";
+import type { CampingSkillKnowledgeBase } from "../domain/camping-skills.js";
 import {
   localizeBuildingUpgradeProgress,
   localizeHeroTownContext,
@@ -131,6 +133,7 @@ export interface DarkestDungeonServerOptions {
   loadTrinketDefinitions?: () => Promise<TrinketDefinition[]>;
   loadTrinketGuidance?: () => Promise<TrinketGuidanceKnowledgeBase>;
   loadBuildingUpgradePriorityKnowledge?: () => Promise<BuildingUpgradePriorityKnowledge>;
+  loadCampingSkills?: () => Promise<CampingSkillKnowledgeBase>;
 }
 
 export const serverInstructions = [
@@ -144,7 +147,7 @@ export const serverInstructions = [
   "For a specific quest, pass questId to list_heroes or get_hero and use questEligibility instead of inferring level restrictions.",
   "Pass the user's language to quest tools and display dungeon.name, title, description, length.name, and reward item names; their ids and raw values are stable machine-readable fields.",
   "Use compare_heroes for objective comparisons instead of selecting a winner from raw experience points or class stereotypes; pass the user's language and display heroClassName, selectedCombatSkills.name, and quirkTreatmentAnalysis.risk.riskyQuirks.name.",
-  "Pass the user's language to hero tools and display heroClassName, combatSkillDetails.name, equippedTrinkets (name, rarity, class usability, and buff effects), quirks[].name, afflictionName, virtueName, and localized town building or activity names; preserve their ids only as stable identifiers.",
+  "Pass the user's language to hero tools and display heroClassName, combatSkillDetails.name, campingSkillDetails (name, cost, ambush prevention), equippedTrinkets (name, rarity, class usability, and buff effects), quirks[].name, afflictionName, virtueName, and localized town building or activity names; preserve their ids only as stable identifiers.",
   "In hero details, use combatSkillDetails.level for combat skill levels; rawSelectionValue is not a level.",
   "Use combatSkillDetails.usableFromPartyPositions, target, and movement for formation claims instead of relying on class stereotypes.",
   "Formation position 1 is frontmost and position 4 is rearmost for both parties.",
@@ -160,7 +163,7 @@ export const serverInstructions = [
   "For curio questions, call search_curios when the identity is uncertain, then call get_curio_advice; pass the user's language and display the localized curio name.",
   "Treat only returned knowledge as verified; never invent curio effects, probabilities, item interactions, or localized names.",
   "The availableItems argument means expedition items explicitly supplied by the user; do not infer it from estate storage.",
-  "Use plan_expedition when preparing an expedition, recommending teams, or calculating provision supplies; pass the user's language and use its scored role pools, strict eligibility filtering, and itemized provision estimates as objective groundwork for party synergy advice.",
+  "Use plan_expedition when preparing an expedition, recommending teams, or calculating provision supplies; pass the user's language and use its scored role pools, strict eligibility filtering, itemized provision estimates, and camping strategy (with ambush prevention and 12-point respite plan) as objective groundwork for party synergy advice.",
   "Keep Darkest Dungeon 1 information separate from Darkest Dungeon 2.",
 ].join(" ");
 
@@ -365,6 +368,13 @@ export function createDarkestDungeonServer(
   const getBuildingUpgradePriority = () => {
     buildingUpgradePriorityPromise ??= buildingUpgradePriorityLoader();
     return buildingUpgradePriorityPromise;
+  };
+  const campingSkillsLoader =
+    options.loadCampingSkills ?? loadCampingSkills;
+  let campingSkillsPromise: Promise<CampingSkillKnowledgeBase> | undefined;
+  const getCampingSkills = () => {
+    campingSkillsPromise ??= campingSkillsLoader();
+    return campingSkillsPromise;
   };
   const server = new McpServer(
     { name: "darkest-dungeon-mcp", version: "1.0.0" },
@@ -810,6 +820,7 @@ export function createDarkestDungeonServer(
         restrictionRules,
         localization,
         trinketDefinitions,
+        campingSkillsKnowledge,
       ] = await Promise.all([
         dataSource.load(),
         getHeroCombatSkillTrees(),
@@ -820,6 +831,7 @@ export function createDarkestDungeonServer(
           : getQuestRestrictionRules(),
         getGameLocalization(),
         getTrinketDefinitions(),
+        getCampingSkills(),
       ]);
       const hero = getHero(state.roster, heroId);
       if (hero === undefined) {
@@ -896,6 +908,30 @@ export function createDarkestDungeonServer(
             localization,
           ),
         })),
+        campingSkillDetails: hero.campingSkills.map((skillId) => {
+          const def = campingSkillsKnowledge.skills.find((s) => s.id === skillId);
+          const langKey = language === "ko" ? "koreana" : "english";
+          const name = localization?.get(langKey)?.get(`camping_skill_name_${skillId}`) ?? null;
+          return {
+            id: skillId,
+            name,
+            cost: def?.cost ?? 3,
+            preventsNightAmbush:
+              def?.preventsNightAmbush ??
+              [
+                "zealous_vigil",
+                "sanctuary",
+                "hounds_watch",
+                "bandits_sense",
+                "unspeakable_commune",
+                "snake_eyes",
+              ].includes(skillId),
+            curesDisease:
+              def?.curesDisease ??
+              ["leeches", "preventative_medicine", "forage"].includes(skillId),
+            primaryCategory: def?.primaryCategory ?? ("utility" as const),
+          };
+        }),
         combatPositionAnalysis: analyzeHeroCombatPositions(combatSkillDetails),
       };
 
@@ -1275,6 +1311,7 @@ export function createDarkestDungeonServer(
         progressionRules,
         restrictionRules,
         localization,
+        campingSkills,
       ] = await Promise.all([
         dataSource.load(),
         getCombatKnowledge(),
@@ -1284,6 +1321,7 @@ export function createDarkestDungeonServer(
         getHeroProgressionRules(),
         getQuestRestrictionRules(),
         getGameLocalization(),
+        getCampingSkills(),
       ]);
 
       try {
@@ -1304,6 +1342,7 @@ export function createDarkestDungeonServer(
             progressionRules,
             restrictionRules,
             localization,
+            campingSkills,
           },
         );
         return toolResult("plan", result);

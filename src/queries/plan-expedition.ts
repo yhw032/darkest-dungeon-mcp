@@ -25,6 +25,13 @@ import {
 import { getResolveLevel } from "../progression/hero-progression.js";
 import { getQuestEligibility } from "../quests/quest-eligibility.js";
 import type { LocalizedEnemyCombatKnowledge } from "./query-combat.js";
+import type {
+  AmbushPreventionProvider,
+  CampingSkillDefinition,
+  CampingSkillKnowledgeBase,
+  ExpeditionCampingStrategy,
+  KeyCampingBuffProvider,
+} from "../domain/camping-skills.js";
 
 export interface PlanExpeditionOptions {
   questId?: string;
@@ -45,6 +52,7 @@ export interface PlanExpeditionDependencies {
   progressionRules?: HeroProgressionRules | undefined;
   restrictionRules?: QuestRestrictionRules | undefined;
   localization?: GameLocalization | undefined;
+  campingSkills?: CampingSkillKnowledgeBase | undefined;
 }
 
 const provisionBaseCosts: Record<string, number> = {
@@ -77,7 +85,7 @@ function findBossGuidance(
 ): LocalizedEnemyCombatKnowledge | null {
   const targetTokens = [
     quest.id.toLowerCase(),
-    ...quest.goalIds.map((g) => g.toLowerCase()),
+    ...(quest.goalIds?.map((g) => g.toLowerCase()) ?? []),
   ];
   for (const enemy of combatKnowledge.enemies) {
     if (enemy.enemyType !== "boss" && enemy.enemyType !== "miniboss") continue;
@@ -182,6 +190,145 @@ function calculateProvisions(
   ];
 
   return { items, totalEstimatedCost, notes };
+}
+
+function getLocalizedSkillName(
+  localization: GameLocalization | undefined,
+  language: GameLanguage,
+  skillId: string,
+): string | null {
+  if (!localization) return null;
+  const langKey = language === "ko" ? "koreana" : "english";
+  return localization.get(langKey)?.get(`camping_skill_name_${skillId}`) ?? null;
+}
+
+function buildCampingStrategy(
+  quest: Quest,
+  candidateHeroes: Hero[],
+  campingSkillsKnowledge: CampingSkillKnowledgeBase | undefined,
+  language: GameLanguage,
+  localization: GameLocalization | undefined,
+): ExpeditionCampingStrategy {
+  const firewoodCount = quest.length === 1 ? 1 : quest.length === 2 ? 2 : 0;
+  const hasCamping = firewoodCount > 0;
+
+  if (!hasCamping) {
+    return {
+      hasCamping: false,
+      firewoodCount: 0,
+      ambushPrevention: {
+        isAvailable: false,
+        providers: [],
+        warning: null,
+      },
+      keyCampingSkills: [],
+      respitePointPlan: [
+        language === "ko"
+          ? "짧은 원정으로 야영(장작)이 제공되지 않습니다."
+          : "Short expedition without camping (no firewood provided).",
+      ],
+    };
+  }
+
+  // Ambush prevention skills known in Darkest Dungeon 1
+  const ambushSkillIds = new Set([
+    "zealous_vigil",
+    "sanctuary",
+    "hounds_watch",
+    "bandits_sense",
+    "unspeakable_commune",
+    "snake_eyes",
+  ]);
+
+  const skillMap = new Map<string, CampingSkillDefinition>();
+  if (campingSkillsKnowledge?.skills) {
+    for (const s of campingSkillsKnowledge.skills) {
+      skillMap.set(s.id, s);
+    }
+  }
+
+  const ambushProviders: AmbushPreventionProvider[] = [];
+  const keySkills: KeyCampingBuffProvider[] = [];
+  const seenKeySkills = new Set<string>();
+
+  for (const hero of candidateHeroes) {
+    for (const skillId of hero.campingSkills) {
+      const def = skillMap.get(skillId);
+      const isAmbushSkill = ambushSkillIds.has(skillId) || def?.preventsNightAmbush === true;
+      const cost = def?.cost ?? (isAmbushSkill ? (skillId === "unspeakable_commune" || skillId === "snake_eyes" ? 3 : 4) : 3);
+      const skillName = getLocalizedSkillName(localization, language, skillId) ?? skillId;
+
+      if (isAmbushSkill) {
+        ambushProviders.push({
+          heroId: hero.id,
+          heroName: hero.name,
+          skillId,
+          skillName,
+          cost,
+        });
+      }
+
+      const category = def?.primaryCategory ?? (isAmbushSkill ? "ambush_prevention" : "buff");
+      if (
+        (category === "buff" || category === "stress_heal" || def?.curesDisease) &&
+        !seenKeySkills.has(`${hero.id}:${skillId}`)
+      ) {
+        seenKeySkills.add(`${hero.id}:${skillId}`);
+        keySkills.push({
+          heroId: hero.id,
+          heroName: hero.name,
+          skillId,
+          skillName,
+          cost,
+          category,
+        });
+      }
+    }
+  }
+
+  const isAmbushPreventable = ambushProviders.length > 0;
+  const warning = isAmbushPreventable
+    ? null
+    : language === "ko"
+      ? "주의: 가용 추천 영웅 풀에 야습 방지(야간 기습 방지) 기술을 보유한 영웅이 없습니다. 야영 시 기습 위험에 노출될 수 있습니다."
+      : "Caution: No candidate heroes possess nighttime ambush prevention skills. Camping carries a high ambush risk.";
+
+  const firstProviderName = ambushProviders[0]
+    ? `${ambushProviders[0].heroName}의 [${ambushProviders[0].skillName}]`
+    : language === "ko"
+      ? "성역/감시견/열정적인 기도"
+      : "Sanctuary / Hound's Watch / Zealous Vigil";
+
+  const respitePointPlan: string[] =
+    language === "ko"
+      ? [
+          "총 12의 휴식 시간(Respite Point)이 주어집니다.",
+          isAmbushPreventable
+            ? `1단계 (3~4P): 야습 방지 기술(${firstProviderName})을 반드시 최우선으로 활성화하십시오.`
+            : "1단계 (주의): 야습 방지 기술이 없으므로 기습 시 열 붕괴에 대비하여 전투 스킬 위치 유연성을 확보하십시오.",
+          "2단계 (5~8P): 보스전 직전이라면 명중/치명타/공격력 버프, 일반 던전이라면 스트레스 치유 및 질병 치료 스킬을 사용하십시오.",
+          "3단계 (1~2P): 남는 포인트는 공용 기술(상처 치료, 격려 등)로 알뜰하게 소모하여 12포인트를 모두 활용하십시오.",
+        ]
+      : [
+          "Total 12 Respite Points are available per camp.",
+          isAmbushPreventable
+            ? `Phase 1 (3-4 pts): Prioritize Ambush Prevention skill (${ambushProviders[0]?.skillName ?? "Sanctuary / Hound's Watch / Zealous Vigil"}) to prevent nocturnal surprises.`
+            : "Phase 1 (Warning): No ambush prevention available; ensure hero positioning flexibility in case of night ambush.",
+          "Phase 2 (5-8 pts): Activate high-value offensive buffs (ACC/CRIT/DMG) before bosses, or focus on Stress Healing / Disease Curing in standard dungeons.",
+          "Phase 3 (1-2 pts): Spend remaining points on universal skills (Wound Care, Encourage) to maximize all 12 points.",
+        ];
+
+  return {
+    hasCamping: true,
+    firewoodCount,
+    ambushPrevention: {
+      isAvailable: isAmbushPreventable,
+      providers: ambushProviders,
+      warning,
+    },
+    keyCampingSkills: keySkills.slice(0, 8),
+    respitePointPlan,
+  };
 }
 
 export function planExpedition(
@@ -475,7 +622,16 @@ export function planExpedition(
   // 4. Provisions Estimate
   const provisions = calculateProvisions(selectedQuest, language, localization);
 
-  // 5. Tactical Advice
+  // 5. Camping Strategy
+  const campingStrategy = buildCampingStrategy(
+    selectedQuest,
+    eligibleCandidates,
+    dependencies.campingSkills,
+    language,
+    localization,
+  );
+
+  // 6. Tactical Advice
   const tacticalAdvice: string[] = [
     "Construct a balanced 4-hero party covering Ranks 1 to 4 with at least 1 reliable healer and 1 backline reach attacker.",
     `Review the provided ${provisions.items.length} provision items to ensure adequate curio cleansing tools for ${selectedQuest.dungeon}.`,
@@ -483,12 +639,28 @@ export function planExpedition(
   if (bossGuidance) {
     tacticalAdvice.unshift(`Target boss detected [${bossGuidance.id}]: ${bossGuidance.effectiveResponses[0] ?? ""}`);
   }
+  if (campingStrategy.hasCamping) {
+    if (campingStrategy.ambushPrevention.isAvailable) {
+      tacticalAdvice.push(
+        language === "ko"
+          ? `야영이 포함된 원정입니다. 안전을 위해 [${campingStrategy.ambushPrevention.providers[0]?.skillName ?? "야습 방지 기술"}]을 최우선 활성화하십시오.`
+          : `Camping included in this expedition. Prioritize [${campingStrategy.ambushPrevention.providers[0]?.skillName ?? "Ambush Prevention"}] to avoid nighttime ambushes.`,
+      );
+    } else {
+      tacticalAdvice.push(
+        language === "ko"
+          ? "야영이 포함된 원정이나 야습 방지 영웅이 없습니다. 야습 발생 시 진형 붕괴에 주의하십시오."
+          : "Expedition includes camping but no candidate heroes have ambush prevention skills. Beware of nocturnal party shuffling.",
+      );
+    }
+  }
 
   return {
     quest: questContext,
     rolePool,
     ineligibleHeroes,
     provisions,
+    campingStrategy,
     tacticalAdvice,
   };
 }
