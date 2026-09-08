@@ -149,12 +149,23 @@ change and a fresh snapshot is needed. Refreshing only replaces the server's
 in-memory snapshot; it never writes to the game profile. Sample mode uses a
 stable snapshot until explicitly refreshed.
 
-Curio coverage includes shared curios, Ruins, Warrens, Weald, Cove, Courtyard, Farmstead, Darkest Dungeon, Old Road, and relevant Hamlet quests. Retired curios that are no longer used by the game are intentionally excluded. `search_curios` and `get_curio_advice` accept `language` (`en` or `ko`) and resolve official curio names from `DD_GAME_DIR`; `availableItems` accepts internal IDs or official English/Korean display names. The curated knowledge set retains search aliases and language-neutral interaction outcomes and advice.
+### Localization
 
-Class knowledge covers all 18 playable Darkest Dungeon 1 classes and all 126 combat skills. `query_classes` accepts `language` (`en` or `ko`) and resolves official class and skill names from `DD_GAME_DIR`; the knowledge set retains only search aliases and language-neutral strategy guidance. Skill guidance uses internal IDs verified against the installed game definitions and describes use cases, synergies, and cautions without duplicating exact position or target data.
+Tools with a `language` input accept `en`, `fr`, `de`, `es`, `pt-BR`, `ru`,
+`pl`, `cs`, `it`, `zh-CN`, `ja`, and `ko`; the default is `en`. These codes
+map to the language IDs verified in the installed Darkest Dungeon 1 string
+tables. Official display names are returned only when the corresponding game
+string exists; otherwise the localized field is `null` or the documented
+stable-ID fallback is used. Stable internal IDs remain available in either
+case. Curated strategy, priority, and policy prose remains English source
+material for the MCP client to summarize in the user's language.
 
-`list_heroes`, `get_hero`, and `compare_heroes` accept `language` (`en` or
-`ko`). When `DD_GAME_DIR` is configured, `heroClassName`, combat skill `name`,
+Curio coverage includes shared curios, Ruins, Warrens, Weald, Cove, Courtyard, Farmstead, Darkest Dungeon, Old Road, and relevant Hamlet quests. Retired curios that are no longer used by the game are intentionally excluded. `search_curios` and `get_curio_advice` resolve official curio names from `DD_GAME_DIR`; `availableItems` accepts internal IDs or official display names in any supported language. The curated knowledge set retains search aliases and language-neutral interaction outcomes and advice.
+
+Class knowledge covers all 18 playable Darkest Dungeon 1 classes and all 126 combat skills. `query_classes` resolves official class and skill names from `DD_GAME_DIR`; the knowledge set retains only search aliases and language-neutral strategy guidance. Skill guidance uses internal IDs verified against the installed game definitions and describes use cases, synergies, and cautions without duplicating exact position or target data.
+
+`list_heroes`, `get_hero`, and `compare_heroes` accept `language`. When
+`DD_GAME_DIR` is configured, `heroClassName`, combat skill `name`,
 camping skill `name`, equipped trinket `name`, `quirks[].name`, `afflictionName`, and
 `virtueName` values come directly from the installed game's localization files; stable
 internal IDs remain available alongside them. In `get_hero`, `equippedTrinkets`
