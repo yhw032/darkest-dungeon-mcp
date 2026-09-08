@@ -203,10 +203,13 @@ test("MCP server advertises and executes read-only game tools", async (t) => {
 
   const instructions = client.getInstructions();
   assert.match(instructions ?? "", /Darkest Dungeon 1/);
+  assert.ok((instructions?.length ?? Infinity) < 2_500);
+  assert.match(instructions ?? "", /read-only/);
+  assert.match(instructions ?? "", /user's language/);
+  assert.match(instructions ?? "", /refresh_game_state/);
   assert.match(instructions ?? "", /search_curios/);
   assert.match(instructions ?? "", /get_curio_advice/);
-  assert.match(instructions ?? "", /never invent curio effects/);
-  assert.match(instructions ?? "", /do not infer it from estate storage/);
+  assert.match(instructions ?? "", /must not be inferred from estate storage/);
   assert.match(instructions ?? "", /list_risky_quirks/);
   assert.match(instructions ?? "", /editorial guidance/);
   assert.match(instructions ?? "", /compare_heroes/);
@@ -215,7 +218,7 @@ test("MCP server advertises and executes read-only game tools", async (t) => {
   assert.match(instructions ?? "", /recommend_trinkets/);
   assert.match(instructions ?? "", /plan_expedition/);
   assert.match(instructions ?? "", /recommend_building_upgrades/);
-  assert.match(instructions ?? "", /editorial strategy knowledge/);
+  assert.match(instructions ?? "", /never invent undocumented meanings/);
 
   const { tools } = await client.listTools();
   assert.deepEqual(
