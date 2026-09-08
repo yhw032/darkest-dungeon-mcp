@@ -1058,30 +1058,46 @@ export function createDarkestDungeonServer(
     {
       title: "Query trinkets",
       description:
-        "Query trinkets across estate storage, equipped heroes, and town stores by exact id, localized name, hero class eligibility, or rarity. Omit filters to list all trinkets.",
+        "Query trinkets across estate storage, equipped heroes, and town stores by exact id, localized name, hero class eligibility, or rarity. Returns at most 50 records by default.",
       inputSchema: z.object({
         id: z.string().min(1).optional(),
         query: z.string().min(1).optional(),
         location: z.enum(["storage", "equipped", "store"]).optional(),
         heroClass: z.string().min(1).optional(),
         rarity: z.string().min(1).optional(),
+        limit: z.number().int().min(1).max(100).default(50),
         language: z.enum(["en", "ko"]).default("en"),
       }),
       outputSchema: z.object({ trinkets: z.array(trinketRecordSchema) }),
       annotations: readOnlyAnnotations,
     },
-    async ({ id, query, location, heroClass, rarity, language }) => {
+    async ({ id, query, location, heroClass, rarity, limit, language }) => {
       const [state, localization, trinketDefinitions] = await Promise.all([
         dataSource.load(),
         getGameLocalization(),
         getTrinketDefinitions(),
       ]);
+      if (
+        trinketDefinitions === undefined &&
+        (heroClass !== undefined || rarity !== undefined)
+      ) {
+        return {
+          isError: true,
+          content: [
+            {
+              type: "text",
+              text: "heroClass and rarity filters require installed game definitions. Configure DD_GAME_DIR and retry.",
+            },
+          ],
+        };
+      }
       const filters = {
         ...(id === undefined ? {} : { id }),
         ...(query === undefined ? {} : { query }),
         ...(location === undefined ? {} : { location }),
         ...(heroClass === undefined ? {} : { heroClass }),
         ...(rarity === undefined ? {} : { rarity }),
+        limit,
         language,
       };
       return toolResult(
@@ -1334,6 +1350,7 @@ export function createDarkestDungeonServer(
   server.registerTool(
     "plan_expedition",
     {
+      title: "Plan expedition",
       description:
         "Generates a comprehensive expedition briefing for a target quest or region. Combines strict hero eligibility, class-knowledge-backed role candidate pools, curated trinket matches, provision estimates with gold costs, and regional or boss tactics.",
       inputSchema: {
@@ -1430,6 +1447,7 @@ export function createDarkestDungeonServer(
   server.registerTool(
     "recommend_building_upgrades",
     {
+      title: "Recommend building upgrades",
       description:
         "Analyzes estate upgrades and recommends strategic investments based on priority tiers (S/A/B/C), heirloom shortages, exchange feasibility, and farming locations. Separates top strategic priorities from immediately affordable alternatives.",
       inputSchema: z.object({

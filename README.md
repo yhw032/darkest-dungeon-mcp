@@ -131,8 +131,10 @@ runner through `tsx`. Tests never access the user's live save directory.
 | `compare_heroes` | Compare 2–8 heroes using localized class, skill, and risky-quirk names plus objective readiness, equipment, skill-position, and curated quirk-risk evidence. |
 | `list_quests` | Filter available quests with localized titles, objectives, regions, lengths, and reward names. |
 | `get_quest` | Return one quest by ID with localized official quest and reward text. |
-| `list_trinkets` | Query trinkets across storage, heroes, and stores by ID, localized name, hero class eligibility, or rarity. |
+| `list_trinkets` | Query up to `limit` trinkets across storage, heroes, and stores by ID, localized name, hero class eligibility, or rarity; class and rarity filters require `DD_GAME_DIR`. |
 | `recommend_trinkets` | Recommend optimal trinkets for a hero or class, or match candidate heroes for a specific trinket based on estate ownership, tier rankings, and synergies. |
+| `plan_expedition` | Build a quest briefing with verified eligibility, role pools, provisions, camping, and tactical guidance. |
+| `recommend_building_upgrades` | Rank estate upgrades using current heirlooms, verified costs, exchange feasibility, and curated priorities. |
 | `query_classes` | Query verified class guidance with official class, skill, and synergy names localized from the installed game. |
 | `query_combat` | Query verified region and enemy guidance by name, region, threat type, or priority. |
 | `search_curios` | Search verified curios by ID, localized name, alias, or region. |

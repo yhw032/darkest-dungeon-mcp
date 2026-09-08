@@ -241,6 +241,14 @@ test("MCP server advertises and executes read-only game tools", async (t) => {
     ],
   );
   assert.ok(tools.every((tool) => tool.annotations?.readOnlyHint === true));
+  assert.equal(
+    tools.find((tool) => tool.name === "plan_expedition")?.title,
+    "Plan expedition",
+  );
+  assert.equal(
+    tools.find((tool) => tool.name === "recommend_building_upgrades")?.title,
+    "Recommend building upgrades",
+  );
 
   const refreshResult = await client.callTool({
     name: "refresh_game_state",
@@ -822,6 +830,18 @@ test("MCP server advertises and executes read-only game tools", async (t) => {
       .trinkets,
     [],
   );
+  const limitedTrinketResult = await client.callTool({
+    name: "list_trinkets",
+    arguments: { limit: 1 },
+  });
+  assert.equal(
+    (
+      limitedTrinketResult.structuredContent as
+        | { trinkets?: unknown[] }
+        | undefined
+    )?.trinkets?.length,
+    1,
+  );
 
   const classFilteredResult = await client.callTool({
     name: "list_trinkets",
@@ -1061,4 +1081,26 @@ test("MCP server advertises and executes read-only game tools", async (t) => {
   assert.ok(upgradeRecContent?.recommendations?.estateResources);
   assert.ok(upgradeRecContent?.recommendations?.topPriorities);
   assert.ok(upgradeRecContent?.recommendations?.strategicGuidance);
+});
+
+test("list_trinkets rejects definition-backed filters without game data", async (t) => {
+  const server = createDarkestDungeonServer(new SampleGameStateDataSource());
+  const client = new Client({ name: "mcp-test-client", version: "1.0.0" });
+  const [clientTransport, serverTransport] = InMemoryTransport.createLinkedPair();
+  await server.connect(serverTransport);
+  await client.connect(clientTransport);
+  t.after(async () => {
+    await client.close();
+    await server.close();
+  });
+
+  const result = await client.callTool({
+    name: "list_trinkets",
+    arguments: { heroClass: "hellion" },
+  });
+  assert.equal(result.isError, true);
+  assert.match(
+    result.content[0]?.type === "text" ? result.content[0].text : "",
+    /DD_GAME_DIR/,
+  );
 });

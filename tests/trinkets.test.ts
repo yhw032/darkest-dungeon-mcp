@@ -100,6 +100,12 @@ test("filters the catalog by id and location", async () => {
   );
 });
 
+test("limits trinket query results", async () => {
+  const sources = await loadSources();
+  const results = listTrinkets(sources, { limit: 3 });
+  assert.equal(results.length, 3);
+});
+
 test("searches and displays localized trinket names", async () => {
   const sources = await loadSources();
   const results = listTrinkets(

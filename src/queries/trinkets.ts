@@ -58,6 +58,7 @@ export interface TrinketFilters {
   location?: TrinketLocation;
   heroClass?: string;
   rarity?: string;
+  limit?: number;
   language?: GameLanguage;
 }
 
@@ -145,7 +146,7 @@ export function listTrinkets(
     definitions?.map((d) => [d.id, d]),
   );
 
-  return buildTrinketCatalog(sources)
+  const results = buildTrinketCatalog(sources)
     .filter((record) => {
       const def = definitionsById.get(record.id);
       if (
@@ -210,6 +211,8 @@ export function listTrinkets(
         })),
       };
     });
+
+  return filters.limit === undefined ? results : results.slice(0, filters.limit);
 }
 
 export function getTrinket(
