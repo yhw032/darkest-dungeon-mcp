@@ -162,6 +162,9 @@ requirements (with localized class names), and stat buff/debuff `effects` from
 (`heroClass`), or a specific item (`trinketId`). It matches curated S/A/B/situational
 tier ratings, class-specific synergies, and usage cautions against current estate
 ownership (`in_storage`, `equipped_by_self`, `equipped_by_other`, `in_store`, or `not_owned`).
+Pass exactly one of `heroId`, `heroClass`, or `trinketId`. By default, store-only
+items are not treated as owned; they are exposed with `isAvailableForPurchase`
+when `onlyOwned` is false.
 When given `trinketId`, it returns candidate roster heroes ranked by suitability.
 
 `plan_expedition` prepares a comprehensive expedition briefing (dossier) for a

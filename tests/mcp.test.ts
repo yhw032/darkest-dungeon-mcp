@@ -874,6 +874,18 @@ test("MCP server advertises and executes read-only game tools", async (t) => {
   assert.equal(recommendedHairpin.tier, "S");
   assert.equal(recommendedHairpin.ownership.isOwned, true);
 
+  const missingTrinketGuidanceResult = await client.callTool({
+    name: "recommend_trinkets",
+    arguments: { trinketId: "does_not_exist" },
+  });
+  assert.equal(missingTrinketGuidanceResult.isError, true);
+
+  const conflictingRecommendationModes = await client.callTool({
+    name: "recommend_trinkets",
+    arguments: { heroId: "18", heroClass: "hellion" },
+  });
+  assert.equal(conflictingRecommendationModes.isError, true);
+
   const curioSearchResult = await client.callTool({
     name: "search_curios",
     arguments: { query: "기는 혼돈의 제단", region: "ruins", language: "ko" },

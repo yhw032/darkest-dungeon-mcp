@@ -1101,8 +1101,18 @@ export function createDarkestDungeonServer(
         heroId: z.string().min(1).optional().describe("Optional hero id to evaluate recommendations for."),
         heroClass: z.string().min(1).optional().describe("Optional hero class to evaluate recommendations for."),
         trinketId: z.string().min(1).optional().describe("Optional trinket id to inspect synergies and candidate heroes for."),
-        onlyOwned: z.boolean().default(true).describe("If true (default), only recommend trinkets currently in estate storage, equipped, or in stores."),
+        onlyOwned: z.boolean().default(true).describe("If true (default), only recommend trinkets already in estate storage or equipped by a hero. Store listings are reported separately as purchasable."),
         language: z.enum(["en", "ko"]).default("en"),
+      }).superRefine((value, context) => {
+        const modes = [value.heroId, value.heroClass, value.trinketId].filter(
+          (candidate) => candidate !== undefined,
+        );
+        if (modes.length !== 1) {
+          context.addIssue({
+            code: z.ZodIssueCode.custom,
+            message: "Provide exactly one of heroId, heroClass, or trinketId.",
+          });
+        }
       }),
       outputSchema: z.object({ recommendations: recommendTrinketsOutputSchema }),
       annotations: readOnlyAnnotations,
@@ -1121,6 +1131,31 @@ export function createDarkestDungeonServer(
         getHeroProgressionRules(),
         getGameLocalization(),
       ]);
+
+      if (
+        heroId !== undefined &&
+        !state.roster.heroes.some((hero) => hero.id === heroId)
+      ) {
+        return notFoundResult("Hero", heroId);
+      }
+      if (
+        trinketId !== undefined &&
+        !guidance.trinkets.some((entry) => entry.trinketId === trinketId)
+      ) {
+        return notFoundResult("Trinket guidance", trinketId);
+      }
+      if (heroClass !== undefined) {
+        const knownClasses = new Set([
+          ...state.roster.heroes.map((hero) => hero.heroClass),
+          ...guidance.trinkets.flatMap((entry) => entry.recommendedClasses),
+          ...(trinketDefinitions?.flatMap(
+            (definition) => definition.heroClassRequirements,
+          ) ?? []),
+        ]);
+        if (!knownClasses.has(heroClass)) {
+          return notFoundResult("Hero class", heroClass);
+        }
+      }
 
       const result = recommendTrinkets(
         state,

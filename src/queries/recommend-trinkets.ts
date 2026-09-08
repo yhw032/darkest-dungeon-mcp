@@ -1,7 +1,10 @@
 import type { TrinketBuffEffect, TrinketDefinition } from "../domain/trinket-definitions.js";
 import type { TrinketGuidanceKnowledgeBase, TrinketTier } from "../domain/trinket-guidance.js";
 import type { HeroProgressionRules } from "../domain/hero-progression.js";
-import { getResolveLevel } from "../progression/hero-progression.js";
+import {
+  getHeroAvailability,
+  getResolveLevel,
+} from "../progression/hero-progression.js";
 import { isDeceasedHero } from "../roster/hero-roster-state.js";
 import {
   localizeHeroClass,
@@ -17,6 +20,7 @@ import {
   type TrinketSources,
   type TrinketStoreListing,
 } from "./trinkets.js";
+import { getHeroTownContext } from "./get-hero-town-context.js";
 
 export type TrinketOwnershipStatus =
   | "in_storage"
@@ -35,6 +39,7 @@ export interface RecommendedTrinketItem {
   effects?: TrinketBuffEffect[];
   ownership: {
     isOwned: boolean;
+    isAvailableForPurchase: boolean;
     status: TrinketOwnershipStatus;
     storageAmount: number;
     equippedBy: EquippedTrinketAssignment[];
@@ -53,6 +58,8 @@ export interface CandidateHeroRecommendation {
   heroClass: string;
   heroClassName: string | null;
   resolveLevel: number | null;
+  stress: number;
+  availability: ReturnType<typeof getHeroAvailability>;
   isCurrentlyEquipped: boolean;
   suitabilityReason: string;
 }
@@ -179,6 +186,11 @@ export function recommendTrinkets(
             (t) => t.id === options.trinketId,
           );
           const resolveLevel = getResolveLevel(h.resolveXp, progressionRules);
+          const townContext = getHeroTownContext(
+            sources.roster,
+            sources.town,
+            h.id,
+          )!;
           const suitabilityReason = isOptimal
             ? `Recommended core class (${h.heroClass}) for this trinket.`
             : `Eligible hero class (${h.heroClass}) meeting equipment requirements.`;
@@ -189,11 +201,19 @@ export function recommendTrinkets(
             heroClass: h.heroClass,
             heroClassName: localizeHeroClass(h.heroClass, language, localization),
             resolveLevel,
+            stress: h.stress,
+            availability: getHeroAvailability(h, townContext),
             isCurrentlyEquipped,
             suitabilityReason,
           };
         })
         .sort((left, right) => {
+          if (
+            left.availability.isAvailableForPartySelection !==
+            right.availability.isAvailableForPartySelection
+          ) {
+            return left.availability.isAvailableForPartySelection ? -1 : 1;
+          }
           const leftOptimal = entry.recommendedClasses.includes(left.heroClass);
           const rightOptimal = entry.recommendedClasses.includes(right.heroClass);
           if (leftOptimal && !rightOptimal) return -1;
@@ -248,7 +268,7 @@ export function recommendTrinkets(
     const hasStorage = (record?.storageAmount ?? 0) > 0;
     const hasEquipped = (record?.equippedBy.length ?? 0) > 0;
     const hasStore = (record?.storeAmount ?? 0) > 0;
-    const isOwned = hasStorage || hasEquipped || hasStore;
+    const isOwned = hasStorage || hasEquipped;
 
     if (onlyOwned && !isOwned) {
       continue;
@@ -300,6 +320,7 @@ export function recommendTrinkets(
           }),
       ownership: {
         isOwned,
+        isAvailableForPurchase: hasStore,
         status,
         storageAmount: record?.storageAmount ?? 0,
         equippedBy: record?.equippedBy ?? [],

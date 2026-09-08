@@ -688,6 +688,9 @@ export const recommendedTrinketItemSchema = z.object({
   effects: z.array(trinketEffectSchema).optional(),
   ownership: z.object({
     isOwned: z.boolean(),
+    isAvailableForPurchase: z.boolean().describe(
+      "Whether the trinket is currently listed in a town store; purchasing is not performed by this read-only server.",
+    ),
     status: trinketOwnershipStatusSchema,
     storageAmount: finiteNumber,
     equippedBy: z.array(
@@ -719,6 +722,8 @@ export const candidateHeroRecommendationSchema = z.object({
   heroClass: z.string(),
   heroClassName: nullableString,
   resolveLevel: finiteNumber.nullable(),
+  stress: finiteNumber,
+  availability: heroAvailabilitySchema,
   isCurrentlyEquipped: z.boolean(),
   suitabilityReason: z.string(),
 });

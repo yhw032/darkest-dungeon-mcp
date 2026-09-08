@@ -137,6 +137,56 @@ test("respects onlyOwned flag when filtering recommendations", async () => {
   assert.ok(resultAll.recommendations.some((r) => !r.ownership.isOwned));
 });
 
+test("does not treat a store-only trinket as owned", async () => {
+  const sources = await loadSources();
+  const guidance = await loadTrinketGuidance();
+  const withStoreListing: TrinketSources = {
+    ...sources,
+    town: {
+      ...sources.town,
+      buildings: [
+        ...sources.town.buildings,
+        {
+          id: "nomad_wagon",
+          activities: [],
+          stores: [
+            {
+              id: "wagon",
+              items: [{ id: "focus_ring", type: "trinket", amount: 1 }],
+              recruits: [],
+            },
+          ],
+        },
+      ],
+    },
+  };
+
+  const ownedOnly = recommendTrinkets(
+    withStoreListing,
+    guidance,
+    { heroId: "150", onlyOwned: true },
+    mockDefinitions,
+  );
+  assert.equal(
+    ownedOnly.recommendations.some((item) => item.trinketId === "focus_ring"),
+    false,
+  );
+
+  const includingUnowned = recommendTrinkets(
+    withStoreListing,
+    guidance,
+    { heroId: "150", onlyOwned: false },
+    mockDefinitions,
+  );
+  const focusRing = includingUnowned.recommendations.find(
+    (item) => item.trinketId === "focus_ring",
+  );
+  assert.ok(focusRing);
+  assert.equal(focusRing.ownership.isOwned, false);
+  assert.equal(focusRing.ownership.isAvailableForPurchase, true);
+  assert.equal(focusRing.ownership.status, "in_store");
+});
+
 test("recommends candidate heroes for a specific trinket id", async () => {
   const sources = await loadSources();
   const guidance = await loadTrinketGuidance();
@@ -154,6 +204,23 @@ test("recommends candidate heroes for a specific trinket id", async () => {
   assert.equal(result.trinketContext.tier, "S");
   assert.ok(result.candidateHeroes);
   assert.ok(result.candidateHeroes.length > 0);
+  assert.ok(
+    result.candidateHeroes.every(
+      (candidate) =>
+        typeof candidate.stress === "number" &&
+        typeof candidate.availability.isAvailableForPartySelection === "boolean",
+    ),
+  );
+  const firstUnavailable = result.candidateHeroes.findIndex(
+    (candidate) => !candidate.availability.isAvailableForPartySelection,
+  );
+  if (firstUnavailable >= 0) {
+    assert.ok(
+      result.candidateHeroes
+        .slice(0, firstUnavailable)
+        .every((candidate) => candidate.availability.isAvailableForPartySelection),
+    );
+  }
 
   // Top candidate should be a Hellion
   assert.equal(result.candidateHeroes[0]?.heroClass, "hellion");
