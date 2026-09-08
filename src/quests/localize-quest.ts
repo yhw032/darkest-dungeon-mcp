@@ -12,6 +12,10 @@ import {
   type LocalizationByLanguage,
 } from "../localization/string-table.js";
 import type { QuestSummary } from "../queries/list-quests.js";
+import {
+  getGameLocalizationId,
+  supportedGameLocalizationIds,
+} from "../localization/languages.js";
 
 export type QuestLanguage = GameLanguage;
 
@@ -38,12 +42,6 @@ export interface LocalizedQuestReward extends Omit<QuestReward, "items"> {
 
 export type QuestLocalization = LocalizationByLanguage;
 
-const languageIds: Record<QuestLanguage, string> = {
-  en: "english",
-  ko: "koreana",
-};
-const supportedLanguageIds = new Set(Object.values(languageIds));
-
 const localizationFiles = [
   { path: ["localization", "miscellaneous.string_table.xml"], optional: false },
   {
@@ -65,7 +63,7 @@ export async function loadQuestLocalization(
       const text = await readFile(resolve(gameDirectory, ...file.path), "utf8");
       mergeStringTables(
         localization,
-        parseStringTableXml(text, supportedLanguageIds),
+        parseStringTableXml(text, supportedGameLocalizationIds),
       );
     } catch (error) {
       if (
@@ -160,7 +158,7 @@ export function localizeDungeon(
   return {
     id: dungeonId,
     name: localization
-      ?.get(languageIds[language])
+      ?.get(getGameLocalizationId(language))
       ?.get(`dungeon_name_${dungeonId}`) ?? null,
   };
 }

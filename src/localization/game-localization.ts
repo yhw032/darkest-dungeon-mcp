@@ -6,15 +6,14 @@ import {
   parseStringTableXml,
   type LocalizationByLanguage,
 } from "./string-table.js";
+import {
+  getGameLocalizationId,
+  supportedGameLocalizationIds,
+  type GameLanguage,
+} from "./languages.js";
 
-export type GameLanguage = "en" | "ko";
+export type { GameLanguage } from "./languages.js";
 export type GameLocalization = LocalizationByLanguage;
-
-const languageIds: Record<GameLanguage, string> = {
-  en: "english",
-  ko: "koreana",
-};
-const supportedLanguageIds = new Set(Object.values(languageIds));
 
 const localizationFiles = [
   { path: ["localization", "miscellaneous.string_table.xml"], optional: false },
@@ -46,7 +45,7 @@ export async function loadGameLocalization(
       const text = await readFile(resolve(gameDirectory, ...file.path), "utf8");
       mergeStringTables(
         localization,
-        parseStringTableXml(text, supportedLanguageIds),
+        parseStringTableXml(text, supportedGameLocalizationIds),
       );
     } catch (error) {
       if (
@@ -69,7 +68,7 @@ export function localizeGameString(
   language: GameLanguage,
   localization?: GameLocalization,
 ): string | null {
-  return localization?.get(languageIds[language])?.get(id) ?? null;
+  return localization?.get(getGameLocalizationId(language))?.get(id) ?? null;
 }
 
 export function localizeHeroClass(
