@@ -122,6 +122,7 @@ runner through `tsx`. Tests never access the user's live save directory.
 
 | Tool | Purpose |
 | --- | --- |
+| `refresh_game_state` | Reload the shared read-only save snapshot before a new analysis when the campaign has changed. |
 | `get_game_state` | Return a combined campaign summary with localized estate resources, class counts, dungeon quest counts, and built-district names. |
 | `list_building_upgrades` | List building upgrades and costs with localized building, tree, and heirloom names. |
 | `list_risky_quirks` | Rank treatment-worthy quirks with localized class, quirk, and effect text. |

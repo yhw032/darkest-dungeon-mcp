@@ -116,6 +116,12 @@ const readOnlyAnnotations = {
   idempotentHint: true,
 } as const;
 
+const refreshAnnotations = {
+  readOnlyHint: true,
+  destructiveHint: false,
+  idempotentHint: false,
+} as const;
+
 export interface DarkestDungeonServerOptions {
   loadClassKnowledge?: () => Promise<ClassKnowledgeBase>;
   loadCombatKnowledge?: () => Promise<CombatKnowledgeBase>;
@@ -140,6 +146,7 @@ export const serverInstructions = [
   "This read-only server provides normalized Darkest Dungeon 1 save state and verified gameplay knowledge.",
   "Answer in the user's language. Treat English guidance fields as source material to summarize rather than text to reproduce verbatim, and use localized name fields for game terminology.",
   "Use save-state tools for facts about the current campaign instead of guessing.",
+  "Live save-state tools share a two-minute read-only snapshot. Call refresh_game_state before a new analysis when the user says the game has changed.",
   "Pass the user's language to get_game_state and display localized estate.resources, built-district names, roster.byClassDetails, and quests.byDungeonDetails.",
   "Use roster.activeHeroes for the current barracks count; roster.totalHeroRecords includes deceased history.",
   "list_heroes excludes deceased heroes by default; set includeDeceased only when historical records are requested.",
@@ -382,6 +389,26 @@ export function createDarkestDungeonServer(
       capabilities: { tools: {} },
       instructions: serverInstructions,
     },
+  );
+
+  server.registerTool(
+    "refresh_game_state",
+    {
+      title: "Refresh game state snapshot",
+      description:
+        "Reload the read-only game-state snapshot. Use before a new analysis when the user reports that the campaign has changed; subsequent save-state tools reuse this snapshot for up to two minutes.",
+      inputSchema: z.object({}),
+      outputSchema: z.object({
+        snapshot: z.object({
+          snapshotId: z.string(),
+          source: z.enum(["sample", "live"]),
+          loadedAt: z.string(),
+          expiresAt: z.string().nullable(),
+        }),
+      }),
+      annotations: refreshAnnotations,
+    },
+    async () => toolResult("snapshot", await dataSource.refresh()),
   );
 
   server.registerTool(

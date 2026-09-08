@@ -236,10 +236,23 @@ test("MCP server advertises and executes read-only game tools", async (t) => {
       "query_combat",
       "recommend_building_upgrades",
       "recommend_trinkets",
+      "refresh_game_state",
       "search_curios",
     ],
   );
   assert.ok(tools.every((tool) => tool.annotations?.readOnlyHint === true));
+
+  const refreshResult = await client.callTool({
+    name: "refresh_game_state",
+    arguments: {},
+  });
+  const refreshedSnapshot = (
+    refreshResult.structuredContent as
+      | { snapshot?: { snapshotId?: unknown; source?: unknown } }
+      | undefined
+  )?.snapshot;
+  assert.equal(typeof refreshedSnapshot?.snapshotId, "string");
+  assert.equal(refreshedSnapshot?.source, "sample");
 
   const listHeroesTool = tools.find((tool) => tool.name === "list_heroes");
   const listHeroesOutput = listHeroesTool?.outputSchema as
