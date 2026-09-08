@@ -94,19 +94,14 @@ export function recommendBuildingUpgrades(
     // Costs analysis
     const costs: HeirloomCostStatus[] = [];
     let isAffordable = true;
-    let totalMissingPoints = 0;
     const missingItems: Array<{ type: string; missing: number }> = [];
-    const requiredTypes = new Set<string>();
 
     for (const cost of progress.nextRequirement.currencyCost) {
-      requiredTypes.add(cost.type);
       const current = resourceMap.get(cost.type) ?? 0;
       const required = cost.amount;
       const missing = Math.max(0, required - current);
       if (missing > 0) {
         isAffordable = false;
-        const rate = heirloomExchangeRates[cost.type] ?? 1.0;
-        totalMissingPoints += missing * rate;
         missingItems.push({ type: cost.type, missing });
       }
 
@@ -125,9 +120,8 @@ export function recommendBuildingUpgrades(
     const recommendedExchanges: HeirloomExchangeOpportunity[] = [];
     let canAffordViaExchange = false;
 
-    if (!isAffordable && totalMissingPoints > 0) {
+    if (!isAffordable && missingItems.length > 0) {
       // Find surplus heirlooms among currencies not required or exceeding requirement
-      let availableSurplusPoints = 0;
       const surplusSources: Array<{ type: string; amount: number; rate: number }> = [];
 
       for (const [type, amount] of resourceMap.entries()) {
@@ -137,58 +131,66 @@ export function recommendBuildingUpgrades(
         const surplus = Math.max(0, amount - reqAmount);
         if (surplus > 0) {
           const rate = heirloomExchangeRates[type]!;
-          availableSurplusPoints += surplus * rate;
           surplusSources.push({ type, amount: surplus, rate });
         }
       }
 
-      if (availableSurplusPoints >= totalMissingPoints) {
-        canAffordViaExchange = true;
-        surplusSources.sort((a, b) => b.rate - a.rate);
+      surplusSources.sort((a, b) => b.rate - a.rate);
+      const proposedExchanges: HeirloomExchangeOpportunity[] = [];
+      let allMissingItemsCovered = true;
 
-        // Propose trade path for first missing item
-        let neededPoints = totalMissingPoints;
+      for (const target of missingItems) {
+        const targetRate = heirloomExchangeRates[target.type] ?? 1.0;
+        let remainingTargetAmount = target.missing;
+
         for (const src of surplusSources) {
-          if (neededPoints <= 0) break;
-          const target = missingItems[0];
-          if (!target) break;
-          const targetRate = heirloomExchangeRates[target.type] ?? 1.0;
-          const srcPointsTotal = src.amount * src.rate;
+          if (remainingTargetAmount <= 0) break;
+          const maximumTargetAmount = Math.floor(
+            (src.amount * src.rate) / targetRate,
+          );
+          if (maximumTargetAmount <= 0) continue;
 
-          if (srcPointsTotal >= neededPoints) {
-            const srcTradeAmount = Math.ceil(neededPoints / src.rate);
-            const targetTradeAmount = Math.floor((srcTradeAmount * src.rate) / targetRate);
-            recommendedExchanges.push({
-              sourceType: src.type,
-              sourceTypeName:
-                getLocalized(localization, language, `str_inventory_title_estate_currency${src.type}`) ??
-                src.type,
-              sourceAmountToTrade: srcTradeAmount,
-              targetType: target.type,
-              targetTypeName:
-                getLocalized(localization, language, `str_inventory_title_estate_currency${target.type}`) ??
-                target.type,
-              targetAmountReceived: targetTradeAmount,
-            });
-            neededPoints = 0;
-          } else {
-            const srcTradeAmount = src.amount;
-            const targetTradeAmount = Math.floor((srcTradeAmount * src.rate) / targetRate);
-            recommendedExchanges.push({
-              sourceType: src.type,
-              sourceTypeName:
-                getLocalized(localization, language, `str_inventory_title_estate_currency${src.type}`) ??
-                src.type,
-              sourceAmountToTrade: srcTradeAmount,
-              targetType: target.type,
-              targetTypeName:
-                getLocalized(localization, language, `str_inventory_title_estate_currency${target.type}`) ??
-                target.type,
-              targetAmountReceived: targetTradeAmount,
-            });
-            neededPoints -= srcPointsTotal;
-          }
+          const requestedTargetAmount = Math.min(
+            remainingTargetAmount,
+            maximumTargetAmount,
+          );
+          const sourceAmountToTrade = Math.min(
+            src.amount,
+            Math.ceil((requestedTargetAmount * targetRate) / src.rate),
+          );
+          const targetAmountReceived = Math.floor(
+            (sourceAmountToTrade * src.rate) / targetRate,
+          );
+          if (targetAmountReceived <= 0) continue;
+
+          proposedExchanges.push({
+            sourceType: src.type,
+            sourceTypeName:
+              getLocalized(localization, language, `str_inventory_title_estate_currency${src.type}`) ??
+              src.type,
+            sourceAmountToTrade,
+            targetType: target.type,
+            targetTypeName:
+              getLocalized(localization, language, `str_inventory_title_estate_currency${target.type}`) ??
+              target.type,
+            targetAmountReceived,
+          });
+          src.amount -= sourceAmountToTrade;
+          remainingTargetAmount = Math.max(
+            0,
+            remainingTargetAmount - targetAmountReceived,
+          );
         }
+
+        if (remainingTargetAmount > 0) {
+          allMissingItemsCovered = false;
+          break;
+        }
+      }
+
+      if (allMissingItemsCovered) {
+        canAffordViaExchange = true;
+        recommendedExchanges.push(...proposedExchanges);
       }
     }
 

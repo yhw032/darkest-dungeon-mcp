@@ -204,6 +204,65 @@ test("simulates heirloom exchange possibility when surplus heirlooms exist", () 
   assert.equal(weaponRec.exchangePossibility.recommendedExchanges[0]?.targetType, "deed");
 });
 
+test("covers every missing heirloom type with distinct exchange steps", () => {
+  const state = createMockGameState([
+    { type: "deed", amount: 2 },
+    { type: "crest", amount: 0 },
+    { type: "bust", amount: 15 },
+  ]);
+
+  const result = recommendBuildingUpgrades(
+    state,
+    mockTrees,
+    mockPriorityKnowledge,
+    { language: "en" },
+  );
+
+  const weaponRec = result.topPriorities.find(
+    (recommendation) => recommendation.treeId === "weaponsmithing",
+  );
+  assert.ok(weaponRec);
+  assert.equal(weaponRec.exchangePossibility.canAffordViaExchange, true);
+  assert.deepEqual(
+    weaponRec.exchangePossibility.recommendedExchanges.map(
+      ({ targetType }) => targetType,
+    ),
+    ["deed", "crest"],
+  );
+  assert.equal(
+    weaponRec.exchangePossibility.recommendedExchanges.reduce(
+      (total, exchange) => total + exchange.sourceAmountToTrade,
+      0,
+    ),
+    15,
+  );
+});
+
+test("does not expose a partial exchange plan as affordable", () => {
+  const state = createMockGameState([
+    { type: "deed", amount: 2 },
+    { type: "crest", amount: 0 },
+    { type: "bust", amount: 14 },
+  ]);
+
+  const result = recommendBuildingUpgrades(
+    state,
+    mockTrees,
+    mockPriorityKnowledge,
+    { language: "en" },
+  );
+
+  const weaponRec = result.topPriorities.find(
+    (recommendation) => recommendation.treeId === "weaponsmithing",
+  );
+  assert.ok(weaponRec);
+  assert.equal(weaponRec.exchangePossibility.canAffordViaExchange, false);
+  assert.deepEqual(
+    weaponRec.exchangePossibility.recommendedExchanges,
+    [],
+  );
+});
+
 test("separates immediately affordable options across all tiers", () => {
   // Can afford network (deed 3, crest 10) and roster_size (portrait 4, crest 15) and bar (portrait 4, crest 15)
   // but cannot afford weaponsmithing (deed 10)
