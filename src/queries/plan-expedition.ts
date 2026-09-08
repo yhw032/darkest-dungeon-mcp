@@ -123,9 +123,7 @@ function getLocalized(
   language: GameLanguage,
   key: string,
 ): string | null {
-  if (!localization) return null;
-  const langKey = language === "ko" ? "koreana" : "english";
-  return localization.get(langKey)?.get(key) ?? null;
+  return localizeGameString(key, language, localization);
 }
 
 function findBossGuidance(
@@ -246,9 +244,11 @@ function getLocalizedSkillName(
   language: GameLanguage,
   skillId: string,
 ): string | null {
-  if (!localization) return null;
-  const langKey = language === "ko" ? "koreana" : "english";
-  return localization.get(langKey)?.get(`camping_skill_name_${skillId}`) ?? null;
+  return localizeGameString(
+    `camping_skill_name_${skillId}`,
+    language,
+    localization,
+  );
 }
 
 function buildCampingStrategy(

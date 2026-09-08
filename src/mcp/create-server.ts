@@ -47,6 +47,7 @@ import {
   localizeAffliction,
   localizeCombatSkill,
   localizeEstateResource,
+  localizeGameString,
   localizeHeroClass,
   localizeQuirk,
   localizeTrinket,
@@ -917,8 +918,11 @@ export function createDarkestDungeonServer(
         })),
         campingSkillDetails: hero.campingSkills.map((skillId) => {
           const def = campingSkillsKnowledge.skills.find((s) => s.id === skillId);
-          const langKey = language === "ko" ? "koreana" : "english";
-          const name = localization?.get(langKey)?.get(`camping_skill_name_${skillId}`) ?? null;
+          const name = localizeGameString(
+            `camping_skill_name_${skillId}`,
+            language,
+            localization,
+          );
           return {
             id: skillId,
             name,

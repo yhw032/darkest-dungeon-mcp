@@ -9,6 +9,7 @@ import {
   type GameLanguage,
   type GameLocalization,
 } from "../localization/game-localization.js";
+import { gameLanguageCodes } from "../localization/languages.js";
 import {
   normalizeKnowledgeTerm,
   searchCurios,
@@ -76,8 +77,9 @@ function resolveAvailableItems(
   for (const itemId of interactionItemIds) {
     const aliases = [
       itemId,
-      localizeProvisionItem(itemId, "en", localization),
-      localizeProvisionItem(itemId, "ko", localization),
+      ...gameLanguageCodes.map((language) =>
+        localizeProvisionItem(itemId, language, localization),
+      ),
     ].filter((alias): alias is string => alias !== null);
     if (aliases.some((alias) => supplied.has(canonicalItem(alias)))) {
       resolved.add(canonicalItem(itemId));

@@ -98,11 +98,15 @@ test("recommends an interaction enabled by supplied items", async () => {
   assert.match(result.warnings[0] ?? "", /no-item/);
 });
 
-test("accepts an official localized provision name", async () => {
+test("accepts official provision names from any supported localization", async () => {
   const localization = new Map([
     [
       "koreana",
       new Map([["str_inventory_title_supplyholy_water", "성수"]]),
+    ],
+    [
+      "french",
+      new Map([["str_inventory_title_supplyholy_water", "Eau bénite"]]),
     ],
   ]);
   const result = getCurioAdvice(
@@ -118,6 +122,20 @@ test("accepts an official localized provision name", async () => {
   assert.equal(result.status, "found");
   if (result.status !== "found") return;
   assert.equal(result.recommendedInteraction?.item, "holy_water");
+
+  const frenchResult = getCurioAdvice(
+    await loadCurioKnowledge(),
+    {
+      curioId: "eldritch_altar",
+      availableItems: ["Eau bénite"],
+      language: "fr",
+    },
+    localization,
+  );
+
+  assert.equal(frenchResult.status, "found");
+  if (frenchResult.status !== "found") return;
+  assert.equal(frenchResult.recommendedInteraction?.item, "holy_water");
 });
 
 test("warns when supplied items cannot enable a recommended interaction", async () => {

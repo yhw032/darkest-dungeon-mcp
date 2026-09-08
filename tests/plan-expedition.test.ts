@@ -314,6 +314,44 @@ test("matches region aliases to save dungeon ids without falling back", () => {
   );
 });
 
+test("localizes expedition details in an additional supported language", () => {
+  const state = createMockGameState(
+    [makeHero("1", "Reynauld", "crusader", 3)],
+    [makeQuest("crypts_short", "crypts", 0, 0)],
+  );
+  const localization = new Map([
+    [
+      "french",
+      new Map([
+        ["dungeon_name_crypts", "Les Ruines"],
+        ["town_quest_name_crypts_short", "Quête des Ruines"],
+        ["hero_class_name_crusader", "Croisé"],
+        ["str_inventory_title_supplyholy_water", "Eau bénite"],
+      ]),
+    ],
+  ]);
+
+  const plan = planExpedition(
+    state,
+    { language: "fr" },
+    {
+      combatKnowledge: mockCombatKnowledge,
+      classKnowledge: mockClassKnowledge,
+      progressionRules: mockProgressionRules,
+      restrictionRules: mockRestrictionRules,
+      localization,
+    },
+  );
+
+  assert.equal(plan.quest.dungeonName, "Les Ruines");
+  assert.equal(plan.quest.questName, "Quête des Ruines");
+  assert.equal(plan.rolePool.frontlineDps[0]?.heroClassName, "Croisé");
+  assert.equal(
+    plan.provisions.items.find(({ id }) => id === "holy_water")?.name,
+    "Eau bénite",
+  );
+});
+
 test("rejects unmatched dungeon and difficulty filters", () => {
   const state = createMockGameState(
     [makeHero("1", "Reynauld", "crusader", 3)],
