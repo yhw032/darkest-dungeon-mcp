@@ -4,6 +4,7 @@ import test from "node:test";
 import { Client, InMemoryTransport } from "@modelcontextprotocol/client";
 
 import { createDarkestDungeonServer } from "../src/mcp/create-server.js";
+import { gameLanguageCodes } from "../src/localization/languages.js";
 import {
   createConfiguredDataSource,
   LiveGameStateDataSource,
@@ -92,6 +93,13 @@ test("MCP server advertises and executes read-only game tools", async (t) => {
             ["str_virtue_name_focused", "정신 집중"],
             ["str_quirk_name_nervous_bleeder", "출혈 긴장증"],
             ["str_quirk_name_torn_rotator_cuff", "인대 파열"],
+          ]),
+        ],
+        [
+          "french",
+          new Map([
+            ["hero_class_name_leper", "Lépreux"],
+            ["combat_skill_name_leper_chop", "Taillade"],
           ]),
         ],
       ]),
@@ -244,6 +252,19 @@ test("MCP server advertises and executes read-only game tools", async (t) => {
     ],
   );
   assert.ok(tools.every((tool) => tool.annotations?.readOnlyHint === true));
+  const languageSchemas = tools.flatMap((tool) => {
+    const language = (
+      tool.inputSchema as {
+        properties?: { language?: { default?: unknown; enum?: unknown[] } };
+      }
+    ).properties?.language;
+    return language === undefined ? [] : [language];
+  });
+  assert.equal(languageSchemas.length, 16);
+  for (const languageSchema of languageSchemas) {
+    assert.deepEqual(languageSchema.enum, [...gameLanguageCodes]);
+    assert.equal(languageSchema.default, "en");
+  }
   assert.equal(
     tools.find((tool) => tool.name === "plan_expedition")?.title,
     "Plan expedition",
@@ -961,6 +982,18 @@ test("MCP server advertises and executes read-only game tools", async (t) => {
       | undefined
   )?.skillGuidance?.find(({ skillId }) => skillId === "chop");
   assert.equal(chop?.name, "토막치기");
+
+  const frenchClassQueryResult = await client.callTool({
+    name: "query_classes",
+    arguments: { query: "leper", language: "fr" },
+  });
+  const frenchClasses = (
+    frenchClassQueryResult.structuredContent as
+      | { classes?: Array<{ id?: unknown; name?: unknown }> }
+      | undefined
+  )?.classes;
+  assert.equal(frenchClasses?.[0]?.id, "leper");
+  assert.equal(frenchClasses?.[0]?.name, "Lépreux");
 
   const combatQueryResult = await client.callTool({
     name: "query_combat",

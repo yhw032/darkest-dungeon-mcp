@@ -54,6 +54,7 @@ import {
   localizeVirtue,
   type GameLocalization,
 } from "../localization/game-localization.js";
+import { gameLanguageCodes } from "../localization/languages.js";
 import { loadQuirkTreatmentKnowledge } from "../knowledge/load-quirk-treatment-knowledge.js";
 import { analyzeRiskyQuirks } from "../queries/analyze-risky-quirks.js";
 import { getCurioAdvice } from "../queries/get-curio-advice.js";
@@ -122,6 +123,8 @@ const refreshAnnotations = {
   destructiveHint: false,
   idempotentHint: false,
 } as const;
+
+const gameLanguageInputSchema = z.enum(gameLanguageCodes).default("en");
 
 export interface DarkestDungeonServerOptions {
   loadClassKnowledge?: () => Promise<ClassKnowledgeBase>;
@@ -400,7 +403,7 @@ export function createDarkestDungeonServer(
         "Return a read-only summary of the roster, estate, town, and available quests with localized resource, class, dungeon, and built-district details.",
       inputSchema: z.object({
         stressThreshold: z.number().finite().nonnegative().optional(),
-        language: z.enum(["en", "ko"]).default("en"),
+        language: gameLanguageInputSchema,
       }),
       outputSchema: z.object({ gameState: gameStateSummarySchema }),
       annotations: readOnlyAnnotations,
@@ -482,7 +485,7 @@ export function createDarkestDungeonServer(
         "List purchased building upgrades and the next verified heirloom cost with localized building, upgrade-tree, and heirloom names, optionally filtered by building id.",
       inputSchema: z.object({
         buildingId: z.string().min(1).optional(),
-        language: z.enum(["en", "ko"]).default("en"),
+        language: gameLanguageInputSchema,
       }),
       outputSchema: z.object({ upgrades: z.array(buildingUpgradeProgressSchema) }),
       annotations: readOnlyAnnotations,
@@ -515,7 +518,7 @@ export function createDarkestDungeonServer(
           .default("high"),
         lockedOnly: z.boolean().default(false),
         heroId: z.string().min(1).optional(),
-        language: z.enum(["en", "ko"]).default("en"),
+        language: gameLanguageInputSchema,
         limit: z.number().int().min(1).max(50).default(10),
       }),
       outputSchema: z.object({
@@ -581,7 +584,7 @@ export function createDarkestDungeonServer(
           .describe("Include deceased historical hero records. Defaults to false."),
         questId: z.string().min(1).optional(),
         eligibleOnly: z.boolean().default(false),
-        language: z.enum(["en", "ko"]).default("en"),
+        language: gameLanguageInputSchema,
       }).refine(
         ({ questId, eligibleOnly }) => !eligibleOnly || questId !== undefined,
         { message: "eligibleOnly requires questId." },
@@ -659,7 +662,7 @@ export function createDarkestDungeonServer(
             message: "heroIds must be unique.",
           }),
         questId: z.string().min(1).optional(),
-        language: z.enum(["en", "ko"]).default("en"),
+        language: gameLanguageInputSchema,
       }),
       outputSchema: z.object({ comparison: heroComparisonSchema }),
       annotations: readOnlyAnnotations,
@@ -811,7 +814,7 @@ export function createDarkestDungeonServer(
       inputSchema: z.object({
         heroId: z.string().min(1),
         questId: z.string().min(1).optional(),
-        language: z.enum(["en", "ko"]).default("en"),
+        language: gameLanguageInputSchema,
       }),
       outputSchema: z.object({
         hero: heroDetailSchema,
@@ -981,10 +984,9 @@ export function createDarkestDungeonServer(
         type: z.string().min(1).optional(),
         difficulty: z.number().int().nonnegative().optional(),
         isPlotQuest: z.boolean().optional(),
-        language: z
-          .enum(["en", "ko"])
-          .default("en")
-          .describe("Display language for dungeon.name."),
+        language: gameLanguageInputSchema.describe(
+          "Display language for dungeon.name.",
+        ),
       }),
       outputSchema: z.object({ quests: z.array(questSummarySchema) }),
       annotations: readOnlyAnnotations,
@@ -1017,10 +1019,9 @@ export function createDarkestDungeonServer(
         "Return one normalized quest with a localized dungeon display name.",
       inputSchema: z.object({
         questId: z.string().min(1),
-        language: z
-          .enum(["en", "ko"])
-          .default("en")
-          .describe("Display language for dungeon.name."),
+        language: gameLanguageInputSchema.describe(
+          "Display language for dungeon.name.",
+        ),
       }),
       outputSchema: z.object({ quest: questSchema }),
       annotations: readOnlyAnnotations,
@@ -1050,7 +1051,7 @@ export function createDarkestDungeonServer(
         heroClass: z.string().min(1).optional(),
         rarity: z.string().min(1).optional(),
         limit: z.number().int().min(1).max(100).default(50),
-        language: z.enum(["en", "ko"]).default("en"),
+        language: gameLanguageInputSchema,
       }),
       outputSchema: z.object({ trinkets: z.array(trinketRecordSchema) }),
       annotations: readOnlyAnnotations,
@@ -1102,7 +1103,7 @@ export function createDarkestDungeonServer(
         heroClass: z.string().min(1).optional().describe("Optional hero class to evaluate recommendations for."),
         trinketId: z.string().min(1).optional().describe("Optional trinket id to inspect synergies and candidate heroes for."),
         onlyOwned: z.boolean().default(true).describe("If true (default), only recommend trinkets already in estate storage or equipped by a hero. Store listings are reported separately as purchasable."),
-        language: z.enum(["en", "ko"]).default("en"),
+        language: gameLanguageInputSchema,
       }).superRefine((value, context) => {
         const modes = [value.heroId, value.heroClass, value.trinketId].filter(
           (candidate) => candidate !== undefined,
@@ -1182,7 +1183,7 @@ export function createDarkestDungeonServer(
         role: z.string().min(1).optional(),
         isDlc: z.boolean().optional(),
         dlc: z.string().min(1).optional(),
-        language: z.enum(["en", "ko"]).default("en"),
+        language: gameLanguageInputSchema,
         limit: z.number().int().min(1).max(20).default(20),
       }),
       outputSchema: z.object({ classes: z.array(classKnowledgeSchema) }),
@@ -1221,7 +1222,7 @@ export function createDarkestDungeonServer(
         threat: combatThreatSchema.optional(),
         priority: enemyPrioritySchema.optional(),
         scope: z.enum(["all", "regions", "enemies"]).default("all"),
-        language: z.enum(["en", "ko"]).default("en"),
+        language: gameLanguageInputSchema,
         limit: z.number().int().min(1).max(50).default(20),
       }),
       outputSchema: z.object({
@@ -1261,7 +1262,7 @@ export function createDarkestDungeonServer(
       inputSchema: z.object({
         query: z.string().min(1).optional(),
         region: curioRegionSchema.optional(),
-        language: z.enum(["en", "ko"]).default("en"),
+        language: gameLanguageInputSchema,
         limit: z.number().int().min(1).max(50).default(20),
       }),
       outputSchema: z.object({ curios: z.array(curioSummarySchema) }),
@@ -1300,9 +1301,9 @@ export function createDarkestDungeonServer(
             .max(64)
             .optional()
             .describe(
-              "Expedition items explicitly supplied by the user, as internal IDs or official English/Korean display names. Never inferred from estate storage.",
+              "Expedition items explicitly supplied by the user, as internal IDs or official display names in any supported language. Never inferred from estate storage.",
             ),
-          language: z.enum(["en", "ko"]).default("en"),
+          language: gameLanguageInputSchema,
         })
         .refine(
           ({ curioId, name }) =>
@@ -1367,7 +1368,7 @@ export function createDarkestDungeonServer(
           .array(z.string())
           .optional()
           .describe("Optional list of hero IDs the user strongly prefers to bring"),
-        language: z.enum(["en", "ko"]).default("en"),
+        language: gameLanguageInputSchema,
       },
       outputSchema: z.object({ plan: planExpeditionOutputSchema }),
       annotations: readOnlyAnnotations,
@@ -1441,7 +1442,7 @@ export function createDarkestDungeonServer(
       description:
         "Analyzes estate upgrades and recommends strategic investments based on priority tiers (S/A/B/C), heirloom shortages, exchange feasibility, and farming locations. Separates top strategic priorities from immediately affordable alternatives.",
       inputSchema: z.object({
-        language: z.enum(["en", "ko"]).default("en"),
+        language: gameLanguageInputSchema,
       }),
       outputSchema: z.object({
         recommendations: recommendBuildingUpgradesOutputSchema,
