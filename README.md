@@ -173,6 +173,8 @@ automated supply provision calculations with itemized gold costs based on dungeo
 length and regional curio cleansing needs, nighttime ambush prevention and camping strategy
 analysis (`campingStrategy` with 12-point respite plan and ambush prevention providers),
 and target boss / regional combat tactics.
+Heroes whose quest eligibility cannot be verified are returned separately under
+`unverifiedHeroes` and are not included in the role pools.
 
 `recommend_building_upgrades` accepts `language` and analyzes the estate's building
 upgrades and current heirloom resources (Busts, Portraits, Deeds, Crests). It evaluates

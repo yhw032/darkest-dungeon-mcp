@@ -163,7 +163,7 @@ export const serverInstructions = [
   "For curio questions, call search_curios when the identity is uncertain, then call get_curio_advice; pass the user's language and display the localized curio name.",
   "Treat only returned knowledge as verified; never invent curio effects, probabilities, item interactions, or localized names.",
   "The availableItems argument means expedition items explicitly supplied by the user; do not infer it from estate storage.",
-  "Use plan_expedition when preparing an expedition, recommending teams, or calculating provision supplies; pass the user's language and use its class-knowledge-backed role pools, strict eligibility filtering, itemized provision estimates, and camping strategy (with ambush prevention and 12-point respite plan) as curated groundwork for party synergy advice.",
+  "Use plan_expedition when preparing an expedition, recommending teams, or calculating provision supplies; pass the user's language and use its class-knowledge-backed role pools, strict eligibility filtering, itemized provision estimates, and camping strategy (with ambush prevention and 12-point respite plan) as curated groundwork for party synergy advice. Heroes in unverifiedHeroes are excluded from role pools because quest eligibility could not be verified.",
   "Keep Darkest Dungeon 1 information separate from Darkest Dungeon 2.",
 ].join(" ");
 

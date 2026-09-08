@@ -469,6 +469,7 @@ export function planExpedition(
   // 2. Roster Evaluation (Eligible vs Ineligible)
   const eligibleCandidates: Hero[] = [];
   const ineligibleHeroes: IneligibleHero[] = [];
+  const unverifiedHeroes: IneligibleHero[] = [];
   const preferredSet = new Set(options.preferredHeroIds ?? []);
 
   // Owned S/A tier trinkets map
@@ -497,7 +498,7 @@ export function planExpedition(
     if (hero.buildingName !== null) {
       reasons.push(`In town building (${hero.buildingName})`);
     }
-    if (eligibility.isEligible === false) {
+    if (eligibility.status === "ineligible") {
       reasons.push(`Resolve level too high for quest (Level ${resolveLevel ?? "?"} > Max ${eligibility.maximumResolveLevel ?? "?"})`);
     }
 
@@ -505,15 +506,23 @@ export function planExpedition(
       getLocalized(localization, language, `hero_class_name_${hero.heroClass}`) ??
       hero.heroClass;
 
+    const heroResult = {
+      id: hero.id,
+      name: hero.name,
+      heroClass: hero.heroClass,
+      heroClassName,
+      resolveLevel,
+      stress: hero.stress,
+    };
+
     if (reasons.length > 0) {
-      ineligibleHeroes.push({
-        id: hero.id,
-        name: hero.name,
-        heroClass: hero.heroClass,
-        heroClassName,
-        resolveLevel,
-        stress: hero.stress,
-        reasons,
+      ineligibleHeroes.push({ ...heroResult, reasons });
+    } else if (eligibility.status === "unknown") {
+      unverifiedHeroes.push({
+        ...heroResult,
+        reasons: [
+          `Quest eligibility could not be verified (${eligibility.reason ?? "unknown_reason"})`,
+        ],
       });
     } else {
       eligibleCandidates.push(hero);
@@ -661,6 +670,7 @@ export function planExpedition(
     quest: questContext,
     rolePool,
     ineligibleHeroes,
+    unverifiedHeroes,
     provisions,
     campingStrategy,
     tacticalAdvice,

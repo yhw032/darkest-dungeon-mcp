@@ -73,6 +73,7 @@ export interface ExpeditionPlanResult {
   quest: ExpeditionQuestContext;
   rolePool: ExpeditionRolePool;
   ineligibleHeroes: IneligibleHero[];
+  unverifiedHeroes: IneligibleHero[];
   provisions: ExpeditionProvisionEstimate;
   campingStrategy: ExpeditionCampingStrategy;
   tacticalAdvice: string[];

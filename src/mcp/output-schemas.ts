@@ -865,6 +865,9 @@ export const planExpeditionOutputSchema = z.object({
   quest: expeditionQuestContextSchema,
   rolePool: expeditionRolePoolSchema,
   ineligibleHeroes: z.array(ineligibleHeroSchema),
+  unverifiedHeroes: z.array(ineligibleHeroSchema).describe(
+    "Otherwise available heroes whose quest eligibility could not be verified; they are excluded from role pools.",
+  ),
   provisions: expeditionProvisionEstimateSchema,
   campingStrategy: expeditionCampingStrategySchema,
   tacticalAdvice: z.array(z.string()),

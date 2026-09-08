@@ -6,7 +6,10 @@ import type { Quest } from "../src/domain/quest.js";
 import type { CampingSkillKnowledgeBase } from "../src/domain/camping-skills.js";
 import type { CombatKnowledgeBase } from "../src/domain/combat-knowledge.js";
 import type { GameState } from "../src/domain/game-state.js";
-import { planExpedition } from "../src/queries/plan-expedition.js";
+import {
+  planExpedition,
+  type PlanExpeditionDependencies,
+} from "../src/queries/plan-expedition.js";
 import { loadCampingSkills } from "../src/knowledge/load-camping-skills.js";
 
 const mockCombatKnowledge: CombatKnowledgeBase = {
@@ -62,6 +65,14 @@ const mockCampingSkills: CampingSkillKnowledgeBase = {
       primaryCategory: "heal",
     },
   ],
+};
+
+const eligibilityDependencies: Pick<
+  PlanExpeditionDependencies,
+  "progressionRules" | "restrictionRules"
+> = {
+  progressionRules: { resolveLevelThresholds: [0] },
+  restrictionRules: { maximumResolveLevelByDifficulty: [99] },
 };
 
 function makeHero(
@@ -173,6 +184,7 @@ test("evaluates camping strategy for medium quest with ambush prevention provide
       combatKnowledge: mockCombatKnowledge,
       classKnowledge: { schemaVersion: 2, classes: [] },
       campingSkills: mockCampingSkills,
+      ...eligibilityDependencies,
     },
   );
 
@@ -199,6 +211,7 @@ test("warns when no candidate heroes have ambush prevention skills", () => {
       combatKnowledge: mockCombatKnowledge,
       classKnowledge: { schemaVersion: 2, classes: [] },
       campingSkills: mockCampingSkills,
+      ...eligibilityDependencies,
     },
   );
 
@@ -222,6 +235,7 @@ test("returns hasCamping: false for short quests", () => {
       combatKnowledge: mockCombatKnowledge,
       classKnowledge: { schemaVersion: 2, classes: [] },
       campingSkills: mockCampingSkills,
+      ...eligibilityDependencies,
     },
   );
 

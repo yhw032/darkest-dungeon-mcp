@@ -274,6 +274,8 @@ test("does not infer roles for a class missing from the knowledge base", () => {
     {
       combatKnowledge: mockCombatKnowledge,
       classKnowledge: { schemaVersion: 2, classes: [] },
+      progressionRules: mockProgressionRules,
+      restrictionRules: mockRestrictionRules,
     },
   );
 
@@ -327,6 +329,30 @@ test("rejects unmatched dungeon and difficulty filters", () => {
       ),
     /No quest matches dungeon=crypts, difficulty=2/,
   );
+});
+
+test("separates heroes whose quest eligibility cannot be verified", () => {
+  const state = createMockGameState(
+    [makeHero("1", "Unverified Hero", "crusader", 0)],
+    [makeQuest("ruins_short", "ruins", 0, 0)],
+  );
+
+  const plan = planExpedition(
+    state,
+    {},
+    {
+      combatKnowledge: mockCombatKnowledge,
+      classKnowledge: mockClassKnowledge,
+    },
+  );
+
+  assert.equal(plan.unverifiedHeroes.length, 1);
+  assert.equal(plan.unverifiedHeroes[0]?.id, "1");
+  assert.match(
+    plan.unverifiedHeroes[0]?.reasons[0] ?? "",
+    /restriction_rules_unavailable/,
+  );
+  assert.equal(plan.rolePool.frontlineDps.length, 0);
 });
 
 test("calculates accurate provisions and gold costs based on dungeon length and region", () => {
@@ -383,7 +409,12 @@ test("respects preferredHeroIds with scoring bonus and priority flag", () => {
   const plan = planExpedition(
     state,
     { preferredHeroIds: ["2"] },
-    { combatKnowledge: mockCombatKnowledge, classKnowledge: mockClassKnowledge },
+    {
+      combatKnowledge: mockCombatKnowledge,
+      classKnowledge: mockClassKnowledge,
+      progressionRules: mockProgressionRules,
+      restrictionRules: mockRestrictionRules,
+    },
   );
 
   const dismas = plan.rolePool.frontlineDps.find((h) => h.id === "2");
@@ -425,6 +456,8 @@ test("recommends only trinkets curated for the candidate class", () => {
       combatKnowledge: mockCombatKnowledge,
       classKnowledge: mockClassKnowledge,
       trinketGuidance: guidance,
+      progressionRules: mockProgressionRules,
+      restrictionRules: mockRestrictionRules,
     },
   );
 
