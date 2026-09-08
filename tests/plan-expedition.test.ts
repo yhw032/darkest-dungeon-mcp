@@ -2,6 +2,7 @@ import assert from "node:assert/strict";
 import test from "node:test";
 
 import type { CombatKnowledgeBase } from "../src/domain/combat-knowledge.js";
+import type { ClassKnowledgeBase } from "../src/domain/class-knowledge.js";
 import type { GameState } from "../src/domain/game-state.js";
 import type { Hero } from "../src/domain/hero.js";
 import type { HeroProgressionRules } from "../src/domain/hero-progression.js";
@@ -119,6 +120,36 @@ const mockCombatKnowledge: CombatKnowledgeBase = {
   ],
 };
 
+const mockClassKnowledge: ClassKnowledgeBase = {
+  schemaVersion: 2,
+  classes: [
+    { id: "crusader", roles: ["damage", "stress_healing"] },
+    { id: "highwayman", roles: ["damage"] },
+    { id: "vestal", roles: ["healing"] },
+    { id: "plague_doctor", roles: ["stun", "blight"] },
+    { id: "jester", roles: ["stress_healing", "buff"] },
+  ].map(({ id, roles }) => ({
+    id,
+    aliases: [],
+    dlcs: [],
+    summary: `${id} test guidance`,
+    roles,
+    strengths: [],
+    limitations: [],
+    positionGuidance: [
+      {
+        positions: [1, 2],
+        recommendation: "preferred" as const,
+        reason: "Verified test front-rank guidance.",
+      },
+    ],
+    mechanics: [],
+    skillGuidance: [],
+    partySynergies: [],
+    sources: [],
+  })),
+};
+
 const mockProgressionRules: HeroProgressionRules = {
   resolveLevelThresholds: [0, 2, 8, 14, 24, 36, 48],
 };
@@ -174,6 +205,7 @@ test("filters heroes by resolve level and town building availability", () => {
     { questId: "apprentice_ruins_1" },
     {
       combatKnowledge: mockCombatKnowledge,
+      classKnowledge: mockClassKnowledge,
       progressionRules: mockProgressionRules,
       restrictionRules: mockRestrictionRules,
       trinketGuidance: mockTrinketGuidance,
@@ -193,7 +225,7 @@ test("filters heroes by resolve level and town building availability", () => {
   assert.ok(overlevelHero.reasons.some((r) => r.includes("Resolve level too high")));
 });
 
-test("categorizes candidates into 4 functional roles with regional class bonuses", () => {
+test("categorizes candidates from curated class roles and position guidance", () => {
   const heroes = [
     makeHero("1", "Reynauld", "crusader", 3), // Level 1
     makeHero("2", "Junia", "vestal", 3),
@@ -208,6 +240,7 @@ test("categorizes candidates into 4 functional roles with regional class bonuses
     { questId: "ruins_short_1" },
     {
       combatKnowledge: mockCombatKnowledge,
+      classKnowledge: mockClassKnowledge,
       progressionRules: mockProgressionRules,
       restrictionRules: mockRestrictionRules,
       trinketGuidance: mockTrinketGuidance,
@@ -223,10 +256,33 @@ test("categorizes candidates into 4 functional roles with regional class bonuses
   // Jester in Support / Stress Healer
   assert.ok(plan.rolePool.supportStressHealer.some((h) => h.heroClass === "jester"));
 
-  // Crusader has bonus against Unholy skeletons in Ruins
+  // Crusader has role evidence from curated class knowledge
   const crusaderCandidate = plan.rolePool.frontlineDps.find((h) => h.heroClass === "crusader");
-  assert.ok(crusaderCandidate?.suitabilityReasons.some((r) => r.includes("Unholy")));
-  assert.ok(crusaderCandidate && crusaderCandidate.roleScore >= 90);
+  assert.ok(crusaderCandidate?.suitabilityReasons.some((r) => r.includes("Curated class roles")));
+  assert.ok(crusaderCandidate && crusaderCandidate.roleScore >= 70);
+});
+
+test("does not infer roles for a class missing from the knowledge base", () => {
+  const state = createMockGameState(
+    [makeHero("1", "Unknown Crusader", "crusader", 0)],
+    [makeQuest("ruins_short", "ruins", 0, 0)],
+  );
+
+  const plan = planExpedition(
+    state,
+    {},
+    {
+      combatKnowledge: mockCombatKnowledge,
+      classKnowledge: { schemaVersion: 2, classes: [] },
+    },
+  );
+
+  assert.deepEqual(plan.rolePool, {
+    frontlineDps: [],
+    controlDisruptor: [],
+    supportStressHealer: [],
+    primaryHealer: [],
+  });
 });
 
 test("matches region aliases to save dungeon ids without falling back", () => {
@@ -240,6 +296,7 @@ test("matches region aliases to save dungeon ids without falling back", () => {
     { dungeon: "ruins" },
     {
       combatKnowledge: mockCombatKnowledge,
+      classKnowledge: mockClassKnowledge,
       progressionRules: mockProgressionRules,
       restrictionRules: mockRestrictionRules,
     },
@@ -250,7 +307,7 @@ test("matches region aliases to save dungeon ids without falling back", () => {
   assert.ok(plan.provisions.items.some(({ id }) => id === "holy_water"));
   assert.ok(
     plan.rolePool.frontlineDps[0]?.suitabilityReasons.some((reason) =>
-      reason.includes("Unholy"),
+      reason.includes("Curated class roles"),
     ),
   );
 });
@@ -278,7 +335,7 @@ test("calculates accurate provisions and gold costs based on dungeon length and 
   const questLong = makeQuest("cove_long", "cove", 0, 2); // Long Cove
 
   const stateShort = createMockGameState([makeHero("1", "Hero", "vestal", 0)], [questShort]);
-  const planShort = planExpedition(stateShort, {}, { combatKnowledge: mockCombatKnowledge });
+  const planShort = planExpedition(stateShort, {}, { combatKnowledge: mockCombatKnowledge, classKnowledge: mockClassKnowledge });
 
   const foodShort = planShort.provisions.items.find((i) => i.id === "food");
   const torchShort = planShort.provisions.items.find((i) => i.id === "torch");
@@ -290,14 +347,14 @@ test("calculates accurate provisions and gold costs based on dungeon length and 
   assert.ok(planShort.provisions.totalEstimatedCost > 0);
 
   const stateMedium = createMockGameState([makeHero("1", "Hero", "vestal", 0)], [questMedium]);
-  const planMedium = planExpedition(stateMedium, {}, { combatKnowledge: mockCombatKnowledge });
+  const planMedium = planExpedition(stateMedium, {}, { combatKnowledge: mockCombatKnowledge, classKnowledge: mockClassKnowledge });
   const foodMedium = planMedium.provisions.items.find((i) => i.id === "food");
   const torchMedium = planMedium.provisions.items.find((i) => i.id === "torch");
   assert.equal(foodMedium?.amount, 16);
   assert.equal(torchMedium?.amount, 14);
 
   const stateLong = createMockGameState([makeHero("1", "Hero", "vestal", 0)], [questLong]);
-  const planLong = planExpedition(stateLong, {}, { combatKnowledge: mockCombatKnowledge });
+  const planLong = planExpedition(stateLong, {}, { combatKnowledge: mockCombatKnowledge, classKnowledge: mockClassKnowledge });
   const foodLong = planLong.provisions.items.find((i) => i.id === "food");
   const herbsLong = planLong.provisions.items.find((i) => i.id === "medicinal_herbs");
   assert.equal(foodLong?.amount, 24);
@@ -308,7 +365,7 @@ test("binds target boss tactics when quest objectives target a boss", () => {
   const bossQuest = makeQuest("kill_necromancer_1", "ruins", 0, 1, ["kill_necromancer"]);
   const state = createMockGameState([makeHero("1", "Hero", "crusader", 0)], [bossQuest]);
 
-  const plan = planExpedition(state, {}, { combatKnowledge: mockCombatKnowledge });
+  const plan = planExpedition(state, {}, { combatKnowledge: mockCombatKnowledge, classKnowledge: mockClassKnowledge });
 
   assert.ok(plan.quest.bossGuidance);
   assert.equal(plan.quest.bossGuidance?.id, "necromancer");
@@ -326,11 +383,52 @@ test("respects preferredHeroIds with scoring bonus and priority flag", () => {
   const plan = planExpedition(
     state,
     { preferredHeroIds: ["2"] },
-    { combatKnowledge: mockCombatKnowledge },
+    { combatKnowledge: mockCombatKnowledge, classKnowledge: mockClassKnowledge },
   );
 
   const dismas = plan.rolePool.frontlineDps.find((h) => h.id === "2");
   assert.ok(dismas);
   assert.equal(dismas.isPreferred, true);
   assert.ok(dismas.suitabilityReasons.some((r) => r.includes("preferred")));
+});
+
+test("recommends only trinkets curated for the candidate class", () => {
+  const state = createMockGameState(
+    [makeHero("1", "Reynauld", "crusader", 0)],
+    [makeQuest("ruins_short", "ruins", 0, 0)],
+  );
+  state.estate.trinkets.push({
+    id: "vestal_only",
+    type: "trinket",
+    amount: 1,
+  });
+  const guidance: TrinketGuidanceKnowledgeBase = {
+    ...mockTrinketGuidance,
+    trinkets: [
+      ...mockTrinketGuidance.trinkets,
+      {
+        trinketId: "vestal_only",
+        tier: "S",
+        recommendedRoles: ["healer"],
+        recommendedClasses: ["vestal"],
+        synergies: [],
+        cautions: [],
+        playstyleAdvice: "Vestal-only test guidance.",
+      },
+    ],
+  };
+
+  const plan = planExpedition(
+    state,
+    {},
+    {
+      combatKnowledge: mockCombatKnowledge,
+      classKnowledge: mockClassKnowledge,
+      trinketGuidance: guidance,
+    },
+  );
+
+  const crusader = plan.rolePool.frontlineDps.find(({ id }) => id === "1");
+  assert.ok(crusader);
+  assert.deepEqual(crusader.recommendedTrinketIds, ["focus_ring"]);
 });

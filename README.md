@@ -166,8 +166,9 @@ When given `trinketId`, it returns candidate roster heroes ranked by suitability
 `plan_expedition` prepares a comprehensive expedition briefing (dossier) for a
 target quest or dungeon region (`questId`, `dungeon`, `difficulty`, `preferredHeroIds`,
 and `language`). It integrates strict eligibility pruning (resolve levels, town
-activity isolation, high stress flags), categorized candidate pools across 4 functional
-roles (Frontline DPS, Control/Disruptor, Support/Stress Healer, and Primary Healer),
+activity isolation, high stress flags), class-knowledge-backed candidate pools across 4
+functional roles (Frontline DPS, Control/Disruptor, Support/Stress Healer, and Primary
+Healer), curated class-compatible trinket matches,
 automated supply provision calculations with itemized gold costs based on dungeon
 length and regional curio cleansing needs, nighttime ambush prevention and camping strategy
 analysis (`campingStrategy` with 12-point respite plan and ambush prevention providers),

@@ -169,7 +169,11 @@ test("evaluates camping strategy for medium quest with ambush prevention provide
   const result = planExpedition(
     state,
     { language: "ko" },
-    { combatKnowledge: mockCombatKnowledge, campingSkills: mockCampingSkills },
+    {
+      combatKnowledge: mockCombatKnowledge,
+      classKnowledge: { schemaVersion: 2, classes: [] },
+      campingSkills: mockCampingSkills,
+    },
   );
 
   assert.equal(result.campingStrategy.hasCamping, true);
@@ -191,7 +195,11 @@ test("warns when no candidate heroes have ambush prevention skills", () => {
   const result = planExpedition(
     state,
     { language: "ko" },
-    { combatKnowledge: mockCombatKnowledge, campingSkills: mockCampingSkills },
+    {
+      combatKnowledge: mockCombatKnowledge,
+      classKnowledge: { schemaVersion: 2, classes: [] },
+      campingSkills: mockCampingSkills,
+    },
   );
 
   assert.equal(result.campingStrategy.hasCamping, true);
@@ -210,7 +218,11 @@ test("returns hasCamping: false for short quests", () => {
   const result = planExpedition(
     state,
     { language: "ko" },
-    { combatKnowledge: mockCombatKnowledge, campingSkills: mockCampingSkills },
+    {
+      combatKnowledge: mockCombatKnowledge,
+      classKnowledge: { schemaVersion: 2, classes: [] },
+      campingSkills: mockCampingSkills,
+    },
   );
 
   assert.equal(result.campingStrategy.hasCamping, false);

@@ -778,10 +778,16 @@ export const expeditionHeroCandidateSchema = z.object({
   heroClassName: nullableString,
   resolveLevel: finiteNumber.nullable(),
   stress: z.number(),
-  roleScore: z.number(),
-  suitabilityReasons: z.array(z.string()),
+  roleScore: z.number().describe(
+    "Relative score within this role pool, derived from curated class roles, resolve level, stress, risky quirks, and user preference.",
+  ),
+  suitabilityReasons: z.array(z.string()).describe(
+    "Curated class-role and position evidence supporting inclusion in this pool.",
+  ),
   cautions: z.array(z.string()),
-  recommendedTrinketIds: z.array(z.string()),
+  recommendedTrinketIds: z.array(z.string()).describe(
+    "Owned S/A-tier trinkets whose curated class recommendations and official equip restrictions match this hero.",
+  ),
   isPreferred: z.boolean(),
 });
 

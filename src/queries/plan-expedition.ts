@@ -1,5 +1,9 @@
 import type { CombatKnowledgeBase } from "../domain/combat-knowledge.js";
 import type {
+  ClassKnowledge,
+  ClassKnowledgeBase,
+} from "../domain/class-knowledge.js";
+import type {
   ExpeditionHeroCandidate,
   ExpeditionPlanResult,
   ExpeditionProvisionEstimate,
@@ -47,6 +51,7 @@ export interface PlanExpeditionOptions {
 
 export interface PlanExpeditionDependencies {
   combatKnowledge: CombatKnowledgeBase;
+  classKnowledge?: ClassKnowledgeBase | undefined;
   trinketGuidance?: TrinketGuidanceKnowledgeBase | undefined;
   trinketDefinitions?:
     | TrinketDefinition[]
@@ -70,6 +75,47 @@ const provisionBaseCosts: Record<string, number> = {
   antivenom: 150,
   the_blood: 0,
 };
+
+type ExpeditionRole = keyof ExpeditionRolePool;
+
+const roleIds: Readonly<Record<ExpeditionRole, readonly string[]>> = {
+  frontlineDps: ["damage", "bleed", "armor_piercing"],
+  controlDisruptor: ["stun", "debuff", "movement_control", "mark"],
+  supportStressHealer: [
+    "stress_healing",
+    "buff",
+    "dodge_support",
+    "guard_support",
+    "guard",
+  ],
+  primaryHealer: ["healing"],
+};
+
+function getRoleEvidence(
+  knowledge: ClassKnowledge,
+  role: ExpeditionRole,
+): { score: number; reasons: string[] } | undefined {
+  const matchedRoles = knowledge.roles.filter((classRole) =>
+    roleIds[role].includes(classRole),
+  );
+  if (matchedRoles.length === 0) return undefined;
+
+  const reasons = [`Curated class roles: ${matchedRoles.join(", ")}`];
+  let score = 50 + matchedRoles.length * 10;
+
+  if (role === "frontlineDps") {
+    const frontlineGuidance = knowledge.positionGuidance.find(
+      (guidance) =>
+        guidance.recommendation !== "avoid" &&
+        guidance.positions.some((position) => position === 1 || position === 2),
+    );
+    if (frontlineGuidance === undefined) return undefined;
+    score += frontlineGuidance.recommendation === "preferred" ? 10 : 5;
+    reasons.push(`Front-rank guidance: ${frontlineGuidance.reason}`);
+  }
+
+  return { score, reasons };
+}
 
 function getLocalized(
   localization: GameLocalization | undefined,
@@ -324,6 +370,7 @@ export function planExpedition(
   const language = options.language ?? "en";
   const {
     combatKnowledge,
+    classKnowledge,
     trinketGuidance,
     trinketDefinitions,
     quirkTreatmentKnowledge,
@@ -519,6 +566,12 @@ export function planExpedition(
       for (const entry of trinketGuidance.trinkets) {
         if (!ownedTrinketIds.has(entry.trinketId)) continue;
         if (entry.tier !== "S" && entry.tier !== "A") continue;
+        if (
+          entry.recommendedClasses.length > 0 &&
+          !entry.recommendedClasses.includes(hero.heroClass)
+        ) {
+          continue;
+        }
         const def = trinketDefMap?.get(entry.trinketId);
         if (def && def.heroClassRequirements.length > 0 && !def.heroClassRequirements.includes(hero.heroClass)) {
           continue;
@@ -551,70 +604,18 @@ export function planExpedition(
   };
 
   for (const hero of eligibleCandidates) {
-    const c = hero.heroClass.toLowerCase();
+    const knowledge = classKnowledge?.classes.find(
+      (entry) => entry.id === hero.heroClass,
+    );
+    if (knowledge === undefined) continue;
 
-    // 1) Frontline DPS
-    if (["crusader", "hellion", "leper", "bounty_hunter", "highwayman", "shieldbreaker", "abomination"].includes(c)) {
-      let base = 60;
-      const reasons: string[] = ["Strong direct physical damage"];
-      if (regionId === "ruins" && c === "crusader") {
-        base += 30;
-        reasons.push("Bonus damage against Unholy skeletons");
+    for (const role of Object.keys(rolePool) as ExpeditionRole[]) {
+      const evidence = getRoleEvidence(knowledge, role);
+      if (evidence !== undefined) {
+        rolePool[role].push(
+          buildCandidate(hero, evidence.score, evidence.reasons),
+        );
       }
-      if ((regionId === "warrens" || regionId === "weald") && (c === "houndmaster" || c === "bounty_hunter")) {
-        base += 20;
-        reasons.push("High bonus against Beast/Human targets");
-      }
-      if (regionId === "cove" && c === "shieldbreaker") {
-        base += 25;
-        reasons.push("Pierce high PROT on Pelagic and Uca foes");
-      }
-      rolePool.frontlineDps.push(buildCandidate(hero, base, reasons));
-    }
-
-    // 2) Control / Disruptor
-    if (["plague_doctor", "occultist", "bounty_hunter", "man_at_arms", "houndmaster"].includes(c)) {
-      let base = 60;
-      const reasons: string[] = ["Reliable stun, displacement, or debuffs"];
-      if ((regionId === "ruins" || regionId === "cove") && c === "plague_doctor") {
-        base += 35;
-        reasons.push("Dominant double backline stun and high blight");
-      }
-      if (regionId === "cove" && c === "occultist") {
-        base += 30;
-        reasons.push("Bonus Eldritch damage and damage-reducing debuffs");
-      }
-      rolePool.controlDisruptor.push(buildCandidate(hero, base, reasons));
-    }
-
-    // 3) Support / Stress Healer
-    if (["jester", "crusader", "houndmaster", "man_at_arms", "antiquarian"].includes(c)) {
-      let base = 60;
-      const reasons: string[] = ["In-combat stress recovery or team-wide buffs"];
-      if (c === "jester") {
-        base += 35;
-        reasons.push("Premier single-target stress healing (Inspiring Tune) & Battle Ballad speed/crit buffs");
-      }
-      if (regionId === "farmstead") {
-        base += 25;
-        reasons.push("Essential endless harvest longevity");
-      }
-      rolePool.supportStressHealer.push(buildCandidate(hero, base, reasons));
-    }
-
-    // 4) Primary Healer
-    if (["vestal", "occultist", "flagellant", "arbalest", "musketeer"].includes(c)) {
-      let base = 60;
-      const reasons: string[] = ["Vital HP recovery and Death's Door protection"];
-      if (c === "vestal") {
-        base += 35;
-        reasons.push("Consistent reliable single-target and party-wide Divine Comfort healing");
-      }
-      if (c === "occultist") {
-        base += 15;
-        reasons.push("High burst single-target heal (cautious with bleed proc)");
-      }
-      rolePool.primaryHealer.push(buildCandidate(hero, base, reasons));
     }
   }
 
