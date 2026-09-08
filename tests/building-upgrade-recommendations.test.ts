@@ -5,6 +5,7 @@ import type { BuildingUpgradeTree } from "../src/domain/building-upgrades.js";
 import type { BuildingUpgradePriorityKnowledge } from "../src/domain/building-upgrade-recommendations.js";
 import type { GameState } from "../src/domain/game-state.js";
 import { recommendBuildingUpgrades } from "../src/queries/recommend-building-upgrades.js";
+import type { GameLocalization } from "../src/localization/game-localization.js";
 
 const mockTrees: BuildingUpgradeTree[] = [
   {
@@ -149,6 +150,46 @@ test("categorizes S/A tiers as topPriorities and keeps C tiers out of top priori
   assert.ok(result.topPriorities.length > 0);
   assert.ok(result.topPriorities.every((r) => r.priorityTier === "S" || r.priorityTier === "A"));
   assert.ok(!result.topPriorities.some((r) => r.buildingId === "tavern"));
+});
+
+test("uses official localization keys for buildings, trees, and heirlooms", () => {
+  const state = createMockGameState([
+    { type: "deed", amount: 5 },
+    { type: "crest", amount: 30 },
+  ]);
+  const localization: GameLocalization = new Map([
+    [
+      "koreana",
+      new Map([
+        ["town_name_blacksmith", "대장간"],
+        ["upgrade_tree_name_weaponsmithing", "무기 제작"],
+        ["str_inventory_title_heirloomdeed", "증서"],
+        ["str_inventory_title_heirloomcrest", "문장"],
+      ]),
+    ],
+  ]);
+
+  const result = recommendBuildingUpgrades(
+    state,
+    mockTrees,
+    mockPriorityKnowledge,
+    { language: "ko" },
+    { localization },
+  );
+  const recommendation = result.topPriorities.find(
+    (item) => item.treeId === "weaponsmithing",
+  );
+  assert.ok(recommendation);
+  assert.equal(recommendation.buildingName, "대장간");
+  assert.equal(recommendation.treeName, "무기 제작");
+  assert.equal(
+    recommendation.costs.find((cost) => cost.type === "deed")?.typeName,
+    "증서",
+  );
+  assert.equal(
+    result.estateResources.find((resource) => resource.type === "crest")?.name,
+    "문장",
+  );
 });
 
 test("accurately calculates missing heirloom amounts and matches primary farming dungeons", () => {

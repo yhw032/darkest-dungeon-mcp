@@ -13,6 +13,7 @@ import {
   localizeDistrict,
   localizeEstateResource,
   localizeHeroClass,
+  localizeProvisionItem,
   localizeQuirk,
   localizeTownActivity,
   localizeTownBuilding,
@@ -46,6 +47,9 @@ test("loads official hero class and combat skill names", async (t) => {
       ["str_inventory_title_gold", "골드"],
       ["str_inventory_title_heirloombust", "흉상"],
       ["str_inventory_title_shard", "혜성의 파편"],
+      ["str_inventory_title_provision", "식량"],
+      ["str_inventory_title_supplytorch", "횃불"],
+      ["str_inventory_title_estatethe_blood", "피"],
     ]),
     "utf8",
   );
@@ -125,4 +129,8 @@ test("loads official hero class and combat skill names", async (t) => {
   assert.equal(localizeEstateResource("bust", "ko", localization), "흉상");
   assert.equal(localizeEstateResource("shard", "ko", localization), "혜성의 파편");
   assert.equal(localizeEstateResource("missing", "ko", localization), null);
+  assert.equal(localizeProvisionItem("food", "ko", localization), "식량");
+  assert.equal(localizeProvisionItem("torch", "ko", localization), "횃불");
+  assert.equal(localizeProvisionItem("the_blood", "ko", localization), "피");
+  assert.equal(localizeProvisionItem("missing", "ko", localization), null);
 });

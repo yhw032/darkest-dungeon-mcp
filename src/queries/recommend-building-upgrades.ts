@@ -8,7 +8,13 @@ import type {
   UpgradePriorityTier,
 } from "../domain/building-upgrade-recommendations.js";
 import type { GameState } from "../domain/game-state.js";
-import type { GameLanguage, GameLocalization } from "../localization/game-localization.js";
+import {
+  localizeBuildingUpgradeTree,
+  localizeEstateResource,
+  localizeTownBuilding,
+  type GameLanguage,
+  type GameLocalization,
+} from "../localization/game-localization.js";
 import { getBuildingUpgradeProgress } from "../upgrades/building-upgrades.js";
 
 export interface RecommendBuildingUpgradesOptions {
@@ -33,16 +39,6 @@ const tierWeight: Record<UpgradePriorityTier, number> = {
   C: 1,
 };
 
-function getLocalized(
-  localization: GameLocalization | undefined,
-  language: GameLanguage,
-  key: string,
-): string | null {
-  if (!localization) return null;
-  const langKey = language === "ko" ? "koreana" : "english";
-  return localization.get(langKey)?.get(key) ?? null;
-}
-
 export function recommendBuildingUpgrades(
   gameState: GameState,
   trees: BuildingUpgradeTree[],
@@ -61,7 +57,7 @@ export function recommendBuildingUpgrades(
 
   const estateResources = gameState.estate.resources.map((res) => ({
     type: res.type,
-    name: getLocalized(localization, language, `str_inventory_title_estate_currency${res.type}`) ?? res.type,
+    name: localizeEstateResource(res.type, language, localization),
     amount: res.amount,
   }));
 
@@ -107,9 +103,7 @@ export function recommendBuildingUpgrades(
 
       costs.push({
         type: cost.type,
-        typeName:
-          getLocalized(localization, language, `str_inventory_title_estate_currency${cost.type}`) ??
-          cost.type,
+        typeName: localizeEstateResource(cost.type, language, localization),
         current,
         required,
         missing,
@@ -165,14 +159,18 @@ export function recommendBuildingUpgrades(
 
           proposedExchanges.push({
             sourceType: src.type,
-            sourceTypeName:
-              getLocalized(localization, language, `str_inventory_title_estate_currency${src.type}`) ??
+            sourceTypeName: localizeEstateResource(
               src.type,
+              language,
+              localization,
+            ),
             sourceAmountToTrade,
             targetType: target.type,
-            targetTypeName:
-              getLocalized(localization, language, `str_inventory_title_estate_currency${target.type}`) ??
+            targetTypeName: localizeEstateResource(
               target.type,
+              language,
+              localization,
+            ),
             targetAmountReceived,
           });
           src.amount -= sourceAmountToTrade;
@@ -203,13 +201,16 @@ export function recommendBuildingUpgrades(
     const recommendedFarmingRegions = Array.from(farmingRegionSet);
 
     // Localized names
-    const buildingName =
-      getLocalized(localization, language, `town_building_name_${buildingId}`) ??
-      buildingId;
-    const treeName =
-      getLocalized(localization, language, `upgrade_tree_name_${buildingId}_${treeId}`) ??
-      getLocalized(localization, language, `upgrade_tree_name_${treeId}`) ??
-      treeId;
+    const buildingName = localizeTownBuilding(
+      buildingId,
+      language,
+      localization,
+    );
+    const treeName = localizeBuildingUpgradeTree(
+      treeId,
+      language,
+      localization,
+    );
 
     allRecommendations.push({
       buildingId,

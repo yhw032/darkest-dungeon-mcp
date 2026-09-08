@@ -137,6 +137,28 @@ export function localizeEstateResource(
   );
 }
 
+export function localizeProvisionItem(
+  itemId: string,
+  language: GameLanguage,
+  localization?: GameLocalization,
+): string | null {
+  if (itemId === "food") {
+    return localizeGameString(
+      "str_inventory_title_provision",
+      language,
+      localization,
+    );
+  }
+  if (itemId === "the_blood") {
+    return localizeGameString(
+      "str_inventory_title_estatethe_blood",
+      language,
+      localization,
+    );
+  }
+  return localizeInventoryItem("supply", itemId, language, localization);
+}
+
 export function localizeCurio(
   curioIdOrKey: string,
   language: GameLanguage,

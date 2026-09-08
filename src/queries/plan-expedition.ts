@@ -23,6 +23,7 @@ import type { TrinketGuidanceKnowledgeBase } from "../domain/trinket-guidance.js
 import {
   localizeGameString,
   localizeGameStrings,
+  localizeProvisionItem,
   type GameLanguage,
   type GameLocalization,
 } from "../localization/game-localization.js";
@@ -173,10 +174,7 @@ function calculateProvisions(
   function addItem(id: string, amount: number, purpose: string) {
     if (amount <= 0) return;
     const costPerUnit = provisionBaseCosts[id] ?? 100;
-    const name =
-      getLocalized(localization, language, `str_inventory_title_${id}`) ??
-      getLocalized(localization, language, `str_inventory_title_estate_currency${id}`) ??
-      id;
+    const name = localizeProvisionItem(id, language, localization) ?? id;
     items.push({
       id,
       name,
