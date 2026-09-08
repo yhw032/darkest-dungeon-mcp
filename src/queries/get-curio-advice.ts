@@ -5,6 +5,7 @@ import type {
 } from "../domain/curio-knowledge.js";
 import {
   localizeCurio,
+  localizeProvisionItem,
   type GameLanguage,
   type GameLocalization,
 } from "../localization/game-localization.js";
@@ -57,6 +58,32 @@ export type CurioAdviceResult =
 
 function canonicalItem(value: string): string {
   return normalizeKnowledgeTerm(value).replace(/\s+/g, "_");
+}
+
+function resolveAvailableItems(
+  suppliedItems: string[],
+  interactions: CurioInteraction[],
+  localization?: GameLocalization,
+): Set<string> {
+  const supplied = new Set(suppliedItems.map(canonicalItem));
+  const resolved = new Set(supplied);
+  const interactionItemIds = new Set(
+    interactions
+      .map((interaction) => interaction.item)
+      .filter((item): item is string => item !== null),
+  );
+
+  for (const itemId of interactionItemIds) {
+    const aliases = [
+      itemId,
+      localizeProvisionItem(itemId, "en", localization),
+      localizeProvisionItem(itemId, "ko", localization),
+    ].filter((alias): alias is string => alias !== null);
+    if (aliases.some((alias) => supplied.has(canonicalItem(alias)))) {
+      resolved.add(canonicalItem(itemId));
+    }
+  }
+  return resolved;
 }
 
 function resolveCurio(
@@ -130,7 +157,11 @@ export function getCurioAdvice(
   const availableItems =
     request.availableItems === undefined
       ? undefined
-      : new Set(request.availableItems.map(canonicalItem));
+      : resolveAvailableItems(
+          request.availableItems,
+          resolved.curio.interactions,
+          localization,
+        );
   const usableInteractions = resolved.curio.interactions.filter(
     (interaction) =>
       availableItems === undefined ||

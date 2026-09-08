@@ -169,7 +169,7 @@ export const serverInstructions = [
   "Class position guidance is editorial strategy knowledge; use combatSkillDetails for the current hero's exact selected-skill positions.",
   "For curio questions, call search_curios when the identity is uncertain, then call get_curio_advice; pass the user's language and display the localized curio name.",
   "Treat only returned knowledge as verified; never invent curio effects, probabilities, item interactions, or localized names.",
-  "The availableItems argument means expedition items explicitly supplied by the user; do not infer it from estate storage.",
+  "The availableItems argument accepts internal item IDs or official English/Korean item names explicitly supplied by the user; do not infer it from estate storage.",
   "Use plan_expedition when preparing an expedition, recommending teams, or calculating provision supplies; pass the user's language and use its class-knowledge-backed role pools, strict eligibility filtering, itemized provision estimates, and camping strategy (with ambush prevention and 12-point respite plan) as curated groundwork for party synergy advice. Heroes in unverifiedHeroes are excluded from role pools because quest eligibility could not be verified.",
   "Keep Darkest Dungeon 1 information separate from Darkest Dungeon 2.",
 ].join(" ");
@@ -1311,7 +1311,13 @@ export function createDarkestDungeonServer(
         .object({
           curioId: z.string().min(1).optional(),
           name: z.string().min(1).optional(),
-          availableItems: z.array(z.string().min(1)).max(64).optional(),
+          availableItems: z
+            .array(z.string().min(1))
+            .max(64)
+            .optional()
+            .describe(
+              "Expedition items explicitly supplied by the user, as internal IDs or official English/Korean display names. Never inferred from estate storage.",
+            ),
           language: z.enum(["en", "ko"]).default("en"),
         })
         .refine(
