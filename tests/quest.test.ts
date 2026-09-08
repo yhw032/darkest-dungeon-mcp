@@ -112,6 +112,7 @@ test("filters and retrieves quests", () => {
   const state = parseQuestState(questDocument());
 
   assert.equal(listQuests(state, { dungeon: "weald" }).length, 1);
+  assert.equal(listQuests(state, { dungeon: "WEALD" }).length, 1);
   assert.equal(listQuests(state, { isPlotQuest: true }).length, 0);
   assert.equal(getQuest(state, "generated_0")?.type, "explore");
   assert.equal(getQuest(state, "missing"), undefined);

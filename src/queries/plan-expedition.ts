@@ -24,6 +24,10 @@ import {
 } from "../localization/game-localization.js";
 import { getResolveLevel } from "../progression/hero-progression.js";
 import { getQuestEligibility } from "../quests/quest-eligibility.js";
+import {
+  getCombatRegionId,
+  normalizeSaveDungeonId,
+} from "../quests/dungeon-ids.js";
 import type { LocalizedEnemyCombatKnowledge } from "./query-combat.js";
 import type {
   AmbushPreventionProvider,
@@ -114,7 +118,8 @@ function calculateProvisions(
   language: GameLanguage,
   localization?: GameLocalization,
 ): ExpeditionProvisionEstimate {
-  const dungeon = quest.dungeon.toLowerCase();
+  const dungeon = getCombatRegionId(quest.dungeon) ??
+    normalizeSaveDungeonId(quest.dungeon);
   const length = quest.length; // 0=short, 1=medium, 2=long
 
   const items: ExpeditionProvisionItem[] = [];
@@ -347,8 +352,15 @@ export function planExpedition(
       throw new Error(`Quest "${options.questId}" was not found`);
     }
   } else {
+    const requestedDungeon =
+      options.dungeon === undefined
+        ? undefined
+        : normalizeSaveDungeonId(options.dungeon);
     selectedQuest = quests.find((q) => {
-      if (options.dungeon && q.dungeon.toLowerCase() !== options.dungeon.toLowerCase()) {
+      if (
+        requestedDungeon !== undefined &&
+        normalizeSaveDungeonId(q.dungeon) !== requestedDungeon
+      ) {
         return false;
       }
       if (options.difficulty !== undefined && q.difficulty !== options.difficulty) {
@@ -356,17 +368,30 @@ export function planExpedition(
       }
       return true;
     });
-    if (!selectedQuest) {
-      selectedQuest = quests[0];
+    if (
+      !selectedQuest &&
+      (requestedDungeon !== undefined || options.difficulty !== undefined)
+    ) {
+      const filters = [
+        requestedDungeon === undefined
+          ? undefined
+          : `dungeon=${requestedDungeon}`,
+        options.difficulty === undefined
+          ? undefined
+          : `difficulty=${String(options.difficulty)}`,
+      ].filter((value): value is string => value !== undefined);
+      throw new Error(`No quest matches ${filters.join(", ")}`);
     }
+    selectedQuest ??= quests[0];
   }
   if (!selectedQuest) {
     throw new Error("Unable to select target quest");
   }
 
-  const dungeonId = selectedQuest.dungeon.toLowerCase();
+  const dungeonId = normalizeSaveDungeonId(selectedQuest.dungeon);
+  const regionId = getCombatRegionId(dungeonId);
   const regionKnowledge = combatKnowledge.regions.find(
-    (r) => r.id === dungeonId || (dungeonId === "crypts" && r.id === "ruins"),
+    (region) => region.id === regionId,
   );
   const bossGuidance = findBossGuidance(selectedQuest, combatKnowledge, language, localization);
 
@@ -532,15 +557,15 @@ export function planExpedition(
     if (["crusader", "hellion", "leper", "bounty_hunter", "highwayman", "shieldbreaker", "abomination"].includes(c)) {
       let base = 60;
       const reasons: string[] = ["Strong direct physical damage"];
-      if (dungeonId === "ruins" && c === "crusader") {
+      if (regionId === "ruins" && c === "crusader") {
         base += 30;
         reasons.push("Bonus damage against Unholy skeletons");
       }
-      if ((dungeonId === "warrens" || dungeonId === "weald") && (c === "houndmaster" || c === "bounty_hunter")) {
+      if ((regionId === "warrens" || regionId === "weald") && (c === "houndmaster" || c === "bounty_hunter")) {
         base += 20;
         reasons.push("High bonus against Beast/Human targets");
       }
-      if (dungeonId === "cove" && c === "shieldbreaker") {
+      if (regionId === "cove" && c === "shieldbreaker") {
         base += 25;
         reasons.push("Pierce high PROT on Pelagic and Uca foes");
       }
@@ -551,11 +576,11 @@ export function planExpedition(
     if (["plague_doctor", "occultist", "bounty_hunter", "man_at_arms", "houndmaster"].includes(c)) {
       let base = 60;
       const reasons: string[] = ["Reliable stun, displacement, or debuffs"];
-      if ((dungeonId === "ruins" || dungeonId === "cove") && c === "plague_doctor") {
+      if ((regionId === "ruins" || regionId === "cove") && c === "plague_doctor") {
         base += 35;
         reasons.push("Dominant double backline stun and high blight");
       }
-      if (dungeonId === "cove" && c === "occultist") {
+      if (regionId === "cove" && c === "occultist") {
         base += 30;
         reasons.push("Bonus Eldritch damage and damage-reducing debuffs");
       }
@@ -570,7 +595,7 @@ export function planExpedition(
         base += 35;
         reasons.push("Premier single-target stress healing (Inspiring Tune) & Battle Ballad speed/crit buffs");
       }
-      if (dungeonId === "farmstead") {
+      if (regionId === "farmstead") {
         base += 25;
         reasons.push("Essential endless harvest longevity");
       }

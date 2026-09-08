@@ -1,4 +1,5 @@
 import type { Quest, QuestState } from "../domain/quest.js";
+import { normalizeSaveDungeonId } from "../quests/dungeon-ids.js";
 
 export type QuestSummary = Pick<
   Quest,
@@ -37,10 +38,15 @@ export function listQuests(
   state: QuestState,
   filters: QuestFilters = {},
 ): QuestSummary[] {
+  const dungeon =
+    filters.dungeon === undefined
+      ? undefined
+      : normalizeSaveDungeonId(filters.dungeon);
   return state.quests
     .filter(
       (quest) =>
-        (filters.dungeon === undefined || quest.dungeon === filters.dungeon) &&
+        (dungeon === undefined ||
+          normalizeSaveDungeonId(quest.dungeon) === dungeon) &&
         (filters.type === undefined || quest.type === filters.type) &&
         (filters.difficulty === undefined ||
           quest.difficulty === filters.difficulty) &&

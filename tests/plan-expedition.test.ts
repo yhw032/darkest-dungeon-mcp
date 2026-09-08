@@ -229,6 +229,49 @@ test("categorizes candidates into 4 functional roles with regional class bonuses
   assert.ok(crusaderCandidate && crusaderCandidate.roleScore >= 90);
 });
 
+test("matches region aliases to save dungeon ids without falling back", () => {
+  const heroes = [makeHero("1", "Reynauld", "crusader", 3)];
+  const coveQuest = makeQuest("cove_short", "cove", 0, 0);
+  const cryptsQuest = makeQuest("crypts_short", "crypts", 0, 0);
+  const state = createMockGameState(heroes, [coveQuest, cryptsQuest]);
+
+  const plan = planExpedition(
+    state,
+    { dungeon: "ruins" },
+    {
+      combatKnowledge: mockCombatKnowledge,
+      progressionRules: mockProgressionRules,
+      restrictionRules: mockRestrictionRules,
+    },
+  );
+
+  assert.equal(plan.quest.id, "crypts_short");
+  assert.equal(plan.quest.regionOverview, "Ruins dominated by Unholy skeletons.");
+  assert.ok(plan.provisions.items.some(({ id }) => id === "holy_water"));
+  assert.ok(
+    plan.rolePool.frontlineDps[0]?.suitabilityReasons.some((reason) =>
+      reason.includes("Unholy"),
+    ),
+  );
+});
+
+test("rejects unmatched dungeon and difficulty filters", () => {
+  const state = createMockGameState(
+    [makeHero("1", "Reynauld", "crusader", 3)],
+    [makeQuest("cove_short", "cove", 0, 0)],
+  );
+
+  assert.throws(
+    () =>
+      planExpedition(
+        state,
+        { dungeon: "ruins", difficulty: 2 },
+        { combatKnowledge: mockCombatKnowledge },
+      ),
+    /No quest matches dungeon=crypts, difficulty=2/,
+  );
+});
+
 test("calculates accurate provisions and gold costs based on dungeon length and region", () => {
   const questShort = makeQuest("ruins_short", "ruins", 0, 0); // Short
   const questMedium = makeQuest("ruins_medium", "ruins", 0, 1); // Medium

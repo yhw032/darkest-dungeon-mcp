@@ -964,7 +964,9 @@ export function createDarkestDungeonServer(
           .string()
           .min(1)
           .optional()
-          .describe("Raw dungeon id used for filtering, such as crypts or weald."),
+          .describe(
+            "Dungeon id used for filtering. Save ids such as crypts and region aliases such as ruins are accepted.",
+          ),
         type: z.string().min(1).optional(),
         difficulty: z.number().int().nonnegative().optional(),
         isPlotQuest: z.boolean().optional(),
@@ -1283,7 +1285,7 @@ export function createDarkestDungeonServer(
           .string()
           .optional()
           .describe(
-            "Target dungeon region (e.g. 'ruins', 'warrens', 'weald', 'cove', 'courtyard', 'farmstead')",
+            "Target dungeon region or save id (e.g. 'ruins'/'crypts', 'warrens', 'weald', 'cove', 'courtyard', 'farmstead'/'farm'). Fails when no quest matches.",
           ),
         difficulty: z
           .number()
