@@ -1,4 +1,5 @@
 import assert from "node:assert/strict";
+import { existsSync } from "node:fs";
 import { mkdir, mkdtemp, rm, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
@@ -20,6 +21,7 @@ import {
   localizeTrinket,
   localizeVirtue,
 } from "../src/localization/game-localization.js";
+import { gameLanguageCodes } from "../src/localization/languages.js";
 
 function table(language: string, entries: Array<[string, string]>): string {
   return `<root><language id="${language}">${entries
@@ -133,4 +135,32 @@ test("loads official hero class and combat skill names", async (t) => {
   assert.equal(localizeProvisionItem("torch", "ko", localization), "횃불");
   assert.equal(localizeProvisionItem("the_blood", "ko", localization), "피");
   assert.equal(localizeProvisionItem("missing", "ko", localization), null);
+});
+
+test("loads representative strings for every supported language from the game install", async (t) => {
+  const gameDirectory =
+    process.env.DD_GAME_DIR ??
+    "D:\\SteamLibrary\\steamapps\\common\\DarkestDungeon";
+
+  if (!existsSync(gameDirectory)) {
+    t.skip("Darkest Dungeon game directory is not available");
+    return;
+  }
+
+  const localization = await loadGameLocalization(gameDirectory);
+
+  for (const language of gameLanguageCodes) {
+    assert.ok(
+      localizeHeroClass("leper", language, localization),
+      `Missing leper class name for ${language}`,
+    );
+    assert.ok(
+      localizeProvisionItem("torch", language, localization),
+      `Missing torch name for ${language}`,
+    );
+    assert.ok(
+      localizeCurio("eldritch_altar", language, localization),
+      `Missing Eldritch Altar name for ${language}`,
+    );
+  }
 });
