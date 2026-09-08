@@ -60,8 +60,9 @@ function definition(
     effects: [],
     unresolvedBuffIds: [],
     localization: {
-      english: { name, description: `${name} description` },
-      korean: { name: `${name} KO`, description: `${name} KO description` },
+      en: { name, description: `${name} description` },
+      fr: { name: `${name} FR`, description: `${name} FR description` },
+      ko: { name: `${name} KO`, description: `${name} KO description` },
     },
   };
 }
@@ -140,6 +141,19 @@ test("selects quirk text in the requested language", () => {
   assert.equal(
     result[0]?.riskyQuirks[0]?.description,
     "Kleptomaniac KO description",
+  );
+});
+
+test("selects quirk text in an additional requested language", () => {
+  const result = analyzeRiskyQuirks(roster, definitions, knowledge, {
+    heroId: "1",
+    language: "fr",
+  });
+
+  assert.equal(result[0]?.riskyQuirks[0]?.name, "Kleptomaniac FR");
+  assert.equal(
+    result[0]?.riskyQuirks[0]?.description,
+    "Kleptomaniac FR description",
   );
 });
 

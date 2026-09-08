@@ -55,6 +55,10 @@ const localization = `<?xml version="1.0" encoding="UTF-8"?>
     <entry id="str_quirk_description_fragile"><![CDATA[최대 체력 -10%]]></entry>
     <entry id="str_quirk_name_kleptomaniac"><![CDATA[도벽]]></entry>
   </language>
+  <language id="french">
+    <entry id="str_quirk_name_fragile"><![CDATA[Fragile FR]]></entry>
+    <entry id="str_quirk_description_fragile"><![CDATA[-10 % PV MAX]]></entry>
+  </language>
 </root>`;
 
 async function writeFixture(root: string): Promise<void> {
@@ -108,11 +112,12 @@ async function writeFixture(root: string): Promise<void> {
   ]);
 }
 
-test("parses English and Korean quirk localization", () => {
+test("parses all supported quirk localization languages", () => {
   const parsed = parseQuirkLocalizationXml(localization);
 
   assert.equal(parsed.get("english")?.get("str_quirk_name_fragile"), "Fragile");
   assert.equal(parsed.get("koreana")?.get("str_quirk_name_fragile"), "약골");
+  assert.equal(parsed.get("french")?.get("str_quirk_name_fragile"), "Fragile FR");
 });
 
 test("loads normalized quirks, buff effects, and localization", async () => {
@@ -145,12 +150,13 @@ test("loads normalized quirks, buff effects, and localization", async () => {
       ],
       unresolvedBuffIds: ["UNKNOWN_MOD_BUFF"],
       localization: {
-        english: { name: "Fragile", description: "-10% MAX HP" },
-        korean: { name: "약골", description: "최대 체력 -10%" },
+        en: { name: "Fragile", description: "-10% MAX HP" },
+        fr: { name: "Fragile FR", description: "-10 % PV MAX" },
+        ko: { name: "약골", description: "최대 체력 -10%" },
       },
     });
     assert.equal(quirks.some((quirk) => quirk.id === "arena_only"), false);
-    assert.deepEqual(quirks[1]?.localization.english, {
+    assert.deepEqual(quirks[1]?.localization.en, {
       name: "Kleptomaniac",
       description: null,
     });

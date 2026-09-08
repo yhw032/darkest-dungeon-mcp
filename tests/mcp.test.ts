@@ -137,8 +137,8 @@ test("MCP server advertises and executes read-only game tools", async (t) => {
         effects: [],
         unresolvedBuffIds: [],
         localization: {
-          english: { name: "Risky test quirk", description: "Test risk" },
-          korean: { name: "위험 테스트 기벽", description: "테스트 위험" },
+          en: { name: "Risky test quirk", description: "Test risk" },
+          ko: { name: "위험 테스트 기벽", description: "테스트 위험" },
         },
       },
     ],

@@ -7,6 +7,12 @@ import type {
   QuirkLocalizedText,
 } from "../domain/quirk-definitions.js";
 import {
+  gameLanguageCodes,
+  getGameLocalizationId,
+  supportedGameLocalizationIds,
+  type GameLanguage,
+} from "../localization/languages.js";
+import {
   mergeStringTables,
   parseStringTableXml,
   type LocalizationByLanguage,
@@ -166,7 +172,7 @@ function parseBuffs(value: unknown, source: string): QuirkBuffEffect[] {
 }
 
 export function parseQuirkLocalizationXml(text: string): LocalizationByLanguage {
-  return parseStringTableXml(text, new Set(["english", "koreana"]));
+  return parseStringTableXml(text, supportedGameLocalizationIds);
 }
 
 function localizedText(
@@ -177,6 +183,20 @@ function localizedText(
     name: entries?.get(`str_quirk_name_${quirkId}`) ?? null,
     description: entries?.get(`str_quirk_description_${quirkId}`) ?? null,
   };
+}
+
+function localizedTextByLanguage(
+  localization: LocalizationByLanguage,
+  quirkId: string,
+): Partial<Record<GameLanguage, QuirkLocalizedText>> {
+  return Object.fromEntries(
+    gameLanguageCodes.flatMap((language) => {
+      const entries = localization.get(getGameLocalizationId(language));
+      return entries === undefined
+        ? []
+        : [[language, localizedText(entries, quirkId)] as const];
+    }),
+  );
 }
 
 async function readGameFiles(
@@ -255,10 +275,7 @@ export async function loadQuirkDefinitions(
       canBeReplacedByNewQuirk: quirk.canBeReplacedByNewQuirk,
       effects: resolvedEffects,
       unresolvedBuffIds: quirk.buffIds.filter((id) => !effects.has(id)),
-      localization: {
-        english: localizedText(localization.get("english"), quirk.id),
-        korean: localizedText(localization.get("koreana"), quirk.id),
-      },
+      localization: localizedTextByLanguage(localization, quirk.id),
     };
   });
 }

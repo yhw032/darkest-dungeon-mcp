@@ -1,3 +1,5 @@
+import type { GameLanguage } from "../localization/languages.js";
+
 export interface QuirkBuffEffect {
   buffId: string;
   statType: string;
@@ -25,8 +27,5 @@ export interface QuirkDefinition {
   canBeReplacedByNewQuirk: boolean;
   effects: QuirkBuffEffect[];
   unresolvedBuffIds: string[];
-  localization: {
-    english: QuirkLocalizedText;
-    korean: QuirkLocalizedText;
-  };
+  localization: Partial<Record<GameLanguage, QuirkLocalizedText>>;
 }

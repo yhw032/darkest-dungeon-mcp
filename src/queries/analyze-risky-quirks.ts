@@ -111,10 +111,7 @@ export function analyzeRiskyQuirks(
         if (filters.lockedOnly === true && !quirk.isLocked) return [];
 
         const definition = definitionById.get(quirk.id);
-        const localized =
-          language === "ko"
-            ? definition?.localization.korean
-            : definition?.localization.english;
+        const localized = definition?.localization[language];
         return [
           {
             id: quirk.id,
