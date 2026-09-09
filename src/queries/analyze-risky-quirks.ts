@@ -105,7 +105,11 @@ export function analyzeRiskyQuirks(
     const riskyQuirks = hero.quirks
       .flatMap((quirk): RiskyQuirkAnalysis[] => {
         const rule = ruleById.get(quirk.id);
-        if (rule === undefined || priorityRank[rule.priority] < minimumRank) {
+        if (
+          rule === undefined ||
+          rule.action !== "remove_negative" ||
+          priorityRank[rule.priority] < minimumRank
+        ) {
           return [];
         }
         if (filters.lockedOnly === true && !quirk.isLocked) return [];

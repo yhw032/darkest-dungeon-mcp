@@ -151,19 +151,27 @@ test("MCP server advertises and executes read-only game tools", async (t) => {
       },
     ],
     loadQuirkTreatmentKnowledge: async () => ({
-      schemaVersion: 1,
+      schemaVersion: 2,
       policy: {
         title: "Test treatment policy",
         disclaimer: "Editorial guidance for MCP integration tests.",
       },
       rules: [
         {
+          action: "remove_negative",
           quirkId: riskyQuirk.id,
           priority: "high",
           factors: ["forced_curio_interaction"],
           reasons: ["May force a curio interaction."],
           notes: [],
-          sources: [{ title: "Fixture", reference: "test" }],
+          sources: [
+            {
+              kind: "game",
+              title: "Fixture",
+              reference: "test",
+              verifiedAt: "2026-09-09",
+            },
+          ],
         },
       ],
     }),

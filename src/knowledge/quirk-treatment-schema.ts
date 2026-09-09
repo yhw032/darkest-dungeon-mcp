@@ -8,15 +8,25 @@ const quirkId = z.string().regex(/^[a-z0-9]+(?:_[a-z0-9]+)*$/);
 
 const sourceSchema = z
   .object({
+    kind: z.enum(["game", "wiki", "community"]),
     title: nonEmptyString,
     reference: nonEmptyString,
+    verifiedAt: z.iso.date(),
   })
   .strict();
 
-const ruleSchema = z
+const ruleBase = {
+  quirkId,
+  priority: z.enum(["critical", "high", "medium", "low"]),
+  reasons: z.array(nonEmptyString).min(1),
+  notes: z.array(nonEmptyString),
+  sources: z.array(sourceSchema).min(1),
+} as const;
+
+const negativeRuleSchema = z
   .object({
-    quirkId,
-    priority: z.enum(["critical", "high", "medium", "low"]),
+    ...ruleBase,
+    action: z.literal("remove_negative"),
     factors: z
       .array(
         z.enum([
@@ -33,15 +43,57 @@ const ruleSchema = z
       .refine((factors) => new Set(factors).size === factors.length, {
         message: "factors must be unique",
       }),
-    reasons: z.array(nonEmptyString).min(1),
-    notes: z.array(nonEmptyString),
-    sources: z.array(sourceSchema).min(1),
   })
   .strict();
 
+const positiveRuleSchema = z
+  .object({
+    ...ruleBase,
+    action: z.literal("lock_positive"),
+    factors: z
+      .array(
+        z.enum([
+          "accuracy",
+          "critical",
+          "damage",
+          "durability",
+          "healing",
+          "resistance",
+          "scouting",
+          "speed",
+          "stress_control",
+          "town",
+          "other",
+        ]),
+      )
+      .min(1)
+      .refine((factors) => new Set(factors).size === factors.length, {
+        message: "factors must be unique",
+      }),
+    applicability: z.enum([
+      "universal",
+      "hero_class",
+      "build",
+      "region",
+      "conditional",
+    ]),
+    heroClasses: z
+      .array(quirkId)
+      .refine((classes) => new Set(classes).size === classes.length, {
+        message: "heroClasses must be unique",
+      }),
+    cautions: z.array(nonEmptyString),
+  })
+  .strict();
+
+const ruleSchema = z.discriminatedUnion("action", [
+  negativeRuleSchema,
+  positiveRuleSchema,
+]);
+
 const knowledgeSchema = z
   .object({
-    schemaVersion: z.literal(1),
+    schemaVersion: z.literal(2),
     policy: z
       .object({
         title: nonEmptyString,

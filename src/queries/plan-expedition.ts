@@ -552,7 +552,11 @@ export function planExpedition(
     // Risky quirks
     if (quirkTreatmentKnowledge) {
       for (const quirk of hero.quirks) {
-        const rule = quirkTreatmentKnowledge.rules.find((r) => r.quirkId === quirk.id);
+        const rule = quirkTreatmentKnowledge.rules.find(
+          (candidate) =>
+            candidate.quirkId === quirk.id &&
+            candidate.action === "remove_negative",
+        );
         if (rule && (rule.priority === "critical" || rule.priority === "high")) {
           cautions.push(`Risky quirk [${quirk.id}] (${rule.priority})`);
           score -= rule.priority === "critical" ? 15 : 8;

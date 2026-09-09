@@ -10,13 +10,14 @@ import {
 
 function validKnowledge(): unknown {
   return {
-    schemaVersion: 1,
+    schemaVersion: 2,
     policy: {
       title: "Test policy",
       disclaimer: "Editorial guidance for tests.",
     },
     rules: [
       {
+        action: "remove_negative",
         quirkId: "kleptomaniac",
         priority: "critical",
         factors: ["forced_curio_interaction", "loot_loss"],
@@ -24,8 +25,10 @@ function validKnowledge(): unknown {
         notes: [],
         sources: [
           {
+            kind: "game",
             title: "Game definition",
             reference: "shared/quirk/quirk_library.json#kleptomaniac",
+            verifiedAt: "2026-09-09",
           },
         ],
       },
@@ -36,12 +39,43 @@ function validKnowledge(): unknown {
 test("validates quirk treatment policy and rules", () => {
   const knowledge = parseQuirkTreatmentKnowledge(validKnowledge());
 
-  assert.equal(knowledge.schemaVersion, 1);
+  assert.equal(knowledge.schemaVersion, 2);
+  assert.equal(knowledge.rules[0]?.action, "remove_negative");
   assert.equal(knowledge.rules[0]?.priority, "critical");
   assert.deepEqual(knowledge.rules[0]?.factors, [
     "forced_curio_interaction",
     "loot_loss",
   ]);
+});
+
+test("validates positive quirk lock rules separately", () => {
+  const value = validKnowledge() as { rules: unknown[] };
+  value.rules.push({
+    action: "lock_positive",
+    quirkId: "quick_reflexes",
+    priority: "high",
+    factors: ["speed"],
+    applicability: "universal",
+    heroClasses: [],
+    reasons: ["Provides an unconditional speed bonus."],
+    notes: [],
+    cautions: ["Lock capacity is limited."],
+    sources: [
+      {
+        kind: "game",
+        title: "Game definition",
+        reference: "shared/quirk/quirk_library.json#quick_reflexes",
+        verifiedAt: "2026-09-09",
+      },
+    ],
+  });
+
+  const knowledge = parseQuirkTreatmentKnowledge(value);
+  const rule = knowledge.rules[1];
+  assert.equal(rule?.action, "lock_positive");
+  if (rule?.action !== "lock_positive") return;
+  assert.equal(rule.applicability, "universal");
+  assert.deepEqual(rule.factors, ["speed"]);
 });
 
 test("rejects malformed treatment knowledge JSON", () => {
@@ -100,15 +134,13 @@ test("loads the checked-in treatment knowledge", async () => {
     knowledge.rules.find((rule) => rule.quirkId === "kleptomaniac")?.priority,
     "critical",
   );
-  assert.equal(
-    knowledge.rules.find((rule) => rule.quirkId === "slow_reflexes")?.priority,
-    "high",
+  const slowReflexes = knowledge.rules.find(
+    (rule) => rule.quirkId === "slow_reflexes",
   );
-  assert.ok(
-    knowledge.rules
-      .find((rule) => rule.quirkId === "slow_reflexes")
-      ?.factors.includes("combat_penalty"),
-  );
+  assert.equal(slowReflexes?.priority, "high");
+  assert.equal(slowReflexes?.action, "remove_negative");
+  if (slowReflexes?.action !== "remove_negative") return;
+  assert.ok(slowReflexes.factors.includes("combat_penalty"));
   assert.ok(knowledge.policy.disclaimer.includes("editorial guidance"));
 });
 

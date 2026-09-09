@@ -90,24 +90,40 @@ const definitions = [
 ];
 
 const knowledge: QuirkTreatmentKnowledgeBase = {
-  schemaVersion: 1,
+  schemaVersion: 2,
   policy: { title: "Test", disclaimer: "Test policy" },
   rules: [
     {
+      action: "remove_negative",
       quirkId: "kleptomaniac",
       priority: "critical",
       factors: ["forced_curio_interaction", "loot_loss"],
       reasons: ["Takes loot."],
       notes: [],
-      sources: [{ title: "Game", reference: "fixture" }],
+      sources: [
+        {
+          kind: "game",
+          title: "Game",
+          reference: "fixture",
+          verifiedAt: "2026-09-09",
+        },
+      ],
     },
     {
+      action: "remove_negative",
       quirkId: "curious",
       priority: "high",
       factors: ["forced_curio_interaction"],
       reasons: ["Touches curios."],
       notes: [],
-      sources: [{ title: "Game", reference: "fixture" }],
+      sources: [
+        {
+          kind: "game",
+          title: "Game",
+          reference: "fixture",
+          verifiedAt: "2026-09-09",
+        },
+      ],
     },
   ],
 };

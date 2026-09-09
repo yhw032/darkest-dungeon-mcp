@@ -1,11 +1,12 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "policy": {
     "title": "Conservative negative-quirk treatment priorities",
     "disclaimer": "Priorities are editorial guidance, not values supplied by the game. They favor preventing forced interactions, permanent loot loss, and critical combat stat penalties (Speed, Accuracy, Max HP); party composition and campaign resources can change the best choice."
   },
   "rules": [
     {
+      "action": "remove_negative",
       "quirkId": "kleptomaniac",
       "priority": "critical",
       "factors": [
@@ -21,12 +22,15 @@
       ],
       "sources": [
         {
+          "kind": "game",
           "title": "Darkest Dungeon base quirk definition",
-          "reference": "shared/quirk/quirk_library.json#kleptomaniac"
+          "reference": "shared/quirk/quirk_library.json#kleptomaniac",
+          "verifiedAt": "2026-09-09"
         }
       ]
     },
     {
+      "action": "remove_negative",
       "quirkId": "curious",
       "priority": "critical",
       "factors": [
@@ -41,12 +45,15 @@
       ],
       "sources": [
         {
+          "kind": "game",
           "title": "Darkest Dungeon base quirk definition",
-          "reference": "shared/quirk/quirk_library.json#curious"
+          "reference": "shared/quirk/quirk_library.json#curious",
+          "verifiedAt": "2026-09-09"
         }
       ]
     },
     {
+      "action": "remove_negative",
       "quirkId": "compulsive",
       "priority": "critical",
       "factors": [
@@ -61,12 +68,15 @@
       ],
       "sources": [
         {
+          "kind": "game",
           "title": "Darkest Dungeon base quirk definition",
-          "reference": "shared/quirk/quirk_library.json#compulsive"
+          "reference": "shared/quirk/quirk_library.json#compulsive",
+          "verifiedAt": "2026-09-09"
         }
       ]
     },
     {
+      "action": "remove_negative",
       "quirkId": "corvids_curiosity",
       "priority": "critical",
       "factors": [
@@ -81,12 +91,15 @@
       ],
       "sources": [
         {
+          "kind": "game",
           "title": "Darkest Dungeon base quirk definition",
-          "reference": "shared/quirk/quirk_library.json#corvids_curiosity"
+          "reference": "shared/quirk/quirk_library.json#corvids_curiosity",
+          "verifiedAt": "2026-09-09"
         }
       ]
     },
     {
+      "action": "remove_negative",
       "quirkId": "dark_temptation",
       "priority": "critical",
       "factors": [
@@ -102,12 +115,15 @@
       ],
       "sources": [
         {
+          "kind": "game",
           "title": "Darkest Dungeon base quirk definition",
-          "reference": "shared/quirk/quirk_library.json#dark_temptation"
+          "reference": "shared/quirk/quirk_library.json#dark_temptation",
+          "verifiedAt": "2026-09-09"
         }
       ]
     },
     {
+      "action": "remove_negative",
       "quirkId": "dipsomania",
       "priority": "critical",
       "factors": [
@@ -123,12 +139,15 @@
       ],
       "sources": [
         {
+          "kind": "game",
           "title": "Darkest Dungeon base quirk definition",
-          "reference": "shared/quirk/quirk_library.json#dipsomania"
+          "reference": "shared/quirk/quirk_library.json#dipsomania",
+          "verifiedAt": "2026-09-09"
         }
       ]
     },
     {
+      "action": "remove_negative",
       "quirkId": "slow_reflexes",
       "priority": "high",
       "factors": [
@@ -143,12 +162,15 @@
       ],
       "sources": [
         {
+          "kind": "game",
           "title": "Darkest Dungeon base quirk definition",
-          "reference": "shared/quirk/quirk_library.json#slow_reflexes"
+          "reference": "shared/quirk/quirk_library.json#slow_reflexes",
+          "verifiedAt": "2026-09-09"
         }
       ]
     },
     {
+      "action": "remove_negative",
       "quirkId": "off_guard",
       "priority": "high",
       "factors": [
@@ -163,12 +185,15 @@
       ],
       "sources": [
         {
+          "kind": "game",
           "title": "Darkest Dungeon base quirk definition",
-          "reference": "shared/quirk/quirk_library.json#off_guard"
+          "reference": "shared/quirk/quirk_library.json#off_guard",
+          "verifiedAt": "2026-09-09"
         }
       ]
     },
     {
+      "action": "remove_negative",
       "quirkId": "the_yips",
       "priority": "high",
       "factors": [
@@ -183,12 +208,15 @@
       ],
       "sources": [
         {
+          "kind": "game",
           "title": "Darkest Dungeon base quirk definition",
-          "reference": "shared/quirk/quirk_library.json#the_yips"
+          "reference": "shared/quirk/quirk_library.json#the_yips",
+          "verifiedAt": "2026-09-09"
         }
       ]
     },
     {
+      "action": "remove_negative",
       "quirkId": "fragile",
       "priority": "high",
       "factors": [
@@ -203,12 +231,15 @@
       ],
       "sources": [
         {
+          "kind": "game",
           "title": "Darkest Dungeon base quirk definition",
-          "reference": "shared/quirk/quirk_library.json#fragile"
+          "reference": "shared/quirk/quirk_library.json#fragile",
+          "verifiedAt": "2026-09-09"
         }
       ]
     },
     {
+      "action": "remove_negative",
       "quirkId": "clumsy",
       "priority": "high",
       "factors": [
@@ -223,12 +254,15 @@
       ],
       "sources": [
         {
+          "kind": "game",
           "title": "Darkest Dungeon base quirk definition",
-          "reference": "shared/quirk/quirk_library.json#clumsy"
+          "reference": "shared/quirk/quirk_library.json#clumsy",
+          "verifiedAt": "2026-09-09"
         }
       ]
     },
     {
+      "action": "remove_negative",
       "quirkId": "inaccurate",
       "priority": "high",
       "factors": [
@@ -243,12 +277,15 @@
       ],
       "sources": [
         {
+          "kind": "game",
           "title": "Darkest Dungeon base quirk definition",
-          "reference": "shared/quirk/quirk_library.json#inaccurate"
+          "reference": "shared/quirk/quirk_library.json#inaccurate",
+          "verifiedAt": "2026-09-09"
         }
       ]
     },
     {
+      "action": "remove_negative",
       "quirkId": "scattering",
       "priority": "high",
       "factors": [
@@ -263,12 +300,15 @@
       ],
       "sources": [
         {
+          "kind": "game",
           "title": "Darkest Dungeon base quirk definition",
-          "reference": "shared/quirk/quirk_library.json#scattering"
+          "reference": "shared/quirk/quirk_library.json#scattering",
+          "verifiedAt": "2026-09-09"
         }
       ]
     },
     {
+      "action": "remove_negative",
       "quirkId": "nervous",
       "priority": "high",
       "factors": [
@@ -283,12 +323,15 @@
       ],
       "sources": [
         {
+          "kind": "game",
           "title": "Darkest Dungeon base quirk definition",
-          "reference": "shared/quirk/quirk_library.json#nervous"
+          "reference": "shared/quirk/quirk_library.json#nervous",
+          "verifiedAt": "2026-09-09"
         }
       ]
     },
     {
+      "action": "remove_negative",
       "quirkId": "bloodthirsty",
       "priority": "high",
       "factors": [
@@ -304,12 +347,15 @@
       ],
       "sources": [
         {
+          "kind": "game",
           "title": "Darkest Dungeon base quirk definition",
-          "reference": "shared/quirk/quirk_library.json#bloodthirsty"
+          "reference": "shared/quirk/quirk_library.json#bloodthirsty",
+          "verifiedAt": "2026-09-09"
         }
       ]
     },
     {
+      "action": "remove_negative",
       "quirkId": "necromania",
       "priority": "high",
       "factors": [
@@ -325,12 +371,15 @@
       ],
       "sources": [
         {
+          "kind": "game",
           "title": "Darkest Dungeon base quirk definition",
-          "reference": "shared/quirk/quirk_library.json#necromania"
+          "reference": "shared/quirk/quirk_library.json#necromania",
+          "verifiedAt": "2026-09-09"
         }
       ]
     },
     {
+      "action": "remove_negative",
       "quirkId": "egomania",
       "priority": "high",
       "factors": [
@@ -346,12 +395,15 @@
       ],
       "sources": [
         {
+          "kind": "game",
           "title": "Darkest Dungeon base quirk definition",
-          "reference": "shared/quirk/quirk_library.json#egomania"
+          "reference": "shared/quirk/quirk_library.json#egomania",
+          "verifiedAt": "2026-09-09"
         }
       ]
     },
     {
+      "action": "remove_negative",
       "quirkId": "hylomania",
       "priority": "high",
       "factors": [
@@ -367,12 +419,15 @@
       ],
       "sources": [
         {
+          "kind": "game",
           "title": "Darkest Dungeon base quirk definition",
-          "reference": "shared/quirk/quirk_library.json#hylomania"
+          "reference": "shared/quirk/quirk_library.json#hylomania",
+          "verifiedAt": "2026-09-09"
         }
       ]
     },
     {
+      "action": "remove_negative",
       "quirkId": "plutomania",
       "priority": "high",
       "factors": [
@@ -388,12 +443,15 @@
       ],
       "sources": [
         {
+          "kind": "game",
           "title": "Darkest Dungeon base quirk definition",
-          "reference": "shared/quirk/quirk_library.json#plutomania"
+          "reference": "shared/quirk/quirk_library.json#plutomania",
+          "verifiedAt": "2026-09-09"
         }
       ]
     },
     {
+      "action": "remove_negative",
       "quirkId": "torn_rotator_cuff",
       "priority": "medium",
       "factors": [
@@ -408,12 +466,15 @@
       ],
       "sources": [
         {
+          "kind": "game",
           "title": "Darkest Dungeon base quirk definition",
-          "reference": "shared/quirk/quirk_library.json#torn_rotator_cuff"
+          "reference": "shared/quirk/quirk_library.json#torn_rotator_cuff",
+          "verifiedAt": "2026-09-09"
         }
       ]
     },
     {
+      "action": "remove_negative",
       "quirkId": "flawed_release",
       "priority": "medium",
       "factors": [
@@ -428,12 +489,15 @@
       ],
       "sources": [
         {
+          "kind": "game",
           "title": "Darkest Dungeon base quirk definition",
-          "reference": "shared/quirk/quirk_library.json#flawed_release"
+          "reference": "shared/quirk/quirk_library.json#flawed_release",
+          "verifiedAt": "2026-09-09"
         }
       ]
     },
     {
+      "action": "remove_negative",
       "quirkId": "weak_grip",
       "priority": "medium",
       "factors": [
@@ -448,12 +512,15 @@
       ],
       "sources": [
         {
+          "kind": "game",
           "title": "Darkest Dungeon base quirk definition",
-          "reference": "shared/quirk/quirk_library.json#weak_grip"
+          "reference": "shared/quirk/quirk_library.json#weak_grip",
+          "verifiedAt": "2026-09-09"
         }
       ]
     },
     {
+      "action": "remove_negative",
       "quirkId": "calm",
       "priority": "medium",
       "factors": [
@@ -468,12 +535,15 @@
       ],
       "sources": [
         {
+          "kind": "game",
           "title": "Darkest Dungeon base quirk definition",
-          "reference": "shared/quirk/quirk_library.json#calm"
+          "reference": "shared/quirk/quirk_library.json#calm",
+          "verifiedAt": "2026-09-09"
         }
       ]
     },
     {
+      "action": "remove_negative",
       "quirkId": "soft",
       "priority": "medium",
       "factors": [
@@ -488,12 +558,15 @@
       ],
       "sources": [
         {
+          "kind": "game",
           "title": "Darkest Dungeon base quirk definition",
-          "reference": "shared/quirk/quirk_library.json#soft"
+          "reference": "shared/quirk/quirk_library.json#soft",
+          "verifiedAt": "2026-09-09"
         }
       ]
     },
     {
+      "action": "remove_negative",
       "quirkId": "thin_blooded",
       "priority": "medium",
       "factors": [
@@ -508,12 +581,15 @@
       ],
       "sources": [
         {
+          "kind": "game",
           "title": "Darkest Dungeon base quirk definition",
-          "reference": "shared/quirk/quirk_library.json#thin_blooded"
+          "reference": "shared/quirk/quirk_library.json#thin_blooded",
+          "verifiedAt": "2026-09-09"
         }
       ]
     },
     {
+      "action": "remove_negative",
       "quirkId": "anemic",
       "priority": "medium",
       "factors": [
@@ -528,12 +604,15 @@
       ],
       "sources": [
         {
+          "kind": "game",
           "title": "Darkest Dungeon base quirk definition",
-          "reference": "shared/quirk/quirk_library.json#anemic"
+          "reference": "shared/quirk/quirk_library.json#anemic",
+          "verifiedAt": "2026-09-09"
         }
       ]
     },
     {
+      "action": "remove_negative",
       "quirkId": "sickly",
       "priority": "medium",
       "factors": [
@@ -548,12 +627,15 @@
       ],
       "sources": [
         {
+          "kind": "game",
           "title": "Darkest Dungeon base quirk definition",
-          "reference": "shared/quirk/quirk_library.json#sickly"
+          "reference": "shared/quirk/quirk_library.json#sickly",
+          "verifiedAt": "2026-09-09"
         }
       ]
     },
     {
+      "action": "remove_negative",
       "quirkId": "suicidal",
       "priority": "medium",
       "factors": [
@@ -568,12 +650,15 @@
       ],
       "sources": [
         {
+          "kind": "game",
           "title": "Darkest Dungeon base quirk definition",
-          "reference": "shared/quirk/quirk_library.json#suicidal"
+          "reference": "shared/quirk/quirk_library.json#suicidal",
+          "verifiedAt": "2026-09-09"
         }
       ]
     },
     {
+      "action": "remove_negative",
       "quirkId": "bad_healer",
       "priority": "medium",
       "factors": [
@@ -588,12 +673,15 @@
       ],
       "sources": [
         {
+          "kind": "game",
           "title": "Darkest Dungeon base quirk definition",
-          "reference": "shared/quirk/quirk_library.json#bad_healer"
+          "reference": "shared/quirk/quirk_library.json#bad_healer",
+          "verifiedAt": "2026-09-09"
         }
       ]
     },
     {
+      "action": "remove_negative",
       "quirkId": "perfectionist",
       "priority": "medium",
       "factors": [
@@ -608,12 +696,15 @@
       ],
       "sources": [
         {
+          "kind": "game",
           "title": "Darkest Dungeon base quirk definition",
-          "reference": "shared/quirk/quirk_library.json#perfectionist"
+          "reference": "shared/quirk/quirk_library.json#perfectionist",
+          "verifiedAt": "2026-09-09"
         }
       ]
     },
     {
+      "action": "remove_negative",
       "quirkId": "claustrophobia",
       "priority": "medium",
       "factors": [
@@ -628,12 +719,15 @@
       ],
       "sources": [
         {
+          "kind": "game",
           "title": "Darkest Dungeon base quirk definition",
-          "reference": "shared/quirk/quirk_library.json#claustrophobia"
+          "reference": "shared/quirk/quirk_library.json#claustrophobia",
+          "verifiedAt": "2026-09-09"
         }
       ]
     },
     {
+      "action": "remove_negative",
       "quirkId": "thanatophobia",
       "priority": "medium",
       "factors": [
@@ -648,12 +742,15 @@
       ],
       "sources": [
         {
+          "kind": "game",
           "title": "Darkest Dungeon base quirk definition",
-          "reference": "shared/quirk/quirk_library.json#thanatophobia"
+          "reference": "shared/quirk/quirk_library.json#thanatophobia",
+          "verifiedAt": "2026-09-09"
         }
       ]
     },
     {
+      "action": "remove_negative",
       "quirkId": "lygophobia",
       "priority": "medium",
       "factors": [
@@ -668,12 +765,15 @@
       ],
       "sources": [
         {
+          "kind": "game",
           "title": "Darkest Dungeon base quirk definition",
-          "reference": "shared/quirk/quirk_library.json#lygophobia"
+          "reference": "shared/quirk/quirk_library.json#lygophobia",
+          "verifiedAt": "2026-09-09"
         }
       ]
     },
     {
+      "action": "remove_negative",
       "quirkId": "ablutomania",
       "priority": "medium",
       "factors": [
@@ -688,12 +788,15 @@
       ],
       "sources": [
         {
+          "kind": "game",
           "title": "Darkest Dungeon base quirk definition",
-          "reference": "shared/quirk/quirk_library.json#ablutomania"
+          "reference": "shared/quirk/quirk_library.json#ablutomania",
+          "verifiedAt": "2026-09-09"
         }
       ]
     },
     {
+      "action": "remove_negative",
       "quirkId": "sitiomania",
       "priority": "medium",
       "factors": [
@@ -709,12 +812,15 @@
       ],
       "sources": [
         {
+          "kind": "game",
           "title": "Darkest Dungeon base quirk definition",
-          "reference": "shared/quirk/quirk_library.json#sitiomania"
+          "reference": "shared/quirk/quirk_library.json#sitiomania",
+          "verifiedAt": "2026-09-09"
         }
       ]
     },
     {
+      "action": "remove_negative",
       "quirkId": "paranormania",
       "priority": "medium",
       "factors": [
@@ -730,12 +836,15 @@
       ],
       "sources": [
         {
+          "kind": "game",
           "title": "Darkest Dungeon base quirk definition",
-          "reference": "shared/quirk/quirk_library.json#paranormania"
+          "reference": "shared/quirk/quirk_library.json#paranormania",
+          "verifiedAt": "2026-09-09"
         }
       ]
     },
     {
+      "action": "remove_negative",
       "quirkId": "demonomania",
       "priority": "medium",
       "factors": [
@@ -750,12 +859,15 @@
       ],
       "sources": [
         {
+          "kind": "game",
           "title": "Darkest Dungeon base quirk definition",
-          "reference": "shared/quirk/quirk_library.json#demonomania"
+          "reference": "shared/quirk/quirk_library.json#demonomania",
+          "verifiedAt": "2026-09-09"
         }
       ]
     },
     {
+      "action": "remove_negative",
       "quirkId": "hieromania",
       "priority": "medium",
       "factors": [
@@ -770,12 +882,15 @@
       ],
       "sources": [
         {
+          "kind": "game",
           "title": "Darkest Dungeon base quirk definition",
-          "reference": "shared/quirk/quirk_library.json#hieromania"
+          "reference": "shared/quirk/quirk_library.json#hieromania",
+          "verifiedAt": "2026-09-09"
         }
       ]
     },
     {
+      "action": "remove_negative",
       "quirkId": "hagiomania",
       "priority": "medium",
       "factors": [
@@ -790,12 +905,15 @@
       ],
       "sources": [
         {
+          "kind": "game",
           "title": "Darkest Dungeon base quirk definition",
-          "reference": "shared/quirk/quirk_library.json#hagiomania"
+          "reference": "shared/quirk/quirk_library.json#hagiomania",
+          "verifiedAt": "2026-09-09"
         }
       ]
     },
     {
+      "action": "remove_negative",
       "quirkId": "guilty_conscience",
       "priority": "medium",
       "factors": [
@@ -811,8 +929,10 @@
       ],
       "sources": [
         {
+          "kind": "game",
           "title": "Darkest Dungeon base quirk definition",
-          "reference": "shared/quirk/quirk_library.json#guilty_conscience"
+          "reference": "shared/quirk/quirk_library.json#guilty_conscience",
+          "verifiedAt": "2026-09-09"
         }
       ]
     }
