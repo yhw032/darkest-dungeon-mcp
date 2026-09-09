@@ -127,7 +127,7 @@ runner through `tsx`. Tests never access the user's live save directory.
 | `refresh_game_state` | Reload the shared read-only save snapshot before a new analysis when the campaign has changed. |
 | `get_game_state` | Return a combined campaign summary with localized estate resources, class counts, dungeon quest counts, and built-district names. |
 | `list_building_upgrades` | List building upgrades and costs with localized building, tree, and heirloom names. |
-| `list_risky_quirks` | Rank treatment-worthy quirks with localized class, quirk, and effect text. |
+| `recommend_quirk_management` | Separate negative-quirk removals from positive-quirk lock guidance with priorities, lock capacity, evidence, and localized quirk text. |
 | `list_heroes` | Filter heroes by class, roster status, stress, party availability, and optional quest eligibility; localize class names with `language`. |
 | `get_hero` | Return one hero with localized class, combat-skill, equipped-trinket, quirk, disease, affliction, and virtue names, resolve level, availability, optional quest eligibility, and town activity. |
 | `compare_heroes` | Compare 2–8 heroes using localized class, skill, and risky-quirk names plus objective readiness, equipment, skill-position, and curated quirk-risk evidence. |
@@ -215,13 +215,16 @@ strategic priority tiers (`S`, `A`, `B`, `C`), separates high-priority core targ
 heirloom shortages, simulates Heirloom Exchange feasibility with surplus currencies,
 and recommends targeted farming dungeons (e.g. Weald for Deeds, Warrens for Portraits).
 
-`list_risky_quirks` accepts `language` and returns ranked treatment candidates
-across 40 curated high-risk quirks covering forced curio interactions, loot loss,
-critical combat stat penalties (Speed, Accuracy, Max HP, PROT, Crits), and stress
-vulnerabilities. It returns official localized quirk names, descriptions, and the
-hero's localized class name. Treatment priorities (`critical`, `high`, `medium`, `low`),
-reasons, and policy text remain English editorial source material for the client
-to summarize in the user's language.
+`recommend_quirk_management` accepts independent `minimumNegativePriority` and
+`minimumPositivePriority` filters plus `includeUnrated`, `heroId`, `language`, and
+`limit`. It separates `negativeRemovals` from `positiveQuirks` and reports each
+positive quirk as `lock_positive`, `keep_locked`, `do_not_prioritize`, or `unrated`.
+The result also reports the verified three-slot positive-lock capacity, current
+usage, remaining slots, definition coverage, game effects, cautions, and evidence
+sources. The checked-in policy currently contains 40 negative-removal rules and
+16 general or conditional positive-lock rules. Official names and descriptions
+are localized; priorities, reasons, cautions, and policy text remain English
+editorial source material for the client to summarize in the user's language.
 
 Town-facing and campaign tools accept `language` and resolve official building,
 activity, district, upgrade-tree, heirloom, estate resource, class count, and
@@ -242,7 +245,15 @@ The guidance describes qualitative priorities, dangerous actions, and counters.
 It covers the listed base and DLC regions and curated bosses, but does not provide
 live turn state or exact enemy stats.
 
-Quirk treatment analysis combines the current roster, installed game definitions, and a conservative editorial policy. It currently covers explicitly curated high-risk rules, primarily forced curio interactions and loot loss, rather than assigning an invented severity to every negative quirk. Results are guidance, not an absolute or exhaustive treatment order.
+Quirk management combines the current roster, installed game definitions, and a
+conservative editorial policy. Negative rules focus on verified high-impact
+penalties and forced interactions. Positive rules prioritize broadly applicable
+speed, accuracy, defense, and opening-round effects while explicitly identifying
+lower-value town or camping effects. Uncurated positive quirks can be returned as
+`unrated`; special non-replaceable quirks are never curated as Sanitarium lock
+targets. Results are guidance, not an absolute or exhaustive treatment order.
+The evidence and priority policy is documented in
+[`docs/QUIRK_MANAGEMENT_POLICY.md`](docs/QUIRK_MANAGEMENT_POLICY.md).
 
 Combat skill levels combine per-hero purchases from `persist.upgrades.json`
 with installed hero upgrade definitions. The raw values under

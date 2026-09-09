@@ -23,7 +23,7 @@ node ABSOLUTE_PATH_TO_PROJECT/dist/mcp/stdio.js
 
 `--game-dir` is required for official localized display names, building and
 trinket definitions, verified hero combat skill details, progression and quest
-restriction rules, and risky-quirk analysis. Tool inputs named `language`
+restriction rules, and quirk-management analysis. Tool inputs named `language`
 accept `en`, `fr`, `de`, `es`, `pt-BR`, `ru`, `pl`, `cs`, `it`, `zh-CN`, `ja`,
 and `ko`; they default to `en`.
 `--java` is optional when Java is already available through `PATH` or
