@@ -1,8 +1,8 @@
 {
   "schemaVersion": 2,
   "policy": {
-    "title": "Conservative negative-quirk treatment priorities",
-    "disclaimer": "Priorities are editorial guidance, not values supplied by the game. They favor preventing forced interactions, permanent loot loss, and critical combat stat penalties (Speed, Accuracy, Max HP); party composition and campaign resources can change the best choice."
+    "title": "Conservative quirk removal and locking priorities",
+    "disclaimer": "Priorities are editorial guidance, not values supplied by the game. Negative priorities favor preventing forced interactions, permanent loot loss, and critical combat penalties. Positive priorities consider repeatability, applicability, and limited lock capacity; hero build, campaign resources, and existing locks can change the best choice."
   },
   "rules": [
     {
@@ -933,6 +933,644 @@
           "title": "Darkest Dungeon base quirk definition",
           "reference": "shared/quirk/quirk_library.json#guilty_conscience",
           "verifiedAt": "2026-09-09"
+        }
+      ]
+    },
+    {
+      "action": "lock_positive",
+      "quirkId": "corvids_eye",
+      "priority": "critical",
+      "factors": [
+        "accuracy",
+        "scouting"
+      ],
+      "applicability": "universal",
+      "heroClasses": [],
+      "reasons": [
+        "Provides unconditional accuracy and scouting bonuses in one rare quirk.",
+        "Its broad value does not depend on attack type, torchlight, or region."
+      ],
+      "notes": [
+        "The installed definition grants +8 ACC and +8% scouting chance."
+      ],
+      "cautions": [
+        "Do not spend scarce gold automatically; consider the hero's longevity and existing locked slots."
+      ],
+      "sources": [
+        {
+          "kind": "game",
+          "title": "Darkest Dungeon base quirk definition",
+          "reference": "shared/quirk/quirk_library.json#corvids_eye",
+          "verifiedAt": "2026-09-10"
+        },
+        {
+          "kind": "wiki",
+          "title": "Official Darkest Dungeon Wiki quirk list",
+          "reference": "https://darkestdungeon.wiki.gg/wiki/Quirks#Positive_quirks",
+          "verifiedAt": "2026-09-10"
+        },
+        {
+          "kind": "community",
+          "title": "Community discussion of generally valuable positive quirks",
+          "reference": "https://www.reddit.com/r/darkestdungeon/comments/1uawwng/what_quirks_do_you_lock_in/",
+          "verifiedAt": "2026-09-10"
+        }
+      ]
+    },
+    {
+      "action": "lock_positive",
+      "quirkId": "luminous",
+      "priority": "high",
+      "factors": [
+        "speed",
+        "durability"
+      ],
+      "applicability": "universal",
+      "heroClasses": [],
+      "reasons": [
+        "Combines two unconditional bonuses that benefit every combat role.",
+        "Speed improves turn order while dodge can prevent both health and stress damage."
+      ],
+      "notes": [
+        "The installed Color of Madness definition grants +2 SPD and +5 DODGE."
+      ],
+      "cautions": [
+        "Requires the Color of Madness DLC definition to be installed.",
+        "Quick Reflexes overlaps with its speed component, so limited lock slots may favor diversity."
+      ],
+      "sources": [
+        {
+          "kind": "game",
+          "title": "Color of Madness quirk definition",
+          "reference": "dlc/735730_color_of_madness/shared/quirk/com.quirk_library.json#luminous",
+          "verifiedAt": "2026-09-10"
+        },
+        {
+          "kind": "wiki",
+          "title": "Official Darkest Dungeon Wiki quirk list",
+          "reference": "https://darkestdungeon.wiki.gg/wiki/Quirks#Positive_quirks",
+          "verifiedAt": "2026-09-10"
+        },
+        {
+          "kind": "community",
+          "title": "Community advice on positive quirks to lock",
+          "reference": "https://www.reddit.com/r/darkestdungeon/comments/17iaqmv/",
+          "verifiedAt": "2026-09-10"
+        }
+      ]
+    },
+    {
+      "action": "lock_positive",
+      "quirkId": "quick_reflexes",
+      "priority": "high",
+      "factors": [
+        "speed"
+      ],
+      "applicability": "universal",
+      "heroClasses": [],
+      "reasons": [
+        "Provides an unconditional speed bonus that benefits control, support, and damage roles.",
+        "Acting earlier can prevent enemy actions rather than merely recovering afterward."
+      ],
+      "notes": [
+        "The installed definition grants +2 SPD."
+      ],
+      "cautions": [
+        "Luminous includes the same speed bonus plus dodge when that DLC quirk is available."
+      ],
+      "sources": [
+        {
+          "kind": "game",
+          "title": "Darkest Dungeon base quirk definition",
+          "reference": "shared/quirk/quirk_library.json#quick_reflexes",
+          "verifiedAt": "2026-09-10"
+        },
+        {
+          "kind": "wiki",
+          "title": "Official Darkest Dungeon Wiki quirk list",
+          "reference": "https://darkestdungeon.wiki.gg/wiki/Quirks#Positive_quirks",
+          "verifiedAt": "2026-09-10"
+        },
+        {
+          "kind": "community",
+          "title": "Community advice on positive quirks to lock",
+          "reference": "https://www.reddit.com/r/darkestdungeon/comments/17iaqmv/",
+          "verifiedAt": "2026-09-10"
+        }
+      ]
+    },
+    {
+      "action": "lock_positive",
+      "quirkId": "natural_swing",
+      "priority": "high",
+      "factors": [
+        "accuracy"
+      ],
+      "applicability": "universal",
+      "heroClasses": [],
+      "reasons": [
+        "Provides unconditional accuracy to both melee and ranged attacks.",
+        "The broad condition avoids wasting a lock when a hero changes skill loadout."
+      ],
+      "notes": [
+        "The installed definition grants +5 ACC."
+      ],
+      "cautions": [
+        "Heroes already reaching reliable hit chances through skills and trinkets may benefit more from another lock."
+      ],
+      "sources": [
+        {
+          "kind": "game",
+          "title": "Darkest Dungeon base quirk definition",
+          "reference": "shared/quirk/quirk_library.json#natural_swing",
+          "verifiedAt": "2026-09-10"
+        },
+        {
+          "kind": "wiki",
+          "title": "Official Darkest Dungeon Wiki quirk list",
+          "reference": "https://darkestdungeon.wiki.gg/wiki/Quirks#Positive_quirks",
+          "verifiedAt": "2026-09-10"
+        },
+        {
+          "kind": "community",
+          "title": "Community discussion of generally valuable positive quirks",
+          "reference": "https://www.reddit.com/r/darkestdungeon/comments/x4xk0k/what_quirks_you_should_always_lock_if_you_get_them/",
+          "verifiedAt": "2026-09-10"
+        }
+      ]
+    },
+    {
+      "action": "lock_positive",
+      "quirkId": "on_guard",
+      "priority": "high",
+      "factors": [
+        "speed",
+        "durability"
+      ],
+      "applicability": "conditional",
+      "heroClasses": [],
+      "reasons": [
+        "A large first-round speed bonus supports early stuns, guards, heals, and priority kills.",
+        "Its first-round dodge bonus adds protection during the most consequential opening exchange."
+      ],
+      "notes": [
+        "The installed definition grants +4 SPD and +5 DODGE during round one."
+      ],
+      "cautions": [
+        "Provides no benefit after the first round."
+      ],
+      "sources": [
+        {
+          "kind": "game",
+          "title": "Darkest Dungeon base quirk definition",
+          "reference": "shared/quirk/quirk_library.json#on_guard",
+          "verifiedAt": "2026-09-10"
+        },
+        {
+          "kind": "wiki",
+          "title": "Official Darkest Dungeon Wiki quirk list",
+          "reference": "https://darkestdungeon.wiki.gg/wiki/Quirks#Positive_quirks",
+          "verifiedAt": "2026-09-10"
+        },
+        {
+          "kind": "community",
+          "title": "Community advice on positive quirks to lock",
+          "reference": "https://www.reddit.com/r/darkestdungeon/comments/17iaqmv/",
+          "verifiedAt": "2026-09-10"
+        }
+      ]
+    },
+    {
+      "action": "lock_positive",
+      "quirkId": "hot_to_trot",
+      "priority": "high",
+      "factors": [
+        "accuracy",
+        "critical",
+        "damage"
+      ],
+      "applicability": "conditional",
+      "heroClasses": [],
+      "reasons": [
+        "Combines a large first-round accuracy bonus with damage and critical chance.",
+        "The opening burst can remove a priority target before it acts."
+      ],
+      "notes": [
+        "The installed Color of Madness definition grants +20 ACC, +25% DMG, and +5% CRIT during round one."
+      ],
+      "cautions": [
+        "Provides no benefit after the first round and is less valuable on heroes not attacking in the opener.",
+        "Requires the Color of Madness DLC definition to be installed."
+      ],
+      "sources": [
+        {
+          "kind": "game",
+          "title": "Color of Madness quirk definition",
+          "reference": "dlc/735730_color_of_madness/shared/quirk/com.quirk_library.json#hot_to_trot",
+          "verifiedAt": "2026-09-10"
+        },
+        {
+          "kind": "wiki",
+          "title": "Official Darkest Dungeon Wiki quirk list",
+          "reference": "https://darkestdungeon.wiki.gg/wiki/Quirks#Positive_quirks",
+          "verifiedAt": "2026-09-10"
+        },
+        {
+          "kind": "community",
+          "title": "Community class-by-class lock discussion",
+          "reference": "https://www.reddit.com/r/darkestdungeon/comments/1c3zx3g/best_quirks_to_lockin_for_each_hero_imo/",
+          "verifiedAt": "2026-09-10"
+        }
+      ]
+    },
+    {
+      "action": "lock_positive",
+      "quirkId": "hard_skinned",
+      "priority": "high",
+      "factors": [
+        "durability"
+      ],
+      "applicability": "universal",
+      "heroClasses": [],
+      "reasons": [
+        "Provides unconditional protection and reduces repeated direct damage.",
+        "The effect remains useful regardless of attack type or dungeon."
+      ],
+      "notes": [
+        "The installed definition grants +10% PROT."
+      ],
+      "cautions": [
+        "Community assessments disagree on whether the mitigation justifies a scarce lock slot, especially on already durable heroes."
+      ],
+      "sources": [
+        {
+          "kind": "game",
+          "title": "Darkest Dungeon base quirk definition",
+          "reference": "shared/quirk/quirk_library.json#hard_skinned",
+          "verifiedAt": "2026-09-10"
+        },
+        {
+          "kind": "wiki",
+          "title": "Official Darkest Dungeon Wiki quirk list",
+          "reference": "https://darkestdungeon.wiki.gg/wiki/Quirks#Positive_quirks",
+          "verifiedAt": "2026-09-10"
+        },
+        {
+          "kind": "community",
+          "title": "Community discussion showing disagreement on protection value",
+          "reference": "https://www.reddit.com/r/darkestdungeon/comments/1uawwng/what_quirks_do_you_lock_in/",
+          "verifiedAt": "2026-09-10"
+        }
+      ]
+    },
+    {
+      "action": "lock_positive",
+      "quirkId": "evasive",
+      "priority": "medium",
+      "factors": [
+        "durability"
+      ],
+      "applicability": "universal",
+      "heroClasses": [],
+      "reasons": [
+        "Provides unconditional dodge without restricting hero build or destination."
+      ],
+      "notes": [
+        "The installed definition grants +5 DODGE."
+      ],
+      "cautions": [
+        "Dodge is probabilistic, and Luminous provides the same dodge bonus plus speed when available."
+      ],
+      "sources": [
+        {
+          "kind": "game",
+          "title": "Darkest Dungeon base quirk definition",
+          "reference": "shared/quirk/quirk_library.json#evasive",
+          "verifiedAt": "2026-09-10"
+        },
+        {
+          "kind": "wiki",
+          "title": "Official Darkest Dungeon Wiki quirk list",
+          "reference": "https://darkestdungeon.wiki.gg/wiki/Quirks#Positive_quirks",
+          "verifiedAt": "2026-09-10"
+        },
+        {
+          "kind": "community",
+          "title": "Community discussion of generally valuable positive quirks",
+          "reference": "https://www.reddit.com/r/darkestdungeon/comments/1uawwng/what_quirks_do_you_lock_in/",
+          "verifiedAt": "2026-09-10"
+        }
+      ]
+    },
+    {
+      "action": "lock_positive",
+      "quirkId": "tough",
+      "priority": "medium",
+      "factors": [
+        "durability"
+      ],
+      "applicability": "universal",
+      "heroClasses": [],
+      "reasons": [
+        "Provides an unconditional maximum-health increase."
+      ],
+      "notes": [
+        "The installed definition grants +10% Max HP."
+      ],
+      "cautions": [
+        "The percentage increase has less absolute impact on low-health heroes and may lose out to speed or accuracy for a lock slot."
+      ],
+      "sources": [
+        {
+          "kind": "game",
+          "title": "Darkest Dungeon base quirk definition",
+          "reference": "shared/quirk/quirk_library.json#tough",
+          "verifiedAt": "2026-09-10"
+        },
+        {
+          "kind": "wiki",
+          "title": "Official Darkest Dungeon Wiki quirk list",
+          "reference": "https://darkestdungeon.wiki.gg/wiki/Quirks#Positive_quirks",
+          "verifiedAt": "2026-09-10"
+        },
+        {
+          "kind": "community",
+          "title": "Community discussion showing mixed views on maximum-health locks",
+          "reference": "https://www.reddit.com/r/darkestdungeon/comments/hvgm3o/running_low_on_money_early_game_due_to_locking_in/",
+          "verifiedAt": "2026-09-10"
+        }
+      ]
+    },
+    {
+      "action": "lock_positive",
+      "quirkId": "steady",
+      "priority": "medium",
+      "factors": [
+        "stress_control"
+      ],
+      "applicability": "universal",
+      "heroClasses": [],
+      "reasons": [
+        "Reduces incoming stress unconditionally and can improve endurance on longer expeditions."
+      ],
+      "notes": [
+        "The installed definition reduces stress received by 10%."
+      ],
+      "cautions": [
+        "Strong stress healing and preventative play can reduce its marginal value."
+      ],
+      "sources": [
+        {
+          "kind": "game",
+          "title": "Darkest Dungeon base quirk definition",
+          "reference": "shared/quirk/quirk_library.json#steady",
+          "verifiedAt": "2026-09-10"
+        },
+        {
+          "kind": "wiki",
+          "title": "Official Darkest Dungeon Wiki quirk list",
+          "reference": "https://darkestdungeon.wiki.gg/wiki/Quirks#Positive_quirks",
+          "verifiedAt": "2026-09-10"
+        },
+        {
+          "kind": "community",
+          "title": "Community discussion of generally valuable positive quirks",
+          "reference": "https://www.reddit.com/r/darkestdungeon/comments/x4xk0k/what_quirks_you_should_always_lock_if_you_get_them/",
+          "verifiedAt": "2026-09-10"
+        }
+      ]
+    },
+    {
+      "action": "lock_positive",
+      "quirkId": "photomania",
+      "priority": "medium",
+      "factors": [
+        "stress_control"
+      ],
+      "applicability": "conditional",
+      "heroClasses": [],
+      "reasons": [
+        "Provides a substantial stress reduction under common high-torch play."
+      ],
+      "notes": [
+        "The installed definition reduces stress received by 20% above its light threshold."
+      ],
+      "cautions": [
+        "Has no benefit when the party deliberately runs at low light."
+      ],
+      "sources": [
+        {
+          "kind": "game",
+          "title": "Darkest Dungeon base quirk definition",
+          "reference": "shared/quirk/quirk_library.json#photomania",
+          "verifiedAt": "2026-09-10"
+        },
+        {
+          "kind": "wiki",
+          "title": "Official Darkest Dungeon Wiki quirk list",
+          "reference": "https://darkestdungeon.wiki.gg/wiki/Quirks#Positive_quirks",
+          "verifiedAt": "2026-09-10"
+        },
+        {
+          "kind": "community",
+          "title": "Community discussion of high-light stress quirks",
+          "reference": "https://www.reddit.com/r/darkestdungeon/comments/hvgm3o/running_low_on_money_early_game_due_to_locking_in/",
+          "verifiedAt": "2026-09-10"
+        }
+      ]
+    },
+    {
+      "action": "lock_positive",
+      "quirkId": "warrior_of_light",
+      "priority": "medium",
+      "factors": [
+        "damage"
+      ],
+      "applicability": "conditional",
+      "heroClasses": [],
+      "reasons": [
+        "Provides a damage bonus to both melee and ranged attacks under common high-torch play."
+      ],
+      "notes": [
+        "The installed definition grants +10% DMG above its light threshold."
+      ],
+      "cautions": [
+        "Has no benefit in low-light strategies, and dedicated melee or ranged bonuses may offer the same magnitude without a torch condition."
+      ],
+      "sources": [
+        {
+          "kind": "game",
+          "title": "Darkest Dungeon base quirk definition",
+          "reference": "shared/quirk/quirk_library.json#warrior_of_light",
+          "verifiedAt": "2026-09-10"
+        },
+        {
+          "kind": "wiki",
+          "title": "Official Darkest Dungeon Wiki quirk list",
+          "reference": "https://darkestdungeon.wiki.gg/wiki/Quirks#Positive_quirks",
+          "verifiedAt": "2026-09-10"
+        },
+        {
+          "kind": "community",
+          "title": "Community discussion of high-light damage quirks",
+          "reference": "https://www.reddit.com/r/darkestdungeon/comments/iot8c3/a_question_on_quirks/",
+          "verifiedAt": "2026-09-10"
+        }
+      ]
+    },
+    {
+      "action": "lock_positive",
+      "quirkId": "armor_haggler",
+      "priority": "low",
+      "factors": [
+        "town"
+      ],
+      "applicability": "conditional",
+      "heroClasses": [],
+      "reasons": [
+        "Reduces only this hero's armor upgrade cost rather than improving expedition performance."
+      ],
+      "notes": [
+        "The installed definition applies a 20% armor upgrade discount."
+      ],
+      "cautions": [
+        "Value ends once the hero's armor is fully upgraded, so it rarely justifies a permanent lock."
+      ],
+      "sources": [
+        {
+          "kind": "game",
+          "title": "Darkest Dungeon base quirk definition",
+          "reference": "shared/quirk/quirk_library.json#armor_haggler",
+          "verifiedAt": "2026-09-10"
+        },
+        {
+          "kind": "wiki",
+          "title": "Official Darkest Dungeon Wiki quirk list",
+          "reference": "https://darkestdungeon.wiki.gg/wiki/Quirks#Positive_quirks",
+          "verifiedAt": "2026-09-10"
+        },
+        {
+          "kind": "community",
+          "title": "Community positive quirk tier guide",
+          "reference": "https://www.speedrun.com/darkest_dungeon/guides/l9ov1",
+          "verifiedAt": "2026-09-10"
+        }
+      ]
+    },
+    {
+      "action": "lock_positive",
+      "quirkId": "weapons_haggler",
+      "priority": "low",
+      "factors": [
+        "town"
+      ],
+      "applicability": "conditional",
+      "heroClasses": [],
+      "reasons": [
+        "Reduces only this hero's weapon upgrade cost rather than improving expedition performance."
+      ],
+      "notes": [
+        "The installed definition applies a 20% weapon upgrade discount."
+      ],
+      "cautions": [
+        "Value ends once the hero's weapon is fully upgraded, so it rarely justifies a permanent lock."
+      ],
+      "sources": [
+        {
+          "kind": "game",
+          "title": "Darkest Dungeon base quirk definition",
+          "reference": "shared/quirk/quirk_library.json#weapons_haggler",
+          "verifiedAt": "2026-09-10"
+        },
+        {
+          "kind": "wiki",
+          "title": "Official Darkest Dungeon Wiki quirk list",
+          "reference": "https://darkestdungeon.wiki.gg/wiki/Quirks#Positive_quirks",
+          "verifiedAt": "2026-09-10"
+        },
+        {
+          "kind": "community",
+          "title": "Community positive quirk tier guide",
+          "reference": "https://www.speedrun.com/darkest_dungeon/guides/l9ov1",
+          "verifiedAt": "2026-09-10"
+        }
+      ]
+    },
+    {
+      "action": "lock_positive",
+      "quirkId": "skilled_gambler",
+      "priority": "low",
+      "factors": [
+        "town"
+      ],
+      "applicability": "conditional",
+      "heroClasses": [],
+      "reasons": [
+        "Affects gambling side effects but provides no direct expedition benefit."
+      ],
+      "notes": [
+        "The installed definition improves currency and trinket side-effect chances while gambling."
+      ],
+      "cautions": [
+        "Requires choosing a specific stress activity and competes with combat-relevant locks."
+      ],
+      "sources": [
+        {
+          "kind": "game",
+          "title": "Darkest Dungeon base quirk definition",
+          "reference": "shared/quirk/quirk_library.json#skilled_gambler",
+          "verifiedAt": "2026-09-10"
+        },
+        {
+          "kind": "wiki",
+          "title": "Official Darkest Dungeon Wiki quirk list",
+          "reference": "https://darkestdungeon.wiki.gg/wiki/Quirks#Positive_quirks",
+          "verifiedAt": "2026-09-10"
+        },
+        {
+          "kind": "community",
+          "title": "Community positive quirk tier guide",
+          "reference": "https://www.speedrun.com/darkest_dungeon/guides/l9ov1",
+          "verifiedAt": "2026-09-10"
+        }
+      ]
+    },
+    {
+      "action": "lock_positive",
+      "quirkId": "fast_healer",
+      "priority": "low",
+      "factors": [
+        "healing"
+      ],
+      "applicability": "conditional",
+      "heroClasses": [],
+      "reasons": [
+        "Improves only camping healing and does not affect combat healing."
+      ],
+      "notes": [
+        "The installed definition increases healing performed in camp by 10%."
+      ],
+      "cautions": [
+        "Short quests have no camp, and even on longer quests the effect is limited to camping skills."
+      ],
+      "sources": [
+        {
+          "kind": "game",
+          "title": "Darkest Dungeon base quirk definition",
+          "reference": "shared/quirk/quirk_library.json#fast_healer",
+          "verifiedAt": "2026-09-10"
+        },
+        {
+          "kind": "wiki",
+          "title": "Official Darkest Dungeon Wiki quirk list",
+          "reference": "https://darkestdungeon.wiki.gg/wiki/Quirks#Positive_quirks",
+          "verifiedAt": "2026-09-10"
+        },
+        {
+          "kind": "community",
+          "title": "Community positive quirk tier guide",
+          "reference": "https://www.speedrun.com/darkest_dungeon/guides/l9ov1",
+          "verifiedAt": "2026-09-10"
         }
       ]
     }

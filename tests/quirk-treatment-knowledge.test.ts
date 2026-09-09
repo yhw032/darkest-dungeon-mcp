@@ -129,7 +129,7 @@ test("rejects duplicate risk factors", () => {
 test("loads the checked-in treatment knowledge", async () => {
   const knowledge = await loadQuirkTreatmentKnowledge();
 
-  assert.equal(knowledge.rules.length, 40);
+  assert.equal(knowledge.rules.length, 56);
   assert.equal(
     knowledge.rules.find((rule) => rule.quirkId === "kleptomaniac")?.priority,
     "critical",
@@ -141,10 +141,18 @@ test("loads the checked-in treatment knowledge", async () => {
   assert.equal(slowReflexes?.action, "remove_negative");
   if (slowReflexes?.action !== "remove_negative") return;
   assert.ok(slowReflexes.factors.includes("combat_penalty"));
+  assert.equal(
+    knowledge.rules.find((rule) => rule.quirkId === "corvids_eye")?.priority,
+    "critical",
+  );
+  assert.equal(
+    knowledge.rules.find((rule) => rule.quirkId === "fast_healer")?.priority,
+    "low",
+  );
   assert.ok(knowledge.policy.disclaimer.includes("editorial guidance"));
 });
 
-test("verifies that all checked-in treatment quirk IDs exist in the game install", async () => {
+test("verifies checked-in management rules against the game install", async () => {
   const gameDirectory =
     process.env.DD_GAME_DIR ??
     "D:\\SteamLibrary\\steamapps\\common\\DarkestDungeon";
@@ -159,13 +167,26 @@ test("verifies that all checked-in treatment quirk IDs exist in the game install
     return;
   }
 
-  const gameQuirkIdSet = new Set(gameQuirks.map((q) => q.id));
+  const gameQuirkById = new Map(gameQuirks.map((quirk) => [quirk.id, quirk]));
   const knowledge = await loadQuirkTreatmentKnowledge();
 
   for (const rule of knowledge.rules) {
+    const definition = gameQuirkById.get(rule.quirkId);
     assert.ok(
-      gameQuirkIdSet.has(rule.quirkId),
+      definition,
       `Quirk id "${rule.quirkId}" from quirk-treatment.json was not found in the game installation!`,
     );
+    assert.equal(
+      definition.isPositive,
+      rule.action === "lock_positive",
+      `Quirk id "${rule.quirkId}" has the wrong polarity for ${rule.action}.`,
+    );
+    if (rule.action === "lock_positive") {
+      assert.equal(
+        definition.canBeReplacedByNewQuirk,
+        true,
+        `Non-replaceable quirk "${rule.quirkId}" must not be recommended for locking.`,
+      );
+    }
   }
 });
