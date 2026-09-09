@@ -182,6 +182,9 @@ buff/debuff `effects` from
 `DD_GAME_DIR`, including base-game, official DLC, and backer trinkets. Filtering
 by `heroClass` or `rarity` returns an explicit configuration error when installed
 game definitions are unavailable instead of returning an unverifiable result.
+Gold-priced trinkets use `price` with `shardPrice: null`; Color of Madness
+trinkets use `shardPrice` with `price: null`, preserving the game's actual
+purchase currency instead of treating shards as gold.
 
 `recommend_trinkets` evaluates equipment options for a hero (`heroId`), a class
 (`heroClass`), or a specific item (`trinketId`). It matches curated S/A/B/situational
