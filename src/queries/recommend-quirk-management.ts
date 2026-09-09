@@ -34,6 +34,7 @@ export interface PositiveQuirkManagementAnalysis {
   factors: PositiveQuirkValueFactor[];
   applicability: PositiveQuirkApplicability | null;
   heroClasses: string[];
+  heroClassMatches: boolean | null;
   reasons: string[];
   notes: string[];
   cautions: string[];
@@ -83,9 +84,11 @@ function positiveAction(
   priority: QuirkTreatmentPriority | null,
   isLocked: boolean,
   canBeReplacedByNewQuirk: boolean | null,
+  heroClassMatches: boolean | null,
 ): PositiveQuirkManagementAction {
   if (priority === null) return "unrated";
   if (priority === "low") return "do_not_prioritize";
+  if (heroClassMatches === false) return "do_not_prioritize";
   if (isLocked) return "keep_locked";
   if (canBeReplacedByNewQuirk !== true) return "do_not_prioritize";
   return priority === "critical" || priority === "high"
@@ -164,10 +167,15 @@ export function recommendQuirkManagement(
 
         const localized = definition?.localization[language];
         const cautions = rule === undefined ? [] : [...rule.cautions];
+        const heroClassMatches =
+          rule === undefined || rule.heroClasses.length === 0
+            ? null
+            : rule.heroClasses.includes(hero.heroClass);
         const recommendedAction = positiveAction(
           rule?.priority ?? null,
           quirk.isLocked,
           definition?.canBeReplacedByNewQuirk ?? null,
+          heroClassMatches,
         );
         if (
           recommendedAction === "lock_positive" &&
@@ -182,6 +190,11 @@ export function recommendQuirkManagement(
             "The installed game definition is unavailable, so lock eligibility cannot be verified.",
           );
         }
+        if (heroClassMatches === false) {
+          cautions.push(
+            `This rule is not curated for hero class ${hero.heroClass}.`,
+          );
+        }
 
         return [
           {
@@ -193,6 +206,7 @@ export function recommendQuirkManagement(
             factors: rule === undefined ? [] : [...rule.factors],
             applicability: rule?.applicability ?? null,
             heroClasses: rule === undefined ? [] : [...rule.heroClasses],
+            heroClassMatches,
             reasons: rule === undefined ? [] : [...rule.reasons],
             notes: rule === undefined ? [] : [...rule.notes],
             cautions,

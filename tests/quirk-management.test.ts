@@ -252,3 +252,30 @@ test("does not recommend locking without an installed game definition", () => {
     luminous?.cautions.some((caution) => caution.includes("unavailable")),
   );
 });
+
+test("does not recommend a class-scoped quirk to an unmatched hero", () => {
+  const scopedKnowledge = structuredClone(knowledge);
+  const luminous = scopedKnowledge.rules.find(
+    (rule) => rule.quirkId === "luminous",
+  );
+  assert.equal(luminous?.action, "lock_positive");
+  if (luminous?.action !== "lock_positive") return;
+  luminous.applicability = "hero_class";
+  luminous.heroClasses = ["vestal"];
+
+  const result = recommendQuirkManagement(
+    roster,
+    definitions,
+    scopedKnowledge,
+    { heroId: "1" },
+  );
+  const recommendation = result[0]?.positiveQuirks.find(
+    (quirk) => quirk.id === "luminous",
+  );
+
+  assert.equal(recommendation?.heroClassMatches, false);
+  assert.equal(recommendation?.recommendedAction, "do_not_prioritize");
+  assert.ok(
+    recommendation?.cautions.some((caution) => caution.includes("crusader")),
+  );
+});

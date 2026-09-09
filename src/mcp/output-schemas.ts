@@ -359,6 +359,7 @@ export const quirkManagementHeroSchema = z.object({
         .enum(["universal", "hero_class", "build", "region", "conditional"])
         .nullable(),
       heroClasses: z.array(z.string()),
+      heroClassMatches: z.boolean().nullable(),
       reasons: z.array(z.string()),
       notes: z.array(z.string()),
       cautions: z.array(z.string()),
