@@ -10,7 +10,8 @@
 export interface TrinketDefinition {
   id: string;
   rarity: string;
-  price: number;
+  price: number | null;
+  shardPrice: number | null;
   limit: number;
   heroClassRequirements: string[];
   originDungeon: string | null;

@@ -144,7 +144,8 @@ test("maps trinket definitions, effects, and filters by heroClass and rarity", a
     {
       id: "flag_5",
       rarity: "very_rare",
-      price: 25000,
+      price: null,
+      shardPrice: 25,
       limit: 1,
       heroClassRequirements: [],
       originDungeon: null,
@@ -164,6 +165,7 @@ test("maps trinket definitions, effects, and filters by heroClass and rarity", a
       id: "gamblers_charm",
       rarity: "common",
       price: 5000,
+      shardPrice: null,
       limit: 0,
       heroClassRequirements: ["vestal"],
       originDungeon: null,
@@ -185,7 +187,8 @@ test("maps trinket definitions, effects, and filters by heroClass and rarity", a
   assert.equal(results.length, 1);
   const flag = results[0]!;
   assert.equal(flag.rarity, "very_rare");
-  assert.equal(flag.price, 25000);
+  assert.equal(flag.price, null);
+  assert.equal(flag.shardPrice, 25);
   assert.equal(flag.limit, 1);
   assert.deepEqual(flag.heroClassRequirements, []);
   assert.deepEqual(flag.heroClassRequirementNames, []);

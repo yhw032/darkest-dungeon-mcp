@@ -23,7 +23,8 @@ interface RawTrinketEntry {
   buffIds: string[];
   heroClassRequirements: string[];
   rarity: string;
-  price: number;
+  price: number | null;
+  shardPrice: number | null;
   limit: number;
   originDungeon: string | null;
 }
@@ -171,6 +172,13 @@ export function parseRawTrinkets(
         entry.origin_dungeon === ""
           ? null
           : expectString(entry.origin_dungeon, `${path}.origin_dungeon`);
+      const hasPrice = entry.price !== undefined && entry.price !== null;
+      const hasShardPrice = entry.shard !== undefined && entry.shard !== null;
+      if (hasPrice === hasShardPrice) {
+        throw new Error(
+          `${path}: expected exactly one finite-number cost field: price or shard`,
+        );
+      }
       return {
         id: expectString(entry.id, `${path}.id`),
         buffIds: parseStringArray(entry.buffs ?? [], `${path}.buffs`),
@@ -179,7 +187,10 @@ export function parseRawTrinkets(
           `${path}.hero_class_requirements`,
         ),
         rarity: expectString(entry.rarity, `${path}.rarity`),
-        price: expectNumber(entry.price, `${path}.price`),
+        price: hasPrice ? expectNumber(entry.price, `${path}.price`) : null,
+        shardPrice: hasShardPrice
+          ? expectNumber(entry.shard, `${path}.shard`)
+          : null,
         limit: expectNumber(entry.limit, `${path}.limit`),
         originDungeon,
       };
@@ -267,6 +278,7 @@ export async function loadTrinketDefinitions(
       id: trinket.id,
       rarity: trinket.rarity,
       price: trinket.price,
+      shardPrice: trinket.shardPrice,
       limit: trinket.limit,
       heroClassRequirements: trinket.heroClassRequirements,
       originDungeon: trinket.originDungeon,

@@ -616,7 +616,14 @@ export const trinketRecordSchema = z.object({
       "Official trinket rarity (e.g. common, rare, very_rare, ancestral); null when game definitions are unavailable.",
     )
     .optional(),
-  price: finiteNumber.nullable().optional(),
+  price: finiteNumber
+    .nullable()
+    .optional()
+    .describe("Gold cost; null for shard-priced Color of Madness trinkets."),
+  shardPrice: finiteNumber
+    .nullable()
+    .optional()
+    .describe("Color of Madness shard cost; null for gold-priced trinkets."),
   limit: finiteNumber.nullable().optional(),
   originDungeon: nullableString.optional(),
   heroClassRequirements: z

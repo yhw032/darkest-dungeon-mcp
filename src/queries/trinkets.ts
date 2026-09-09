@@ -35,6 +35,7 @@ export interface TrinketRecord {
   name: string | null;
   rarity?: string | null;
   price?: number | null;
+  shardPrice?: number | null;
   limit?: number | null;
   originDungeon?: string | null;
   heroClassRequirements?: string[];
@@ -193,6 +194,7 @@ export function listTrinkets(
           : {
               rarity: def.rarity,
               price: def.price,
+              shardPrice: def.shardPrice,
               limit: def.limit,
               originDungeon: def.originDungeon,
               heroClassRequirements: def.heroClassRequirements,

@@ -44,6 +44,7 @@ test("parses raw trinket entries with class requirements and buff ids", () => {
     heroClassRequirements: ["vestal"],
     rarity: "very_rare",
     price: 25000,
+    shardPrice: null,
     limit: 0,
     originDungeon: null,
   });
@@ -53,9 +54,55 @@ test("parses raw trinket entries with class requirements and buff ids", () => {
     heroClassRequirements: [],
     rarity: "rare",
     price: 15000,
+    shardPrice: null,
     limit: 1,
     originDungeon: "cove",
   });
+});
+
+test("parses Color of Madness shard costs without inventing a gold price", () => {
+  const parsed = parseRawTrinkets(
+    {
+      entries: [
+        {
+          id: "com_lens_of_comet",
+          buffs: [],
+          hero_class_requirements: [],
+          rarity: "comet",
+          shard: 25,
+          limit: 1,
+          origin_dungeon: "",
+        },
+      ],
+    },
+    "com.entries.trinkets.json",
+  );
+
+  assert.equal(parsed[0]?.price, null);
+  assert.equal(parsed[0]?.shardPrice, 25);
+});
+
+test("rejects ambiguous or missing trinket cost fields", () => {
+  const entry = {
+    id: "broken",
+    buffs: [],
+    hero_class_requirements: [],
+    rarity: "common",
+    limit: 1,
+  };
+
+  assert.throws(
+    () =>
+      parseRawTrinkets(
+        { entries: [{ ...entry, price: 1000, shard: 10 }] },
+        "both.json",
+      ),
+    /both\.json\.entries\[0\].*exactly one/,
+  );
+  assert.throws(
+    () => parseRawTrinkets({ entries: [entry] }, "missing.json"),
+    /missing\.json\.entries\[0\].*exactly one/,
+  );
 });
 
 test("reports the source path of an invalid trinket field", () => {
@@ -165,6 +212,7 @@ test("loads normalized trinkets and resolves buff effects", async (t) => {
   assert.equal(trinket.id, "holy_orders");
   assert.equal(trinket.rarity, "very_rare");
   assert.equal(trinket.price, 25000);
+  assert.equal(trinket.shardPrice, null);
   assert.deepEqual(trinket.heroClassRequirements, ["crusader"]);
   assert.equal(trinket.originDungeon, null);
   assert.equal(trinket.effects.length, 1);
@@ -240,4 +288,8 @@ test("loads full trinket catalog and resolves all buffs when game directory is a
   assert.equal(sacredScroll.rarity, "very_rare");
   assert.equal(sacredScroll.effects.length, 5);
   assert.deepEqual(sacredScroll.unresolvedBuffIds, []);
+  const cometLens = definitions.find(({ id }) => id === "com_lens_of_comet");
+  assert.ok(cometLens);
+  assert.equal(cometLens.price, null);
+  assert.equal(cometLens.shardPrice, 25);
 });
