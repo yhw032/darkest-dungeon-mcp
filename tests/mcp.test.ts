@@ -226,7 +226,7 @@ test("MCP server advertises and executes read-only game tools", async (t) => {
   assert.match(instructions ?? "", /search_curios/);
   assert.match(instructions ?? "", /get_curio_advice/);
   assert.match(instructions ?? "", /must not be inferred from estate storage/);
-  assert.match(instructions ?? "", /list_risky_quirks/);
+  assert.match(instructions ?? "", /recommend_quirk_management/);
   assert.match(instructions ?? "", /editorial guidance/);
   assert.match(instructions ?? "", /compare_heroes/);
   assert.match(instructions ?? "", /query_classes/);
@@ -248,12 +248,12 @@ test("MCP server advertises and executes read-only game tools", async (t) => {
       "list_building_upgrades",
       "list_heroes",
       "list_quests",
-      "list_risky_quirks",
       "list_trinkets",
       "plan_expedition",
       "query_classes",
       "query_combat",
       "recommend_building_upgrades",
+      "recommend_quirk_management",
       "recommend_trinkets",
       "refresh_game_state",
       "search_curios",
@@ -402,7 +402,7 @@ test("MCP server advertises and executes read-only game tools", async (t) => {
   });
 
   const riskyResult = await client.callTool({
-    name: "list_risky_quirks",
+    name: "recommend_quirk_management",
     arguments: { heroId: riskyHero.id, language: "ko" },
   });
   const riskyContent = riskyResult.structuredContent as
@@ -425,9 +425,9 @@ test("MCP server advertises and executes read-only game tools", async (t) => {
   );
   const localizedRiskyQuirk = (
     riskyHeroes[0] as
-      | { riskyQuirks?: Array<{ name?: unknown; description?: unknown }> }
+      | { negativeRemovals?: Array<{ name?: unknown; description?: unknown }> }
       | undefined
-  )?.riskyQuirks?.[0];
+  )?.negativeRemovals?.[0];
   assert.equal(localizedRiskyQuirk?.name, "위험 테스트 기벽");
   assert.equal(localizedRiskyQuirk?.description, "테스트 위험");
 

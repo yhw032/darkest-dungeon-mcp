@@ -278,6 +278,43 @@ const riskFactorSchema = z.enum([
   "disease",
   "other",
 ]);
+const positiveValueFactorSchema = z.enum([
+  "accuracy",
+  "critical",
+  "damage",
+  "durability",
+  "healing",
+  "resistance",
+  "scouting",
+  "speed",
+  "stress_control",
+  "town",
+  "other",
+]);
+const quirkSourceSchema = z.object({
+  kind: z.enum(["game", "wiki", "community"]),
+  title: z.string(),
+  reference: z.string(),
+  verifiedAt: z.string(),
+});
+
+const riskyQuirkSchema = z.object({
+  id: z.string(),
+  name: nullableString,
+  description: nullableString,
+  priority: prioritySchema,
+  factors: z.array(riskFactorSchema),
+  reasons: z.array(z.string()),
+  notes: z.array(z.string()),
+  isLocked: z.boolean(),
+  isNew: z.boolean(),
+  evolutionDurationRemaining: finiteNumber,
+  effects: z.array(quirkEffectSchema),
+  curioInteraction: z
+    .object({ tag: z.string(), chance: finiteNumber, keepsLoot: z.boolean() })
+    .nullable(),
+  definitionFound: z.boolean(),
+});
 
 export const riskyHeroSchema = z.object({
   heroId: z.string(),
@@ -287,22 +324,50 @@ export const riskyHeroSchema = z.object({
   resolveXp: finiteNumber.describe("Raw resolve experience, not resolve level."),
   stress: finiteNumber,
   overallPriority: prioritySchema,
-  riskyQuirks: z.array(
+  riskyQuirks: z.array(riskyQuirkSchema),
+});
+
+export const quirkManagementHeroSchema = z.object({
+  heroId: z.string(),
+  heroName: z.string(),
+  heroClass: z.string(),
+  heroClassName: nullableString,
+  resolveXp: finiteNumber.describe("Raw resolve experience, not resolve level."),
+  stress: finiteNumber,
+  overallPriority: prioritySchema.nullable(),
+  positiveLockSlots: z.object({
+    used: count,
+    maximum: count,
+    remaining: count,
+    definitionCoverageComplete: z.boolean(),
+  }),
+  negativeRemovals: z.array(riskyQuirkSchema),
+  positiveQuirks: z.array(
     z.object({
       id: z.string(),
       name: nullableString,
       description: nullableString,
-      priority: prioritySchema,
-      factors: z.array(riskFactorSchema),
+      recommendedAction: z.enum([
+        "lock_positive",
+        "keep_locked",
+        "do_not_prioritize",
+        "unrated",
+      ]),
+      priority: prioritySchema.nullable(),
+      factors: z.array(positiveValueFactorSchema),
+      applicability: z
+        .enum(["universal", "hero_class", "build", "region", "conditional"])
+        .nullable(),
+      heroClasses: z.array(z.string()),
       reasons: z.array(z.string()),
       notes: z.array(z.string()),
+      cautions: z.array(z.string()),
+      sources: z.array(quirkSourceSchema),
       isLocked: z.boolean(),
       isNew: z.boolean(),
       evolutionDurationRemaining: finiteNumber,
+      canBeReplacedByNewQuirk: z.boolean().nullable(),
       effects: z.array(quirkEffectSchema),
-      curioInteraction: z
-        .object({ tag: z.string(), chance: finiteNumber, keepsLoot: z.boolean() })
-        .nullable(),
       definitionFound: z.boolean(),
     }),
   ),

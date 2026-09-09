@@ -40,7 +40,7 @@ test("built stdio entrypoint serves sample tools outside the project", async (t)
   const { tools } = await client.listTools();
 
   assert.ok(tools.some((tool) => tool.name === "get_game_state"));
-  assert.ok(tools.some((tool) => tool.name === "list_risky_quirks"));
+  assert.ok(tools.some((tool) => tool.name === "recommend_quirk_management"));
 
   const stateResult = await client.callTool({
     name: "get_game_state",

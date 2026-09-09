@@ -17,7 +17,7 @@ import {
   enemyPrioritySchema,
   questSchema,
   questSummarySchema,
-  riskyHeroSchema,
+  quirkManagementHeroSchema,
   regionCombatKnowledgeSchema,
   trinketRecordSchema,
   recommendTrinketsOutputSchema,
@@ -57,6 +57,7 @@ import {
 import { gameLanguageCodes } from "../localization/languages.js";
 import { loadQuirkTreatmentKnowledge } from "../knowledge/load-quirk-treatment-knowledge.js";
 import { analyzeRiskyQuirks } from "../queries/analyze-risky-quirks.js";
+import { recommendQuirkManagement } from "../queries/recommend-quirk-management.js";
 import { getCurioAdvice } from "../queries/get-curio-advice.js";
 import { getGameStateSummary } from "../queries/get-game-state-summary.js";
 import { getHeroTownContext } from "../queries/get-hero-town-context.js";
@@ -153,7 +154,7 @@ export const serverInstructions = [
   "Use verified resolveLevel, availability, questEligibility, and exact skill-position fields for readiness or formation claims instead of inferring them from raw values or class stereotypes.",
   "Use compare_heroes for objective roster comparisons and plan_expedition for quest-specific party, provision, camping, and tactical planning.",
   "Use list_building_upgrades and recommend_building_upgrades for estate progression; use list_trinkets for holdings and recommend_trinkets for equipment advice.",
-  "Use list_risky_quirks, query_classes, and query_combat for verified knowledge; treat their strategy and priority text as editorial guidance rather than absolute game rules.",
+  "Use recommend_quirk_management, query_classes, and query_combat for verified knowledge; treat their strategy and priority text as editorial guidance rather than absolute game rules.",
   "For an uncertain curio identity, call search_curios before get_curio_advice. availableItems must come explicitly from the user and must not be inferred from estate storage.",
   "Treat only returned data as verified, never invent undocumented meanings or localized names, and keep Darkest Dungeon 1 separate from Darkest Dungeon 2.",
 ].join(" ");
@@ -507,27 +508,37 @@ export function createDarkestDungeonServer(
   );
 
   server.registerTool(
-    "list_risky_quirks",
+    "recommend_quirk_management",
     {
-      title: "List risky quirks",
+      title: "Recommend quirk management",
       description:
-        "Rank heroes with treatment-worthy quirks using verified game definitions and an explicit editorial priority policy.",
+        "Separate negative-quirk removal candidates from positive-quirk lock guidance, including lock capacity, evidence, and unrated states.",
       inputSchema: z.object({
-        minimumPriority: z
+        minimumNegativePriority: z
           .enum(["critical", "high", "medium", "low"])
           .default("high"),
-        lockedOnly: z.boolean().default(false),
+        minimumPositivePriority: z
+          .enum(["critical", "high", "medium", "low"])
+          .default("low"),
+        includeUnrated: z.boolean().default(false),
         heroId: z.string().min(1).optional(),
         language: gameLanguageInputSchema,
         limit: z.number().int().min(1).max(50).default(10),
       }),
       outputSchema: z.object({
         policy: z.object({ title: z.string(), disclaimer: z.string() }),
-        heroes: z.array(riskyHeroSchema),
+        heroes: z.array(quirkManagementHeroSchema),
       }),
       annotations: readOnlyAnnotations,
     },
-    async ({ minimumPriority, lockedOnly, heroId, language, limit }) => {
+    async ({
+      minimumNegativePriority,
+      minimumPositivePriority,
+      includeUnrated,
+      heroId,
+      language,
+      limit,
+    }) => {
       const [state, definitions, knowledge, localization] = await Promise.all([
         dataSource.load(),
         getQuirkDefinitions(),
@@ -535,13 +546,14 @@ export function createDarkestDungeonServer(
         getGameLocalization(),
       ]);
       const filters = {
-        minimumPriority,
-        lockedOnly,
+        minimumNegativePriority,
+        minimumPositivePriority,
+        includeUnrated,
         ...(heroId === undefined ? {} : { heroId }),
         language,
         limit,
       };
-      const heroes = analyzeRiskyQuirks(
+      const heroes = recommendQuirkManagement(
         state.roster,
         definitions,
         knowledge,
