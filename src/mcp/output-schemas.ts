@@ -555,6 +555,29 @@ export const heroComparisonSchema = z.object({
           })
           .nullable()
           .describe("Curated treatment risk; null means no curated match only when status is available."),
+        positiveAssets: z.array(
+          z.object({
+            id: z.string(),
+            name: nullableString.describe(
+              "Official quirk name in the requested language; null without game localization.",
+            ),
+            priority: prioritySchema.nullable(),
+            recommendedAction: z.enum([
+              "lock_positive",
+              "keep_locked",
+              "do_not_prioritize",
+              "unrated",
+            ]),
+          }),
+        ),
+        positiveLockSlots: z
+          .object({
+            used: count,
+            maximum: count,
+            remaining: count,
+            definitionCoverageComplete: z.boolean(),
+          })
+          .nullable(),
       }),
     }),
   ),

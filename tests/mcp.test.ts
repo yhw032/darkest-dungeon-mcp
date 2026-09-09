@@ -713,6 +713,12 @@ test("MCP server advertises and executes read-only game tools", async (t) => {
                   riskyQuirkIds: string[];
                   riskyQuirks: Array<{ id: string; name: string | null }>;
                 } | null;
+                positiveAssets: Array<{
+                  id: string;
+                  name: string | null;
+                  priority: string | null;
+                  recommendedAction: string;
+                }>;
               };
             }>;
           };
@@ -729,6 +735,10 @@ test("MCP server advertises and executes read-only game tools", async (t) => {
   assert.deepEqual(
     comparedRiskyHero?.quirkTreatmentAnalysis?.risk?.riskyQuirks,
     [{ id: riskyQuirk.id, name: "위험 테스트 기벽" }],
+  );
+  assert.deepEqual(
+    comparedRiskyHero?.quirkTreatmentAnalysis?.positiveAssets,
+    [],
   );
 
   const missingResult = await client.callTool({

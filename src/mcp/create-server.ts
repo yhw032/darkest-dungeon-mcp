@@ -56,7 +56,6 @@ import {
 } from "../localization/game-localization.js";
 import { gameLanguageCodes } from "../localization/languages.js";
 import { loadQuirkTreatmentKnowledge } from "../knowledge/load-quirk-treatment-knowledge.js";
-import { analyzeRiskyQuirks } from "../queries/analyze-risky-quirks.js";
 import { recommendQuirkManagement } from "../queries/recommend-quirk-management.js";
 import { getCurioAdvice } from "../queries/get-curio-advice.js";
 import { getGameStateSummary } from "../queries/get-game-state-summary.js";
@@ -728,19 +727,26 @@ export function createDarkestDungeonServer(
       if (questId !== undefined && quest === undefined) {
         return notFoundResult("Quest", questId);
       }
-      const riskyHeroes =
+      const quirkManagementHeroes =
         quirkDefinitions === undefined || treatmentKnowledge === undefined
           ? []
           : heroIds.flatMap((heroId) =>
-              analyzeRiskyQuirks(
+              recommendQuirkManagement(
                 state.roster,
                 quirkDefinitions,
                 treatmentKnowledge,
-                { minimumPriority: "low", heroId, limit: 1, language },
+                {
+                  minimumNegativePriority: "low",
+                  minimumPositivePriority: "low",
+                  includeUnrated: true,
+                  heroId,
+                  limit: 1,
+                  language,
+                },
               ),
             );
-      const riskByHeroId = new Map(
-        riskyHeroes.map((hero) => [hero.heroId, hero]),
+      const quirkManagementByHeroId = new Map(
+        quirkManagementHeroes.map((hero) => [hero.heroId, hero]),
       );
       const heroes = heroIds.map((heroId) => {
         const hero = getHero(state.roster, heroId)!;
@@ -759,7 +765,9 @@ export function createDarkestDungeonServer(
           skillTrees,
           skillPositions,
         );
-        const risk = riskByHeroId.get(heroId);
+        const quirkManagement = quirkManagementByHeroId.get(heroId);
+        const negativeRemovals = quirkManagement?.negativeRemovals ?? [];
+        const highestNegative = negativeRemovals[0];
         return {
           id: hero.id,
           name: hero.name,
@@ -795,18 +803,29 @@ export function createDarkestDungeonServer(
             status: canAnalyzeQuirkRisk
               ? "available" as const
               : "unavailable" as const,
-            risk: risk === undefined
+            risk: highestNegative === undefined
               ? null
               : {
-                  overallPriority: risk.overallPriority,
-                  riskyQuirkIds: risk.riskyQuirks.map((quirk) => quirk.id),
-                  riskyQuirks: risk.riskyQuirks.map((quirk) => ({
+                  overallPriority: highestNegative.priority,
+                  riskyQuirkIds: negativeRemovals.map(
+                    (quirk) => quirk.id,
+                  ),
+                  riskyQuirks: negativeRemovals.map((quirk) => ({
                     id: quirk.id,
                     name:
                       quirk.name ??
                       localizeQuirk(quirk.id, language, localization),
                   })),
                 },
+            positiveAssets: quirkManagement?.positiveQuirks.map((quirk) => ({
+              id: quirk.id,
+              name:
+                quirk.name ??
+                localizeQuirk(quirk.id, language, localization),
+              priority: quirk.priority,
+              recommendedAction: quirk.recommendedAction,
+            })) ?? [],
+            positiveLockSlots: quirkManagement?.positiveLockSlots ?? null,
           },
         };
       });
